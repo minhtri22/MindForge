@@ -153,9 +153,13 @@ Phase 1 closed with all frozen gates passing: exact CPU resume, real Intel Arc 1
 
 ## Phase 2 — Reproducible experiment system
 
+Status: **PASS / CLOSED**.
+
 Add experiment manifests, baseline/treatment relationships, automatic provenance, multi-seed aggregation, result comparison and regression checks.
 
 **QA gate:** a 3-seed baseline/treatment pair can produce mean/variance/effect summary plus compute/memory difference from machine-readable results without manual spreadsheet work.
+
+Phase 2 closed with all frozen gates passing: manifest schema, deterministic run IDs, baseline/treatment relationships, 3-seed canonical XPU comparison, automatic aggregation, paired effects, resource effects, variance exposure, incomplete evidence rejection, duplicate-run protection, exact source-tree provenance, artifact hashing, CPU integration, XPU experiment, regression checks, tests, and documentation. No external tracking services or learning/memory mechanisms added. See [docs/phases/phase-2.md](docs/phases/phase-2.md) and [docs/phases/phase-2-qa.md](docs/phases/phase-2-qa.md).
 
 ## Phase 3 — First research slice: continual learning — INACTIVE / DEFERRED
 

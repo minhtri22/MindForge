@@ -68,6 +68,8 @@ Phase 0 established a reproducible local foundation: MindForge byte-level BPE wi
 
 Phase 1 turns that evidence into a working compact end-to-end kernel under `mindforge/`. The default 10,339,200-parameter model is validated on Intel Arc 140V with XPU/BF16, including training, checkpoint/resume, independent evaluation and generation. See [docs/phases/phase-1.md](docs/phases/phase-1.md).
 
+Phase 2 adds a reproducible experiment system: manifests, baseline/treatment relationships, multi-seed execution, automatic aggregation, paired comparison, resource comparison, and regression checks — all from machine-readable records without external dependencies. See [docs/phases/phase-2.md](docs/phases/phase-2.md).
+
 Minimal command surface:
 
 ```text
@@ -76,6 +78,10 @@ python -m mindforge.data prepare --tokenizer ... --train-text ... --validation-t
 python -m mindforge.train --config ...
 python -m mindforge.evaluate --checkpoint ... --tokenizer ... --tokens ...
 python -m mindforge.generate --checkpoint ... --tokenizer ... --prompt ...
+python -m mindforge.experiment validate <manifest>
+python -m mindforge.experiment run <manifest>
+python -m mindforge.experiment summarize <manifest>
+python -m mindforge.experiment check <manifest>
 ```
 
 The active core direction is intentionally narrow:

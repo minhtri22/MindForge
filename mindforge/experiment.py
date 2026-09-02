@@ -193,8 +193,22 @@ def _source_tree_hash() -> str:
                 digest.update(b"\n")
         return digest.hexdigest()
     except (FileNotFoundError, subprocess.CalledProcessError):
-        # In test environments without git, return a deterministic fallback
-        return "test-environment-fallback-hash"
+        # In test environments without git, compute hash directly from filesystem
+        source_files = []
+        for pattern in ["*.py", "*.json", "*.md", "*.txt"]:
+            source_files.extend(ROOT.glob(pattern))
+        source_files = [f for f in source_files if f.is_file()]
+        if not source_files:
+            return "empty"
+        digest = hashlib.sha256()
+        for full in sorted(source_files):
+            rel = full.relative_to(ROOT)
+            content = full.read_bytes()
+            digest.update(str(rel).encode())
+            digest.update(b"\0")
+            digest.update(content)
+            digest.update(b"\n")
+        return digest.hexdigest()
 
 
 def _software() -> dict[str, str]:

@@ -2,10 +2,11 @@
   "experiment_id": "phase2-lr-sweep-v1",
   "status": "PASS",
   "base_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
-  "git_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
+  "git_commit": "71baccf3e99028948c2d2b2f5cf32b276e8930b2",
   "manifest_hash": "f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968",
-  "source_tree_hash": "test-environment-fallback-hash",
-  "working_tree_clean": true,
+  "source_tree_hash": "373142c764f602ce86a2dd4002bc0f1d7bdd75a8e791d1aa2e098f626c8cefb9",
+  "working_tree_clean": false,
+  "working_tree_diff_hash": "0cdca6a705bdbcfcac520480e7d5c0a785db55bf86747b898abc53a0cecc8a3c",
   "hardware": {
     "platform": "Windows-11-10.0.26200-SP0",
     "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
@@ -16,8 +17,8 @@
   "software": {
     "python": "3.12.10",
     "torch": "2.12.1+xpu",
-    "numpy": "1.26.4",
-    "tokenizers": "0.21.1"
+    "numpy": "2.5.2",
+    "tokenizers": "0.21.4"
   },
   "model": {
     "vocab_size": 16384,
@@ -49,8 +50,8 @@
       "mean_bpb": 10.537770964151376,
       "median_bpb": 10.478312317731046,
       "std_bpb": 0.1257010876900121,
-      "mean_wall_clock_seconds": 37.59413576666702,
-      "median_wall_clock_seconds": 36.07483740000316,
+      "mean_wall_clock_seconds": 11.89807570000024,
+      "median_wall_clock_seconds": 12.289360900002066,
       "mean_tokens_per_second": 5448.2,
       "median_tokens_per_second": 5690.0,
       "peak_memory_bytes": 211125760
@@ -66,8 +67,8 @@
       "mean_bpb": 10.938692122871304,
       "median_bpb": 10.875835839512671,
       "std_bpb": 0.136213040362487,
-      "mean_wall_clock_seconds": 43.08834859999964,
-      "median_wall_clock_seconds": 38.29214779999893,
+      "mean_wall_clock_seconds": 12.663234966663973,
+      "median_wall_clock_seconds": 12.728678699997545,
       "mean_tokens_per_second": 4754.0,
       "median_tokens_per_second": 5342.0,
       "peak_memory_bytes": 211125760
@@ -85,7 +86,7 @@
     "std_relative": 0.0005585081617133665
   },
   "resource_comparison": {
-    "wall_clock_seconds": { "baseline_mean": 37.59, "treatment_mean": 43.09, "delta_mean": 5.49 },
+    "wall_clock_seconds": { "baseline_mean": 11.898, "treatment_mean": 12.663, "delta_mean": 0.765 },
     "tokens_per_second": { "baseline_median": 5690.0, "treatment_median": 5342.0, "delta_median": -348.0 },
     "peak_memory_bytes": { "baseline": 211125760, "treatment": 211125760, "delta": 0 }
   },
