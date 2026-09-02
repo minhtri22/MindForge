@@ -2,6 +2,10 @@
 
 MindForge separates the active compact-kernel roadmap from optional research tracks. Research does not become kernel architecture merely because it may be interesting later.
 
+## Strategic research directions
+
+- **Personal Intelligence — Two-Track Direction — NOT YET AUTHORIZED FOR IMPLEMENTATION** — Track A investigates whether a <=20M-class MindForge-Mobile model can focus on personal understanding/routing rather than world knowledge; Track B re-evaluates PIS from first principles as a personal pattern substrate for routines, preferences, relationships, exceptions and drift. The tracks remain independent until each has benchmark evidence; integration is not authorized. See [personal-intelligence-two-track.md](personal-intelligence-two-track.md).
+
 ## Completed research
 
 - **R1 — Open-Source Learning/Memory Architecture Survey — PASS / CLOSED** — source-level survey of ten projects and six shortlisted candidates. It recommends minimal reservoir replay only for a future independently authorized prototype, keeps application memory outside the kernel, and concludes that Phase 1 needs no architectural change or preserved extension point. See the [survey](r1-open-source-learning-memory.md), [matrices](r1-candidate-matrix.md), and [machine-readable inventory](data/r1-candidates.json). R1 did not implement a candidate and is not a P0.9 retry.
@@ -10,7 +14,7 @@ MindForge separates the active compact-kernel roadmap from optional research tra
 
 - Custom continual-learning research — STOP/FROZEN after P0.9 bounded falsification.
 - Explicit custom memory research — STOP/FROZEN because no controlled memory-value substrate was established.
-- Adaptive/PIS-like pattern research — inactive; prerequisite learning/memory evidence is absent.
+- Adaptive/PIS-like pattern research — inactive under the old framing; any future PIS work must use the new personal-intelligence Track B framing and a dedicated benchmark before implementation.
 
 See [deferred/continual-learning-memory.md](deferred/continual-learning-memory.md) for reopen conditions and adoption policy.
 
