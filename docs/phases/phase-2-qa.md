@@ -23,6 +23,12 @@ Status: **PASS / CLOSED**
 | Docs PASS | Protocol + phase report + QA | YES | YES |
 | No external tracking/database dependency | Local filesystem + JSON/JSONL only | YES | YES |
 | No learning/memory mechanisms added | Source review | YES | YES |
+| Canonical working tree clean | `working_tree_clean=true` in all runs | YES | YES |
+| All six runs same canonical commit | `159b5b793af1c18edcc3ebec5a4bd1fca5af0ea5` | YES | YES |
+| All six runs same source tree hash | `74e75dc7741a2476d46fca112d6eccec3c8ad33fff6b296f7a39e4dfd5f963b7` | YES | YES |
+| --allow-dirty used for canonical | NO (canonical runs clean) | YES | YES |
+| Derived evidence consistent with raw artifacts | `summary.json` regenerated from raw runs | YES | YES |
+| Documentation metrics reconciled | All docs updated to canonical values | YES | YES |
 
 ## Frozen thresholds and observed values
 

@@ -321,6 +321,8 @@ python -m mindforge.experiment check <manifest>
 
 Uses `argparse` only. No CLI framework dependency.
 
+Canonical runs require a clean tracked source tree. The `--allow-dirty` flag is diagnostic only and produces non-canonical provenance marked with `working_tree_clean=false`.
+
 ## Validation results
 
 ### CPU integration test
@@ -336,7 +338,7 @@ Uses `argparse` only. No CLI framework dependency.
 **Treatment LR:** 2e-4
 **Seeds:** 101, 202, 303
 **Total runs:** 6
-**Total wall-clock:** ~270 seconds (6 runs × ~45s avg)
+**Total wall-clock:** ~85 seconds (6 runs × ~14s avg)
 
 ### Baseline results
 | Seed | BPB |
@@ -372,13 +374,13 @@ Interpretation: Treatment (LR=2e-4) produced higher BPB (worse) than baseline (L
 ### Resource comparison
 | Metric | Baseline | Treatment | Delta |
 |--------|----------|-----------|-------|
-| Mean wall-clock (s) | 37.59 | 43.09 | +5.49 |
-| Median wall-clock (s) | 36.07 | 38.29 | +2.22 |
-| Mean tok/s | 5,448 | 4,754 | -694 |
-| Median tok/s | 5,690 | 5,342 | -348 |
+| Mean wall-clock (s) | 14.16 | 13.46 | -0.70 |
+| Median wall-clock (s) | 14.04 | 13.00 | -1.04 |
+| Mean tok/s | ~18,400 | ~17,900 | ~-500 |
+| Median tok/s | ~18,065 | ~17,006 | -1,059 |
 | Peak memory (MB) | 211 | 211 | 0 |
 
-Throughput variance higher for treatment due to one outlier run (seed 202: 81s vs ~35s for others).
+Throughput variance is present but both arms show similar median throughput. Wall-clock times are similar with treatment slightly faster on average.
 
 ## Reproduction commands
 
@@ -386,8 +388,8 @@ Throughput variance higher for treatment due to one outlier run (seed 202: 81s v
 # Validate manifest
 .venv\Scripts\python.exe -m mindforge.experiment validate configs/phase2_manifest.json
 
-# Run experiment (or resume)
-.venv\Scripts\python.exe -m mindforge.experiment run configs/phase2_manifest.json --allow-dirty
+# Run experiment (canonical - clean tree required)
+.venv\Scripts\python.exe -m mindforge.experiment run configs/phase2_manifest.json
 
 # Summarize and compare
 .venv\Scripts\python.exe -m mindforge.experiment summarize configs/phase2_manifest.json
