@@ -7,7 +7,7 @@ This plan distinguishes whether a check exists, whether it was executed on the l
 | Check | Exists | Executed | Passed | Evidence |
 |---|---|---|---|---|
 | Python byte-compilation | YES | YES | YES | `python -m compileall .` |
-| Git whitespace validation | YES | Pending final gate | Pending | `git diff --check` |
+| Git whitespace validation | YES | YES | YES | `git diff --check` |
 
 ## Unit tests
 
@@ -17,6 +17,10 @@ This plan distinguishes whether a check exists, whether it was executed on the l
 | Synthetic domain transition generator correctness | YES | YES | YES | `tests/test_phase0_local.py` |
 | CPU forward/backward/optimizer changes parameters | YES | YES | YES | `tests/test_phase0_local.py` |
 | CPU checkpoint round-trip | YES | YES | YES | `tests/test_phase0_local.py` |
+| Real-language deterministic split/pool helpers | YES | YES | YES | `tests/test_phase0_real_language.py` |
+| BPB from known NLL + Vietnamese UTF-8 byte count | YES | YES | YES | `tests/test_phase0_real_language.py` |
+| Deterministic evaluation/generation | YES | YES | YES | `tests/test_phase0_real_language.py` |
+| Real-language checkpoint load/evaluation equality | YES | YES | YES | `tests/test_phase0_real_language.py` |
 
 The repository contained no tests at base commit `5d95db1`; the pre-change `pytest -q` run reported `no tests ran`.
 
@@ -28,6 +32,10 @@ The repository contained no tests at base commit `5d95db1`; the pre-change `pyte
 | Practical model-envelope sweep | YES | YES | YES | `experiments/results/phase0_model_envelope.json` |
 | Three-seed reproducibility run | YES | YES | YES | `experiments/results/phase0_reproducibility.json` |
 | Continual-learning baseline + replay treatment | YES | YES | REVISE | `experiments/results/phase0_continual_local.json` |
+| P0.3 tokenizer comparison on shared exact UTF-8 samples | YES | YES | YES | `experiments/results/phase0_tokenizer_comparison.json`, `experiments/results/phase0_tokenizer_integrity.json` |
+| P0.4 1M-vs-10M dataset viability | YES | YES | YES | `experiments/results/phase0_dataset_viability.json` |
+| P0.6 standalone initial/final checkpoint evaluation | YES | YES | YES | `experiments/results/phase0_real_language_initial_eval.json`, `experiments/results/phase0_real_language_eval.json` |
+| P0.8 frozen real-language Baseline-0 | YES | YES | YES | `experiments/results/phase0_baseline0.json` |
 
 ## Hardware tests
 
@@ -83,9 +91,9 @@ OOM probing is intentionally bounded. No tested 10M-100M / context 256-2048 XPU 
 
 ## Known limitations
 
-- P0.3 tokenizer strategy and P0.4 real-dataset viability are not addressed by this local hardware harness.
-- P0.6 has loss/checkpoint comparison primitives but not the full planned evaluation contract (bits/token and deterministic generation sanity checks).
-- P0.8 has a plain Transformer training mechanism but no real-corpus Baseline-0 yet.
+- P0.3/P0.4/P0.6/P0.8 are now addressed by the separately documented Real Language Baseline slice. The older local-hardware report remains historical evidence and is not rewritten.
+- Baseline-0 generation is a bounded path/safety sanity check only; generated language remains weak and is not evidence of chatbot, reasoning, or factual quality.
+- Baseline throughput shows an early high-throughput interval followed by a lower but non-monotonically varying sustained plateau. No thermal/power telemetry was added, so the cause of the early-to-sustained clock change is not asserted.
 - Intel Arc 140V is integrated/shared-memory hardware. WMI reports `AdapterRAM` about 2 GB while the device label says `16GB`; these fields are not treated as equivalent to dedicated VRAM. XPU allocator peak and process RSS are reported separately.
 - Single-step throughput measurements are local research-envelope measurements, not production or marketing benchmarks.
 - CPU 2048x2048 matmul throughput showed large run-to-run variance in this session; it is kept as raw diagnostic evidence but is not used to rank backends.
@@ -96,8 +104,12 @@ Phase 0 may be marked PASS only when all Phase 0 questions in `PLAN.md` have evi
 
 - P0.1 PASS requires real target-hardware forward, backward, optimizer, checkpoint and representative timing evidence.
 - P0.2 PASS requires measured model/context configurations and resource/throughput evidence.
+- P0.3 PASS requires fair same-byte tokenizer comparison, reproducible project tokenizer training, compression/safety evidence, and no cross-tokenizer perplexity ranking.
+- P0.4 PASS requires deterministic real-data split/fingerprint plus a smallest viable development pool selected by the frozen rule.
 - P0.5 PASS requires at least three seeds plus checkpoint resume correctness.
+- P0.6 PASS requires a standalone checkpoint evaluator with deterministic CE/bits-token/BPB and bounded deterministic generation.
+- P0.8 PASS requires the frozen real-corpus Baseline-0 to learn, reload/evaluate/generate, and record credible local runtime/XPU evidence.
 - P0.9 PASS requires a protocol that actually exposes untreated forgetting; the current protocol does not.
 - P0.10 may only proceed when a controlled memory-value signal exists.
 
-Because P0.3, P0.4, P0.6 and P0.8 remain incomplete and P0.9 needs revision, overall Phase 0 remains REVISE and Phase 1 must not start.
+P0.3, P0.4, P0.6 and P0.8 now PASS/FROZEN. P0.9 remains REVISE and P0.10 remains blocked/stopped by the missing controlled memory-value signal. Therefore overall Phase 0 remains REVISE and Phase 1 must not start.

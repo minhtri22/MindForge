@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "base_commit": "1b0d9b016c2eaff8922693f7f6d496b597f29927",
+  "dataset_fingerprint": "c04d6f39c9fc1f47aa068c283e6b029ece1cd316611f64c9270d29453bfbc696",
+  "same_source_and_split_for_candidates": true,
+  "tokenizer_training": {
+    "inputs": {
+      "train.vi.txt": "7a5bfa6fe798191a38049380b0784920c441d2ce0f61e8dc2ed01378da912962",
+      "train.en.txt": "a5b45b6ff948fa8a4b7112684a2a45034eadf1b7377c1858748296ccd9cd5050"
+    },
+    "validation_not_used": true,
+    "validation_files": {
+      "validation.vi.txt": "99bee7e32d3a8fb5d6bce53194e59577801d3b528af7c2764926a933efd912e4",
+      "validation.en.txt": "58a7e52ef9ac32df32b455bf0e94219564bedca771df540a06680f187349206c"
+    },
+    "vocab_size": 16384,
+    "rebuilt_vocab_exactly_equal": true,
+    "rebuilt_probe_token_ids_equal": true,
+    "tokenizer_sha256": "66a81f01511a62896089e8e2a510c95dad61b567cec12f0dbc5752529b11fb3e"
+  },
+  "fair_bpb": {
+    "same_exact_text_for_both_tokenizers": true,
+    "all_text_tokens_scored_via_bos_prefix": true,
+    "sample_count": 12,
+    "total_utf8_bytes": 6140,
+    "sample_sha256": [
+      "e1f63cf2027a8a72c0a08428eff9cd340bbba88b0e2be044b6f90e22c3302661",
+      "fb71854e0cf937e1b07a7a446e2957fdddbf1f9014082882a8c001c660e25c24",
+      "0bcb701491883284d1a6fdb4dcd0ef09db5a1bdbc4ece41a58aadefdf4d2781e",
+      "5cd49534b5daa900d86cf1b29d993ec29332dfcd0a3a38e9d9dda216323f09ce",
+      "f7a2f2f6b6f5323b988df4361f8941c0523cd14458dd5d83ca505d3e65ec37e3",
+      "a5aa9954b6dbcd1c50354abc42ad9453d0e4ab1171cbe468afbfa1ac785a47b2",
+      "005717d2c8476eb720bc87e00534503cd7bc51a7171381bc190831f0d6a232da",
+      "7f64106f290fb8cc0a66103c41be7cad7c2198dd7740724e140da01ee49c60b5",
+      "f5216119c58f26747d69b66cf07e33b54e1b84da88d7a95c7ca34360a26e9669",
+      "21023266b0aebe583bce39e7fec5e6adf63b904cbb5d282a9bf151d762eb8c4d",
+      "950f02b1a20a7374cb8b9962e9b321cb0aba89aa2bb999dbdb708630464ee334",
+      "f8833dd25f79f8ca1b9b53b27b820ec6254e813070feb809e0081b97638a9b15"
+    ]
+  },
+  "recomputed_decision_inputs": {
+    "qwen_mixed_tokens_per_byte": 0.2379584542113224,
+    "mindforge_mixed_tokens_per_byte": 0.23566296451003169,
+    "qwen_final_bpb": 12.48142680326087,
+    "mindforge_final_bpb": 9.714459897477736
+  },
+  "perplexity_used_for_cross_tokenizer_ranking": false,
+  "comparison_result_sha256": "55af573de50b6543de4dff8cf1d8814c1075af37ab4fb614ffbbc7cecf600002",
+  "decision": "TRAIN MINDFORGE TOKENIZER"
+}

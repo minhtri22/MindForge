@@ -1,0 +1,802 @@
+{
+  "base_commit": "1b0d9b016c2eaff8922693f7f6d496b597f29927",
+  "comparison_warning": "perplexity is reported only as within-tokenizer context; cross-tokenizer decision uses BPB, compression, safety and implementation cost",
+  "dataset_fingerprint": "c04d6f39c9fc1f47aa068c283e6b029ece1cd316611f64c9270d29453bfbc696",
+  "decision": "TRAIN MINDFORGE TOKENIZER",
+  "decision_inputs": {
+    "existing_final_bpb": 12.48142680326087,
+    "existing_mixed_tokens_per_byte": 0.2379584542113224,
+    "mindforge_final_bpb": 9.714459897477736,
+    "mindforge_mixed_tokens_per_byte": 0.23566296451003169,
+    "safe": {
+      "existing": true,
+      "mindforge": true
+    }
+  },
+  "decision_rationale": "MindForge tokenizer met frozen BPB/compression tolerances with much smaller project-local vocabulary",
+  "fair_bpb_contract": {
+    "all_text_tokens_scored_via_bos_prefix": true,
+    "same_exact_text_for_both_tokenizers": true,
+    "sample_count": 12,
+    "sample_sha256": [
+      "e1f63cf2027a8a72c0a08428eff9cd340bbba88b0e2be044b6f90e22c3302661",
+      "fb71854e0cf937e1b07a7a446e2957fdddbf1f9014082882a8c001c660e25c24",
+      "0bcb701491883284d1a6fdb4dcd0ef09db5a1bdbc4ece41a58aadefdf4d2781e",
+      "5cd49534b5daa900d86cf1b29d993ec29332dfcd0a3a38e9d9dda216323f09ce",
+      "f7a2f2f6b6f5323b988df4361f8941c0523cd14458dd5d83ca505d3e65ec37e3",
+      "a5aa9954b6dbcd1c50354abc42ad9453d0e4ab1171cbe468afbfa1ac785a47b2",
+      "005717d2c8476eb720bc87e00534503cd7bc51a7171381bc190831f0d6a232da",
+      "7f64106f290fb8cc0a66103c41be7cad7c2198dd7740724e140da01ee49c60b5",
+      "f5216119c58f26747d69b66cf07e33b54e1b84da88d7a95c7ca34360a26e9669",
+      "21023266b0aebe583bce39e7fec5e6adf63b904cbb5d282a9bf151d762eb8c4d",
+      "950f02b1a20a7374cb8b9962e9b321cb0aba89aa2bb999dbdb708630464ee334",
+      "f8833dd25f79f8ca1b9b53b27b820ec6254e813070feb809e0081b97638a9b15"
+    ],
+    "total_utf8_bytes": 6140
+  },
+  "git_commit": "1b0d9b016c2eaff8922693f7f6d496b597f29927",
+  "hardware": {
+    "cpu": {
+      "Name": "Intel(R) Core(TM) Ultra 7 258V",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 8
+    },
+    "gpu": {
+      "AdapterRAM": 2147479552,
+      "DriverVersion": "32.0.101.8860",
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "VideoProcessor": "Intel(R) Arc(TM) 140V GPU (16GB) Family"
+    },
+    "os": {
+      "BuildNumber": "26200",
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "OSArchitecture": "64-bit",
+      "Version": "10.0.26200"
+    },
+    "ram": {
+      "available_bytes": 14769688576,
+      "total_bytes": 33916248064
+    },
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "heldout_metrics": {
+    "existing": {
+      "en": {
+        "characters": 1044990,
+        "roundtrip_exact": true,
+        "tokens": 248497,
+        "tokens_per_byte": 0.2369852066040039,
+        "tokens_per_character": 0.23779844783203666,
+        "tokens_per_word": 1.5163813882532418,
+        "unique_token_ids": 21621,
+        "unknown_count": 0,
+        "utf8_bytes": 1048576,
+        "valid_token_ids": true,
+        "vocab_utilization": 0.14255761052319257,
+        "whitespace_words": 163875
+      },
+      "mixed": {
+        "characters": 932323,
+        "roundtrip_exact": true,
+        "sequence_expansion_ratio_vs_mindforge": 1.0097405619337059,
+        "tokens": 249518,
+        "tokens_per_byte": 0.2379584542113224,
+        "tokens_per_character": 0.2676304242199324,
+        "tokens_per_word": 1.4858452926814745,
+        "unique_token_ids": 18689,
+        "unknown_count": 0,
+        "utf8_bytes": 1048578,
+        "valid_token_ids": true,
+        "vocab_utilization": 0.12322552995087858,
+        "whitespace_words": 167930
+      },
+      "vi": {
+        "characters": 816726,
+        "roundtrip_exact": true,
+        "tokens": 254623,
+        "tokens_per_byte": 0.2428276470447989,
+        "tokens_per_character": 0.3117606149430776,
+        "tokens_per_word": 1.4832810989036596,
+        "unique_token_ids": 9612,
+        "unknown_count": 0,
+        "utf8_bytes": 1048575,
+        "valid_token_ids": true,
+        "vocab_utilization": 0.06337652062110573,
+        "whitespace_words": 171662
+      }
+    },
+    "mindforge": {
+      "en": {
+        "characters": 1044990,
+        "roundtrip_exact": true,
+        "tokens": 267521,
+        "tokens_per_byte": 0.2551279067993164,
+        "tokens_per_character": 0.2560034067311649,
+        "tokens_per_word": 1.6324698703279938,
+        "unique_token_ids": 11322,
+        "unknown_count": 0,
+        "utf8_bytes": 1048576,
+        "valid_token_ids": true,
+        "vocab_utilization": 0.6910400390625,
+        "whitespace_words": 163875
+      },
+      "mixed": {
+        "characters": 932323,
+        "roundtrip_exact": true,
+        "sequence_expansion_ratio_vs_mindforge": 1.0,
+        "tokens": 247111,
+        "tokens_per_byte": 0.23566296451003169,
+        "tokens_per_character": 0.2650487009330457,
+        "tokens_per_word": 1.4715119394986007,
+        "unique_token_ids": 13051,
+        "unknown_count": 0,
+        "utf8_bytes": 1048578,
+        "valid_token_ids": true,
+        "vocab_utilization": 0.79656982421875,
+        "whitespace_words": 167930
+      },
+      "vi": {
+        "characters": 816726,
+        "roundtrip_exact": true,
+        "tokens": 229799,
+        "tokens_per_byte": 0.21915361323701213,
+        "tokens_per_character": 0.2813660885045903,
+        "tokens_per_word": 1.3386713425219325,
+        "unique_token_ids": 8535,
+        "unknown_count": 0,
+        "utf8_bytes": 1048575,
+        "valid_token_ids": true,
+        "vocab_utilization": 0.52093505859375,
+        "whitespace_words": 171662
+      }
+    }
+  },
+  "license": {
+    "existing": "Apache-2.0 (Qwen2.5 model/tokenizer repository)",
+    "mindforge": "project-generated tokenizer from CC BY-SA Wikipedia training text"
+  },
+  "probes": {
+    "existing": {
+      "code_switch": {
+        "roundtrip_exact": true,
+        "tokens": 16,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "multisyllable": {
+        "roundtrip_exact": true,
+        "tokens": 14,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "numbers": {
+        "roundtrip_exact": true,
+        "tokens": 38,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "punctuation": {
+        "roundtrip_exact": true,
+        "tokens": 21,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "vietnamese_diacritics": {
+        "roundtrip_exact": true,
+        "tokens": 24,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      }
+    },
+    "mindforge": {
+      "code_switch": {
+        "roundtrip_exact": true,
+        "tokens": 17,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "multisyllable": {
+        "roundtrip_exact": true,
+        "tokens": 12,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "numbers": {
+        "roundtrip_exact": true,
+        "tokens": 24,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "punctuation": {
+        "roundtrip_exact": true,
+        "tokens": 18,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      },
+      "vietnamese_diacritics": {
+        "roundtrip_exact": true,
+        "tokens": 18,
+        "unknown_count": 0,
+        "valid_token_ids": true
+      }
+    }
+  },
+  "smoke_language_models": {
+    "existing": {
+      "checkpoint": {
+        "bytes": 185758549,
+        "sha256": "be2d6a65abd3971a81fbaf1f65728cc457c32a96881fd1eadebf3a800c0ff9e6",
+        "step": 256
+      },
+      "config": {
+        "d_model": 192,
+        "ff_mult": 4,
+        "max_context": 256,
+        "n_heads": 6,
+        "n_layers": 4,
+        "vocab_size": 151665
+      },
+      "curve": [
+        {
+          "step": 1,
+          "train_loss": 129.0
+        },
+        {
+          "step": 64,
+          "train_loss": 38.75
+        },
+        {
+          "step": 128,
+          "train_loss": 33.75
+        },
+        {
+          "step": 192,
+          "train_loss": 36.0
+        },
+        {
+          "step": 256,
+          "train_loss": 41.0
+        }
+      ],
+      "device": "xpu",
+      "dtype": "torch.bfloat16",
+      "fair_eval": {
+        "method": "same exact held-out UTF-8 text samples; BOS predicts every sample token",
+        "sample_count": 12,
+        "sample_sha256": [
+          "e1f63cf2027a8a72c0a08428eff9cd340bbba88b0e2be044b6f90e22c3302661",
+          "fb71854e0cf937e1b07a7a446e2957fdddbf1f9014082882a8c001c660e25c24",
+          "0bcb701491883284d1a6fdb4dcd0ef09db5a1bdbc4ece41a58aadefdf4d2781e",
+          "5cd49534b5daa900d86cf1b29d993ec29332dfcd0a3a38e9d9dda216323f09ce",
+          "f7a2f2f6b6f5323b988df4361f8941c0523cd14458dd5d83ca505d3e65ec37e3",
+          "a5aa9954b6dbcd1c50354abc42ad9453d0e4ab1171cbe468afbfa1ac785a47b2",
+          "005717d2c8476eb720bc87e00534503cd7bc51a7171381bc190831f0d6a232da",
+          "7f64106f290fb8cc0a66103c41be7cad7c2198dd7740724e140da01ee49c60b5",
+          "f5216119c58f26747d69b66cf07e33b54e1b84da88d7a95c7ca34360a26e9669",
+          "21023266b0aebe583bce39e7fec5e6adf63b904cbb5d282a9bf151d762eb8c4d",
+          "950f02b1a20a7374cb8b9962e9b321cb0aba89aa2bb999dbdb708630464ee334",
+          "f8833dd25f79f8ca1b9b53b27b820ec6254e813070feb809e0081b97638a9b15"
+        ],
+        "total_utf8_bytes": 6140
+      },
+      "final_eval": {
+        "bits_per_byte": 12.48142680326087,
+        "bits_per_token": 53.25640067548419,
+        "byte_accounting": "exact original UTF-8 bytes of the frozen text samples",
+        "cross_entropy": 36.91452397498263,
+        "finite": true,
+        "perplexity": 485165195.4097903,
+        "perplexity_note": "tokenizer-dependent; never used for cross-tokenizer ranking",
+        "predicted_tokens": 1439,
+        "represented_utf8_bytes": 6140,
+        "samples": [
+          {
+            "index": 0,
+            "nll": 4800.0,
+            "tokens": 141,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 1,
+            "nll": 4864.0,
+            "tokens": 126,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 2,
+            "nll": 5760.0,
+            "tokens": 134,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 3,
+            "nll": 4160.0,
+            "tokens": 117,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 4,
+            "nll": 4896.0,
+            "tokens": 138,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 5,
+            "nll": 4352.0,
+            "tokens": 108,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 6,
+            "nll": 4032.0,
+            "tokens": 117,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 7,
+            "nll": 4960.0,
+            "tokens": 135,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 8,
+            "nll": 3600.0,
+            "tokens": 95,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 9,
+            "nll": 3600.0,
+            "tokens": 93,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 10,
+            "nll": 3904.0,
+            "tokens": 102,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 11,
+            "nll": 4192.0,
+            "tokens": 133,
+            "utf8_bytes": 512
+          }
+        ],
+        "status": "PASS",
+        "total_nll": 53120.0
+      },
+      "initial_eval": {
+        "bits_per_byte": 43.88048603845207,
+        "bits_per_token": 187.23153876031668,
+        "byte_accounting": "exact original UTF-8 bytes of the frozen text samples",
+        "cross_entropy": 129.77901320361363,
+        "finite": true,
+        "perplexity": 485165195.4097903,
+        "perplexity_note": "tokenizer-dependent; never used for cross-tokenizer ranking",
+        "predicted_tokens": 1439,
+        "represented_utf8_bytes": 6140,
+        "samples": [
+          {
+            "index": 0,
+            "nll": 18432.0,
+            "tokens": 141,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 1,
+            "nll": 16192.0,
+            "tokens": 126,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 2,
+            "nll": 17664.0,
+            "tokens": 134,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 3,
+            "nll": 15040.0,
+            "tokens": 117,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 4,
+            "nll": 17920.0,
+            "tokens": 138,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 5,
+            "nll": 13760.0,
+            "tokens": 108,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 6,
+            "nll": 15232.0,
+            "tokens": 117,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 7,
+            "nll": 17536.0,
+            "tokens": 135,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 8,
+            "nll": 12544.0,
+            "tokens": 95,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 9,
+            "nll": 12224.0,
+            "tokens": 93,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 10,
+            "nll": 13568.0,
+            "tokens": 102,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 11,
+            "nll": 16640.0,
+            "tokens": 133,
+            "utf8_bytes": 512
+          }
+        ],
+        "status": "PASS",
+        "total_nll": 186752.0
+      },
+      "parameter_count": 30948672,
+      "peak_xpu_memory_bytes": 835374080,
+      "seed": 4242,
+      "steps": 256,
+      "throughput_tokens_per_second": {
+        "count": 246,
+        "mean": 3685.658600844698,
+        "median": 4092.107704231189,
+        "stddev": 1399.4846324670536
+      },
+      "tokenizer": "existing",
+      "training_tokens": 131072,
+      "wall_clock_seconds": 50.964961500001664
+    },
+    "mindforge": {
+      "checkpoint": {
+        "bytes": 29915051,
+        "sha256": "c6dcc14ba11a60c2f9012458b7f58070e5dd0b96e01b9b05e0efd953098cae68",
+        "step": 256
+      },
+      "config": {
+        "d_model": 192,
+        "ff_mult": 4,
+        "max_context": 256,
+        "n_heads": 6,
+        "n_layers": 4,
+        "vocab_size": 16384
+      },
+      "curve": [
+        {
+          "step": 1,
+          "train_loss": 129.0
+        },
+        {
+          "step": 64,
+          "train_loss": 33.75
+        },
+        {
+          "step": 128,
+          "train_loss": 31.375
+        },
+        {
+          "step": 192,
+          "train_loss": 28.5
+        },
+        {
+          "step": 256,
+          "train_loss": 28.5
+        }
+      ],
+      "device": "xpu",
+      "dtype": "torch.bfloat16",
+      "fair_eval": {
+        "method": "same exact held-out UTF-8 text samples; BOS predicts every sample token",
+        "sample_count": 12,
+        "sample_sha256": [
+          "e1f63cf2027a8a72c0a08428eff9cd340bbba88b0e2be044b6f90e22c3302661",
+          "fb71854e0cf937e1b07a7a446e2957fdddbf1f9014082882a8c001c660e25c24",
+          "0bcb701491883284d1a6fdb4dcd0ef09db5a1bdbc4ece41a58aadefdf4d2781e",
+          "5cd49534b5daa900d86cf1b29d993ec29332dfcd0a3a38e9d9dda216323f09ce",
+          "f7a2f2f6b6f5323b988df4361f8941c0523cd14458dd5d83ca505d3e65ec37e3",
+          "a5aa9954b6dbcd1c50354abc42ad9453d0e4ab1171cbe468afbfa1ac785a47b2",
+          "005717d2c8476eb720bc87e00534503cd7bc51a7171381bc190831f0d6a232da",
+          "7f64106f290fb8cc0a66103c41be7cad7c2198dd7740724e140da01ee49c60b5",
+          "f5216119c58f26747d69b66cf07e33b54e1b84da88d7a95c7ca34360a26e9669",
+          "21023266b0aebe583bce39e7fec5e6adf63b904cbb5d282a9bf151d762eb8c4d",
+          "950f02b1a20a7374cb8b9962e9b321cb0aba89aa2bb999dbdb708630464ee334",
+          "f8833dd25f79f8ca1b9b53b27b820ec6254e813070feb809e0081b97638a9b15"
+        ],
+        "total_utf8_bytes": 6140
+      },
+      "final_eval": {
+        "bits_per_byte": 9.714459897477736,
+        "bits_per_token": 41.65278196264896,
+        "byte_accounting": "exact original UTF-8 bytes of the frozen text samples",
+        "cross_entropy": 28.87150837988827,
+        "finite": true,
+        "perplexity": 485165195.4097903,
+        "perplexity_note": "tokenizer-dependent; never used for cross-tokenizer ranking",
+        "predicted_tokens": 1432,
+        "represented_utf8_bytes": 6140,
+        "samples": [
+          {
+            "index": 0,
+            "nll": 3696.0,
+            "tokens": 117,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 1,
+            "nll": 3280.0,
+            "tokens": 108,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 2,
+            "nll": 3232.0,
+            "tokens": 116,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 3,
+            "nll": 3120.0,
+            "tokens": 101,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 4,
+            "nll": 3808.0,
+            "tokens": 138,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 5,
+            "nll": 3088.0,
+            "tokens": 102,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 6,
+            "nll": 4032.0,
+            "tokens": 138,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 7,
+            "nll": 4064.0,
+            "tokens": 142,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 8,
+            "nll": 3040.0,
+            "tokens": 105,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 9,
+            "nll": 3232.0,
+            "tokens": 115,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 10,
+            "nll": 3056.0,
+            "tokens": 115,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 11,
+            "nll": 3696.0,
+            "tokens": 135,
+            "utf8_bytes": 512
+          }
+        ],
+        "status": "PASS",
+        "total_nll": 41344.0
+      },
+      "initial_eval": {
+        "bits_per_byte": 43.65491808417627,
+        "bits_per_token": 187.17960686930329,
+        "byte_accounting": "exact original UTF-8 bytes of the frozen text samples",
+        "cross_entropy": 129.74301675977654,
+        "finite": true,
+        "perplexity": 485165195.4097903,
+        "perplexity_note": "tokenizer-dependent; never used for cross-tokenizer ranking",
+        "predicted_tokens": 1432,
+        "represented_utf8_bytes": 6140,
+        "samples": [
+          {
+            "index": 0,
+            "nll": 15424.0,
+            "tokens": 117,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 1,
+            "nll": 13888.0,
+            "tokens": 108,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 2,
+            "nll": 15040.0,
+            "tokens": 116,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 3,
+            "nll": 13376.0,
+            "tokens": 101,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 4,
+            "nll": 18048.0,
+            "tokens": 138,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 5,
+            "nll": 13056.0,
+            "tokens": 102,
+            "utf8_bytes": 511
+          },
+          {
+            "index": 6,
+            "nll": 17792.0,
+            "tokens": 138,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 7,
+            "nll": 18176.0,
+            "tokens": 142,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 8,
+            "nll": 13504.0,
+            "tokens": 105,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 9,
+            "nll": 15040.0,
+            "tokens": 115,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 10,
+            "nll": 14912.0,
+            "tokens": 115,
+            "utf8_bytes": 512
+          },
+          {
+            "index": 11,
+            "nll": 17536.0,
+            "tokens": 135,
+            "utf8_bytes": 512
+          }
+        ],
+        "status": "PASS",
+        "total_nll": 185792.0
+      },
+      "parameter_count": 4974720,
+      "peak_xpu_memory_bytes": 125986816,
+      "seed": 4242,
+      "steps": 256,
+      "throughput_tokens_per_second": {
+        "count": 246,
+        "mean": 13166.05051444644,
+        "median": 14219.639991017135,
+        "stddev": 4044.097572091994
+      },
+      "tokenizer": "mindforge",
+      "training_tokens": 131072,
+      "wall_clock_seconds": 11.416864800001349
+    }
+  },
+  "software": {
+    "cuda_available": false,
+    "numpy": "2.5.2",
+    "python": "3.12.10",
+    "python_executable": "<venv>/Scripts/python.exe",
+    "tokenizers": "0.21.4",
+    "torch": "2.12.1+xpu",
+    "xpu_available": true
+  },
+  "status": "PASS",
+  "timestamp": "2026-09-02T12:12:49.043783+00:00",
+  "tokenizer_metadata": {
+    "existing": {
+      "decoder": {
+        "add_prefix_space": false,
+        "trim_offsets": false,
+        "type": "ByteLevel",
+        "use_regex": false
+      },
+      "name": "Qwen/Qwen2.5-0.5B",
+      "normalizer": {
+        "type": "NFC"
+      },
+      "pre_tokenizer": {
+        "pretokenizers": [
+          {
+            "behavior": "Isolated",
+            "invert": false,
+            "pattern": {
+              "Regex": "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?\\p{L}+|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+            },
+            "type": "Split"
+          },
+          {
+            "add_prefix_space": false,
+            "trim_offsets": false,
+            "type": "ByteLevel",
+            "use_regex": false
+          }
+        ],
+        "type": "Sequence"
+      },
+      "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+      "special_tokens": [
+        "<|endoftext|>",
+        "<|im_start|>",
+        "<|im_end|>",
+        "<|object_ref_start|>",
+        "<|object_ref_end|>",
+        "<|box_start|>",
+        "<|box_end|>",
+        "<|quad_start|>",
+        "<|quad_end|>",
+        "<|vision_start|>",
+        "<|vision_end|>",
+        "<|vision_pad|>",
+        "<|image_pad|>",
+        "<|video_pad|>"
+      ],
+      "vocab_size": 151665
+    },
+    "mindforge": {
+      "decoder": {
+        "add_prefix_space": true,
+        "trim_offsets": true,
+        "type": "ByteLevel",
+        "use_regex": true
+      },
+      "name": "MindForge byte-level BPE",
+      "normalizer": {
+        "type": "NFC"
+      },
+      "pre_tokenizer": {
+        "add_prefix_space": false,
+        "trim_offsets": true,
+        "type": "ByteLevel",
+        "use_regex": true
+      },
+      "revision": "66a81f01511a62896089e8e2a510c95dad61b567cec12f0dbc5752529b11fb3e",
+      "special_tokens": [
+        "<|endoftext|>",
+        "<|unk|>"
+      ],
+      "vocab_size": 16384
+    }
+  }
+}

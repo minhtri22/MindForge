@@ -1,0 +1,300 @@
+{
+  "100M": "NOT_RUN unless 50M justifies escalation",
+  "50M": "NOT_RUN unless 10M fails frozen gate",
+  "base_commit": "1b0d9b016c2eaff8922693f7f6d496b597f29927",
+  "dataset_fingerprint": "c04d6f39c9fc1f47aa068c283e6b029ece1cd316611f64c9270d29453bfbc696",
+  "decision_reason": "both viable; 10M improved final BPB by <5%, so frozen smallest-corpus rule selects 1M",
+  "git_commit": "1b0d9b016c2eaff8922693f7f6d496b597f29927",
+  "hardware": {
+    "cpu": {
+      "Name": "Intel(R) Core(TM) Ultra 7 258V",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 8
+    },
+    "gpu": {
+      "AdapterRAM": 2147479552,
+      "DriverVersion": "32.0.101.8860",
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "VideoProcessor": "Intel(R) Arc(TM) 140V GPU (16GB) Family"
+    },
+    "os": {
+      "BuildNumber": "26200",
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "OSArchitecture": "64-bit",
+      "Version": "10.0.26200"
+    },
+    "ram": {
+      "available_bytes": 14987206656,
+      "total_bytes": 33916248064
+    },
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "mixed_train": {
+    "en_bytes": 33565953,
+    "language_byte_ratio_vi": 0.5,
+    "path": "train.mixed.txt",
+    "sha256": "12ad1dfc62d3efc1bc4fac5984aeaec91f198d1136d326e003d582daff4b9b9e",
+    "total_bytes": 67131908,
+    "vi_bytes": 33565953
+  },
+  "mixed_validation": {
+    "en_bytes": 4204353,
+    "language_byte_ratio_vi": 0.5,
+    "path": "validation.mixed.txt",
+    "sha256": "52bfc1fa14e87511567fc657a6293718f57890736e98ad75c8d3cebe73164759",
+    "total_bytes": 8408708,
+    "vi_bytes": 4204353
+  },
+  "recommended_development_corpus": "1M tokens",
+  "software": {
+    "cuda_available": false,
+    "numpy": "2.5.2",
+    "python": "3.12.10",
+    "python_executable": "<venv>/Scripts/python.exe",
+    "tokenizers": "0.21.4",
+    "torch": "2.12.1+xpu",
+    "xpu_available": true
+  },
+  "sources": {
+    "en": {
+      "download_bytes": 299138062,
+      "filename": "enwiki-20260801-pages-articles-multistream1.xml-p1p41242.bz2",
+      "license": "CC BY-SA (Wikipedia text; see Wikimedia Terms of Use/content licensing)",
+      "sha256": "856411e9a99bdc38f809ee36960ae05249a41815d56e08f015b138feaad8fe9f",
+      "url": "https://dumps.wikimedia.org/enwiki/20260801/enwiki-20260801-pages-articles-multistream1.xml-p1p41242.bz2"
+    },
+    "vi": {
+      "download_bytes": 330227402,
+      "filename": "viwiki-20260801-pages-articles-multistream1.xml-p1p832082.bz2",
+      "license": "CC BY-SA (Wikipedia text; see Wikimedia Terms of Use/content licensing)",
+      "sha256": "e101d5068a510319191d250d4eb006392e73bf9be117036495c2f02fde097f52",
+      "url": "https://dumps.wikimedia.org/viwiki/20260801/viwiki-20260801-pages-articles-multistream1.xml-p1p832082.bz2"
+    }
+  },
+  "split": {
+    "article_id_overlap": 0,
+    "method": "SHA-256 first 16 bits of <language>:<article-id>",
+    "validation_fraction_target": 0.05
+  },
+  "stages": {
+    "10M": {
+      "best_bpb": 7.6226645714319625,
+      "config": {
+        "d_model": 192,
+        "ff_mult": 4,
+        "max_context": 256,
+        "n_heads": 6,
+        "n_layers": 4,
+        "vocab_size": 16384
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "bits_per_byte": 44.53127656499764,
+            "bits_per_token": 186.64867091500966,
+            "cross_entropy": 129.375,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 488,
+          "train_loss": 23.625,
+          "validation": {
+            "bits_per_byte": 8.03140575729426,
+            "bits_per_token": 33.66288428740915,
+            "cross_entropy": 23.333333333333332,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 977,
+          "train_loss": 22.875,
+          "validation": {
+            "bits_per_byte": 7.651348163422299,
+            "bits_per_token": 32.069908513094255,
+            "cross_entropy": 22.229166666666668,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 1465,
+          "train_loss": 22.5,
+          "validation": {
+            "bits_per_byte": 7.6226645714319625,
+            "bits_per_token": 31.9496839263535,
+            "cross_entropy": 22.145833333333332,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 1954,
+          "train_loss": 22.875,
+          "validation": {
+            "bits_per_byte": 7.6226645714319625,
+            "bits_per_token": 31.9496839263535,
+            "cross_entropy": 22.145833333333332,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        }
+      ],
+      "final_bpb": 7.6226645714319625,
+      "final_vs_best_reversal": 0.0,
+      "initial_bpb": 44.53127656499764,
+      "parameter_count": 4974720,
+      "peak_xpu_memory_bytes": 125986816,
+      "pool_sha256": "2d7a4448e2fe09e95477cd1ab999e2e4ac999f0cb910f63dc664cf4176f50ac1",
+      "pool_tokens": 10000000,
+      "relative_bpb_improvement": 0.8288244766505637,
+      "requested_pool_tokens": 10000000,
+      "seed": 5151,
+      "status": "PASS",
+      "steps": 1954,
+      "throughput_tokens_per_second": {
+        "count": 1944,
+        "mean": 20248.400485331436,
+        "median": 20854.420344705843,
+        "stddev": 3753.4250931068514
+      },
+      "training_token_budget": 1000448,
+      "viable": true,
+      "wall_clock_seconds": 52.78344649999781
+    },
+    "1M": {
+      "best_bpb": 7.633420918428339,
+      "config": {
+        "d_model": 192,
+        "ff_mult": 4,
+        "max_context": 256,
+        "n_heads": 6,
+        "n_layers": 4,
+        "vocab_size": 16384
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "bits_per_byte": 44.53127656499764,
+            "bits_per_token": 186.64867091500966,
+            "cross_entropy": 129.375,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 488,
+          "train_loss": 27.0,
+          "validation": {
+            "bits_per_byte": 8.078016594278557,
+            "bits_per_token": 33.85824924086286,
+            "cross_entropy": 23.46875,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 977,
+          "train_loss": 22.75,
+          "validation": {
+            "bits_per_byte": 7.66927540841626,
+            "bits_per_token": 32.14504887980722,
+            "cross_entropy": 22.28125,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 1465,
+          "train_loss": 22.75,
+          "validation": {
+            "bits_per_byte": 7.640591816425923,
+            "bits_per_token": 32.02482429306647,
+            "cross_entropy": 22.197916666666668,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        },
+        {
+          "step": 1954,
+          "train_loss": 21.0,
+          "validation": {
+            "bits_per_byte": 7.633420918428339,
+            "bits_per_token": 31.994768146381283,
+            "cross_entropy": 22.177083333333332,
+            "finite": true,
+            "perplexity": 485165195.4097903,
+            "predicted_tokens": 3072,
+            "represented_utf8_bytes": 12876,
+            "status": "PASS",
+            "windows": 12
+          }
+        }
+      ],
+      "final_bpb": 7.633420918428339,
+      "final_vs_best_reversal": 0.0,
+      "initial_bpb": 44.53127656499764,
+      "parameter_count": 4974720,
+      "peak_xpu_memory_bytes": 125986816,
+      "pool_sha256": "d17ea67c745736d1996246e65b58237dcae88b1e211894063ac6e98062353919",
+      "pool_tokens": 1000000,
+      "relative_bpb_improvement": 0.8285829307568437,
+      "requested_pool_tokens": 1000000,
+      "seed": 5151,
+      "status": "PASS",
+      "steps": 1954,
+      "throughput_tokens_per_second": {
+        "count": 1944,
+        "mean": 23533.067002827993,
+        "median": 23280.716835156934,
+        "stddev": 5434.039537946781
+      },
+      "training_token_budget": 1000448,
+      "viable": true,
+      "wall_clock_seconds": 47.4081096000009
+    }
+  },
+  "status": "PASS",
+  "timestamp": "2026-09-02T11:40:31.806863+00:00",
+  "tokenizer": "mindforge"
+}
