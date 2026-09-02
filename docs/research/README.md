@@ -4,7 +4,7 @@ MindForge separates the active compact-kernel roadmap from optional research tra
 
 ## Strategic research directions
 
-- **Personal Intelligence — Two-Track Direction — NOT YET AUTHORIZED FOR IMPLEMENTATION** — Track A investigates whether a <=20M-class MindForge-Mobile model can focus on personal understanding/routing rather than world knowledge; Track B re-evaluates PIS from first principles as a personal pattern substrate for routines, preferences, relationships, exceptions and drift. The tracks remain independent until each has benchmark evidence; integration is not authorized. See [personal-intelligence-two-track.md](personal-intelligence-two-track.md).
+- **Personal Intelligence — Two-Track Direction — FOUNDATION RESEARCH ONLY** — Track A investigates whether a <=20M-class MindForge-Mobile model can focus on personal understanding/routing rather than world knowledge. Track B is now **Personal Pattern Foundation (PPF)**, a greenfield research track asking how little machinery is required to reliably recognize one person over time. PPF must progress through five proof layers: define "Recognize Me"; define the personal event foundation; freeze a ground-truth benchmark; test minimal baselines; add only the minimum mechanism justified by measured failure. Legacy PIS is outside the PPF execution path and is historical only. Track A/PPF integration is not authorized. See [personal-intelligence-two-track.md](personal-intelligence-two-track.md).
 
 ## Completed research
 
@@ -14,7 +14,7 @@ MindForge separates the active compact-kernel roadmap from optional research tra
 
 - Custom continual-learning research — STOP/FROZEN after P0.9 bounded falsification.
 - Explicit custom memory research — STOP/FROZEN because no controlled memory-value substrate was established.
-- Adaptive/PIS-like pattern research — inactive under the old framing; any future PIS work must use the new personal-intelligence Track B framing and a dedicated benchmark before implementation.
+- Legacy PIS / adaptive-pattern research — historical only under the old framing. It is not a prerequisite, baseline requirement, compatibility target or salvage source for PPF.
 
 See [deferred/continual-learning-memory.md](deferred/continual-learning-memory.md) for reopen conditions and adoption policy.
 

@@ -1,28 +1,26 @@
 # MindForge Personal Intelligence — Two-Track Research Direction
 
-Status: **STRATEGIC DIRECTION / NOT YET AUTHORIZED FOR IMPLEMENTATION**
+Status: **STRATEGIC DIRECTION / FOUNDATION RESEARCH ONLY**
 
-This document captures the research/product thesis agreed after Phase 2. It exists to preserve direction without prematurely turning it into kernel architecture.
+This document freezes the current research direction without prematurely turning it into implementation architecture.
 
 ## Core thesis
 
 MindForge should not try to make a tiny model "know everything".
 
-The more promising edge/mobile thesis is:
+The working edge/mobile thesis is:
 
 > **Recognize me, not know everything.**
 
-A compact personal model can focus on understanding the user, current context, intent, local state and routing. World knowledge and complex actions can be delegated to apps, OEM services or external agents when required.
-
-The resulting architecture is deliberately decomposed:
+Personal intelligence is decomposed into two independent research tracks plus external capabilities:
 
 ```text
-MindForge-Mobile  -> UNDERSTAND
-PIS               -> RECOGNIZE ME
-Apps / Agents     -> KNOW & ACT
+Track A — MindForge-Mobile         -> UNDERSTAND
+Track B — Personal Pattern Foundation (PPF) -> RECOGNIZE ME
+Apps / Agents                      -> KNOW & ACT
 ```
 
-Personal intelligence is therefore not defined as a single gigantic neural model. It is the composition of a small language/intelligence kernel, explicit personal memory/state, learned behavioral patterns, current context, and controlled access to external capabilities.
+World knowledge and complex actions may be delegated to apps, OEM services or external agents. The local system should specialize in understanding the user, current context, personal state, personal patterns and routing.
 
 ---
 
@@ -30,11 +28,11 @@ Personal intelligence is therefore not defined as a single gigantic neural model
 
 ## Mission
 
-Determine whether a very small model, with a target envelope of roughly **<=20M parameters**, can become a useful local personal-intelligence router on mobile/edge hardware.
+Determine whether a very small model, with a target envelope around **<=20M parameters**, can become a useful local personal-intelligence router on mobile/edge hardware.
 
 The target is not a general-purpose assistant that answers arbitrary world-knowledge questions.
 
-The target is a model that is excellent at:
+The target is a model that is strong at:
 
 1. personal intent recognition;
 2. personal entity resolution;
@@ -46,384 +44,469 @@ The target is a model that is excellent at:
 8. interpreting returned results;
 9. short local summarization/transformation where practical.
 
-## Why <=20M may be viable
+## Track-A research question
 
-The model does not need to store all personal facts, long histories, behavioral patterns and world knowledge in its weights.
+> What is the smallest model that is "personal enough" when world knowledge and persistent personal state are externalized?
 
-Conceptually:
-
-```text
-Personal Intelligence
-=
-Compact Base Model
-+ Personal Facts / State
-+ Personal Patterns
-+ Current Context
-+ Apps / Tools / External Agents
-```
-
-This separates four different jobs:
-
-- **weights**: language/computation prior;
-- **personal memory/state**: explicit facts and user-owned data;
-- **PIS**: changing behavioral patterns, preferences, routines and exceptions;
-- **apps/agents**: world knowledge and actions.
-
-## Intended mobile behavior
-
-MindForge-Mobile should be suitable for low-latency, privacy-preserving, frequently invoked local inference.
-
-It should prefer local handling for simple/private tasks and delegate only when necessary:
-
-```text
-User request
-    |
-    v
-MindForge-Mobile
-    |
-    +-- simple/personal/local --> local handling
-    |
-    +-- app action ------------> permitted app/system function
-    |
-    +-- complex/world query ---> external agent / OEM model / cloud model
-```
-
-External systems should receive the minimum task context required, not the user's entire personal history.
-
-## OEM/system-layer opportunity
-
-A normal application may be sandboxed and have limited cross-app context. The stronger product opportunity is therefore potentially an **OEM/system-level personal intelligence kernel**.
-
-With user permission and OS-level mediation, an OEM integration could safely connect to capabilities such as:
-
-- contacts;
-- calendar;
-- notifications;
-- local files;
-- device state;
-- routines;
-- location context;
-- wearable/sensor context;
-- app-exposed actions/functions/intents.
-
-MindForge-Mobile should never assume unrestricted app access. Permission brokerage belongs to the OS/OEM/application boundary.
-
-## Long-term deployment family
-
-A possible model family, subject to evidence:
-
-```text
-MindForge-Tiny      ~5M–20M    mobile / embedded / always-ready
-MindForge-Small     ~20M–100M  laptop / edge / richer local tasks
-MindForge-Research  larger      training/scaling experiments
-```
-
-These are hypotheses, not committed product SKUs.
-
-## Track-A first research question
-
-> What is the smallest model that is "personal enough" when knowledge and persistent personal state are externalized?
-
-A future benchmark should compare candidate sizes such as:
+Candidate sizes should be tested rather than assumed:
 
 ```text
 5M / 10M / 20M / 50M
 ```
 
-on fixed personal-assistant capabilities such as:
+Potential evaluation dimensions include intent accuracy, personal-entity resolution, tool selection, argument extraction, clarification decisions, local-vs-external routing, latency, RAM and energy.
 
-- intent classification;
-- personal entity resolution;
-- preference-conditioned interpretation;
-- routine-aware interpretation;
-- tool selection;
-- argument extraction;
-- clarification decision;
-- local-vs-external routing;
-- latency;
-- RAM;
-- energy where measurable.
-
-The 20M target is a hypothesis to test, not a success claim.
+The 20M target is a hypothesis, not a success claim.
 
 ## Track-A non-goals for now
 
 Do not yet add to the active kernel:
 
 - Android/iOS integration;
-- AppFunctions/App Intents integrations;
-- mobile runtime code;
-- quantization stack;
-- OEM permission layer;
-- agent framework;
+- OEM permission layers;
+- app-function integrations;
+- agent frameworks;
 - personal memory implementation;
-- PIS integration.
+- PPF integration;
+- speculative mobile runtime architecture.
 
-Track A should first prove the capability envelope.
+Track A must prove its capability envelope before deployment architecture is admitted.
 
 ---
 
-# Track B — PIS Re-evaluation / Personal Pattern Intelligence
+# Track B — Personal Pattern Foundation (PPF)
 
 ## Mission
 
-Re-evaluate PIS from first principles for the new role:
+PPF is a **greenfield foundation research track**.
 
-> **PIS should help MindForge recognize the user over time without requiring continual fine-tuning of model weights.**
+It is not a continuation, rewrite or salvage program for legacy PIS.
 
-The existing PIS architecture must not be preserved merely because prior work exists. It may need substantial redesign or replacement.
+The primary question is:
 
-The correct question is not:
+> **How little machinery is required to reliably recognize one person over time from a personal/device event stream?**
 
-> "How much of old PIS can we keep?"
+No representation, algorithm, storage model, hierarchy or pattern engine is assumed in advance.
 
-It is:
+PPF starts from the problem definition and earns architecture only through evidence.
 
-> "What is the minimum pattern substrate required for reliable personal recognition on an event stream?"
+## Legacy PIS policy
 
-## Minimum capabilities PIS must prove
+Legacy PIS is **outside the PPF execution path**.
 
-A personal PIS should demonstrate at least six capabilities:
+Do not spend PPF research time on:
 
-1. **Observe** — consume personal/device events and context over time;
-2. **Discover** — propose routines, preferences, relationships, sequences and contextual behaviors;
-3. **Distinguish** — separate meaningful patterns from coincidence/noise;
-4. **Adapt** — reduce confidence in stale patterns and form new ones when behavior changes;
-5. **Retrieve** — surface the right personal patterns for the current MindForge context;
-6. **Explain / Forget** — show why a pattern exists and support complete removal when required.
+- porting PIS;
+- adapting PIS;
+- salvaging PIS components;
+- benchmarking PPF against PIS as a prerequisite;
+- preserving HDC, SLM, repair, pattern taxonomies or other legacy structures;
+- maintaining compatibility with the PIS codebase.
 
-## Principles worth preserving from legacy PIS
+Legacy PIS may remain as historical research material, but PPF must be designed as if it does not exist.
 
-Even if implementation is rebuilt, retain these research/governance principles unless falsified:
+This rule exists to keep PPF small, clean and free from sunk-cost architectural bias.
+
+---
+
+# PPF proof ladder — five layers
+
+PPF must be proven sequentially through five layers.
+
+Each layer should have a frozen question, protocol, benchmark or acceptance gate before implementation complexity is added.
+
+A later layer must not compensate for a failure at an earlier layer.
 
 ```text
-candidate != truth
-promotion requires evidence
-counterexamples matter
-confidence can decay
-correlation is not authority
-host/user retains action authority
-auditability matters
-patterns must be removable
+L1 Define "Recognize Me"
+        |
+        v
+L2 Personal Event Foundation
+        |
+        v
+L3 Ground-Truth Personal Pattern Benchmark
+        |
+        v
+L4 Minimal Baselines
+        |
+        v
+L5 Minimum Missing Mechanism
 ```
 
-## Areas explicitly open to replacement
+If the five layers prove feasible, their minimal proven contracts may then be composed into PPF.
 
-Do not assume that the following legacy choices remain appropriate:
+Architecture follows evidence; evidence does not follow architecture.
 
-- HDC-centric architecture;
-- numeric-trace-first assumptions;
-- broad multi-domain abstraction;
-- complex pattern-family taxonomy;
-- generic repair machinery;
-- SLM layers without demonstrated personal-value benefit;
-- production-substrate ambitions before the personal use case is proven.
+---
 
-## Initial personal pattern types
+## Layer 1 — Define "Recognize Me"
 
-Start with a very small vocabulary of pattern semantics:
+### Question
+
+What observable outputs make a system meaningfully better at recognizing one user over time?
+
+Before defining algorithms, specify the behavioral contract.
+
+A useful response may expose concepts such as:
 
 ```text
-Routine
-Preference
-Relationship
-Sequence
-Context -> Action
-Exception
-Change / Drift
+current context
+likely personal pattern(s)
+confidence
+relevant exception(s)
+uncertainty / abstention
+supporting evidence summary
 ```
 
 Example:
 
 ```text
 Context:
-weekday, ~17:30, leaving office
+Friday, 17:35, leaving office
 
-Observed sequence:
-open Maps -> navigate home -> play playlist A -> message person X
+Likely patterns:
+- usually goes home after work: confidence 0.82
+- Friday has frequent alternative destination: confidence 0.61
+- usually messages spouse before commute: confidence 0.76
 
-Candidate:
-commute-home routine
-
-Evidence:
-17 occurrences / 21 opportunities
-
-Counterexamples:
-Friday behavior often differs
-
-Confidence:
-0.81
+Uncertainty:
+Friday behavior is less stable than Mon–Thu.
 ```
 
-The output to MindForge should expose both likely pattern and meaningful uncertainty/exception, not a hard autonomous assumption.
+Layer 1 must define what success means without choosing how the system achieves it.
 
-## Facts are not patterns
+### Gate
 
-The architecture should distinguish at least:
+PASS only if the output contract, failure modes, uncertainty semantics and useful personal-pattern categories can be specified independently of an implementation.
 
-- **fact/memory**: "person X is my spouse";
-- **pattern**: "after leaving work I usually message person X";
-- **preference**: "when dining with person X I often choose Japanese food";
-- **exception**: "with children present I usually choose something else".
+---
 
-PIS should primarily own evolving behavioral structure, not become a generic storage bucket for every personal fact.
+## Layer 2 — Personal Event Foundation
 
-## Avoid continual weight training by default
+### Question
 
-Preferred initial adaptation path:
+What is the minimum event/context model required to support reliable personal-pattern inference?
+
+Candidate primitives may include:
 
 ```text
-new behavior
-    |
-    v
-observation
-    |
-    v
-pattern candidate
-    |
-    v
-evidence + counterevidence
-    |
-    v
-confidence / drift update
+timestamp
+event_type
+source
+actor/device
+entity/person
+context
+action
+result
+explicit vs observed
+availability / observability
 ```
 
-rather than:
+A critical distinction must exist between:
 
 ```text
-new behavior -> fine-tune base model weights
+OBSERVED EVENT
+OPPORTUNITY
+NON-OCCURRENCE
+UNKNOWN / NOT OBSERVABLE
 ```
 
-This is especially attractive for mobile because it is cheaper, reversible, explainable, deletable and less exposed to catastrophic forgetting in model weights.
-
-## Track-B first research artifact
-
-Before rebuilding PIS, define a **Personal Pattern Benchmark**.
-
-It should include controlled cases such as:
-
-- routine formation;
-- routine absence / false correlation;
-- routine drift;
-- preference emergence;
-- preference reversal;
-- conditional preference;
-- rare-but-important exception;
-- relationship-conditioned behavior;
-- contextual retrieval;
-- conflicting evidence;
-- deliberate deletion/forgetting;
-- user correction;
-- insufficient-evidence abstention.
-
-Legacy PIS should be run as a baseline against this benchmark before deciding whether to reuse, salvage or rebuild.
-
-Possible decisions:
+Example:
 
 ```text
-KEEP      legacy design already meets the new gates
-SALVAGE   retain only proven primitives
-REBUILD   replace architecture, preserve useful principles/tests
-STOP      personal-pattern substrate does not show value
+25 observable after-work opportunities
+18 -> Maps -> Home
+4  -> other destination
+2  -> no Maps action
+1  -> telemetry unavailable
 ```
 
-No implementation decision is pre-authorized by this document.
+This is more informative than merely recording 18 occurrences.
+
+Layer 2 must avoid prematurely encoding a particular pattern algorithm into the event contract.
+
+### Gate
+
+PASS only if the event representation can express positive evidence, opportunity denominators, negative evidence, missing observations, explicit corrections and contextual conditions without ambiguity.
+
+---
+
+## Layer 3 — Ground-Truth Personal Pattern Benchmark
+
+### Question
+
+Can we evaluate personal-pattern recognition against histories whose true underlying behavior is known in advance?
+
+Build controlled synthetic or semi-synthetic personal histories where the generator owns hidden ground truth.
+
+Benchmark families should include at least:
+
+```text
+routine formation
+routine absence / coincidence
+routine drift
+preference emergence
+preference reversal
+conditional preference
+rare but important exception
+relationship-conditioned behavior
+temporal sequence
+context -> action association
+conflicting evidence
+user correction
+deletion / forgetting
+insufficient evidence / abstention
+contextual retrieval
+```
+
+The benchmark should include adversarial cases designed to induce false conclusions.
+
+Examples:
+
+```text
+correlated events without stable personal intent
+small-sample 3/3 coincidences
+missing telemetry that must not count as negative evidence
+conditional preferences hidden by global averages
+rare critical exceptions
+behavioral reversals
+```
+
+### Gate
+
+PASS only if ground truth, event streams, expected discoveries, expected abstentions, counterexamples and metrics are frozen before candidate algorithms are evaluated.
+
+---
+
+## Layer 4 — Minimal Baselines
+
+### Question
+
+How much of "recognize me" can be solved with deliberately simple machinery?
+
+Start with small baselines such as:
+
+```text
+A. frequency/count + threshold
+B. frequency + exponential decay
+C. context-conditioned counts/rules
+D. simple sequence statistics / Markov model, only if needed
+```
+
+Prefer a few hundred transparent lines over a framework.
+
+Primary quality dimensions may include:
+
+```text
+pattern precision
+pattern recall
+false discovery rate
+false promotion rate
+abstention accuracy
+confidence calibration
+exception recall
+drift adaptation lag
+reversal detection
+contextual retrieval accuracy
+```
+
+Primary systems dimensions may include:
+
+```text
+memory footprint
+local storage growth
+update latency
+query latency
+background CPU cost
+deletion correctness
+```
+
+### Gate
+
+If simple baselines already satisfy the useful product envelope, STOP adding complexity.
+
+The simplest sufficient solution wins.
+
+---
+
+## Layer 5 — Minimum Missing Mechanism
+
+### Question
+
+Where do the minimal baselines fail, and what is the smallest additional mechanism that closes a measured gap?
+
+Examples of possible gaps:
+
+```text
+conditional context composition
+similar-but-not-identical situations
+long temporal dependencies
+better confidence calibration
+contextual retrieval
+compact generalized representation
+```
+
+Only after a concrete failure is demonstrated may a mechanism be proposed.
+
+Candidate mechanisms are not predetermined. They might include a better statistical model, contextual feature composition, compact embeddings, Bayesian treatment, lightweight sequence modeling or another small mechanism.
+
+No technology is protected in advance.
+
+### Gate
+
+A mechanism is admitted only if it provides a measurable benefit over Layer-4 baselines that justifies its complexity, memory and latency cost.
+
+---
+
+# Feasibility and composition rule
+
+The five layers are not five modules that must automatically exist in the final product.
+
+They are five proof stages.
+
+The process is:
+
+```text
+prove L1
+-> prove L2
+-> prove L3
+-> prove L4
+-> prove L5 only if necessary
+```
+
+Then:
+
+```text
+minimal proven contracts
+        +
+minimal proven mechanisms
+        |
+        v
+      PPF
+```
+
+If a layer is unnecessary, it should not create architecture merely to preserve the roadmap shape.
+
+If a layer fails, stop and revise the foundation instead of hiding the failure behind later complexity.
+
+---
+
+# PPF design constraints
+
+PPF should optimize for:
+
+```text
+small
+local-first
+CPU-friendly
+incremental
+reversible
+explainable
+deletable
+context-aware
+confidence-aware
+low-latency
+low-memory
+```
+
+PPF must not automatically execute user actions.
+
+The preferred future authority boundary is:
+
+```text
+PPF produces personal pattern context/evidence
+MindForge-Mobile interprets and routes
+OS / host permission layer authorizes actions
+```
 
 ---
 
 # Track A + Track B convergence
 
-The two tracks remain independent until each has evidence.
+Track A and Track B remain independent until each proves its own minimal contract.
 
-Target composition:
+Target composition, if both tracks succeed:
 
 ```text
-              Personal / Device Event Stream
-                         |
-                         v
-                    PIS (Track B)
-              patterns / confidence /
-             exceptions / drift context
-                         |
-                         v
-                 MindForge-Mobile
-                    (Track A)
-                         |
-              understand / decide / route
-                         |
-        +----------------+----------------+
-        |                |                |
-        v                v                v
-   Local state      App/System action   External agent
-                                        / world model
+        Personal / Device Context
+                  |
+        +---------+---------+
+        |                   |
+        v                   v
+ MindForge-Mobile          PPF
+    UNDERSTAND         RECOGNIZE ME
+        |                   |
+        +---------+---------+
+                  |
+                  v
+           Personal Router
+                  |
+        +---------+---------+
+        |                   |
+        v                   v
+  Local / App Action    External Agent
+                       KNOW & ACT
 ```
 
-A future interface between PIS and MindForge-Mobile should be defined only after both sides establish their minimal useful outputs.
+Do not define a generic integration bus before the two independent contracts are proven.
 
-Do not create a speculative generic plugin bus now.
+---
 
-## Personalization thesis
+# Personalization thesis
 
-A useful personal model may not require continuous neural fine-tuning.
+A useful personal system may not require continuous neural fine-tuning.
 
-A future operational definition could be:
+A future operational model may look like:
 
 ```text
-Personal Model(t)
+Personal Intelligence(t)
 =
-Base MindForge
-+ Personal Memory(t)
-+ Personal Patterns(t)
+Base MindForge-Mobile
++ Personal Facts / State(t)
++ PPF-derived Personal Patterns(t)
 + Current Context(t)
++ Permitted Apps / Agents
 ```
 
-The changing part of the system can therefore live largely outside immutable base weights.
+The changing personal state can therefore live largely outside immutable model weights.
 
 ---
 
 # Product / OEM thesis
 
-If the technical hypotheses survive testing, the product is not simply "a small mobile chatbot".
+If the technical hypotheses survive testing, the target is not simply a small mobile chatbot.
 
 The stronger proposition is:
 
-> **A small, private, always-available personal intelligence kernel that recognizes the user locally and delegates world knowledge or actions to permitted apps/agents only when necessary.**
+> **A small, private, always-available personal intelligence kernel that understands locally, recognizes the user over time, and delegates world knowledge or actions only when necessary.**
 
-Potential advantages to an OEM, subject to measurement:
+Potential OEM benefits remain hypotheses to measure:
 
-- lower cloud inference frequency;
+- fewer cloud inference calls;
 - lower latency for common personal interactions;
 - lower bandwidth/server cost;
-- stronger privacy boundary;
-- always-ready behavior with a small memory footprint;
-- cross-device reuse of the same personal-intelligence concepts;
-- differentiation through personalization rather than generic model size.
-
-Possible device surfaces include mobile, wearable, automotive, TV/home devices and other edge hardware, but none is yet committed.
+- stronger privacy boundaries;
+- small always-ready footprint;
+- personalization without requiring a giant on-device general model.
 
 ---
 
-# Research discipline and reopening rules
+# Research discipline
 
-This document does **not** reopen the stopped Phase-0 continual-learning or memory hypotheses.
+This direction does not reopen stopped Phase-0 continual-learning or memory hypotheses.
 
-It creates two new questions with different framing:
+Track A and Track B ask new questions under different assumptions.
 
-- Track A asks whether a compact model can perform personal understanding/routing when knowledge is externalized.
-- Track B asks whether explicit pattern learning on personal event streams provides useful, reliable, reversible personalization without continual weight updates.
-
-Any future work must follow the MindForge process:
+All future work follows:
 
 ```text
 question
--> frozen benchmark/protocol
+-> frozen protocol / benchmark
 -> smallest experiment
 -> evidence
 -> PASS / REVISE / STOP
 -> only then architecture
 ```
-
-No track becomes active implementation merely because this strategic document exists.
 
 ---
 
@@ -431,13 +514,26 @@ No track becomes active implementation merely because this strategic document ex
 
 ```text
 Track A — MindForge-Mobile
-STATUS: RESEARCH DIRECTION / BENCHMARK REQUIRED
+STATUS: RESEARCH DIRECTION / CAPABILITY ENVELOPE NOT YET PROVEN
 
-Track B — PIS Personal Pattern Intelligence
-STATUS: RE-EVALUATE FROM FIRST PRINCIPLES / BENCHMARK REQUIRED
+Track B — Personal Pattern Foundation (PPF)
+STATUS: RESET / GREENFIELD FOUNDATION RESEARCH
 
-Integration
+PPF proof ladder:
+L1 Define Recognize Me
+L2 Personal Event Foundation
+L3 Ground-Truth Personal Pattern Benchmark
+L4 Minimal Baselines
+L5 Minimum Missing Mechanism
+
+Legacy PIS:
+STATUS: OUTSIDE PPF EXECUTION PATH / HISTORICAL ONLY
+
+PPF implementation:
+STATUS: NOT AUTHORIZED
+
+Track A + PPF integration:
 STATUS: NOT AUTHORIZED
 ```
 
-The next roadmap decision should be made only after Phase 2 is fully closed and reviewed.
+The immediate Track-B task is to freeze the Layer-1 / Layer-2 foundation problem before implementing a pattern engine.
