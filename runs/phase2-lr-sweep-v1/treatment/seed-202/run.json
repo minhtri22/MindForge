@@ -1,0 +1,93 @@
+{
+  "checkpoint": {
+    "bytes": 62115843,
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\runs\\phase2-lr-sweep-v1\\treatment\\seed-202\\checkpoint-step-200.pt",
+    "sha256": "3d6e66194da721a8e317b4f861944c82e7778ada426ac9af21786398b1b6f703"
+  },
+  "completed_steps": 200,
+  "data_config": {
+    "run_dir": "D:\\WORK\\RESEARCH\\MindForge\\runs\\phase2-lr-sweep-v1\\treatment\\seed-202",
+    "tokenizer": "experiments/data/phase0_real_language/mindforge-tokenizer.json",
+    "train_tokens": "experiments/data/phase0_real_language/mindforge.train.npy",
+    "validation_tokens": "experiments/data/phase0_real_language/mindforge.validation.npy"
+  },
+  "dataset_fingerprint": "6fbf6b28c072c6fccb5385992d457ddaee7c63b3a54ae9c5bc93a346d54d5bee",
+  "device": "xpu",
+  "dtype": "torch.bfloat16",
+  "final_evaluation": {
+    "bits_per_byte": 11.09498342203331,
+    "bits_per_token": 49.07417350023865,
+    "cross_entropy": 34.015625,
+    "predicted_tokens": 4096,
+    "represented_utf8_bytes": 18117,
+    "status": "PASS",
+    "total_nll": 139328.0,
+    "window_starts": [
+      0,
+      289412,
+      578824,
+      868236,
+      1157648,
+      1447060,
+      1736472,
+      2025885
+    ]
+  },
+  "final_train_loss": 34.625,
+  "format_version": 1,
+  "git_commit": "159b5b793af1c18edcc3ebec5a4bd1fca5af0ea5",
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ram_bytes": 33916248064,
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "model_config": {
+    "d_model": 320,
+    "dropout": 0.0,
+    "ff_mult": 4,
+    "max_context": 512,
+    "n_heads": 8,
+    "n_layers": 4,
+    "vocab_size": 16384
+  },
+  "parameter_count": 10339200,
+  "peak_device_memory_bytes": 211125760,
+  "resume_from": null,
+  "seed": 202,
+  "software": {
+    "numpy": "2.5.2",
+    "python": "3.12.10",
+    "tokenizers": "0.21.4",
+    "torch": "2.12.1+xpu"
+  },
+  "start_step": 0,
+  "status": "PASS",
+  "throughput_tokens_per_second": {
+    "max": 31337.026047000647,
+    "mean": 18702.125036756937,
+    "median": 18952.95336010773,
+    "min": 3831.79325680892,
+    "samples": 200
+  },
+  "timestamp_utc": "2026-09-02T20:13:35.658044+00:00",
+  "tokenizer_fingerprint": "66a81f01511a62896089e8e2a510c95dad61b567cec12f0dbc5752529b11fb3e",
+  "training_config": {
+    "accumulation": 2,
+    "checkpoint_interval": 100,
+    "device": "xpu",
+    "dtype": "bfloat16",
+    "eval_interval": 50,
+    "eval_windows": 8,
+    "gradient_clip": 1.0,
+    "learning_rate": 0.0002,
+    "micro_batch": 1,
+    "min_lr_fraction": 0.1,
+    "seed": 202,
+    "steps": 200,
+    "warmup_fraction": 0.05,
+    "weight_decay": 0.1
+  },
+  "training_tokens": 204800,
+  "wall_clock_seconds": 12.936679999998887
+}

@@ -4,7 +4,8 @@ Status: **PASS / CLOSED**
 
 Base commit: `ff169b1f3a5db07851359031be299f020d4b3b0f`
 Validation commit: `71baccf3e99028948c2d2b2f5cf32b276e8930b2` (chore: freeze phase 2 validation source)
-Final commit: `e17f273` (fix: update train.py jsonl dir creation and final provenance)
+Canonical source commit: `159b5b793af1c18edcc3ebec5a4bd1fca5af0ea5` (fix: use untracked-files=no for canonical dirty detection)
+Final commit: `159b5b793af1c18edcc3ebec5a4bd1fca5af0ea5` (fix: use untracked-files=no for canonical dirty detection)
 
 ## Purpose
 

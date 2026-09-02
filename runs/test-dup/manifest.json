@@ -1,0 +1,24 @@
+{
+  "baseline": {
+    "config": "configs/phase2_baseline.json",
+    "seeds": [
+      101
+    ]
+  },
+  "description": "",
+  "experiment_id": "test-dup",
+  "metrics": {
+    "primary": "bits_per_byte",
+    "secondary": [
+      "cross_entropy",
+      "tokens_per_second",
+      "peak_device_memory_bytes"
+    ]
+  },
+  "treatment": {
+    "config": "configs/phase2_treatment.json",
+    "seeds": [
+      101
+    ]
+  }
+}

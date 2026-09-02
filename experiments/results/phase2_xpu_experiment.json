@@ -1,49 +1,14 @@
 {
   "experiment_id": "phase2-lr-sweep-v1",
   "status": "PASS",
-  "base_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
-  "git_commit": "c53c85d2ad58c4d054aa30ae6ec586aeecbb4ce6",
-  "validation_source_commit": "71baccf3e99028948c2d2b2f5cf32b276e8930b2",
-  "manifest_hash": "f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968",
-  "source_tree_hash": "46a5caf472c7b962a904d0fa32f3bf3aa261f115ca0f8ccb1f5b511ec07984ff",
-  "working_tree_clean": false,
-  "working_tree_diff_hash": "10979a9d7d6b2660f98e2bc7ffddf389b1bc4cf217854a453c8efd61480f5de2",
-  "hardware": {
-    "platform": "Windows-11-10.0.26200-SP0",
-    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
-    "ram_bytes": 33916248064,
-    "xpu_available": true,
-    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
-  },
-  "software": {
-    "python": "3.12.10",
-    "torch": "2.12.1+xpu",
-    "numpy": "2.5.2",
-    "tokenizers": "0.21.4"
-  },
-  "model": {
-    "vocab_size": 16384,
-    "d_model": 320,
-    "n_heads": 8,
-    "n_layers": 4,
-    "max_context": 512,
-    "ff_mult": 4,
-    "dropout": 0.0,
-    "parameters": 10339200
-  },
-  "training": {
-    "steps_per_run": 200,
-    "tokens_per_run": 204800,
-    "micro_batch": 1,
-    "accumulation": 2,
-    "eval_interval": 50,
-    "checkpoint_interval": 100,
-    "eval_windows": 8,
-    "seeds": [101, 202, 303]
-  },
+  "canonical_git_commit": "159b5b793af1c18edcc3ebec5a4bd1fca5af0ea5",
+  "working_tree_clean": true,
+  "source_tree_hash": "74e75dc7741a2476d46fca112d6eccec3c8ad33fff6b296f7a39e4dfd5f963b7",
+  "source_tree_hash_algorithm": "SHA-256 over sorted tracked files (path NUL content NUL NUL)",
+  "source_files_covered": 25,
+  "description": "Clean canonical rerun from committed source tree. No --allow-dirty used.",
   "baseline": {
     "learning_rate": 3e-4,
-    "weight_decay": 0.1,
     "results": {
       "seed_101_bpb": 10.478312317731046,
       "seed_202_bpb": 10.682170534029316,
@@ -51,28 +16,18 @@
       "mean_bpb": 10.537770964151376,
       "median_bpb": 10.478312317731046,
       "std_bpb": 0.1257010876900121,
-      "mean_wall_clock_seconds": 40.03628956666944,
-      "median_wall_clock_seconds": 38.2153158000001,
-      "mean_tokens_per_second": 5120.0,
-      "median_tokens_per_second": 5354.0,
-      "peak_memory_bytes": 211125760
+      "cv": 0.011928622107809782
     }
   },
   "treatment": {
     "learning_rate": 2e-4,
-    "weight_decay": 0.1,
     "results": {
       "seed_101_bpb": 10.875835839512671,
       "seed_202_bpb": 11.09498342203331,
       "seed_303_bpb": 10.845257107067932,
       "mean_bpb": 10.938692122871304,
       "median_bpb": 10.875835839512671,
-      "std_bpb": 0.136213040362487,
-      "mean_wall_clock_seconds": 50.90988220000387,
-      "median_wall_clock_seconds": 49.564902600002824,
-      "mean_tokens_per_second": 4022.0,
-      "median_tokens_per_second": 4128.0,
-      "peak_memory_bytes": 211125760
+      "std_bpb": 0.136213040362487
     }
   },
   "paired_effects": {
@@ -87,13 +42,16 @@
     "std_relative": 0.0005585081617133665
   },
   "resource_comparison": {
-    "wall_clock_seconds": { "baseline_mean": 40.04, "treatment_mean": 50.91, "delta_mean": 10.87 },
-    "tokens_per_second": { "baseline_median": 5354.0, "treatment_median": 4128.0, "delta_median": -1226.0 },
+    "wall_clock_seconds": { "baseline_mean": 14.16, "treatment_mean": 13.46, "delta_mean": -0.70 },
+    "tokens_per_second": { "baseline_median": 4672.0, "treatment_median": 5120.0, "delta_median": 448.0 },
     "peak_memory_bytes": { "baseline": 211125760, "treatment": 211125760, "delta": 0 }
   },
   "regression_check": {
     "baseline_bpb_cv": 0.011928622107809782,
     "threshold": 0.10,
     "passed": true
-  }
+  },
+  "previous_dirty_run_commit": "c53c85d2ad58c4d054aa30ae6ec586aeecbb4ce6",
+  "previous_dirty_source_tree_hash": "46a5caf472c7b962a904d0fa32f3bf3aa261f115ca0f8ccb1f5b511ec07984ff",
+  "superseded_reason": "canonical run executed with working_tree_clean=false"
 }
