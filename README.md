@@ -1,0 +1,83 @@
+# MindForge
+
+> Build small. Prove first. Scale only what survives contact with reality.
+
+MindForge is a practical LLM research-and-engineering kernel inspired by the clarity of **nanochat** and the breadth of **MiniMind**, while deliberately being neither a feature collection nor a purely educational Transformer.
+
+The project grows through **thin, measurable, usable vertical slices**. Every uncertain assumption is tested before dependent architecture is added.
+
+## Principles
+
+1. **Thin slices over feature breadth** — build only what a concrete experiment needs.
+2. **Prove before architecture** — uncertain assumptions belong in Phase 0.
+3. **End-to-end before sophisticated** — raw text → tokenizer → train → checkpoint → eval → generation.
+4. **Claims require baselines** — every treatment answers “better than what?”.
+5. **Local-first, cloud-optional** — constrained hardware is a first-class target; cloud is for scale, not comprehension.
+6. **Evidence gates development** — PASS advances; REVISE changes the experiment; STOP removes unsupported scope.
+
+## Borrowed deliberately
+
+From nanochat: small understandable code, cohesive end-to-end training, explicit evaluation, compute awareness, reproducibility, strong baselines, minimal abstraction.
+
+From MiniMind: the option to explore SFT, PEFT, preference/RL methods, distillation, memory, continual learning, routing/MoE, and agents **only when justified by a measurable question**.
+
+## Non-goals
+
+MindForge is not a Hugging Face replacement, production serving platform, benchmark leaderboard, paper-implementation catalog, or miniature ChatGPT clone.
+
+## First vertical slice
+
+The first usable kernel must:
+
+1. prepare a small text dataset;
+2. train or load a tokenizer;
+3. construct a tiny Transformer;
+4. train it;
+5. save and resume checkpoints;
+6. measure validation loss;
+7. generate text;
+8. record experiment metadata.
+
+## Research discipline
+
+Each experiment records at minimum: experiment id, git commit, seed, model config, parameter count, dataset/token count, context length, batch/effective batch, optimizer/LR/steps, device/dtype, peak memory, wall-clock time, train/validation loss, and evaluation results.
+
+Comparisons hold dataset, tokenizer, seeds, compute budget, and evaluation set constant whenever practical.
+
+## Evidence states
+
+- **PASS** — evidence supports continuing.
+- **REVISE** — promising but the implementation or experiment must change.
+- **STOP** — the assumption failed; dependent architecture is not built.
+
+A STOP result is useful evidence.
+
+## Hardware policy
+
+Core model code avoids backend-specific assumptions. Device selection is explicit. Target-machine capability is measured, never inferred from specifications.
+
+Preferred target order: `xpu → cuda → cpu`, subject to Phase 0 evidence.
+
+## Model policy
+
+The initial model stays deliberately boring: embedding, pre-norm attention/MLP residual blocks, final norm, LM head. Novel research starts around a strong boring baseline.
+
+## Roadmap
+
+MindForge uses an evidence-driven capability roadmap:
+
+```text
+Question → smallest experiment → evidence → decision → next capability
+```
+
+See [PLAN.md](PLAN.md).
+
+## Success criterion
+
+MindForge succeeds when a research question can be expressed as:
+
+```text
+baseline + one meaningful change + controlled experiment + measurement
+```
+
+without weeks of framework work.
