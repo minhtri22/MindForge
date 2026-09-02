@@ -2,7 +2,7 @@
 
 > Build small. Prove first. Scale only what survives contact with reality.
 
-MindForge is a practical LLM research-and-engineering kernel inspired by the clarity of **nanochat** and the breadth of **MiniMind**, while deliberately being neither a feature collection nor a purely educational Transformer.
+MindForge is a compact, local-first LLM kernel built to make training, evaluation and experimentation practical on consumer hardware. It is inspired by the clarity of **nanochat** and the breadth of **MiniMind**, while deliberately being neither a feature collection nor a purely educational Transformer.
 
 The project grows through **thin, measurable, usable vertical slices**. Every uncertain assumption is tested before dependent architecture is added.
 
@@ -56,11 +56,29 @@ A STOP result is useful evidence.
 
 Core model code avoids backend-specific assumptions. Device selection is explicit. Target-machine capability is measured, never inferred from specifications.
 
-Preferred target order: `xpu → cuda → cpu`, subject to Phase 0 evidence.
+Phase 0 validated **Intel XPU + BF16** as the primary local training backend on the target Intel Arc 140V machine. CPU remains useful for preprocessing, tests, diagnostics and FP32 fallback. Other backends remain conditional on direct evidence.
 
 ## Model policy
 
 The initial model stays deliberately boring: embedding, pre-norm attention/MLP residual blocks, final norm, LM head. Novel research starts around a strong boring baseline.
+
+## Validated foundation
+
+Phase 0 established a reproducible local foundation: MindForge byte-level BPE with a 16,384-token vocabulary, deterministic Vietnamese/English Wikimedia data, a 1M-token development pool, a ~10.34M-parameter Baseline-0, checkpoint/resume, independent evaluation, and machine-readable experiment provenance. See [docs/phases/phase-0.md](docs/phases/phase-0.md).
+
+The active core direction is intentionally narrow:
+
+```text
+dataset
+→ tokenizer
+→ Transformer
+→ training
+→ checkpoint
+→ evaluation
+→ generation
+```
+
+Continual learning, explicit memory and adaptive/pattern mechanisms are **not current core commitments**. Phase 0 stopped the custom research hypotheses because the bounded experiments did not establish a scientifically usable forgetting/memory-value substrate. Future capabilities may be adopted, ported, adapted or minimally cloned from proven open-source mechanisms after a dedicated research/selection phase.
 
 ## Roadmap
 
@@ -71,6 +89,8 @@ Question → smallest experiment → evidence → decision → next capability
 ```
 
 See [PLAN.md](PLAN.md).
+
+Research scope and deferred hypotheses are indexed in [docs/research/README.md](docs/research/README.md).
 
 ## Success criterion
 

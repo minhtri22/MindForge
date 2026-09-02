@@ -118,4 +118,6 @@ Phase 0 may be marked PASS only when all Phase 0 questions in `PLAN.md` have evi
 - P0.9 PASS requires a protocol that actually exposes untreated forgetting; the current protocol does not.
 - P0.10 may only proceed when a controlled memory-value signal exists.
 
-P0.3, P0.4, P0.6 and P0.8 remain PASS/FROZEN. The bounded replacement P0.9 protocol is now STOP because none of the three pre-registered real-language candidate families qualified without post-outcome tuning. P0.10 remains blocked/stopped by the missing controlled memory-value signal. Therefore overall Phase 0 is STOP under the current roadmap and Phase 1 must not start.
+P0.3, P0.4, P0.6 and P0.8 remain PASS/FROZEN. The bounded replacement P0.9 protocol is STOP because none of the three pre-registered real-language candidate families qualified without post-outcome tuning. P0.10 is STOP/FROZEN because the required controlled memory-value substrate was not established.
+
+Closure interpretation is recorded in `docs/phases/phase-0.md`: the **core foundation is PASS**, while the continual-learning and custom-memory research hypotheses remain **STOP/FROZEN**. This closure does not change any historical experiment result. The project direction may proceed toward a compact local LLM kernel, but Phase 1 is not implemented by the closure increment.

@@ -79,9 +79,56 @@ Phase 0 passes only when evidence answers:
 
 A target-hardware claim cannot be waived merely because sandbox tests pass.
 
-## Phase 1 — End-to-end kernel
+## Roadmap Decision After Phase 0
 
-Turn successful Phase 0 prototypes into a clean path:
+Phase 0 is closed with two different kinds of outcomes that must not be conflated:
+
+```text
+P0.1 PASS / FROZEN
+P0.2 PASS / FROZEN
+P0.3 PASS / FROZEN
+P0.4 PASS / FROZEN
+P0.5 PASS / FROZEN
+P0.6 PASS / FROZEN
+P0.7 PASS / FROZEN
+P0.8 PASS / FROZEN
+P0.9 STOP / FROZEN
+P0.10 STOP / FROZEN
+```
+
+The core engineering foundation passed: local Intel XPU/BF16 training, tokenizer/data strategy, reproducibility, evaluation, checkpoint/resume and Baseline-0 are validated. The bounded continual-learning search did not establish a scientifically usable real-language catastrophic-forgetting substrate, so custom continual-learning and custom memory research are stopped rather than tuned until they produce the desired result.
+
+This STOP is a bounded falsification result. It does not claim catastrophic forgetting or memory mechanisms are impossible. Future learning/memory capabilities may be adopted, ported, adapted or minimally cloned from established open-source mechanisms when independently justified.
+
+Project decision:
+
+```text
+CORE FOUNDATION: PASS
+CONTINUAL-LEARNING RESEARCH HYPOTHESIS: STOP
+CUSTOM MEMORY RESEARCH HYPOTHESIS: STOP
+
+PROCEED WITH COMPACT LOCAL LLM KERNEL DIRECTION
+```
+
+Canonical core path:
+
+```text
+dataset → tokenizer → Transformer → training → checkpoint → evaluation → generation
+```
+
+See [docs/phases/phase-0.md](docs/phases/phase-0.md) for the canonical closure summary and [docs/research/deferred/continual-learning-memory.md](docs/research/deferred/continual-learning-memory.md) for the stopped-research archive.
+
+## R1 — Open-Source Learning/Memory Architecture Survey
+
+Status: **RESEARCH-ONLY / NOT STARTED**.
+
+R1 will survey established open-source learning and memory mechanisms to determine architectural boundaries and whether any future extension point is justified. It is not a P0.9 retry, not an implementation phase, and must not introduce candidate frameworks or mechanisms into the kernel.
+
+R1 occurs before Phase 1 only to answer whether the minimal kernel needs any concrete future-facing boundary. The default is YAGNI: R1 does not block the minimal Phase-1 core unless source-backed research identifies a cheap, specific interface requirement.
+
+## Phase 1 — Compact End-to-End Kernel
+
+Turn validated Phase-0 prototypes into a clean reusable local LLM kernel:
 
 ```text
 dataset → tokenizer → Transformer → training → checkpoint → evaluation → generation
@@ -97,7 +144,9 @@ Add experiment manifests, baseline/treatment relationships, automatic provenance
 
 **QA gate:** a 3-seed baseline/treatment pair can produce mean/variance/effect summary plus compute/memory difference from machine-readable results without manual spreadsheet work.
 
-## Phase 3 — First research slice: continual learning
+## Phase 3 — First research slice: continual learning — INACTIVE / DEFERRED
+
+Historical roadmap intent, superseded as an active commitment by the P0.9 STOP evidence. It may be reconsidered only after R1 or future independent evidence provides a justified substrate.
 
 Use Phase 0 evidence to select exactly one minimal anti-forgetting treatment (for example replay, a small explicit buffer, or regularization), never all at once.
 
@@ -105,7 +154,9 @@ Measure A-before-B, A-after-B, B acquisition, forgetting, recovery speed and res
 
 **QA gate:** same seeds/data/compute protocol, treatment isolation verified, statistical summary generated, negative controls included where feasible.
 
-## Phase 4 — Memory as a measurable mechanism
+## Phase 4 — Memory as a measurable mechanism — INACTIVE / DEFERRED
+
+Historical roadmap intent, superseded as an active commitment by P0.10 STOP/BLOCKED. It may be reconsidered only after R1 or future independent evidence demonstrates measurable memory value.
 
 Enter only if Phase 0/3 evidence supports explicit memory. Start with a minimal interface (`write`, `read`, `gate`, `measure`) rather than RAG/vector DB/knowledge graph/agents.
 
@@ -113,7 +164,9 @@ Questions: when to write, what to store, when to recall, whether recall helps, c
 
 **QA gate:** memory-off reproduces baseline; memory-on effect is reproducible; irrelevant-memory control measures harm/interference; overhead is reported.
 
-## Phase 5 — Adaptive learning
+## Phase 5 — Adaptive learning — INACTIVE / DEFERRED
+
+Historical roadmap intent. It is not an active commitment and may be reconsidered only after R1 or future evidence justifies the prerequisite continual-learning/memory substrate.
 
 Candidate hypotheses include adaptive write/replay, error- or novelty-triggered storage, concept formation, consolidation and demotion. Each is a separate treatment.
 
