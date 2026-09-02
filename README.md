@@ -66,6 +66,18 @@ The initial model stays deliberately boring: embedding, pre-norm attention/MLP r
 
 Phase 0 established a reproducible local foundation: MindForge byte-level BPE with a 16,384-token vocabulary, deterministic Vietnamese/English Wikimedia data, a 1M-token development pool, a ~10.34M-parameter Baseline-0, checkpoint/resume, independent evaluation, and machine-readable experiment provenance. See [docs/phases/phase-0.md](docs/phases/phase-0.md).
 
+Phase 1 turns that evidence into a working compact end-to-end kernel under `mindforge/`. The default 10,339,200-parameter model is validated on Intel Arc 140V with XPU/BF16, including training, checkpoint/resume, independent evaluation and generation. See [docs/phases/phase-1.md](docs/phases/phase-1.md).
+
+Minimal command surface:
+
+```text
+python -m mindforge.tokenizer train --input ... --output ...
+python -m mindforge.data prepare --tokenizer ... --train-text ... --validation-text ... --output-dir ...
+python -m mindforge.train --config ...
+python -m mindforge.evaluate --checkpoint ... --tokenizer ... --tokens ...
+python -m mindforge.generate --checkpoint ... --tokenizer ... --prompt ...
+```
+
 The active core direction is intentionally narrow:
 
 ```text

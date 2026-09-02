@@ -1,0 +1,189 @@
+{
+  "base_commit": "bba9360b87c947202115386a3c6ea1f68b9735b9",
+  "checkpoint_hash": "426ebdb071b31512000a37b2a38991810d0305de3b80129658d2ab8654e0f393",
+  "config": {
+    "data": {
+      "run_dir": "experiments\\phase1_validation_work\\cpu\\continuous",
+      "tokenizer": "experiments\\phase1_validation_work\\cpu\\tokenizer.json",
+      "train_tokens": "experiments\\phase1_validation_work\\cpu\\data\\train.npy",
+      "validation_tokens": "experiments\\phase1_validation_work\\cpu\\data\\validation.npy"
+    },
+    "model": {
+      "d_model": 32,
+      "dropout": 0.0,
+      "ff_mult": 4,
+      "max_context": 16,
+      "n_heads": 4,
+      "n_layers": 1,
+      "vocab_size": 512
+    },
+    "training": {
+      "accumulation": 2,
+      "checkpoint_interval": 2,
+      "device": "cpu",
+      "dtype": "float32",
+      "eval_interval": 2,
+      "eval_windows": 2,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.001,
+      "micro_batch": 1,
+      "min_lr_fraction": 0.1,
+      "seed": 123,
+      "steps": 4,
+      "warmup_fraction": 0.05,
+      "weight_decay": 0.1
+    }
+  },
+  "dataset_fingerprint": "111bcd2bae6e57499c4e17dc2e3767ef5232f026528bf862bf91c2ddcd83807e",
+  "evaluation": {
+    "checkpoint": "experiments\\phase1_validation_work\\cpu\\resumed\\checkpoint-step-4.pt",
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "metrics": {
+      "bits_per_byte": 11.948391479103112,
+      "bits_per_token": 29.87097869775778,
+      "cross_entropy": 20.704984664916992,
+      "predicted_tokens": 32,
+      "represented_utf8_bytes": 80,
+      "status": "PASS",
+      "total_nll": 662.5595092773438,
+      "window_starts": [
+        0,
+        1363
+      ]
+    },
+    "repeat_delta": {
+      "bits_per_byte": 0.0,
+      "cross_entropy": 0.0
+    },
+    "status": "PASS"
+  },
+  "generation": {
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "prompt": "Xin ch\u00e0o",
+    "seed": 42,
+    "text": "Xin ch\u00e0ooooo",
+    "token_ids": [
+      57,
+      282,
+      262,
+      73,
+      270,
+      80,
+      80,
+      80,
+      80,
+      80
+    ]
+  },
+  "git_commit": "bba9360b87c947202115386a3c6ea1f68b9735b9",
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ram_bytes": 33916248064,
+    "xpu_available": true,
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "resume": {
+    "exact_evaluation": true,
+    "exact_parameters": true,
+    "loss_delta": 0.0,
+    "status": "PASS"
+  },
+  "software": {
+    "numpy": "2.5.2",
+    "python": "3.12.10",
+    "tokenizers": "0.21.4",
+    "torch": "2.12.1+xpu"
+  },
+  "status": "PASS",
+  "tokenizer_fingerprint": "9a557414d5ed803e131b6e66390651044e377defa97445c9b4b618890a95f919",
+  "training": {
+    "checkpoint": {
+      "bytes": 390469,
+      "path": "experiments\\phase1_validation_work\\cpu\\continuous\\checkpoint-step-4.pt",
+      "sha256": "708100c2e230244a52c36ea19848d5f04eebacd7706c4f4b4588877145f993b6"
+    },
+    "completed_steps": 4,
+    "data_config": {
+      "run_dir": "experiments\\phase1_validation_work\\cpu\\continuous",
+      "tokenizer": "experiments\\phase1_validation_work\\cpu\\tokenizer.json",
+      "train_tokens": "experiments\\phase1_validation_work\\cpu\\data\\train.npy",
+      "validation_tokens": "experiments\\phase1_validation_work\\cpu\\data\\validation.npy"
+    },
+    "dataset_fingerprint": "111bcd2bae6e57499c4e17dc2e3767ef5232f026528bf862bf91c2ddcd83807e",
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "final_evaluation": {
+      "bits_per_byte": 11.948391479103112,
+      "bits_per_token": 29.87097869775778,
+      "cross_entropy": 20.704984664916992,
+      "predicted_tokens": 32,
+      "represented_utf8_bytes": 80,
+      "status": "PASS",
+      "total_nll": 662.5595092773438,
+      "window_starts": [
+        0,
+        1363
+      ]
+    },
+    "final_train_loss": 20.895745277404785,
+    "format_version": 1,
+    "git_commit": "bba9360b87c947202115386a3c6ea1f68b9735b9",
+    "hardware": {
+      "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "ram_bytes": 33916248064,
+      "xpu_name": null
+    },
+    "model_config": {
+      "d_model": 32,
+      "dropout": 0.0,
+      "ff_mult": 4,
+      "max_context": 16,
+      "n_heads": 4,
+      "n_layers": 1,
+      "vocab_size": 512
+    },
+    "parameter_count": 29664,
+    "peak_device_memory_bytes": null,
+    "resume_from": null,
+    "seed": 123,
+    "software": {
+      "numpy": "2.5.2",
+      "python": "3.12.10",
+      "tokenizers": "0.21.4",
+      "torch": "2.12.1+xpu"
+    },
+    "start_step": 0,
+    "status": "PASS",
+    "throughput_tokens_per_second": {
+      "max": 1397.2517805425118,
+      "mean": 737.7215806646468,
+      "median": 658.6384946395505,
+      "min": 236.35755283697452,
+      "samples": 4
+    },
+    "timestamp_utc": "2026-09-02T16:37:25.436946+00:00",
+    "tokenizer_fingerprint": "9a557414d5ed803e131b6e66390651044e377defa97445c9b4b618890a95f919",
+    "training_config": {
+      "accumulation": 2,
+      "checkpoint_interval": 2,
+      "device": "cpu",
+      "dtype": "float32",
+      "eval_interval": 2,
+      "eval_windows": 2,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.001,
+      "micro_batch": 1,
+      "min_lr_fraction": 0.1,
+      "seed": 123,
+      "steps": 4,
+      "warmup_fraction": 0.05,
+      "weight_decay": 0.1
+    },
+    "training_tokens": 128,
+    "wall_clock_seconds": 0.3660837999996147
+  }
+}

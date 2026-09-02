@@ -1,0 +1,73 @@
+{
+  "base_commit": "bba9360b87c947202115386a3c6ea1f68b9735b9",
+  "comparison_basis": "same tokenizer, token arrays, 10.3392M architecture, context/batch, XPU/BF16; exact Phase-0 final checkpoint for BPB; per-step sustained throughput/memory against frozen Baseline-0",
+  "git_commit": "bba9360b87c947202115386a3c6ea1f68b9735b9",
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ram_bytes": 33916248064,
+    "xpu_available": true,
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "memory_relative_change": -0.16568874609000375,
+  "phase0_checkpoint_hash": "795e23802ea07509285f3f63bf226678b955a360785f3f74a98f65ac6922f079",
+  "phase0_metric": {
+    "bits_per_byte": 9.034118696437462,
+    "median_tokens_per_second": 13477.86084911403,
+    "peak_memory_bytes": 253053952
+  },
+  "phase1_evaluator_metrics": {
+    "bits_per_byte": 9.034118696437462,
+    "bits_per_token": 37.97594133673345,
+    "cross_entropy": 26.322916666666668,
+    "predicted_tokens": 12288,
+    "represented_utf8_bytes": 51654,
+    "status": "PASS",
+    "total_nll": 323456.0,
+    "window_starts": [
+      0,
+      88081,
+      176163,
+      264245,
+      352327,
+      440409,
+      528491,
+      616573,
+      704655,
+      792737,
+      880819,
+      968901,
+      1056983,
+      1145065,
+      1233147,
+      1321229,
+      1409311,
+      1497393,
+      1585475,
+      1673557,
+      1761639,
+      1849721,
+      1937803,
+      2025885
+    ]
+  },
+  "phase1_metric": {
+    "bits_per_byte_on_phase0_checkpoint": 9.034118696437462,
+    "median_tokens_per_second": 11149.095405334912,
+    "peak_memory_bytes": 211125760
+  },
+  "relative_bpb_difference": 0.0,
+  "software": {
+    "numpy": "2.5.2",
+    "python": "3.12.10",
+    "tokenizers": "0.21.4",
+    "torch": "2.12.1+xpu"
+  },
+  "status": "PASS",
+  "thresholds": {
+    "bpb_relative_max": 0.1,
+    "memory_relative_max": 0.25,
+    "throughput_relative_min": -0.25
+  },
+  "throughput_relative_change": -0.1727844996954542
+}

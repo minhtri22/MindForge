@@ -137,6 +137,8 @@ See [docs/research/r1-open-source-learning-memory.md](docs/research/r1-open-sour
 
 ## Phase 1 — Compact End-to-End Kernel
 
+Status: **PASS / CLOSED**.
+
 Turn validated Phase-0 prototypes into a clean reusable local LLM kernel:
 
 ```text
@@ -146,6 +148,8 @@ dataset → tokenizer → Transformer → training → checkpoint → evaluation
 Required: one primary architecture, single-device training, gradient accumulation, supported mixed precision, checkpoint/resume, seeds, backend abstraction validated in Phase 0, and independent evaluation/inference entry points.
 
 **QA gate:** unit tests + integration smoke train + checkpoint round-trip + resume equivalence + deterministic eval + malformed-config/error-path tests.
+
+Phase 1 closed with all frozen gates passing: exact CPU resume, real Intel Arc 140V XPU/BF16 training/resume/evaluation/generation, exact Phase-0 final-BPB parity, and throughput/memory within the pre-registered regression tolerances. No R1 learning/memory candidates or speculative extension points were introduced. See [docs/phases/phase-1.md](docs/phases/phase-1.md) and [docs/phases/phase-1-qa.md](docs/phases/phase-1-qa.md).
 
 ## Phase 2 — Reproducible experiment system
 
