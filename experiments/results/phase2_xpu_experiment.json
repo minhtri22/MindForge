@@ -2,11 +2,12 @@
   "experiment_id": "phase2-lr-sweep-v1",
   "status": "PASS",
   "base_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
-  "git_commit": "71baccf3e99028948c2d2b2f5cf32b276e8930b2",
+  "git_commit": "c53c85d2ad58c4d054aa30ae6ec586aeecbb4ce6",
+  "validation_source_commit": "71baccf3e99028948c2d2b2f5cf32b276e8930b2",
   "manifest_hash": "f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968",
-  "source_tree_hash": "373142c764f602ce86a2dd4002bc0f1d7bdd75a8e791d1aa2e098f626c8cefb9",
+  "source_tree_hash": "46a5caf472c7b962a904d0fa32f3bf3aa261f115ca0f8ccb1f5b511ec07984ff",
   "working_tree_clean": false,
-  "working_tree_diff_hash": "0cdca6a705bdbcfcac520480e7d5c0a785db55bf86747b898abc53a0cecc8a3c",
+  "working_tree_diff_hash": "10979a9d7d6b2660f98e2bc7ffddf389b1bc4cf217854a453c8efd61480f5de2",
   "hardware": {
     "platform": "Windows-11-10.0.26200-SP0",
     "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
@@ -50,10 +51,10 @@
       "mean_bpb": 10.537770964151376,
       "median_bpb": 10.478312317731046,
       "std_bpb": 0.1257010876900121,
-      "mean_wall_clock_seconds": 11.89807570000024,
-      "median_wall_clock_seconds": 12.289360900002066,
-      "mean_tokens_per_second": 5448.2,
-      "median_tokens_per_second": 5690.0,
+      "mean_wall_clock_seconds": 40.03628956666944,
+      "median_wall_clock_seconds": 38.2153158000001,
+      "mean_tokens_per_second": 5120.0,
+      "median_tokens_per_second": 5354.0,
       "peak_memory_bytes": 211125760
     }
   },
@@ -67,10 +68,10 @@
       "mean_bpb": 10.938692122871304,
       "median_bpb": 10.875835839512671,
       "std_bpb": 0.136213040362487,
-      "mean_wall_clock_seconds": 12.663234966663973,
-      "median_wall_clock_seconds": 12.728678699997545,
-      "mean_tokens_per_second": 4754.0,
-      "median_tokens_per_second": 5342.0,
+      "mean_wall_clock_seconds": 50.90988220000387,
+      "median_wall_clock_seconds": 49.564902600002824,
+      "mean_tokens_per_second": 4022.0,
+      "median_tokens_per_second": 4128.0,
       "peak_memory_bytes": 211125760
     }
   },
@@ -86,8 +87,8 @@
     "std_relative": 0.0005585081617133665
   },
   "resource_comparison": {
-    "wall_clock_seconds": { "baseline_mean": 11.898, "treatment_mean": 12.663, "delta_mean": 0.765 },
-    "tokens_per_second": { "baseline_median": 5690.0, "treatment_median": 5342.0, "delta_median": -348.0 },
+    "wall_clock_seconds": { "baseline_mean": 40.04, "treatment_mean": 50.91, "delta_mean": 10.87 },
+    "tokens_per_second": { "baseline_median": 5354.0, "treatment_median": 4128.0, "delta_median": -1226.0 },
     "peak_memory_bytes": { "baseline": 211125760, "treatment": 211125760, "delta": 0 }
   },
   "regression_check": {
