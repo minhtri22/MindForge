@@ -1,0 +1,138 @@
+{
+  "base_commit": "5d95db1",
+  "baseline": [
+    {
+      "a_after_b": 2.847545027732849,
+      "a_before_b": 3.3397000432014465,
+      "b_acquisition": 3.4752721786499023,
+      "b_after_b": 2.105267286300659,
+      "b_before_b": 5.5805394649505615,
+      "forgetting": -0.4921550154685974,
+      "seed": 101,
+      "treatment": "none"
+    },
+    {
+      "a_after_b": 2.835419714450836,
+      "a_before_b": 2.930789589881897,
+      "b_acquisition": 2.522914230823517,
+      "b_after_b": 2.330775558948517,
+      "b_before_b": 4.853689789772034,
+      "forgetting": -0.09536987543106079,
+      "seed": 202,
+      "treatment": "none"
+    },
+    {
+      "a_after_b": 2.752997100353241,
+      "a_before_b": 3.35681289434433,
+      "b_acquisition": 3.636372983455658,
+      "b_after_b": 2.1027221083641052,
+      "b_before_b": 5.739095091819763,
+      "forgetting": -0.6038157939910889,
+      "seed": 303,
+      "treatment": "none"
+    }
+  ],
+  "baseline_mean": {
+    "a_after_b": 2.811987280845642,
+    "a_before_b": 3.209100842475891,
+    "b_after_b": 2.1795883178710938,
+    "forgetting": -0.397113561630249
+  },
+  "config": {
+    "d_model": 64,
+    "ff_mult": 4,
+    "max_context": 64,
+    "n_heads": 4,
+    "n_layers": 2,
+    "name": "tiny",
+    "vocab_size": 64
+  },
+  "device": "xpu",
+  "forgetting_improvement": 1.7643885413805642,
+  "git_commit": "5d95db1f325c277a75a28b47f9c72500e48c6fa3",
+  "hardware": {
+    "cpu": {
+      "Name": "Intel(R) Core(TM) Ultra 7 258V",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 8
+    },
+    "gpu": {
+      "AdapterRAM": 2147479552,
+      "DriverVersion": "32.0.101.8860",
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "VideoProcessor": "Intel(R) Arc(TM) 140V GPU (16GB) Family"
+    },
+    "os": {
+      "BuildNumber": "26200",
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "OSArchitecture": "64-bit",
+      "Version": "10.0.26200"
+    },
+    "ram": {
+      "available_bytes": 17602772992,
+      "total_bytes": 33916248064
+    },
+    "torch_xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "protocol": {
+    "batch_size": 16,
+    "context": 32,
+    "domain_a_offset": 1,
+    "domain_b_offset": 2,
+    "learning_rate": 0.003,
+    "optimizer": "AdamW",
+    "train_a_steps": 30,
+    "train_b_steps": 30,
+    "treatment": "fixed 50/50 B/A replay batch during B; no hyperparameter tuning"
+  },
+  "replay": [
+    {
+      "a_after_b": 1.03853140771389,
+      "a_before_b": 3.3397000432014465,
+      "b_acquisition": 2.835973024368286,
+      "b_after_b": 2.7445664405822754,
+      "b_before_b": 5.5805394649505615,
+      "forgetting": -2.3011686354875565,
+      "seed": 101,
+      "treatment": "50% replay A during B"
+    },
+    {
+      "a_after_b": 1.02776800096035,
+      "a_before_b": 2.930789589881897,
+      "b_acquisition": 1.9337270259857178,
+      "b_after_b": 2.919962763786316,
+      "b_before_b": 4.853689789772034,
+      "forgetting": -1.903021588921547,
+      "seed": 202,
+      "treatment": "50% replay A during B"
+    },
+    {
+      "a_after_b": 1.076496809720993,
+      "a_before_b": 3.35681289434433,
+      "b_acquisition": 2.9826014041900635,
+      "b_after_b": 2.7564936876296997,
+      "b_before_b": 5.739095091819763,
+      "forgetting": -2.280316084623337,
+      "seed": 303,
+      "treatment": "50% replay A during B"
+    }
+  ],
+  "replay_mean": {
+    "a_after_b": 1.0475987394650776,
+    "a_before_b": 3.209100842475891,
+    "b_after_b": 2.807007630666097,
+    "forgetting": -2.1615021030108132
+  },
+  "software": {
+    "cuda_available": false,
+    "python": "3.12.10",
+    "python_executable": "D:\\WORK\\RESEARCH\\MindForge\\.venv\\Scripts\\python.exe",
+    "torch": "2.12.1+xpu",
+    "torch_cuda_version": null,
+    "xpu_attribute": true,
+    "xpu_available": true,
+    "xpu_count": 1
+  },
+  "status": "REVISE",
+  "timestamp": "2026-09-02T10:44:56.065868+00:00"
+}

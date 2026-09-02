@@ -1,0 +1,140 @@
+{
+  "available_devices": [
+    "cpu",
+    "xpu"
+  ],
+  "base_commit": "5d95db1",
+  "checkpoint": {
+    "checkpoint_bytes": 5090763,
+    "max_abs_output_difference": 0.0,
+    "status": "PASS",
+    "tolerance": 1e-06
+  },
+  "cpu_xpu_numerical": {
+    "max_abs_difference": 1.52587890625e-05,
+    "mean_abs_difference": 1.1519284726091428e-06,
+    "status": "PASS",
+    "tolerance": 0.002
+  },
+  "full_steps": [
+    {
+      "device_observed": "cpu",
+      "device_requested": "cpu",
+      "dtype_observed": "torch.float32",
+      "dtype_requested": "float32",
+      "loss": 88.87902069091797,
+      "parameter_device": "cpu",
+      "parameter_dtype": "torch.float32",
+      "peak_memory_bytes": null,
+      "status": "PASS",
+      "step_seconds": 0.4994055999995908,
+      "tokens_per_second": 512.609390043303
+    },
+    {
+      "device_requested": "cpu",
+      "dtype_requested": "float16",
+      "error": "RuntimeError('DNNL does not support bf16/f16 backward on the platform with avx2_vnni_2')",
+      "status": "FAIL"
+    },
+    {
+      "device_requested": "cpu",
+      "dtype_requested": "bfloat16",
+      "error": "RuntimeError('DNNL does not support bf16/f16 backward on the platform with avx2_vnni_2')",
+      "status": "FAIL"
+    },
+    {
+      "device_observed": "xpu:0",
+      "device_requested": "xpu",
+      "dtype_observed": "torch.float32",
+      "dtype_requested": "float32",
+      "loss": 88.87901306152344,
+      "parameter_device": "xpu:0",
+      "parameter_dtype": "torch.float32",
+      "peak_memory_bytes": 8728576,
+      "status": "PASS",
+      "step_seconds": 2.3926828000003297,
+      "tokens_per_second": 106.9928700954279
+    },
+    {
+      "device_observed": "xpu:0",
+      "device_requested": "xpu",
+      "dtype_observed": "torch.float16",
+      "dtype_requested": "float16",
+      "loss": 88.875,
+      "parameter_device": "xpu:0",
+      "parameter_dtype": "torch.float16",
+      "peak_memory_bytes": 4450304,
+      "status": "PASS",
+      "step_seconds": 0.9777098999984446,
+      "tokens_per_second": 261.8363586176301
+    },
+    {
+      "device_observed": "xpu:0",
+      "device_requested": "xpu",
+      "dtype_observed": "torch.bfloat16",
+      "dtype_requested": "bfloat16",
+      "loss": 89.0,
+      "parameter_device": "xpu:0",
+      "parameter_dtype": "torch.bfloat16",
+      "peak_memory_bytes": 4450304,
+      "status": "PASS",
+      "step_seconds": 0.1792609000003722,
+      "tokens_per_second": 1428.086102432089
+    }
+  ],
+  "git_commit": "5d95db1f325c277a75a28b47f9c72500e48c6fa3",
+  "hardware": {
+    "cpu": {
+      "Name": "Intel(R) Core(TM) Ultra 7 258V",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 8
+    },
+    "gpu": {
+      "AdapterRAM": 2147479552,
+      "DriverVersion": "32.0.101.8860",
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "VideoProcessor": "Intel(R) Arc(TM) 140V GPU (16GB) Family"
+    },
+    "os": {
+      "BuildNumber": "26200",
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "OSArchitecture": "64-bit",
+      "Version": "10.0.26200"
+    },
+    "ram": {
+      "available_bytes": 15736201216,
+      "total_bytes": 33916248064
+    },
+    "torch_xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "matmul": [
+    {
+      "device": "cpu",
+      "dtype": "torch.float32",
+      "gflops": 5.460097733314336,
+      "seconds_mean": 3.146439866667303,
+      "size": 2048,
+      "status": "PASS"
+    },
+    {
+      "device": "xpu:0",
+      "dtype": "torch.float32",
+      "gflops": 2064.7474951717077,
+      "seconds_mean": 0.0083205666669528,
+      "size": 2048,
+      "status": "PASS"
+    }
+  ],
+  "software": {
+    "cuda_available": false,
+    "python": "3.12.10",
+    "python_executable": "D:\\WORK\\RESEARCH\\MindForge\\.venv\\Scripts\\python.exe",
+    "torch": "2.12.1+xpu",
+    "torch_cuda_version": null,
+    "xpu_attribute": true,
+    "xpu_available": true,
+    "xpu_count": 1
+  },
+  "status": "PASS",
+  "timestamp": "2026-09-02T10:52:10.044031+00:00"
+}

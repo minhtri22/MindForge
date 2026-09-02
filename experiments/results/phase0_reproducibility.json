@@ -1,0 +1,86 @@
+{
+  "base_commit": "5d95db1",
+  "checkpoint_resume": {
+    "max_abs_parameter_difference": 0.0,
+    "resume_step": 4,
+    "status": "PASS",
+    "tolerance": 1e-06,
+    "total_steps": 8
+  },
+  "config": {
+    "d_model": 64,
+    "ff_mult": 4,
+    "max_context": 64,
+    "n_heads": 4,
+    "n_layers": 2,
+    "name": "tiny",
+    "vocab_size": 64
+  },
+  "device": "xpu",
+  "git_commit": "5d95db1f325c277a75a28b47f9c72500e48c6fa3",
+  "hardware": {
+    "cpu": {
+      "Name": "Intel(R) Core(TM) Ultra 7 258V",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 8
+    },
+    "gpu": {
+      "AdapterRAM": 2147479552,
+      "DriverVersion": "32.0.101.8860",
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "VideoProcessor": "Intel(R) Arc(TM) 140V GPU (16GB) Family"
+    },
+    "os": {
+      "BuildNumber": "26200",
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "OSArchitecture": "64-bit",
+      "Version": "10.0.26200"
+    },
+    "ram": {
+      "available_bytes": 17676742656,
+      "total_bytes": 33916248064
+    },
+    "torch_xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "seeds": [
+    {
+      "eval_loss_after": 5.225343108177185,
+      "eval_loss_before": 43.61936664581299,
+      "loss_reduction": 38.3940235376358,
+      "seed": 101,
+      "status": "PASS",
+      "train_loss_first": 43.354270935058594,
+      "train_loss_last": 5.694101810455322
+    },
+    {
+      "eval_loss_after": 4.3287118673324585,
+      "eval_loss_before": 43.158504486083984,
+      "loss_reduction": 38.829792618751526,
+      "seed": 202,
+      "status": "PASS",
+      "train_loss_first": 42.6916389465332,
+      "train_loss_last": 4.254075050354004
+    },
+    {
+      "eval_loss_after": 5.320948600769043,
+      "eval_loss_before": 45.83769512176514,
+      "loss_reduction": 40.516746520996094,
+      "seed": 303,
+      "status": "PASS",
+      "train_loss_first": 45.54244613647461,
+      "train_loss_last": 5.550472736358643
+    }
+  ],
+  "software": {
+    "cuda_available": false,
+    "python": "3.12.10",
+    "python_executable": "D:\\WORK\\RESEARCH\\MindForge\\.venv\\Scripts\\python.exe",
+    "torch": "2.12.1+xpu",
+    "torch_cuda_version": null,
+    "xpu_attribute": true,
+    "xpu_available": true,
+    "xpu_count": 1
+  },
+  "status": "PASS",
+  "timestamp": "2026-09-02T10:44:27.146929+00:00"
+}
