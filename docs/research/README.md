@@ -2,9 +2,9 @@
 
 MindForge separates the active compact-kernel roadmap from optional research tracks. Research does not become kernel architecture merely because it may be interesting later.
 
-## Active research
+## Completed research
 
-- **R1 — Open-Source Learning/Memory Architecture Survey** — defined in `PLAN.md`; research-only and not started in the Phase-0 closure increment. Its purpose is to inspect established mechanisms and determine whether any concrete future extension point is justified.
+- **R1 — Open-Source Learning/Memory Architecture Survey — PASS / CLOSED** — source-level survey of ten projects and six shortlisted candidates. It recommends minimal reservoir replay only for a future independently authorized prototype, keeps application memory outside the kernel, and concludes that Phase 1 needs no architectural change or preserved extension point. See the [survey](r1-open-source-learning-memory.md), [matrices](r1-candidate-matrix.md), and [machine-readable inventory](data/r1-candidates.json). R1 did not implement a candidate and is not a P0.9 retry.
 
 ## Deferred research
 

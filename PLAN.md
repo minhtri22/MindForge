@@ -120,11 +120,20 @@ See [docs/phases/phase-0.md](docs/phases/phase-0.md) for the canonical closure s
 
 ## R1 — Open-Source Learning/Memory Architecture Survey
 
-Status: **RESEARCH-ONLY / NOT STARTED**.
+Status: **PASS / CLOSED (research-only)**.
 
 R1 will survey established open-source learning and memory mechanisms to determine architectural boundaries and whether any future extension point is justified. It is not a P0.9 retry, not an implementation phase, and must not introduce candidate frameworks or mechanisms into the kernel.
 
 R1 occurs before Phase 1 only to answer whether the minimal kernel needs any concrete future-facing boundary. The default is YAGNI: R1 does not block the minimal Phase-1 core unless source-backed research identifies a cheap, specific interface requirement.
+
+R1 inspected ten open-source projects and six shortlisted candidates at immutable commits. It selected minimal reservoir replay as the leading future mechanism, retained Avalanche as a reference rather than a dependency, and classified Mem0/Letta/LangMem-style memory as an application concern outside the model kernel. The source-backed boundary decision is:
+
+```text
+PHASE-1 ARCHITECTURAL CHANGES REQUIRED: NONE
+PHASE-1 EXTENSION POINTS TO PRESERVE: NONE
+```
+
+See [docs/research/r1-open-source-learning-memory.md](docs/research/r1-open-source-learning-memory.md) and [docs/research/r1-candidate-matrix.md](docs/research/r1-candidate-matrix.md). This closes R1 without starting Phase 1 or reopening P0.9/P0.10.
 
 ## Phase 1 — Compact End-to-End Kernel
 

@@ -1,0 +1,38 @@
+{
+  "research_phase": "R1",
+  "status": "PASS",
+  "as_of": "2026-09-02",
+  "mindforge_base_commit": "971c0f7d453a62ee8c8da20f2710cb4c6cdfaecb",
+  "weights": {
+    "mechanism_relevance": 0.25,
+    "kernel_simplicity": 0.20,
+    "local_hardware_fit": 0.15,
+    "portability_separability": 0.15,
+    "reproducibility": 0.10,
+    "dependency_burden": 0.10,
+    "license": 0.05
+  },
+  "score_order": [
+    "mechanism_relevance",
+    "kernel_simplicity",
+    "local_hardware_fit",
+    "portability_separability",
+    "reproducibility",
+    "dependency_burden",
+    "license"
+  ],
+  "candidates": [
+    {"project":"ContinualAI/avalanche","track":"continual learning","shortlisted":true,"url":"https://github.com/ContinualAI/avalanche","default_branch":"master","commit":"eb075be393e1f458b2c352514ff6c17b5a2c0f4e","commit_date":"2025-03-11","license":"MIT","language_framework":"Python / PyTorch","release":"v0.6.0 (2024-10-29)","stars":2088,"forks":321,"scores":[4,3,4,4,5,2,5],"weighted_score":3.75,"decision":"REFERENCE"},
+    {"project":"aimagelab/mammoth","track":"continual learning","shortlisted":true,"url":"https://github.com/aimagelab/mammoth","default_branch":"master","commit":"e75a491c69fd729edeb01431afb753d9157d9a81","commit_date":"2026-05-20","license":"MIT","language_framework":"Python / PyTorch","release":"none observed","stars":837,"forks":158,"scores":[5,4,4,4,4,3,5],"weighted_score":4.20,"decision":"CLONE-MINIMAL"},
+    {"project":"GMvandeVen/continual-learning","track":"continual learning","shortlisted":false,"url":"https://github.com/GMvandeVen/continual-learning","default_branch":"master","commit":"e6d795aa81b9cef742b8de76cb71222d4d1ce00b","commit_date":"2025-11-05","license":"MIT","language_framework":"Python/Jupyter / PyTorch","release":"article (2022-10-12)","stars":1878,"forks":345,"scores":[3,3,4,3,3,4,5],"weighted_score":3.35,"decision":"REFERENCE"},
+    {"project":"facebookresearch/agem","track":"continual learning","shortlisted":false,"url":"https://github.com/facebookresearch/agem","default_branch":"main","commit":"45421499483b28935491251e9e821c55e8b3c089","commit_date":"2019-02-28","license":"MIT","language_framework":"Jupyter/Python / TensorFlow","release":"none observed; archived","stars":210,"forks":37,"scores":[3,4,2,4,3,4,5],"weighted_score":3.40,"decision":"REJECT"},
+    {"project":"kuc2477/pytorch-ewc","track":"continual learning","shortlisted":false,"url":"https://github.com/kuc2477/pytorch-ewc","default_branch":"master","commit":"4afaa6666d6b4f1a91a110caf69e7b77f049dc08","commit_date":"2019-06-29","license":"MIT","language_framework":"Python / PyTorch","release":"none observed","stars":286,"forks":48,"scores":[2,5,4,5,1,5,5],"weighted_score":3.70,"decision":"REFERENCE"},
+    {"project":"huggingface/peft","track":"model-learning memory","shortlisted":true,"url":"https://github.com/huggingface/peft","default_branch":"main","commit":"871cad819e5da703216a97e60a6e126d3147bee5","commit_date":"2026-09-02","license":"Apache-2.0","language_framework":"Python / PyTorch + Transformers","release":"v0.20.0 (2026-07-28)","stars":21619,"forks":2471,"scores":[3,3,4,3,5,2,5],"weighted_score":3.35,"decision":"REFERENCE"},
+    {"project":"mem0ai/mem0","track":"inference/application memory","shortlisted":true,"url":"https://github.com/mem0ai/mem0","default_branch":"main","commit":"9a7924befd7026e41e445ba809370009e5e985a6","commit_date":"2026-09-02","license":"Apache-2.0","language_framework":"Python / LLM, embedding and vector-store providers","release":"ts-v3.1.8 (2026-09-02)","stars":64578,"forks":7569,"scores":[2,2,2,3,4,1,5],"weighted_score":2.40,"decision":"REFERENCE"},
+    {"project":"letta-ai/letta-code","track":"inference/application memory","shortlisted":true,"url":"https://github.com/letta-ai/letta-code","default_branch":"main","commit":"6394c7fcc6123e324efc7d1272dac34a8a11d9bf","commit_date":"2026-09-01","license":"Apache-2.0","language_framework":"TypeScript / agent runtime","release":"current successor; landing repo 0.16.8 (2026-05-14)","stars":3190,"forks":387,"scores":[1,1,2,2,4,1,5],"weighted_score":1.80,"decision":"REJECT"},
+    {"project":"getzep/graphiti","track":"inference/application memory","shortlisted":false,"url":"https://github.com/getzep/graphiti","default_branch":"main","commit":"11538f6d45561bcce9a4400b374fb2dc533dccb6","commit_date":"2026-09-01","license":"Apache-2.0","language_framework":"Python / graph DB + model providers","release":"mcp-v1.1.0 (2026-09-01)","stars":30525,"forks":3100,"scores":[1,1,1,2,3,1,5],"weighted_score":1.55,"decision":"REJECT"},
+    {"project":"langchain-ai/langmem","track":"inference/application memory","shortlisted":true,"url":"https://github.com/langchain-ai/langmem","default_branch":"main","commit":"f8c7ebd6110c124a36995dab645a8cb0eb0b8210","commit_date":"2026-09-02","license":"MIT","language_framework":"Python / LangChain + LangGraph","release":"none observed","stars":1638,"forks":187,"scores":[2,3,2,3,3,2,5],"weighted_score":2.60,"decision":"REFERENCE"}
+  ],
+  "phase1_architectural_changes_required": "NONE",
+  "phase1_extension_points_worth_preserving": "NONE"
+}
