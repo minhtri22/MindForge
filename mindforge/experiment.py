@@ -146,15 +146,22 @@ def _git_commit() -> str:
 
 
 def _git_diff_hash() -> str | None:
-    """Return SHA-256 of `git diff --binary HEAD` if dirty, else None."""
+    """Return SHA-256 of `git diff --binary HEAD` for tracked source files if dirty, else None.
+    
+    Only considers tracked source files (*.py, *.json, *.md, *.txt) for canonical cleanliness.
+    Untracked runtime directories (runs/, .agentloop/) do not affect canonical cleanliness.
+    """
     try:
+        # Check only tracked source files for modifications
         status = subprocess.check_output(
-            ["git", "status", "--porcelain"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
+            ["git", "status", "--porcelain", "--", "*.py", "*.json", "*.md", "*.txt"],
+            cwd=ROOT, text=True, stderr=subprocess.DEVNULL
         ).strip()
         if not status:
             return None
         diff = subprocess.check_output(
-            ["git", "diff", "--binary", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
+            ["git", "diff", "--binary", "HEAD", "--", "*.py", "*.json", "*.md", "*.txt"],
+            cwd=ROOT, text=True, stderr=subprocess.DEVNULL
         )
         return hashlib.sha256(diff.encode()).hexdigest()
     except (FileNotFoundError, subprocess.CalledProcessError):
