@@ -21,6 +21,7 @@ This plan distinguishes whether a check exists, whether it was executed on the l
 | BPB from known NLL + Vietnamese UTF-8 byte count | YES | YES | YES | `tests/test_phase0_real_language.py` |
 | Deterministic evaluation/generation | YES | YES | YES | `tests/test_phase0_real_language.py` |
 | Real-language checkpoint load/evaluation equality | YES | YES | YES | `tests/test_phase0_real_language.py` |
+| P0.9 domain determinism/leakage, forgetting/interference metrics, qualification/final gate logic, seed aggregation, A→A control budget | YES | YES | YES | `tests/test_phase0_continual_real.py` |
 
 The repository contained no tests at base commit `5d95db1`; the pre-change `pytest -q` run reported `no tests ran`.
 
@@ -36,6 +37,8 @@ The repository contained no tests at base commit `5d95db1`; the pre-change `pyte
 | P0.4 1M-vs-10M dataset viability | YES | YES | YES | `experiments/results/phase0_dataset_viability.json` |
 | P0.6 standalone initial/final checkpoint evaluation | YES | YES | YES | `experiments/results/phase0_real_language_initial_eval.json`, `experiments/results/phase0_real_language_eval.json` |
 | P0.8 frozen real-language Baseline-0 | YES | YES | YES | `experiments/results/phase0_baseline0.json` |
+| P0.9 bounded real-language domain qualification | YES | YES | STOP | `experiments/results/phase0_continual_qualification.json` |
+| P0.9 final three-seed untreated forgetting protocol | YES | NO | N/A | Not authorized: no candidate passed frozen qualification; `experiments/results/phase0_continual_real.json` |
 
 ## Hardware tests
 
@@ -78,6 +81,8 @@ Frozen protocol before comparison:
 
 The baseline did not exhibit forgetting: mean A loss changed from `3.2091` before B to `2.8120` after B, i.e. forgetting metric `A_after_B - A_before_B = -0.3971`. Therefore the continual-learning probe is REVISE. Replay further improved A but cannot be claimed as an anti-forgetting success because the baseline had no forgetting signal.
 
+The replacement P0.9 real-language protocol preserves that historical failure and performs a bounded three-family qualification with dedicated seeds `404/505`. C1 (VI→EN) and C2 (history/geography→science/technology) fail the frozen 5% independent learnability threshold within the pre-registered 65,536-token stage budget. C3 (controlled contradictory natural-language mappings) is independently learnable by >43% but does not provide a valid sequential acquisition/interference substrate: after A, B has already improved strongly through transfer, then B-stage BPB worsens by about 0.17%/5.38% for seeds 404/505. No candidate qualifies, so P0.9 is STOP and final seeds 101/202/303 are not run.
+
 ## Failure-mode tests
 
 Meaningful failures are retained as evidence:
@@ -85,6 +90,7 @@ Meaningful failures are retained as evidence:
 - the initial global PyTorch build was `2.12.0+cpu`; `torch.xpu.is_available()` was false;
 - CPU FP16 and BF16 backward failed with `DNNL does not support bf16/f16 backward on the platform with avx2_vnni_2`;
 - the synthetic continual-learning protocol failed to produce untreated forgetting;
+- the bounded replacement real-language P0.9 qualification exhausted C1/C2/C3 without a candidate satisfying the frozen learnability + usable-interference rule; final three-seed training was therefore not authorized;
 - CUDA was not tested because no CUDA device exists.
 
 OOM probing is intentionally bounded. No tested 10M-100M / context 256-2048 XPU configuration OOMed, so repeated forced OOM attempts were not performed.
@@ -112,4 +118,4 @@ Phase 0 may be marked PASS only when all Phase 0 questions in `PLAN.md` have evi
 - P0.9 PASS requires a protocol that actually exposes untreated forgetting; the current protocol does not.
 - P0.10 may only proceed when a controlled memory-value signal exists.
 
-P0.3, P0.4, P0.6 and P0.8 now PASS/FROZEN. P0.9 remains REVISE and P0.10 remains blocked/stopped by the missing controlled memory-value signal. Therefore overall Phase 0 remains REVISE and Phase 1 must not start.
+P0.3, P0.4, P0.6 and P0.8 remain PASS/FROZEN. The bounded replacement P0.9 protocol is now STOP because none of the three pre-registered real-language candidate families qualified without post-outcome tuning. P0.10 remains blocked/stopped by the missing controlled memory-value signal. Therefore overall Phase 0 is STOP under the current roadmap and Phase 1 must not start.

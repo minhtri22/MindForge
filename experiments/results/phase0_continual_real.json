@@ -1,0 +1,256 @@
+{
+  "base_commit": "0c0fb52ac5ce214fdaa0e577b499066606cb1b5b",
+  "dataset_fingerprint": "c04d6f39c9fc1f47aa068c283e6b029ece1cd316611f64c9270d29453bfbc696",
+  "domain_definitions": [
+    {
+      "A": {
+        "definition": "Frozen Vietnamese Wikipedia article-level train/validation split",
+        "fingerprint": "1b8c0c123f92aad7e7237202f55c7b2872b7b551ef7d15e6d60fd34f5e54bc75",
+        "name": "C1-A-VI",
+        "train_sha256": "7a5bfa6fe798191a38049380b0784920c441d2ce0f61e8dc2ed01378da912962",
+        "train_tokens": 7149033,
+        "train_utf8_bytes": 33565953,
+        "validation_sha256": "99bee7e32d3a8fb5d6bce53194e59577801d3b528af7c2764926a933efd912e4",
+        "validation_tokens": 953465,
+        "validation_utf8_bytes": 4204353
+      },
+      "B": {
+        "definition": "Frozen English Wikipedia article-level train/validation split",
+        "fingerprint": "96af2b564edf7b5479cdfcf9d45e55880493e7c39643ae7c0e3cabd038c1d813",
+        "name": "C1-B-EN",
+        "train_sha256": "a5b45b6ff948fa8a4b7112684a2a45034eadf1b7377c1858748296ccd9cd5050",
+        "train_tokens": 8449941,
+        "train_utf8_bytes": 33571974,
+        "validation_sha256": "58a7e52ef9ac32df32b455bf0e94219564bedca771df540a06680f187349206c",
+        "validation_tokens": 1079376,
+        "validation_utf8_bytes": 4227443
+      },
+      "description": "Vietnamese Wikipedia -> English Wikipedia language specialization",
+      "id": "C1",
+      "integrity": {
+        "same_sentence_overlap": "not applicable; frozen article split",
+        "source_article_overlap": 0
+      }
+    },
+    {
+      "A": {
+        "definition": "English Wikipedia: history/geography term count >=4 and technical term count <=1",
+        "fingerprint": "373ab9658a087004d3791b5dbd032296497f9be800252477687dd21d5d431a45",
+        "name": "C2-A-HISTORY",
+        "train_articles": 429,
+        "train_sha256": "871fee2d7d89a5bde4d6a3d0f74a3b1d5f933ec1302a1b79c9eddf770fdee2c9",
+        "train_tokens": 1819187,
+        "train_utf8_bytes": 7030308,
+        "validation_articles": 48,
+        "validation_sha256": "75688adccce3813541cd1093201f6576073d2ec593b080789ebb3014a563f718",
+        "validation_tokens": 274198,
+        "validation_utf8_bytes": 1026323
+      },
+      "B": {
+        "definition": "English Wikipedia: technical term count >=4 and history/geography term count <=3",
+        "fingerprint": "b7a03a6640fe0f91201605aa1ef1279fda00479083d425359aebf75f7f25182d",
+        "name": "C2-B-TECH",
+        "train_articles": 47,
+        "train_sha256": "1d09e0c1c2bdd40bc7ae508e07fa6d2193f6df41a8a85da613f87bb9a4c601e8",
+        "train_tokens": 87532,
+        "train_utf8_bytes": 337439,
+        "validation_articles": 7,
+        "validation_sha256": "992b763a0d36ed2ce0c8d5e5799f737f379db6bcda97c7838eacca9078207e32",
+        "validation_tokens": 15047,
+        "validation_utf8_bytes": 61151
+      },
+      "description": "English history/geography-heavy -> science/technology-heavy Wikipedia specialization",
+      "id": "C2",
+      "integrity": {
+        "A_B_article_overlap": 0,
+        "train_validation_source_split": "frozen article-level SHA-256 split"
+      }
+    },
+    {
+      "A": {
+        "definition": "128 entities with SHA-256-balanced experimental lam/red labels; A assignment",
+        "fingerprint": "ccd07f0da131136fe11c4aba2cdb4e08e78023cc1db22509819550aa0c20cb78",
+        "name": "C3-A-CONFLICT",
+        "train_sentences": 512,
+        "train_sha256": "2b70056efec805d854a16cc8578dcc7b12b3bf5e0eb01ceb98fcd36bb6184935",
+        "train_tokens": 27854,
+        "train_utf8_bytes": 115774,
+        "validation_sentences": 256,
+        "validation_sha256": "bf6b244afb87d493f0ab9cacb87e813621dde89db5daf4176f6abf09af9f1fa1",
+        "validation_tokens": 10015,
+        "validation_utf8_bytes": 40170
+      },
+      "B": {
+        "definition": "Same 128 entities and opposite experimental labels; B assignment",
+        "fingerprint": "a0860ca01ba193b95c3e294da74035de3dbe56195a155b46854b50cb2b265917",
+        "name": "C3-B-CONFLICT",
+        "train_sentences": 512,
+        "train_sha256": "66594cf0191227ec7edb9689fe74c87a8f3bfd19d56b8938fa4d66f063fdb410",
+        "train_tokens": 27854,
+        "train_utf8_bytes": 115902,
+        "validation_sentences": 256,
+        "validation_sha256": "2729a64de886a4b1b0dc8855b3a2a892d2649dc1974f6a5cdf2ba73c6f66cb14",
+        "validation_tokens": 10015,
+        "validation_utf8_bytes": 40210
+      },
+      "description": "Balanced contradictory entity-label mappings embedded in Vietnamese natural-language sentences",
+      "id": "C3",
+      "integrity": {
+        "balanced_opposite_mapping": true,
+        "entities": 128,
+        "exact_train_validation_sentence_overlap": 0,
+        "factual_world_claim": false
+      }
+    }
+  ],
+  "final_protocol": {
+    "executed": false,
+    "reason_not_executed": "No candidate qualified under the pre-registered bounded search; running final seeds would violate the protocol.",
+    "seeds": [
+      101,
+      202,
+      303
+    ],
+    "training_tokens_per_stage": 196608
+  },
+  "git_commit": "0c0fb52ac5ce214fdaa0e577b499066606cb1b5b",
+  "hardware": {
+    "cpu": {
+      "Name": "Intel(R) Core(TM) Ultra 7 258V",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 8
+    },
+    "gpu": {
+      "AdapterRAM": 2147479552,
+      "DriverVersion": "32.0.101.8860",
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "VideoProcessor": "Intel(R) Arc(TM) 140V GPU (16GB) Family"
+    },
+    "os": {
+      "BuildNumber": "26200",
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "OSArchitecture": "64-bit",
+      "Version": "10.0.26200"
+    },
+    "ram": {
+      "available_bytes": 20100943872,
+      "total_bytes": 33916248064
+    },
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "metrics": {
+    "final_seed_metrics": [],
+    "qualification_candidate_gates": [
+      {
+        "learnable": false,
+        "mean_forgetting": 0.15828425591467443,
+        "meaningful_forgetting_seed_count": 0,
+        "positive_net_interference_both_seeds": true,
+        "qualified": false,
+        "usable_interference": false
+      },
+      {
+        "learnable": false,
+        "mean_forgetting": -0.11683219361874375,
+        "meaningful_forgetting_seed_count": 0,
+        "positive_net_interference_both_seeds": true,
+        "qualified": false,
+        "usable_interference": false
+      },
+      {
+        "learnable": true,
+        "mean_forgetting": 0.1514382839664763,
+        "meaningful_forgetting_seed_count": 1,
+        "positive_net_interference_both_seeds": false,
+        "qualified": false,
+        "usable_interference": false
+      }
+    ]
+  },
+  "model_config": {
+    "d_model": 320,
+    "ff_mult": 4,
+    "max_context": 512,
+    "n_heads": 8,
+    "n_layers": 4,
+    "vocab_size": 16384
+  },
+  "optimizer": {
+    "learning_rate": 0.0003,
+    "lr_schedule": "stage-local 5% linear warmup then cosine to 10% peak",
+    "name": "AdamW",
+    "optimizer_state_policy": "continue baseline state; continue exact post-A state into A2/B",
+    "weight_decay": 0.1
+  },
+  "parameter_count": 10339200,
+  "qualification": {
+    "candidate_gates": [
+      {
+        "candidate": "C1",
+        "gate": {
+          "learnable": false,
+          "mean_forgetting": 0.15828425591467443,
+          "meaningful_forgetting_seed_count": 0,
+          "positive_net_interference_both_seeds": true,
+          "qualified": false,
+          "usable_interference": false
+        }
+      },
+      {
+        "candidate": "C2",
+        "gate": {
+          "learnable": false,
+          "mean_forgetting": -0.11683219361874375,
+          "meaningful_forgetting_seed_count": 0,
+          "positive_net_interference_both_seeds": true,
+          "qualified": false,
+          "usable_interference": false
+        }
+      },
+      {
+        "candidate": "C3",
+        "gate": {
+          "learnable": true,
+          "mean_forgetting": 0.1514382839664763,
+          "meaningful_forgetting_seed_count": 1,
+          "positive_net_interference_both_seeds": false,
+          "qualified": false,
+          "usable_interference": false
+        }
+      }
+    ],
+    "evidence_sha256": "e3068ba92fa0115e0e4b02cb017662d13fa7c23c87c42dc50ad89ecaa5ee4be6",
+    "seeds": [
+      404,
+      505
+    ],
+    "training_tokens_per_stage": 65536
+  },
+  "research_question": "Can MindForge produce a reproducible controlled catastrophic-forgetting signal on real language modeling tasks?",
+  "software": {
+    "cuda_available": false,
+    "numpy": "2.5.2",
+    "python": "3.12.10",
+    "python_executable": "<venv>/Scripts/python.exe",
+    "tokenizers": "0.21.4",
+    "torch": "2.12.1+xpu",
+    "xpu_available": true
+  },
+  "starting_checkpoint": {
+    "bytes": 62100623,
+    "sha256": "795e23802ea07509285f3f63bf226678b955a360785f3f74a98f65ac6922f079"
+  },
+  "status": "STOP",
+  "stop_reason": "None of the three pre-registered bounded candidate families satisfied the frozen qualification rule; final seeds were therefore not authorized.",
+  "thresholds": {
+    "A_learning_fraction": 0.05,
+    "B_acquisition_fraction": 0.05,
+    "final_net_interference": "mean > 0; not reached",
+    "final_seed_criterion": "at least 2/3 meaningful forgetting; not reached",
+    "meaningful_forgetting": "max(0.10 BPB, 0.05 * A_after_A BPB) per seed",
+    "qualification_selection": "first C1->C2->C3 satisfying frozen learnability + usable-interference gate"
+  },
+  "timestamp": "2026-09-02T13:02:44.085460+00:00",
+  "tokenizer": "mindforge",
+  "treatment": "NONE — untreated continual training only"
+}
