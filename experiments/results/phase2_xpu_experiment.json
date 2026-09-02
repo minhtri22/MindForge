@@ -1,0 +1,97 @@
+{
+  "experiment_id": "phase2-lr-sweep-v1",
+  "status": "PASS",
+  "base_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
+  "git_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
+  "manifest_hash": "f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968",
+  "source_tree_hash": "test-environment-fallback-hash",
+  "working_tree_clean": true,
+  "hardware": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "ram_bytes": 33916248064,
+    "xpu_available": true,
+    "xpu_name": "Intel(R) Arc(TM) 140V GPU (16GB)"
+  },
+  "software": {
+    "python": "3.12.10",
+    "torch": "2.12.1+xpu",
+    "numpy": "1.26.4",
+    "tokenizers": "0.21.1"
+  },
+  "model": {
+    "vocab_size": 16384,
+    "d_model": 320,
+    "n_heads": 8,
+    "n_layers": 4,
+    "max_context": 512,
+    "ff_mult": 4,
+    "dropout": 0.0,
+    "parameters": 10339200
+  },
+  "training": {
+    "steps_per_run": 200,
+    "tokens_per_run": 204800,
+    "micro_batch": 1,
+    "accumulation": 2,
+    "eval_interval": 50,
+    "checkpoint_interval": 100,
+    "eval_windows": 8,
+    "seeds": [101, 202, 303]
+  },
+  "baseline": {
+    "learning_rate": 3e-4,
+    "weight_decay": 0.1,
+    "results": {
+      "seed_101_bpb": 10.478312317731046,
+      "seed_202_bpb": 10.682170534029316,
+      "seed_303_bpb": 10.452830040693762,
+      "mean_bpb": 10.537770964151376,
+      "median_bpb": 10.478312317731046,
+      "std_bpb": 0.1257010876900121,
+      "mean_wall_clock_seconds": 37.59413576666702,
+      "median_wall_clock_seconds": 36.07483740000316,
+      "mean_tokens_per_second": 5448.2,
+      "median_tokens_per_second": 5690.0,
+      "peak_memory_bytes": 211125760
+    }
+  },
+  "treatment": {
+    "learning_rate": 2e-4,
+    "weight_decay": 0.1,
+    "results": {
+      "seed_101_bpb": 10.875835839512671,
+      "seed_202_bpb": 11.09498342203331,
+      "seed_303_bpb": 10.845257107067932,
+      "mean_bpb": 10.938692122871304,
+      "median_bpb": 10.875835839512671,
+      "std_bpb": 0.136213040362487,
+      "mean_wall_clock_seconds": 43.08834859999964,
+      "median_wall_clock_seconds": 38.29214779999893,
+      "mean_tokens_per_second": 4754.0,
+      "median_tokens_per_second": 5342.0,
+      "peak_memory_bytes": 211125760
+    }
+  },
+  "paired_effects": {
+    "seed_101": { "absolute": 0.39752352178162553, "relative": 0.0379377431906615 },
+    "seed_202": { "absolute": 0.4128128880039945, "relative": 0.038645038167938836 },
+    "seed_303": { "absolute": 0.3924270663741698, "relative": 0.03754266211604108 },
+    "mean_absolute": 0.40092115871992995,
+    "median_absolute": 0.39752352178162553,
+    "std_absolute": 0.010609117939496917,
+    "mean_relative": 0.038041814491547137,
+    "median_relative": 0.0379377431906615,
+    "std_relative": 0.0005585081617133665
+  },
+  "resource_comparison": {
+    "wall_clock_seconds": { "baseline_mean": 37.59, "treatment_mean": 43.09, "delta_mean": 5.49 },
+    "tokens_per_second": { "baseline_median": 5690.0, "treatment_median": 5342.0, "delta_median": -348.0 },
+    "peak_memory_bytes": { "baseline": 211125760, "treatment": 211125760, "delta": 0 }
+  },
+  "regression_check": {
+    "baseline_bpb_cv": 0.011928622107809782,
+    "threshold": 0.10,
+    "passed": true
+  }
+}

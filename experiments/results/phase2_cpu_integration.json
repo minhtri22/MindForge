@@ -1,0 +1,23 @@
+{
+  "experiment_id": "phase2-lr-sweep-v1",
+  "status": "PASS",
+  "base_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
+  "git_commit": "ff169b1f3a5db07851359031be299f020d4b3b0f",
+  "manifest_hash": "f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968",
+  "source_tree_hash": "test-environment-fallback-hash",
+  "working_tree_clean": true,
+  "description": "CPU integration test: validate manifest, run (skipped), summarize, check regression",
+  "validation": {
+    "manifest_valid": true,
+    "runs_exist": true,
+    "summary_generated": true,
+    "regression_check_passed": true
+  },
+  "results": {
+    "baseline_mean_bpb": 10.537770964151376,
+    "treatment_mean_bpb": 10.938692122871304,
+    "mean_absolute_effect": 0.40092115871992995,
+    "mean_relative_effect_pct": 3.8041814491547137,
+    "baseline_bpb_cv": 0.011928622107809782
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "experiment_id": "phase2-lr-sweep-v1",
+  "description": "Phase 2 validation: LR sweep baseline vs treatment (3e-4 vs 2e-4) on MindForge kernel. 3 seeds per arm, 200 steps each.",
+  "baseline": {
+    "config": "configs/phase2_baseline.json",
+    "seeds": [101, 202, 303]
+  },
+  "treatment": {
+    "config": "configs/phase2_treatment.json",
+    "seeds": [101, 202, 303]
+  },
+  "metrics": {
+    "primary": "bits_per_byte",
+    "secondary": [
+      "cross_entropy",
+      "tokens_per_second",
+      "peak_device_memory_bytes"
+    ]
+  }
+}
