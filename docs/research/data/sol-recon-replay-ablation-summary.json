@@ -1,0 +1,40 @@
+{
+  "experiment_contract": {
+    "seed": 2026,
+    "student": "same MindForge sandbox Transformer kernel",
+    "heldout": "same 30 prompts",
+    "N10_steps": 300,
+    "N10_lr": 0.001,
+    "batch_size": 8,
+    "train_examples": "same 240 examples",
+    "only_replay_change": "sampling policy during N10"
+  },
+  "N5_before_new_lessons": {
+    "overall": 0.3333333333333333,
+    "old5_retention": 0.6666666666666666
+  },
+  "N10_original_random_all10": {
+    "overall": 0.4666666666666667,
+    "old5_retention": 0.3333333333333333,
+    "new5_learning": 0.6
+  },
+  "N10_balanced_replay_4_old_4_new": {
+    "score": 0.5,
+    "passed": 15,
+    "total": 30,
+    "old5_score": 0.3333333333333333,
+    "new5_score": 0.6666666666666666
+  },
+  "N10_retention_replay_6_old_2_new": {
+    "overall": 0.4666666666666667,
+    "old5_score": 0.26666666666666666,
+    "new5_score": 0.6666666666666666
+  },
+  "conclusion": {
+    "balanced_replay_overall_delta_pp": 3.3333333333333326,
+    "balanced_replay_old_retention_delta_pp": 0.0,
+    "retention_weighted_overall_delta_pp": 0.0,
+    "retention_weighted_old_retention_delta_pp": -6.666666666666665,
+    "status": "REPLAY_ONLY_INSUFFICIENT_FOR_ANTI_FORGETTING"
+  }
+}
