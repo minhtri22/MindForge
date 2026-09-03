@@ -111,9 +111,9 @@ class RunConfig:
         return cls.from_dict(value)
 
 
-# Backward compatibility for frozen Phase-1/Phase-2 configs and callers. New
-# code should use RunConfig when referring to training/evaluation compositions.
-KernelConfig = RunConfig
+@dataclass(frozen=True)
+class KernelConfig(RunConfig):
+    """Backward-compatible Phase-1/Phase-2 name for the research run config."""
 
 
 T = TypeVar("T")

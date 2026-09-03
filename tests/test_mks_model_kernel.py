@@ -59,12 +59,14 @@ def test_mks_validation_semantics_preserved(tokens: torch.Tensor) -> None:
 
 
 def test_mks_run_config_preserves_kernel_config_compatibility(tmp_path) -> None:
-    config = RunConfig(DataConfig("train.npy", "val.npy", "tokenizer.json"))
-    assert KernelConfig is RunConfig
+    legacy = KernelConfig(DataConfig("train.npy", "val.npy", "tokenizer.json"))
     path = tmp_path / "config.json"
-    config.save(path)
-    assert KernelConfig.load(path) == config
-    assert set(config.to_dict()) == {"data", "model", "training"}
+    legacy.save(path)
+    loaded = KernelConfig.load(path)
+    assert type(loaded) is KernelConfig
+    assert loaded == legacy
+    assert isinstance(loaded, RunConfig)
+    assert set(loaded.to_dict()) == {"data", "model", "training"}
 
 
 def test_mks_one_step_training_parity_is_exact() -> None:
