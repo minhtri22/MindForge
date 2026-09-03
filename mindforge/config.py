@@ -1,4 +1,4 @@
-"""Small serializable configuration objects for the Phase-1 kernel."""
+"""Small serializable configuration objects for MindForge research/tooling."""
 
 from __future__ import annotations
 
@@ -75,7 +75,9 @@ class DataConfig:
 
 
 @dataclass(frozen=True)
-class KernelConfig:
+class RunConfig:
+    """Research/tooling composition, not a kernel-runtime ownership boundary."""
+
     data: DataConfig
     model: ModelConfig = field(default_factory=ModelConfig)
     training: TrainingConfig = field(default_factory=TrainingConfig)
@@ -87,7 +89,7 @@ class KernelConfig:
         Path(path).write_text(json.dumps(self.to_dict(), indent=2) + "\n", encoding="utf-8")
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> "KernelConfig":
+    def from_dict(cls, value: dict[str, Any]) -> "RunConfig":
         if not isinstance(value, dict) or "data" not in value:
             raise ValueError("config must be an object containing data")
         allowed = {"data", "model", "training"}
@@ -101,12 +103,17 @@ class KernelConfig:
         )
 
     @classmethod
-    def load(cls, path: str | Path) -> "KernelConfig":
+    def load(cls, path: str | Path) -> "RunConfig":
         try:
             value = json.loads(Path(path).read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as error:
             raise ValueError(f"cannot load config {path}: {error}") from error
         return cls.from_dict(value)
+
+
+# Backward compatibility for frozen Phase-1/Phase-2 configs and callers. New
+# code should use RunConfig when referring to training/evaluation compositions.
+KernelConfig = RunConfig
 
 
 T = TypeVar("T")

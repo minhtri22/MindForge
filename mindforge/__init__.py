@@ -1,14 +1,18 @@
-"""MindForge compact local language-model kernel."""
+"""MindForge compact local language-model research package."""
 
-from .config import DataConfig, KernelConfig, ModelConfig, TrainingConfig
-from .model import TransformerLM, parameter_count
+from .config import DataConfig, KernelConfig, ModelConfig, RunConfig, TrainingConfig
+from .model import TransformerLM, create_model, parameter_count
+from .model_contract import TokenModel
 
 __all__ = [
     "DataConfig",
     "KernelConfig",
     "ModelConfig",
+    "RunConfig",
     "TrainingConfig",
+    "TokenModel",
     "TransformerLM",
+    "create_model",
     "parameter_count",
 ]
 

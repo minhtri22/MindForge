@@ -1,4 +1,4 @@
-"""Explicit single-device training loop for the compact MindForge kernel."""
+"""Explicit single-device training loop for MindForge research/tooling."""
 
 from __future__ import annotations
 
@@ -22,11 +22,11 @@ import torch
 from torch.nn import functional as F
 
 from .checkpoint import FORMAT_VERSION, load_checkpoint, save_checkpoint
-from .config import KernelConfig, TrainingConfig
+from .config import RunConfig, TrainingConfig
 from .data import deterministic_batch, load_token_array
 from .device import peak_memory, reset_peak_memory, resolve_device, synchronize
 from .evaluate import evaluate_tokens
-from .model import TransformerLM, parameter_count
+from .model import create_model, parameter_count
 from .tokenizer import load_tokenizer, metadata, sha256_file
 
 
@@ -67,7 +67,7 @@ def _append_jsonl(path: Path, value: dict[str, Any]) -> None:
         handle.write(json.dumps(value, sort_keys=True) + "\n")
 
 
-def _dataset_fingerprint(config: KernelConfig) -> str:
+def _dataset_fingerprint(config: RunConfig) -> str:
     manifest = Path(config.data.train_tokens).parent / "manifest.json"
     if manifest.is_file():
         try:
@@ -83,7 +83,7 @@ def _dataset_fingerprint(config: KernelConfig) -> str:
     return hashlib.sha256(joined.encode()).hexdigest()
 
 
-def train(config: KernelConfig, *, resume: str | Path | None = None) -> dict[str, Any]:
+def train(config: RunConfig, *, resume: str | Path | None = None) -> dict[str, Any]:
     spec = resolve_device(config.training.device, config.training.dtype)
     tokenizer = load_tokenizer(config.data.tokenizer)
     tokenizer_info = metadata(config.data.tokenizer, tokenizer)
@@ -110,7 +110,7 @@ def train(config: KernelConfig, *, resume: str | Path | None = None) -> dict[str
     set_seed(config.training.seed)
 
     if resume is None:
-        model = TransformerLM(config.model).to(device=spec.device, dtype=spec.dtype)
+        model = create_model(config.model).to(device=spec.device, dtype=spec.dtype)
         optimizer = torch.optim.AdamW(
             model.parameters(), lr=config.training.learning_rate, weight_decay=config.training.weight_decay
         )
@@ -278,7 +278,7 @@ def main() -> int:
     parser.add_argument("--config", required=True)
     parser.add_argument("--resume")
     args = parser.parse_args()
-    result = train(KernelConfig.load(args.config), resume=args.resume)
+    result = train(RunConfig.load(args.config), resume=args.resume)
     print(json.dumps(result, indent=2, ensure_ascii=True))
     return 0 if result["status"] == "PASS" else 1
 

@@ -30,6 +30,14 @@ class TransformerLM(nn.Module):
         self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
         self.lm_head.weight = self.token_embedding.weight
 
+    @property
+    def context_limit(self) -> int:
+        return self.config.max_context
+
+    @property
+    def vocab_size(self) -> int:
+        return self.config.vocab_size
+
     def forward(self, tokens: torch.Tensor) -> torch.Tensor:
         if tokens.ndim != 2:
             raise ValueError("tokens must have shape [batch, context]")
@@ -46,6 +54,14 @@ class TransformerLM(nn.Module):
         for layer in self.layers:
             hidden = layer(hidden, src_mask=mask, is_causal=True)
         return self.lm_head(self.norm(hidden))
+
+
+def create_model(config: ModelConfig) -> TransformerLM:
+    """Construct the single proven learned model implementation.
+
+    This is deliberately a plain function, not a registry/provider system.
+    """
+    return TransformerLM(config)
 
 
 def parameter_count(model: nn.Module) -> int:

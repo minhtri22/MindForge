@@ -11,13 +11,13 @@ import torch
 
 from .checkpoint import load_checkpoint, read_checkpoint
 from .device import resolve_device
-from .model import TransformerLM
+from .model_contract import TokenModel
 from .tokenizer import decode, encode, load_tokenizer, metadata
 
 
 @torch.no_grad()
 def generate(
-    model: TransformerLM,
+    model: TokenModel,
     tokenizer: Any,
     prompt: str,
     *,
@@ -39,7 +39,7 @@ def generate(
     generator = torch.Generator(device="cpu").manual_seed(seed)
     model.eval()
     for _ in range(max_new_tokens):
-        x = torch.tensor([ids[-model.config.max_context :]], dtype=torch.long, device=device)
+        x = torch.tensor([ids[-model.context_limit :]], dtype=torch.long, device=device)
         logits = model(x)[0, -1].float().cpu()
         if not torch.isfinite(logits).all():
             raise FloatingPointError("non-finite generation logits")

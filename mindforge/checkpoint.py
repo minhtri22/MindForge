@@ -10,9 +10,10 @@ from typing import Any
 
 import numpy as np
 import torch
+from torch import nn
 
 from .config import ModelConfig, TrainingConfig
-from .model import TransformerLM
+from .model import create_model
 from .tokenizer import sha256_file
 
 
@@ -60,7 +61,7 @@ def restore_rng_state(state: dict[str, Any]) -> None:
 
 def save_checkpoint(
     path: str | Path,
-    model: TransformerLM,
+    model: nn.Module,
     optimizer: torch.optim.Optimizer,
     *,
     step: int,
@@ -72,12 +73,15 @@ def save_checkpoint(
 ) -> dict[str, Any]:
     if step < 0:
         raise ValueError("checkpoint step cannot be negative")
+    model_config = getattr(model, "config", None)
+    if not isinstance(model_config, ModelConfig):
+        raise TypeError("checkpoint model must expose its ModelConfig as .config")
     payload = {
         "format_version": FORMAT_VERSION,
         "model_state": model.state_dict(),
         "optimizer_state": optimizer.state_dict(),
         "step": step,
-        "model_config": asdict(model.config),
+        "model_config": asdict(model_config),
         "training_config": asdict(training_config),
         "tokenizer_fingerprint": tokenizer_fingerprint,
         "dataset_fingerprint": dataset_fingerprint,
@@ -127,7 +131,7 @@ def load_checkpoint(
     tokenizer_fingerprint: str | None = None,
     dataset_fingerprint: str | None = None,
     restore_rng: bool = False,
-) -> tuple[TransformerLM, torch.optim.Optimizer, dict[str, Any]]:
+) -> tuple[nn.Module, torch.optim.Optimizer, dict[str, Any]]:
     payload = read_checkpoint(path, map_location="cpu")
     saved_model_config = ModelConfig(**payload["model_config"])
     if model_config is not None and model_config != saved_model_config:
@@ -137,7 +141,7 @@ def load_checkpoint(
     if dataset_fingerprint is not None and payload["dataset_fingerprint"] != dataset_fingerprint:
         raise ValueError("checkpoint dataset fingerprint mismatch")
     training_config = TrainingConfig(**payload["training_config"])
-    model = TransformerLM(saved_model_config).to(device=device, dtype=dtype)
+    model = create_model(saved_model_config).to(device=device, dtype=dtype)
     model.load_state_dict(payload["model_state"])
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=training_config.learning_rate, weight_decay=training_config.weight_decay
