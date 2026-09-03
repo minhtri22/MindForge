@@ -2,82 +2,138 @@
 
 Status: **ARCHITECTURE DECISION / FROZEN UNTIL EXPLICITLY REVISED**
 
-Decision scope: MindForge core architecture, extensions/plugins, PPF placement, and host/product composition.
+Decision scope: MindForge model/kernel boundary, extensions/plugins, PPF placement, and host/product composition.
 
-## 1. Decisions
+## 1. Final architecture model
 
-### D1 — MindForge-Mobile is not the architectural center
-
-MindForge-Mobile is one optional host/product branch of MindForge. It is not the primary architecture and must not become the place where cross-cutting MindForge capabilities are anchored by default.
-
-A capability that is useful beyond one host must not be defined as a MindForge-Mobile feature merely because mobile is a convenient validation environment.
-
-PPF therefore must not be architected as a MindForge-Mobile subsystem. MindForge-Mobile may later consume PPF, but only as one optional host/consumer.
-
-### D2 — Kernel is an independent minimal core; feature capabilities live outside it
-
-The MindForge kernel is an independently operable minimal core.
-
-Domain-specific, product-specific, optional, or independently evolvable capabilities belong outside the kernel behind extension/plugin contracts.
-
-The architectural direction is:
+MindForge is organized into four distinct architectural roles:
 
 ```text
+Host / Product
+    |
+    +-- composes Kernel + selected Plugins
+
+Plugins / Extensions
+    |
+    +-- feature-specific mechanisms and semantics
+
 MindForge Kernel
     |
-    +-- stable generic extension/service boundary
-            |
-            +-- optional extension/plugin A
-            +-- optional extension/plugin B
-            +-- PPF extension/plugin
-            +-- ...
+    +-- only proven universal runtime primitives/contracts
+    +-- operates the Model
 
-Hosts/products compose the kernel with the extension set they require.
+MindForge Model
+    |
+    +-- learned representations/capabilities
+    +-- Transformer / weights / neural computation
 ```
 
-This yields the shorthand:
+The four roles are intentionally different.
 
 ```text
-Kernel owns primitives.
-Plugins own features.
+The Model owns learned representations/capabilities.
+The Kernel owns only proven universal primitives.
+Plugins own feature-specific mechanisms and semantics.
 Hosts own composition.
 ```
 
-## 2. Important qualification: "feature outside core" is not absolute
+This replaces the earlier shorthand `Kernel owns primitives`, which was too broad and could be misread as permission to add feature-specific deterministic machinery to the kernel.
 
-The kernel is not required to be artificially empty.
+## 2. D1 — MindForge-Mobile is not the architectural center
 
-A capability may belong in the kernel if it is a genuinely generic primitive required for core correctness or for a stable extension runtime and cannot be cleanly externalized without violating the core boundary.
+MindForge-Mobile is one optional host/product branch of MindForge. It is not the primary architecture and must not become the place where cross-cutting MindForge capabilities are anchored by default.
 
-Therefore the architecture is **not**:
+A capability useful beyond one host must not be defined as a MindForge-Mobile feature merely because mobile is a convenient validation environment.
+
+PPF therefore must not be architected as a MindForge-Mobile subsystem. MindForge-Mobile may later consume PPF, but only as one optional host/consumer.
+
+## 3. D2 — Model is not the Kernel
+
+The MindForge Model is the learned neural component: Transformer architecture, parameters/weights, and learned representations/capabilities.
+
+The MindForge Kernel is the minimal generic runtime/core that operates the model and, only when separately proven necessary, exposes stable universal primitives/contracts to extensions and hosts.
+
+Therefore:
 
 ```text
-everything except a tiny dispatcher must be a plugin
+MindForge Model != MindForge Kernel
+MindForge Model is operated by / contained within the MindForge Kernel runtime boundary
 ```
 
-The architecture is:
+Current repository history may use `LLM kernel` as an umbrella phrase for the compact end-to-end research stack. For architecture decisions from this document onward, use the more precise terminology above.
+
+Model-level primitives such as embeddings, attention, normalization, MLP blocks, residual paths, and LM head are neural/model internals. They are not the same thing as kernel/runtime primitives.
+
+## 4. D3 — Kernel is an independent minimal core
+
+The kernel must be independently operable and must not require any specific optional plugin.
+
+Domain-specific, product-specific, host-specific, optional, or independently evolvable capabilities belong outside the kernel by default.
+
+The kernel is not required to be artificially empty. A capability may enter the kernel only when it is a genuinely universal runtime primitive and passes the Kernel Admission Test.
+
+The default rule is:
 
 ```text
-domain/product/optional capability -> plugin by default
-universal minimal primitive -> kernel only after explicit admission proof
+domain/product/optional capability -> Plugin
+host/platform-specific capability  -> Host / Adapter
+learned/generalizable capability    -> first evaluate Model-level learning
+universal runtime primitive         -> Kernel candidate, only after KAT proof
 ```
 
-This qualification prevents "minimal kernel" from becoming an underpowered kernel that pushes generic invariants into every plugin repeatedly.
+## 5. Capability placement decision tree
 
-## 3. Kernel invariants
+For every new capability, determine placement in this order.
 
-The following are architecture invariants unless explicitly revised by a later architecture decision.
+### Step 1 — Learned/generalizable?
 
-1. **Independent operation** — the kernel must be able to operate without any specific optional plugin installed.
+Can the capability reasonably be represented or learned by the Model rather than hard-coded as feature logic?
+
+If YES, evaluate it first as a model/research question. Do not automatically encode it as a kernel primitive.
+
+### Step 2 — Feature/domain-specific?
+
+Does the capability carry feature-specific semantics, state, policy, or lifecycle?
+
+If YES -> Plugin/Extension.
+
+### Step 3 — Host/platform-specific?
+
+Does it depend on mobile permissions, UI lifecycle, OS APIs, deployment packaging, device adapters, or product-specific policy?
+
+If YES -> Host / Adapter.
+
+### Step 4 — Truly universal runtime primitive?
+
+Only if it is independent of one feature/host and cannot be cleanly externalized without violating generic correctness/runtime boundaries may it become a kernel candidate.
+
+Then it must pass KAT-1..KAT-5 before implementation is authorized.
+
+## 6. Kernel invariants
+
+1. **Independent operation** — the kernel operates without any particular optional plugin.
 2. **No plugin-specific dependency** — kernel code must not import, name, or require a specific feature plugin.
-3. **Generic contracts only** — extension boundaries exposed by the kernel must use generic contracts rather than domain-specific feature semantics.
-4. **Minimality** — a primitive enters the kernel only when evidence shows that keeping it outside would violate a generic correctness, lifecycle, isolation, or runtime requirement.
-5. **Plugin replaceability** — removing or replacing one optional plugin must not invalidate unrelated kernel operation.
-6. **Composition outside the kernel** — hosts/products choose which optional extensions are enabled.
-7. **Failure isolation goal** — a plugin failure should be containable without redefining kernel semantics; exact runtime isolation mechanics remain a later implementation decision.
-8. **Independent evolution** — plugin implementation details may evolve without forcing kernel redesign when the generic contract remains stable.
+3. **Generic contracts only** — kernel-facing extension contracts must not encode one plugin's domain vocabulary.
+4. **Minimality** — kernel growth requires evidence, not convenience.
+5. **Model/Kernel separation** — learned neural capability and runtime primitive are distinct design categories.
+6. **Plugin replaceability** — removing/replacing one plugin must not invalidate unrelated kernel operation.
+7. **Composition outside the kernel** — hosts/products choose enabled extensions.
+8. **Failure isolation goal** — plugin failure should be containable without redefining kernel semantics; exact mechanics remain a later decision.
+9. **Independent evolution** — plugin internals may evolve while stable generic kernel contracts remain unchanged.
+10. **Scale invariant** — feature count should scale primarily through plugins, not through proportional growth of kernel primitives.
 
-## 4. Kernel Admission Test
+Desired scaling behavior:
+
+```text
+number of features ↑
+number of plugins ↑
+
+kernel primitive set ~ small / slowly changing
+```
+
+If every new feature requires new kernel primitives, the architecture boundary is considered suspect and must be reviewed.
+
+## 7. Kernel Admission Test (KAT)
 
 Before moving any capability into the kernel, the proposal must answer all of the following.
 
@@ -85,17 +141,17 @@ Before moving any capability into the kernel, the proposal must answer all of th
 
 Is the capability independent of a specific domain, feature, product, or host?
 
-If NO -> plugin territory.
+If NO -> keep it outside the kernel.
 
 ### KAT-2 — Reuse / core necessity
 
-Is the capability required by the core itself or broadly useful across multiple independently plausible extensions?
+Is the capability required by the kernel itself or broadly useful across multiple independently plausible extensions?
 
 If NO -> plugin territory by default.
 
 ### KAT-3 — Externalization test
 
-Can the capability live outside the kernel behind a stable contract without breaking correctness, lifecycle guarantees, isolation, or an essential runtime boundary?
+Can the capability live outside the kernel behind a stable contract without breaking generic correctness, lifecycle guarantees, isolation, or an essential runtime boundary?
 
 If YES -> keep it outside the kernel.
 
@@ -103,95 +159,148 @@ If YES -> keep it outside the kernel.
 
 Can the kernel-facing abstraction be defined without importing the semantics of one particular plugin?
 
-If NO -> do not admit the feature-specific abstraction into the kernel.
+If NO -> do not admit it.
 
 ### KAT-5 — Evidence
 
-Is there measured or demonstrated evidence that the primitive is necessary in the kernel rather than merely convenient there?
+Is there measured or demonstrated evidence that the capability must be a kernel primitive rather than merely being convenient there?
 
 If NO -> defer admission.
 
-A proposed kernel addition should pass all five tests before implementation is authorized.
+A kernel addition must pass all five tests before implementation is authorized.
 
-## 5. Plugin / Extension invariants
+## 8. What a kernel primitive is — and is not
+
+A kernel primitive is deterministic generic runtime machinery, not manually hard-coded intelligence for a feature.
+
+Potential future examples, only if separately proven necessary:
+
+```text
+extension lifecycle
+bounded capability invocation
+context exchange
+resource boundary
+opaque state-provider contract
+```
+
+These are examples, not authorized implementations.
+
+A kernel primitive must not look like:
+
+```text
+recognize_personal_routine()
+infer_food_preference()
+manage_calendar_semantics()
+mobile_permission_policy()
+```
+
+Those belong to plugins/hosts or, where appropriate, learned model capability.
+
+The architecture must avoid a scaling model in which every feature adds feature-specific primitives to the kernel.
+
+## 9. Model responsibility
+
+The Model owns learned capabilities such as representations that may support language, generalization, reasoning, or other experimentally established learned behavior.
+
+The architecture must not assume that every useful capability should be manually coded into deterministic runtime primitives.
+
+Conversely, deterministic correctness/lifecycle boundaries should not be pushed into learned weights merely because the model can approximate them.
+
+This creates a deliberate separation:
+
+```text
+learned/generalizable behavior -> Model candidate
+universal deterministic runtime mechanics -> Kernel candidate
+feature-specific mechanisms/semantics -> Plugin
+host/platform integration -> Host / Adapter
+```
+
+## 10. Plugin / Extension invariants
 
 An extension/plugin:
 
 - owns feature-specific semantics and state;
 - may depend on stable generic kernel contracts;
 - must not require the kernel to know its domain vocabulary;
-- should expose a bounded contract to hosts/other authorized consumers;
-- should preserve its own validation, lifecycle, and feature-specific correctness rules;
+- should expose a bounded contract to hosts/authorized consumers;
+- preserves its own validation, lifecycle, and feature-specific correctness rules;
 - may be optional for a host/product;
-- should not gain kernel status merely because it becomes important or widely used.
+- does not gain kernel status merely because it becomes important or widely used.
 
-"Important" is not the same as "core".
+`Important` is not the same as `core`.
 
-## 6. Host / Product responsibility
+## 11. Host / Product responsibility
 
 Hosts/products own composition.
 
-Examples of host responsibility include:
+Host responsibilities may include:
 
 - selecting enabled plugins;
-- providing host-specific adapters or permissions;
+- providing OS/device adapters and permissions;
 - wiring UI/product flows;
-- deciding deployment/runtime packaging;
-- applying host-specific policy where the kernel/plugin contracts deliberately do not.
+- deployment/runtime packaging;
+- host-specific policy where kernel/plugin contracts intentionally stop.
 
-A host must not be used as an excuse to move host-specific logic into the kernel.
+A host-specific requirement is not evidence for a kernel primitive.
 
-MindForge-Mobile is one such host/product branch. Other hosts may exist without changing this architecture rule.
+MindForge-Mobile is one such optional host/product branch. Other hosts can exist without changing this rule.
 
-## 7. PPF placement decision
+## 12. PPF placement decision
 
 PPF is an optional MindForge extension/plugin, not a kernel subsystem and not a MindForge-Mobile subsystem.
 
-The intended future relationship is:
-
 ```text
-MindForge Kernel
-      |
-      +-- generic extension boundary
-               |
-               +-- PPF Extension
-
-MindForge-Mobile (optional host)
-      |
-      +-- MindForge Kernel
-      +-- optionally enables/consumes PPF Extension
+MindForge Host
+    |
+    +-- MindForge Kernel
+    |      |
+    |      +-- MindForge Model
+    |
+    +-- optional PPF Extension
 ```
 
-PPF owns personal-pattern feature semantics.
+PPF owns personal-pattern feature semantics and mechanisms.
 
-The kernel must not acquire PPF-specific concepts such as personal-pattern recognition merely to integrate PPF.
+The kernel must not acquire PPF-specific concepts merely to integrate PPF.
 
-If later PPF work identifies a missing capability, the decision path is:
+If PPF later identifies a missing capability:
 
 ```text
 PPF needs capability X
        |
        v
-Can X remain entirely inside PPF?
+Can X remain inside PPF?
        | yes
        +--> keep X in PPF
        |
        no
        v
-Does X pass KAT-1..KAT-5 as a generic kernel primitive?
+Is X host/platform-specific?
+       | yes
+       +--> Host / Adapter
+       |
+       no
+       v
+Is X fundamentally learned/generalizable?
+       | yes
+       +--> separate Model-level research
+       |
+       no / runtime concern
+       v
+Does X pass KAT-1..KAT-5?
        | no
-       +--> redesign extension boundary / keep feature-specific logic outside
+       +--> redesign boundary / keep outside kernel
        |
        yes
        v
-separate kernel-primitive proof and architecture decision
+separate kernel-primitive proof + architecture decision
 ```
 
-PPF research does not itself authorize a kernel change.
+PPF research never self-authorizes a kernel or model change.
 
-## 8. Consequence for the PPF research ladder
+## 13. Consequence for the PPF research ladder
 
-The PPF research ladder remains independent until feasibility is established.
+The PPF research ladder remains independent until feasibility is established:
 
 ```text
 L1 semantic foundation
@@ -202,98 +311,112 @@ L1 semantic foundation
  -> PPF feasibility decision
 ```
 
-After that, the default integration path is:
+After feasibility:
 
 ```text
 PPF feasibility decision
  -> PPF plugin/extension contract
- -> evaluate required generic MindForge capabilities
- -> apply Kernel Admission Test to any proposed kernel primitive
+ -> classify each required capability as Model / Kernel / Plugin / Host
+ -> apply KAT to any kernel candidate
+ -> separately prove any Model-level change
  -> reference integration
  -> optional host validation
 ```
 
-The default outcome should be **zero kernel changes** unless evidence demonstrates a genuinely generic missing primitive.
+Default expectation: **zero kernel changes and zero model changes unless evidence proves they are necessary**.
 
-## 9. Architectural risks and countermeasures
+## 14. Architectural risks and countermeasures
 
-### Risk A — Plugin architecture becomes a dumping ground
+### Risk A — Kernel becomes a feature registry
 
-If every cross-cutting concern is pushed into plugins, different plugins may duplicate generic lifecycle, scheduling, state, or isolation machinery.
+If each plugin need becomes a new kernel primitive, kernel size scales with product breadth.
 
-Countermeasure: use the Kernel Admission Test. Repeated generic need is evidence to investigate a kernel primitive, not permission to copy infrastructure everywhere.
+Countermeasure: feature-specific semantics remain plugins; KAT must reject convenience-driven admission.
 
-### Risk B — Kernel grows through convenience
+### Risk B — Plugin architecture becomes a dumping ground
 
-A feature can be moved into core because direct access is easier or faster to implement.
+Different plugins may duplicate truly generic lifecycle/state/isolation machinery.
 
-Countermeasure: convenience is not evidence. Kernel admission requires genericity, externalization failure, stable abstraction, and demonstrated necessity.
+Countermeasure: repeated generic need is evidence to investigate a universal primitive, not permission to copy indefinitely.
 
-### Risk C — "Optional plugin" hides hard coupling
+### Risk C — Model and runtime semantics are confused
 
-A plugin may be called optional while core behavior quietly assumes it exists.
+A learned capability may be manually hard-coded, or a deterministic correctness boundary may be delegated to probabilistic model behavior.
 
-Countermeasure: kernel tests must eventually include operation with the plugin absent. Exact tests belong to later implementation work.
+Countermeasure: run the Model/Kernel/Plugin/Host placement decision tree before implementation.
 
-### Risk D — Overly generic extension API
+### Risk D — `Optional plugin` hides hard coupling
 
-Designing a universal plugin framework too early can become architecture speculation.
+Core behavior may silently assume a plugin exists.
 
-Countermeasure: define the smallest generic boundary required by independently proven extensions. Do not build a general marketplace/plugin ecosystem without evidence.
+Countermeasure: future kernel tests must include plugin-absent operation.
 
-### Risk E — Host-specific needs leak into core
+### Risk E — Over-general plugin framework
 
-Mobile permissions, UI lifecycle, device adapters, or product flows may pressure the kernel boundary.
+A universal marketplace/runtime may be designed before real extension needs exist.
 
-Countermeasure: host-specific concerns remain host/adapters unless a separately proven generic primitive passes the Kernel Admission Test.
+Countermeasure: define only the smallest generic boundary justified by independently proven extensions.
 
-## 10. Non-decisions
+### Risk F — Host-specific needs leak into core
 
-This architecture decision does **not** yet choose:
+Mobile/device concerns may pressure the kernel.
+
+Countermeasure: keep them in Host/Adapter unless a separately proven universal primitive passes KAT.
+
+## 15. Non-decisions
+
+This decision does not yet choose:
 
 - plugin loading mechanism;
 - in-process vs out-of-process plugins;
 - IPC/RPC mechanism;
-- plugin package format;
+- package format;
 - service discovery;
-- dependency injection framework;
+- dependency-injection framework;
 - lifecycle API;
 - version negotiation;
 - sandboxing/security model;
 - plugin marketplace;
 - PPF runtime API;
-- any concrete kernel change.
+- any concrete kernel primitive;
+- any concrete model modification.
 
-Those require separate evidence and authorization.
+These require separate evidence and authorization.
 
-## 11. Mandatory read rule for future work
+## 16. Mandatory read rule for future work
 
-Any future Codex task that may affect PPF integration, MindForge kernel boundaries, extension/plugin architecture, host composition, or a proposed kernel capability **must fetch and read this document before planning or modifying code/docs**:
+Any future Codex task that may affect PPF integration, MindForge model/kernel boundaries, extension/plugin architecture, host composition, or a proposed kernel/model capability **must fetch and read this document completely before planning or modifying code/docs**:
 
 ```text
 docs/research/mindforge-architecture-invariants.md
 ```
 
-The task must explicitly acknowledge these invariants before execution:
+The task must explicitly acknowledge:
 
 ```text
-Kernel = independent minimal core.
-Domain/product/optional features = plugins/extensions by default.
+Model != Kernel.
+The Model owns learned representations/capabilities.
+The Kernel owns only proven universal primitives.
+Plugins own feature-specific mechanisms and semantics.
 Hosts own composition.
 MindForge-Mobile is an optional host, not the architectural center.
 PPF is an optional MindForge extension/plugin.
-Any proposed kernel addition must separately pass KAT-1..KAT-5.
+Any proposed kernel addition must pass KAT-1..KAT-5.
+PPF work cannot self-authorize kernel or model changes.
 ```
 
-If a requested task conflicts with these invariants, Codex must stop that conflicting scope and report the conflict rather than silently changing the architecture.
+If requested work conflicts with these invariants, Codex must stop the conflicting scope and report the conflict rather than silently changing architecture.
 
-## 12. Decision status
+## 17. Decision status
 
 ```text
 D1 MindForge-Mobile is an optional host/product branch: ACCEPTED
-D2 Kernel independent; feature capabilities outside core by default: ACCEPTED WITH QUALIFICATION
+D2 Model and Kernel are distinct architectural roles: ACCEPTED
+D3 Kernel is independent/minimal and owns only proven universal primitives: ACCEPTED
+D4 Feature-specific mechanisms and semantics belong to plugins by default: ACCEPTED
+D5 Hosts own composition and platform integration: ACCEPTED
 PPF placement as optional extension/plugin: ACCEPTED
-Kernel Admission Test KAT-1..KAT-5: REQUIRED FOR FUTURE KERNEL CHANGES
+Kernel Admission Test KAT-1..KAT-5: REQUIRED
 ```
 
 These decisions remain frozen until an explicit architecture-review task revises them with evidence.
