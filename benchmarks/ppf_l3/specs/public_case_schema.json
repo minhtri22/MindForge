@@ -1,0 +1,26 @@
+{
+  "benchmark_version": "ppf-l3-benchmark/v1",
+  "checkpoint_contract": {
+    "allowed_top_level": [
+      "benchmark_version",
+      "case_id",
+      "checkpoints"
+    ],
+    "checkpoint_fields": [
+      "checkpoint_id",
+      "time"
+    ]
+  },
+  "history_contract": {
+    "allowed_top_level": [
+      "benchmark_version",
+      "case_id",
+      "history"
+    ],
+    "history_records": "ppf-l2/1"
+  },
+  "required_files": [
+    "history.json",
+    "checkpoints.json"
+  ]
+}

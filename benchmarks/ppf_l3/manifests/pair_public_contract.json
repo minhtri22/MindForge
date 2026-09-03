@@ -1,0 +1,138 @@
+{
+  "benchmark_version": "ppf-l3-benchmark/v1",
+  "instance_membership_visibility": "EVALUATOR_ONLY",
+  "templates": [
+    {
+      "controlled_variable": "full observability -> permission loss",
+      "expected_effect": "identifiability/status may change; latent behavior unchanged",
+      "held_constant": [
+        "truth",
+        "opportunities",
+        "behavior"
+      ],
+      "pair_id": "CF-01",
+      "template": "full_observability_vs_permission_loss"
+    },
+    {
+      "controlled_variable": "normal -> degraded quality",
+      "expected_effect": "support may weaken or abstain; truth unchanged",
+      "held_constant": [
+        "truth",
+        "opportunities",
+        "behavior"
+      ],
+      "pair_id": "CF-02",
+      "template": "normal_quality_vs_degraded_quality"
+    },
+    {
+      "controlled_variable": "single evidence -> same-origin replicas",
+      "expected_effect": "behavioral occurrence unchanged",
+      "held_constant": [
+        "behavioral episode"
+      ],
+      "pair_id": "CF-03",
+      "template": "single_evidence_vs_same_origin_replicas"
+    },
+    {
+      "controlled_variable": "true routine -> chance-matching NO_PATTERN",
+      "expected_effect": "positive truth changes",
+      "held_constant": [
+        "observation policy",
+        "record-count shape"
+      ],
+      "pair_id": "CF-04",
+      "template": "true_routine_vs_chance_matching_no_pattern"
+    },
+    {
+      "controlled_variable": "stable coverage -> fake drift coverage collapse",
+      "expected_effect": "no behavioral drift",
+      "held_constant": [
+        "behavior",
+        "truth"
+      ],
+      "pair_id": "CF-05",
+      "template": "stable_behavior_vs_fake_drift"
+    },
+    {
+      "controlled_variable": "true drift -> observation-only change",
+      "expected_effect": "only true-drift side changes latent behavior",
+      "held_constant": [
+        "pre-change history shape"
+      ],
+      "pair_id": "CF-06",
+      "template": "true_drift_vs_observation_only_change"
+    },
+    {
+      "controlled_variable": "meaningful alternatives -> constrained availability",
+      "expected_effect": "preference identifiability/truth relation differs",
+      "held_constant": [
+        "visible option frequency where possible"
+      ],
+      "pair_id": "CF-07",
+      "template": "meaningful_alternatives_vs_constrained_availability"
+    },
+    {
+      "controlled_variable": "contextual slices -> misleading aggregate",
+      "expected_effect": "conditional truth must not collapse globally",
+      "held_constant": [
+        "aggregate count shape"
+      ],
+      "pair_id": "CF-08",
+      "template": "conditional_truth_vs_misleading_aggregate"
+    },
+    {
+      "controlled_variable": "scoped exception -> random deviation",
+      "expected_effect": "exception relation differs",
+      "held_constant": [
+        "parent pattern"
+      ],
+      "pair_id": "CF-09",
+      "template": "stable_exception_vs_random_deviation"
+    },
+    {
+      "controlled_variable": "no correction -> correction applied",
+      "expected_effect": "active semantic state changes",
+      "held_constant": [
+        "underlying prior history"
+      ],
+      "pair_id": "CF-10",
+      "template": "correction_absent_vs_correction_applied"
+    },
+    {
+      "controlled_variable": "no deletion -> deletion applied",
+      "expected_effect": "active state becomes DELETED",
+      "held_constant": [
+        "pre-delete history"
+      ],
+      "pair_id": "CF-11",
+      "template": "deletion_absent_vs_deletion_applied"
+    },
+    {
+      "controlled_variable": "known relationship -> hidden relationship identity",
+      "expected_effect": "relationship-specific claim becomes UNKNOWN_CONTEXT",
+      "held_constant": [
+        "behavior"
+      ],
+      "pair_id": "CF-12",
+      "template": "known_relationship_vs_unknown_relationship"
+    },
+    {
+      "controlled_variable": "raw only -> raw+derived lineage",
+      "expected_effect": "recurrence truth unchanged",
+      "held_constant": [
+        "behavioral episode"
+      ],
+      "pair_id": "CF-13",
+      "template": "raw_only_vs_raw_plus_derived_lineage"
+    },
+    {
+      "controlled_variable": "independent corroboration -> same-origin replication",
+      "expected_effect": "evidentiary relation changes; episode does not multiply",
+      "held_constant": [
+        "visible source count"
+      ],
+      "pair_id": "CF-14",
+      "template": "independent_corroboration_vs_same_origin_replication"
+    }
+  ]
+}
