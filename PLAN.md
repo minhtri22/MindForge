@@ -161,6 +161,48 @@ Add experiment manifests, baseline/treatment relationships, automatic provenance
 
 Phase 2 closed with all frozen gates passing: manifest schema, deterministic run IDs, baseline/treatment relationships, 3-seed canonical XPU comparison, automatic aggregation, paired effects, resource effects, variance exposure, incomplete evidence rejection, duplicate-run protection, exact source-tree provenance, artifact hashing, CPU integration, XPU experiment, regression checks, tests, and documentation. No external tracking services or learning/memory mechanisms added. See [docs/phases/phase-2.md](docs/phases/phase-2.md) and [docs/phases/phase-2-qa.md](docs/phases/phase-2-qa.md).
 
+## Parallel architecture transition — Model / Kernel Separation
+
+Status: **TECHNICAL DEBT IDENTIFIED / NON-BLOCKING / PHYSICAL REFACTOR NOT AUTHORIZED**.
+
+The validated Phase-1/Phase-2 implementation places the Transformer model, training, checkpoint, evaluation, generation and experiment tooling inside the same `mindforge/` package. `model.py` is already source-modular, but there is no architectural Model Contract separating the learned model from the future Kernel Runtime.
+
+Target architecture distinguishes:
+
+```text
+MindForge Model Component
+MindForge Kernel Runtime
+Plugins / Extensions
+Hosts / Products
+Research / Tooling
+```
+
+with the boundary:
+
+```text
+Kernel Runtime <-> Model Contract <-> Model Component
+```
+
+This transition is deliberately **parallel to and non-blocking for PPF**. PPF-L3/L4/L5 research may continue independently. Model/kernel separation must not alter PPF semantics, benchmark truth, or use PPF as justification for speculative kernel changes.
+
+Do not begin with folder/package moves. Before physical refactor, a separately authorized task must first freeze the smallest behavior-based Model Contract and compatibility tests, then adapt the current Transformer through that boundary and prove no relevant regression.
+
+Activation gates:
+
+```text
+MKS-G1 — concrete reason to separate now
+MKS-G2 — minimal model/kernel behavioral contract
+MKS-G3 — compatibility test suite
+MKS-G4 — current Transformer adapter path
+MKS-G5 — no regression to frozen kernel evidence
+MKS-G6 — no PPF/plugin semantics in Model Contract
+MKS-G7 — no speculative universal plugin framework
+```
+
+Only after these gates PASS may physical package restructuring be authorized.
+
+See [docs/research/model-kernel-separation-technical-debt.md](docs/research/model-kernel-separation-technical-debt.md) and [docs/research/mindforge-architecture-invariants.md](docs/research/mindforge-architecture-invariants.md).
+
 ## Phase 3 — First research slice: continual learning — INACTIVE / DEFERRED
 
 Historical roadmap intent, superseded as an active commitment by the P0.9 STOP evidence. It may be reconsidered only after R1 or future independent evidence provides a justified substrate.
