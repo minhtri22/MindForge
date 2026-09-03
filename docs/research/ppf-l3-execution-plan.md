@@ -653,3 +653,100 @@ PPF-L3 Benchmark Execution: NOT STARTED
 PPF-L4: BLOCKED
 PPF-L5: BLOCKED
 ```
+
+## 28. L3-EP.A freeze amendment — exact protected split/config allocation
+
+Status: **PASS / FROZEN**
+
+Independent review found one pre-E0 planning gap: the global `20 STANDARD / 12 HIGH-RISK / 32 truth configurations / 188 histories` totals were frozen, and split history totals were frozen, but the STANDARD/HIGH-RISK truth-configuration counts were not explicit per protected split. This amendment closes that gap without changing any L1/L2/L3 protocol semantics.
+
+### 28.1 Canonical protected split reconciliation
+
+| Split | Persons | STANDARD configs | HIGH-RISK configs | Total configs | Histories |
+|---|---:|---:|---:|---:|---:|
+| DEV | 6 | 5 | 2 | 7 | 38 |
+| VALIDATION | 6 | 5 | 2 | 7 | 38 |
+| FINAL TEST | 18 | 10 | 8 | 18 | 112 |
+| **TOTAL** | **30** | **20** | **12** | **32** | **188** |
+
+Arithmetic is frozen:
+
+```text
+DEV:        5*4 + 2*9  = 38
+VALIDATION: 5*4 + 2*9  = 38
+FINAL TEST: 10*4 + 8*9 = 112
+
+STANDARD:   5 + 5 + 10 = 20
+HIGH-RISK:  2 + 2 + 8  = 12
+CONFIGS:    7 + 7 + 18 = 32
+HISTORIES:  38 + 38 + 112 = 188
+```
+
+Protected-split invariants:
+
+```text
+truth configurations are protected-split-disjoint
+a truth configuration belongs to exactly one protected split
+no truth configuration is reused in another protected split under new seeds
+synthetic persons are protected-split-disjoint
+no history crosses protected splits
+```
+
+Protected FINAL TEST counts are therefore explicit before generator implementation:
+
+```text
+persons:                 18
+truth configurations:    18
+STANDARD configurations: 10
+HIGH-RISK configurations: 8
+histories:               112
+structural holdouts:       3 minimum
+```
+
+Exact FINAL_TEST person/config/seed/family mappings and protected parameterizations remain evaluator-only and are not disclosed by this public plan.
+
+### 28.2 Counterfactual pair-instance accounting
+
+Minimum pair-instance allocation is frozen as:
+
+```text
+DEV:         >=14 pair instances
+VALIDATION:  >=14 pair instances
+FINAL TEST:  >=14 pair instances
+TOTAL:       >=42 pair instances
+```
+
+For benchmark v1, pair membership is deliberately simple:
+
+```text
+a history may participate in at most one registered counterfactual pair instance
+```
+
+Therefore the minimum suite has:
+
+```text
+42 pair instances * 2 distinct member histories = 84 distinct paired histories
+```
+
+All 84 paired histories are members of the canonical 188 histories; pair instances do not add histories outside that total. A pair instance is split-local: its two member histories must belong to the same protected split.
+
+### 28.3 L3-EP.A gates
+
+```text
+EP-A-G1 32 truth configurations reconcile exactly across splits: PASS
+EP-A-G2 20 STANDARD configs reconcile exactly across splits: PASS
+EP-A-G3 12 HIGH-RISK configs reconcile exactly across splits: PASS
+EP-A-G4 188 histories derive exactly from replication policy: PASS
+EP-A-G5 FINAL TEST count explicit at 18 configs / 112 histories: PASS
+EP-A-G6 person-disjoint protected split remains frozen: PASS
+EP-A-G7 truth configurations are protected-split-disjoint: PASS
+EP-A-G8 counterfactual minimum allocation 14 / 14 / 14 is explicit: PASS
+EP-A-G9 pair-history accounting is mathematically unambiguous: PASS
+EP-A-G10 no final secret mapping/seed/truth is exposed: PASS
+EP-A-G11 no generator/recognizer/L4 implementation introduced: PASS
+EP-A-G12 frozen L1/L2/L3 protocol semantics unchanged: PASS
+```
+
+**L3-EP.A: PASS / FROZEN.**
+
+The next candidate action remains **L3-E0 — Generator Skeleton Validation**, but this amendment does **not** authorize E0. Separate review/authorization is required.

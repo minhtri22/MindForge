@@ -289,3 +289,65 @@ Benchmark data: NOT GENERATED
 Recognizer: NOT IMPLEMENTED
 L4: BLOCKED
 ```
+
+## 16. L3-EP.A exact split/config QA amendment
+
+Future generator/manifest QA must assert the exact protected split allocation below; these are not targets and may not drift silently:
+
+```text
+DEV:
+  persons = 6
+  STANDARD configs = 5
+  HIGH-RISK configs = 2
+  total configs = 7
+  histories = 38
+  minimum counterfactual pair instances = 14
+
+VALIDATION:
+  persons = 6
+  STANDARD configs = 5
+  HIGH-RISK configs = 2
+  total configs = 7
+  histories = 38
+  minimum counterfactual pair instances = 14
+
+FINAL TEST:
+  persons = 18
+  STANDARD configs = 10
+  HIGH-RISK configs = 8
+  total configs = 18
+  histories = 112
+  minimum counterfactual pair instances = 14
+```
+
+Additional mandatory checks:
+
+```text
+GQA-S1 every truth_configuration_id belongs to exactly one protected split
+GQA-S2 no truth configuration is reused in another split under alternate seeds
+GQA-S3 STANDARD/HIGH-RISK config totals reconcile exactly to 20/12
+GQA-S4 split history totals derive exactly from replication policy
+GQA-S5 pair-instance totals satisfy DEV>=14, VALIDATION>=14, FINAL>=14, TOTAL>=42
+GQA-S6 each history has at most one registered counterfactual pair-instance membership
+```
+
+For `GQA-S6`, the frozen v1 accounting is:
+
+```text
+minimum 42 pair instances
+x 2 distinct histories per pair
+= 84 distinct paired histories
+```
+
+The two members of a pair must be in the same protected split. All paired histories are included in the canonical 188 histories. Pair registration therefore cannot inflate the benchmark history total.
+
+The manifest/totals gate must also verify:
+
+```text
+7 DEV configs + 7 VALIDATION configs + 18 FINAL configs = 32
+5+5+10 STANDARD configs = 20
+2+2+8 HIGH-RISK configs = 12
+38+38+112 histories = 188
+```
+
+Failure of any `GQA-S*` check blocks generator freeze and all dataset freeze stages.

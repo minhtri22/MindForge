@@ -152,3 +152,46 @@ high-risk repeated seeds: PASS
 structural holdout > unseen seed only: PASS
 canonical totals reconciled independently of overlapping family rows: PASS
 ```
+
+## L3-EP.A split-level canonical reconciliation
+
+The protected split allocation is frozen at truth-configuration level as well as person/history level:
+
+| Split | Persons | STANDARD configs | HIGH-RISK configs | Total configs | Histories | Minimum CF pair instances |
+|---|---:|---:|---:|---:|---:|---:|
+| DEV | 6 | 5 | 2 | 7 | 38 | 14 |
+| VALIDATION | 6 | 5 | 2 | 7 | 38 | 14 |
+| FINAL TEST | 18 | 10 | 8 | 18 | 112 | 14 |
+| **TOTAL** | **30** | **20** | **12** | **32** | **188** | **42** |
+
+Replication reconciliation:
+
+```text
+DEV:        5 STANDARD*4 + 2 HIGH-RISK*9 = 38
+VALIDATION: 5 STANDARD*4 + 2 HIGH-RISK*9 = 38
+FINAL TEST: 10 STANDARD*4 + 8 HIGH-RISK*9 = 112
+```
+
+Frozen split-disjoint rules:
+
+```text
+each truth_configuration_id belongs to exactly one protected split
+no truth configuration is reused in another split under alternate seeds
+no synthetic person crosses protected splits
+no history crosses protected splits
+```
+
+Counterfactual accounting for v1 is also frozen:
+
+```text
+DEV        >=14 pair instances
+VALIDATION >=14 pair instances
+FINAL TEST >=14 pair instances
+TOTAL      >=42 pair instances
+
+one history participates in at most one registered pair instance
+minimum 42 pair instances = 84 distinct paired histories
+all paired histories are included within the canonical 188 histories
+```
+
+The exact FINAL_TEST mappings remain evaluator-only. Public counts freeze the protected set at **18 persons / 18 truth configurations / 112 histories**, including at least three structural-holdout combinations.
