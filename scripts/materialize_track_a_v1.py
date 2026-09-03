@@ -10,33 +10,39 @@ apps=["maps","messages","phone","calendar","notes","weather","browser","calculat
 external_caps=["web_search","general_qa","travel_search","news_search"]
 intents=["NAVIGATE","MESSAGE","CALL","REMIND","LOCAL_TRANSFORM","LOOKUP_DELEGATE","APP_ACTION","CLARIFY"]
 families=[f"A{i}" for i in range(1,8)]
+def quotas(n, counts):
+    arr=[]
+    for k,v in counts.items(): arr += [k]*v
+    assert len(arr)==n
+    rng.shuffle(arr)
+    return arr
 splits=["calibration"]*40+["development"]*60+["test"]*100
-
 def paired_assignment(pair_counts, remaining_counts):
     pairs=[]
-    for k,n_pairs in pair_counts.items(): pairs += [k]*n_pairs
+    for k,n_pairs in pair_counts.items():
+        pairs += [k]*n_pairs
     rng.shuffle(pairs)
     pair_block=[x for x in pairs for _ in (0,1)]
+    assert len(pair_block)==40
     remaining=[]
     for k,n in remaining_counts.items(): remaining += [k]*n
     rng.shuffle(remaining)
-    return remaining[:100]+pair_block+remaining[100:]
-
+    assert len(remaining)==160
+    return remaining[:100] + pair_block + remaining[100:]
 def family_languages():
     return paired_assignment({"vi":12,"vi_en":5,"en":3},{"vi":96,"vi_en":40,"en":24})
-
 def family_difficulties():
     return paired_assignment({"straightforward":8,"contextual":7,"adversarial":5},{"straightforward":64,"contextual":56,"adversarial":40})
-
-def lang_phrase(lang,vi,mix,en): return {"vi":vi,"vi_en":mix,"en":en}[lang]
-def prov(i,family):
+def lang_phrase(lang, vi, mix, en): return {"vi":vi,"vi_en":mix,"en":en}[lang]
+def prov(i, family):
     return {"truth_source":"rule_defined","generator":"scripts/materialize_track_a_v1.py","generator_seed":SEED,"review_status":"automated_qa_pass_human_spot_review_pending","template_id":f"{family}-T{i%25:02d}"}
 
-def make_case(fam,i,split,lang,diff,cf_gid=None,cf_variant=None):
-    base_i=i if cf_gid is None else i-(cf_variant or 0)
+def make_case(fam, i, split, lang, diff, cf_gid=None, cf_variant=None):
+    base_i = i if cf_gid is None else i - (cf_variant or 0)
     context={"date_local":str(date(2026,1,1)+timedelta(days=base_i)),"time_local":f"{7+(base_i%13):02d}:{(base_i*7)%60:02d}","location":["home","office","outside"][base_i%3],"device_state":{"network":["online","offline"][base_i%2]}}
     state={"home_label":"home","home_address":"12 Nguyen Trai, Hanoi","partner":"Linh","contacts":[{"id":"c_linh","name":"Linh","relation":"partner"},{"id":"c_tuan","name":"Tuấn","relation":"coworker","project":"A"},{"id":"c_tuan2","name":"Tuấn Anh","relation":"friend"}],"preferred_navigation_app":"maps","preferred_language":"vi"}
-    inp={"user_utterance":"","current_context":context,"personal_state":state,"available_actions":[{"id":a,"kind":a} for a in apps[:5]],"available_local_capabilities":["text_transform","calculator","device_context"],"external_capabilities":external_caps[:]}
+    avail_actions=[{"id":a,"kind":a} for a in apps[:5]]
+    inp={"user_utterance":"","current_context":context,"personal_state":state,"available_actions":avail_actions,"available_local_capabilities":["text_transform","calculator","device_context"],"external_capabilities":external_caps[:]}
     tags=[]; expected={}; scoring={}
     if fam=="A1":
         intent=intents[base_i%len(intents)]
@@ -45,19 +51,29 @@ def make_case(fam,i,split,lang,diff,cf_gid=None,cf_variant=None):
         if intent=="CLARIFY": tags += ["ambiguous_pronoun","clarification_required"]
     elif fam=="A2":
         mode=base_i%5
-        if mode==0: inp["user_utterance"]=lang_phrase(lang,"Nhắn cho vợ là tôi về muộn","message vợ là I'm late","Message my partner that I'll be late"); expected={"entity_mentions":["vợ" if lang!="en" else "my partner"],"resolved_entity_ids":["c_linh"],"resolved_values":["Linh"],"clarification_required":False}
-        elif mode==1: inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn bên dự án A","call Tuấn project A","Call Tuan from project A"); expected={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":["c_tuan"],"resolved_values":["Tuấn"],"clarification_required":False}
-        elif mode==2: inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn","call Tuấn","Call Tuan"); expected={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":[],"resolved_values":[],"clarification_required":True}; tags += ["similar_entity_names","clarification_required"]
-        elif mode==3: inp["user_utterance"]=lang_phrase(lang,"Chỉ đường về nhà","Maps về home","Navigate home"); expected={"entity_mentions":["nhà" if lang!="en" else "home"],"resolved_entity_ids":["home"],"resolved_values":["12 Nguyen Trai, Hanoi"],"clarification_required":False}
-        else: state["favorite_cafe"]="quán Cây"; state["favorite_cafe_address"]="8 Phan Dinh Phung, Hanoi"; inp["user_utterance"]=lang_phrase(lang,"Chỉ đường tới quán mình hay ngồi","navigate tới favorite cafe","Navigate to my usual cafe"); expected={"entity_mentions":["quán mình hay ngồi" if lang!="en" else "my usual cafe"],"resolved_entity_ids":["favorite_cafe"],"resolved_values":["8 Phan Dinh Phung, Hanoi"],"clarification_required":False}
+        if mode==0:
+            inp["user_utterance"]=lang_phrase(lang,"Nhắn cho vợ là tôi về muộn","message vợ là I'm late","Message my partner that I'll be late"); expected={"entity_mentions":["vợ" if lang!="en" else "my partner"],"resolved_entity_ids":["c_linh"],"resolved_values":["Linh"],"clarification_required":False}
+        elif mode==1:
+            inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn bên dự án A","call Tuấn project A","Call Tuan from project A"); expected={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":["c_tuan"],"resolved_values":["Tuấn"],"clarification_required":False}
+        elif mode==2:
+            inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn","call Tuấn","Call Tuan"); expected={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":[],"resolved_values":[],"clarification_required":True}; tags += ["similar_entity_names","clarification_required"]
+        elif mode==3:
+            inp["user_utterance"]=lang_phrase(lang,"Chỉ đường về nhà","Maps về home","Navigate home"); expected={"entity_mentions":["nhà" if lang!="en" else "home"],"resolved_entity_ids":["home"],"resolved_values":["12 Nguyen Trai, Hanoi"],"clarification_required":False}
+        else:
+            state["favorite_cafe"]="quán Cây"; state["favorite_cafe_address"]="8 Phan Dinh Phung, Hanoi"; inp["user_utterance"]=lang_phrase(lang,"Chỉ đường tới quán mình hay ngồi","navigate tới favorite cafe","Navigate to my usual cafe"); expected={"entity_mentions":["quán mình hay ngồi" if lang!="en" else "my usual cafe"],"resolved_entity_ids":["favorite_cafe"],"resolved_values":["8 Phan Dinh Phung, Hanoi"],"clarification_required":False}
         scoring={"primary":"entity_set_f1","secondary":["resolved_value_accuracy"]}
     elif fam=="A3":
         mode=base_i%5
-        if mode==0: state["preferred_navigation_app"]="maps"; context["location"]="office"; inp["user_utterance"]=lang_phrase(lang,"Về nhà bằng app quen nhé","use usual app để về home","Use my usual app to get home"); expected={"interpretation_label":"NAVIGATE_HOME_WITH_PREFERRED_APP","normalized":{"destination":"home","app":"maps"}}
-        elif mode==1: inp["user_utterance"]=lang_phrase(lang,"Trả lời theo ngôn ngữ tôi hay dùng","reply in my usual language","Reply in my usual language"); expected={"interpretation_label":"RESPOND_VI","normalized":{"language":"vi"}}
-        elif mode==2: context["device_state"]["network"]="offline"; inp["user_utterance"]=lang_phrase(lang,"Chỉ đường về nhà như mọi khi","route home như usual","Route me home as usual"); expected={"interpretation_label":"NAVIGATE_HOME_OFFLINE_CONSTRAINT","normalized":{"destination":"home","network":"offline"}}; tags += ["context_preference_conflict"]
-        elif mode==3: state.update({"old_work_location":"District 1","work_location":"District 3","work_location_status":"current"}); inp["user_utterance"]=lang_phrase(lang,"Đi tới chỗ làm hiện tại","navigate current work","Navigate to my current workplace"); expected={"interpretation_label":"CURRENT_WORK_LOCATION","normalized":{"work_location":"District 3"}}; tags += ["stale_personal_fact"]
-        else: state["morning_destination"]="gym"; context["time_local"]="07:00"; inp["user_utterance"]=lang_phrase(lang,"Đi chỗ buổi sáng","go morning place","Go to my morning place"); expected={"interpretation_label":"MORNING_DESTINATION_GYM","normalized":{"destination":"gym"}}
+        if mode==0:
+            state["preferred_navigation_app"]="maps"; context["location"]="office"; inp["user_utterance"]=lang_phrase(lang,"Về nhà bằng app quen nhé","use usual app để về home","Use my usual app to get home"); expected={"interpretation_label":"NAVIGATE_HOME_WITH_PREFERRED_APP","normalized":{"destination":"home","app":"maps"}}
+        elif mode==1:
+            inp["user_utterance"]=lang_phrase(lang,"Trả lời theo ngôn ngữ tôi hay dùng","reply in my usual language","Reply in my usual language"); expected={"interpretation_label":"RESPOND_VI","normalized":{"language":"vi"}}
+        elif mode==2:
+            context["device_state"]["network"]="offline"; inp["user_utterance"]=lang_phrase(lang,"Chỉ đường về nhà như mọi khi","route home như usual","Route me home as usual"); expected={"interpretation_label":"NAVIGATE_HOME_OFFLINE_CONSTRAINT","normalized":{"destination":"home","network":"offline"}}; tags += ["context_preference_conflict"]
+        elif mode==3:
+            state.update({"old_work_location":"District 1","work_location":"District 3","work_location_status":"current"}); inp["user_utterance"]=lang_phrase(lang,"Đi tới chỗ làm hiện tại","navigate current work","Navigate to my current workplace"); expected={"interpretation_label":"CURRENT_WORK_LOCATION","normalized":{"work_location":"District 3"}}; tags += ["stale_personal_fact"]
+        else:
+            state["morning_destination"]="gym"; context["time_local"]="07:00"; inp["user_utterance"]=lang_phrase(lang,"Đi chỗ buổi sáng","go morning place","Go to my morning place"); expected={"interpretation_label":"MORNING_DESTINATION_GYM","normalized":{"destination":"gym"}}
         scoring={"primary":"normalized_interpretation_accuracy","secondary":["counterfactual_consistency"]}
     elif fam=="A4":
         mode=base_i%5; avail=[{"id":"maps","kind":"navigation"},{"id":"messages","kind":"messaging"},{"id":"phone","kind":"calling"},{"id":"notes","kind":"notes"}]; inp["available_actions"]=avail
@@ -102,14 +118,14 @@ def make_case(fam,i,split,lang,diff,cf_gid=None,cf_variant=None):
     if cf_gid:
         tags.append("counterfactual_context")
         if fam=="A1": inp["user_utterance"]=lang_phrase(lang,"Mở nó giúp tôi","open it giúp tôi","Open it"); inp["current_context"]["foreground_reference"]="notes" if cf_variant==0 else None; expected={"intent_label":"APP_ACTION" if cf_variant==0 else "CLARIFY"}
-        elif fam=="A2": inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn","call Tuấn","Call Tuan");
-        if fam=="A2":
+        elif fam=="A2":
+            inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn","call Tuấn","Call Tuan")
             if cf_variant==0: inp["personal_state"]["contacts"]=[{"id":"c_tuan","name":"Tuấn","relation":"coworker","project":"A"}]; expected={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":["c_tuan"],"resolved_values":["Tuấn"],"clarification_required":False}
             else: expected={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":[],"resolved_values":[],"clarification_required":True}
         elif fam=="A3": inp["user_utterance"]=lang_phrase(lang,"Dùng ngôn ngữ tôi đang dùng","use current language","Use my current language"); inp["current_context"]["conversation_language"]="vi" if cf_variant==0 else "en"; expected={"interpretation_label":"RESPOND_VI" if cf_variant==0 else "RESPOND_EN","normalized":{"language":"vi" if cf_variant==0 else "en"}}
-        elif fam=="A4": inp["user_utterance"]=lang_phrase(lang,"Mở Maps chỉ đường về nhà","open Maps home","Open Maps and navigate home"); inp["available_actions"]=[{"id":"maps","kind":"navigation"}] if cf_variant==0 else [{"id":"browser","kind":"web"}]; expected={"action_id":"maps" if cf_variant==0 else "NONE"}
-        elif fam=="A5": inp["user_utterance"]=lang_phrase(lang,"Nhắn Linh nội dung vừa nói","message Linh previous text","Message Linh the text I just said"); inp["current_context"]["last_dictated_text"]="Tôi về lúc 8" if cf_variant==0 else None; expected={"arguments":{"contact_id":"c_linh","text":"Tôi về lúc 8" if cf_variant==0 else None}}
-        elif fam=="A6": inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn","call Tuấn","Call Tuan"); expected={"clarification_required":False,"clarification_reason":"NONE"} if cf_variant==0 else {"clarification_required":True,"clarification_reason":"AMBIGUOUS_ENTITY"}; inp["personal_state"]["contacts"]=[{"id":"c_tuan","name":"Tuấn"}] if cf_variant==0 else inp["personal_state"]["contacts"]
+        elif fam=="A4": inp["user_utterance"]=lang_phrase(lang,"Mở Maps chỉ đường về nhà","open Maps home","Open Maps and navigate home"); inp["available_actions"]=[{"id":"maps","kind":"navigation"}] if cf_variant==0 else [{"id":"browser","kind":"web"}]; expected={"action_id":"maps" if cf_variant==0 else "NONE"}; tags += [] if cf_variant==0 else ["unavailable_tool"]
+        elif fam=="A5": inp["user_utterance"]=lang_phrase(lang,"Nhắn Linh nội dung vừa nói","message Linh previous text","Message Linh the text I just said"); inp["current_context"]["last_dictated_text"]="Tôi về lúc 8" if cf_variant==0 else None; expected={"arguments":{"contact_id":"c_linh","text":"Tôi về lúc 8" if cf_variant==0 else None}}; tags += [] if cf_variant==0 else ["missing_required_argument"]
+        elif fam=="A6": inp["user_utterance"]=lang_phrase(lang,"Gọi Tuấn","call Tuấn","Call Tuan"); expected={"clarification_required":False,"clarification_reason":"NONE"} if cf_variant==0 else {"clarification_required":True,"clarification_reason":"AMBIGUOUS_ENTITY"}; inp["personal_state"]["contacts"]=[{"id":"c_tuan","name":"Tuấn"}] if cf_variant==0 else inp["personal_state"]["contacts"]; tags += [] if cf_variant==0 else ["similar_entity_names","clarification_required"]
         elif fam=="A7": inp["user_utterance"]=lang_phrase(lang,"Tính 18 nhân 7","calculate 18 x 7","Calculate 18 times 7"); inp["available_local_capabilities"]=["calculator"] if cf_variant==0 else []; expected={"route":"LOCAL_MODEL" if cf_variant==0 else "EXTERNAL"}
     return {"case_id":f"{fam}-{ {'calibration':'C','development':'D','test':'T'}[split]}-{i+1:04d}","benchmark_version":"1.0","family":fam,"split":split,"language_group":lang,"difficulty":diff,"adversarial_tags":sorted(set(tags)),"counterfactual_group_id":cf_gid,"input":inp,"expected":expected,"scoring":scoring,"provenance":prov(i,fam)}
 
