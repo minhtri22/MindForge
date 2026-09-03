@@ -2,9 +2,36 @@
 
 > Build small. Prove first. Scale only what survives contact with reality.
 
-MindForge is a compact, local-first LLM kernel built to make training, evaluation and experimentation practical on consumer hardware. It is inspired by the clarity of **nanochat** and the breadth of **MiniMind**, while deliberately being neither a feature collection nor a purely educational Transformer.
+MindForge is a compact, local-first LLM research system built to make model training, evaluation and experimentation practical on consumer hardware. Its architecture distinguishes the **Model** from the **Kernel**: the Model is the learned neural component, while the Kernel is the minimal generic runtime/core that operates it. Optional feature capabilities live outside the kernel as plugins/extensions, and hosts/products compose the pieces they need.
+
+It is inspired by the clarity of **nanochat** and the breadth of **MiniMind**, while deliberately being neither a feature collection nor a purely educational Transformer.
 
 The project grows through **thin, measurable, usable vertical slices**. Every uncertain assumption is tested before dependent architecture is added.
+
+## Architecture model
+
+```text
+Host / Product
+    |
+    +-- MindForge Kernel
+    |      |
+    |      +-- MindForge Model
+    |
+    +-- optional Plugins / Extensions
+```
+
+Architecture responsibilities:
+
+```text
+The Model owns learned representations/capabilities.
+The Kernel owns only proven universal primitives.
+Plugins own feature-specific mechanisms and semantics.
+Hosts own composition.
+```
+
+A new capability does not enter the kernel merely because it is useful. Domain/product/optional capabilities belong outside the kernel by default; host/platform-specific capabilities belong in hosts/adapters; learned/generalizable capabilities should first be treated as model research questions. A runtime capability becomes a kernel candidate only after separate evidence shows it is genuinely universal and cannot be cleanly externalized.
+
+The authoritative architecture decision is [docs/research/mindforge-architecture-invariants.md](docs/research/mindforge-architecture-invariants.md).
 
 ## Principles
 
@@ -27,7 +54,7 @@ MindForge is not a Hugging Face replacement, production serving platform, benchm
 
 ## First vertical slice
 
-The first usable kernel must:
+The first usable model/runtime slice must:
 
 1. prepare a small text dataset;
 2. train or load a tokenizer;
@@ -66,7 +93,7 @@ The initial model stays deliberately boring: embedding, pre-norm attention/MLP r
 
 Phase 0 established a reproducible local foundation: MindForge byte-level BPE with a 16,384-token vocabulary, deterministic Vietnamese/English Wikimedia data, a 1M-token development pool, a ~10.34M-parameter Baseline-0, checkpoint/resume, independent evaluation, and machine-readable experiment provenance. See [docs/phases/phase-0.md](docs/phases/phase-0.md).
 
-Phase 1 turns that evidence into a working compact end-to-end kernel under `mindforge/`. The default 10,339,200-parameter model is validated on Intel Arc 140V with XPU/BF16, including training, checkpoint/resume, independent evaluation and generation. See [docs/phases/phase-1.md](docs/phases/phase-1.md).
+Phase 1 turns that evidence into a working compact end-to-end model/runtime slice under `mindforge/`. The default 10,339,200-parameter model is validated on Intel Arc 140V with XPU/BF16, including training, checkpoint/resume, independent evaluation and generation. See [docs/phases/phase-1.md](docs/phases/phase-1.md).
 
 Phase 2 adds a reproducible experiment system: manifests, baseline/treatment relationships, multi-seed execution, automatic aggregation, paired comparison, resource comparison, and regression checks — all from machine-readable records without external dependencies. See [docs/phases/phase-2.md](docs/phases/phase-2.md).
 
@@ -84,19 +111,19 @@ python -m mindforge.experiment summarize <manifest>
 python -m mindforge.experiment check <manifest>
 ```
 
-The active core direction is intentionally narrow:
+The currently validated core research path remains intentionally narrow:
 
 ```text
 dataset
 → tokenizer
-→ Transformer
+→ Transformer Model
 → training
 → checkpoint
 → evaluation
 → generation
 ```
 
-Continual learning, explicit memory and adaptive/pattern mechanisms are **not current core commitments**. Phase 0 stopped the custom research hypotheses because the bounded experiments did not establish a scientifically usable forgetting/memory-value substrate. Future capabilities may be adopted, ported, adapted or minimally cloned from proven open-source mechanisms after a dedicated research/selection phase.
+Future optional capabilities must earn their placement through evidence. They do not become kernel architecture merely because they are useful.
 
 ## Roadmap
 
@@ -108,7 +135,7 @@ Question → smallest experiment → evidence → decision → next capability
 
 See [PLAN.md](PLAN.md).
 
-Research scope and deferred hypotheses are indexed in [docs/research/README.md](docs/research/README.md).
+Research scope is indexed in [docs/research/README.md](docs/research/README.md).
 
 ## Success criterion
 
