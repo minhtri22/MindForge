@@ -1,20 +1,30 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Track A Capability Benchmark v1 Case",
-  "type": "object",
-  "required": ["case_id","benchmark_version","family","split","language_group","difficulty","adversarial_tags","counterfactual_group_id","input","expected","scoring","provenance"],
-  "properties": {
-    "case_id": {"type":"string","pattern":"^A[1-7]-[CDT]-[0-9]{4}$"},
-    "benchmark_version": {"const":"1.0"},
-    "family": {"enum":["A1","A2","A3","A4","A5","A6","A7"]},
-    "split": {"enum":["calibration","development","test"]},
-    "language_group": {"enum":["vi","vi_en","en"]},
-    "difficulty": {"enum":["straightforward","contextual","adversarial"]},
-    "adversarial_tags": {"type":"array","items":{"type":"string"}},
-    "counterfactual_group_id": {"type":["string","null"]},
-    "input": {"type":"object"},
-    "expected": {"type":"object"},
-    "scoring": {"type":"object"},
-    "provenance": {"type":"object"}
-  }
+  "benchmark_id": "track-a-capability-v1",
+  "version": "1.0",
+  "materialization_revision": "r1-semantic-correction",
+  "required_case_fields": [
+    "case_id",
+    "benchmark_version",
+    "materialization_revision",
+    "family",
+    "split",
+    "language_group",
+    "difficulty",
+    "adversarial_tags",
+    "counterfactual_group_id",
+    "input",
+    "expected",
+    "scoring",
+    "provenance"
+  ],
+  "route_semantics": {
+    "LOCAL_MODEL": "intrinsic learned local text-understanding/transformation; no external fresh knowledge or app required",
+    "LOCAL_APP_OR_TOOL": "requires an explicitly available local app/tool/live local capability",
+    "EXTERNAL": "requires non-local/fresh world capability not locally available",
+    "CLARIFY": "required information/entity choice is underdetermined"
+  },
+  "a5_text_policy": "literal_source_payload",
+  "intrinsic_model_scope": [
+    "short_text_transformation"
+  ]
 }
