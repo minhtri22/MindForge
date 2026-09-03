@@ -1,0 +1,70 @@
+{
+  "fixture_id": "L2-F058",
+  "title": "Unknown relationship entity",
+  "family": "entities",
+  "purpose": "Represent known entity identity with unknown relationship semantics.",
+  "source_platform_class": "Android phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F058-E1",
+      "event_type": "social.proximity",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F058-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "proximity": "near"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "entities": [
+        {
+          "entity_id": "person-opaque-7",
+          "relationship_status": "UNKNOWN"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "An opaque entity can be referenced without inventing a relationship label.",
+    "observability": "Proximity was observed; relationship meaning is unknown.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G2",
+    "L2-G14",
+    "L2-G16"
+  ]
+}

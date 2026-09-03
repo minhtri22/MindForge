@@ -1,0 +1,105 @@
+{
+  "fixture_id": "L2-F050",
+  "title": "User rejects derived event",
+  "family": "user-evidence",
+  "purpose": "Keep rejection scoped to a target event and preserve both records.",
+  "source_platform_class": "User plus derived source",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F050-E1",
+      "event_type": "location.visit",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F050-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "DERIVED_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "KNOWN",
+        "procedure": "derive-region-dwell/v1"
+      },
+      "payload": {
+        "region": "gym"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F050-E2",
+      "event_type": "user.feedback",
+      "source": {
+        "platform": "USER",
+        "device_class": "USER",
+        "provider": "user",
+        "source_event_id": "src-L2-F050-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_FEEDBACK",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "action": "reject",
+        "scope": "this_event"
+      },
+      "relations": [
+        {
+          "type": "TARGETS",
+          "target_event_id": "L2-F050-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The user rejected one derived visit; that feedback does not erase the source record.",
+    "observability": "Both source result and user feedback are observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Feedback source, time, target, and scope are explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Derived evidence and USER_FEEDBACK remain distinct.",
+    "lineage": "TARGETS identifies the rejected event without destructive overwrite.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G12",
+    "L2-G13"
+  ]
+}

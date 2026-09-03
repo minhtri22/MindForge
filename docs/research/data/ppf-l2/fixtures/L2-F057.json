@@ -1,0 +1,146 @@
+{
+  "fixture_id": "L2-F057",
+  "title": "Scoped user reset",
+  "family": "lineage",
+  "purpose": "Represent a reset request as a control event with explicit target scope.",
+  "source_platform_class": "User plus phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F057-E1",
+      "event_type": "location.sample",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F057-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "location.sample"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F057-E2",
+      "event_type": "activity.motion",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F057-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.motion"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F057-E3",
+      "event_type": "source.reset",
+      "source": {
+        "platform": "USER",
+        "device_class": "USER",
+        "provider": "user",
+        "source_event_id": "src-L2-F057-3"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "SOURCE_CONTROL",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "scope": "selected_source_evidence",
+        "action": "reset"
+      },
+      "relations": [
+        {
+          "type": "TARGETS",
+          "target_event_id": "L2-F057-E1"
+        },
+        {
+          "type": "TARGETS",
+          "target_event_id": "L2-F057-E2"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A user reset targets selected evidence records and retains explicit provenance.",
+    "observability": "Reset is an observed control action.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "TARGETS links reset scope to affected evidence; policy may later decide physical deletion.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G12",
+    "L2-G13"
+  ]
+}

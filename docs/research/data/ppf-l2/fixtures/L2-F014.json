@@ -1,0 +1,63 @@
+{
+  "fixture_id": "L2-F014",
+  "title": "Delayed ingestion",
+  "family": "three-time",
+  "purpose": "Keep source observation time separate from backend ingestion delay.",
+  "source_platform_class": "Generic service",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F014-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "offline-sync",
+        "source_event_id": "src-L2-F014-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:10Z",
+        "ingested_time": "2026-08-11T08:00:00Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The event was observed promptly but reached the foundation a day later.",
+    "observability": "Ingestion delay does not change occurrence semantics.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Ingestion is one day after result time and must not replace phenomenon ordering.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G3",
+    "L2-G9"
+  ]
+}

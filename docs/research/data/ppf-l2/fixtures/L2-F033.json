@@ -1,0 +1,71 @@
+{
+  "fixture_id": "L2-F033",
+  "title": "Observable non-occurrence",
+  "family": "opportunity",
+  "purpose": "Represent a true negative only when the opportunity and observability are explicit.",
+  "source_platform_class": "Android phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F033-E1",
+      "event_type": "opportunity.exercise",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F033-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "window_minutes": 60
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "opportunity": {
+        "id": "exercise-window-1",
+        "state": "OBSERVABLE_NON_OCCURRENCE",
+        "observability": "FULL",
+        "alternatives": [
+          "exercise"
+        ]
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "An explicit exercise opportunity had an observable non-occurrence.",
+    "observability": "OBSERVABLE_NON_OCCURRENCE is supported by full opportunity observability.",
+    "opportunity": "The negative outcome is attached to a concrete opportunity ID.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G7",
+    "L2-G8"
+  ]
+}

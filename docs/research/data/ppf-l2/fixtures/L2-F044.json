@@ -1,0 +1,155 @@
+{
+  "fixture_id": "L2-F044",
+  "title": "Derived evidence from multiple inputs",
+  "family": "raw-derived",
+  "purpose": "Show multi-input derivation without a provenance engine.",
+  "source_platform_class": "Mixed sources",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F044-E1",
+      "event_type": "sensor.signal",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "sensor-a",
+        "source_event_id": "src-L2-F044-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "signal": "A"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F044-E2",
+      "event_type": "sensor.signal",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "sensor-b",
+        "source_event_id": "src-L2-F044-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "signal": "B"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F044-E3",
+      "event_type": "activity.episode",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "deriver",
+        "source_event_id": "src-L2-F044-3"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "DERIVED_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "KNOWN",
+        "procedure": "combine-signals/v2",
+        "input_event_refs": [
+          "L2-F044-E1",
+          "L2-F044-E2"
+        ]
+      },
+      "payload": {
+        "label": "movement_episode"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "DERIVED_FROM",
+          "target_event_id": "L2-F044-E1"
+        },
+        {
+          "type": "DERIVED_FROM",
+          "target_event_id": "L2-F044-E2"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "One derived observation references two raw inputs and a known procedure.",
+    "observability": "All source records are observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Input event references and procedure make derivation inspectable.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "The derived record remains evidence rather than pattern output.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G4",
+    "L2-G11",
+    "L2-G17"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "fixture_id": "L2-F032",
+  "title": "Opportunity with occurrence",
+  "family": "opportunity",
+  "purpose": "Link an observed action to a defined opportunity.",
+  "source_platform_class": "Android phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F032-E1",
+      "event_type": "opportunity.choice",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F032-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "choice": "walk"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "opportunity": {
+        "id": "commute-20260810",
+        "state": "OCCURRENCE",
+        "observability": "FULL",
+        "alternatives": [
+          "walk",
+          "drive",
+          "transit"
+        ]
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The observed occurrence is explicitly tied to a commute opportunity.",
+    "observability": "Occurrence was observable and observed.",
+    "opportunity": "The opportunity and alternatives are part of evidence context, not a pattern denominator implementation.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G7",
+    "L2-G8"
+  ]
+}

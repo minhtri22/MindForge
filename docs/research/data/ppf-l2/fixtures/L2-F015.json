@@ -1,0 +1,102 @@
+{
+  "fixture_id": "L2-F015",
+  "title": "Wearable batch upload",
+  "family": "three-time",
+  "purpose": "Represent batched observations that share ingestion time but retain phenomenon order.",
+  "source_platform_class": "Wear OS watch",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F015-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "WEAR_OS",
+        "device_class": "WATCH",
+        "provider": "wear-batch",
+        "source_event_id": "src-L2-F015-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T07:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T07:00:02Z",
+        "ingested_time": "2026-08-10T09:00:00Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BATCHED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F015-E2",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "WEAR_OS",
+        "device_class": "WATCH",
+        "provider": "wear-batch",
+        "source_event_id": "src-L2-F015-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:02Z",
+        "ingested_time": "2026-08-10T09:00:00Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BATCHED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "Two observations uploaded together retain distinct behavioral times.",
+    "observability": "Batching affects delivery, not occurrence semantics.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Shared ingestion time does not erase the 07:00 then 08:00 phenomenon order.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G3",
+    "L2-G5",
+    "L2-G9"
+  ]
+}

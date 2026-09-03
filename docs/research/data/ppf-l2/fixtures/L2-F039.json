@@ -1,0 +1,106 @@
+{
+  "fixture_id": "L2-F039",
+  "title": "Unknown cross-device relationship",
+  "family": "multi-device",
+  "purpose": "Represent ambiguous duplication without guessing independence.",
+  "source_platform_class": "Phone plus watch",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F039-E1",
+      "event_type": "activity.motion",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "phone-source",
+        "source_event_id": "src-L2-F039-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.motion"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F039-E2",
+      "event_type": "activity.motion",
+      "source": {
+        "platform": "WEAR_OS",
+        "device_class": "WATCH",
+        "provider": "watch-source",
+        "source_event_id": "src-L2-F039-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.motion"
+      },
+      "capture_policy": {
+        "mode": "PASSIVE_WEARABLE",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "UNKNOWN_RELATIONSHIP",
+          "target_event_id": "L2-F039-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The two records may be related, but the evidence does not justify replica or independent labels.",
+    "observability": "Both records exist; relationship uncertainty remains explicit.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "UNKNOWN_RELATIONSHIP prevents unsupported double counting or deduplication.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G10"
+  ]
+}

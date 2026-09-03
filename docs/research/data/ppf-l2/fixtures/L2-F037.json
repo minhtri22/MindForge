@@ -1,0 +1,107 @@
+{
+  "fixture_id": "L2-F037",
+  "title": "Same-origin phone/watch replica",
+  "family": "multi-device",
+  "purpose": "Represent two device records as synchronized replicas of one origin.",
+  "source_platform_class": "Phone plus watch",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F037-E1",
+      "event_type": "activity.workout",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fitness-cloud",
+        "source_event_id": "cloud-workout-37"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.workout"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F037-E2",
+      "event_type": "activity.workout",
+      "source": {
+        "platform": "WEAR_OS",
+        "device_class": "WATCH",
+        "provider": "fitness-cloud",
+        "source_event_id": "cloud-workout-37"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.workout"
+      },
+      "capture_policy": {
+        "mode": "PASSIVE_WEARABLE",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "SAME_ORIGIN_REPLICATED",
+          "target_event_id": "L2-F037-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "Phone and watch records identify one synchronized source occurrence.",
+    "observability": "Both records report the same observed occurrence.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "SAME_ORIGIN_REPLICATED explicitly distinguishes replication from corroboration.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G2",
+    "L2-G10"
+  ]
+}

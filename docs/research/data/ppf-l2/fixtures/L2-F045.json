@@ -1,0 +1,76 @@
+{
+  "fixture_id": "L2-F045",
+  "title": "Compositional multi-label context",
+  "family": "context",
+  "purpose": "Represent simultaneous contextual dimensions without flattening them into one platform label.",
+  "source_platform_class": "Android phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F045-E1",
+      "event_type": "activity.motion",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F045-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {
+        "place": {
+          "status": "KNOWN",
+          "value": "office"
+        },
+        "social": {
+          "status": "KNOWN",
+          "value": "coworkers_present"
+        },
+        "weather": {
+          "status": "KNOWN",
+          "value": "rain"
+        }
+      },
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.motion"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "Place, social, and weather dimensions coexist independently on one event.",
+    "observability": "The occurrence is observed; context dimensions are evidence annotations.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Each context dimension can carry its own source list when needed.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G14",
+    "L2-G17"
+  ]
+}

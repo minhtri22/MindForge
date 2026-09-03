@@ -1,0 +1,68 @@
+{
+  "fixture_id": "L2-F010",
+  "title": "HealthKit measurement",
+  "family": "cross-platform-health",
+  "purpose": "Show equivalent optional measurement semantics from HealthKit.",
+  "source_platform_class": "iOS HealthKit",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F010-E1",
+      "event_type": "health.measurement",
+      "source": {
+        "platform": "HEALTH_REPOSITORY",
+        "device_class": "HEALTH_REPOSITORY",
+        "provider": "healthkit",
+        "source_event_id": "src-L2-F010-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "measure": "step_count",
+        "value": 1200,
+        "unit": "count"
+      },
+      "capture_policy": {
+        "mode": "HISTORY_LIMITED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The same optional health measurement semantics are representable from HealthKit.",
+    "observability": "Repository history exposed this measurement.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer health status, diagnosis, treatment, or a behavioral pattern."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G1",
+    "L2-G15",
+    "L2-G17",
+    "L2-G18"
+  ],
+  "cross_platform_pair": "XP-HEALTH"
+}

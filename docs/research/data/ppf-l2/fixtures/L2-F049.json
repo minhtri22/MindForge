@@ -1,0 +1,60 @@
+{
+  "fixture_id": "L2-F049",
+  "title": "User assertion",
+  "family": "user-evidence",
+  "purpose": "Represent explicit user-supplied evidence separately from sensed observation.",
+  "source_platform_class": "User",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F049-E1",
+      "event_type": "user.assertion",
+      "source": {
+        "platform": "USER",
+        "device_class": "USER",
+        "provider": "user",
+        "source_event_id": "src-L2-F049-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_ASSERTION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "assertion": "worked_from_home",
+        "scope": "2026-08-10"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A user assertion is first-class provenance-bearing evidence.",
+    "observability": "The assertion action is observed directly.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source platform USER distinguishes the assertion origin.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "USER_ASSERTION is not raw sensor evidence or derived observation.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G12",
+    "L2-G16"
+  ]
+}

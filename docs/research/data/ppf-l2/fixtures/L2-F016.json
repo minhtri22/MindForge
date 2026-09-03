@@ -1,0 +1,101 @@
+{
+  "fixture_id": "L2-F016",
+  "title": "Out-of-order arrival",
+  "family": "three-time",
+  "purpose": "Show that arrival order cannot be treated as behavioral order.",
+  "source_platform_class": "Generic service",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F016-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "sync",
+        "source_event_id": "src-L2-F016-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T09:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T09:00:05Z",
+        "ingested_time": "2026-08-10T10:02:00Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F016-E2",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "sync",
+        "source_event_id": "src-L2-F016-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T09:30:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T09:30:05Z",
+        "ingested_time": "2026-08-10T10:01:00Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The 09:30 phenomenon arrived first, but behavioral order remains 09:00 then 09:30.",
+    "observability": "Both occurrences are observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon time determines semantic order; ingestion order is explicitly different.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G3",
+    "L2-G9"
+  ]
+}

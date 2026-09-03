@@ -1,0 +1,112 @@
+{
+  "fixture_id": "L2-F042",
+  "title": "Derived place visit from raw sample",
+  "family": "raw-derived",
+  "purpose": "Preserve derivation procedure and input lineage.",
+  "source_platform_class": "Android phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F042-E1",
+      "event_type": "location.sample",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F042-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "region_semantic_id": "office-zone"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F042-E2",
+      "event_type": "location.visit",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F042-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "DERIVED_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "KNOWN",
+        "procedure": "derive-region-dwell/v1",
+        "input_event_refs": [
+          "L2-F042-E1"
+        ]
+      },
+      "payload": {
+        "region_semantic_id": "office-zone",
+        "duration_seconds": 900
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "DERIVED_FROM",
+          "target_event_id": "L2-F042-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A derived visit is distinguishable from its raw input.",
+    "observability": "Raw source occurrence and derived result are both represented.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Derived observation names procedure derive-region-dwell/v1 and its input event.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "RAW_OBSERVATION and DERIVED_OBSERVATION are distinct evidence kinds.",
+    "lineage": "DERIVED_FROM points to the raw input.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G4",
+    "L2-G11"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "fixture_id": "L2-F051",
+  "title": "User corrects source fact",
+  "family": "user-evidence",
+  "purpose": "Represent field-level correction with provenance and target scope.",
+  "source_platform_class": "User plus calendar",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F051-E1",
+      "event_type": "calendar.event",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F051-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "label": "meeting",
+        "start_local": "09:00"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F051-E2",
+      "event_type": "user.correction",
+      "source": {
+        "platform": "USER",
+        "device_class": "USER",
+        "provider": "user",
+        "source_event_id": "src-L2-F051-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_FEEDBACK",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "field": "start_local",
+        "corrected_value": "10:00",
+        "scope": "this_event"
+      },
+      "relations": [
+        {
+          "type": "CORRECTS",
+          "target_event_id": "L2-F051-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The user corrects one source fact while the original remains auditable.",
+    "observability": "Correction is an observed user action.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "User origin and correction timestamp are explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "CORRECTS targets the original event.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G12",
+    "L2-G13"
+  ]
+}

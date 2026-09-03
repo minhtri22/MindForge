@@ -1,0 +1,110 @@
+{
+  "fixture_id": "L2-F048",
+  "title": "User context correction",
+  "family": "context-lineage",
+  "purpose": "Represent a context correction as evidence with lineage rather than mutating the source event.",
+  "source_platform_class": "User plus phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F048-E1",
+      "event_type": "activity.motion",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F048-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {
+        "place": {
+          "status": "KNOWN",
+          "value": "office"
+        }
+      },
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "activity.motion"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F048-E2",
+      "event_type": "user.context_correction",
+      "source": {
+        "platform": "USER",
+        "device_class": "USER",
+        "provider": "user",
+        "source_event_id": "src-L2-F048-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_FEEDBACK",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "dimension": "place",
+        "corrected_value": "client_site"
+      },
+      "relations": [
+        {
+          "type": "CONTEXT_CORRECTS",
+          "target_event_id": "L2-F048-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The user supplies a corrected place value targeting the original event.",
+    "observability": "Original occurrence and user correction are both observed evidence.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "User is the provider of correction evidence.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "USER_FEEDBACK remains distinct from the raw observation.",
+    "lineage": "CONTEXT_CORRECTS preserves the original context and correction record.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G12",
+    "L2-G13",
+    "L2-G14"
+  ]
+}

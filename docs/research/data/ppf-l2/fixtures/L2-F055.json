@@ -1,0 +1,102 @@
+{
+  "fixture_id": "L2-F055",
+  "title": "Source invalidation",
+  "family": "lineage",
+  "purpose": "Represent retraction without physically removing prior evidence.",
+  "source_platform_class": "Generic source",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F055-E1",
+      "event_type": "sensor.signal",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F055-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "value": 5
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F055-E2",
+      "event_type": "source.invalidation",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "source-control",
+        "source_event_id": "src-L2-F055-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "SOURCE_CONTROL",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "reason": "source_retracted"
+      },
+      "relations": [
+        {
+          "type": "INVALIDATES",
+          "target_event_id": "L2-F055-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A source-control record invalidates earlier evidence while preserving audit lineage.",
+    "observability": "Original evidence existed; invalidation is a later control event.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "INVALIDATES targets the prior event.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G13"
+  ]
+}

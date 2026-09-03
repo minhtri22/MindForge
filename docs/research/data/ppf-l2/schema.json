@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindforge.local/research/ppf-l2-fixture-v1.schema.json",
+  "title": "PPF-L2 Personal Event Foundation Research Fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fixture_id",
+    "title",
+    "family",
+    "purpose",
+    "source_platform_class",
+    "records",
+    "expected",
+    "adversarial",
+    "gates"
+  ],
+  "properties": {
+    "fixture_id": {"type": "string", "pattern": "^L2-F[0-9]{3}$"},
+    "title": {"type": "string", "minLength": 1},
+    "family": {"type": "string", "minLength": 1},
+    "purpose": {"type": "string", "minLength": 1},
+    "source_platform_class": {"type": "string", "minLength": 1},
+    "adversarial": {"type": "boolean"},
+    "cross_platform_pair": {"type": ["string", "null"]},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/event"}
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_interpretation",
+        "observability",
+        "opportunity",
+        "time",
+        "provenance",
+        "multi_device",
+        "raw_derived",
+        "lineage",
+        "must_not_infer"
+      ],
+      "properties": {
+        "semantic_interpretation": {"type": "string", "minLength": 1},
+        "observability": {"type": "string", "minLength": 1},
+        "opportunity": {"type": "string", "minLength": 1},
+        "time": {"type": "string", "minLength": 1},
+        "provenance": {"type": "string", "minLength": 1},
+        "multi_device": {"type": "string", "minLength": 1},
+        "raw_derived": {"type": "string", "minLength": 1},
+        "lineage": {"type": "string", "minLength": 1},
+        "must_not_infer": {"type": "string", "minLength": 1}
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "pattern": "^L2-G([1-9]|1[0-8])$"},
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "event_id",
+        "event_type",
+        "source",
+        "time",
+        "evidence_kind",
+        "observability",
+        "context",
+        "quality",
+        "provenance",
+        "payload"
+      ],
+      "properties": {
+        "schema_version": {"const": "ppf-l2/1"},
+        "event_id": {"type": "string", "minLength": 1},
+        "event_type": {"type": "string", "minLength": 1},
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["platform", "device_class", "provider"],
+          "properties": {
+            "platform": {
+              "enum": ["ANDROID", "IOS", "WEAR_OS", "WATCH_OS", "USER", "HEALTH_REPOSITORY", "GENERIC"]
+            },
+            "device_class": {
+              "enum": ["PHONE", "WATCH", "WEARABLE", "USER", "HEALTH_REPOSITORY", "SERVICE", "UNKNOWN"]
+            },
+            "provider": {"type": "string", "minLength": 1},
+            "source_event_id": {"type": "string", "minLength": 1},
+            "metadata": {"type": "object", "additionalProperties": true}
+          }
+        },
+        "time": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["phenomenon_time", "result_or_observed_time", "ingested_time"],
+          "properties": {
+            "phenomenon_time": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["start"],
+              "properties": {
+                "start": {"type": "string", "format": "date-time"},
+                "end": {"type": "string", "format": "date-time"},
+                "timezone": {"type": "string", "minLength": 1},
+                "timing_quality": {"enum": ["KNOWN", "APPROXIMATE", "CLOCK_SKEW_SUSPECTED", "UNKNOWN"]}
+              }
+            },
+            "result_or_observed_time": {"type": "string", "format": "date-time"},
+            "ingested_time": {"type": "string", "format": "date-time"}
+          }
+        },
+        "evidence_kind": {
+          "enum": ["RAW_OBSERVATION", "DERIVED_OBSERVATION", "USER_ASSERTION", "USER_FEEDBACK", "SOURCE_CONTROL", "OBSERVABILITY_RECORD"]
+        },
+        "capture_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "expected_observability"],
+          "properties": {
+            "mode": {
+              "enum": ["CONTINUOUS", "PERIODIC", "EVENT_DRIVEN", "FOREGROUND_ONLY", "BACKGROUND_ENABLED", "HISTORY_LIMITED", "USER_TRIGGERED", "PASSIVE_WEARABLE", "BATCHED", "UNKNOWN"]
+            },
+            "expected_observability": {"enum": ["EXPECTED", "NOT_EXPECTED", "UNKNOWN"]},
+            "details": {"type": "object", "additionalProperties": true}
+          }
+        },
+        "observability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state"],
+          "properties": {
+            "state": {
+              "enum": ["OBSERVED_OCCURRENCE", "OBSERVABLE_NON_OCCURRENCE", "NO_OBSERVATION", "SOURCE_UNAVAILABLE", "PERMISSION_UNAVAILABLE_OR_UNKNOWN", "OUTSIDE_CAPTURE_WINDOW", "HISTORY_UNAVAILABLE", "DATA_DELAYED", "UNKNOWN_OUTCOME"]
+            },
+            "missingness_reason": {
+              "enum": ["MISSING_BY_DESIGN", "SENSOR_NON_COLLECTION", "PLATFORM_RESTRICTION", "PERMISSION_LIMITATION", "DEVICE_DISCONNECTED", "WEARABLE_NON_WEAR", "SAMPLING_GAP", "SYNC_DELAY", "HISTORY_UNAVAILABLE", "UNKNOWN"]
+            },
+            "details": {"type": "string"}
+          }
+        },
+        "opportunity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "state"],
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "state": {"enum": ["OPPORTUNITY", "OCCURRENCE", "OBSERVABLE_NON_OCCURRENCE", "UNKNOWN_OUTCOME"]},
+            "alternatives": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            },
+            "observability": {"enum": ["FULL", "PARTIAL", "UNKNOWN"]}
+          }
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/$defs/contextDimension"}
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["entity_id", "relationship_status"],
+            "properties": {
+              "entity_id": {"type": "string", "minLength": 1},
+              "relationship_status": {"enum": ["KNOWN", "UNKNOWN"]},
+              "relationship": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "quality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["quality_state", "coverage_state"],
+          "properties": {
+            "quality_state": {"enum": ["GOOD", "DEGRADED", "UNKNOWN"]},
+            "coverage_state": {"enum": ["COMPLETE", "PARTIAL", "UNKNOWN", "NOT_APPLICABLE"]},
+            "details": {"type": "object", "additionalProperties": true}
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["procedure_status"],
+          "properties": {
+            "procedure_status": {"enum": ["KNOWN", "UNKNOWN", "NOT_APPLICABLE"]},
+            "procedure": {"type": "string", "minLength": 1},
+            "input_event_refs": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            },
+            "notes": {"type": "string"}
+          }
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "target_event_id"],
+            "properties": {
+              "type": {
+                "enum": ["SAME_ORIGIN_REPLICATED", "INDEPENDENT_CORROBORATION", "UNKNOWN_RELATIONSHIP", "DERIVED_FROM", "CORRECTS", "SUPERSEDES", "INVALIDATES", "DELETES", "TARGETS", "CONTEXT_CORRECTS"]
+              },
+              "target_event_id": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "payload": {"type": "object", "additionalProperties": true}
+      }
+    },
+    "contextDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {"enum": ["KNOWN", "UNKNOWN", "CONFLICTING"]},
+        "value": {},
+        "sources": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

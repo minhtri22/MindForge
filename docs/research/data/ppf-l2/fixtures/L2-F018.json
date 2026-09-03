@@ -1,0 +1,63 @@
+{
+  "fixture_id": "L2-F018",
+  "title": "Timezone-preserving local context",
+  "family": "three-time",
+  "purpose": "Preserve explicit timezone context alongside offset-aware time.",
+  "source_platform_class": "iOS phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F018-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "IOS",
+        "device_class": "PHONE",
+        "provider": "ios-source",
+        "source_event_id": "src-L2-F018-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05+07:00",
+        "ingested_time": "2026-08-10T01:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "Local-time context is retained while all three times remain absolute instants.",
+    "observability": "The occurrence is observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon carries +07:00 and IANA timezone; ingestion is equivalent UTC time.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G3"
+  ]
+}

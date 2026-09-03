@@ -1,0 +1,67 @@
+{
+  "fixture_id": "L2-F001",
+  "title": "Android calendar occurrence",
+  "family": "cross-platform-calendar",
+  "purpose": "Represent a calendar-backed personal occurrence without Android SDK fields in core.",
+  "source_platform_class": "Android phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F001-E1",
+      "event_type": "calendar.event",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "android-calendar",
+        "source_event_id": "src-L2-F001-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "semantic_type": "calendar_commitment",
+        "label": "dentist"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A calendar commitment occurred and is represented as a source observation.",
+    "observability": "The occurrence was observed under an event-driven source.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G1",
+    "L2-G2",
+    "L2-G3",
+    "L2-G17"
+  ],
+  "cross_platform_pair": "XP-CALENDAR"
+}

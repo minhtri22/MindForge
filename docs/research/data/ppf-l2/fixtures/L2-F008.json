@@ -1,0 +1,63 @@
+{
+  "fixture_id": "L2-F008",
+  "title": "iOS UI user rejection",
+  "family": "cross-platform-feedback",
+  "purpose": "Show equivalent user-feedback semantics for an iOS UI.",
+  "source_platform_class": "iOS UI",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F008-E1",
+      "event_type": "user.feedback",
+      "source": {
+        "platform": "IOS",
+        "device_class": "PHONE",
+        "provider": "ios-ui",
+        "source_event_id": "src-L2-F008-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_FEEDBACK",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "action": "reject",
+        "scope": "event_interpretation"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The same explicit rejection semantics are representable from iOS.",
+    "observability": "The feedback action itself was observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Feedback retains iOS UI provider and event time as provenance.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "This is USER_FEEDBACK evidence, distinct from sensed or derived observations.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G12",
+    "L2-G16",
+    "L2-G17",
+    "L2-G18"
+  ],
+  "cross_platform_pair": "XP-FEEDBACK"
+}

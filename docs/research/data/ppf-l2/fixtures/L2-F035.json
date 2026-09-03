@@ -1,0 +1,73 @@
+{
+  "fixture_id": "L2-F035",
+  "title": "Opportunity alternatives",
+  "family": "opportunity",
+  "purpose": "Represent mutually possible actions without encoding preference scoring.",
+  "source_platform_class": "Generic service",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F035-E1",
+      "event_type": "opportunity.choice",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "choice-source",
+        "source_event_id": "src-L2-F035-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "decision_point": "leave_home"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "opportunity": {
+        "id": "transport-choice-1",
+        "state": "OPPORTUNITY",
+        "observability": "FULL",
+        "alternatives": [
+          "walk",
+          "bike",
+          "bus"
+        ]
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A decision opportunity and alternatives are representable before outcome evidence arrives.",
+    "observability": "Opportunity itself is observed.",
+    "opportunity": "Alternatives are explicit strings; no scoring or preference conclusion is stored.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G7",
+    "L2-G16"
+  ]
+}

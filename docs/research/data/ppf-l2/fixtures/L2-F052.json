@@ -1,0 +1,63 @@
+{
+  "fixture_id": "L2-F052",
+  "title": "Feedback with bounded temporal scope",
+  "family": "user-evidence",
+  "purpose": "Represent feedback whose intended scope is a bounded interval rather than all history.",
+  "source_platform_class": "User",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F052-E1",
+      "event_type": "user.feedback",
+      "source": {
+        "platform": "USER",
+        "device_class": "USER",
+        "provider": "user",
+        "source_event_id": "src-L2-F052-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T00:00:00Z",
+          "end": "2026-08-16T23:59:59Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_FEEDBACK",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "action": "annotate",
+        "scope": "date_range",
+        "annotation": "travel_week"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "User feedback carries a bounded phenomenon interval as its temporal scope.",
+    "observability": "The feedback itself is explicit evidence.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "The phenomenon interval represents the period the feedback concerns.",
+    "provenance": "User source and event time preserve feedback provenance.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G3",
+    "L2-G12",
+    "L2-G14"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "fixture_id": "L2-F040",
+  "title": "Reused source identity with correction lineage",
+  "family": "identity-lineage",
+  "purpose": "Permit a provider to revise one source identity only with explicit lineage.",
+  "source_platform_class": "Generic source",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F040-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "source-with-revision",
+        "source_event_id": "source-40"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "value": 100
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F040-E2",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "source-with-revision",
+        "source_event_id": "source-40"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "value": 101
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "CORRECTS",
+          "target_event_id": "L2-F040-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The provider reused a source identity for a corrected representation, with explicit correction lineage.",
+    "observability": "Both records are source representations of one underlying occurrence.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "The second record CORRECTS the first and preserves history.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G2",
+    "L2-G13"
+  ]
+}

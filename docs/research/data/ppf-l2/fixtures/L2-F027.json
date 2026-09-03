@@ -1,0 +1,65 @@
+{
+  "fixture_id": "L2-F027",
+  "title": "History window unavailable",
+  "family": "observability-missingness",
+  "purpose": "Keep missingness mechanism distinct from observable non-occurrence.",
+  "source_platform_class": "Phone/source",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F027-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "observability-source",
+        "source_event_id": "src-L2-F027-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "OBSERVABILITY_RECORD",
+      "observability": {
+        "state": "HISTORY_UNAVAILABLE",
+        "missingness_reason": "HISTORY_UNAVAILABLE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "UNKNOWN",
+        "coverage_state": "PARTIAL"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "window": "test-window"
+      },
+      "capture_policy": {
+        "mode": "HISTORY_LIMITED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A bounded history API cannot answer about older behavior.",
+    "observability": "Observability state is HISTORY_UNAVAILABLE with reason HISTORY_UNAVAILABLE.",
+    "opportunity": "No negative opportunity outcome may be inferred from this missing-like record.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G5",
+    "L2-G6",
+    "L2-G8"
+  ]
+}

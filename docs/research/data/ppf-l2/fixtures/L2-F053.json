@@ -1,0 +1,107 @@
+{
+  "fixture_id": "L2-F053",
+  "title": "Source correction lineage",
+  "family": "lineage",
+  "purpose": "Preserve provider correction history for one source identity.",
+  "source_platform_class": "Calendar source",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F053-E1",
+      "event_type": "calendar.event",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "calendar",
+        "source_event_id": "calendar-53"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "start": "09:00"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F053-E2",
+      "event_type": "calendar.event",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "calendar",
+        "source_event_id": "calendar-53"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "start": "10:00"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "CORRECTS",
+          "target_event_id": "L2-F053-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "A source-provided correction updates interpretation through lineage without deleting history.",
+    "observability": "Both source records are available.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "CORRECTS links revised source record to prior representation.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G2",
+    "L2-G13"
+  ]
+}

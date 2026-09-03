@@ -1,0 +1,103 @@
+{
+  "fixture_id": "L2-F020",
+  "title": "DST fall-back repeated hour",
+  "family": "three-time",
+  "purpose": "Disambiguate repeated local clock labels by offset.",
+  "source_platform_class": "Generic service",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F020-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "timezone-source",
+        "source_event_id": "src-L2-F020-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-11-01T01:30:00-04:00",
+          "timezone": "America/New_York",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-11-01T01:30:05-04:00",
+        "ingested_time": "2026-11-01T05:30:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F020-E2",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "GENERIC",
+        "device_class": "SERVICE",
+        "provider": "timezone-source",
+        "source_event_id": "src-L2-F020-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-11-01T01:30:00-05:00",
+          "timezone": "America/New_York",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-11-01T01:30:05-05:00",
+        "ingested_time": "2026-11-01T06:30:10Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "Two 01:30 local observations are distinct absolute instants because offsets differ.",
+    "observability": "Both occurrences are observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "The repeated wall-clock hour remains unambiguous.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G2",
+    "L2-G3"
+  ]
+}

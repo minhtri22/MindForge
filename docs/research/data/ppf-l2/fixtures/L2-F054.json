@@ -1,0 +1,110 @@
+{
+  "fixture_id": "L2-F054",
+  "title": "Derived result supersession",
+  "family": "lineage",
+  "purpose": "Represent a newer derived result that supersedes an older one.",
+  "source_platform_class": "Derived service",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F054-E1",
+      "event_type": "derived.place",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F054-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "DERIVED_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "KNOWN",
+        "procedure": "derive-place/v1"
+      },
+      "payload": {
+        "place": "office"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      }
+    },
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F054-E2",
+      "event_type": "derived.place",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "fixture-source",
+        "source_event_id": "src-L2-F054-2"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "DERIVED_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "KNOWN",
+        "procedure": "derive-place/v2"
+      },
+      "payload": {
+        "place": "client_site"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "relations": [
+        {
+          "type": "SUPERSEDES",
+          "target_event_id": "L2-F054-E1"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The v2 derived result supersedes v1 while both remain inspectable.",
+    "observability": "Both derived results are represented.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Each record names its derivation procedure.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Both records are DERIVED_OBSERVATION evidence.",
+    "lineage": "SUPERSEDES captures replacement semantics without erasure.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G4",
+    "L2-G11",
+    "L2-G13"
+  ]
+}

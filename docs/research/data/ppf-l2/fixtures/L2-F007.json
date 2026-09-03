@@ -1,0 +1,62 @@
+{
+  "fixture_id": "L2-F007",
+  "title": "Android UI user rejection",
+  "family": "cross-platform-feedback",
+  "purpose": "Represent explicit user rejection with capture-surface provenance.",
+  "source_platform_class": "Android UI",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F007-E1",
+      "event_type": "user.feedback",
+      "source": {
+        "platform": "ANDROID",
+        "device_class": "PHONE",
+        "provider": "android-ui",
+        "source_event_id": "src-L2-F007-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "USER_FEEDBACK",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "action": "reject",
+        "scope": "event_interpretation"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The user explicitly rejected an interpretation; the UI surface is provenance, not semantics.",
+    "observability": "The feedback action itself was observed.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Feedback retains Android UI provider and event time as provenance.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "This is USER_FEEDBACK evidence, distinct from sensed or derived observations.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": false,
+  "gates": [
+    "L2-G12",
+    "L2-G16",
+    "L2-G17"
+  ],
+  "cross_platform_pair": "XP-FEEDBACK"
+}

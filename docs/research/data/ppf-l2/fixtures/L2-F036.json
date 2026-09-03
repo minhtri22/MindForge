@@ -1,0 +1,74 @@
+{
+  "fixture_id": "L2-F036",
+  "title": "Opportunity outcome hidden by permission",
+  "family": "opportunity",
+  "purpose": "Prevent a known opportunity from becoming a false non-occurrence when outcome capture is unavailable.",
+  "source_platform_class": "iOS phone",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F036-E1",
+      "event_type": "opportunity.location",
+      "source": {
+        "platform": "IOS",
+        "device_class": "PHONE",
+        "provider": "ios-permissioned-source",
+        "source_event_id": "src-L2-F036-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T08:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T08:00:05Z",
+        "ingested_time": "2026-08-10T08:00:10Z"
+      },
+      "evidence_kind": "OBSERVABILITY_RECORD",
+      "observability": {
+        "state": "PERMISSION_UNAVAILABLE_OR_UNKNOWN",
+        "missingness_reason": "PERMISSION_LIMITATION"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "UNKNOWN",
+        "coverage_state": "UNKNOWN"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "opportunity.location"
+      },
+      "capture_policy": {
+        "mode": "BACKGROUND_ENABLED",
+        "expected_observability": "EXPECTED"
+      },
+      "opportunity": {
+        "id": "location-choice-1",
+        "state": "UNKNOWN_OUTCOME",
+        "observability": "UNKNOWN",
+        "alternatives": [
+          "arrive",
+          "not_arrive"
+        ]
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The opportunity exists, but permission state makes its outcome unknown.",
+    "observability": "Permission limitation blocks negative evidence.",
+    "opportunity": "Opportunity is retained with UNKNOWN_OUTCOME rather than observable non-occurrence.",
+    "time": "Phenomenon, observation/result, and ingestion times remain distinct fields.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G6",
+    "L2-G7",
+    "L2-G8"
+  ]
+}

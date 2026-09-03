@@ -1,0 +1,63 @@
+{
+  "fixture_id": "L2-F013",
+  "title": "Delayed observation result",
+  "family": "three-time",
+  "purpose": "Separate behavior time from a much later observation/result time.",
+  "source_platform_class": "Wearable",
+  "records": [
+    {
+      "schema_version": "ppf-l2/1",
+      "event_id": "L2-F013-E1",
+      "event_type": "personal.observation",
+      "source": {
+        "platform": "WEAR_OS",
+        "device_class": "WATCH",
+        "provider": "wear-sensor",
+        "source_event_id": "src-L2-F013-1"
+      },
+      "time": {
+        "phenomenon_time": {
+          "start": "2026-08-10T06:00:00Z",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-08-10T06:30:00Z",
+        "ingested_time": "2026-08-10T06:30:05Z"
+      },
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "context": {},
+      "quality": {
+        "quality_state": "GOOD",
+        "coverage_state": "COMPLETE"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "payload": {
+        "observation": "personal.observation"
+      },
+      "capture_policy": {
+        "mode": "PASSIVE_WEARABLE",
+        "expected_observability": "EXPECTED"
+      }
+    }
+  ],
+  "expected": {
+    "semantic_interpretation": "The phenomenon happened at 06:00; the source produced the result at 06:30.",
+    "observability": "The occurrence is observed despite delayed result production.",
+    "opportunity": "No opportunity claim is required for this fixture.",
+    "time": "Phenomenon time differs materially from result/observed time and ingestion time.",
+    "provenance": "Source identity and capture/procedure provenance remain explicit.",
+    "multi_device": "No cross-device relationship is asserted.",
+    "raw_derived": "Evidence kind is explicit and does not imply a pattern.",
+    "lineage": "No correction, deletion, or supersession is asserted.",
+    "must_not_infer": "Do not infer a routine, preference, habit, or pattern conclusion."
+  },
+  "adversarial": true,
+  "gates": [
+    "L2-G3",
+    "L2-G9"
+  ]
+}
