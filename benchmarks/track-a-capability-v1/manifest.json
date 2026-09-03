@@ -1,30 +1,33 @@
 {
   "benchmark_id": "track-a-capability-v1",
   "version": "1.0",
-  "status": "MATERIALIZED_AUTOMATED_QA_PASS_HUMAN_SPOT_REVIEW_PENDING",
-  "generator_seed": 20260904,
-  "counts": {
-    "total": 1400,
-    "families": {"A1":200,"A2":200,"A3":200,"A4":200,"A5":200,"A6":200,"A7":200},
-    "splits": {"calibration":280,"development":420,"test":700},
-    "language": {"vi":840,"vi_en":350,"en":210},
-    "difficulty": {"straightforward":560,"contextual":490,"adversarial":350},
-    "heldout_counterfactual_cases": 280
+  "materialization_revision": "r1-semantic-correction",
+  "seed": 20260904,
+  "case_counts": {
+    "calibration": 280,
+    "development": 420,
+    "test": 700,
+    "total": 1400
   },
-  "protocol_commit": "627044cc06d3e411b1388b57cd94906fefa74343",
-  "human_review": {
-    "required": true,
-    "status": "PENDING",
-    "recommended_sample": 140,
-    "sampling": "20 stratified cases per family",
-    "sample_artifact": "human-review-sample.jsonl",
-    "sample_sha256": "8d50861d8814235d2a1b66a802b6e289719f4197b937c8911c73fa8224db6e84",
-    "sample_counts": {"total":140,"per_family":20,"calibration":42,"development":42,"test":56,"language":{"vi":81,"en":15,"vi_en":44},"difficulty":{"straightforward":55,"adversarial":39,"contextual":46}}
+  "language_counts": {
+    "vi": 840,
+    "vi_en": 350,
+    "en": 210
   },
-  "artifacts_sha256": {
-    "calibration.jsonl": "6a6c6172404d7d446a24abf3bdf19ea7c3bce9fc33e87debd792feac4a2d7f0b",
-    "development.jsonl": "dfba475f0de65b3bc677466484f7282cad5c469403b9e3c694c5fc26a1b6e790",
-    "test.jsonl": "959503e113054d7f945ba027564371fc5ae2f4c8a5ae0945e10a91496f848099",
-    "schema.json": "34acc342d0b77c2e8d631c9d64199742059ade9f34c57e6b86cfa451772c9f60"
+  "difficulty_counts": {
+    "straightforward": 560,
+    "contextual": 490,
+    "adversarial": 350
+  },
+  "heldout_counterfactual_cases": 280,
+  "counterfactual_groups": 140,
+  "review_sample_cases": 140,
+  "status": "FINAL_FROZEN_AFTER_SEMANTIC_R1_PASS",
+  "hashes": {
+    "calibration.jsonl": "7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb",
+    "development.jsonl": "2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42",
+    "test.jsonl": "3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf",
+    "schema.json": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+    "human-review-sample.jsonl": "d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693"
   }
 }
