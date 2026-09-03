@@ -1,0 +1,122 @@
+{
+  "behavior_seed_isolation": {
+    "behavior_hash_changed": true,
+    "opportunities_equal": true,
+    "truth_equal": true
+  },
+  "checkpoint_future_leak_violations": 0,
+  "correction_lifecycle": [
+    "INSUFFICIENT_EVIDENCE",
+    "SUPPORTED",
+    "USER_REJECTED",
+    "USER_REJECTED"
+  ],
+  "counterfactual_pairs": 3,
+  "deletion_lifecycle": [
+    "INSUFFICIENT_EVIDENCE",
+    "SUPPORTED",
+    "DELETED",
+    "DELETED"
+  ],
+  "gates": {
+    "E0-G1": true,
+    "E0-G10": true,
+    "E0-G11": true,
+    "E0-G12": true,
+    "E0-G2": true,
+    "E0-G3": true,
+    "E0-G4": true,
+    "E0-G5": true,
+    "E0-G6": true,
+    "E0-G7": true,
+    "E0-G8": true,
+    "E0-G9": true
+  },
+  "l2_errors": {
+    "s1": [],
+    "s2": [],
+    "s3a": [],
+    "s3b": [],
+    "s4a": [],
+    "s4b": [],
+    "s5": [],
+    "s6a": [],
+    "s6b": []
+  },
+  "l2_valid_visible_events": 33,
+  "observation_seed_isolation": {
+    "behavior_equal": true,
+    "opportunities_equal": true,
+    "truth_equal": true,
+    "visible_hash_changed": true
+  },
+  "oracle_boundary": {
+    "declarative_expected_answers": true,
+    "generic_threshold_patterns_found": false
+  },
+  "pair_isolation": {
+    "E0-CF1": {
+      "behavior_equal": true,
+      "no_undeclared_spec_difference": true,
+      "opportunities_equal": true,
+      "truth_equal": true,
+      "visible_change_is_observation_only": true
+    },
+    "E0-CF2": {
+      "behavior_equal": true,
+      "no_undeclared_spec_difference": true,
+      "opportunities_equal": true,
+      "truth_equal": true,
+      "visible_change_is_replica_only": true
+    },
+    "E0-CF3": {
+      "behavior_equal": true,
+      "no_undeclared_spec_difference": true,
+      "opportunities_equal": true,
+      "truth_equal": true,
+      "visible_change_is_control_only": true
+    }
+  },
+  "permission_loss_pair": {
+    "behavior_equal": true,
+    "opportunities_equal": true,
+    "truth_equal": true,
+    "visible_hash_different": true
+  },
+  "replica_pair": {
+    "occurrences_a": 1,
+    "occurrences_b": 1,
+    "records_a": 1,
+    "records_b": 2
+  },
+  "seed_reproducibility_hashes": {
+    "s1": "86ff9f78e5231c6508f6e6d1ff452320f758f8e7ec0d744db6c15a8c899e4c5f",
+    "s2": "4612655806e06ffe7a0a08b9b72a6c4aea30393afcc1f8656f5077ddc6d31fed",
+    "s3a": "34baf9ccf7d65692354a1bcd376d8f04410d2d5467b719a1e400daafbe346bc8",
+    "s3b": "a79572a33f3e97c02701d8db74733d4a190595eac581ebc1ed0d3839e7a9f373",
+    "s4a": "2fb92629d977c2732322cc3fbc4d7d7a6f3ae1f106df22a5090c939307ba78d5",
+    "s4b": "b169cf3792e21cbd5d70747b9b3671b77b482d855ba887deada0b87dc8407201",
+    "s5": "0769a0267adc453de51017016309a391b56914a905c5a96df0b45fbcd4f93c00",
+    "s6a": "a7b42d59170edf378b920893362f7ea16b56e3d6b97a68ceeefe4e58389c8f54",
+    "s6b": "6a49cd4c9cb952c07afb2b8d2092695fd9088eebb62b36a4c4b2611f99cb1b5a"
+  },
+  "smoke_checkpoints": 32,
+  "smoke_histories": 9,
+  "smoke_persons": 6,
+  "smoke_structures": 6,
+  "smoke_version": "ppf-l3-e0-smoke/1",
+  "status": "PASS",
+  "truth_leak_violations": 0,
+  "visible_l2_events": 33,
+  "visible_leaks": {
+    "s1": [],
+    "s2": [],
+    "s3a": [],
+    "s3b": [],
+    "s4a": [],
+    "s4b": [],
+    "s5": [],
+    "s6a": [],
+    "s6b": []
+  }
+}
