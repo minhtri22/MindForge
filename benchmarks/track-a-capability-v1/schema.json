@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Track A Capability Benchmark v1 Case",
+  "type": "object",
+  "required": ["case_id","benchmark_version","family","split","language_group","difficulty","adversarial_tags","counterfactual_group_id","input","expected","scoring","provenance"],
+  "properties": {
+    "case_id": {"type":"string","pattern":"^A[1-7]-[CDT]-[0-9]{4}$"},
+    "benchmark_version": {"const":"1.0"},
+    "family": {"enum":["A1","A2","A3","A4","A5","A6","A7"]},
+    "split": {"enum":["calibration","development","test"]},
+    "language_group": {"enum":["vi","vi_en","en"]},
+    "difficulty": {"enum":["straightforward","contextual","adversarial"]},
+    "adversarial_tags": {"type":"array","items":{"type":"string"}},
+    "counterfactual_group_id": {"type":["string","null"]},
+    "input": {"type":"object"},
+    "expected": {"type":"object"},
+    "scoring": {"type":"object"},
+    "provenance": {"type":"object"}
+  }
+}
