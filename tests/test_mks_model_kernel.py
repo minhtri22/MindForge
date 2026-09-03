@@ -22,6 +22,8 @@ def test_mks_transformer_satisfies_runtime_contract() -> None:
     model = create_model(_small_config())
     assert isinstance(model, TokenModel)
     assert model.context_limit == 8
+    # Concrete-model vocabulary metadata remains available but is not required
+    # by the runtime TokenModel v0 contract.
     assert model.vocab_size == 32
 
 

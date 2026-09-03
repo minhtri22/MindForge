@@ -1,9 +1,12 @@
-"""Minimal runtime-facing learned-model contract.
+"""Minimal PyTorch runtime-facing learned-model contract v0.
 
 The contract intentionally exposes only behavior already required by current
 MindForge evaluation/generation paths. It excludes Transformer internals,
 training/optimizer semantics, checkpoint format, PPF, hosts, plugins, and
 speculative capability enums.
+
+This is a bounded PyTorch v0 contract for current proven runtime consumers,
+not a universal permanent model ABI. See docs/research/model-contract-adr.md.
 """
 
 from __future__ import annotations
@@ -15,13 +18,10 @@ import torch
 
 @runtime_checkable
 class TokenModel(Protocol):
-    """Smallest proven runtime contract for the current token LM use cases."""
+    """Smallest proven PyTorch runtime contract for current token-LM use cases."""
 
     @property
     def context_limit(self) -> int: ...
-
-    @property
-    def vocab_size(self) -> int: ...
 
     @property
     def training(self) -> bool: ...
