@@ -1,13 +1,16 @@
 # PPF-L1/L2 Foundation Protocol
 
-Status: **FROZEN DRAFT FOR REVIEW / IMPLEMENTATION NOT AUTHORIZED**
+Version: **2**
+
+Status: **FROZEN FOR EXECUTION REVIEW**
+
+Implementation: **NOT AUTHORIZED**
+
+L1 execution: **NOT STARTED**
+
+L2 execution: **NOT STARTED**
 
 Date: 2026-09-03
-
-Depends on:
-
-- `docs/research/personal-intelligence-two-track.md`
-- `docs/research/ppf-device-platform-research.md`
 
 Track:
 
@@ -17,7 +20,7 @@ Track B — Personal Pattern Foundation (PPF)
 
 Mission:
 
-> Prove, from first principles, the minimum foundation required for a local system to reliably recognize one person over time.
+> Prove, from first principles, the minimum semantic and event foundation required for a local system to reliably recognize one person over time.
 
 This protocol covers only:
 
@@ -26,13 +29,42 @@ PPF-L1 — Define “Recognize Me”
 PPF-L2 — Personal Event Foundation
 ```
 
-It does **not** authorize a pattern engine, PIS port, HDC, SLM, graph, embeddings, LLM-based pattern discovery, mobile application, wearable integration, or MindForge-Mobile integration.
+It does not authorize L1/L2 proof execution, fixtures, schema/validator implementation, pattern algorithms, production PPF, mobile SDK integration, MindForge-Mobile integration, or L3/L4/L5 work.
+
+Legacy PIS is **HISTORICAL ONLY** and outside the PPF execution path. PPF is **GREENFIELD FOUNDATION RESEARCH**.
 
 ---
 
-# 1. Research ladder
+# 1. Protocol v2 revision basis
 
-PPF is intentionally staged:
+Protocol v2 preserves the v1 first-principles rationale and strengthens it using completed research. Git history preserves v1 provenance; this document records the evidence that changed the frozen requirements.
+
+Canonical inputs reviewed in full:
+
+- `docs/research/personal-intelligence-two-track.md`
+- `docs/research/ppf-device-platform-research.md`
+- `docs/research/ppf-l1-l2-related-work-research.md`
+- `docs/research/ppf-l1-l2-research-synthesis.md`
+- `docs/research/README.md` (canonical research index/status)
+- Protocol v1 in this file's Git history
+
+Research-driven changes frozen into v2:
+
+1. observation quality/coverage is explicit and distinct from pattern confidence;
+2. time expands to `phenomenon_time`, `result_or_observed_time`, and `ingested_time`;
+3. capture policy and expected observability become provenance;
+4. context is compositional/multi-label;
+5. explicit user feedback is provenance-bearing evidence rather than silent mutation;
+6. the event envelope remains small while borrowing proven semantics from SOSA/SSN, SensorThings, OpenTelemetry, CloudEvents, and W3C PROV;
+7. the L2 fixture floor increases from 27+ to **40+** to cover missingness, timing, multi-device, correction, and acquisition failure modes before algorithms exist.
+
+These standards and systems are semantic references, not framework dependencies.
+
+---
+
+# 2. Research ladder and hard principle
+
+PPF remains staged:
 
 ```text
 L1 — Define “Recognize Me”
@@ -41,179 +73,162 @@ L3 — Ground-Truth Personal Pattern Benchmark
 L4 — Minimal Baselines
 L5 — Minimum Missing Mechanism
         ↓
-Feasibility decision
+Feasibility Decision
         ↓
 Only then compose proven layers
 ```
 
-Each layer must earn the right to exist.
-
-A later layer must not retroactively redefine an earlier layer merely to make an implementation succeed.
-
-Core rule:
+Each layer must earn the right to exist. A later layer may not redefine an earlier layer merely to make an implementation succeed.
 
 > **Architecture follows evidence; evidence does not follow architecture.**
 
----
-
-# 2. Why L1/L2 must precede implementation
-
-The device-platform survey establishes several facts:
-
-1. personal signals exist across Android, iOS and wearables;
-2. access is incomplete and permission-dependent;
-3. event delivery may be delayed, batched or unavailable;
-4. different devices may observe the same underlying behavior;
-5. health data may be deliberately indistinguishable from absent data when permission is denied;
-6. wearable/device connectivity may disappear temporarily;
-7. platform capability differs significantly;
-8. missing observation is therefore not equivalent to negative behavioral evidence.
-
-If PPF starts by implementing a pattern algorithm before solving these semantics, the benchmark can produce scientifically invalid conclusions.
-
-Therefore L1/L2 are **semantic and evidence-foundation proofs**, not application engineering milestones.
+No implementation architecture is selected during L1/L2 proof definition.
 
 ---
 
-# 3. PPF-L1 — Define “Recognize Me”
+# 3. Why L1/L2 precede implementation
 
-## 3.1 Research question
+Completed research establishes that useful personal signals exist across phones, watches, accessories, health repositories, user input, and app/system sources, but their observability is inherently partial. Permission, entitlement, background limits, history windows, sampling policy, non-wear, disconnection, batching, synchronization, and source quality all affect what evidence exists.
 
-> What observable outputs are necessary and sufficient for a system to demonstrate that it recognizes a person’s recurring behavior, preferences, context dependencies, exceptions and changes over time?
+Therefore these implications are invalid:
 
-The answer must not depend on a specific algorithm.
+```text
+no observation -> behavior did not occur
+frequency -> preference
+arrival order -> behavioral order
+phone + watch records -> independent evidence
+high observation quality -> high pattern confidence
+context A precedes behavior B -> A caused B
+```
 
----
-
-## 3.2 L1 non-goals
-
-L1 does not decide:
-
-- how a pattern is discovered;
-- how confidence is calculated;
-- which database is used;
-- whether vectors/embeddings exist;
-- whether HDC exists;
-- whether a neural model exists;
-- how mobile permissions are implemented;
-- how apps are invoked;
-- whether actions are autonomous.
-
-L1 specifies the **semantic output contract only**.
+L1/L2 are semantic and evidence-foundation proofs. They must make these distinctions testable before any pattern algorithm is admitted.
 
 ---
 
-## 3.3 Minimum pattern semantics to define
+# 4. PPF-L1 — Define “Recognize Me”
 
-L1 must define operational semantics for at least:
+## 4.1 Research question
+
+> What observable, implementation-independent outputs are necessary and sufficient for a system to demonstrate that it recognizes a person's recurring behavior, preferences, context dependencies, exceptions, corrections, and changes over time?
+
+L1 defines semantics only. It does not choose discovery, scoring, storage, retrieval, inference, or mobile architecture.
+
+## 4.2 L1 semantic categories
+
+L1 must define and keep distinct:
+
+```text
+FACT
+OBSERVATION
+CURRENT CONTEXT
+PATTERN
+ROUTINE
+PREFERENCE
+RELATIONSHIP-CONDITIONED BEHAVIOR
+TEMPORAL SEQUENCE
+CONTEXT→ACTION ASSOCIATION
+EXCEPTION
+CHANGE/DRIFT
+EXPLICIT USER CORRECTION
+```
+
+### Fact
+
+A directly asserted or otherwise established personal datum whose semantics are not themselves a recurring behavioral pattern.
+
+### Observation
+
+A provenance-bearing record that a source observed, derived, or explicitly reported something. An observation is evidence; it is not automatically a fact, preference, routine, or pattern.
+
+### Current context
+
+The currently applicable contextual dimensions relevant to interpretation. Context may be multi-label/compositional rather than one exclusive category.
+
+### Pattern
+
+A supported recurring or conditional personal-behavior assertion derived from evidence under a defined scope. A pattern is not a raw observation, immutable fact, preference by default, or causal claim. Routine, preference, relationship-conditioned behavior, temporal sequence, context-action association, exception, and change/drift are distinct pattern semantics with their own proof obligations.
 
 ### Routine
 
-A recurring behavior under identifiable opportunities/context.
-
-Example:
+A recurring behavior under comparable **observable opportunities and context**. Repetition count alone is insufficient.
 
 ```text
-weekday + leaving work
-→ usually navigates home
+18 home commutes / 27 observable commute opportunities
+```
+
+is semantically different from:
+
+```text
+18 observed home commutes / unknown opportunity denominator
 ```
 
 ### Preference
 
-A repeated choice among meaningful alternatives, not merely frequent occurrence.
-
-Example:
+A repeated selection when a meaningful choice opportunity and meaningful alternatives existed. Frequency without alternatives does not establish preference.
 
 ```text
-when dining with spouse
-→ Japanese is chosen disproportionately often
+choice opportunity + alternatives + selected outcome
 ```
+
+must be representable. `15 Japanese meals` alone does not prove preference.
 
 ### Relationship-conditioned behavior
 
-Behavior changes based on person/entity context.
+Behavior whose association changes with a person/entity relationship or social context.
 
 ### Temporal sequence
 
-A recurring ordered chain where temporal order matters.
+A recurring ordered relation in which temporal ordering is semantically relevant.
 
-### Context → action association
+### Context→action association
 
-A behavior associated with a context, without claiming causality.
+A recurring association between a compositional context and an action/outcome. It is an association, not a causal claim.
+
+Allowed language includes `associated with`, `conditioned on`, and `observed under`. Causal claims require a future separately authorized causal framework.
 
 ### Exception
 
-A meaningful conditional deviation from a broader pattern.
+A meaningful conditional deviation from a broader pattern without automatically invalidating the broader pattern.
 
-### Change / drift
+### Change/drift
 
-A prior pattern weakens, reverses, or is replaced over time.
+A previously supported behavior weakens, reverses, changes scope, or becomes stale. Apparent change caused only by telemetry coverage degradation must not be labeled drift.
 
 ### Explicit user correction
 
-A user-provided correction that can invalidate or modify an inferred pattern.
+Provenance-bearing user feedback that confirms, rejects, edits, qualifies, corrects, deletes, or resets personal state. Correction does not silently overwrite historical evidence.
 
----
+## 4.3 Context composition
 
-## 3.4 Required distinction: fact vs pattern
-
-L1 must distinguish:
+L1 must allow simultaneous contextual dimensions such as:
 
 ```text
-FACT
-PATTERN
-PREFERENCE
-EXCEPTION
-CURRENT CONTEXT
+time = Friday 17:40
+location_category = work_exit
+social = alone
+activity = walking
+calendar = workday-ended
+device_state = phone+watch available
 ```
 
-Example:
+No large universal context ontology is frozen. Context must remain small, extensible, typed enough to test, and platform-neutral.
+
+## 4.4 Pattern is not causality
+
+L1 must reject causal overclaim. These are invalid without separate causal evidence:
 
 ```text
-Fact:
-Person X is spouse.
-
-Pattern:
-After work, user often messages Person X.
-
-Preference:
-With Person X, user often chooses Japanese food.
-
-Exception:
-With children present, user usually chooses another category.
+A often precedes B -> A causes B
+context C co-occurs with action D -> C causes D
 ```
 
-PPF must not become a generic personal-memory bucket.
+L1 scenarios must later include false-correlation cases such as sparse coincidence, confounder/context split, Simpson-like aggregate effects, rare exceptions, and missing telemetry.
 
----
+## 4.5 Abstention and semantic state
 
-## 3.5 Required output semantics
+Recognizing a person includes knowing when not to claim a pattern.
 
-A future pattern result must be able to expose conceptually:
-
-```text
-pattern identity
-pattern type
-scope/context
-supporting evidence summary
-counterevidence summary
-opportunity denominator
-confidence/calibration value if later justified
-exceptions
-freshness/last evidence
-status: candidate/admitted/stale/corrected/deleted/etc.
-provenance reference
-```
-
-This is a semantic requirement, not a frozen JSON schema.
-
----
-
-## 3.6 Required abstention semantics
-
-“Recognize me” includes knowing when not to claim recognition.
-
-L1 must define states equivalent to:
+Mandatory semantic states include equivalents of:
 
 ```text
 SUPPORTED
@@ -223,31 +238,45 @@ STALE
 UNKNOWN_CONTEXT
 NOT_OBSERVABLE
 USER_REJECTED
+SUPERSEDED
+DELETED
 ```
 
-A system that always returns a pattern fails L1 by definition.
+`SUPERSEDED` belongs at semantic level because replacement/correction must be distinguishable from deletion.
 
----
+A numeric confidence score is **OPTIONAL / FUTURE / REQUIRES CALIBRATION PROOF**. L1/L2 do not require numeric pattern confidence.
 
-## 3.7 Required correction semantics
+## 4.6 Observation quality is not pattern confidence
 
-L1 must define how explicit user feedback affects semantic truth.
-
-At minimum:
+This is a hard invariant:
 
 ```text
-user confirms pattern
-user rejects pattern
-user edits scope/context
-user marks exception
-user requests forgetting/deletion
+observation_quality != pattern_confidence
 ```
 
-No algorithm is chosen yet, but the semantic outcome must be unambiguous.
+Poor observation quality or coverage describes weakness in a source/window. It does not itself determine support for a later pattern because other evidence may exist. High-quality observation likewise does not establish a high-confidence pattern.
 
----
+If numeric pattern confidence is ever added, calibration must be independently proven in a later layer.
 
-## 3.8 Required deletion semantics
+## 4.7 User correction operations
+
+L1 must define semantic operations equivalent to:
+
+```text
+CONFIRM
+REJECT
+EDIT_SCOPE
+DECLARE_EXCEPTION
+CORRECT_OBSERVATION
+REQUEST_DELETE
+RESET_PERSONALIZATION
+```
+
+The future system must conceptually preserve what was believed, what was corrected, when the correction occurred, who/what supplied it, and what observation/pattern assertion it referenced.
+
+Actual persistence mechanics remain deferred.
+
+## 4.8 Deletion and replacement semantics
 
 L1 must distinguish:
 
@@ -255,211 +284,254 @@ L1 must distinguish:
 HIDE
 DEACTIVATE
 INVALIDATE
+SUPERSEDE
 DELETE
 RESET PERSONALIZATION
 ```
 
-`DELETE` must mean that the pattern cannot continue to be returned from active PPF state merely because stale derived state/index/cache remains.
+`DELETE` means deleted information cannot remain retrievable from active PPF state merely because derived state, cache, or index remains stale. Deletion lineage must be sufficient for future derived state to be invalidated. Physical storage mechanics are not frozen here.
 
-Actual storage mechanics belong to implementation later.
-
----
-
-## 3.9 Required authority boundary
-
-PPF semantics stop at recognition.
+## 4.9 Authority boundary
 
 ```text
 PPF:
-recognize / retrieve / explain uncertainty
+recognize
+retrieve
+report evidence/uncertainty
 
 MindForge-Mobile:
-understand / reason / decide / route
+understand
+reason
+route
 
 Host / OS / app:
-authorize and execute
+authorize
+execute
 ```
 
-PPF cannot autonomously perform device/app actions.
+PPF has no action authority.
 
 ---
 
-# 4. PPF-L1 proof artifacts
+# 5. PPF-L1 proof artifacts and scenario floor
 
-Before L1 PASS, produce:
+L1 execution, when separately authorized, must produce at least:
 
-### A. `recognize-me-contract.md`
+1. `ppf-recognize-me-contract.md` defining categories, examples, non-examples, uncertainty, correction, and deletion semantics;
+2. **>=30 independently reviewable scenarios**;
+3. an ambiguity review demonstrating that expected semantic answers can be classified without knowing an algorithm.
 
-Defines every semantic category above with examples and non-examples.
-
-### B. scenario set
-
-At least 30 hand-authored examples spanning:
-
-- routine;
-- preference;
-- conditional preference;
-- relationship-conditioned behavior;
-- temporal sequence;
-- exception;
-- drift;
-- reversal;
-- correction;
-- deletion;
-- insufficient evidence;
-- conflicting evidence.
-
-Each scenario must specify the expected semantic answer independently of implementation.
-
-### C. ambiguity review
-
-A reviewer must be able to answer each scenario without needing to know which algorithm PPF will later use.
-
----
-
-# 5. PPF-L1 PASS gates
-
-L1 = PASS only if all are true:
+Scenario coverage must include at least:
 
 ```text
-L1-G1 semantic categories defined without algorithm leakage
-L1-G2 fact vs pattern distinction unambiguous
-L1-G3 occurrence vs preference distinction explicit
-L1-G4 exception semantics defined
-L1-G5 drift/reversal semantics defined
-L1-G6 insufficient-evidence/abstention semantics defined
-L1-G7 user correction semantics defined
-L1-G8 delete/reset semantics defined
-L1-G9 authority boundary explicit
-L1-G10 >=30 scenario expectations independently reviewable
+routine
+preference
+conditional preference
+relationship-conditioned behavior
+sequence
+context-action association
+exception
+drift
+reversal
+correction
+deletion
+insufficient evidence
+conflicting evidence
+unknown/unobservable
+multi-label context
+false correlation
+sparse evidence
 ```
 
-If these cannot be defined coherently, PPF should STOP before implementation.
+Tiny examples inside this protocol do not count toward the execution scenario set.
 
 ---
 
-# 6. PPF-L2 — Personal Event Foundation
+# 6. PPF-L1 PASS gates
 
-## 6.1 Research question
+L1 = PASS only if all are independently demonstrated:
 
-> Can one small, platform-neutral event model faithfully represent the minimum personal observations needed by future PPF experiments across phone, wearable and optional health sources without confusing missingness, opportunity, duplication, delay or permission gaps with behavior?
+```text
+L1-G1  semantic categories are algorithm-independent
+L1-G2  fact/observation/context/pattern/preference remain distinct
+L1-G3  routine semantics require comparable observable opportunities/context
+L1-G4  preference requires choice opportunity and meaningful alternatives
+L1-G5  multi-label/compositional context is representable
+L1-G6  exception semantics are coherent
+L1-G7  drift/reversal semantics distinguish behavioral change from coverage change
+L1-G8  abstention/uncertainty semantics are first-class
+L1-G9  correction semantics preserve provenance and do not require silent overwrite
+L1-G10 hide/deactivate/invalidate/supersede/delete/reset remain distinct
+L1-G11 context-action semantics make no causal overclaim
+L1-G12 authority boundary is explicit and PPF has no action authority
+L1-G13 >=30 scenario expectations are independently reviewable
+```
 
-This is the most important pre-implementation proof.
+If these cannot be defined coherently, PPF must STOP or REVISE before implementation.
 
 ---
 
-## 6.2 L2 design principle
+# 7. PPF-L2 — Personal Event Foundation
 
-PPF must learn from **behavioral evidence**, not telemetry artifacts.
+## 7.1 Research question
 
-Therefore the model must separate:
+> Can one small, platform-neutral event model faithfully represent the minimum personal evidence required by future PPF experiments across phone, wearable, user-input, and optional health sources without confusing missingness, opportunity, replication, delay, quality, or platform restrictions with behavior?
+
+L2 proves representability only. It does not infer patterns.
+
+## 7.2 Event-foundation principle
+
+PPF must learn from behavioral evidence rather than telemetry artifacts. The event layer must keep separable:
 
 ```text
 what happened
+what was observed or derived
 what was observable
 what opportunity existed
-what source reported it
-when it happened
-when it was received
-whether another device reported the same thing
+which source produced evidence
+when the phenomenon occurred
+when the source produced/recognized the result
+when PPF ingested it
+what capture policy governed observability
+whether evidence is raw or derived
+whether another device record is a replica or independent corroboration
+what correction/deletion lineage exists
 ```
 
 ---
 
-# 7. L2 minimum event concepts
+# 8. L2 minimal conceptual envelope
 
-## 7.1 Event identity
+The frozen requirement is a **tiny event envelope**, not a schema implementation and not an ontology.
 
-Each observation must support:
+It must be capable of supporting conceptually:
 
 ```text
 event_id
-source_event_id (optional)
-correlation/dedup key (optional)
+source
+event_type
+phenomenon_time
+result_or_observed_time
+ingested_time
+payload / context
+provenance
+observation quality / coverage
+observability / opportunity state
 ```
 
-Requirement:
-
-Two devices observing one underlying event must not automatically become two units of evidence.
-
----
-
-## 7.2 Time model
-
-Must represent separately:
+Where needed it must also support:
 
 ```text
-occurred_at
-ingested_at
-interval_start / interval_end where relevant
-timezone or canonical time basis
+source_event_id
+correlation key
+lineage reference
+schema/version reference
 ```
 
-Required because wearable/health signals may arrive batched or delayed.
+The exact field names are intentionally deferred to L2 execution review.
 
-Arrival order must not define behavioral order.
+## 8.1 Identity and source
 
----
+Identity must allow one semantic event to be recognized across retransmission or synchronization without requiring a dedup algorithm now.
 
-## 7.3 Source/provenance model
+Source/provenance must be able to identify relevant origin information such as platform, device class, provider/adapter, source record identifier, capture policy reference, and raw/derived status without leaking platform-specific behavior into pattern semantics.
 
-At minimum:
+## 8.2 Three-time model
+
+L2 must support three conceptual time layers:
 
 ```text
-platform
-source device class
-source adapter/type
-source provider/app where relevant
-source record identifier when available
-raw vs derived
+phenomenon_time
+= when the underlying behavior/event happened
+
+result_or_observed_time
+= when the source produced, recognized, or observed the result
+
+ingested_time
+= when PPF received it
 ```
 
-Example device classes:
+Example:
 
 ```text
-PHONE
-WATCH
-WEARABLE
-ACCESSORY
-HEALTH_REPOSITORY
-CALENDAR_PROVIDER
-APP_USAGE_PROVIDER
-USER_INPUT
+08:00 behavior occurs
+08:02 watch creates/derives observation
+10:00 phone receives synchronized record
 ```
 
-These are examples, not final enum requirements.
+All three may be equal in simple cases. Arrival order never defines behavioral order. Interval and timezone/canonical-time metadata must be representable when relevant.
 
----
+These semantics borrow from SOSA/SSN, OGC SensorThings, and OpenTelemetry without adopting those frameworks.
 
-## 7.4 Observability model
+## 8.3 Capture-policy provenance
 
-L2 must distinguish at least:
+Evidence provenance must be able to reference why data should or should not have been observable. Relevant capture policies include:
 
 ```text
-SOURCE_AVAILABLE
+continuous
+periodic sample
+event-driven
+foreground-only
+background-enabled
+history-window-limited
+user-triggered
+wearable passive monitoring
+batched
+```
+
+Conceptual metadata must support:
+
+```text
+capture policy
+expected observability
+history/access window
+sampling/duty cycle when relevant
+```
+
+Every event need not duplicate full policy metadata; referenceable provenance is sufficient.
+
+## 8.4 Observability and missingness
+
+The model must distinguish at least the semantics of:
+
+```text
+OBSERVED_OCCURRENCE
+OBSERVABLE_NON_OCCURRENCE
+NO_OBSERVATION
 SOURCE_UNAVAILABLE
-PERMISSION_GRANTED
-PERMISSION_DENIED when knowable
-PERMISSION_UNKNOWN
-HISTORY_LIMITED
-BACKGROUND_UNAVAILABLE
+PERMISSION_UNAVAILABLE_OR_UNKNOWN
+OUTSIDE_CAPTURE_WINDOW
+HISTORY_UNAVAILABLE
 DATA_DELAYED
-NOT_OBSERVABLE
+UNKNOWN_OUTCOME
 ```
 
-The exact schema may differ, but semantic distinction is mandatory.
+Exact enum names are deferred. The invariants are not:
 
-Important:
+```text
+NO_OBSERVATION != OBSERVABLE_NON_OCCURRENCE
+NOT_OBSERVED != BEHAVIOR_DID_NOT_OCCUR
+```
 
-On platforms such as HealthKit, denial may deliberately be indistinguishable from no data. Therefore `PERMISSION_UNKNOWN / NOT_OBSERVABLE` must be possible.
+Missingness mechanisms that must remain distinguishable in evidence provenance include:
 
----
+```text
+missing by design
+sensor non-collection
+platform restriction
+permission limitation
+device disconnected
+wearable non-wear
+sampling gap
+sync delay
+unknown
+```
 
-## 7.5 Opportunity model
+L2 does not require MCAR/MAR/MNAR statistical modeling.
 
-This is a hard requirement.
+## 8.5 Opportunity model
 
-PPF must distinguish:
+Opportunity remains a PPF-specific hard requirement. L2 must support:
 
 ```text
 OPPORTUNITY
@@ -471,433 +543,375 @@ UNKNOWN_OUTCOME
 Example:
 
 ```text
-Opportunity:
-workday ended and commute context became available
-
-Occurrence:
-user navigated home
-
-Observable non-occurrence:
-full observation available and user selected another route/destination
-
-Unknown outcome:
-phone/watch source unavailable during the opportunity window
+30 commute opportunities
+27 observable
+3 unknown
+18 home
+7 other destination
+2 observable no-navigation
 ```
 
-A missing event must never be silently counted as a non-occurrence.
+This must remain distinguishable from `18 observed home events` with an unknown denominator. No frequency algorithm is chosen.
+
+## 8.6 Multi-device evidence relationship
+
+L2 must represent at least:
+
+```text
+SAME_ORIGIN_REPLICATED
+INDEPENDENT_CORROBORATION
+UNKNOWN_RELATIONSHIP
+```
+
+Example A:
+
+```text
+watch workout -> synchronized into HealthKit -> phone reads repository copy
+= same-origin replicated evidence unless proven otherwise
+```
+
+Example B:
+
+```text
+phone geofence + watch motion
+= potentially independent corroboration of one behavioral episode
+```
+
+No deduplication algorithm is authorized; only relationship representability is required.
+
+## 8.7 Raw observation, derived observation, and pattern
+
+L2 must keep distinct:
+
+```text
+RAW OBSERVATION
+DERIVED OBSERVATION
+PATTERN
+```
+
+Example:
+
+```text
+accelerometer samples
+-> derived walking episode
+-> later routine
+```
+
+L2 may consume a derived observation without retaining raw high-rate data, but provenance must identify derivation and source/procedure. Pattern conclusions remain outside L2.
+
+## 8.8 Compositional context
+
+Context inside the event foundation must be small, extensible, typed enough to test, and platform-neutral. It may carry multiple simultaneous dimensions and must not require a generic ontology.
+
+## 8.9 User feedback as evidence
+
+Explicit feedback/correction must be representable as provenance-bearing evidence with conceptually:
+
+```text
+feedback event
+reference target
+feedback type
+user source
+timestamp
+lineage
+```
+
+This prevents `user correction -> silent database mutation`.
+
+## 8.10 Lineage and invalidation
+
+Borrowing minimally from W3C PROV concepts, L2 must be able to represent relationships equivalent to:
+
+```text
+derived_from
+supersedes
+invalidates
+corrects
+deletes
+```
+
+No graph database, RDF, or provenance engine is implied.
+
+## 8.11 Health/medical boundary
+
+```text
+health/fitness: OPTIONAL SOURCE
+medical/clinical: OPTIONAL / NOT FOUNDATION DEPENDENCY
+```
+
+PPF foundation may recognize personal/wellness context. It must not diagnose, recommend treatment, control medical devices, or convert personal pattern confidence into clinical risk.
 
 ---
 
-## 7.6 Behavioral semantics
+# 9. L2 fixture specification floor
 
-The event foundation must be able to represent minimally:
+L2 execution must later define **>=40 fixtures**. This task freezes required families only; no fixtures are created here.
+
+Minimum families:
+
+### Platform acquisition
 
 ```text
-actor/person
-context
-behavior/action
-object/target
-outcome/result
-explicit vs observed
-authorized user correction
+Android
+iOS
+Wear OS
+Apple Watch/watchOS
+user input
+optional health source
 ```
 
-The foundation should avoid encoding pattern conclusions into raw observations.
-
-Bad:
+### Time
 
 ```text
-user_prefers_japanese = true
+normal event
+delayed event
+batched event
+out-of-order event
+timezone change
+DST boundary
 ```
 
-Good observation:
+### Missingness
 
 ```text
-context: dinner_with_person_X
-choice_set: [Japanese, Vietnamese, Korean]
-selected: Japanese
+permission missing
+source unavailable
+outside history window
+sampling gap
+wearable disconnected
+wearable non-wear
+data delayed
+unknown reason
 ```
 
-Pattern interpretation belongs later.
-
----
-
-## 7.7 Missingness semantics
-
-L2 must explicitly prove the difference among:
+### Opportunity
 
 ```text
-NO EVENT
-NO OBSERVATION
-NO PERMISSION
-SOURCE DISCONNECTED
-DATA NOT YET ARRIVED
-HISTORY OUTSIDE ACCESS WINDOW
-OBSERVABLE NON-OCCURRENCE
+occurrence
+observable non-occurrence
+unknown outcome
+partial observability
 ```
 
-If the schema collapses any of these in a way that biases future learning, L2 fails.
-
----
-
-## 7.8 Multi-device deduplication semantics
-
-Scenario:
+### Multi-device
 
 ```text
-Apple Watch records workout
-HealthKit syncs workout to iPhone
-phone-side adapter observes HealthKit record
-```
-
-These may represent one underlying behavior, not multiple independent confirmations.
-
-L2 must define a way to represent:
-
-```text
-same-origin replicated evidence
-independent corroborating evidence
+same-origin replication
+independent corroboration
 unknown relationship
+duplicate source event ID
 ```
 
-No dedup algorithm is required yet; representability is required.
-
----
-
-## 7.9 Correction and deletion lineage
-
-An event may later be:
+### Context
 
 ```text
-corrected
-superseded
-deleted by source
-removed by user request
+single context
+multi-label context
+conflicting context
+unknown context
 ```
 
-L2 must represent lineage so future derived patterns can be invalidated/recomputed.
+### Correction/deletion
+
+```text
+user correction
+source correction
+superseded event
+source deletion
+user deletion request
+reset semantics
+```
+
+### Raw/derived
+
+```text
+raw observation
+derived observation
+derived observation with procedure provenance
+```
+
+The fixture set must include cross-platform semantic equivalence, capture-policy changes, observation-quality degradation, and false-negative traps caused by missing telemetry.
 
 ---
 
-# 8. L2 platform-neutral fixture set
+# 10. L2 proof implementation boundary
 
-Before implementation, create a fixture specification covering at least:
+No schema, fixtures, validator, or executable PPF logic is created by this protocol-freeze task.
 
-### Android fixtures
-
-1. app usage event with usage permission;
-2. app usage unknown because permission unavailable;
-3. calendar meeting end as opportunity;
-4. geofence enter/leave context;
-5. notification signal with content minimized;
-6. delayed background ingestion.
-
-### iOS fixtures
-
-7. calendar full-access event;
-8. calendar write-only state that cannot observe history;
-9. geofence event;
-10. app-usage data available through entitlement/authorization;
-11. health data absent but read authorization unknowable;
-12. limited health-history window.
-
-### Wearable fixtures
-
-13. Wear OS passive event;
-14. Wear OS batched delivery;
-15. watch-phone duplicate observation;
-16. disconnected wearable / unknown outcome;
-17. Apple Watch workout record later synchronized to phone.
-
-### User/semantic fixtures
-
-18. explicit user preference statement;
-19. user correction of an old observation;
-20. user deletion request;
-21. source record deletion;
-22. timezone change;
-23. duplicated event IDs;
-24. out-of-order arrival.
-
-### Optional medical fixtures
-
-25. permissioned health measurement as context only;
-26. clinical record source unavailable/permission absent;
-27. medical context explicitly excluded from diagnostic interpretation.
-
-Minimum fixture count: **27**.
-
-Fixtures must contain no PPF pattern algorithm.
-
----
-
-# 9. L2 proof implementation boundary
-
-A small **throwaway validator/schema prototype** is allowed only if necessary to prove representability.
-
-Allowed:
+During a later explicitly authorized L2 execution, the maximum permitted proof implementation may be a throwaway, platform-neutral representability harness such as:
 
 ```text
 JSON fixtures
-JSON Schema / dataclass / typed record draft
+small JSON Schema / dataclass / typed record draft
 parser/validator
 round-trip serialization test
 fixture consistency checks
 ```
 
-Not allowed:
+It may exist only to prove the frozen event contract.
+
+Forbidden during L1/L2 proof definition and forbidden now:
 
 ```text
-pattern scoring
-confidence learning
-HDC
-SLM
-embedding generation
-vector retrieval
-graph database
-LLM inference
-mobile SDK integration
-live telemetry collection
-agent/tool execution
-```
-
-The purpose is proof of the event contract, not production code.
-
----
-
-# 10. PPF-L2 proof questions
-
-For every fixture, reviewer must be able to answer:
-
-1. What actually happened?
-2. Was the behavior observable?
-3. Was there an opportunity?
-4. Was a non-occurrence observable or merely missing?
-5. Which device/provider supplied evidence?
-6. Is the event raw or derived?
-7. Did it arrive late?
-8. Could it duplicate another event?
-9. Can it later be corrected/deleted?
-10. Does the event encode only observation, not a pattern conclusion?
-
-If any answer is ambiguous because of schema limitations, L2 is not PASS.
-
----
-
-# 11. L2 PASS gates
-
-L2 = PASS only if all are true:
-
-```text
-L2-G1 one platform-neutral event model covers all 27+ fixtures
-L2-G2 occurrence time and ingestion time are separate
-L2-G3 source provenance is preserved
-L2-G4 observability state is explicit
-L2-G5 opportunity semantics are explicit
-L2-G6 observable non-occurrence != missing observation
-L2-G7 unknown/unobservable is representable
-L2-G8 delayed/batched events remain semantically correct
-L2-G9 multi-device duplicate/correlation semantics are representable
-L2-G10 correction/deletion lineage is representable
-L2-G11 explicit user input is distinguishable from passive observation
-L2-G12 no pattern conclusion leaks into raw event schema
-L2-G13 health/medical sources are optional, not foundation dependencies
-L2-G14 no mobile/platform SDK dependency exists in foundation model
-L2-G15 independent reviewer can classify all fixtures consistently
-```
-
----
-
-# 12. Scientific falsification cases required before L2 PASS
-
-The fixture review must explicitly test failure-prone scenarios.
-
-## Falsification A — Missing permission
-
-```text
-Expected:
-UNKNOWN / NOT OBSERVABLE
-
-Forbidden interpretation:
-behavior did not occur
-```
-
-## Falsification B — Wearable disconnected
-
-```text
-Expected:
-source unavailable
-
-Forbidden interpretation:
-no activity
-```
-
-## Falsification C — Delayed batch
-
-```text
-Occurred: 08:00
-Ingested: 10:00
-
-Expected behavior time: 08:00
-```
-
-## Falsification D — Duplicate cross-device record
-
-```text
-watch observation + phone synchronized copy
-```
-
-Must not imply two independent occurrences.
-
-## Falsification E — Opportunity denominator
-
-```text
-10 observed choices / 30 opportunities
-```
-
-must differ from:
-
-```text
-10 observed choices / 10 opportunities
-```
-
-## Falsification F — Explicit correction
-
-User correction must be representable as higher-authority evidence metadata without mutating historical raw facts invisibly.
-
-## Falsification G — Delete lineage
-
-Deleted/superseded observations must be traceable so later pattern evidence can be invalidated.
-
----
-
-# 13. What must be proven before any PPF pattern implementation
-
-Implementation of L3/L4 pattern experiments is forbidden until all of the following are established:
-
-```text
-P1 “recognize me” semantic contract is frozen
-P2 fact/pattern/preference/exception semantics are distinct
-P3 abstention/insufficient evidence is first-class
-P4 opportunity denominator is first-class
-P5 missingness/observability states are first-class
-P6 event time != ingest time
-P7 provenance is preserved
-P8 multi-device duplication is representable
-P9 correction/delete lineage is representable
-P10 platform-specific absence cannot masquerade as behavioral evidence
-P11 health/medical is optional
-P12 action authority remains outside PPF
-```
-
-Only then may PPF proceed to:
-
-```text
-L3 — Ground-Truth Personal Pattern Benchmark
-```
-
----
-
-# 14. L3 entry criteria
-
-L3 is authorized only after L1 and L2 both PASS.
-
-L3 may then define synthetic/semi-synthetic event histories with hidden ground truth for:
-
-```text
-routine formation
-coincidence / false correlation
-routine drift
-preference emergence
-preference reversal
-conditional preference
-rare exception
-relationship-conditioned behavior
-temporal sequence
-context-action association
-conflicting evidence
-user correction
-deletion / forgetting
-insufficient evidence / abstention
-contextual retrieval
-```
-
-No baseline or algorithm should see ground-truth generator rules.
-
----
-
-# 15. Explicit STOP conditions
-
-PPF foundation should STOP or REVISE before implementation if:
-
-```text
-S1 “recognize me” cannot be defined independently of algorithm
-S2 event model needs platform-specific semantics in the core
-S3 missing telemetry cannot be distinguished from negative evidence
-S4 opportunity denominator cannot be represented coherently
-S5 correction/delete semantics require hidden irreversible state
-S6 multi-device replication systematically inflates evidence
-S7 benchmark ground truth cannot be expressed using the L2 event model
-```
-
-A STOP is a valid research outcome.
-
----
-
-# 16. Minimalism constraints
-
-PPF must remain greenfield and small.
-
-Before L3/L4 evidence, do not introduce:
-
-```text
-legacy PIS code
-HDC
-SLM
-repair subsystem
-complex taxonomy
+database selection
 graph DB
 vector DB
 embedding model
-LLM classifier
-agent framework
-plugin architecture
-production sync engine
-mobile SDK adapters
-medical logic
+HDC
+SLM
+neural model
+LLM
+mobile framework
+mobile SDK
+event broker
+RDF
+ontology stack
+production synchronization engine
+pattern scoring/discovery
+agent/tool execution
 ```
-
-If a later benchmark exposes a failure, add only the smallest mechanism necessary to test that failure.
 
 ---
 
-# 17. Deliverables for the next research execution
+# 11. PPF-L2 proof questions
 
-The next agent task should produce only:
+For every future fixture an independent reviewer must be able to answer without knowing a pattern algorithm:
 
-```text
-docs/research/ppf-recognize-me-contract.md
-docs/research/ppf-l1-scenarios.md
-docs/research/ppf-l2-event-contract.md
-docs/research/data/ppf-l2-fixtures.json
-(optional) tiny validation schema/tests
-```
+1. What underlying phenomenon happened, if known?
+2. What observation/result was produced?
+3. When did the phenomenon, result/observation, and ingestion occur?
+4. Was the behavior observable under the applicable capture policy?
+5. Was there an opportunity?
+6. Was a non-occurrence observable or merely missing?
+7. What source/device/provider supplied the evidence?
+8. What was the observation quality/coverage, and is it clearly distinct from pattern confidence?
+9. Is the evidence raw or derived, and is derivation provenance available?
+10. Is another device record a replica, independent corroboration, or unknown relationship?
+11. Can correction/deletion/supersession lineage be represented?
+12. Is context compositional where needed?
+13. Does the event remain an observation/evidence item rather than a pattern conclusion?
 
-No production package/module should be added to `mindforge/`.
+Any ambiguity caused by the event model is an L2 failure or revision trigger.
 
 ---
 
-# 18. Final protocol status
+# 12. PPF-L2 PASS gates
+
+L2 = PASS only if all are independently demonstrated:
 
 ```text
+L2-G1  one small platform-neutral event model covers >=40 fixtures
+L2-G2  event identity/source semantics are unambiguous
+L2-G3  phenomenon/result-or-observed/ingestion timing is representable
+L2-G4  source and derivation provenance are preserved
+L2-G5  capture policy, expected coverage, and history/sampling limits are representable
+L2-G6  observability/missingness state is explicit
+L2-G7  opportunity semantics are explicit
+L2-G8  observable non-occurrence remains distinct from missing/no observation
+L2-G9  delayed/batched/out-of-order events remain semantically correct
+L2-G10 same-origin replication, independent corroboration, and unknown relationship are representable
+L2-G11 raw and derived observations are distinguishable
+L2-G12 user feedback/correction is provenance-bearing evidence
+L2-G13 correction/delete/supersession lineage is representable
+L2-G14 context is compositional and platform-neutral
+L2-G15 health/medical evidence is optional and does not expand clinical scope
+L2-G16 no pattern conclusion leaks into the event layer
+L2-G17 no mobile/platform SDK dependency exists in the foundation model
+L2-G18 an independent reviewer classifies all fixtures consistently
+```
+
+---
+
+# 13. Required falsification families
+
+Future L1/L2 execution must include cases that could make a naive system falsely claim recognition:
+
+```text
+sparse coincidence
+confounder/context split
+Simpson-like aggregate effect
+rare exception
+missing telemetry
+permission unavailable/unknown
+sampling-by-design gap
+unexpected sensor non-collection
+wearable non-wear/disconnection
+delayed batch
+out-of-order delivery
+same-origin cross-device replica
+source-quality degradation
+apparent drift caused by coverage change
+user correction conflicting with passive evidence
+source correction/deletion
+```
+
+These requirements freeze falsification coverage only. They do not authorize execution in this task.
+
+---
+
+# 14. PPF-L1/L2 PRE-IMPLEMENTATION GATE
+
+Implementation remains blocked until all of the following are independently demonstrated:
+
+```text
+semantic contract coherent
+opportunity semantics coherent
+missingness semantics coherent
+time semantics coherent
+provenance coherent
+multi-device semantics coherent
+correction/deletion lineage coherent
+scenario review PASS
+fixture review PASS
+no algorithm leakage
+no platform dependency
+```
+
+Only after both L1 and L2 PASS may a later, separately authorized task begin:
+
+```text
+L3 — Ground-Truth Personal Pattern Benchmark design
+```
+
+Passing this gate does **not** automatically authorize pattern implementation.
+
+---
+
+# 15. STOP / REVISE conditions
+
+PPF must STOP or REVISE before implementation if any of these occur:
+
+```text
+S1 “recognize me” cannot be defined independently of algorithm
+S2 core event semantics require platform-specific behavior
+S3 missing telemetry cannot be distinguished from behavioral negative evidence
+S4 opportunity denominator cannot be represented coherently
+S5 observation quality and pattern confidence cannot be kept distinct
+S6 correction/delete semantics require hidden destructive overwrite
+S7 multi-device replication inflates evidence by construction
+S8 three-time semantics cannot represent delayed/derived/synchronized records
+S9 context requires a fixed global ontology to be testable
+S10 benchmark ground truth cannot later be expressed using the L2 event model
+```
+
+A STOP or REVISE outcome is valid research evidence.
+
+---
+
+# 16. Status after Protocol v2 freeze
+
+```text
+PPF-L1/L2 Protocol v2:
+FROZEN / READY FOR EXECUTION REVIEW
+
 PPF-L1:
-PROTOCOL DEFINED / EXECUTION NOT YET RUN
+NOT EXECUTED
 
 PPF-L2:
-PROTOCOL DEFINED / EXECUTION NOT YET RUN
+NOT EXECUTED
 
 PPF-L3:
-BLOCKED BY L1/L2
+BLOCKED
 
 PPF-L4:
 BLOCKED
@@ -906,11 +920,13 @@ PPF-L5:
 BLOCKED
 
 Legacy PIS:
-OUTSIDE EXECUTION PATH
-
-MindForge-Mobile integration:
-NOT AUTHORIZED
+HISTORICAL ONLY / OUTSIDE EXECUTION PATH
 
 PPF implementation:
 NOT AUTHORIZED
+
+MindForge-Mobile integration:
+NOT AUTHORIZED
 ```
+
+The next authorized action after external review is **PPF-L1 semantic proof only**. Do not execute L1 until that review authorizes it. L2 execution remains separately gated.
