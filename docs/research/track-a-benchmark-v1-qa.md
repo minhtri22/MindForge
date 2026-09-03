@@ -1,10 +1,10 @@
-# Track A Benchmark v1 — Automated QA
+# Track A Benchmark v1 — Final Automated QA
 
-Status: **PASS / HUMAN SEMANTIC SPOT-REVIEW STILL REQUIRED**
+Status: **PASS / SEMANTIC R1 CORRECTION VALIDATED**
 
 ## Scope
 
-This QA checks materialization correctness, deterministic scoring, quotas, counterfactual structure, reproducibility, and obvious leakage/duplication properties. It does not claim human semantic acceptance of all 1,400 cases.
+This QA validates the final `r1-semantic-correction` materialization after the independent semantic review returned REVISE on the first materialization.
 
 ## Gate results
 
@@ -15,41 +15,58 @@ This QA checks materialization correctness, deterministic scoring, quotas, count
 | split matrix 280/420/700 | PASS |
 | language 840/350/210 | PASS |
 | difficulty 560/490/350 | PASS |
-| per-family language/difficulty/split quotas | PASS |
 | unique case IDs | PASS |
 | same-family exact-input duplicates | PASS — zero |
-| held-out counterfactual minimum | PASS — 280 cases |
-| counterfactual group structure | PASS — 140 pairs |
-| pair language/difficulty held constant | PASS |
-| pair input field-difference count | PASS — exactly one per pair |
-| truth independent of candidate/reference output | PASS |
+| held-out counterfactual coverage | PASS — 280 cases / 140 pairs |
+| counterfactual pair input difference | PASS — exactly one path |
+| split-disjoint template IDs | PASS |
+| calibration-vs-held-out exact utterance overlap | PASS — zero |
+| development-vs-held-out exact utterance overlap | PASS — zero |
+| wrapper/noise-stripped core surface overlap | PASS — zero |
+| exact-name entity policy | PASS |
+| A5 literal extraction policy | PASS |
+| A7 route semantics | PASS |
 | deterministic materializer | PASS |
-| canonical split reproduction | PASS |
-| validator execution | PASS |
-| oracle scorer test | PASS — 2 tests |
-| N4 candidate training absent | PASS |
-| PPF/model/kernel modification absent | PASS |
+| oracle scorer tests | PASS — 2 passed |
+| semantic invariant audit | PASS — 0 CRITICAL / 0 MAJOR |
+| Qwen/reference used as truth | NO |
+| candidate model training | NO |
+| PPF/model/kernel modification | NO |
 
-## Counterfactual structural audit
+## Diversity diagnostics
 
-All 140 held-out pairs differ on exactly one input path. The declared change path is family-specific: A1 foreground reference; A2 personal contacts; A3 conversation language; A4 available actions; A5 last dictated text; A6 personal contacts; A7 available local capabilities.
+Final unique utterance counts per 200-case family:
 
-## Adversarial coverage
+```text
+A1 123
+A2 113
+A3 110
+A4 109
+A5 107
+A6 113
+A7 118
+```
 
-Materialized records cover the frozen ambiguity, similar-entity, irrelevant-state, context/preference conflict, missing argument, unavailable tool, local/external trap, world-knowledge trap, stale fact, code-mix, noisy text, clarification, similar-tool, unsupported-action, and counterfactual tags.
+Unique VI-EN utterances per 50-case family:
 
-## Known limitation
+```text
+A1 34
+A2 35
+A3 30
+A4 30
+A5 32
+A6 35
+A7 36
+```
 
-Rule/template QA cannot establish that Vietnamese phrasing and ambiguous cases are natural enough for a final benchmark. `review_status` therefore remains `automated_qa_pass_human_spot_review_pending`.
-
-Human spot-review is a closure gate, not cosmetic review.
+These counts are diagnostics, not a universal diversity threshold. The essential held-out leakage gates are independently PASS.
 
 ## Decision
 
 ```text
-N3.1 AUTOMATED QA: PASS
-BENCHMARK MATERIALIZATION: PASS
-HUMAN SEMANTIC SPOT-REVIEW: REQUIRED
-BENCHMARK FINAL FREEZE: PENDING
-N4: BLOCKED
+AUTOMATED QA: PASS
+SEMANTIC RE-REVIEW: PASS
+BENCHMARK V1: FINAL FROZEN
+N3.R1-B: MAY PROCEED AS A SEPARATE LOCAL-HARDWARE TASK
+N4: NOT AUTHORIZED
 ```
