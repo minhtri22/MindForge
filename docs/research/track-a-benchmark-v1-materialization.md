@@ -1,6 +1,6 @@
 # Track A Benchmark v1 Materialization — N3.1
 
-Status: **MATERIALIZED / AUTOMATED QA PASS / HUMAN SPOT-REVIEW PENDING**
+Status: **PASS / FINAL FROZEN AFTER SEMANTIC R1 CORRECTION + RE-REVIEW**
 
 Protocol authority: `docs/research/track-a-foundation-protocol.md`
 
@@ -8,99 +8,122 @@ Specification authority: `docs/research/track-a-benchmark-spec.md`
 
 Starting protocol commit: `627044cc06d3e411b1388b57cd94906fefa74343`
 
+Historical first semantic review: `docs/research/track-a-benchmark-v1-semantic-review.md` — **REVISE**.
+
+Closure review: `docs/research/track-a-benchmark-v1-semantic-r1-closure.md` — **PASS**.
+
 ## Purpose
 
-N3.1 materializes the frozen Track-A Benchmark v1 without evaluating or training any 5M/10M/20M/50M candidate. It stops before N4.
+N3.1 materializes and freezes the Track-A Benchmark v1 before any 5M/10M/20M/50M candidate or Qwen reference is evaluated.
 
-## Materialized artifacts
+## Final materialization identity
 
-`benchmarks/track-a-capability-v1/` contains canonical split artifacts in the sandbox bundle plus schema/manifest in-repo. Research tooling includes `scripts/materialize_track_a_v1.py`, `scripts/validate_track_a_v1.py`, `scripts/score_track_a_v1.py`, and `tests/test_track_a_benchmark_v1.py`.
+```text
+benchmark_id: track-a-capability-v1
+benchmark_version: 1.0
+materialization_revision: r1-semantic-correction
+generator_seed: 20260904
+status: FINAL_FROZEN_AFTER_SEMANTIC_R1_PASS
+```
 
-## Frozen counts
+## Final counts
 
 ```text
 total cases: 1400
 families: 7 × 200
 calibration: 280
 development: 420
-test: 700
+held-out test: 700
 Vietnamese: 840
 Vietnamese-English: 350
 English: 210
 straightforward: 560
 contextual: 490
 adversarial: 350
+held-out counterfactual cases: 280
+counterfactual groups: 140
 ```
 
-Every family independently contains exactly 200 cases; 40/60/100 split; 120/50/30 language; and 80/70/50 difficulty.
+Every family remains exactly 200 cases with the frozen 40/60/100 split and 120/50/30 language quotas.
 
-## Counterfactual coverage
+## Semantic R1 corrections
 
-Held-out test contains 280 counterfactual cases in 140 controlled pairs (40% held-out). Pair members keep language/difficulty constant and automated structural audit requires exactly one differing input path per pair.
+The generator was revised rather than patching JSONL rows manually.
 
-## Truth/provenance
+1. **Exact-name policy** — `Tuấn` resolves to the exact `Tuấn` contact even when `Tuấn Anh` exists. Clarification cases now use genuinely duplicated display names such as two `Mai` contacts.
+2. **A5 extraction policy** — explicit message payloads use literal source payload extraction. No silent translation is part of A5 truth.
+3. **Held-out leakage** — held-out template IDs and core surface forms are split-disjoint from calibration/development. The validator strips bounded wrappers/noise before checking core-surface overlap.
+4. **A7 route semantics** — `LOCAL_MODEL` is limited to intrinsic short text transformation; `LOCAL_APP_OR_TOOL` requires an explicitly available local app/tool/live capability; `EXTERNAL` requires non-local/fresh capability; `CLARIFY` is underdetermined input. The old calculator counterfactual was removed and replaced by a live-weather availability counterfactual.
+5. **Language diversity** — surface variation and held-out paraphrase pools were expanded. Final unique utterance counts are 107–123 per 200-case family; VI-EN unique counts are 30–36 per 50-case family.
+6. **Additional re-review fixes** — English date phrasing was made locale-unambiguous; text-transformation routes always include a payload; duplicate politeness artifacts were reduced.
 
-Every case records:
-
-```text
-truth_source = rule_defined
-generator = scripts/materialize_track_a_v1.py
-generator_seed = 20260904
-review_status = automated_qa_pass_human_spot_review_pending
-```
-
-No candidate or external reference model authored final truth.
-
-## Reproducibility / hashes
+## Final automated evidence
 
 ```text
-calibration.jsonl: 6a6c6172404d7d446a24abf3bdf19ea7c3bce9fc33e87debd792feac4a2d7f0b
-development.jsonl: dfba475f0de65b3bc677466484f7282cad5c469403b9e3c694c5fc26a1b6e790
-test.jsonl: 959503e113054d7f945ba027564371fc5ae2f4c8a5ae0945e10a91496f848099
-schema.json: 34acc342d0b77c2e8d631c9d64199742059ade9f34c57e6b86cfa451772c9f60
-human-review-sample.jsonl: 8d50861d8814235d2a1b66a802b6e289719f4197b937c8911c73fa8224db6e84
-```
-
-Re-running the final materializer with seed `20260904` reproduces the three split files byte-for-byte.
-
-## Automated QA
-
-```text
-1400 unique stable IDs: PASS
-split/language/difficulty/per-family quotas: PASS
-held-out counterfactual minimum: PASS
-140 groups exactly paired: PASS
-pair language/difficulty constant: PASS
-pair input differs on exactly one field: PASS
-rule-defined truth provenance: PASS
-same-family exact-input duplicates: 0
-materializer reproduction: PASS
 validator: PASS
-oracle scorer test: PASS
-pytest tests/test_track_a_benchmark_v1.py: 2 passed
+1400 unique IDs: PASS
+split quotas: PASS
+language quotas: PASS
+difficulty quotas: PASS
+counterfactual groups: 140 / PASS
+counterfactual members differ on exactly one input path: PASS
+same-family exact-input duplicates: 0
+held-out template leakage: 0
+held-out exact utterance leakage: 0
+held-out core-surface leakage after wrapper/noise stripping: 0
+SR-01 exact-name truth audit: PASS
+SR-02 A5 literal extraction audit: PASS
+oracle scorer tests: 2 passed
+full semantic audit: 0 CRITICAL / 0 MAJOR
 ```
 
-The scorer test intentionally requires TUE on held-out test only, because calibration/development have no required counterfactual denominator.
+## Final semantic review
 
-## Human spot-review package
+A new deterministic 140-case stratified sample (20 per family) was reviewed after regeneration, and all 1,400 cases were audited again with family-specific semantic invariants.
 
-A deterministic 140-case sample was created: 20 per family; 42 calibration, 42 development, 56 test; 81 VI / 44 VI-EN / 15 EN; 55 straightforward / 46 contextual / 39 adversarial.
-
-Human review is not performed in N3.1. The benchmark is therefore not `FINAL FROZEN` and N4 remains blocked.
-
-## Repository/artifact policy before human review
-
-The branch commits generator, validator, scorer, schema, manifest, tests and evidence docs. The 1,400-case raw JSONL files and 140-case human-review sample are preserved in the sandbox artifact bundle and identified by SHA256, rather than treated as final repository truth before human semantic review. They are deterministically regenerable from the committed materializer.
-
-## Decision
+Decision:
 
 ```text
-BENCHMARK V1: MATERIALIZED
-AUTOMATED QA: PASS
-HUMAN SPOT-REVIEW: PENDING
-FINAL BENCHMARK FREEZE: NOT YET AUTHORIZED
-5M/10M/20M/50M TRAINING: NOT STARTED
-N4: NOT AUTHORIZED
+INDEPENDENT SEMANTIC RE-REVIEW: PASS
+CRITICAL: 0
+MAJOR: 0
+BENCHMARK FINAL FREEZE: PASS
+```
+
+This review is performed by ChatGPT as the independent research reviewer requested by the user. It is not represented as a separate external human adjudication.
+
+## Final artifact hashes
+
+```text
+calibration.jsonl:
+7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb
+
+development.jsonl:
+2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42
+
+test.jsonl:
+3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf
+
+schema.json:
+6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb
+
+human-review-sample.jsonl:
+d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693
+```
+
+`manifest.json` records the same final hashes.
+
+## Held-out governance
+
+Held-out protection is procedural rather than cryptographic. Candidate training, prompt tuning, threshold tuning, teacher generation, and iterative error-driven tuning against held-out truth remain forbidden. Evaluation settings must be frozen before held-out scoring.
+
+## N3.1 final decision
+
+```text
+N3.1: PASS / FINAL FROZEN
+TRACK-A BENCHMARK V1: READY FOR REFERENCE QUALIFICATION
+QWEN3.8-27B EXECUTION: NOT YET RUN
+N4 5M/10M/20M/50M: STILL NOT AUTHORIZED
 PPF INTEGRATION: NOT AUTHORIZED
 MODEL/KERNEL CHANGE: NO
 ```
