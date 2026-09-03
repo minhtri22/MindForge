@@ -1,112 +1,44 @@
-# Model / Kernel Separation MKS-1 — Closure Attempt
+# Model / Kernel Separation MKS-1 - Closure
 
-Status: **REVISE — G2 RESOLVED; G5 FULL LOCAL EVIDENCE STILL REQUIRED**
+Status: **PASS / CLOSED - FULL LOCAL EVIDENCE VALIDATED**
 
 Branch: `refactor/mks-1-model-kernel-separation`
 
-Starting closure HEAD: `8b10b49f8a5aef8e1911655a286c6ae59824126a`
-
-Contract decision/correction commit: `b25802e3cb3167c6811d9dc3ff51e60996a95fa6`
-
 Starting architectural reference: `1b0392a2550ecee0e65941e0590f21507797610d`
 
-## Closure objective
+MKS implementation head: `d17a5ed8eb5083049411cfafa382204edaafa79b`
 
-This closure attempt followed the required sequence:
+Contract correction commit: `b25802e3cb3167c6811d9dc3ff51e60996a95fa6`
 
-```text
-N1 — full local regression/evidence validation
-N2 — resolve Model Contract ADR
-only if required — tiny bounded correction
-revalidate
-close or remain REVISE
-```
+Closure evidence commit: `2c1d0bcf02875f6bb3ed3c81f9d6f731274e6285`
 
-The task did not run Track A, PPF, model scaling, package restructuring, plugin architecture, external adapters, ONNX, quantization, continual learning, or canonical Phase-2 training.
+## Status
 
-## Environment result for N1
+MKS-1 is closed at the contract level. The earlier REVISE state was caused by missing full local evidence in a sandbox-only closure attempt, not by a known model/kernel behavior mismatch.
 
-A normal Git checkout could not be created in the execution sandbox because DNS resolution for `github.com` failed:
+The subsequent real-local validation established:
 
 ```text
-fatal: unable to access 'https://github.com/minhtri22/MindForge.git/':
-Could not resolve host: github.com
+MKS implementation: PASS
+Model Contract ADR: PASS
+Full regression: PASS
+Phase-2 compatibility: PASS
+Checkpoint compatibility: PASS
+Evaluation replay: PASS
+Generation replay: PASS
 ```
 
-The GitHub connector was therefore used to inspect and modify the exact branch. It can access tracked UTF-8 repository content but does not provide the normal local checkout/runtime environment required for the complete historical pytest suite and real binary checkpoint replay.
+## ADR decision
 
-Consequently this task does **not** claim execution of:
+ADR: `docs/research/model-contract-adr.md`
+
+Final framework decision:
 
 ```text
-full repository pytest tests/ -q
-Phase-2 summarize command on a complete checkout
-Phase-2 check command on a complete checkout
-real historical .pt checkpoint evaluation/generation replay
+PYTORCH-BOUND V0
 ```
 
-These remain the MKS-G5 closure requirements.
-
-## What was executable in sandbox
-
-The previously reconstructed exact MKS changed subset remained available locally. Before and after the bounded contract correction, focused acceptance tests executed successfully.
-
-Post-correction result:
-
-```text
-9 passed
-compileall PASS
-```
-
-Focused coverage includes:
-
-- default parameter count `10,339,200`;
-- structural runtime-contract conformance;
-- exact direct-vs-factory forward parity;
-- invalid input/context validation behavior;
-- deterministic one-step CPU training parity;
-- `KernelConfig` compatibility;
-- focused checkpoint v1 round-trip;
-- evaluator runtime path;
-- deterministic greedy generation.
-
-This evidence is useful but does not substitute for MKS-G5 full historical evidence.
-
-## Phase-2 historical evidence inspection
-
-Tracked Phase-2 canonical artifacts remain present in the repository. The tracked canonical summary inspected after the MKS correction remains:
-
-```text
-status: PASS
-experiment_id: phase2-lr-sweep-v1
-manifest_hash: f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968
-baseline mean BPB: 10.537770964151376
-treatment mean BPB: 10.938692122871304
-paired mean absolute effect: 0.40092115871992995
-```
-
-No canonical Phase-2 training run was performed and no Phase-2 evidence file was changed by this task.
-
-This is a static artifact integrity check, **not** a substitute for executing `mindforge.experiment summarize` and `check` in the real checkout.
-
-## N2 — Model Contract ADR
-
-ADR:
-
-`docs/research/model-contract-adr.md`
-
-### Decision — `vocab_size`
-
-**REMOVE FROM THE REQUIRED RUNTIME CONTRACT.**
-
-Repository/runtime review showed no current evaluator/generator consumer of `TokenModel.vocab_size`. The concrete model continues to expose vocabulary metadata and `ModelConfig.vocab_size` remains unchanged.
-
-### Decision — framework binding
-
-**PYTORCH-BOUND V0.**
-
-`TokenModel` is explicitly a bounded contract for current proven PyTorch runtime consumers. It is not a universal permanent model ABI.
-
-Current required surface after the correction:
+Final required `TokenModel` contract:
 
 ```text
 context_limit
@@ -116,68 +48,141 @@ train(mode)
 eval()
 ```
 
-The contract will be reconsidered only when a second proven model/runtime cannot satisfy v0 without inappropriate PyTorch lifecycle emulation, or a demonstrated current consumer needs a missing capability.
+`vocab_size` is not a required `TokenModel` member. `TransformerLM.vocab_size` and `ModelConfig.vocab_size` still exist as concrete-model/config metadata.
 
-No framework-neutral redesign was authorized or implemented.
+The ADR does not authorize a plugin system, adapter framework, framework-neutral ABI, physical package move, PPF integration, or Track A work.
 
-## Tiny bounded correction
-
-Production code changed in this closure task:
+## Full local validation environment
 
 ```text
-mindforge/model_contract.py
+Python: 3.12.10
+PyTorch: 2.12.1+xpu
+XPU available: YES
+CUDA available: NO
+OS: Windows 11
+default parameter count: 10,339,200
 ```
 
-Change:
-
-- remove `vocab_size` from `TokenModel` required protocol surface;
-- explicitly document the protocol as a PyTorch runtime contract v0.
-
-Test adjustment:
+## Regression results
 
 ```text
-tests/test_mks_model_kernel.py
+pytest tests/ -q: PASS
+passed: 61
+failed: 0
+skipped: 0
+focused MKS: PASS (10 passed)
+compileall: PASS
+git diff --check: PASS
 ```
 
-The concrete `TransformerLM.vocab_size` property remains tested as concrete-model behavior, not as a runtime-contract requirement.
+## Phase-2 compatibility
 
-No Transformer mathematics, checkpoint schema, evaluator formula, generation algorithm, tokenizer behavior, optimizer semantics, model parameter count, or Phase-2 semantics changed.
+Canonical Phase-2 training was not rerun.
 
-## Source-boundary result
-
-Current intended boundary remains:
+Existing canonical summary:
 
 ```text
-evaluate.py -> TokenModel -> context_limit + forward/train/eval
-generate.py -> TokenModel -> context_limit + forward/eval
-train.py -> create_model(ModelConfig) [research/tooling]
-checkpoint.py -> create_model(ModelConfig) [research/tooling]
-TransformerLM -> owns Transformer internals
+status: PASS
+baseline mean BPB: 10.537770964151376
+treatment mean BPB: 10.938692122871304
+paired mean absolute effect: 0.40092115871992995
+mean relative effect: 0.038041814491547137
+manifest_hash: f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968
 ```
 
-No PPF semantics were introduced into the runtime contract.
+Phase-2 summarize: PASS
 
-No `PluginManager`, `ExtensionRegistry`, `HookBus`, `CapabilityRegistry`, `ProviderRegistry`, `ServiceContainer`, `EventBus`, model registry, external-model adapter, or physical `kernel/`/`models/` package structure was introduced.
+Phase-2 check: PASS
 
-## Gate reassessment
+## Real checkpoint replay
+
+Checkpoint:
+
+```text
+runs\phase2-lr-sweep-v1\baseline\seed-101\checkpoint-step-200.pt
+```
+
+Replay result:
+
+```text
+format_version: 1
+model reconstruction: PASS
+parameter count: 10,339,200
+state restore: PASS
+optimizer restore: PASS
+step: 200
+```
+
+## Evaluation replay
+
+```text
+device: cpu
+dtype: float32
+CE: 32.110002517700195
+BPB: 10.473420541746082
+repeat delta CE: 0.0
+repeat delta BPB: 0.0
+classification: DETERMINISTIC CURRENT REPLAY ONLY
+```
+
+This is not upgraded to historical parity verified because there was no exact pre-MKS fixture for this exact replay configuration.
+
+## Generation replay
+
+```text
+prompt: The quick brown fox
+seed: 42
+max_new_tokens: 20
+temperature: 0
+token output exact across both runs: YES
+text output exact across both runs: YES
+```
+
+## Source boundary audit
+
+Runtime-facing `evaluate.py` and `generate.py` depend on `TokenModel`, not on `TransformerLM` internals.
+
+Training/checkpointing remain research/tooling paths and use `create_model(ModelConfig)` for concrete model construction.
+
+No PPF semantics, plugin framework, extension registry, model registry, external adapter layer, host/mobile concepts, or physical package restructure were added.
+
+## Provenance hashes
+
+These are distinct provenance values:
+
+```text
+manifest_hash:
+f3db682e905b9aa4aa8c6da557070d86d79fac9e0aeb02e4e9295d126b8fa968
+
+summary_file_sha256:
+58335391E17FE1470C165BF4E94BF8A91D8E3812F2ECB2E945ADE50452FC0693
+
+checkpoint_sha256:
+6561FA2B354B317CF173FAAA5A5CC236A4584CB047DF3AFDB2871DABAE01778E
+
+checkpoint_bytes:
+62115779
+```
+
+## Gate table
 
 | Gate | Status | Evidence |
 |---|---|---|
-| MKS-G1 — reason to separate now | PASS | concrete direct model/runtime coupling demonstrated earlier |
-| MKS-G2 — minimal/scoped model contract | **PASS** | ADR frozen; unused `vocab_size` removed; PyTorch v0 scope explicit |
-| MKS-G3 — compatibility tests | PASS (focused) | tests frozen before refactor; post-correction focused UAT 9/9 PASS |
-| MKS-G4 — Transformer conformance/construction | PASS | structural conformance + single `create_model` path |
-| MKS-G5 — frozen evidence regression | **REVISE** | full checkout pytest, executable Phase-2 summarize/check, and real checkpoint replay unavailable in sandbox |
-| MKS-G6 — no PPF/plugin semantics | PASS | contract remains PPF/plugin-free |
-| MKS-G7 — no speculative plugin framework | PASS | none introduced |
+| G1 - reason to separate now | PASS | concrete direct model/runtime coupling demonstrated |
+| G2 - minimal/scoped model contract | PASS | ADR frozen; unused `vocab_size` removed; PyTorch-bound v0 scope explicit |
+| G3 - compatibility tests | PASS | full pytest 61 passed; focused MKS 10 passed |
+| G4 - Transformer conformance/construction | PASS | structural conformance + `create_model` path |
+| G5 - frozen evidence regression | PASS | full regression, Phase-2 summarize/check, checkpoint/eval/generation replay |
+| G6 - no PPF/plugin semantics | PASS | contract remains PPF/plugin-free |
+| G7 - no speculative plugin framework | PASS | none introduced |
 
 ## Final closure decision
 
 ```text
-MKS-1: REVISE
-TECHNICAL DEBT: PARTIALLY RESOLVED
+MKS-1: PASS / CLOSED
+TECHNICAL DEBT: RESOLVED AT CONTRACT LEVEL
 G2 DESIGN BLOCKER: RESOLVED
-G5 EVIDENCE BLOCKER: OPEN
+G5 EVIDENCE BLOCKER: RESOLVED
 MODEL CONTRACT: PYTORCH RUNTIME V0 / MINIMIZED
 TRANSFORMER MATH: UNCHANGED
 DEFAULT PARAMETER COUNT: 10,339,200
@@ -186,34 +191,19 @@ EVALUATION SEMANTICS: UNCHANGED
 GENERATION SEMANTICS: UNCHANGED
 CANONICAL PHASE-2 TRAINING RERUN: NO
 PPF MODIFIED: NO
-PHYSICAL PACKAGE MOVE: NO
+PHYSICAL PACKAGE MOVE: NO / NOT REQUIRED
 TRACK A STARTED: NO
 ```
 
-## Smallest remaining blocker
+## Residual debt
 
-Run N1 on the real Windows checkout at `D:\WORK\RESEARCH\MindForge` on this branch:
+- Future model-contract evolution remains evidence-gated.
+- Physical package separation remains deferred unless independently justified.
 
-```powershell
-.venv\Scripts\python.exe -m pytest tests/ -q
-.venv\Scripts\python.exe -m compileall mindforge tests -q
-git diff --check
-.venv\Scripts\python.exe -m mindforge.experiment summarize configs/phase2_manifest.json
-.venv\Scripts\python.exe -m mindforge.experiment check configs/phase2_manifest.json --baseline-bpb-cv-max 0.10
-```
-
-Then replay one existing real compatible checkpoint through load/evaluate/deterministic-generate.
-
-Do not rerun the six canonical Phase-2 training runs.
-
-If all of those pass, no further architecture work is currently indicated and MKS-1 can be reviewed for `PASS / CLOSED` at the contract level.
-
-## Deferred backlog — not executed
+## Deferred backlog - not executed
 
 ```text
-N3 — Track A Foundation Protocol: PLANNED / NOT STARTED
-N4 — Compact-model scaling envelope: PLANNED / NOT STARTED
-N5 — Cross-device reproducibility: PLANNED / NOT STARTED
+N3 - Track A Foundation Protocol: PLANNED / NOT STARTED
+N4 - Compact-model scaling envelope: PLANNED / NOT STARTED
+N5 - Cross-device reproducibility: PLANNED / NOT STARTED
 ```
-
-PPF continues independently.

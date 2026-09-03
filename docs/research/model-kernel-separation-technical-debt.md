@@ -1,8 +1,8 @@
 # Model / Kernel Separation Technical Debt
 
-Status: **ARCHITECTURE TRANSITION / TECHNICAL DEBT — NON-BLOCKING FOR PPF**
+Status: **RESOLVED AT CONTRACT LEVEL BY MKS-1 / PHYSICAL PACKAGE SEPARATION DEFERRED**
 
-This note records a known mismatch between the current physical code layout and the newer MindForge architecture invariants. It is intentionally non-blocking for the active PPF research branch.
+This note records the historical mismatch between the physical code layout and the newer MindForge architecture invariants. MKS-1 resolved the demonstrated model/runtime coupling at the contract level while intentionally deferring physical package separation.
 
 ## 1. Current implementation state
 
@@ -219,7 +219,32 @@ PPF BLOCKED BY THIS DEBT: NO
 PARALLEL RESEARCH/PLANNING ALLOWED: YES
 ```
 
+## 11. Resolution / closure (MKS-1)
+
+The MKS-1 task resolved this debt at the contract level. The original problem statement above is preserved as historical context; the resolution below supersedes the "Current decision" state.
+
+```text
+TECHNICAL DEBT IDENTIFIED: YES
+MODEL SOURCE MODULE SEPARATE: YES
+MODEL ARCHITECTURAL COMPONENT SEPARATED BY CONTRACT: YES
+MODEL CONTRACT DEFINED: YES
+MODEL CONTRACT SCOPE: PYTORCH-BOUND V0
+KERNEL/RUNTIME DIRECT TRANSFORMER DEPENDENCY: REMOVED FOR CURRENT RUNTIME CONSUMERS
+PHYSICAL PACKAGE REFACTOR: NOT REQUIRED
+MKS-1: PASS / CLOSED
+PPF BLOCKED: NO
+```
+
+Terminology: **RESOLVED AT CONTRACT LEVEL** — not "permanently solved forever". Future model-contract evolution remains evidence-gated.
+
+The runtime-facing consumers (`evaluate.py`, `generate.py`) now depend on the `TokenModel` protocol rather than `TransformerLM` internals. Training/checkpointing remain research/tooling paths that may construct the concrete model via `create_model(ModelConfig)`.
+
+Physical package separation into `kernel/` and `models/` folders remains deferred unless independently justified by a future demonstrated need.
+
 See also:
 
+- `docs/research/model-contract-adr.md`
+- `docs/research/model-kernel-separation-closure.md`
+- `docs/research/model-kernel-separation-validation.md`
 - `docs/research/mindforge-architecture-invariants.md`
 - `PLAN.md`

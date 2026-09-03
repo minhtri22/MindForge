@@ -129,7 +129,7 @@ This ADR resolves the design part of MKS-G2:
 - framework binding is explicit and bounded;
 - the contract is no longer described as a universal permanent abstraction.
 
-MKS-1 still cannot be declared PASS/CLOSED until MKS-G5 full frozen-evidence regression is completed in a normal local checkout with the real repository artifacts.
+At ADR acceptance time, MKS-1 still required MKS-G5 full frozen-evidence regression in a normal local checkout with the real repository artifacts. That later real-local evidence run completed successfully and is recorded in `docs/research/model-kernel-separation-closure.md`; MKS-1 is now PASS / CLOSED at the contract level.
 
 ## Relationship to PPF
 
