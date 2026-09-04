@@ -1,0 +1,136 @@
+        wrappers = (["Please ", "I need you to ", "Could you "] if split=="development" else
+                    ["In this situation, ", "Using the supplied context, ", "Handle this request: ", "Given the current context, "])
+    else:
+        wrappers = (["Giúp tôi ", "Please ", "Tôi cần "] if split=="development" else
+                    ["Trong context này, ", "Can you ", "Xử lý request này: ", "Theo current context, "])
+    w=wrappers[idx%len(wrappers)]
+    if w.endswith((": ", ", ")):
+        return w + text[0].lower() + text[1:] if text else w
+    return w + text[0].lower() + text[1:] if text else w
+
+
+def heldout_core(fam, mode, lang, inp, exp):
+    # Held-out core surface forms are independently worded from calibration/development.
+    P={
+      "A2": {
+        0:("Báo cho người bạn đời của tôi rằng tôi sẽ về muộn","text my partner rằng tối nay tôi sẽ về muộn","Tell my partner that I will be home late"),
+        1:("Điện cho Tuấn","phone Tuấn giúp tôi","Phone Tuan"),
+        2:("Tôi muốn gọi điện cho Mai","I need to call Mai giúp tôi","I want to phone Mai"),
+        3:("Dẫn tôi đến địa chỉ nhà","route tới địa chỉ home của tôi","Take me to my home address"),
+        4:("Đưa tôi tới quán cà phê quen","take me tới my regular cafe","Take me to my regular cafe"),
+        5:("Dẫn tới văn phòng tôi đang làm","route tới my current office","Take me to the office where I currently work"),
+      },
+      "A3": {
+        0:("Dùng ứng dụng điều hướng mặc định của tôi để về nhà","use my default navigation app để về home","Use my default navigation app to go home"),
+        1:("Phản hồi theo ngôn ngữ tôi đặt làm mặc định","reply bằng my default language","Respond in the language I set as default"),
+        2:("Máy đang ngoại tuyến; vẫn xác định đích là nhà","device is offline; destination vẫn là home","The device is offline; interpret the destination as home"),
+        3:("Đưa tôi đến địa điểm làm việc mới nhất","take me tới latest work location","Take me to my latest workplace"),
+        4:("Đưa tôi tới nơi tôi thường đi đầu ngày","take me tới my early-morning place","Take me to the place I usually go first thing in the morning"),
+        5:("Theo ngôn ngữ của phiên chat hiện tại","use language của current chat session","Use the language of the current chat session"),
+      },
+      "A4": {
+        0:("Chọn ứng dụng bản đồ để dẫn tôi về nhà","choose Maps để route me home","Choose the maps app to guide me home"),
+        1:("Dùng ứng dụng nhắn tin báo Linh tôi đến sau 10 phút","use messaging app báo Linh 10 phút nữa tới","Use the messaging app to tell Linh I will arrive in 10 minutes"),
+        2:("Tôi cần Maps để dẫn đường về nhà","I need Maps để route home","I need Maps to guide me home"),
+        3:("Dùng điện thoại gọi Tuấn của dự án A","use Phone gọi Tuấn project A","Use the phone app to call Tuan from project A"),
+        4:("Chọn công cụ phù hợp để tìm đường về nhà","choose the right tool để find route home","Choose the appropriate tool to find a route home"),
+        5:("Mở ứng dụng quản lý lịch","open calendar-management app","Open the calendar application"),
+      },
+      "A5": {
+        1:("Điều hướng tới nhà của tôi","navigate tới my home address","Navigate to my home"),
+        2:("Đặt nhắc việc tưới cây vào 20:00","set reminder tưới cây at 20:00","Set a reminder to water the plants at 20:00"),
+        3:("Thực hiện cuộc gọi tới Tuấn của dự án A","make a call tới Tuấn project A","Place a call to Tuan from project A"),
+        4:("Soạn tin cho Linh","compose message cho Linh","Compose a message to Linh"),
+        5:("Thêm cuộc hẹn nha sĩ ngày 12/10 lúc 09:30","add dentist appointment ngày 12/10 at 09:30","Add a dentist appointment on October 12 at 09:30"),
+      },
+      "A6": {
+        0:("Tôi muốn gọi điện cho Mai","I want to call Mai giúp tôi","I want to phone Mai"),
+        1:("Soạn tin cho Linh","compose message cho Linh","Compose a message to Linh"),
+        2:("Máy không có mạng, tra cứu giá vàng hiện tại","device offline, check current gold price","The device is offline; look up the current gold price"),
+        3:("Đưa tôi tới nhà","take me về home","Take me home"),
+        4:("Điện cho Tuấn","phone Tuấn","Phone Tuan"),
+        5:("Làm ngắn câu sau: Tôi sẽ về muộn","make this shorter: tôi sẽ về muộn","Make this shorter: I will be late"),
+      },
+      "A7": {
+        0:("Rút câu này cho ngắn: Tôi sẽ đến muộn","make concise: tôi sẽ đến muộn","Condense this sentence: I will arrive late"),
+        1:("Dùng bản đồ đưa tôi về nhà","use maps để đưa tôi về home","Use maps to take me home"),
+        2:("Tra giá vàng mới nhất","check latest gold price","Get the latest gold price"),
+        3:("Tôi cần gọi cho Mai","I need to call Mai","I need to phone Mai"),
+        4:("Mở lịch cá nhân của tôi","open my personal Calendar","Open my personal calendar"),
+        5:("Nén câu này còn một dòng: Họp dời sang 3 giờ chiều","compress to one line: Họp dời sang 3 giờ chiều","Condense to one line: The meeting moved to 3 pm"),
+      },
+    }
+    if fam=="A1": return None
+    if fam=="A5" and mode==0:
+        payload=exp.get("arguments",{}).get("text")
+        if payload is None: return None
+        return {"vi":f"Gửi Linh nội dung: {payload}","vi_en":f"message Linh with text: {payload}","en":f"Send Linh this text: {payload}"}[lang]
+    triple=P.get(fam,{}).get(mode)
+    return trilang(lang,triple) if triple else None
+
+def case_record(fam, split, local_i, lang, diff, inp, exp, scoring, tags, mode, global_i, cf_gid=None, cf_variant=None):
+    variant=(local_i*7 + (0 if split=="calibration" else 2 if split=="development" else 5))%11
+    if split=="test" and cf_gid is None:
+        h=heldout_core(fam,mode,lang,inp,exp)
+        if h: inp["user_utterance"]=add_surface_noise(h,local_i,diff,lang)
+    inp["user_utterance"] = split_surface(inp["user_utterance"], split, lang, local_i if cf_gid is None else int(cf_gid.rsplit('-',1)[-1])*2)
+    return {
+      "case_id": f"{fam}-{ {'calibration':'C','development':'D','test':'H'}[split] }-{local_i:03d}",
+      "benchmark_version": BENCHMARK_VERSION,
+      "materialization_revision": MATERIALIZATION_REVISION,
+      "family": fam, "split": split, "language_group": lang, "difficulty": diff,
+      "adversarial_tags": tags, "counterfactual_group_id": cf_gid,
+      "counterfactual_variant": cf_variant,
+      "input": inp, "expected": exp, "scoring": scoring,
+      "provenance": provenance(fam,split,mode,variant),
+    }
+
+def write_jsonl(path, rows):
+    with path.open("w", encoding="utf-8", newline="\n") as f:
+        for r in rows: f.write(json.dumps(r, ensure_ascii=False, sort_keys=True, separators=(",",":"))+"\n")
+
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def main():
+    all_rows=[]; global_i=0
+    for fam in FAMILIES:
+        for split in ["calibration","development","test"]:
+            langs,diffs=split_attrs(split)
+            for local_i in range(SPLIT_COUNTS[split]):
+                lang,diff=langs[local_i],diffs[local_i]
+                if split=="test" and local_i<40:
+                    pair_idx=local_i//2; variant=local_i%2; gid=f"CF-{fam}-{pair_idx:02d}"
+                    inp,exp,scoring,tags,mode,_=make_counterfactual(fam,pair_idx,variant,lang,diff,global_i)
+                    row=case_record(fam,split,local_i,lang,diff,inp,exp,scoring,tags,mode,global_i,gid,variant)
+                else:
+                    inp,exp,scoring,tags,mode=make_regular(fam,split,local_i,lang,diff,global_i)
+                    row=case_record(fam,split,local_i,lang,diff,inp,exp,scoring,tags,mode,global_i)
+                all_rows.append(row); global_i += 1
+    for split in ["calibration","development","test"]:
+        write_jsonl(ROOT/f"{split}.jsonl", [r for r in all_rows if r["split"]==split])
+    schema={"benchmark_id":"track-a-capability-v1","version":BENCHMARK_VERSION,"materialization_revision":MATERIALIZATION_REVISION,
+            "required_case_fields":["case_id","benchmark_version","materialization_revision","family","split","language_group","difficulty","adversarial_tags","counterfactual_group_id","input","expected","scoring","provenance"],
+            "route_semantics":{"LOCAL_MODEL":"intrinsic learned local text-understanding/transformation; no external fresh knowledge or app required","LOCAL_APP_OR_TOOL":"requires an explicitly available local app/tool/live local capability","EXTERNAL":"requires non-local/fresh world capability not locally available","CLARIFY":"required information/entity choice is underdetermined"},
+            "a5_text_policy":"literal_source_payload","intrinsic_model_scope":["short_text_transformation"]}
+    (ROOT/"schema.json").write_text(json.dumps(schema,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    # deterministic 140-case review sample: 20/family, 6 C + 6 D + 8 H
+    sample=[]
+    for fam in FAMILIES:
+        fr=[r for r in all_rows if r["family"]==fam]
+        for split,n in [("calibration",6),("development",6),("test",8)]:
+            pool=[r for r in fr if r["split"]==split]
+            # evenly pick across list, ensuring test includes CF members when possible
+            idxs=[]
+            if split=="test": idxs=[0,1,8,9,40,55,72,91]
+            else: idxs=[round(i*(len(pool)-1)/(n-1)) for i in range(n)]
+            sample += [pool[i] for i in idxs[:n]]
+    write_jsonl(ROOT/"human-review-sample.jsonl", sample)
+    manifest={"benchmark_id":"track-a-capability-v1","version":BENCHMARK_VERSION,"materialization_revision":MATERIALIZATION_REVISION,"seed":SEED,
+              "case_counts":{"calibration":280,"development":420,"test":700,"total":1400},
+              "language_counts":{"vi":840,"vi_en":350,"en":210},"difficulty_counts":{"straightforward":560,"contextual":490,"adversarial":350},
+              "heldout_counterfactual_cases":280,"counterfactual_groups":140,"review_sample_cases":140,
+              "status":"FINAL_FROZEN_AFTER_SEMANTIC_R1_PASS",
+              "hashes":{name:sha(ROOT/name) for name in ["calibration.jsonl","development.jsonl","test.jsonl","schema.json","human-review-sample.jsonl"]}}
+    (ROOT/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print(json.dumps(manifest,ensure_ascii=False,indent=2))
+if __name__=="__main__": main()
