@@ -1,0 +1,170 @@
+            exp={"entity_mentions":["Tuấn" if lang!="en" else "Tuan"],"resolved_entity_ids":["c_tuan"],"resolved_values":["Tuấn"],"clarification_required":False}
+        elif mode==2:
+            # Genuine ambiguity: two contacts with identical display name.
+            inp["personal_state"]["contacts"]=[
+              {"id":"c_mai_sister","name":"Mai","relation":"sister"},
+              {"id":"c_mai_vendor","name":"Mai","relation":"vendor"},
+              {"id":"c_linh","name":"Linh","relation":"partner"},]
+            t=("Gọi Mai", "call Mai giúp tôi", "Call Mai")
+            exp={"entity_mentions":["Mai"],"resolved_entity_ids":[],"resolved_values":[],"clarification_required":True}; tags += ["similar_entity_names","clarification_required"]
+        elif mode==3:
+            t=("Chỉ đường về nhà", "route về home", "Navigate home")
+            exp={"entity_mentions":["nhà" if lang!="en" else "home"],"resolved_entity_ids":["home"],"resolved_values":["12 Nguyễn Trãi, Hà Nội"],"clarification_required":False}
+        elif mode==4:
+            inp["personal_state"].update({"favorite_cafe":"quán Cây","favorite_cafe_address":"8 Phan Đình Phùng, Hà Nội"})
+            t=("Đi tới quán cà phê tôi hay ngồi", "navigate tới my usual cafe", "Navigate to my usual cafe")
+            exp={"entity_mentions":["quán cà phê tôi hay ngồi" if lang!="en" else "my usual cafe"],"resolved_entity_ids":["favorite_cafe"],"resolved_values":["8 Phan Đình Phùng, Hà Nội"],"clarification_required":False}
+        else:
+            inp["personal_state"].update({"current_work_location":"18 Láng Hạ, Hà Nội","former_work_location":"1 Tràng Tiền, Hà Nội"})
+            t=("Chỉ đường tới chỗ làm hiện tại", "navigate tới current workplace", "Navigate to my current workplace")
+            exp={"entity_mentions":["chỗ làm hiện tại" if lang!="en" else "my current workplace"],"resolved_entity_ids":["current_work_location"],"resolved_values":["18 Láng Hạ, Hà Nội"],"clarification_required":False}; tags += ["stale_personal_fact"]
+        inp["user_utterance"]=add_surface_noise(trilang(lang,t),local_i,diff,lang); scoring={"primary":"entity_set_f1","secondary":["resolved_value_accuracy"]}
+    elif fam=="A3":
+        mode=(local_i+offset)%6
+        if mode==0:
+            inp["personal_state"]["preferred_navigation_app"]="maps"; t=("Về nhà bằng ứng dụng tôi vẫn dùng", "về home bằng app tôi hay dùng", "Go home using my usual navigation app")
+            exp={"interpretation_label":"NAVIGATE_HOME_WITH_PREFERRED_APP","normalized":{"destination":"home","app":"maps"}}
+        elif mode==1:
+            t=("Trả lời bằng ngôn ngữ tôi ưu tiên", "reply bằng preferred language của tôi", "Reply in my preferred language")
+            exp={"interpretation_label":"RESPOND_VI","normalized":{"language":"vi"}}
+        elif mode==2:
+            inp["current_context"]["device_state"]["network"]="offline"; t=("Tìm đường về nhà nhưng máy đang mất mạng", "route về nhà while offline", "Route me home while the device is offline")
+            exp={"interpretation_label":"NAVIGATE_HOME_OFFLINE_CONSTRAINT","normalized":{"destination":"home","network":"offline"}}; tags += ["context_preference_conflict"]
+        elif mode==3:
+            inp["personal_state"].update({"former_work_location":"District 1","current_work_location":"District 3"}); t=("Đi tới văn phòng hiện tại của tôi", "navigate tới current office", "Navigate to my current office")
+            exp={"interpretation_label":"CURRENT_WORK_LOCATION","normalized":{"work_location":"District 3"}}; tags += ["stale_personal_fact"]
+        elif mode==4:
+            inp["personal_state"]["morning_destination"]="gym"; inp["current_context"]["time_local"]="07:00"; t=("Đưa tôi tới chỗ tôi thường đến vào buổi sáng", "take me tới my usual morning place", "Take me to my usual morning place")
+            exp={"interpretation_label":"MORNING_DESTINATION_GYM","normalized":{"destination":"gym"}}
+        else:
+            inp["current_context"]["conversation_language"]="en"; t=("Dùng ngôn ngữ của cuộc trò chuyện này", "use language của conversation hiện tại", "Use the language of this conversation")
+            exp={"interpretation_label":"RESPOND_EN","normalized":{"language":"en"}}
+        inp["user_utterance"]=add_surface_noise(trilang(lang,t),local_i,diff,lang); scoring={"primary":"normalized_interpretation_accuracy","secondary":["counterfactual_consistency"]}
+    elif fam=="A4":
+        mode=(local_i+offset)%6
+        if mode==0:
+            t=("Mở bản đồ và chỉ đường về nhà", "open Maps rồi route về nhà", "Open Maps and navigate home"); exp={"action_id":"maps"}
+        elif mode==1:
+            t=("Nhắn Linh là tôi đến sau 10 phút", "text Linh: tôi tới sau 10 phút", "Message Linh that I'll arrive in 10 minutes"); exp={"action_id":"messages"}
+        elif mode==2:
+            inp["available_actions"]=[a for a in ACTIONS if a["id"]!="maps"]; t=("Mở Maps chỉ đường về nhà", "open Maps để về home", "Open Maps and navigate home"); exp={"action_id":"NONE"}; tags += ["unavailable_tool","unsupported_action"]
+        elif mode==3:
+            t=("Gọi Tuấn bên dự án A", "call Tuấn bên project A", "Call Tuan from project A"); exp={"action_id":"phone"}
+        elif mode==4:
+            inp["available_actions"]=[{"id":"maps","kind":"navigation"},{"id":"browser","kind":"web"}]; t=("Tìm lộ trình về nhà", "find route về nhà", "Find a route home"); exp={"action_id":"maps"}; tags += ["semantically_similar_tools"]
+        else:
+            t=("Mở lịch", "open Calendar", "Open Calendar"); exp={"action_id":"calendar"}
+        inp["user_utterance"]=add_surface_noise(trilang(lang,t),local_i,diff,lang); scoring={"primary":"action_id","secondary":["unavailable_action_false_selection"]}
+    elif fam=="A5":
+        mode=(local_i+offset)%6
+        if mode==0:
+            payload = {"vi":"tôi về muộn 20 phút", "vi_en":"I'm late 20 phút", "en":"I'll be 20 minutes late"}[lang]
+            prefix = {"vi":"Nhắn Linh: ", "vi_en":"message Linh: ", "en":"Message Linh: "}[lang]
+            inp["user_utterance"]=prefix+payload
+            exp={"arguments":{"contact_id":"c_linh","text":payload}}
+        elif mode==1:
+            inp["user_utterance"]=trilang(lang,("Chỉ đường về nhà","navigate về home","Navigate home")); exp={"arguments":{"destination":"12 Nguyễn Trãi, Hà Nội"}}
+        elif mode==2:
+            task={"vi":"tưới cây","vi_en":"tưới cây","en":"water the plants"}[lang]
+            inp["user_utterance"]=trilang(lang,("Nhắc tôi lúc 20:00 tưới cây","remind me lúc 20:00 tưới cây","Remind me at 20:00 to water the plants")); exp={"arguments":{"time":"20:00","task":task}}
+        elif mode==3:
+            inp["user_utterance"]=trilang(lang,("Gọi Tuấn bên dự án A","call Tuấn from project A","Call Tuan from project A")); exp={"arguments":{"contact_id":"c_tuan"}}
+        elif mode==4:
+            inp["user_utterance"]=trilang(lang,("Nhắn Linh","message Linh","Message Linh")); exp={"arguments":{"contact_id":"c_linh","text":None}}; tags += ["missing_required_argument"]
+        else:
+            inp["user_utterance"]=trilang(lang,("Tạo lịch hẹn nha sĩ ngày 12/10 lúc 09:30","create calendar nha sĩ ngày 12/10 at 09:30","Create a dentist appointment on October 12 at 09:30")); exp={"arguments":{"date":"2026-10-12","time":"09:30","title":"nha sĩ" if lang!="en" else "dentist"}}
+        inp["user_utterance"]=add_surface_noise(inp["user_utterance"],local_i,diff,lang); scoring={"primary":"slot_micro_f1","secondary":["exact_record_match"],"text_policy":"literal_source_payload"}
+    elif fam=="A6":
+        mode=(local_i+offset)%6
+        if mode==0:
+            # genuine same-display-name ambiguity
+            inp["personal_state"]["contacts"]=[{"id":"c_mai_sister","name":"Mai","relation":"sister"},{"id":"c_mai_vendor","name":"Mai","relation":"vendor"}]
+            t=("Gọi Mai", "call Mai giúp tôi", "Call Mai"); exp={"clarification_required":True,"clarification_reason":"AMBIGUOUS_ENTITY"}; tags += ["similar_entity_names","clarification_required"]
+        elif mode==1:
+            t=("Nhắn Linh", "message Linh", "Message Linh"); exp={"clarification_required":True,"clarification_reason":"MISSING_ARGUMENT"}; tags += ["missing_required_argument","clarification_required"]
+        elif mode==2:
+            inp["current_context"]["device_state"]["network"]="offline"; t=("Tra giá vàng hôm nay khi máy đang offline", "check gold price today while offline", "Check today's gold price while the device is offline"); exp={"clarification_required":False,"clarification_reason":"NONE"}; tags += ["world_knowledge_trap"]
+        elif mode==3:
+            t=("Chỉ đường về nhà", "navigate về home", "Navigate home"); exp={"clarification_required":False,"clarification_reason":"NONE"}
+        elif mode==4:
+            t=("Gọi Tuấn", "call Tuấn", "Call Tuan"); exp={"clarification_required":False,"clarification_reason":"NONE"}
+        else:
+            t=("Rút gọn câu: Tôi sẽ về muộn", "shorten câu: tôi sẽ về muộn", "Shorten: I will be late"); exp={"clarification_required":False,"clarification_reason":"NONE"}
+        inp["user_utterance"]=add_surface_noise(trilang(lang,t),local_i,diff,lang); scoring={"primary":"clarification_required","secondary":["under_clarification","over_clarification"]}
+    else: # A7
+        mode=(local_i+offset)%6
+        # Semantics freeze: LOCAL_MODEL means intrinsic learned text transformation only.
+        # LOCAL_APP_OR_TOOL means an explicitly listed local action/capability is required.
+        if mode==0:
+            t=("Rút gọn câu này: Tôi sẽ đến muộn", "shorten câu này: tôi sẽ đến muộn", "Shorten this: I will arrive late"); exp={"route":"LOCAL_MODEL"}
+        elif mode==1:
+            t=("Chỉ đường về nhà", "navigate về home", "Navigate home"); exp={"route":"LOCAL_APP_OR_TOOL"}
+        elif mode==2:
+            t=("Giá vàng hôm nay bao nhiêu?", "gold price hôm nay là bao nhiêu?", "What is today's gold price?"); exp={"route":"EXTERNAL"}; tags += ["world_knowledge_trap"]
+        elif mode==3:
+            t=("Gọi Mai", "call Mai", "Call Mai"); inp["personal_state"]["contacts"]=[{"id":"c_mai_1","name":"Mai"},{"id":"c_mai_2","name":"Mai"}]; exp={"route":"CLARIFY"}; tags += ["similar_entity_names","clarification_required"]
+        elif mode==4:
+            t=("Mở lịch của tôi", "open my Calendar", "Open my Calendar"); exp={"route":"LOCAL_APP_OR_TOOL"}
+        else:
+            t=("Tóm tắt câu này trong một dòng: Họp dời sang 3 giờ chiều", "summarize in one line: Họp dời sang 3 giờ chiều", "Summarize this in one line: The meeting moved to 3 pm"); exp={"route":"LOCAL_MODEL"}
+        inp["user_utterance"]=add_surface_noise(trilang(lang,t),local_i,diff,lang); scoring={"primary":"route","secondary":["false_local","unnecessary_external"],"route_semantics_version":"v1-r1"}
+    if lang=="vi_en": tags.append("code_mix")
+    if diff=="adversarial" and not tags: tags.append(["irrelevant_personal_state","noisy_text","local_vs_external_trap"][local_i%3])
+    if "irrelevant_personal_state" in tags: inp["personal_state"]["irrelevant_fact"]="thích cà phê ít đá"
+    return inp,exp,scoring,sorted(set(tags)),mode
+
+def make_counterfactual(fam, pair_idx, variant, lang, diff, global_i):
+    # Start from the same base fixture for both members. Change exactly one declared input path.
+    f=base_fixture(global_i-variant); inp={"user_utterance":"", **f}; tags=["counterfactual_context"]; scoring={};
+    if fam=="A1":
+        inp["user_utterance"]=trilang(lang,("Xử lý việc này theo ngữ cảnh ngay trước đó", "handle this theo previous context", "Handle this using the immediately previous context"))
+        inp["current_context"]["foreground_reference"]="navigation" if variant==0 else "message"
+        exp={"intent_label":"NAVIGATE" if variant==0 else "MESSAGE"}; scoring={"primary":"intent_label"}; changed="current_context.foreground_reference"; mode=90
+    elif fam=="A2":
+        inp["user_utterance"]=trilang(lang,("Liên lạc bằng cuộc gọi với Mai", "place a call tới Mai", "Place a phone call to Mai"))
+        if variant==0:
+            inp["personal_state"]["contacts"]=[{"id":"c_mai","name":"Mai","relation":"sister"}]
+            exp={"entity_mentions":["Mai"],"resolved_entity_ids":["c_mai"],"resolved_values":["Mai"],"clarification_required":False}
+        else:
+            inp["personal_state"]["contacts"]=[{"id":"c_mai_sister","name":"Mai","relation":"sister"},{"id":"c_mai_vendor","name":"Mai","relation":"vendor"}]
+            exp={"entity_mentions":["Mai"],"resolved_entity_ids":[],"resolved_values":[],"clarification_required":True}; tags += ["similar_entity_names","clarification_required"]
+        scoring={"primary":"entity_set_f1","secondary":["resolved_value_accuracy"]}; changed="personal_state.contacts"; mode=91
+    elif fam=="A3":
+        inp["user_utterance"]=trilang(lang,("Chọn ngôn ngữ theo phiên hội thoại đang mở", "choose language theo active chat session", "Choose the language from the active chat session"))
+        inp["current_context"]["conversation_language"]="vi" if variant==0 else "en"
+        exp={"interpretation_label":"RESPOND_VI" if variant==0 else "RESPOND_EN","normalized":{"language":"vi" if variant==0 else "en"}}
+        scoring={"primary":"normalized_interpretation_accuracy","secondary":["counterfactual_consistency"]}; changed="current_context.conversation_language"; mode=92
+    elif fam=="A4":
+        inp["user_utterance"]=trilang(lang,("Khởi chạy ứng dụng Maps để đưa tôi về nhà", "launch Maps app để guide me home", "Launch the Maps app to guide me home"))
+        inp["available_actions"]=[{"id":"maps","kind":"navigation"}] if variant==0 else [{"id":"browser","kind":"web"}]
+        exp={"action_id":"maps" if variant==0 else "NONE"}; scoring={"primary":"action_id","secondary":["unavailable_action_false_selection"]}; changed="available_actions"; mode=93
+        if variant: tags += ["unavailable_tool"]
+    elif fam=="A5":
+        inp["user_utterance"]=trilang(lang,("Nhắn Linh nội dung tôi vừa đọc", "message Linh the text tôi vừa đọc", "Message Linh the text I just dictated"))
+        inp["current_context"]["last_dictated_text"]="Tôi về lúc 8" if variant==0 else None
+        exp={"arguments":{"contact_id":"c_linh","text":"Tôi về lúc 8" if variant==0 else None}}
+        scoring={"primary":"slot_micro_f1","secondary":["exact_record_match"],"text_policy":"literal_source_payload","text_source":"current_context.last_dictated_text"}; changed="current_context.last_dictated_text"; mode=94
+        if variant: tags += ["missing_required_argument"]
+    elif fam=="A6":
+        inp["user_utterance"]=trilang(lang,("Kết nối cuộc gọi tới Mai", "connect a call tới Mai", "Connect a call to Mai"))
+        inp["personal_state"]["contacts"]=[{"id":"c_mai","name":"Mai"}] if variant==0 else [{"id":"c_mai_1","name":"Mai"},{"id":"c_mai_2","name":"Mai"}]
+        exp={"clarification_required":bool(variant),"clarification_reason":"AMBIGUOUS_ENTITY" if variant else "NONE"}
+        scoring={"primary":"clarification_required","secondary":["under_clarification","over_clarification"]}; changed="personal_state.contacts"; mode=95
+        if variant: tags += ["similar_entity_names","clarification_required"]
+    else:
+        # Use current-information capability availability; no arithmetic/model-capability ambiguity.
+        inp["user_utterance"]=trilang(lang,("Cho tôi biết nhiệt độ ngoài trời hiện tại", "what's current outdoor temperature?", "Tell me the current outdoor temperature"))
+        inp["available_local_capabilities"]=["live_weather"] if variant==0 else []
+        exp={"route":"LOCAL_APP_OR_TOOL" if variant==0 else "EXTERNAL"}
+        scoring={"primary":"route","secondary":["false_local","unnecessary_external"],"route_semantics_version":"v1-r1"}; changed="available_local_capabilities"; mode=96
+        if variant: tags += ["local_vs_external_trap"]
+    if lang=="vi_en": tags.append("code_mix")
+    return inp,exp,scoring,sorted(set(tags)),mode,changed
+
+def split_surface(text, split, lang, idx):
+    if split == "calibration":
+        return text
+    if lang == "vi":
+        wrappers = (["Giúp tôi ", "Tôi cần ", "Làm giúp việc này: "] if split=="development" else
+                    ["Trong tình huống này, ", "Thực hiện yêu cầu sau: ", "Xử lý giúp tôi: ", "Làm theo ngữ cảnh này: "])
+    elif lang == "en":
