@@ -1,137 +1,461 @@
 {
   "benchmark_version": "ppf-l3-benchmark/v1",
+  "contract_version": "ppf-l3-e2-counterfactual-contract/2",
   "instance_membership_visibility": "EVALUATOR_ONLY",
   "templates": [
     {
+      "allowed_changed_paths": [
+        "observation_policy",
+        "base_records[*].event_type",
+        "base_records[*].evidence_kind",
+        "base_records[*].ingestion_delay_class",
+        "base_records[*].observability.*",
+        "base_records[*].opportunity.state",
+        "base_records[*].opportunity.observability",
+        "base_records[*].payload.*",
+        "base_records[*].quality.*",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "full observability -> permission loss",
+      "expected_answer_relation": "B includes NOT_OBSERVABLE lifecycle answers",
+      "expected_behavior_relation": "latent behavior unchanged",
       "expected_effect": "identifiability/status may change; latent behavior unchanged",
+      "expected_observation_relation": "B renders permission-limited unknown observations",
+      "expected_truth_relation": "latent truth unchanged",
       "held_constant": [
         "truth",
         "opportunities",
         "behavior"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]"
+      ],
       "pair_id": "CF-01",
+      "required_changed_paths": [
+        "observation_policy",
+        "base_records[*].event_type",
+        "base_records[*].evidence_kind",
+        "base_records[*].observability.state",
+        "base_records[*].opportunity.observability",
+        "base_records[*].quality.coverage_state",
+        "expected_answers[*]"
+      ],
       "template": "full_observability_vs_permission_loss"
     },
     {
+      "allowed_changed_paths": [
+        "observation_policy",
+        "base_records[*].quality.*",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "normal -> degraded quality",
+      "expected_answer_relation": "B abstains from support under degraded quality",
+      "expected_behavior_relation": "latent behavior unchanged",
       "expected_effect": "support may weaken or abstain; truth unchanged",
+      "expected_observation_relation": "B degrades quality and coverage only",
+      "expected_truth_relation": "latent truth unchanged",
       "held_constant": [
         "truth",
         "opportunities",
         "behavior"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]"
+      ],
       "pair_id": "CF-02",
+      "required_changed_paths": [
+        "observation_policy",
+        "base_records[*].quality.quality_state",
+        "base_records[*].quality.coverage_state",
+        "expected_answers[*]"
+      ],
       "template": "normal_quality_vs_degraded_quality"
     },
     {
+      "allowed_changed_paths": [
+        "evidence_records[*]"
+      ],
       "controlled_variable": "single evidence -> same-origin replicas",
+      "expected_answer_relation": "same-origin replication does not promote support",
+      "expected_behavior_relation": "latent behavior unchanged",
       "expected_effect": "behavioral occurrence unchanged",
+      "expected_observation_relation": "B adds same-origin replication lineage",
+      "expected_truth_relation": "latent truth unchanged",
       "held_constant": [
         "behavioral episode"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]",
+        "base_records[*]",
+        "expected_answers[*]"
+      ],
       "pair_id": "CF-03",
+      "required_changed_paths": [
+        "evidence_records[*]"
+      ],
       "template": "single_evidence_vs_same_origin_replicas"
     },
     {
+      "allowed_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "behavior[*].choice",
+        "base_records[*].observability.state",
+        "base_records[*].opportunity.state",
+        "base_records[*].payload.action",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "true routine -> chance-matching NO_PATTERN",
+      "expected_answer_relation": "B has no supported active answer",
+      "expected_behavior_relation": "behavior realization differs by truth configuration",
       "expected_effect": "positive truth changes",
+      "expected_observation_relation": "observation policy unchanged",
+      "expected_truth_relation": "A is STABLE_ROUTINE; B is NO_PATTERN",
       "held_constant": [
         "observation policy",
         "record-count shape"
       ],
+      "held_constant_paths": [
+        "scope",
+        "opportunities[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-04",
+      "required_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "base_records[*].payload.action",
+        "expected_answers[*]"
+      ],
       "template": "true_routine_vs_chance_matching_no_pattern"
     },
     {
+      "allowed_changed_paths": [
+        "observation_policy",
+        "base_records[*].event_type",
+        "base_records[*].evidence_kind",
+        "base_records[*].ingestion_delay_class",
+        "base_records[*].observability.*",
+        "base_records[*].opportunity.state",
+        "base_records[*].opportunity.observability",
+        "base_records[*].payload.*",
+        "base_records[*].quality.*",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "stable coverage -> fake drift coverage collapse",
+      "expected_answer_relation": "B becomes NOT_OBSERVABLE/STALE without latent drift",
+      "expected_behavior_relation": "latent behavior unchanged",
       "expected_effect": "no behavioral drift",
+      "expected_observation_relation": "B changes observation coverage only",
+      "expected_truth_relation": "latent truth remains stable",
       "held_constant": [
         "behavior",
         "truth"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]"
+      ],
       "pair_id": "CF-05",
+      "required_changed_paths": [
+        "observation_policy",
+        "base_records[*].observability.state",
+        "base_records[*].opportunity.observability",
+        "base_records[*].quality.coverage_state",
+        "expected_answers[*]"
+      ],
       "template": "stable_behavior_vs_fake_drift"
     },
     {
+      "allowed_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "behavior[*].choice",
+        "observation_policy",
+        "base_records[*].event_type",
+        "base_records[*].evidence_kind",
+        "base_records[*].ingestion_delay_class",
+        "base_records[*].observability.*",
+        "base_records[*].opportunity.state",
+        "base_records[*].opportunity.observability",
+        "base_records[*].payload.*",
+        "base_records[*].quality.*",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "true drift -> observation-only change",
+      "expected_answer_relation": "B becomes NOT_OBSERVABLE/STALE without drift truth",
+      "expected_behavior_relation": "A has a latent behavior transition; B remains behaviorally stable",
       "expected_effect": "only true-drift side changes latent behavior",
+      "expected_observation_relation": "B has observation-only degradation",
+      "expected_truth_relation": "A is true DRIFT; B is stable latent truth",
       "held_constant": [
         "pre-change history shape"
       ],
+      "held_constant_paths": [
+        "scope",
+        "opportunities[*]"
+      ],
       "pair_id": "CF-06",
+      "required_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "observation_policy",
+        "base_records[*].observability.state",
+        "base_records[*].opportunity.observability",
+        "expected_answers[*]"
+      ],
       "template": "true_drift_vs_observation_only_change"
     },
     {
+      "allowed_changed_paths": [
+        "truth_kind",
+        "opportunities[*].alternatives[*]",
+        "base_records[*].opportunity.alternatives[*]",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "meaningful alternatives -> constrained availability",
+      "expected_answer_relation": "B must abstain from preference support",
+      "expected_behavior_relation": "choice occurrence is held constant",
       "expected_effect": "preference identifiability/truth relation differs",
+      "expected_observation_relation": "B removes meaningful alternatives from opportunities",
+      "expected_truth_relation": "A is PREFERENCE; B is insufficient true support",
       "held_constant": [
         "visible option frequency where possible"
       ],
+      "held_constant_paths": [
+        "scope",
+        "behavior[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-07",
+      "required_changed_paths": [
+        "truth_kind",
+        "opportunities[*].alternatives[*]",
+        "base_records[*].opportunity.alternatives[*]",
+        "expected_answers[*]"
+      ],
       "template": "meaningful_alternatives_vs_constrained_availability"
     },
     {
+      "allowed_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "behavior[*].choice",
+        "base_records[*].observability.state",
+        "base_records[*].opportunity.state",
+        "base_records[*].payload.action",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "contextual slices -> misleading aggregate",
+      "expected_answer_relation": "B exposes conflicting evidence rather than support",
+      "expected_behavior_relation": "context slices differ from aggregate behavior",
       "expected_effect": "conditional truth must not collapse globally",
+      "expected_observation_relation": "observation policy unchanged",
+      "expected_truth_relation": "A is CONDITIONAL_PATTERN; B is NO_GLOBAL_PATTERN",
       "held_constant": [
         "aggregate count shape"
       ],
+      "held_constant_paths": [
+        "scope",
+        "opportunities[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-08",
+      "required_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "base_records[*].payload.action",
+        "expected_answers[*]"
+      ],
       "template": "conditional_truth_vs_misleading_aggregate"
     },
     {
+      "allowed_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "behavior[*].choice",
+        "base_records[*].observability.state",
+        "base_records[*].opportunity.state",
+        "base_records[*].payload.action",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "scoped exception -> random deviation",
+      "expected_answer_relation": "B has no supported exception answer",
+      "expected_behavior_relation": "exception structure differs from random behavior",
       "expected_effect": "exception relation differs",
+      "expected_observation_relation": "observation policy unchanged",
+      "expected_truth_relation": "A is SCOPED_EXCEPTION; B is RANDOM_DEVIATION",
       "held_constant": [
         "parent pattern"
       ],
+      "held_constant_paths": [
+        "scope",
+        "opportunities[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-09",
+      "required_changed_paths": [
+        "truth_kind",
+        "behavior[*].occurred",
+        "base_records[*].payload.action",
+        "expected_answers[*]"
+      ],
       "template": "stable_exception_vs_random_deviation"
     },
     {
+      "allowed_changed_paths": [
+        "control_records[*]",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "no correction -> correction applied",
+      "expected_answer_relation": "B changes active answer to USER_REJECTED",
+      "expected_behavior_relation": "pre-control behavior unchanged",
       "expected_effect": "active semantic state changes",
+      "expected_observation_relation": "B adds explicit correction control",
+      "expected_truth_relation": "latent prior truth unchanged",
       "held_constant": [
         "underlying prior history"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]",
+        "base_records[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-10",
+      "required_changed_paths": [
+        "control_records[*]",
+        "expected_answers[*]"
+      ],
       "template": "correction_absent_vs_correction_applied"
     },
     {
+      "allowed_changed_paths": [
+        "control_records[*]",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "no deletion -> deletion applied",
+      "expected_answer_relation": "B changes active answer to DELETED",
+      "expected_behavior_relation": "pre-delete behavior unchanged",
       "expected_effect": "active state becomes DELETED",
+      "expected_observation_relation": "B adds explicit deletion control",
+      "expected_truth_relation": "latent prior truth unchanged",
       "held_constant": [
         "pre-delete history"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]",
+        "base_records[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-11",
+      "required_changed_paths": [
+        "control_records[*]",
+        "expected_answers[*]"
+      ],
       "template": "deletion_absent_vs_deletion_applied"
     },
     {
+      "allowed_changed_paths": [
+        "opportunities[*].context.relationship",
+        "base_records[*].context.relationship.status",
+        "base_records[*].context.relationship.value",
+        "expected_answers[*]"
+      ],
       "controlled_variable": "known relationship -> hidden relationship identity",
+      "expected_answer_relation": "B answers UNKNOWN_CONTEXT after cold start",
+      "expected_behavior_relation": "behavior unchanged",
       "expected_effect": "relationship-specific claim becomes UNKNOWN_CONTEXT",
+      "expected_observation_relation": "B hides relationship identity",
+      "expected_truth_relation": "relationship-conditioned truth unchanged",
       "held_constant": [
         "behavior"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "behavior[*]",
+        "observation_policy"
+      ],
       "pair_id": "CF-12",
+      "required_changed_paths": [
+        "opportunities[*].context.relationship",
+        "base_records[*].context.relationship.status",
+        "base_records[*].context.relationship.value",
+        "expected_answers[*]"
+      ],
       "template": "known_relationship_vs_unknown_relationship"
     },
     {
+      "allowed_changed_paths": [
+        "evidence_records[*]"
+      ],
       "controlled_variable": "raw only -> raw+derived lineage",
+      "expected_answer_relation": "derived lineage does not promote support",
+      "expected_behavior_relation": "underlying behavior episode unchanged",
       "expected_effect": "recurrence truth unchanged",
+      "expected_observation_relation": "B adds derived observation lineage",
+      "expected_truth_relation": "latent truth unchanged",
       "held_constant": [
         "behavioral episode"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]",
+        "base_records[*]",
+        "expected_answers[*]"
+      ],
       "pair_id": "CF-13",
+      "required_changed_paths": [
+        "evidence_records[*]"
+      ],
       "template": "raw_only_vs_raw_plus_derived_lineage"
     },
     {
+      "allowed_changed_paths": [
+        "evidence_records[*].relations[*].type",
+        "evidence_records[*].source.provider"
+      ],
       "controlled_variable": "independent corroboration -> same-origin replication",
+      "expected_answer_relation": "neither arm promotes support",
+      "expected_behavior_relation": "underlying behavior episode unchanged",
       "expected_effect": "evidentiary relation changes; episode does not multiply",
+      "expected_observation_relation": "A and B differ only by corroboration lineage",
+      "expected_truth_relation": "latent truth unchanged",
       "held_constant": [
         "visible source count"
       ],
+      "held_constant_paths": [
+        "truth_kind",
+        "scope",
+        "opportunities[*]",
+        "behavior[*]",
+        "base_records[*]",
+        "expected_answers[*]"
+      ],
       "pair_id": "CF-14",
+      "required_changed_paths": [
+        "evidence_records[*].relations[*].type",
+        "evidence_records[*].source.provider"
+      ],
       "template": "independent_corroboration_vs_same_origin_replication"
     }
   ]

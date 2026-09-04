@@ -73,6 +73,8 @@ Structurally `NO` units never receive a forced `SUPPORTED` active answer.
 
 All 14 frozen counterfactual templates have one DEV pair instance and pass strong path-level isolation. The DEV evidence concretely exercises routine/opportunity, preference/availability, conditional structure, relationship-conditioned behavior, temporal structure, exception, no-pattern/sparse coincidence, confounding/Simpson-like aggregation, real drift, reversal, coverage-induced fake drift, observability loss, same-origin replication, independent corroboration, raw/derived lineage, correction/rejection, deletion/reset, staleness, and relationship visibility.
 
+E2-CF.A subsequently hardened this evidence from broad-root path allowance to declarative contracts with `held_constant_paths`, `allowed_changed_paths`, `required_changed_paths`, and semantic relation checks. The original E2-G6 checker weakness is treated as **REVISE** in the closure report; the hardened checker passes with 14/14 DEV pairs, 9/9 mutation rejections, and 155/155 canonical DEV artifacts unchanged. See [E2-CF.A counterfactual hardening](ppf-l3-e2-cf-a-counterfactual-hardening.md).
+
 CF-14 preserves the behavioral realization and visible source count while changing lineage from `INDEPENDENT_CORROBORATION` to `SAME_ORIGIN_REPLICATED`. Fake-drift evidence holds latent truth and behavioral realization constant while observation coverage collapses. True-drift evidence contains an actual latent behavioral regime transition.
 
 ## Lifecycle QA
@@ -88,7 +90,7 @@ Fresh lifecycle checks PASS for correction, rejection, supersession, invalidatio
 | E2-G3 canonical L2 validity | 1,130 / 1,130 PASS |
 | E2-G4 required semantic-family coverage | PASS |
 | E2-G5 counterfactual pair coverage | PASS — 14 / 14 templates, 14 pairs |
-| E2-G6 counterfactual strong isolation | PASS |
+| E2-G6 counterfactual strong isolation | PASS after E2-CF.A hardening |
 | E2-G7 seed isolation | PASS |
 | E2-G8 checkpoint correctness | PASS — zero future evidence/control leakage |
 | E2-G9 oracle boundary | PASS — no generic recognizer threshold detected |

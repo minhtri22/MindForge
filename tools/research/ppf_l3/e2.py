@@ -140,6 +140,22 @@ class HistorySpec:
     lifecycle_variant: str | None = None
 
 
+@dataclass(frozen=True)
+class PairContract:
+    template: str
+    held_constant_paths: tuple[str, ...]
+    allowed_changed_paths: tuple[str, ...]
+    required_changed_paths: tuple[str, ...]
+    expected_truth_relation: str
+    expected_behavior_relation: str
+    expected_observation_relation: str
+    expected_answer_relation: str
+    required_relations_a: tuple[str, ...] = ()
+    required_relations_b: tuple[str, ...] = ()
+    forbidden_relations_a: tuple[str, ...] = ()
+    forbidden_relations_b: tuple[str, ...] = ()
+
+
 def canonical_bytes(value: Any) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
@@ -754,16 +770,261 @@ def _validation_policy() -> dict:
     }
 
 
+PAIR_CONTRACTS = {
+    "full_observability_vs_permission_loss": PairContract(
+        "full_observability_vs_permission_loss",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]"),
+        (
+            "observation_policy",
+            "base_records[*].event_type",
+            "base_records[*].evidence_kind",
+            "base_records[*].ingestion_delay_class",
+            "base_records[*].observability.*",
+            "base_records[*].opportunity.state",
+            "base_records[*].opportunity.observability",
+            "base_records[*].payload.*",
+            "base_records[*].quality.*",
+            "expected_answers[*]",
+        ),
+        (
+            "observation_policy",
+            "base_records[*].event_type",
+            "base_records[*].evidence_kind",
+            "base_records[*].observability.state",
+            "base_records[*].opportunity.observability",
+            "base_records[*].quality.coverage_state",
+            "expected_answers[*]",
+        ),
+        "latent truth unchanged",
+        "latent behavior unchanged",
+        "B renders permission-limited unknown observations",
+        "B includes NOT_OBSERVABLE lifecycle answers",
+    ),
+    "normal_quality_vs_degraded_quality": PairContract(
+        "normal_quality_vs_degraded_quality",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]"),
+        ("observation_policy", "base_records[*].quality.*", "expected_answers[*]"),
+        ("observation_policy", "base_records[*].quality.quality_state", "base_records[*].quality.coverage_state", "expected_answers[*]"),
+        "latent truth unchanged",
+        "latent behavior unchanged",
+        "B degrades quality and coverage only",
+        "B abstains from support under degraded quality",
+    ),
+    "single_evidence_vs_same_origin_replicas": PairContract(
+        "single_evidence_vs_same_origin_replicas",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]", "base_records[*]", "expected_answers[*]"),
+        ("evidence_records[*]",),
+        ("evidence_records[*]",),
+        "latent truth unchanged",
+        "latent behavior unchanged",
+        "B adds same-origin replication lineage",
+        "same-origin replication does not promote support",
+        required_relations_b=("SAME_ORIGIN_REPLICATED",),
+        forbidden_relations_a=("SAME_ORIGIN_REPLICATED",),
+    ),
+    "true_routine_vs_chance_matching_no_pattern": PairContract(
+        "true_routine_vs_chance_matching_no_pattern",
+        ("scope", "opportunities[*]", "observation_policy"),
+        (
+            "truth_kind",
+            "behavior[*].occurred",
+            "behavior[*].choice",
+            "base_records[*].observability.state",
+            "base_records[*].opportunity.state",
+            "base_records[*].payload.action",
+            "expected_answers[*]",
+        ),
+        ("truth_kind", "behavior[*].occurred", "base_records[*].payload.action", "expected_answers[*]"),
+        "A is STABLE_ROUTINE; B is NO_PATTERN",
+        "behavior realization differs by truth configuration",
+        "observation policy unchanged",
+        "B has no supported active answer",
+    ),
+    "stable_behavior_vs_fake_drift": PairContract(
+        "stable_behavior_vs_fake_drift",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]"),
+        (
+            "observation_policy",
+            "base_records[*].event_type",
+            "base_records[*].evidence_kind",
+            "base_records[*].ingestion_delay_class",
+            "base_records[*].observability.*",
+            "base_records[*].opportunity.state",
+            "base_records[*].opportunity.observability",
+            "base_records[*].payload.*",
+            "base_records[*].quality.*",
+            "expected_answers[*]",
+        ),
+        (
+            "observation_policy",
+            "base_records[*].observability.state",
+            "base_records[*].opportunity.observability",
+            "base_records[*].quality.coverage_state",
+            "expected_answers[*]",
+        ),
+        "latent truth remains stable",
+        "latent behavior unchanged",
+        "B changes observation coverage only",
+        "B becomes NOT_OBSERVABLE/STALE without latent drift",
+    ),
+    "true_drift_vs_observation_only_change": PairContract(
+        "true_drift_vs_observation_only_change",
+        ("scope", "opportunities[*]"),
+        (
+            "truth_kind",
+            "behavior[*].occurred",
+            "behavior[*].choice",
+            "observation_policy",
+            "base_records[*].event_type",
+            "base_records[*].evidence_kind",
+            "base_records[*].ingestion_delay_class",
+            "base_records[*].observability.*",
+            "base_records[*].opportunity.state",
+            "base_records[*].opportunity.observability",
+            "base_records[*].payload.*",
+            "base_records[*].quality.*",
+            "expected_answers[*]",
+        ),
+        (
+            "truth_kind",
+            "behavior[*].occurred",
+            "observation_policy",
+            "base_records[*].observability.state",
+            "base_records[*].opportunity.observability",
+            "expected_answers[*]",
+        ),
+        "A is true DRIFT; B is stable latent truth",
+        "A has a latent behavior transition; B remains behaviorally stable",
+        "B has observation-only degradation",
+        "B becomes NOT_OBSERVABLE/STALE without drift truth",
+    ),
+    "meaningful_alternatives_vs_constrained_availability": PairContract(
+        "meaningful_alternatives_vs_constrained_availability",
+        ("scope", "behavior[*]", "observation_policy"),
+        ("truth_kind", "opportunities[*].alternatives[*]", "base_records[*].opportunity.alternatives[*]", "expected_answers[*]"),
+        ("truth_kind", "opportunities[*].alternatives[*]", "base_records[*].opportunity.alternatives[*]", "expected_answers[*]"),
+        "A is PREFERENCE; B is insufficient true support",
+        "choice occurrence is held constant",
+        "B removes meaningful alternatives from opportunities",
+        "B must abstain from preference support",
+    ),
+    "conditional_truth_vs_misleading_aggregate": PairContract(
+        "conditional_truth_vs_misleading_aggregate",
+        ("scope", "opportunities[*]", "observation_policy"),
+        (
+            "truth_kind",
+            "behavior[*].occurred",
+            "behavior[*].choice",
+            "base_records[*].observability.state",
+            "base_records[*].opportunity.state",
+            "base_records[*].payload.action",
+            "expected_answers[*]",
+        ),
+        ("truth_kind", "behavior[*].occurred", "base_records[*].payload.action", "expected_answers[*]"),
+        "A is CONDITIONAL_PATTERN; B is NO_GLOBAL_PATTERN",
+        "context slices differ from aggregate behavior",
+        "observation policy unchanged",
+        "B exposes conflicting evidence rather than support",
+    ),
+    "stable_exception_vs_random_deviation": PairContract(
+        "stable_exception_vs_random_deviation",
+        ("scope", "opportunities[*]", "observation_policy"),
+        (
+            "truth_kind",
+            "behavior[*].occurred",
+            "behavior[*].choice",
+            "base_records[*].observability.state",
+            "base_records[*].opportunity.state",
+            "base_records[*].payload.action",
+            "expected_answers[*]",
+        ),
+        ("truth_kind", "behavior[*].occurred", "base_records[*].payload.action", "expected_answers[*]"),
+        "A is SCOPED_EXCEPTION; B is RANDOM_DEVIATION",
+        "exception structure differs from random behavior",
+        "observation policy unchanged",
+        "B has no supported exception answer",
+    ),
+    "correction_absent_vs_correction_applied": PairContract(
+        "correction_absent_vs_correction_applied",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]", "base_records[*]", "observation_policy"),
+        ("control_records[*]", "expected_answers[*]"),
+        ("control_records[*]", "expected_answers[*]"),
+        "latent prior truth unchanged",
+        "pre-control behavior unchanged",
+        "B adds explicit correction control",
+        "B changes active answer to USER_REJECTED",
+        required_relations_b=("CORRECTS",),
+        forbidden_relations_a=("CORRECTS",),
+    ),
+    "deletion_absent_vs_deletion_applied": PairContract(
+        "deletion_absent_vs_deletion_applied",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]", "base_records[*]", "observation_policy"),
+        ("control_records[*]", "expected_answers[*]"),
+        ("control_records[*]", "expected_answers[*]"),
+        "latent prior truth unchanged",
+        "pre-delete behavior unchanged",
+        "B adds explicit deletion control",
+        "B changes active answer to DELETED",
+        required_relations_b=("DELETES",),
+        forbidden_relations_a=("DELETES",),
+    ),
+    "known_relationship_vs_unknown_relationship": PairContract(
+        "known_relationship_vs_unknown_relationship",
+        ("truth_kind", "scope", "behavior[*]", "observation_policy"),
+        ("opportunities[*].context.relationship", "base_records[*].context.relationship.status", "base_records[*].context.relationship.value", "expected_answers[*]"),
+        ("opportunities[*].context.relationship", "base_records[*].context.relationship.status", "base_records[*].context.relationship.value", "expected_answers[*]"),
+        "relationship-conditioned truth unchanged",
+        "behavior unchanged",
+        "B hides relationship identity",
+        "B answers UNKNOWN_CONTEXT after cold start",
+    ),
+    "raw_only_vs_raw_plus_derived_lineage": PairContract(
+        "raw_only_vs_raw_plus_derived_lineage",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]", "base_records[*]", "expected_answers[*]"),
+        ("evidence_records[*]",),
+        ("evidence_records[*]",),
+        "latent truth unchanged",
+        "underlying behavior episode unchanged",
+        "B adds derived observation lineage",
+        "derived lineage does not promote support",
+        required_relations_b=("DERIVED_FROM",),
+        forbidden_relations_a=("DERIVED_FROM",),
+    ),
+    "independent_corroboration_vs_same_origin_replication": PairContract(
+        "independent_corroboration_vs_same_origin_replication",
+        ("truth_kind", "scope", "opportunities[*]", "behavior[*]", "base_records[*]", "expected_answers[*]"),
+        ("evidence_records[*].relations[*].type", "evidence_records[*].source.provider"),
+        ("evidence_records[*].relations[*].type", "evidence_records[*].source.provider"),
+        "latent truth unchanged",
+        "underlying behavior episode unchanged",
+        "A and B differ only by corroboration lineage",
+        "neither arm promotes support",
+        required_relations_a=("INDEPENDENT_CORROBORATION",),
+        required_relations_b=("SAME_ORIGIN_REPLICATED",),
+        forbidden_relations_a=("SAME_ORIGIN_REPLICATED",),
+        forbidden_relations_b=("INDEPENDENT_CORROBORATION",),
+    ),
+}
+
+
 def _pair_public_contract() -> dict:
     return {
         "benchmark_version": VERSION,
+        "contract_version": "ppf-l3-e2-counterfactual-contract/2",
         "templates": [
             {
                 "pair_id": PAIR_IDS[template],
                 "template": template,
                 "controlled_variable": PAIR_LABELS[template],
                 "held_constant": list(PAIR_HELD_CONSTANT[template]),
+                "held_constant_paths": list(PAIR_CONTRACTS[template].held_constant_paths),
+                "allowed_changed_paths": list(PAIR_CONTRACTS[template].allowed_changed_paths),
+                "required_changed_paths": list(PAIR_CONTRACTS[template].required_changed_paths),
                 "expected_effect": PAIR_EXPECTED_EFFECT[template],
+                "expected_truth_relation": PAIR_CONTRACTS[template].expected_truth_relation,
+                "expected_behavior_relation": PAIR_CONTRACTS[template].expected_behavior_relation,
+                "expected_observation_relation": PAIR_CONTRACTS[template].expected_observation_relation,
+                "expected_answer_relation": PAIR_CONTRACTS[template].expected_answer_relation,
             }
             for template in PAIR_TEMPLATES
         ],
@@ -807,13 +1068,55 @@ def _normalize_record_for_diff(record: dict) -> dict:
     return item
 
 
+def _record_relation_types(record: dict) -> list[str]:
+    return sorted(rel["type"] for rel in record.get("relations", []))
+
+
+def _record_role(record: dict) -> str:
+    if record.get("evidence_kind") == "USER_FEEDBACK":
+        return "control_records"
+    if record.get("evidence_kind") == "DERIVED_OBSERVATION" or record.get("relations"):
+        return "evidence_records"
+    return "base_records"
+
+
+def _normalized_records_by_role(case: dict) -> dict[str, list[dict]]:
+    result = {"base_records": [], "evidence_records": [], "control_records": []}
+    for record in case["fixture"]["records"]:
+        normalized = _normalize_record_for_diff(record)
+        if normalized.get("relations"):
+            normalized["relations"] = [{"type": rel["type"]} for rel in normalized["relations"]]
+        role = _record_role(record)
+        result[role].append(normalized)
+    result["evidence_records"] = sorted(
+        result["evidence_records"],
+        key=lambda r: (
+            r.get("evidence_kind", ""),
+            tuple(rel.get("type", "") for rel in r.get("relations", [])),
+            r.get("source", {}).get("provider", ""),
+        ),
+    )
+    result["control_records"] = sorted(
+        result["control_records"],
+        key=lambda r: (
+            tuple(rel.get("type", "") for rel in r.get("relations", [])),
+            r.get("payload", {}).get("operation", ""),
+        ),
+    )
+    return result
+
+
 def _normalize_case_for_diff(case: dict) -> dict:
+    records = _normalized_records_by_role(case)
     return {
         "truth_kind": case["truth"]["truth_kind"],
         "scope": case["truth"]["scope"],
+        "observation_policy": case["observation_provenance"]["observation_policy"],
         "opportunities": [{"alternatives": o["alternatives"], "context": o["context"]} for o in case["opportunities"]],
         "behavior": [{"occurred": b["occurred"], "choice": b["choice"]} for b in case["behavior"]],
-        "records": [_normalize_record_for_diff(r) for r in case["fixture"]["records"]],
+        "base_records": records["base_records"],
+        "evidence_records": records["evidence_records"],
+        "control_records": records["control_records"],
         "expected_answers": [c["expected_answer"] for c in case["checkpoints"]],
     }
 
@@ -842,42 +1145,360 @@ def _diff_paths(a: Any, b: Any, path: str = "") -> list[str]:
     return [] if a == b else [path or "$"]
 
 
-def _allowed_pair_path(template: str, path: str) -> bool:
-    allowed = {
-        "full_observability_vs_permission_loss": ("records", "expected_answers"),
-        "normal_quality_vs_degraded_quality": ("records", "expected_answers"),
-        "single_evidence_vs_same_origin_replicas": ("records",),
-        "true_routine_vs_chance_matching_no_pattern": ("truth_kind", "behavior", "records", "expected_answers"),
-        "stable_behavior_vs_fake_drift": ("records", "expected_answers"),
-        "true_drift_vs_observation_only_change": ("truth_kind", "behavior", "records", "expected_answers"),
-        "meaningful_alternatives_vs_constrained_availability": ("truth_kind", "opportunities", "behavior", "records", "expected_answers"),
-        "conditional_truth_vs_misleading_aggregate": ("truth_kind", "behavior", "records", "expected_answers"),
-        "stable_exception_vs_random_deviation": ("truth_kind", "behavior", "records", "expected_answers"),
-        "correction_absent_vs_correction_applied": ("records", "expected_answers"),
-        "deletion_absent_vs_deletion_applied": ("records", "expected_answers"),
-        "known_relationship_vs_unknown_relationship": ("opportunities", "records", "expected_answers"),
-        "raw_only_vs_raw_plus_derived_lineage": ("records",),
-        "independent_corroboration_vs_same_origin_replication": ("records",),
-    }[template]
-    return any(path == root or path.startswith(root + ".") or path.startswith(root + "[") for root in allowed)
+def _path_matches(pattern: str, path: str) -> bool:
+    regex = ""
+    i = 0
+    while i < len(pattern):
+        if pattern.startswith("[*]", i):
+            regex += r"\[\d+\]"
+            i += 3
+        elif pattern[i] == "*":
+            regex += r"[^.\[\]]+"
+            i += 1
+        else:
+            regex += re.escape(pattern[i])
+            i += 1
+    return re.fullmatch(regex, path) is not None
+
+
+def _matches_any(path: str, patterns: tuple[str, ...]) -> bool:
+    return any(_path_matches(pattern, path) for pattern in patterns)
+
+
+def _changed_path_matches(pattern: str, paths: list[str]) -> list[str]:
+    return [path for path in paths if _path_matches(pattern, path)]
+
+
+def _pair_cases(cases: list[dict], template: str) -> tuple[dict, dict]:
+    arms = sorted((c for c in cases if c["spec"].pair_template == template), key=lambda c: c["spec"].pair_arm or "")
+    if len(arms) != 2:
+        raise ValueError(f"expected two arms for {template}, found {len(arms)}")
+    return arms[0], arms[1]
+
+
+def _relation_types(case: dict) -> set[str]:
+    return {
+        rel["type"]
+        for record in case["fixture"]["records"]
+        for rel in record.get("relations", [])
+    }
+
+
+def _control_events(case: dict) -> list[dict]:
+    return [record for record in case["fixture"]["records"] if record.get("evidence_kind") == "USER_FEEDBACK"]
+
+
+def _behavior_semantics(case: dict) -> list[dict]:
+    return [{"occurred": b["occurred"], "choice": b["choice"]} for b in case["behavior"]]
+
+
+def _answers(case: dict) -> list[str]:
+    return [cp["expected_answer"] for cp in case["checkpoints"]]
+
+
+def _has_record_value(case: dict, path: tuple[str, ...], value: Any) -> bool:
+    def descend(node: Any, parts: tuple[str, ...]) -> bool:
+        if not parts:
+            return node == value
+        part = parts[0]
+        if isinstance(node, list):
+            return any(descend(item, parts) for item in node)
+        if isinstance(node, dict) and part in node:
+            return descend(node[part], parts[1:])
+        return False
+    return any(descend(record, path) for record in case["fixture"]["records"])
+
+
+def _has_control(case: dict, relation_type: str, operation: str) -> bool:
+    return any(
+        operation == event.get("payload", {}).get("operation")
+        and any(rel.get("type") == relation_type for rel in event.get("relations", []))
+        for event in _control_events(case)
+    )
+
+
+def _all_behavior(case: dict, start: int, value: bool) -> bool:
+    return all(b["occurred"] is value for b in case["behavior"][start:])
+
+
+def _semantic_relation_checks(template: str, arm_a: dict, arm_b: dict) -> list[dict]:
+    contract = PAIR_CONTRACTS[template]
+    checks: list[tuple[str, bool]] = []
+    rel_a = _relation_types(arm_a)
+    rel_b = _relation_types(arm_b)
+    for rel in contract.required_relations_a:
+        checks.append((f"A requires {rel}", rel in rel_a))
+    for rel in contract.required_relations_b:
+        checks.append((f"B requires {rel}", rel in rel_b))
+    for rel in contract.forbidden_relations_a:
+        checks.append((f"A forbids {rel}", rel not in rel_a))
+    for rel in contract.forbidden_relations_b:
+        checks.append((f"B forbids {rel}", rel not in rel_b))
+
+    checks.extend([
+        ("expected truth relation registered", bool(contract.expected_truth_relation)),
+        ("expected behavior relation registered", bool(contract.expected_behavior_relation)),
+        ("expected observation relation registered", bool(contract.expected_observation_relation)),
+        ("expected answer relation registered", bool(contract.expected_answer_relation)),
+    ])
+
+    if template == "full_observability_vs_permission_loss":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B policy is permission loss", arm_b["observation_provenance"]["observation_policy"] == "PERMISSION_LOSS"),
+            ("B has permission-limited observations", _has_record_value(arm_b, ("observability", "state"), "PERMISSION_UNAVAILABLE_OR_UNKNOWN")),
+            ("B has unknown opportunity observability", _has_record_value(arm_b, ("opportunity", "observability"), "UNKNOWN")),
+            ("B has NOT_OBSERVABLE answer", "NOT_OBSERVABLE" in _answers(arm_b)),
+        ])
+    elif template == "normal_quality_vs_degraded_quality":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B policy is degraded quality", arm_b["observation_provenance"]["observation_policy"] == "DEGRADED_QUALITY"),
+            ("B has degraded quality", _has_record_value(arm_b, ("quality", "quality_state"), "DEGRADED")),
+            ("B has partial coverage", _has_record_value(arm_b, ("quality", "coverage_state"), "PARTIAL")),
+            ("B abstains from support", "SUPPORTED" not in _answers(arm_b)),
+        ])
+    elif template == "single_evidence_vs_same_origin_replicas":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B adds exactly one visible record", len(arm_b["fixture"]["records"]) == len(arm_a["fixture"]["records"]) + 1),
+            ("replica does not promote support", "SUPPORTED" not in _answers(arm_b)),
+        ])
+    elif template == "true_routine_vs_chance_matching_no_pattern":
+        checks.extend([
+            ("A is stable routine", arm_a["truth"]["truth_kind"] == "STABLE_ROUTINE"),
+            ("B is no pattern", arm_b["truth"]["truth_kind"] == "NO_PATTERN"),
+            ("behavior differs", _behavior_semantics(arm_a) != _behavior_semantics(arm_b)),
+            ("B has no supported answer", "SUPPORTED" not in _answers(arm_b)),
+        ])
+    elif template == "stable_behavior_vs_fake_drift":
+        checks.extend([
+            ("truth unchanged stable pattern", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"] == "STABLE_PATTERN"),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B policy is coverage collapse", arm_b["observation_provenance"]["observation_policy"] == "COVERAGE_COLLAPSE"),
+            ("B has no-observation record", _has_record_value(arm_b, ("observability", "state"), "NO_OBSERVATION")),
+            ("B has stale/not-observable answers", {"NOT_OBSERVABLE", "STALE"}.issubset(set(_answers(arm_b)))),
+        ])
+    elif template == "true_drift_vs_observation_only_change":
+        mid = len(arm_a["behavior"]) // 2
+        checks.extend([
+            ("A is true drift", arm_a["truth"]["truth_kind"] == "DRIFT"),
+            ("B is stable pattern", arm_b["truth"]["truth_kind"] == "STABLE_PATTERN"),
+            ("A has latent transition", all(b["occurred"] for b in arm_a["behavior"][:mid]) and _all_behavior(arm_a, mid, False)),
+            ("B remains latent stable", all(b["occurred"] for b in arm_b["behavior"])),
+            ("B policy is observation-only change", arm_b["observation_provenance"]["observation_policy"] == "OBSERVATION_ONLY_CHANGE"),
+            ("B has delayed data observations", _has_record_value(arm_b, ("observability", "state"), "DATA_DELAYED")),
+        ])
+    elif template == "meaningful_alternatives_vs_constrained_availability":
+        checks.extend([
+            ("A is preference", arm_a["truth"]["truth_kind"] == "PREFERENCE"),
+            ("B is insufficient true support", arm_b["truth"]["truth_kind"] == "INSUFFICIENT_TRUE_SUPPORT"),
+            ("A exposes meaningful alternatives", all(len(o["alternatives"]) > 1 for o in arm_a["opportunities"])),
+            ("B constrains alternatives", all(len(o["alternatives"]) == 1 for o in arm_b["opportunities"])),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B has no supported preference", "SUPPORTED" not in _answers(arm_b)),
+        ])
+    elif template == "conditional_truth_vs_misleading_aggregate":
+        checks.extend([
+            ("A is conditional pattern", arm_a["truth"]["truth_kind"] == "CONDITIONAL_PATTERN"),
+            ("B is no global pattern", arm_b["truth"]["truth_kind"] == "NO_GLOBAL_PATTERN"),
+            ("segments are present", {o["context"]["segment"] for o in arm_a["opportunities"]} == {"context-a", "context-b"}),
+            ("B has conflicting evidence answer", "CONFLICTING_EVIDENCE" in _answers(arm_b)),
+        ])
+    elif template == "stable_exception_vs_random_deviation":
+        checks.extend([
+            ("A is scoped exception", arm_a["truth"]["truth_kind"] == "SCOPED_EXCEPTION"),
+            ("B is random deviation", arm_b["truth"]["truth_kind"] == "RANDOM_DEVIATION"),
+            ("behavior differs", _behavior_semantics(arm_a) != _behavior_semantics(arm_b)),
+            ("B has no supported exception", "SUPPORTED" not in _answers(arm_b)),
+        ])
+    elif template == "correction_absent_vs_correction_applied":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B has correction control", _has_control(arm_b, "CORRECTS", "reject")),
+            ("B has USER_REJECTED answer", "USER_REJECTED" in _answers(arm_b)),
+            ("A has no correction control", not _has_control(arm_a, "CORRECTS", "reject")),
+        ])
+    elif template == "deletion_absent_vs_deletion_applied":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B has deletion control", _has_control(arm_b, "DELETES", "remove")),
+            ("B has DELETED answer", "DELETED" in _answers(arm_b)),
+            ("A has no deletion control", not _has_control(arm_a, "DELETES", "remove")),
+        ])
+    elif template == "known_relationship_vs_unknown_relationship":
+        checks.extend([
+            ("truth unchanged relationship-conditioned", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"] == "RELATIONSHIP_CONDITIONED"),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("A relationship known", all(o["context"]["relationship"] == "known" for o in arm_a["opportunities"])),
+            ("B relationship unknown", all(o["context"]["relationship"] == "unknown" for o in arm_b["opportunities"])),
+            ("B answers unknown context", "UNKNOWN_CONTEXT" in _answers(arm_b)),
+        ])
+    elif template == "raw_only_vs_raw_plus_derived_lineage":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("B has derived observation", any(r.get("evidence_kind") == "DERIVED_OBSERVATION" for r in arm_b["fixture"]["records"])),
+            ("B has derived input refs", any(r.get("provenance", {}).get("input_event_refs") for r in arm_b["fixture"]["records"])),
+            ("derived lineage does not promote support", "SUPPORTED" not in _answers(arm_b)),
+        ])
+    elif template == "independent_corroboration_vs_same_origin_replication":
+        checks.extend([
+            ("truth unchanged", arm_a["truth"]["truth_kind"] == arm_b["truth"]["truth_kind"]),
+            ("behavior unchanged", _behavior_semantics(arm_a) == _behavior_semantics(arm_b)),
+            ("visible source count comparable", len(arm_a["fixture"]["records"]) == len(arm_b["fixture"]["records"])),
+            ("neither arm promotes support", "SUPPORTED" not in _answers(arm_a) and "SUPPORTED" not in _answers(arm_b)),
+        ])
+    else:
+        checks.append(("known template", False))
+
+    return [{"name": name, "pass": bool(ok)} for name, ok in checks]
+
+
+def _pair_report_for_arms(template: str, arm_a: dict, arm_b: dict) -> dict:
+    contract = PAIR_CONTRACTS[template]
+    diffs = _diff_paths(_normalize_case_for_diff(arm_a), _normalize_case_for_diff(arm_b))
+    held_constant_violations = [path for path in diffs if _matches_any(path, contract.held_constant_paths)]
+    unexpected = [path for path in diffs if not _matches_any(path, contract.allowed_changed_paths)]
+    required_matches = {pattern: _changed_path_matches(pattern, diffs) for pattern in contract.required_changed_paths}
+    missing_required = [pattern for pattern, matches in required_matches.items() if not matches]
+    semantic_checks = _semantic_relation_checks(template, arm_a, arm_b)
+    passed = not held_constant_violations and not unexpected and not missing_required and all(check["pass"] for check in semantic_checks)
+    return {
+        "pair_id": PAIR_IDS[template],
+        "template": template,
+        "case_a": arm_a["case_id"],
+        "case_b": arm_b["case_id"],
+        "held_constant_paths": list(contract.held_constant_paths),
+        "allowed_changed_paths": list(contract.allowed_changed_paths),
+        "required_changed_paths": list(contract.required_changed_paths),
+        "actual_changed_paths": diffs,
+        "held_constant_violations": held_constant_violations,
+        "unexpected_changed_paths": unexpected,
+        "required_change_matches": required_matches,
+        "missing_required_changes": missing_required,
+        "semantic_relation_checks": semantic_checks,
+        "pass": passed,
+    }
 
 
 def _strong_pair_reports(cases: list[dict]) -> dict[str, dict]:
-    by_template: dict[str, list[dict]] = {}
-    for c in cases:
-        if c["spec"].pair_template:
-            by_template.setdefault(c["spec"].pair_template, []).append(c)
     reports = {}
-    for template, arms in by_template.items():
-        arms = sorted(arms, key=lambda c: c["spec"].pair_arm or "")
-        diffs = _diff_paths(_normalize_case_for_diff(arms[0]), _normalize_case_for_diff(arms[1]))
-        unexpected = [p for p in diffs if not _allowed_pair_path(template, p)]
-        reports[template] = {
-            "changed_paths": diffs,
-            "unexpected_paths": unexpected,
-            "pass": bool(diffs) and not unexpected,
-        }
+    for template in PAIR_TEMPLATES:
+        arm_a, arm_b = _pair_cases(cases, template)
+        reports[template] = _pair_report_for_arms(template, arm_a, arm_b)
     return reports
+
+
+def _mutated_pair_report(cases: list[dict], template: str, mutator: Any) -> dict:
+    arm_a_src, arm_b_src = _pair_cases(cases, template)
+    arm_a = copy.deepcopy(arm_a_src)
+    arm_b = copy.deepcopy(arm_b_src)
+    mutator(arm_a, arm_b)
+    report = _pair_report_for_arms(template, arm_a, arm_b)
+    return {
+        "template": template,
+        "checker_pass": report["pass"],
+        "rejected": not report["pass"],
+        "held_constant_violations": report["held_constant_violations"],
+        "unexpected_changed_paths": report["unexpected_changed_paths"],
+        "missing_required_changes": report["missing_required_changes"],
+        "failed_semantic_checks": [check["name"] for check in report["semantic_relation_checks"] if not check["pass"]],
+    }
+
+
+def counterfactual_contract_mutation_results(cases: list[dict] | None = None) -> dict:
+    if cases is None:
+        cases = [generate_case(spec) for spec in preregistered_histories()]
+
+    def remove_permission_loss(_: dict, arm_b: dict) -> None:
+        arm_a, _arm_b = _pair_cases(cases, "full_observability_vs_permission_loss")
+        arm_b["fixture"]["records"] = copy.deepcopy(arm_a["fixture"]["records"])
+        arm_b["observation_provenance"]["observation_policy"] = "NORMAL"
+        arm_b["fixture"]["records"][0]["quality"]["coverage_state"] = "PARTIAL"
+
+    def remove_relation(arm_b: dict, relation_type: str) -> None:
+        for record in arm_b["fixture"]["records"]:
+            record["relations"] = [rel for rel in record.get("relations", []) if rel.get("type") != relation_type]
+            if not record.get("relations"):
+                record.pop("relations", None)
+
+    def remove_derived_lineage(_: dict, arm_b: dict) -> None:
+        for record in arm_b["fixture"]["records"]:
+            record.get("provenance", {}).pop("input_event_refs", None)
+        remove_relation(arm_b, "DERIVED_FROM")
+
+    mutations: dict[str, dict] = {
+        "M1": _mutated_pair_report(cases, "full_observability_vs_permission_loss", lambda _a, b: b["truth"].update({"truth_kind": "NO_PATTERN"})),
+        "M2": _mutated_pair_report(cases, "full_observability_vs_permission_loss", lambda _a, b: b["opportunities"][0]["context"].update({"period": "night"})),
+        "M3": _mutated_pair_report(cases, "full_observability_vs_permission_loss", lambda _a, b: b["behavior"][0].update({"occurred": not b["behavior"][0]["occurred"]})),
+        "M4": _mutated_pair_report(cases, "full_observability_vs_permission_loss", lambda _a, b: b["fixture"]["records"][0]["context"]["period"].update({"value": "night"})),
+        "M5": _mutated_pair_report(cases, "full_observability_vs_permission_loss", remove_permission_loss),
+        "M6": _mutated_pair_report(cases, "single_evidence_vs_same_origin_replicas", lambda _a, b: remove_relation(b, "SAME_ORIGIN_REPLICATED")),
+        "M7": _mutated_pair_report(cases, "correction_absent_vs_correction_applied", lambda _a, b: remove_relation(b, "CORRECTS")),
+        "M8": _mutated_pair_report(cases, "raw_only_vs_raw_plus_derived_lineage", remove_derived_lineage),
+        "M9": _mutated_pair_report(cases, "independent_corroboration_vs_same_origin_replication", lambda a, _b: [rel.update({"type": "SAME_ORIGIN_REPLICATED"}) for record in a["fixture"]["records"] for rel in record.get("relations", []) if rel.get("type") == "INDEPENDENT_CORROBORATION"]),
+    }
+    for mutation_id, result in mutations.items():
+        result["mutation_id"] = mutation_id
+        result["pass"] = result["rejected"]
+    return {
+        "mutation_count": len(mutations),
+        "mutations": mutations,
+        "undeclared_change_mutations_passed": sum(1 for key in ("M1", "M2", "M3", "M4") if mutations[key]["pass"]),
+        "missing_controlled_change_mutations_passed": sum(1 for key in ("M5", "M6", "M7", "M8", "M9") if mutations[key]["pass"]),
+        "status": "PASS" if all(result["pass"] for result in mutations.values()) else "REVISE",
+    }
+
+
+def counterfactual_contract_qa(cases: list[dict], qa: dict | None = None, dataset_hash_comparison: dict | None = None) -> dict:
+    pair_reports = _strong_pair_reports(cases)
+    mutations = counterfactual_contract_mutation_results(cases)
+    contract_shape = {
+        template: bool(contract.held_constant_paths and contract.allowed_changed_paths and contract.required_changed_paths)
+        for template, contract in PAIR_CONTRACTS.items()
+    }
+    pair_pass_count = sum(1 for report in pair_reports.values() if report["pass"])
+    total_held = sum(len(report["held_constant_violations"]) for report in pair_reports.values())
+    total_unexpected = sum(len(report["unexpected_changed_paths"]) for report in pair_reports.values())
+    total_missing = sum(len(report["missing_required_changes"]) for report in pair_reports.values())
+    cf_gates = {
+        "CF-G1": len(PAIR_CONTRACTS) == len(PAIR_TEMPLATES) and all(contract_shape.values()),
+        "CF-G2": all(mutations["mutations"][key]["pass"] for key in ("M1", "M2", "M3")),
+        "CF-G3": all(mutations["mutations"][key]["pass"] for key in ("M5", "M6", "M7", "M8", "M9")),
+        "CF-G4": all(mutations["mutations"][key]["pass"] for key in ("M1", "M2", "M3", "M4")),
+        "CF-G5": all(mutations["mutations"][key]["pass"] for key in ("M5", "M6", "M7", "M8", "M9")),
+        "CF-G6": pair_pass_count == len(PAIR_TEMPLATES) and total_held == 0 and total_unexpected == 0 and total_missing == 0,
+        "CF-G7": (dataset_hash_comparison or {}).get("canonical_dev_artifacts_unchanged") is True,
+        "CF-G8": (dataset_hash_comparison or {}).get("seed_registry_unchanged") is True and (dataset_hash_comparison or {}).get("case_registry_unchanged") is True,
+        "CF-G9": (dataset_hash_comparison or {}).get("reroll_count") == 0,
+        "CF-G10": bool((qa or {}).get("regression_checks", {}).get("l2_60_and_8")),
+        "CF-G11": bool((qa or {}).get("regression_checks", {}).get("e0")) and bool((qa or {}).get("regression_checks", {}).get("e1")),
+        "CF-G12": bool(qa) and all(value for gate, value in qa.get("e2_gates", {}).items() if gate != "E2-G6"),
+    }
+    return {
+        "benchmark_version": VERSION,
+        "contract_version": "ppf-l3-e2-counterfactual-contract/2",
+        "status": "PASS" if all(cf_gates.values()) else "REVISE",
+        "pair_count": len(pair_reports),
+        "pair_pass_count": pair_pass_count,
+        "pair_reports": pair_reports,
+        "mutation_tests": mutations,
+        "dataset_hash_comparison": dataset_hash_comparison or {"status": "NOT_EVALUATED_IN_GENERATOR"},
+        "seed_registry_unchanged": (dataset_hash_comparison or {}).get("seed_registry_unchanged"),
+        "case_registry_unchanged": (dataset_hash_comparison or {}).get("case_registry_unchanged"),
+        "reroll_count": (dataset_hash_comparison or {}).get("reroll_count"),
+        "cf_gates": cf_gates,
+        "contract_shape": contract_shape,
+        "held_constant_violation_count": total_held,
+        "unexpected_changed_path_count": total_unexpected,
+        "missing_required_change_count": total_missing,
+    }
 
 
 def _public_manifest(cases: list[dict], root: Path) -> dict:
@@ -1251,6 +1872,7 @@ def generate_dev(root: Path = BENCH_ROOT) -> dict:
     qa = _qa(cases, preregistration, prereg_evidence, root)
     summary = _summary(cases, qa)
     write_json(root / "reports" / "generator_qa.json", qa)
+    write_json(root / "reports" / "counterfactual_contract_qa.json", counterfactual_contract_qa(cases, qa))
     write_json(root / "reports" / "oracle_qa.json", {
         "benchmark_version": VERSION,
         "status": "PASS" if qa["e2_gates"]["E2-G8"] and qa["e2_gates"]["E2-G9"] and qa["e2_gates"]["E2-G10"] and qa["e2_gates"]["E2-G12"] else "REVISE",

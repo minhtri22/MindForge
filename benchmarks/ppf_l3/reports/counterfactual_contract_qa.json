@@ -1,104 +1,234 @@
 {
   "benchmark_version": "ppf-l3-benchmark/v1",
-  "checkpoint_future_leak_violations": [],
-  "e2_gates": {
-    "E2-G1": true,
-    "E2-G10": true,
-    "E2-G11": true,
-    "E2-G12": true,
-    "E2-G13": true,
-    "E2-G14": true,
-    "E2-G15": true,
-    "E2-G16": true,
-    "E2-G17": true,
-    "E2-G18": true,
-    "E2-G2": true,
-    "E2-G3": true,
-    "E2-G4": true,
-    "E2-G5": true,
-    "E2-G6": true,
-    "E2-G7": true,
-    "E2-G8": true,
-    "E2-G9": true
+  "case_registry_unchanged": true,
+  "cf_gates": {
+    "CF-G1": true,
+    "CF-G10": true,
+    "CF-G11": true,
+    "CF-G12": true,
+    "CF-G2": true,
+    "CF-G3": true,
+    "CF-G4": true,
+    "CF-G5": true,
+    "CF-G6": true,
+    "CF-G7": true,
+    "CF-G8": true,
+    "CF-G9": true
   },
-  "evidence_non_inflation": {
-    "independent_and_same_origin_distinguished": true,
-    "raw_derived_not_new_behavior": true,
-    "same_origin_replica_not_new_behavior": true,
-    "unknown_relationship_remains_unknown": true
+  "contract_shape": {
+    "conditional_truth_vs_misleading_aggregate": true,
+    "correction_absent_vs_correction_applied": true,
+    "deletion_absent_vs_deletion_applied": true,
+    "full_observability_vs_permission_loss": true,
+    "independent_corroboration_vs_same_origin_replication": true,
+    "known_relationship_vs_unknown_relationship": true,
+    "meaningful_alternatives_vs_constrained_availability": true,
+    "normal_quality_vs_degraded_quality": true,
+    "raw_only_vs_raw_plus_derived_lineage": true,
+    "single_evidence_vs_same_origin_replicas": true,
+    "stable_behavior_vs_fake_drift": true,
+    "stable_exception_vs_random_deviation": true,
+    "true_drift_vs_observation_only_change": true,
+    "true_routine_vs_chance_matching_no_pattern": true
   },
-  "family_evidence": {
-    "confounding_simpson": true,
-    "correction": true,
-    "deletion_reset": true,
-    "drift_reversal": true,
-    "exception": true,
-    "fake_drift": true,
-    "insufficient_or_conflicting": true,
-    "no_pattern": true,
-    "observability_loss": true,
-    "preference": true,
-    "relationship_conditioned": true,
-    "relationship_visibility": true,
-    "routine": true,
-    "same_origin_replication": true,
-    "temporal_sequence": true
+  "contract_version": "ppf-l3-e2-counterfactual-contract/2",
+  "dataset_hash_comparison": {
+    "added_canonical_artifacts": [],
+    "baseline_capture": "pre-change temp hash capture; not committed",
+    "baseline_count": 155,
+    "canonical_checkpoint_count": 38,
+    "canonical_dev_artifacts_unchanged": true,
+    "canonical_expected_count": 38,
+    "canonical_history_count": 38,
+    "canonical_truth_count": 38,
+    "case_registry_unchanged": true,
+    "changed_canonical_artifacts": [],
+    "current_count": 155,
+    "master_seed_unchanged": true,
+    "missing_canonical_artifacts": [],
+    "reroll_count": 0,
+    "seed_registry_unchanged": true
   },
-  "l2_errors": {
-    "case-00bc7a63042a": [],
-    "case-0101182c8237": [],
-    "case-02f955d07213": [],
-    "case-0bf5d134505e": [],
-    "case-17b4fdc2d166": [],
-    "case-2570e85d40bc": [],
-    "case-264df07ec9ac": [],
-    "case-2d89827ceb0e": [],
-    "case-382eb6cd77d2": [],
-    "case-3c99190de706": [],
-    "case-43c45962f13b": [],
-    "case-4592d5309116": [],
-    "case-47a463e06491": [],
-    "case-5712efbeeb2b": [],
-    "case-670c8c4fac2f": [],
-    "case-6b06a1984557": [],
-    "case-6f8a8c2231b2": [],
-    "case-7248e802b174": [],
-    "case-76772a34ec13": [],
-    "case-7c8a9a0ac23b": [],
-    "case-88e9d458d680": [],
-    "case-94a8e3a3c9fb": [],
-    "case-a28e880cf3b0": [],
-    "case-ad11a1859faf": [],
-    "case-b236025170e3": [],
-    "case-b71f413b0c67": [],
-    "case-b7e23fa0d5ed": [],
-    "case-b8ac5ac92e07": [],
-    "case-c3d780398aad": [],
-    "case-c94d7d75e21b": [],
-    "case-d605c20f5997": [],
-    "case-dcc24f2eb3e0": [],
-    "case-df953d0c3d67": [],
-    "case-eb89616f9bf4": [],
-    "case-f0278fa4ef22": [],
-    "case-f19777b50987": [],
-    "case-f49f9d933020": [],
-    "case-fe6c167a4cb7": []
+  "held_constant_violation_count": 0,
+  "missing_required_change_count": 0,
+  "mutation_tests": {
+    "missing_controlled_change_mutations_passed": 5,
+    "mutation_count": 9,
+    "mutations": {
+      "M1": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "truth unchanged"
+        ],
+        "held_constant_violations": [
+          "truth_kind"
+        ],
+        "missing_required_changes": [],
+        "mutation_id": "M1",
+        "pass": true,
+        "rejected": true,
+        "template": "full_observability_vs_permission_loss",
+        "unexpected_changed_paths": [
+          "truth_kind"
+        ]
+      },
+      "M2": {
+        "checker_pass": false,
+        "failed_semantic_checks": [],
+        "held_constant_violations": [],
+        "missing_required_changes": [],
+        "mutation_id": "M2",
+        "pass": true,
+        "rejected": true,
+        "template": "full_observability_vs_permission_loss",
+        "unexpected_changed_paths": [
+          "opportunities[0].context.period"
+        ]
+      },
+      "M3": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "behavior unchanged"
+        ],
+        "held_constant_violations": [],
+        "missing_required_changes": [],
+        "mutation_id": "M3",
+        "pass": true,
+        "rejected": true,
+        "template": "full_observability_vs_permission_loss",
+        "unexpected_changed_paths": [
+          "behavior[0].occurred"
+        ]
+      },
+      "M4": {
+        "checker_pass": false,
+        "failed_semantic_checks": [],
+        "held_constant_violations": [],
+        "missing_required_changes": [],
+        "mutation_id": "M4",
+        "pass": true,
+        "rejected": true,
+        "template": "full_observability_vs_permission_loss",
+        "unexpected_changed_paths": [
+          "base_records[0].context.period.value"
+        ]
+      },
+      "M5": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "B policy is permission loss",
+          "B has permission-limited observations",
+          "B has unknown opportunity observability"
+        ],
+        "held_constant_violations": [],
+        "missing_required_changes": [
+          "observation_policy",
+          "base_records[*].event_type",
+          "base_records[*].evidence_kind",
+          "base_records[*].observability.state",
+          "base_records[*].opportunity.observability"
+        ],
+        "mutation_id": "M5",
+        "pass": true,
+        "rejected": true,
+        "template": "full_observability_vs_permission_loss",
+        "unexpected_changed_paths": []
+      },
+      "M6": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "B requires SAME_ORIGIN_REPLICATED"
+        ],
+        "held_constant_violations": [
+          "base_records[20]"
+        ],
+        "missing_required_changes": [
+          "evidence_records[*]"
+        ],
+        "mutation_id": "M6",
+        "pass": true,
+        "rejected": true,
+        "template": "single_evidence_vs_same_origin_replicas",
+        "unexpected_changed_paths": [
+          "base_records[1].context.segment.value",
+          "base_records[1].observability.state",
+          "base_records[1].opportunity.state",
+          "base_records[1].payload.action",
+          "base_records[1].source.device_class",
+          "base_records[1].source.platform",
+          "base_records[1].source.provider",
+          "base_records[2].context.segment.value",
+          "base_records[3].context.period.value",
+          "base_records[3].context.segment.value",
+          "base_records[4].context.segment.value",
+          "base_records[5].context.segment.value",
+          "base_records[6].context.segment.value",
+          "base_records[7].context.segment.value",
+          "base_records[8].context.segment.value",
+          "base_records[9].context.segment.value",
+          "base_records[10].context.segment.value",
+          "base_records[11].context.segment.value",
+          "base_records[12].context.segment.value",
+          "base_records[13].context.segment.value",
+          "base_records[14].context.segment.value",
+          "base_records[15].context.segment.value",
+          "base_records[16].context.segment.value",
+          "base_records[17].context.segment.value",
+          "base_records[18].context.segment.value",
+          "base_records[19].context.segment.value",
+          "base_records[20]"
+        ]
+      },
+      "M7": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "B requires CORRECTS",
+          "B has correction control"
+        ],
+        "held_constant_violations": [],
+        "missing_required_changes": [],
+        "mutation_id": "M7",
+        "pass": true,
+        "rejected": true,
+        "template": "correction_absent_vs_correction_applied",
+        "unexpected_changed_paths": []
+      },
+      "M8": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "B requires DERIVED_FROM",
+          "B has derived input refs"
+        ],
+        "held_constant_violations": [],
+        "missing_required_changes": [],
+        "mutation_id": "M8",
+        "pass": true,
+        "rejected": true,
+        "template": "raw_only_vs_raw_plus_derived_lineage",
+        "unexpected_changed_paths": []
+      },
+      "M9": {
+        "checker_pass": false,
+        "failed_semantic_checks": [
+          "A requires INDEPENDENT_CORROBORATION",
+          "A forbids SAME_ORIGIN_REPLICATED"
+        ],
+        "held_constant_violations": [],
+        "missing_required_changes": [
+          "evidence_records[*].relations[*].type"
+        ],
+        "mutation_id": "M9",
+        "pass": true,
+        "rejected": true,
+        "template": "independent_corroboration_vs_same_origin_replication",
+        "unexpected_changed_paths": []
+      }
+    },
+    "status": "PASS",
+    "undeclared_change_mutations_passed": 4
   },
-  "lifecycle_checks": {
-    "correction_control_present": true,
-    "deletion_present": true,
-    "fake_drift_has_no_latent_transition": true,
-    "invalidation_present": true,
-    "no_passive_resurrection": true,
-    "rejection_state_present": true,
-    "reset_present": true,
-    "reversal_has_latent_transition": true,
-    "staleness_present": true,
-    "supersession_present": true,
-    "true_drift_has_latent_transition": true
-  },
-  "method_visible_hash": "8cef4220788993c0c8a6dab1cfa74f30c78c92c498eaf695fda668473f8718de",
-  "oracle_generic_threshold_found": false,
+  "pair_count": 14,
+  "pair_pass_count": 14,
   "pair_reports": {
     "conditional_truth_vs_misleading_aggregate": {
       "actual_changed_paths": [
@@ -3012,114 +3142,8 @@
       "unexpected_changed_paths": []
     }
   },
-  "qa_checks": {
-    "checkpoint_future_leakage": true,
-    "counterfactual_pair_count": true,
-    "counterfactual_pair_templates": true,
-    "counterfactual_strong_isolation": true,
-    "dev_only_generation": true,
-    "evidence_non_inflation": true,
-    "high_risk_history_count": true,
-    "history_count": true,
-    "identifiability_labels": true,
-    "l2_validity": true,
-    "lifecycle_correctness": true,
-    "negative_denominator_preregistered": true,
-    "one_pair_per_history": true,
-    "oracle_boundary": true,
-    "person_count": true,
-    "preregistered_before_generation": true,
-    "registration_matches_generation": true,
-    "regression": true,
-    "reroll_count_zero": true,
-    "scope_integrity": true,
-    "seed_isolation": true,
-    "seed_matrix_exact": true,
-    "semantic_family_coverage": true,
-    "standard_history_count": true,
-    "truth_config_count": true,
-    "truth_leakage": true
-  },
-  "registered_negative_denominator": 148,
-  "regression_checks": {
-    "e0": true,
-    "e1": true,
-    "l2_60_and_8": true
-  },
-  "scope_violations": [],
-  "seed_isolation": {
-    "behavior_seed_keeps_truth_opportunity": true,
-    "observation_seed_keeps_truth_opportunity_behavior": true,
-    "same_tuple_stable": true
-  },
-  "semantic_families": [
-    "NO_PATTERN controls",
-    "Simpson-like aggregation",
-    "conditional preference",
-    "conflicting structure",
-    "confounding",
-    "correction/rejection",
-    "coverage-induced fake drift",
-    "deletion/reset",
-    "exception",
-    "independent corroboration",
-    "lifecycle parent relation",
-    "missingness",
-    "multi-device replication",
-    "observation quality",
-    "pattern overlap",
-    "preference/availability",
-    "raw/derived evidence",
-    "real drift",
-    "relationship-conditioned",
-    "reversal",
-    "routine/opportunity",
-    "scoped exception",
-    "sparse coincidence",
-    "staleness",
-    "temporal sequence",
-    "unidentifiable latent truth",
-    "unknown context"
-  ],
+  "reroll_count": 0,
+  "seed_registry_unchanged": true,
   "status": "PASS",
-  "truth_leak_violations": {
-    "case-00bc7a63042a": [],
-    "case-0101182c8237": [],
-    "case-02f955d07213": [],
-    "case-0bf5d134505e": [],
-    "case-17b4fdc2d166": [],
-    "case-2570e85d40bc": [],
-    "case-264df07ec9ac": [],
-    "case-2d89827ceb0e": [],
-    "case-382eb6cd77d2": [],
-    "case-3c99190de706": [],
-    "case-43c45962f13b": [],
-    "case-4592d5309116": [],
-    "case-47a463e06491": [],
-    "case-5712efbeeb2b": [],
-    "case-670c8c4fac2f": [],
-    "case-6b06a1984557": [],
-    "case-6f8a8c2231b2": [],
-    "case-7248e802b174": [],
-    "case-76772a34ec13": [],
-    "case-7c8a9a0ac23b": [],
-    "case-88e9d458d680": [],
-    "case-94a8e3a3c9fb": [],
-    "case-a28e880cf3b0": [],
-    "case-ad11a1859faf": [],
-    "case-b236025170e3": [],
-    "case-b71f413b0c67": [],
-    "case-b7e23fa0d5ed": [],
-    "case-b8ac5ac92e07": [],
-    "case-c3d780398aad": [],
-    "case-c94d7d75e21b": [],
-    "case-d605c20f5997": [],
-    "case-dcc24f2eb3e0": [],
-    "case-df953d0c3d67": [],
-    "case-eb89616f9bf4": [],
-    "case-f0278fa4ef22": [],
-    "case-f19777b50987": [],
-    "case-f49f9d933020": [],
-    "case-fe6c167a4cb7": []
-  }
+  "unexpected_changed_path_count": 0
 }
