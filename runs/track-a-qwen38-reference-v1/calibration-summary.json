@@ -1,0 +1,20 @@
+{
+  "four_worker_v3_20": "20 cases: 13 ok, 13 parsed, 7 connection/timeout failures; rejected for full heldout reliability",
+  "leakage_check": "PASS: dry-run rg found no expected/truth/gold/target answer/counterfactual partner answer tokens",
+  "parser_success_v3_smoke": "5/5",
+  "prompt_versions": [
+    {
+      "result": "20 cases: 8 ok, 0 parsed, 12 timeouts; hidden-thinking/content-empty failure",
+      "version": "v1"
+    },
+    {
+      "result": "5 cases: 5 ok, 5 parsed; exact enum correction worked",
+      "version": "v2"
+    },
+    {
+      "result": "5 cases: 5 ok, 5 parsed; no extra-key instruction added",
+      "version": "v3"
+    }
+  ],
+  "selected_prompt_version": "track-a-reference-json-v1-v3-local-format"
+}

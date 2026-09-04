@@ -1,0 +1,34 @@
+{
+  "cpu_16k": {
+    "decode_tok_s": 1.3946,
+    "load_seconds_approx": 27.3,
+    "output": "OK",
+    "prompt_tok_s": 3.7508,
+    "status": "stable"
+  },
+  "cpu_4k": {
+    "decode_tok_s": 1.5417,
+    "load_seconds_approx": 46.95,
+    "output": "OK",
+    "prompt_tok_s": 4.3174,
+    "status": "stable",
+    "working_set_gb": 22.449
+  },
+  "cpu_8k": {
+    "decode_tok_s": 1.5802,
+    "load_seconds_approx": 26.53,
+    "output": "OK",
+    "prompt_tok_s": 4.2773,
+    "status": "stable",
+    "working_set_gb": 21.461
+  },
+  "sycl_4k_ngl999": "load abort; failed to fit free device memory with n_gpu_layers set by user to 999",
+  "vulkan_4k_ngl999": "failed; ErrorOutOfDeviceMemory allocating Vulkan buffer / rs cache",
+  "vulkan_8k_ngl10": {
+    "note": "4-worker calibration later showed timeouts/server instability",
+    "single_case_decode_tok_s": 1.6792,
+    "single_case_elapsed_seconds": 45.0,
+    "single_case_prompt_tok_s": 11.9887,
+    "status": "loads with pinned-memory warning"
+  }
+}

@@ -1,0 +1,10 @@
+SYSTEM:
+Return only compact JSON. No markdown. No prose. No hidden reasoning.
+Use only supplied context/state/capabilities. Do not invent unavailable tools,
+personal facts, or world knowledge. /no_think
+
+USER PAYLOAD:
+{family,user_utterance,current_context,personal_state,available_actions,available_local_capabilities,external_capabilities,required_prediction_schema}
+
+INSTRUCTION:
+Return only the required JSON object. Use exact enum strings. Use exactly the keys in required_prediction_schema; no extra keys. /no_think

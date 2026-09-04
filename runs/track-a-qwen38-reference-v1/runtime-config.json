@@ -1,0 +1,28 @@
+{
+  "cpu_zip_sha256": "da6c5650bb1c97a81bc0c1594137d614bd566b8a54161898325e22f925271d7b",
+  "decoding": {
+    "max_tokens_parser_smoke": 64,
+    "no_retrieval": true,
+    "no_tools": true,
+    "no_voting": true,
+    "no_web": true,
+    "one_response": true,
+    "seed": 20260904,
+    "temperature": 0
+  },
+  "llama_cpp": "0.3.0-dev build 10793 commit d230ddd76",
+  "primary_backend": "Vulkan partial offload for parser smoke; CPU-only for stable context characterization",
+  "server_args_primary": [
+    "-c",
+    "8192",
+    "-ngl",
+    "10",
+    "--reasoning",
+    "off",
+    "--reasoning-budget",
+    "0",
+    "--no-reasoning-preserve"
+  ],
+  "sycl_zip_sha256": "05425634252aa6b15fc2e404685f6f67f6b6dd4777d7ad05e18e1709b0aa6b78",
+  "vulkan_zip_sha256": "4b02f7d2d2162ac14171b261b102dc000dc455299b0f395a69f200694e7d5784"
+}
