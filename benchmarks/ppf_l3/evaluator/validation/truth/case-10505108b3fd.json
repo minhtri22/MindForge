@@ -1,0 +1,255 @@
+{
+  "behavior": [
+    {
+      "behavior_nonce": 416975390,
+      "choice": "act",
+      "occurred": true,
+      "opportunity_id": "opp-c3714471721f",
+      "phenomenon_time": "2026-03-01T08:00:00Z"
+    },
+    {
+      "behavior_nonce": 952938362,
+      "choice": null,
+      "occurred": false,
+      "opportunity_id": "opp-cf0d61735eda",
+      "phenomenon_time": "2026-03-01T08:36:00Z"
+    },
+    {
+      "behavior_nonce": 454125619,
+      "choice": "act",
+      "occurred": true,
+      "opportunity_id": "opp-a0952f4795c0",
+      "phenomenon_time": "2026-03-01T09:12:00Z"
+    },
+    {
+      "behavior_nonce": 141042103,
+      "choice": null,
+      "occurred": false,
+      "opportunity_id": "opp-45e3a4f88369",
+      "phenomenon_time": "2026-03-01T09:46:00Z"
+    },
+    {
+      "behavior_nonce": 722651565,
+      "choice": "act",
+      "occurred": true,
+      "opportunity_id": "opp-06baf63007af",
+      "phenomenon_time": "2026-03-01T10:21:00Z"
+    },
+    {
+      "behavior_nonce": 837114389,
+      "choice": null,
+      "occurred": false,
+      "opportunity_id": "opp-6fc2ccad28ed",
+      "phenomenon_time": "2026-03-01T10:57:00Z"
+    },
+    {
+      "behavior_nonce": 40407890,
+      "choice": "act",
+      "occurred": true,
+      "opportunity_id": "opp-41faad460e6c",
+      "phenomenon_time": "2026-03-01T11:30:00Z"
+    },
+    {
+      "behavior_nonce": 774981240,
+      "choice": null,
+      "occurred": false,
+      "opportunity_id": "opp-da6a52d14b01",
+      "phenomenon_time": "2026-03-01T12:08:00Z"
+    }
+  ],
+  "benchmark_version": "ppf-l3-benchmark/v1",
+  "case_id": "case-10505108b3fd",
+  "families": [
+    "confounding",
+    "Simpson-like aggregation",
+    "sparse coincidence",
+    "NO_PATTERN controls",
+    "multi-device replication",
+    "independent corroboration"
+  ],
+  "identifiability_by_checkpoint": {
+    "cp-02ea7d228309": "YES",
+    "cp-6deff3351e32": "YES",
+    "cp-be56f62e006d": "YES",
+    "cp-c299a899b8cb": "YES"
+  },
+  "observation_provenance": {
+    "observation_policy": "NORMAL",
+    "records": [
+      {
+        "behavior_occurred": true,
+        "event_id": "event-7f801c491af6",
+        "opportunity_id": "opp-c3714471721f"
+      },
+      {
+        "behavior_occurred": false,
+        "event_id": "event-fbd0d489da5e",
+        "opportunity_id": "opp-cf0d61735eda"
+      },
+      {
+        "behavior_occurred": true,
+        "event_id": "event-9abadebaf7c6",
+        "opportunity_id": "opp-a0952f4795c0"
+      },
+      {
+        "behavior_occurred": false,
+        "event_id": "event-9bb75fd443a4",
+        "opportunity_id": "opp-45e3a4f88369"
+      },
+      {
+        "behavior_occurred": true,
+        "event_id": "event-c58631ed2609",
+        "opportunity_id": "opp-06baf63007af"
+      },
+      {
+        "behavior_occurred": false,
+        "event_id": "event-16087891a252",
+        "opportunity_id": "opp-6fc2ccad28ed"
+      },
+      {
+        "behavior_occurred": true,
+        "event_id": "event-874dfd6f6359",
+        "opportunity_id": "opp-41faad460e6c"
+      },
+      {
+        "behavior_occurred": false,
+        "event_id": "event-cc9528193ada",
+        "opportunity_id": "opp-da6a52d14b01"
+      }
+    ]
+  },
+  "opportunities": [
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "morning",
+        "relationship": "known",
+        "segment": "context-a"
+      },
+      "opportunity_id": "opp-c3714471721f",
+      "phenomenon_time": "2026-03-01T08:00:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "morning",
+        "relationship": "known",
+        "segment": "context-b"
+      },
+      "opportunity_id": "opp-cf0d61735eda",
+      "phenomenon_time": "2026-03-01T08:36:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "morning",
+        "relationship": "known",
+        "segment": "context-a"
+      },
+      "opportunity_id": "opp-a0952f4795c0",
+      "phenomenon_time": "2026-03-01T09:12:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "later",
+        "relationship": "known",
+        "segment": "context-b"
+      },
+      "opportunity_id": "opp-45e3a4f88369",
+      "phenomenon_time": "2026-03-01T09:46:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "later",
+        "relationship": "known",
+        "segment": "context-a"
+      },
+      "opportunity_id": "opp-06baf63007af",
+      "phenomenon_time": "2026-03-01T10:21:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "later",
+        "relationship": "known",
+        "segment": "context-b"
+      },
+      "opportunity_id": "opp-6fc2ccad28ed",
+      "phenomenon_time": "2026-03-01T10:57:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "later",
+        "relationship": "known",
+        "segment": "context-a"
+      },
+      "opportunity_id": "opp-41faad460e6c",
+      "phenomenon_time": "2026-03-01T11:30:00Z"
+    },
+    {
+      "alternatives": [
+        "act",
+        "not-act"
+      ],
+      "context": {
+        "period": "later",
+        "relationship": "known",
+        "segment": "context-b"
+      },
+      "opportunity_id": "opp-da6a52d14b01",
+      "phenomenon_time": "2026-03-01T12:08:00Z"
+    }
+  ],
+  "pair_arm": "A",
+  "pair_template": "conditional_truth_vs_misleading_aggregate",
+  "person_id": "person-3a8dd882301e",
+  "seeds": {
+    "behavior_seed": 15583069452675898162,
+    "master_seed": "mindforge-ppf-l3-e3-validation-v1",
+    "observation_seed": 10725162315848620061,
+    "person_seed": 7164389336614922990,
+    "scenario_seed": 15213820678987582386,
+    "split": "validation"
+  },
+  "truth": {
+    "families": [
+      "confounding",
+      "Simpson-like aggregation",
+      "sparse coincidence",
+      "NO_PATTERN controls",
+      "multi-device replication",
+      "independent corroboration"
+    ],
+    "history_regime": "SHORT",
+    "lifecycle_variant": null,
+    "person_id": "person-3a8dd882301e",
+    "risk_class": "HIGH-RISK",
+    "scope": "activity:generic",
+    "truth_config_id": "val-h01",
+    "truth_kind": "CONDITIONAL_PATTERN"
+  }
+}

@@ -1,0 +1,566 @@
+{
+  "benchmark_version": "ppf-l3-benchmark/v1",
+  "case_id": "case-1f3b6281ddd8",
+  "history": [
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "morning"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-a"
+        }
+      },
+      "event_id": "event-9b9868716bba",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-34631ca14268",
+        "observability": "FULL",
+        "state": "OCCURRENCE"
+      },
+      "payload": {
+        "action": "act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-a21b6c75b7d9"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T08:05:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T08:00:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T08:00:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "morning"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-b"
+        }
+      },
+      "event_id": "event-3d742d0a41ea",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-2331d43d0448",
+        "observability": "FULL",
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "payload": {
+        "action": "not-act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-ed5544c07c22"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T08:39:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T08:36:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T08:36:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "morning"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-a"
+        }
+      },
+      "event_id": "event-2a0639a3f2cf",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-e02da4d7affc",
+        "observability": "FULL",
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "payload": {
+        "action": "not-act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-d2639e416018"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T09:15:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T09:12:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T09:12:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "later"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-b"
+        }
+      },
+      "event_id": "event-433c66852567",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-21472562f6f8",
+        "observability": "FULL",
+        "state": "OCCURRENCE"
+      },
+      "payload": {
+        "action": "act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-6219c79d0428"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T09:48:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T09:46:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T09:46:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "later"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-a"
+        }
+      },
+      "event_id": "event-3aec90aa0e56",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-5282501c35c3",
+        "observability": "FULL",
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "payload": {
+        "action": "not-act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-dcb6c435a8fd"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T10:22:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T10:21:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T10:21:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "later"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-b"
+        }
+      },
+      "event_id": "event-502d378f080d",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVED_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-1d410d7cff96",
+        "observability": "FULL",
+        "state": "OCCURRENCE"
+      },
+      "payload": {
+        "action": "act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-dcd176e22d0d"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T11:02:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T10:57:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T10:57:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "later"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-a"
+        }
+      },
+      "event_id": "event-896335ad1b96",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-eaf27fa3ea6f",
+        "observability": "FULL",
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "payload": {
+        "action": "not-act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-2bb1e9823e76"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T11:31:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T11:30:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T11:30:00Z"
+      }
+    },
+    {
+      "capture_policy": {
+        "expected_observability": "EXPECTED",
+        "mode": "EVENT_DRIVEN"
+      },
+      "context": {
+        "period": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "later"
+        },
+        "relationship": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "known"
+        },
+        "segment": {
+          "sources": [
+            "e2-sensor"
+          ],
+          "status": "KNOWN",
+          "value": "context-b"
+        }
+      },
+      "event_id": "event-a113c81359cf",
+      "event_type": "activity.sample",
+      "evidence_kind": "RAW_OBSERVATION",
+      "observability": {
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "opportunity": {
+        "alternatives": [
+          "act",
+          "not-act"
+        ],
+        "id": "opp-6f549752b416",
+        "observability": "FULL",
+        "state": "OBSERVABLE_NON_OCCURRENCE"
+      },
+      "payload": {
+        "action": "not-act"
+      },
+      "provenance": {
+        "procedure_status": "NOT_APPLICABLE"
+      },
+      "quality": {
+        "coverage_state": "COMPLETE",
+        "quality_state": "GOOD"
+      },
+      "schema_version": "ppf-l2/1",
+      "source": {
+        "device_class": "SERVICE",
+        "platform": "GENERIC",
+        "provider": "e2-sensor",
+        "source_event_id": "src-a5f881f891c6"
+      },
+      "time": {
+        "ingested_time": "2026-03-01T12:10:00Z",
+        "phenomenon_time": {
+          "start": "2026-03-01T12:08:00Z",
+          "timezone": "UTC",
+          "timing_quality": "KNOWN"
+        },
+        "result_or_observed_time": "2026-03-01T12:08:00Z"
+      }
+    }
+  ]
+}
