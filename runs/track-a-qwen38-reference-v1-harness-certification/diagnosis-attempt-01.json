@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-09-05T16:21:04.437162+00:00",
+  "durable_rows": 24,
+  "heartbeat": {
+    "exit_reason": null,
+    "finalizer_executed": false,
+    "last_case_completed": 24,
+    "last_case_started": 25,
+    "last_update": "2026-09-05T15:51:56.359867+00:00",
+    "run_id": "preheldout-certification-attempt-01-1788622857",
+    "runner_pid": 12364,
+    "server_pid": 28096,
+    "started_at": "2026-09-05T15:40:57.310695+00:00",
+    "status": "RUNNING"
+  },
+  "hypotheses": [
+    "Codex tool/session lifetime terminated the foreground Python child",
+    "external process termination outside Python signal/finalizer handling"
+  ],
+  "proven_facts": [
+    "runner process absent",
+    "heartbeat remained RUNNING",
+    "finalizer_executed false",
+    "24 durable rows persisted",
+    "llama-server PID 28096 remained alive"
+  ],
+  "root_cause": "UNPROVEN",
+  "runner_pid": 12364,
+  "runner_present": false,
+  "server_alive": true,
+  "server_pid": 28096
+}
