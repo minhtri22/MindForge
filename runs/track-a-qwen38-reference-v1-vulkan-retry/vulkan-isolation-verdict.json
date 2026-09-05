@@ -1,0 +1,21 @@
+{
+  "heldout": "INVALID / INCOMPLETE",
+  "heldout_completed": 175,
+  "heldout_expected": 700,
+  "heldout_failure": {
+    "classification": "CLIENT_RUNNER_TERMINATED_SERVER_ALIVE",
+    "detail": "The one-shot client runner process is no longer present after checkpoint 175. The same llama-server PID remains alive. Completed rows contain no transport error. Protocol forbids resume/rerun to rescue the held-out run.",
+    "last_successful_case": "A2-H-074",
+    "last_successful_index": 175,
+    "root_cause": "UNPROVEN"
+  },
+  "reference_verdict": "NOT EVALUATED",
+  "v0": "PASS",
+  "v1": "PASS",
+  "v2": "PASS",
+  "v3": "PASS",
+  "v4": "PASS",
+  "v4_client_interruption_disclosed": true,
+  "v4_evidence_caveat": "Client interrupted case 258 before completion; resumed at 258 on the same PID. Original 257 HTTP records were not checkpointed. Do not claim zero total interrupted requests.",
+  "vulkan_verdict": "STABLE UNDER ISOLATION"
+}

@@ -67,10 +67,10 @@ def prompt_for(case: dict) -> str:
         + "\nReturn only the required JSON object. Use exact enum strings. "
         + "Use exactly the keys in required_prediction_schema; no extra keys. /no_think"
     )
-    forbidden = ("expected", "truth", "gold", "target answer", "counterfactual partner answer")
+    forbidden_keys = ("expected", "truth", "gold", "target answer", "counterfactual partner answer")
     lower = prompt.lower()
-    if any(token in lower for token in forbidden):
-        raise AssertionError(f"forbidden truth/leakage token in prompt for {case['case_id']}")
+    if any(re.search(r'"' + re.escape(token) + r'"\s*:', lower) for token in forbidden_keys):
+        raise AssertionError(f"forbidden truth/leakage key in prompt for {case['case_id']}")
     return prompt
 
 

@@ -1,0 +1,28 @@
+{
+  "closure_snapshot": {
+    "captured_epoch": 1788620550.136191,
+    "server_alive": true,
+    "server_pid": 28096,
+    "server_private_bytes": 29534629888,
+    "server_rss_bytes": 17545125888,
+    "swap_used_bytes": 10371375104,
+    "system_available_physical_bytes": 4611526656,
+    "system_total_physical_bytes": 33916248064,
+    "system_used_physical_bytes": 29304721408
+  },
+  "completed": 175,
+  "expected": 700,
+  "failure": {
+    "classification": "CLIENT_RUNNER_TERMINATED_SERVER_ALIVE",
+    "detail": "The one-shot client runner process is no longer present after checkpoint 175. The same llama-server PID remains alive. Completed rows contain no transport error. Protocol forbids resume/rerun to rescue the held-out run.",
+    "last_successful_case": "A2-H-074",
+    "last_successful_index": 175,
+    "root_cause": "UNPROVEN"
+  },
+  "gpu_memory_peak_bytes": null,
+  "gpu_memory_peak_status": "UNAVAILABLE; no authoritative held-out GPU peak was persisted",
+  "monitor_summary_available": false,
+  "monitor_summary_reason": "The client runner terminated before its finally block could persist monitor.stop().",
+  "phase": "HELDOUT",
+  "status": "INVALID / INCOMPLETE"
+}
