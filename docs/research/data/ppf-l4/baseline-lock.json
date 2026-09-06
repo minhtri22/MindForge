@@ -1,0 +1,91 @@
+{
+  "base_l3_head": "b94645cc9d69a50a098683e543489ba01fda0057",
+  "baseline_source_sha256": "1c057043deb10fb64316c611bccd08c37c6ac63886537ee9f59ee73f15f46880",
+  "dev_result_sha256": "1204bc571966632f6dcd0cd80d95724fa39e999697b3376adbee5b019cff86ea",
+  "evaluator_source_sha256": "45f227dda6bc65f1f2150e9481d3474c44d331213336fe86c6a7db2624770f44",
+  "final_policy": "ONE_SHOT_ALL_LOCKED_BASELINES_NO_POST_FINAL_TUNING",
+  "final_private_read_before_lock": false,
+  "l4_version": "ppf-l4-minimal-baselines/v1",
+  "locked_baselines": [
+    {
+      "baseline_id": "B0",
+      "name": "Always Abstain",
+      "parameters": {}
+    },
+    {
+      "baseline_id": "B1",
+      "name": "Always Supported",
+      "parameters": {}
+    },
+    {
+      "baseline_id": "B2",
+      "name": "Last Observation",
+      "parameters": {}
+    },
+    {
+      "baseline_id": "B3",
+      "name": "Any Occurrence",
+      "parameters": {}
+    },
+    {
+      "baseline_id": "B4",
+      "name": "Raw Count Threshold",
+      "parameters": {
+        "occurrence_threshold": 3
+      }
+    },
+    {
+      "baseline_id": "B5",
+      "name": "Naive Frequency",
+      "parameters": {
+        "minimum_records": 3,
+        "support_frequency": 0.6
+      }
+    },
+    {
+      "baseline_id": "B6",
+      "name": "Recency Heuristic",
+      "parameters": {
+        "support_occurrences": 2,
+        "window": 3
+      }
+    },
+    {
+      "baseline_id": "B7",
+      "name": "Naive Majority",
+      "parameters": {
+        "minimum_records": 3
+      }
+    },
+    {
+      "baseline_id": "B8",
+      "name": "Context-Keyed Majority",
+      "parameters": {
+        "minimum_context_records": 3
+      }
+    },
+    {
+      "baseline_id": "B9",
+      "name": "Lifecycle-Naive Rule",
+      "parameters": {
+        "fallback": "B7"
+      }
+    },
+    {
+      "baseline_id": "B10",
+      "name": "Provenance-Naive Counter",
+      "parameters": {
+        "occurrence_threshold": 3
+      }
+    },
+    {
+      "baseline_id": "B11",
+      "name": "Provenance-Dedup Counter",
+      "parameters": {
+        "occurrence_threshold": 3
+      }
+    }
+  ],
+  "runner_source_sha256": "5fcbe877653ba8fc3930985e9a4dad1f7a0661ef3a1aa09777c4608a0bdfb210",
+  "validation_result_sha256": "c5d53428f6160c25de2cac512ea3364972b865b9280f2d9fea01a2bc4afe1751"
+}

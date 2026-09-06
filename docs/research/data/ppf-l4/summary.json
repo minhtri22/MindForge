@@ -1,0 +1,665 @@
+{
+  "architecture_boundary": "research tooling only; no Model/Kernel/Host/production-plugin changes",
+  "baseline_lock_sha256": "477619a6375621a4514a07baa37e2f112e6e9b8709917c7ea075484de0744006",
+  "baseline_results": [
+    {
+      "baseline_id": "B0",
+      "dev": {
+        "exact_state_accuracy": 0.5314009661835749,
+        "false_discovery_rate": null,
+        "false_promotion_rate": 0.0,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 0,
+          "stale_as_current_violations": 0,
+          "unknown_context_positive_violations": 0
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.7432432432432432,
+        "pattern_precision_status_proxy": null,
+        "pattern_recall_status_proxy": 0.0
+      },
+      "final": {
+        "exact_state_accuracy": 0.4675324675324675,
+        "false_discovery_rate": null,
+        "false_promotion_rate": 0.0,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 0,
+          "stale_as_current_violations": 0,
+          "unknown_context_positive_violations": 0
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.6167023554603854,
+        "pattern_precision_status_proxy": null,
+        "pattern_recall_status_proxy": 0.0
+      },
+      "validation": {
+        "exact_state_accuracy": 0.5314009661835749,
+        "false_discovery_rate": null,
+        "false_promotion_rate": 0.0,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 0,
+          "stale_as_current_violations": 0,
+          "unknown_context_positive_violations": 0
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.7432432432432432,
+        "pattern_precision_status_proxy": null,
+        "pattern_recall_status_proxy": 0.0
+      }
+    },
+    {
+      "baseline_id": "B1",
+      "dev": {
+        "exact_state_accuracy": 0.28502415458937197,
+        "false_discovery_rate": 0.714975845410628,
+        "false_promotion_rate": 1.0,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.0,
+        "pattern_precision_status_proxy": 0.28502415458937197,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "final": {
+        "exact_state_accuracy": 0.2418831168831169,
+        "false_discovery_rate": 0.7581168831168831,
+        "false_promotion_rate": 1.0,
+        "hard_violations": {
+          "conflict_positive_violations": 24,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 86,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.0,
+        "pattern_precision_status_proxy": 0.2418831168831169,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "validation": {
+        "exact_state_accuracy": 0.28502415458937197,
+        "false_discovery_rate": 0.714975845410628,
+        "false_promotion_rate": 1.0,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.0,
+        "pattern_precision_status_proxy": 0.28502415458937197,
+        "pattern_recall_status_proxy": 1.0
+      }
+    },
+    {
+      "baseline_id": "B2",
+      "dev": {
+        "exact_state_accuracy": 0.3961352657004831,
+        "false_discovery_rate": 0.6993006993006993,
+        "false_promotion_rate": 0.6756756756756757,
+        "hard_violations": {
+          "conflict_positive_violations": 1,
+          "correction_resurrection_violations": 8,
+          "deleted_active_return_violations": 8,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 1
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.2635135135135135,
+        "pattern_precision_status_proxy": 0.3006993006993007,
+        "pattern_recall_status_proxy": 0.7288135593220338
+      },
+      "final": {
+        "exact_state_accuracy": 0.3457792207792208,
+        "false_discovery_rate": 0.7667560321715817,
+        "false_promotion_rate": 0.6124197002141327,
+        "hard_violations": {
+          "conflict_positive_violations": 8,
+          "correction_resurrection_violations": 12,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 66,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 21
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.2698072805139186,
+        "pattern_precision_status_proxy": 0.23324396782841822,
+        "pattern_recall_status_proxy": 0.5838926174496645
+      },
+      "validation": {
+        "exact_state_accuracy": 0.42028985507246375,
+        "false_discovery_rate": 0.6985294117647058,
+        "false_promotion_rate": 0.6418918918918919,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 7,
+          "deleted_active_return_violations": 8,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 3
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.3108108108108108,
+        "pattern_precision_status_proxy": 0.3014705882352941,
+        "pattern_recall_status_proxy": 0.6949152542372882
+      }
+    },
+    {
+      "baseline_id": "B3",
+      "dev": {
+        "exact_state_accuracy": 0.2946859903381642,
+        "false_discovery_rate": 0.7121951219512195,
+        "false_promotion_rate": 0.9864864864864865,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.013513513513513514,
+        "pattern_precision_status_proxy": 0.28780487804878047,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "final": {
+        "exact_state_accuracy": 0.2418831168831169,
+        "false_discovery_rate": 0.7581168831168831,
+        "false_promotion_rate": 1.0,
+        "hard_violations": {
+          "conflict_positive_violations": 24,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 86,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.0,
+        "pattern_precision_status_proxy": 0.2418831168831169,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "validation": {
+        "exact_state_accuracy": 0.2898550724637681,
+        "false_discovery_rate": 0.7135922330097088,
+        "false_promotion_rate": 0.9932432432432432,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.006756756756756757,
+        "pattern_precision_status_proxy": 0.28640776699029125,
+        "pattern_recall_status_proxy": 1.0
+      }
+    },
+    {
+      "baseline_id": "B4",
+      "dev": {
+        "exact_state_accuracy": 0.6135265700483091,
+        "false_discovery_rate": 0.5755395683453237,
+        "false_promotion_rate": 0.5405405405405406,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4594594594594595,
+        "pattern_precision_status_proxy": 0.4244604316546763,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "final": {
+        "exact_state_accuracy": 0.5844155844155844,
+        "false_discovery_rate": 0.6320987654320988,
+        "false_promotion_rate": 0.5481798715203426,
+        "hard_violations": {
+          "conflict_positive_violations": 24,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 86,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4518201284796574,
+        "pattern_precision_status_proxy": 0.36790123456790125,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6183574879227053,
+        "false_discovery_rate": 0.572463768115942,
+        "false_promotion_rate": 0.5337837837837838,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.46621621621621623,
+        "pattern_precision_status_proxy": 0.427536231884058,
+        "pattern_recall_status_proxy": 1.0
+      }
+    },
+    {
+      "baseline_id": "B5",
+      "dev": {
+        "exact_state_accuracy": 0.6231884057971014,
+        "false_discovery_rate": 0.5658914728682171,
+        "false_promotion_rate": 0.49324324324324326,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.49324324324324326,
+        "pattern_precision_status_proxy": 0.43410852713178294,
+        "pattern_recall_status_proxy": 0.9491525423728814
+      },
+      "final": {
+        "exact_state_accuracy": 0.5941558441558441,
+        "false_discovery_rate": 0.578125,
+        "false_promotion_rate": 0.3961456102783726,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 59,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.49464668094218417,
+        "pattern_precision_status_proxy": 0.421875,
+        "pattern_recall_status_proxy": 0.9060402684563759
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6328502415458938,
+        "false_discovery_rate": 0.5634920634920635,
+        "false_promotion_rate": 0.4797297297297297,
+        "hard_violations": {
+          "conflict_positive_violations": 1,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.5135135135135135,
+        "pattern_precision_status_proxy": 0.4365079365079365,
+        "pattern_recall_status_proxy": 0.9322033898305084
+      }
+    },
+    {
+      "baseline_id": "B6",
+      "dev": {
+        "exact_state_accuracy": 0.6086956521739131,
+        "false_discovery_rate": 0.5655737704918032,
+        "false_promotion_rate": 0.46621621621621623,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 9,
+          "deleted_active_return_violations": 8,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.49324324324324326,
+        "pattern_precision_status_proxy": 0.4344262295081967,
+        "pattern_recall_status_proxy": 0.8983050847457628
+      },
+      "final": {
+        "exact_state_accuracy": 0.5535714285714286,
+        "false_discovery_rate": 0.6526946107784432,
+        "false_promotion_rate": 0.4668094218415418,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 86,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4817987152034261,
+        "pattern_precision_status_proxy": 0.3473053892215569,
+        "pattern_recall_status_proxy": 0.7785234899328859
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6135265700483091,
+        "false_discovery_rate": 0.576,
+        "false_promotion_rate": 0.4864864864864865,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.5,
+        "pattern_precision_status_proxy": 0.424,
+        "pattern_recall_status_proxy": 0.8983050847457628
+      }
+    },
+    {
+      "baseline_id": "B7",
+      "dev": {
+        "exact_state_accuracy": 0.6183574879227053,
+        "false_discovery_rate": 0.5692307692307692,
+        "false_promotion_rate": 0.5,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4864864864864865,
+        "pattern_precision_status_proxy": 0.4307692307692308,
+        "pattern_recall_status_proxy": 0.9491525423728814
+      },
+      "final": {
+        "exact_state_accuracy": 0.599025974025974,
+        "false_discovery_rate": 0.6022408963585434,
+        "false_promotion_rate": 0.4603854389721627,
+        "hard_violations": {
+          "conflict_positive_violations": 8,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 77,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4860813704496788,
+        "pattern_precision_status_proxy": 0.39775910364145656,
+        "pattern_recall_status_proxy": 0.9530201342281879
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6328502415458938,
+        "false_discovery_rate": 0.5615384615384615,
+        "false_promotion_rate": 0.49324324324324326,
+        "hard_violations": {
+          "conflict_positive_violations": 1,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.5,
+        "pattern_precision_status_proxy": 0.43846153846153846,
+        "pattern_recall_status_proxy": 0.9661016949152542
+      }
+    },
+    {
+      "baseline_id": "B8",
+      "dev": {
+        "exact_state_accuracy": 0.6714975845410628,
+        "false_discovery_rate": 0.4375,
+        "false_promotion_rate": 0.1891891891891892,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 6,
+          "deleted_active_return_violations": 4,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 2
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.6959459459459459,
+        "pattern_precision_status_proxy": 0.5625,
+        "pattern_recall_status_proxy": 0.6101694915254238
+      },
+      "final": {
+        "exact_state_accuracy": 0.5487012987012987,
+        "false_discovery_rate": 0.592814371257485,
+        "false_promotion_rate": 0.21199143468950749,
+        "hard_violations": {
+          "conflict_positive_violations": 8,
+          "correction_resurrection_violations": 6,
+          "deleted_active_return_violations": 8,
+          "not_observable_as_current_violations": 35,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 19
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.5781584582441114,
+        "pattern_precision_status_proxy": 0.40718562874251496,
+        "pattern_recall_status_proxy": 0.4563758389261745
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6183574879227053,
+        "false_discovery_rate": 0.5,
+        "false_promotion_rate": 0.22297297297297297,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 4,
+          "deleted_active_return_violations": 4,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 1
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.6418918918918919,
+        "pattern_precision_status_proxy": 0.5,
+        "pattern_recall_status_proxy": 0.559322033898305
+      }
+    },
+    {
+      "baseline_id": "B9",
+      "dev": {
+        "exact_state_accuracy": 0.7391304347826086,
+        "false_discovery_rate": 0.4666666666666667,
+        "false_promotion_rate": 0.3310810810810811,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.8928571428571429,
+        "negative_exact_accuracy": 0.6554054054054054,
+        "pattern_precision_status_proxy": 0.5333333333333333,
+        "pattern_recall_status_proxy": 0.9491525423728814
+      },
+      "final": {
+        "exact_state_accuracy": 0.6558441558441559,
+        "false_discovery_rate": 0.5590062111801242,
+        "false_promotion_rate": 0.3854389721627409,
+        "hard_violations": {
+          "conflict_positive_violations": 8,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 77,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.9210526315789473,
+        "negative_exact_accuracy": 0.5610278372591007,
+        "pattern_precision_status_proxy": 0.4409937888198758,
+        "pattern_recall_status_proxy": 0.9530201342281879
+      },
+      "validation": {
+        "exact_state_accuracy": 0.7536231884057971,
+        "false_discovery_rate": 0.45714285714285713,
+        "false_promotion_rate": 0.32432432432432434,
+        "hard_violations": {
+          "conflict_positive_violations": 1,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.8928571428571429,
+        "negative_exact_accuracy": 0.668918918918919,
+        "pattern_precision_status_proxy": 0.5428571428571428,
+        "pattern_recall_status_proxy": 0.9661016949152542
+      }
+    },
+    {
+      "baseline_id": "B10",
+      "dev": {
+        "exact_state_accuracy": 0.6135265700483091,
+        "false_discovery_rate": 0.5755395683453237,
+        "false_promotion_rate": 0.5405405405405406,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4594594594594595,
+        "pattern_precision_status_proxy": 0.4244604316546763,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "final": {
+        "exact_state_accuracy": 0.5844155844155844,
+        "false_discovery_rate": 0.6320987654320988,
+        "false_promotion_rate": 0.5481798715203426,
+        "hard_violations": {
+          "conflict_positive_violations": 24,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 86,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4518201284796574,
+        "pattern_precision_status_proxy": 0.36790123456790125,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6183574879227053,
+        "false_discovery_rate": 0.572463768115942,
+        "false_promotion_rate": 0.5337837837837838,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.46621621621621623,
+        "pattern_precision_status_proxy": 0.427536231884058,
+        "pattern_recall_status_proxy": 1.0
+      }
+    },
+    {
+      "baseline_id": "B11",
+      "dev": {
+        "exact_state_accuracy": 0.6280193236714976,
+        "false_discovery_rate": 0.5661764705882353,
+        "false_promotion_rate": 0.5202702702702703,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4797297297297297,
+        "pattern_precision_status_proxy": 0.4338235294117647,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "final": {
+        "exact_state_accuracy": 0.5844155844155844,
+        "false_discovery_rate": 0.6320987654320988,
+        "false_promotion_rate": 0.5481798715203426,
+        "hard_violations": {
+          "conflict_positive_violations": 24,
+          "correction_resurrection_violations": 15,
+          "deleted_active_return_violations": 15,
+          "not_observable_as_current_violations": 86,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 31
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4518201284796574,
+        "pattern_precision_status_proxy": 0.36790123456790125,
+        "pattern_recall_status_proxy": 1.0
+      },
+      "validation": {
+        "exact_state_accuracy": 0.6231884057971014,
+        "false_discovery_rate": 0.5693430656934306,
+        "false_promotion_rate": 0.527027027027027,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.47297297297297297,
+        "pattern_precision_status_proxy": 0.4306569343065693,
+        "pattern_recall_status_proxy": 1.0
+      }
+    }
+  ],
+  "dev_result_sha256": "1204bc571966632f6dcd0cd80d95724fa39e999697b3376adbee5b019cff86ea",
+  "final_result_sha256": "64bc200c7a56c6a208f82a168f2c62e983c1e89fad53376321800e8953e3c895",
+  "l4_version": "ppf-l4-minimal-baselines/v1",
+  "procedure": [
+    "DEV",
+    "VALIDATION",
+    "BASELINE_LOCK",
+    "FINAL_ONE_SHOT"
+  ],
+  "status": "COMPLETE",
+  "validation_result_sha256": "c5d53428f6160c25de2cac512ea3364972b865b9280f2d9fea01a2bc4afe1751"
+}

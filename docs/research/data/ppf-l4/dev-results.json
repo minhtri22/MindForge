@@ -1,0 +1,6017 @@
+{
+  "baselines": [
+    {
+      "baseline_id": "B0",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 26,
+            "exact_accuracy": 0.49056603773584906,
+            "predicted_supported": 0,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 4,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 4,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 4,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 4,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 8,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 7,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 7,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 4,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 9,
+            "exact_accuracy": 0.6428571428571429,
+            "predicted_supported": 0,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 4,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 0,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 110,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 30,
+            "exact_accuracy": 0.8333333333333334,
+            "predicted_supported": 0,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 30,
+            "exact_accuracy": 0.8333333333333334,
+            "predicted_supported": 0,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 30,
+            "exact_accuracy": 0.8333333333333334,
+            "predicted_supported": 0,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "exception": {
+            "exact": 13,
+            "exact_accuracy": 0.4642857142857143,
+            "predicted_supported": 0,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 50,
+            "exact_accuracy": 0.8928571428571429,
+            "predicted_supported": 0,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 13,
+            "exact_accuracy": 0.4642857142857143,
+            "predicted_supported": 0,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 50,
+            "exact_accuracy": 0.8928571428571429,
+            "predicted_supported": 0,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 13,
+            "exact_accuracy": 0.4642857142857143,
+            "predicted_supported": 0,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 30,
+            "exact_accuracy": 0.8333333333333334,
+            "predicted_supported": 0,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 18,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 0,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 2,
+            "exact_accuracy": 0.2222222222222222,
+            "predicted_supported": 0,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 48,
+            "exact_accuracy": 0.8888888888888888,
+            "predicted_supported": 0,
+            "units": 54
+          },
+          "YES": {
+            "exact": 60,
+            "exact_accuracy": 0.4166666666666667,
+            "predicted_supported": 0,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 2,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 10,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 5,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 24,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 6,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 0,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 7,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 5,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 0,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 2,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 0,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 2,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 21,
+            "exact_accuracy": 0.38181818181818183,
+            "predicted_supported": 0,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 92,
+            "exact_accuracy": 0.5508982035928144,
+            "predicted_supported": 0,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 0,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "DELETED": {
+            "INSUFFICIENT_EVIDENCE": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 110
+          },
+          "NOT_OBSERVABLE": {
+            "INSUFFICIENT_EVIDENCE": 4
+          },
+          "STALE": {
+            "INSUFFICIENT_EVIDENCE": 3
+          },
+          "SUPERSEDED": {
+            "INSUFFICIENT_EVIDENCE": 5
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "INSUFFICIENT_EVIDENCE": 4
+          },
+          "USER_REJECTED": {
+            "INSUFFICIENT_EVIDENCE": 10
+          }
+        },
+        "exact_state_accuracy": 0.5314009661835749,
+        "exact_state_count": 110,
+        "expected_supported": 59,
+        "false_discovery_rate": null,
+        "false_promotion_rate": 0.0,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 0,
+          "stale_as_current_violations": 0,
+          "unknown_context_positive_violations": 0
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.7432432432432432,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": null,
+        "pattern_recall_status_proxy": 0.0,
+        "predicted_supported": 0,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Always Abstain",
+      "parameters": {},
+      "prediction_sha256": "f3c0ac2aba32946f81a4c67bf40bd7cb01510752076e371fcfcdc33c190089ae"
+    },
+    {
+      "baseline_id": "B1",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 11,
+            "exact_accuracy": 0.20754716981132076,
+            "predicted_supported": 53,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 8,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 5,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 5,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 4,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 8,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 8,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 5,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 8,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 8,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 110,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 59,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 59,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "exception": {
+            "exact": 10,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 28,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 4,
+            "exact_accuracy": 0.07142857142857142,
+            "predicted_supported": 56,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 10,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 28,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 4,
+            "exact_accuracy": 0.07142857142857142,
+            "predicted_supported": 56,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 9,
+            "exact_accuracy": 0.45,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 10,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 28,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 9,
+            "exact_accuracy": 0.45,
+            "predicted_supported": 20,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 9,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 54,
+            "units": 54
+          },
+          "YES": {
+            "exact": 59,
+            "exact_accuracy": 0.4097222222222222,
+            "predicted_supported": 144,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 7,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 5,
+            "exact_accuracy": 0.14285714285714285,
+            "predicted_supported": 35,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 24,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 8,
+            "exact_accuracy": 0.5333333333333333,
+            "predicted_supported": 15,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 7,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 6,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 15,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 7,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 23,
+            "exact_accuracy": 0.41818181818181815,
+            "predicted_supported": 55,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 4,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 42,
+            "exact_accuracy": 0.25149700598802394,
+            "predicted_supported": 167,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 9,
+            "exact_accuracy": 0.45,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "SUPPORTED": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "SUPPORTED": 110
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "SUPPORTED": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.28502415458937197,
+        "exact_state_count": 59,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.714975845410628,
+        "false_promotion_rate": 1.0,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.0,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.28502415458937197,
+        "pattern_recall_status_proxy": 1.0,
+        "predicted_supported": 207,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Always Supported",
+      "parameters": {},
+      "prediction_sha256": "6587cbb572e6cd142bdbfa4741294da15c8fdcd2a10b07b838d29a615ff2df35"
+    },
+    {
+      "baseline_id": "B2",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 14,
+            "exact_accuracy": 0.2641509433962264,
+            "predicted_supported": 39,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 5,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 4,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 4,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 9,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 3,
+            "exact_accuracy": 0.375,
+            "predicted_supported": 5,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 2,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 8,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 2,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 8,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 2,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 5,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 11,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 12,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 7,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 6,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 5,
+            "exact_accuracy": 0.625,
+            "predicted_supported": 5,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 1,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 39,
+            "exact_accuracy": 0.35454545454545455,
+            "predicted_supported": 71,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 43,
+            "exact_accuracy": 0.7288135593220338,
+            "predicted_supported": 43,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 1,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 8,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 16,
+            "exact_accuracy": 0.4444444444444444,
+            "predicted_supported": 21,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 16,
+            "exact_accuracy": 0.4444444444444444,
+            "predicted_supported": 21,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 16,
+            "exact_accuracy": 0.4444444444444444,
+            "predicted_supported": 21,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "exception": {
+            "exact": 16,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 19,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 32,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 25,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 16,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 19,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 32,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 25,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 16,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 4,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 5,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 9,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 6,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 17,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 16,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 19,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 16,
+            "exact_accuracy": 0.4444444444444444,
+            "predicted_supported": 21,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 6,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 17,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 15,
+            "exact_accuracy": 0.23809523809523808,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 5,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 9,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 6,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 27,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 26,
+            "units": 54
+          },
+          "YES": {
+            "exact": 55,
+            "exact_accuracy": 0.3819444444444444,
+            "predicted_supported": 111,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 1,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 3,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 3,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 5,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 4,
+            "exact_accuracy": 0.11428571428571428,
+            "predicted_supported": 30,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 1,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 11,
+            "exact_accuracy": 0.4583333333333333,
+            "predicted_supported": 13,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 8,
+            "exact_accuracy": 0.5333333333333333,
+            "predicted_supported": 15,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 1,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 4,
+            "exact_accuracy": 0.26666666666666666,
+            "predicted_supported": 6,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 3,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 16,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 4,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 18,
+            "exact_accuracy": 0.32727272727272727,
+            "predicted_supported": 47,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 3,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 3,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 69,
+            "exact_accuracy": 0.41317365269461076,
+            "predicted_supported": 114,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 9,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 1,
+            "SUPPORTED": 1
+          },
+          "DELETED": {
+            "INSUFFICIENT_EVIDENCE": 2,
+            "SUPPORTED": 8
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 39,
+            "SUPPORTED": 71
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "INSUFFICIENT_EVIDENCE": 1,
+            "SUPPORTED": 4
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 16,
+            "SUPPORTED": 43
+          },
+          "UNKNOWN_CONTEXT": {
+            "INSUFFICIENT_EVIDENCE": 3,
+            "SUPPORTED": 1
+          },
+          "USER_REJECTED": {
+            "INSUFFICIENT_EVIDENCE": 2,
+            "SUPPORTED": 8
+          }
+        },
+        "exact_state_accuracy": 0.3961352657004831,
+        "exact_state_count": 82,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.6993006993006993,
+        "false_promotion_rate": 0.6756756756756757,
+        "hard_violations": {
+          "conflict_positive_violations": 1,
+          "correction_resurrection_violations": 8,
+          "deleted_active_return_violations": 8,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 1
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.2635135135135135,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.3006993006993007,
+        "pattern_recall_status_proxy": 0.7288135593220338,
+        "predicted_supported": 143,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Last Observation",
+      "parameters": {},
+      "prediction_sha256": "29823eab0d305347908cf769d4ec4cf19423920b19a4f3e29484b19785948457"
+    },
+    {
+      "baseline_id": "B3",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 11,
+            "exact_accuracy": 0.20754716981132076,
+            "predicted_supported": 53,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 8,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 5,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 5,
+            "exact_accuracy": 0.35714285714285715,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 4,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 8,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 3,
+            "exact_accuracy": 0.3,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 8,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 8,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 14,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 8,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 2,
+            "exact_accuracy": 0.01818181818181818,
+            "predicted_supported": 108,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 59,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 59,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "exception": {
+            "exact": 12,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 26,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 4,
+            "exact_accuracy": 0.07142857142857142,
+            "predicted_supported": 56,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 12,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 26,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 4,
+            "exact_accuracy": 0.07142857142857142,
+            "predicted_supported": 56,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 9,
+            "exact_accuracy": 0.45,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 12,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 26,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 4,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 36,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 7,
+            "exact_accuracy": 0.35,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 21,
+            "exact_accuracy": 0.3333333333333333,
+            "predicted_supported": 63,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 9,
+            "exact_accuracy": 0.45,
+            "predicted_supported": 20,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 9,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 54,
+            "units": 54
+          },
+          "YES": {
+            "exact": 61,
+            "exact_accuracy": 0.4236111111111111,
+            "predicted_supported": 142,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 7,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 5,
+            "exact_accuracy": 0.14285714285714285,
+            "predicted_supported": 35,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 24,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 8,
+            "exact_accuracy": 0.5333333333333333,
+            "predicted_supported": 15,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 2,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 5,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 6,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 15,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 7,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 23,
+            "exact_accuracy": 0.41818181818181815,
+            "predicted_supported": 55,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 4,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 44,
+            "exact_accuracy": 0.2634730538922156,
+            "predicted_supported": 165,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 9,
+            "exact_accuracy": 0.45,
+            "predicted_supported": 20,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 8,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 20,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "SUPPORTED": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2,
+            "SUPPORTED": 108
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "SUPPORTED": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.2946859903381642,
+        "exact_state_count": 61,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.7121951219512195,
+        "false_promotion_rate": 0.9864864864864865,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.013513513513513514,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.28780487804878047,
+        "pattern_recall_status_proxy": 1.0,
+        "predicted_supported": 205,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Any Occurrence",
+      "parameters": {},
+      "prediction_sha256": "b642a5910b6d17510e6d03cd61717aee4955c271dd901e79c084b03cf76e01a9"
+    },
+    {
+      "baseline_id": "B4",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 27,
+            "exact_accuracy": 0.5094339622641509,
+            "predicted_supported": 37,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 4,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 6,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 9,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 68,
+            "exact_accuracy": 0.6181818181818182,
+            "predicted_supported": 42,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 59,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 59,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "exception": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 16,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 16,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 34,
+            "exact_accuracy": 0.6296296296296297,
+            "predicted_supported": 20,
+            "units": 54
+          },
+          "YES": {
+            "exact": 92,
+            "exact_accuracy": 0.6388888888888888,
+            "predicted_supported": 111,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 4,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 10,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 30,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 14,
+            "exact_accuracy": 0.5833333333333334,
+            "predicted_supported": 10,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 4,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 3,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 4,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 32,
+            "exact_accuracy": 0.5818181818181818,
+            "predicted_supported": 46,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 4,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 2,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 102,
+            "exact_accuracy": 0.6107784431137725,
+            "predicted_supported": 107,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "SUPPORTED": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 68,
+            "SUPPORTED": 42
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "SUPPORTED": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.6135265700483091,
+        "exact_state_count": 127,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.5755395683453237,
+        "false_promotion_rate": 0.5405405405405406,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4594594594594595,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.4244604316546763,
+        "pattern_recall_status_proxy": 1.0,
+        "predicted_supported": 139,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Raw Count Threshold",
+      "parameters": {
+        "occurrence_threshold": 3
+      },
+      "prediction_sha256": "90be155e6034cb8888ce42fb0e52fab11bbbd687d6e727b6caf467b6ddbef134"
+    },
+    {
+      "baseline_id": "B5",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 26,
+            "exact_accuracy": 0.49056603773584906,
+            "predicted_supported": 36,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 3,
+            "exact_accuracy": 0.375,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 2,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 13,
+            "exact_accuracy": 0.9285714285714286,
+            "predicted_supported": 6,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 9,
+            "exact_accuracy": 0.6428571428571429,
+            "predicted_supported": 11,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 73,
+            "exact_accuracy": 0.6636363636363637,
+            "predicted_supported": 37,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 56,
+            "exact_accuracy": 0.9491525423728814,
+            "predicted_supported": 56,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "exception": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 45,
+            "exact_accuracy": 0.8035714285714286,
+            "predicted_supported": 11,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 45,
+            "exact_accuracy": 0.8035714285714286,
+            "predicted_supported": 11,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 37,
+            "exact_accuracy": 0.6851851851851852,
+            "predicted_supported": 15,
+            "units": 54
+          },
+          "YES": {
+            "exact": 91,
+            "exact_accuracy": 0.6319444444444444,
+            "predicted_supported": 106,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 5,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 10,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 30,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 1,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 1,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 19,
+            "exact_accuracy": 0.7916666666666666,
+            "predicted_supported": 5,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 7,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 3,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 32,
+            "exact_accuracy": 0.5818181818181818,
+            "predicted_supported": 46,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 3,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 3,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 105,
+            "exact_accuracy": 0.6287425149700598,
+            "predicted_supported": 98,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 73,
+            "SUPPORTED": 37
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 3,
+            "SUPPORTED": 56
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.6231884057971014,
+        "exact_state_count": 129,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.5658914728682171,
+        "false_promotion_rate": 0.49324324324324326,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.49324324324324326,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.43410852713178294,
+        "pattern_recall_status_proxy": 0.9491525423728814,
+        "predicted_supported": 129,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Naive Frequency",
+      "parameters": {
+        "minimum_records": 3,
+        "support_frequency": 0.6
+      },
+      "prediction_sha256": "5ee8008997d90cc2069b288a0cc370750acc32825b9b12b73173c512232f65b8"
+    },
+    {
+      "baseline_id": "B6",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 25,
+            "exact_accuracy": 0.4716981132075472,
+            "predicted_supported": 32,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 3,
+            "exact_accuracy": 0.375,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 6,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 10,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 2,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 13,
+            "exact_accuracy": 0.9285714285714286,
+            "predicted_supported": 6,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 8,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 10,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 73,
+            "exact_accuracy": 0.6636363636363637,
+            "predicted_supported": 37,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 53,
+            "exact_accuracy": 0.8983050847457628,
+            "predicted_supported": 53,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 9,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "exception": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 45,
+            "exact_accuracy": 0.8035714285714286,
+            "predicted_supported": 11,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 45,
+            "exact_accuracy": 0.8035714285714286,
+            "predicted_supported": 11,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 14,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 25,
+            "exact_accuracy": 0.6944444444444444,
+            "predicted_supported": 11,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 27,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 47,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 14,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 37,
+            "exact_accuracy": 0.6851851851851852,
+            "predicted_supported": 15,
+            "units": 54
+          },
+          "YES": {
+            "exact": 88,
+            "exact_accuracy": 0.6111111111111112,
+            "predicted_supported": 99,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 4,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 4,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 9,
+            "exact_accuracy": 0.2571428571428571,
+            "predicted_supported": 25,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 1,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 1,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 19,
+            "exact_accuracy": 0.7916666666666666,
+            "predicted_supported": 5,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 7,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 2,
+            "exact_accuracy": 0.4,
+            "predicted_supported": 2,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 32,
+            "exact_accuracy": 0.5818181818181818,
+            "predicted_supported": 46,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 3,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 3,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 103,
+            "exact_accuracy": 0.6167664670658682,
+            "predicted_supported": 92,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 14,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "DELETED": {
+            "INSUFFICIENT_EVIDENCE": 2,
+            "SUPPORTED": 8
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 73,
+            "SUPPORTED": 37
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "INSUFFICIENT_EVIDENCE": 1,
+            "SUPPORTED": 4
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 6,
+            "SUPPORTED": 53
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "INSUFFICIENT_EVIDENCE": 1,
+            "SUPPORTED": 9
+          }
+        },
+        "exact_state_accuracy": 0.6086956521739131,
+        "exact_state_count": 126,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.5655737704918032,
+        "false_promotion_rate": 0.46621621621621623,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 9,
+          "deleted_active_return_violations": 8,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.49324324324324326,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.4344262295081967,
+        "pattern_recall_status_proxy": 0.8983050847457628,
+        "predicted_supported": 122,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Recency Heuristic",
+      "parameters": {
+        "support_occurrences": 2,
+        "window": 3
+      },
+      "prediction_sha256": "d0fca24eec21e1e903a05ded2f0af99856ac2a1b556f693ed156d9a8a612020b"
+    },
+    {
+      "baseline_id": "B7",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 26,
+            "exact_accuracy": 0.49056603773584906,
+            "predicted_supported": 36,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 3,
+            "exact_accuracy": 0.375,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 5,
+            "exact_accuracy": 0.625,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 13,
+            "exact_accuracy": 0.9285714285714286,
+            "predicted_supported": 6,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 9,
+            "exact_accuracy": 0.6428571428571429,
+            "predicted_supported": 11,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 72,
+            "exact_accuracy": 0.6545454545454545,
+            "predicted_supported": 38,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 56,
+            "exact_accuracy": 0.9491525423728814,
+            "predicted_supported": 56,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "exception": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 12,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 12,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 20,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 18,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 29,
+            "exact_accuracy": 0.4603174603174603,
+            "predicted_supported": 53,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 36,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 54
+          },
+          "YES": {
+            "exact": 91,
+            "exact_accuracy": 0.6319444444444444,
+            "predicted_supported": 106,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 5,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 10,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 30,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 1,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 1,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 18,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 6,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 7,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 3,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 32,
+            "exact_accuracy": 0.5818181818181818,
+            "predicted_supported": 46,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 3,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 3,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 104,
+            "exact_accuracy": 0.6227544910179641,
+            "predicted_supported": 99,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 72,
+            "SUPPORTED": 38
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 3,
+            "SUPPORTED": 56
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.6183574879227053,
+        "exact_state_count": 128,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.5692307692307692,
+        "false_promotion_rate": 0.5,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4864864864864865,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.4307692307692308,
+        "pattern_recall_status_proxy": 0.9491525423728814,
+        "predicted_supported": 130,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Naive Majority",
+      "parameters": {
+        "minimum_records": 3
+      },
+      "prediction_sha256": "f1469531b8a1af015eb4af535b7757540ff6fb070eadaa026b0c357b1e05b3ae"
+    },
+    {
+      "baseline_id": "B8",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 32,
+            "exact_accuracy": 0.6037735849056604,
+            "predicted_supported": 13,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 4,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 8,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 8,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 6,
+            "exact_accuracy": 0.42857142857142855,
+            "predicted_supported": 4,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 4,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 2,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 4,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 7,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 4,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 7,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 4,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 8,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 13,
+            "exact_accuracy": 0.9285714285714286,
+            "predicted_supported": 4,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 9,
+            "exact_accuracy": 0.6428571428571429,
+            "predicted_supported": 7,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 2,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 103,
+            "exact_accuracy": 0.9363636363636364,
+            "predicted_supported": 7,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 36,
+            "exact_accuracy": 0.6101694915254238,
+            "predicted_supported": 36,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 6,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 28,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 4,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 28,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 4,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 14,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 8,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 28,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 4,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "exception": {
+            "exact": 21,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 12,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 48,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 4,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 21,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 12,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 48,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 4,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 14,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 8,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 7,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 8,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 21,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 12,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 28,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 4,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 8,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 31,
+            "exact_accuracy": 0.49206349206349204,
+            "predicted_supported": 25,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 7,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 6,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 43,
+            "exact_accuracy": 0.7962962962962963,
+            "predicted_supported": 9,
+            "units": 54
+          },
+          "YES": {
+            "exact": 95,
+            "exact_accuracy": 0.6597222222222222,
+            "predicted_supported": 49,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 3,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 12,
+            "exact_accuracy": 0.34285714285714286,
+            "predicted_supported": 10,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 2,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 0,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 21,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 6,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 7,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 6,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 1,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 4,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 35,
+            "exact_accuracy": 0.6363636363636364,
+            "predicted_supported": 28,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 3,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 1,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 113,
+            "exact_accuracy": 0.6766467065868264,
+            "predicted_supported": 49,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 7,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 14,
+            "exact_accuracy": 0.7,
+            "predicted_supported": 8,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "DELETED": {
+            "INSUFFICIENT_EVIDENCE": 6,
+            "SUPPORTED": 4
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 103,
+            "SUPPORTED": 7
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "INSUFFICIENT_EVIDENCE": 3,
+            "SUPPORTED": 2
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 23,
+            "SUPPORTED": 36
+          },
+          "UNKNOWN_CONTEXT": {
+            "INSUFFICIENT_EVIDENCE": 2,
+            "SUPPORTED": 2
+          },
+          "USER_REJECTED": {
+            "INSUFFICIENT_EVIDENCE": 4,
+            "SUPPORTED": 6
+          }
+        },
+        "exact_state_accuracy": 0.6714975845410628,
+        "exact_state_count": 139,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.4375,
+        "false_promotion_rate": 0.1891891891891892,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 6,
+          "deleted_active_return_violations": 4,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 2
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.6959459459459459,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.5625,
+        "pattern_recall_status_proxy": 0.6101694915254238,
+        "predicted_supported": 64,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Context-Keyed Majority",
+      "parameters": {
+        "minimum_context_records": 3
+      },
+      "prediction_sha256": "f46c480afa9362f89535d9d213ec875c7761051a67303b137baf8ced235fb004"
+    },
+    {
+      "baseline_id": "B9",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 41,
+            "exact_accuracy": 0.7735849056603774,
+            "predicted_supported": 21,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 3,
+            "exact_accuracy": 0.375,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 12,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 7,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 12,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 7,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 5,
+            "exact_accuracy": 0.625,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 13,
+            "exact_accuracy": 0.9285714285714286,
+            "predicted_supported": 6,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 9,
+            "exact_accuracy": 0.6428571428571429,
+            "predicted_supported": 11,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 0,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 72,
+            "exact_accuracy": 0.6545454545454545,
+            "predicted_supported": 38,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 5,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 56,
+            "exact_accuracy": 0.9491525423728814,
+            "predicted_supported": 56,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "exception": {
+            "exact": 25,
+            "exact_accuracy": 0.8928571428571429,
+            "predicted_supported": 13,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 12,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 25,
+            "exact_accuracy": 0.8928571428571429,
+            "predicted_supported": 13,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 12,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 25,
+            "exact_accuracy": 0.8928571428571429,
+            "predicted_supported": 13,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 12,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 49,
+            "exact_accuracy": 0.7777777777777778,
+            "predicted_supported": 33,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 36,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 54
+          },
+          "YES": {
+            "exact": 116,
+            "exact_accuracy": 0.8055555555555556,
+            "predicted_supported": 81,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 5,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 5,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 30,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 10,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 1,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 1,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 18,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 6,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 7,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 3,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 3,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 37,
+            "exact_accuracy": 0.6727272727272727,
+            "predicted_supported": 41,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 3,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 3,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 129,
+            "exact_accuracy": 0.7724550898203593,
+            "predicted_supported": 74,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 15,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "DELETED": {
+            "DELETED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 72,
+            "SUPPORTED": 38
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPERSEDED": 5
+          },
+          "SUPPORTED": {
+            "INSUFFICIENT_EVIDENCE": 3,
+            "SUPPORTED": 56
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "USER_REJECTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.7391304347826086,
+        "exact_state_count": 153,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.4666666666666667,
+        "false_promotion_rate": 0.3310810810810811,
+        "hard_violations": {
+          "conflict_positive_violations": 0,
+          "correction_resurrection_violations": 0,
+          "deleted_active_return_violations": 0,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.8928571428571429,
+        "negative_exact_accuracy": 0.6554054054054054,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.5333333333333333,
+        "pattern_recall_status_proxy": 0.9491525423728814,
+        "predicted_supported": 105,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Lifecycle-Naive Rule",
+      "parameters": {
+        "fallback": "B7"
+      },
+      "prediction_sha256": "415567eef5ef90ec47326cc948a9e2277e42016320a83da79061adadfb30b288"
+    },
+    {
+      "baseline_id": "B10",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 27,
+            "exact_accuracy": 0.5094339622641509,
+            "predicted_supported": 37,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 4,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 2,
+            "exact_accuracy": 0.25,
+            "predicted_supported": 6,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 9,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 68,
+            "exact_accuracy": 0.6181818181818182,
+            "predicted_supported": 42,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 59,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 59,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "exception": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 16,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 44,
+            "exact_accuracy": 0.7857142857142857,
+            "predicted_supported": 16,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 24,
+            "exact_accuracy": 0.6666666666666666,
+            "predicted_supported": 16,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 34,
+            "exact_accuracy": 0.6296296296296297,
+            "predicted_supported": 20,
+            "units": 54
+          },
+          "YES": {
+            "exact": 92,
+            "exact_accuracy": 0.6388888888888888,
+            "predicted_supported": 111,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 4,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 10,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 30,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 14,
+            "exact_accuracy": 0.5833333333333334,
+            "predicted_supported": 10,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 4,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 3,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 4,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 32,
+            "exact_accuracy": 0.5818181818181818,
+            "predicted_supported": 46,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 4,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 2,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 102,
+            "exact_accuracy": 0.6107784431137725,
+            "predicted_supported": 107,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "SUPPORTED": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 68,
+            "SUPPORTED": 42
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "SUPPORTED": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.6135265700483091,
+        "exact_state_count": 127,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.5755395683453237,
+        "false_promotion_rate": 0.5405405405405406,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4594594594594595,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.4244604316546763,
+        "pattern_recall_status_proxy": 1.0,
+        "predicted_supported": 139,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Provenance-Naive Counter",
+      "parameters": {
+        "occurrence_threshold": 3
+      },
+      "prediction_sha256": "6844d3dd943aefbe17dbd2e7a23e855de9995d6c1b779678aabf5215e0951b2c"
+    },
+    {
+      "baseline_id": "B11",
+      "metrics": {
+        "by_counterfactual_template": {
+          "NONE": {
+            "exact": 27,
+            "exact_accuracy": 0.5094339622641509,
+            "predicted_supported": 37,
+            "units": 53
+          },
+          "conditional_truth_vs_misleading_aggregate": {
+            "exact": 6,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 4,
+            "units": 8
+          },
+          "correction_absent_vs_correction_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "deletion_absent_vs_deletion_applied": {
+            "exact": 7,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "full_observability_vs_permission_loss": {
+            "exact": 6,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "independent_corroboration_vs_same_origin_replication": {
+            "exact": 5,
+            "exact_accuracy": 0.625,
+            "predicted_supported": 3,
+            "units": 8
+          },
+          "known_relationship_vs_unknown_relationship": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "meaningful_alternatives_vs_constrained_availability": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "normal_quality_vs_degraded_quality": {
+            "exact": 5,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 8,
+            "units": 10
+          },
+          "raw_only_vs_raw_plus_derived_lineage": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "single_evidence_vs_same_origin_replicas": {
+            "exact": 10,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 10
+          },
+          "stable_behavior_vs_fake_drift": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "stable_exception_vs_random_deviation": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 9,
+            "units": 14
+          },
+          "true_drift_vs_observation_only_change": {
+            "exact": 10,
+            "exact_accuracy": 0.7142857142857143,
+            "predicted_supported": 12,
+            "units": 14
+          },
+          "true_routine_vs_chance_matching_no_pattern": {
+            "exact": 7,
+            "exact_accuracy": 0.875,
+            "predicted_supported": 3,
+            "units": 8
+          }
+        },
+        "by_expected_state": {
+          "CONFLICTING_EVIDENCE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 2,
+            "units": 2
+          },
+          "DELETED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "exact": 71,
+            "exact_accuracy": 0.6454545454545455,
+            "predicted_supported": 39,
+            "units": 110
+          },
+          "NOT_OBSERVABLE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "STALE": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 3,
+            "units": 3
+          },
+          "SUPERSEDED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 5,
+            "units": 5
+          },
+          "SUPPORTED": {
+            "exact": 59,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 59,
+            "units": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 4,
+            "units": 4
+          },
+          "USER_REJECTED": {
+            "exact": 0,
+            "exact_accuracy": 0.0,
+            "predicted_supported": 10,
+            "units": 10
+          }
+        },
+        "by_family": {
+          "NO_PATTERN controls": {
+            "exact": 27,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 13,
+            "units": 36
+          },
+          "Simpson-like aggregation": {
+            "exact": 27,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 13,
+            "units": 36
+          },
+          "conditional preference": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "conflicting structure": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "confounding": {
+            "exact": 27,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 13,
+            "units": 36
+          },
+          "correction/rejection": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "coverage-induced fake drift": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "deletion/reset": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "exception": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "independent corroboration": {
+            "exact": 47,
+            "exact_accuracy": 0.8392857142857143,
+            "predicted_supported": 13,
+            "units": 56
+          },
+          "lifecycle parent relation": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "missingness": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "multi-device replication": {
+            "exact": 47,
+            "exact_accuracy": 0.8392857142857143,
+            "predicted_supported": 13,
+            "units": 56
+          },
+          "observation quality": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "pattern overlap": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "preference/availability": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "raw/derived evidence": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "real drift": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "relationship-conditioned": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "reversal": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "routine/opportunity": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "scoped exception": {
+            "exact": 17,
+            "exact_accuracy": 0.6071428571428571,
+            "predicted_supported": 21,
+            "units": 28
+          },
+          "sparse coincidence": {
+            "exact": 27,
+            "exact_accuracy": 0.75,
+            "predicted_supported": 13,
+            "units": 36
+          },
+          "staleness": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "temporal sequence": {
+            "exact": 11,
+            "exact_accuracy": 0.55,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "unidentifiable latent truth": {
+            "exact": 30,
+            "exact_accuracy": 0.47619047619047616,
+            "predicted_supported": 54,
+            "units": 63
+          },
+          "unknown context": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "by_identifiability": {
+          "NO": {
+            "exact": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "predicted_supported": 8,
+            "units": 9
+          },
+          "PARTIAL": {
+            "exact": 37,
+            "exact_accuracy": 0.6851851851851852,
+            "predicted_supported": 17,
+            "units": 54
+          },
+          "YES": {
+            "exact": 92,
+            "exact_accuracy": 0.6388888888888888,
+            "predicted_supported": 111,
+            "units": 144
+          }
+        },
+        "by_truth_kind": {
+          "CONDITIONAL_PATTERN": {
+            "exact": 4,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "DRIFT": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "DRIFT_OR_UNIDENTIFIABLE": {
+            "exact": 10,
+            "exact_accuracy": 0.2857142857142857,
+            "predicted_supported": 30,
+            "units": 35
+          },
+          "INSUFFICIENT_TRUE_SUPPORT": {
+            "exact": 1,
+            "exact_accuracy": 0.2,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "NO_GLOBAL_PATTERN": {
+            "exact": 2,
+            "exact_accuracy": 0.5,
+            "predicted_supported": 2,
+            "units": 4
+          },
+          "NO_PATTERN": {
+            "exact": 17,
+            "exact_accuracy": 0.7083333333333334,
+            "predicted_supported": 7,
+            "units": 24
+          },
+          "PREFERENCE": {
+            "exact": 11,
+            "exact_accuracy": 0.7333333333333333,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "RANDOM_DEVIATION": {
+            "exact": 4,
+            "exact_accuracy": 0.5714285714285714,
+            "predicted_supported": 3,
+            "units": 7
+          },
+          "RELATIONSHIP_CONDITIONED": {
+            "exact": 9,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 12,
+            "units": 15
+          },
+          "REVERSAL": {
+            "exact": 4,
+            "exact_accuracy": 0.8,
+            "predicted_supported": 4,
+            "units": 5
+          },
+          "SCOPED_EXCEPTION": {
+            "exact": 6,
+            "exact_accuracy": 0.8571428571428571,
+            "predicted_supported": 6,
+            "units": 7
+          },
+          "SINGLE_OCCURRENCE": {
+            "exact": 20,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 0,
+            "units": 20
+          },
+          "STABLE_PATTERN": {
+            "exact": 32,
+            "exact_accuracy": 0.5818181818181818,
+            "predicted_supported": 46,
+            "units": 55
+          },
+          "STABLE_ROUTINE": {
+            "exact": 4,
+            "exact_accuracy": 1.0,
+            "predicted_supported": 2,
+            "units": 4
+          }
+        },
+        "by_truth_scope": {
+          "activity:generic": {
+            "exact": 105,
+            "exact_accuracy": 0.6287425149700598,
+            "predicted_supported": 104,
+            "units": 167
+          },
+          "activity:relationship": {
+            "exact": 13,
+            "exact_accuracy": 0.65,
+            "predicted_supported": 16,
+            "units": 20
+          },
+          "choice:drink": {
+            "exact": 12,
+            "exact_accuracy": 0.6,
+            "predicted_supported": 16,
+            "units": 20
+          }
+        },
+        "confusion_matrix": {
+          "CONFLICTING_EVIDENCE": {
+            "SUPPORTED": 2
+          },
+          "DELETED": {
+            "SUPPORTED": 10
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "INSUFFICIENT_EVIDENCE": 71,
+            "SUPPORTED": 39
+          },
+          "NOT_OBSERVABLE": {
+            "SUPPORTED": 4
+          },
+          "STALE": {
+            "SUPPORTED": 3
+          },
+          "SUPERSEDED": {
+            "SUPPORTED": 5
+          },
+          "SUPPORTED": {
+            "SUPPORTED": 59
+          },
+          "UNKNOWN_CONTEXT": {
+            "SUPPORTED": 4
+          },
+          "USER_REJECTED": {
+            "SUPPORTED": 10
+          }
+        },
+        "exact_state_accuracy": 0.6280193236714976,
+        "exact_state_count": 130,
+        "expected_supported": 59,
+        "false_discovery_rate": 0.5661764705882353,
+        "false_promotion_rate": 0.5202702702702703,
+        "hard_violations": {
+          "conflict_positive_violations": 2,
+          "correction_resurrection_violations": 10,
+          "deleted_active_return_violations": 10,
+          "not_observable_as_current_violations": 4,
+          "stale_as_current_violations": 3,
+          "unknown_context_positive_violations": 4
+        },
+        "lifecycle_exact_accuracy": 0.0,
+        "negative_exact_accuracy": 0.4797297297297297,
+        "negative_units": 148,
+        "note": "Baselines predict checkpoint semantic state only. Family/scope/pair fields are evaluator-only slices and are never method inputs.",
+        "pattern_precision_status_proxy": 0.4338235294117647,
+        "pattern_recall_status_proxy": 1.0,
+        "predicted_supported": 136,
+        "scope_correctness": "NOT_APPLICABLE_TO_STATUS_ONLY_L3_V1_OUTPUT",
+        "units": 207
+      },
+      "name": "Provenance-Dedup Counter",
+      "parameters": {
+        "occurrence_threshold": 3
+      },
+      "prediction_sha256": "729aeffd8cf2b79f47f1020d0071913fa63aa9948ec2780c80d6801cc87abdf4"
+    }
+  ],
+  "benchmark_version": "ppf-l3-benchmark/v1",
+  "l4_version": "ppf-l4-minimal-baselines/v1",
+  "split": "dev"
+}
