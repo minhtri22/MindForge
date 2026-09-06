@@ -1,0 +1,120 @@
+1012.06.939.910 D srv  process_sing: decoding, decline task, id_task = 34218
+1012.06.939.911 D que  process_new_: task declined, id = 34218
+1012.08.087.314 D que  yield_to_que: done yielding to queue
+1012.08.087.874 D slot process_toke: id  0 | task 34208 | stopped by EOS
+1012.08.087.877 D slot process_toke: id  0 | task 34208 | n_gen = 9, n_remaining = 119, next token: 248046 ''
+1012.08.087.885 I slot print_timing: id  0 | task 34208 | prompt eval time =   50267.08 ms /   322 tokens (  156.11 ms per token,     6.41 tokens per second)
+1012.08.087.889 I slot print_timing: id  0 | task 34208 |        eval time =    8474.97 ms /     9 tokens ( 1059.37 ms per token,     0.94 tokens per second)
+1012.08.087.890 I slot print_timing: id  0 | task 34208 |       total time =   58742.05 ms /   331 tokens
+1012.08.087.892 I slot print_timing: id  0 | task 34208 |    graphs reused =      27986
+1012.08.088.221 D res          send: sending result for task id = 34208
+1012.08.088.223 D res          send: task id = 34208 pushed to result queue
+1012.08.088.231 I slot      release: id  0 | task 34208 | stop processing: n_tokens = 378, truncated = 0
+1012.08.088.235 D slot        reset: id  0 | task 34208 |
+1012.08.088.260 D que    start_loop: waiting for new tasks
+1012.08.088.261 D que    start_loop: processing new tasks
+1012.08.088.264 D que  process_new_: processing task, id = 34218
+1012.08.088.267 D que    start_loop: update slots
+1012.08.088.268 I srv  update_slots: all slots are idle
+1012.08.088.269 D que    start_loop: waiting for new tasks
+1012.08.089.335 D Parsed message: {"role":"assistant","content":"{\"intent_label\":\"CLARIFY\"}"}
+1012.08.090.584 D srv          stop: all tasks already finished, no need to cancel
+1012.08.090.603 D res  remove_waiti: remove task 34208 from waiting list. current waiting = 1 (before remove)
+1012.08.090.605 D srv          stop: all tasks already finished, no need to cancel
+1012.08.123.867 D Using specialized template: Qwen3-Coder
+1012.08.130.079 I srv  server_strea: conv_id= (empty=1)
+1012.08.132.287 I srv    operator(): chat format: peg-native
+1012.08.132.479 D srv  eval_llama_c: reasoning budget: tokens=0, generation_prompt='<|im_start|>assistant
+<think>
+
+</think>
+
+', start=1 toks, end=2 seqs, forced=1 toks
+1012.08.132.544 D res  add_waiting_: add task 34219 to waiting list. current waiting = 0 (before add)
+1012.08.132.547 D que          post: new task, id = 34219/1, front = 0
+1012.08.132.674 D que    start_loop: processing new tasks
+1012.08.132.694 D que  process_new_: processing task, id = 34219
+1012.08.132.708 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.354 (131/370) > 0.100
+1012.08.132.713 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.354 (> 0.100 thold), f_keep = 0.347
+1012.08.132.715 I srv  get_availabl: updating prompt cache
+1012.08.132.797 I srv   prompt_save:  - saving prompt with length 378, total state size = 173.260 MiB (draft: 0.000 MiB)
+1012.08.132.817 W srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 622.201 MiB)
+1012.08.785.463 I srv          load:  - looking for better prompt, base f_keep = 0.347, f_sim = 0.354
+1012.08.785.473 I srv          load:    - prompt with length     372, lcp =     116, f_keep = 0.312, f_sim = 0.314
+1012.08.785.474 I srv          load:    - prompt with length     372, lcp =     116, f_keep = 0.312, f_sim = 0.314
+1012.08.785.477 I srv          load:    - prompt with length     374, lcp =     116, f_keep = 0.310, f_sim = 0.314
+1012.08.785.479 I srv          load:    - prompt with length     374, lcp =     116, f_keep = 0.310, f_sim = 0.314
+1012.08.785.480 I srv          load:    - prompt with length     378, lcp =     116, f_keep = 0.307, f_sim = 0.314
+1012.08.785.482 I srv          load:    - prompt with length     378, lcp =     116, f_keep = 0.307, f_sim = 0.314
+1012.08.785.483 I srv          load:    - prompt with length     379, lcp =     116, f_keep = 0.306, f_sim = 0.314
+1012.08.785.489 I srv          load:    - prompt with length     379, lcp =     116, f_keep = 0.306, f_sim = 0.314
+1012.08.785.490 I srv          load:    - prompt with length     378, lcp =     116, f_keep = 0.307, f_sim = 0.314
+1012.08.785.491 I srv          load:    - prompt with length     378, lcp =     116, f_keep = 0.307, f_sim = 0.314
+1012.08.785.493 I srv          load:    - prompt with length     379, lcp =     116, f_keep = 0.306, f_sim = 0.314
+1012.08.785.497 I srv          load:    - prompt with length     379, lcp =     116, f_keep = 0.306, f_sim = 0.314
+1012.08.785.499 I srv          load:    - prompt with length     378, lcp =     131, f_keep = 0.347, f_sim = 0.354
+1012.08.785.504 I srv        update:  - cache state: 13 prompts, 8086.801 MiB (limits: 8192.000 MiB, 8192 tokens, 8192 est)
+1012.08.785.506 I srv        update:    - prompt 00000256C6238490:     372 tokens, checkpoints:  3,   621.763 MiB
+1012.08.785.507 I srv        update:    - prompt 00000256C69628C0:     372 tokens, checkpoints:  3,   621.763 MiB
+1012.08.785.508 I srv        update:    - prompt 00000256C6237DD0:     374 tokens, checkpoints:  3,   621.888 MiB
+1012.08.785.509 I srv        update:    - prompt 00000256C69623B0:     374 tokens, checkpoints:  3,   621.888 MiB
+1012.08.785.510 I srv        update:    - prompt 00000256C62381C0:     378 tokens, checkpoints:  3,   622.139 MiB
+1012.08.785.511 I srv        update:    - prompt 00000256C6962440:     378 tokens, checkpoints:  3,   622.139 MiB
+1012.08.785.512 I srv        update:    - prompt 00000256C6237F80:     379 tokens, checkpoints:  3,   622.201 MiB
+1012.08.785.513 I srv        update:    - prompt 00000256C6962950:     379 tokens, checkpoints:  3,   622.201 MiB
+1012.08.785.514 I srv        update:    - prompt 00000256C6238250:     378 tokens, checkpoints:  3,   622.139 MiB
+1012.08.785.515 I srv        update:    - prompt 00000256C6962710:     378 tokens, checkpoints:  3,   622.139 MiB
+1012.08.785.517 I srv        update:    - prompt 00000256C6238130:     379 tokens, checkpoints:  3,   622.201 MiB
+1012.08.785.518 I srv        update:    - prompt 00000256C69627A0:     379 tokens, checkpoints:  3,   622.201 MiB
+1012.08.785.519 I srv        update:    - prompt 00000256C62380A0:     378 tokens, checkpoints:  3,   622.139 MiB
+1012.08.785.521 I srv  get_availabl: prompt cache update took 652.80 ms
+1012.08.788.549 D slot launch_slot_: id  0 | task -1 | launching slot : {"id":0,"n_ctx":8192,"speculative":false,"is_processing":false,"id_task":34208,"n_prompt_tokens":378,"n_prompt_tokens_processed":0,"n_prompt_tokens_cache":0,"params":{"seed":20260904,"temperature":0.0,"dynatemp_range":0.0,"dynatemp_exponent":1.0,"top_k":20,"top_p":0.949999988079071,"min_p":0.05000000074505806,"top_n_sigma":-1.0,"xtc_probability":0.0,"xtc_threshold":0.10000000149011612,"typical_p":1.0,"repeat_last_n":64,"repeat_penalty":1.0,"presence_penalty":0.0,"frequency_penalty":0.0,"dry_multiplier":0.0,"dry_base":1.75,"dry_allowed_length":2,"dry_penalty_last_n":64,"dry_sequence_breakers":["\n",":","\"","*"],"mirostat":0,"mirostat_tau":5.0,"mirostat_eta":0.10000000149011612,"adaptive_target":-1.0,"adaptive_decay":0.8999999761581421,"stop":[],"max_tokens":128,"n_predict":128,"n_keep":0,"n_discard":0,"ignore_eos":false,"stream":false,"logit_bias":[],"n_probs":0,"min_keep":0,"grammar":"","grammar_lazy":false,"grammar_triggers":[],"preserved_tokens":[248058,248059,248068,248069],"chat_format":"peg-native","reasoning_format":"deepseek","reasoning_in_content":false,"generation_prompt":"<|im_start|>assistant\n<think>\n\n</think>\n\n","samplers":["penalties","dry","top_n_sigma","top_k","typ_p","top_p","min_p","xtc","temperature"],"speculative.types":"none","timings_per_token":false,"post_sampling_probs":false,"backend_sampling":false,"lora":[]},"next_token":[{"has_next_token":false,"has_new_line":false,"n_remain":-1,"n_decoded":0}],"prompt":"<|im_start|>system\nReturn only compact JSON. No markdown. No prose. No hidden reasoning.\nUse only supplied context/state/capabilities. Do not invent unavailable tools,\npersonal facts, or world knowledge. /no_think<|im_end|>\n<|im_start|>user\n{\"available_actions\":[{\"id\":\"maps\",\"kind\":\"navigation\"},{\"id\":\"messages\",\"kind\":\"messaging\"},{\"id\":\"phone\",\"kind\":\"calling\"},{\"id\":\"calendar\",\"kind\":\"calendar\"},{\"id\":\"notes\",\"kind\":\"notes\"}],\"available_local_capabilities\":[\"device_context\"],\"current_context\":{\"date_local\":\"2026-05-01\",\"device_state\":{\"network\":\"offline\"},\"foreground_reference\":\"navigation\",\"location\":\"home\",\"time_local\":\"10:00\"},\"external_capabilities\":[\"web_search\",\"general_qa\",\"travel_search\",\"news_search\"],\"family\":\"A1\",\"personal_state\":{\"contacts\":[{\"id\":\"c_linh\",\"name\":\"Linh\",\"relation\":\"partner\"},{\"id\":\"c_tuan\",\"name\":\"Tuấn\",\"project\":\"A\",\"relation\":\"coworker\"},{\"id\":\"c_tuan_anh\",\"name\":\"Tuấn Anh\",\"relation\":\"friend\"},{\"id\":\"c_mai\",\"name\":\"Mai\",\"relation\":\"sister\"}],\"home_address\":\"12 Nguyễn Trãi, Hà Nội\",\"home_label\":\"home\",\"partner\":\"Linh\",\"preferred_language\":\"vi\",\"preferred_navigation_app\":\"maps\"},\"required_prediction_schema\":{\"intent_label\":[\"NAVIGATE\",\"MESSAGE\",\"CALL\",\"REMIND\",\"LOCAL_TRANSFORM\",\"LOOKUP_DELEGATE\",\"APP_ACTION\",\"CLARIFY\"]},\"user_utterance\":\"Trong tình huống này, xử lý việc này theo ngữ cảnh ngay trước đó\"}\nReturn only the required JSON object. Use exact enum strings. Use exactly the keys in required_prediction_schema; no extra keys. /no_think<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n","generated":""}
+1012.08.788.611 D common_sampler_init: prefill token: 248045 = <|im_start|>
+1012.08.788.613 D common_sampler_init: prefill token: 74455 = assistant
+1012.08.788.614 D common_sampler_init: prefill token: 198 =
+
+1012.08.788.615 D common_sampler_init: prefill token: 248068 = <think>
+1012.08.788.616 D common_sampler_init: prefill token: 271 =
+
+
+1012.08.788.616 D common_sampler_init: prefill token: 248069 = </think>
+1012.08.788.617 D common_sampler_init: prefill token: 271 =
+
+
+1012.08.788.630 D common_sampler_init: reasoning-budget accepted prefill token (248045)
+1012.08.788.631 D common_sampler_init: reasoning-budget accepted prefill token (74455)
+1012.08.788.632 D common_sampler_init: reasoning-budget accepted prefill token (198)
+1012.08.788.633 I cmn  common_reaso: activated, budget=0 tokens
+1012.08.788.634 I cmn  common_reaso: budget=0, forcing immediately
+1012.08.788.635 D common_sampler_init: reasoning-budget accepted prefill token (248068)
+1012.08.788.636 I cmn  common_reaso: forced sequence complete, done
+1012.08.788.637 D common_sampler_init: reasoning-budget accepted prefill token (271)
+1012.08.788.637 D common_sampler_init: reasoning-budget accepted prefill token (248069)
+1012.08.788.638 D common_sampler_init: reasoning-budget accepted prefill token (271)
+1012.08.788.980 I slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist
+1012.08.788.994 I slot launch_slot_: id  0 | task -1 | sampler params:
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64
+	top_k = 20, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.000
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+1012.08.788.997 I slot launch_slot_: id  0 | task 34219 | processing task, is_child = 0
+1012.08.789.002 D que    start_loop: update slots
+1012.08.789.004 D srv  update_slots: posting NEXT_RESPONSE
+1012.08.789.007 D que          post: new task, id = 34220, front = 0
+1012.08.789.012 I slot   operator(): id  0 | task 34219 | new prompt, n_ctx_slot = 8192, n_keep = 0, task.n_tokens = 370
+1012.08.789.018 I slot   operator(): id  0 | task 34219 | checking checkpoint with [365, 365] against 131...
+1012.08.789.019 I slot   operator(): id  0 | task 34219 | checking checkpoint with [47, 47] against 131...
+1012.08.801.192 I slot   operator(): id  0 | task 34219 | restored context checkpoint (pos_min = 47, pos_max = 47, n_tokens = 48, n_past = 48, size = 149.626 MiB)
+1012.08.801.199 I slot   operator(): id  0 | task 34219 | erased invalidated context checkpoint (pos_min = 365, pos_max = 365, n_tokens = 366, n_swa = 0, pos_next = 48, size = 149.626 MiB)
+1012.08.819.498 I slot   operator(): id  0 | task 34219 | cached n_tokens = 48, memory_seq_rm [48, end)
+1012.08.819.575 D slot   operator(): id  0 | task 34219 | main/do_checkpoint = yes, pos_min = 47, pos_max = 47
+1012.08.819.580 I slot create_check: id  0 | task 34219 | erasing context checkpoint too close to an earlier one (pos_min = 47, pos_max = 47, n_tokens = 48, size = 149.626 MiB)
+1012.09.030.873 I slot create_check: id  0 | task 34219 | created context checkpoint 2 of 32 (pos_min = 47, pos_max = 47, n_tokens = 48, size = 149.626 MiB)
+1012.09.030.904 D set_adapters_lora: adapters = 0000000000000000
+1012.09.030.905 D adapters_lora_are_same: adapters = 0000000000000000
+1012.09.030.907 D set_embeddings: value = 0
+1012.09.030.909 D srv        decode: n_batch (effective) = 2048, off = 0
+1012.09.030.911 D que  yield_to_que: yielding to queue
+1012.09.031.040 D que  process_new_: processing task, id = 34220
+1012.09.031.042 D srv  process_sing: decoding, decline task, id_task = 34220
+1012.09.031.043 D que  process_new_: task declined, id = 34220
