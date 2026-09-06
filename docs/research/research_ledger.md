@@ -176,30 +176,25 @@ Minimum unresolved capability clusters:
 
 ## L5 — Minimum Missing Mechanism
 
-Status: **NOT STARTED**.
+Prior status at starting commit: **NOT STARTED**.
 
-Research question:
+Question: what is the smallest symbolic addition that causally improves the frozen B9 failure dimensions without becoming a full PPF recognizer?
 
-> What is the smallest additional mechanism that causally improves the failure dimensions of the strongest L4 baselines without evolving into a full PPF recognizer?
+Treatments: preregistered T0–T7 over E1 Observability, E2 Context, E3 Conflict, and E4 Currentness/Staleness eligibility; VALIDATION was executed once after source/selection freeze.
 
-Starting floor:
+Result: **PASS — MINIMUM_MECHANISM_FOUND** on DEV + protected VALIDATION.
 
-```text
-B9 — strongest exact-state trivial baseline
-B8 — lower false-promotion frontier
-```
+Selected minimum: **T1 = B9 + E1 Observability Eligibility**, one component, zero learned parameters. T1 preserved `SUPPORTED` recall and correction/deletion invariants while removing 4/4 `NOT_OBSERVABLE` active violations on both splits and lowering false promotion from 0.3311→0.2905 DEV and 0.3243→0.2838 VALIDATION.
 
-Hard rules:
+Mechanism lock SHA-256: `092cb0bb367eac49284f377d1f7e3cfba425edf1f5298136bf8068dbe7cd4e70`.
 
-```text
-Do not build full PPF.
-Do not modify frozen L3.
-Do not tune against FINAL.
-Do not self-authorize Model or Kernel changes.
-```
+E2 also qualified independently; E3/E4 produced no measurable gain under strict method-visible signals. T1 does not dominate the lower-false-promotion B8 frontier on every metric.
 
-Next action: design and preregister PPF-L5 Minimum Missing Mechanism experiment.
+L3 FINAL was not used for L5 evaluation. Confirmatory status: **NOT YET CONFIRMED ON A NEW BLIND HOLDOUT**.
 
+Commit: this L5 completion commit.
+
+Next candidate: decision on a new protected blind confirmatory experiment/split; **not authorized in L5**.
 ## Current research conclusion
 
 PPF has not yet been proven feasible as a production mechanism.
@@ -212,10 +207,10 @@ event/evidence contract  — established
 benchmark foundation     — established
 protected splits         — established
 trivial-baseline floor   — established
-minimum mechanism        — still unknown
+minimum mechanism        — identified on DEV + VALIDATION; blind confirmation pending
 ```
 
-Current state: **PPF RESEARCH CONTINUES — NEXT: L5**.
+Current state: **PPF L5 COMPLETE — MINIMUM MECHANISM FOUND; NEW BLIND CONFIRMATION NOT YET AUTHORIZED**.
 
 ## Ledger maintenance rule
 

@@ -1,0 +1,133 @@
+{
+  "complexity_ledger": {
+    "E1": {
+      "fields": [
+        "event_type",
+        "observability.state",
+        "opportunity.state"
+      ],
+      "learned_parameters": 0,
+      "parameters": 0,
+      "state_retained": 0
+    },
+    "E2": {
+      "fields": [
+        "opportunity.state",
+        "context.*.status"
+      ],
+      "learned_parameters": 0,
+      "parameters": 0,
+      "state_retained": 0
+    },
+    "E3": {
+      "fields": [
+        "opportunity.id",
+        "opportunity.state",
+        "context.*.status"
+      ],
+      "learned_parameters": 0,
+      "parameters": 0,
+      "state_retained": 0
+    },
+    "E4": {
+      "fields": [
+        "event_type",
+        "observability.state",
+        "opportunity.state"
+      ],
+      "learned_parameters": 0,
+      "parameters": 0,
+      "state_retained": 0
+    }
+  },
+  "components": {
+    "E1": "Observability eligibility: explicit current missing/unavailable/delayed/unknown-outcome evidence cannot sustain an active claim.",
+    "E2": "Context eligibility: a context dimension that remains explicitly UNKNOWN across the visible determinate evidence cannot sustain a context-specific active claim.",
+    "E3": "Conflict eligibility: only explicit L2 CONFLICTING context or incompatible determinate outcomes for the same opportunity may block active support; no statistical conflict detector.",
+    "E4": "Currentness eligibility: only explicit HISTORY_UNAVAILABLE or OUTSIDE_CAPTURE_WINDOW currentness loss may mark historical support STALE; no age threshold is fitted because DEV staleness and supported recency overlap."
+  },
+  "development_policy": "DEV may be iterated for implementation/debugging only.",
+  "final_policy": "L3 FINAL is scientifically spent by L4 and is forbidden for L5 treatment evaluation. A new protected blind split is required for confirmation.",
+  "freeze": {
+    "dev_result_sha256": "30be9f0d984d900e9e14af1adc3811e7685448afeb8fd811d0a76f1fc7e996d3",
+    "evaluator_source_sha256": "ca5635ac32332aaae0823e78f845f7095ac048a5fb738444ff4289bcd95e7749",
+    "mechanism_source_sha256": "2d42bf29dfd890e8a2ae8e4b61c1c9a2522c7a36aa0e70dbee8b34d8954f1aa6",
+    "runner_source_sha256": "98bd07c50983cf4562b1c2f1113146bf71fca93808c5812a3fc943d1ba2ad938"
+  },
+  "hypothesis": "A minimal Semantic Evidence Eligibility Gate before the frozen B9 recurrence fallback may reduce false active claims without reducing supported recall.",
+  "information_boundary": {
+    "allowed": [
+      "history.json",
+      "checkpoints.json",
+      "frozen ppf-l2/1 fields"
+    ],
+    "forbidden": [
+      "truth_kind",
+      "expected_answer",
+      "identifiability",
+      "families",
+      "pair membership",
+      "pair arm",
+      "risk_class",
+      "hidden lifecycle",
+      "holdout labels",
+      "private evaluator metadata"
+    ]
+  },
+  "l5_version": "ppf-l5-minimum-missing-mechanism/v1",
+  "metrics": [
+    "exact_state_accuracy",
+    "pattern_precision_status_proxy",
+    "pattern_recall_status_proxy",
+    "false_discovery_rate",
+    "false_promotion_rate",
+    "negative_exact_accuracy",
+    "lifecycle_exact_accuracy",
+    "hard_violations",
+    "counterfactual_pair_analysis",
+    "identifiability_slices"
+  ],
+  "preregistration_sha256": "59ae47ad592e0c03a87e3564561533a0f10e7a5b0e70595d3c7dc772edf5f605",
+  "selection_rule": [
+    "On both DEV and VALIDATION exact_state_accuracy must exceed T0.",
+    "On both DEV and VALIDATION false_promotion_rate must be lower than T0.",
+    "On both DEV and VALIDATION SUPPORTED recall must be at least T0.",
+    "correction_resurrection and deleted_active_return must remain zero.",
+    "At least one hard-failure class targeted by the treatment must strictly improve on each split.",
+    "No untargeted hard-failure class may worsen on either split.",
+    "Choose the qualifying treatment with the fewest atomic components; ties use lower VALIDATION false promotion, higher VALIDATION exact accuracy, fewer VALIDATION hard violations, then treatment id."
+  ],
+  "starting_commit": "18dc5332e73d673e245baa365a173f169c2ee412",
+  "treatments": {
+    "T0": [],
+    "T1": [
+      "E1"
+    ],
+    "T2": [
+      "E2"
+    ],
+    "T3": [
+      "E3"
+    ],
+    "T4": [
+      "E4"
+    ],
+    "T5": [
+      "E1",
+      "E2"
+    ],
+    "T6": [
+      "E1",
+      "E2",
+      "E3"
+    ],
+    "T7": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+    ]
+  },
+  "validation_policy": "Freeze T0-T7 source, component definitions, evaluator, selection rule, and preregistration hash before exactly one VALIDATION execution.",
+  "validation_run_count": 0
+}
