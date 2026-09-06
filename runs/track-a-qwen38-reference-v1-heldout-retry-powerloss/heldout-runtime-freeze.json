@@ -1,0 +1,85 @@
+{
+  "backend": "Vulkan",
+  "benchmark_hashes": {
+    "calibration.jsonl": {
+      "actual": "7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb",
+      "expected": "7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb",
+      "match": true
+    },
+    "development.jsonl": {
+      "actual": "2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42",
+      "expected": "2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42",
+      "match": true
+    },
+    "human-review-sample.jsonl": {
+      "actual": "d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693",
+      "expected": "d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693",
+      "match": true
+    },
+    "schema.json": {
+      "actual": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+      "expected": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+      "match": true
+    },
+    "test.jsonl": {
+      "actual": "3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf",
+      "expected": "3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf",
+      "match": true
+    }
+  },
+  "certified_harness_sha256": "099385c485c92bca8435aebeb98142e240080b93f768b59db331c257db3a351a",
+  "context": 8192,
+  "gpu_layers": 10,
+  "harness_commit": "4437dba66fd3ebbf3749479c180dfe5355d3eafe",
+  "heldout_runner_sha256": "736ded6a083e59894e934ff66219258e3d4d8143763b60ef26e9655c277e1b92",
+  "kv_k": "f16",
+  "kv_v": "f16",
+  "llama_cpp_build": 10793,
+  "llama_cpp_commit": "d230ddd76",
+  "llama_server_path": "D:\\WORK\\MODELS\\MindForge\\llama-b10793\\vulkan\\llama-server.exe",
+  "llama_server_version": "0.3.0-dev build 10793 commit d230ddd76",
+  "manifest_sha256": "09660d9e3b1d294fa82fbde702083d0d818431692a55f30387c78adfc697a210",
+  "max_tokens": 128,
+  "model_bytes": 18973870432,
+  "model_path": "D:\\WORK\\2.Ollama\\Qwen3.8-27B-Q4_K_M.gguf",
+  "model_sha256": "31629f53165ab6a7dad8c9847dcfd1fdf55829dac1e6e748f4a68581b0033d34",
+  "parallel": 1,
+  "prompt_sha256": "6e9325e89991df4244336e6ff8fc7effbf55fba1d53213ce6c014f58abece80d",
+  "prompt_version": "track-a-reference-json-v1-v3-local-format",
+  "reasoning_mode": "off",
+  "repository_head": "8ff40dd637aa3eb16d9557621f311aed6351f876",
+  "schema_sha256": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+  "scorer_sha256": "5687848ee162a8d0de66167e524fac3b6f5bc3a9e40f4731451f6af2f2bea700",
+  "seed": 20260904,
+  "server_command": [
+    "D:\\WORK\\MODELS\\MindForge\\llama-b10793\\vulkan\\llama-server.exe",
+    "-m",
+    "D:\\WORK\\2.Ollama\\Qwen3.8-27B-Q4_K_M.gguf",
+    "-c",
+    "8192",
+    "-ngl",
+    "10",
+    "--parallel",
+    "1",
+    "--cache-type-k",
+    "f16",
+    "--cache-type-v",
+    "f16",
+    "--reasoning",
+    "off",
+    "--reasoning-budget",
+    "0",
+    "--no-reasoning-preserve",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--verbose"
+  ],
+  "server_create_time": 1788668464.6692636,
+  "server_pid": 11556,
+  "temperature": 0.0,
+  "timeout_seconds": 300.0,
+  "timestamp": "2026-09-06T04:23:59.337279+00:00",
+  "vulkan_device": "Intel(R) Arc(TM) 140V GPU"
+}

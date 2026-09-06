@@ -1,0 +1,71 @@
+{
+  "verified_result": "700/700 COMPLETE",
+  "integrity": {
+    "planned": 700,
+    "telemetry_rows": 700,
+    "first_sequence_index": 1,
+    "last_sequence_index": 700,
+    "unique_sequence_indices": 700,
+    "unique_case_ids": 700,
+    "heldout_order_mismatches": 0,
+    "missing_indices": 0,
+    "duplicate_indices": 0,
+    "transport_errors": 0,
+    "timeouts": 0,
+    "validator_failures": 0,
+    "wrong_server_pid_rows": 0,
+    "server_dead_after_rows": 0,
+    "parse_errors": 1,
+    "parse_error_sequence_index": 589,
+    "parse_error_case_id": "A6-H-088",
+    "heartbeat_final": "COMPLETED",
+    "finalizer_executed": true,
+    "runner_exit_code": 0,
+    "server_pid": 11556,
+    "server_pid_unchanged": true,
+    "server_alive_afterward": true,
+    "heldout_stderr_bytes": 0
+  },
+  "frozen_scorer": {
+    "macro_family_primary": 0.5501417233560091,
+    "RVE": "FAIL",
+    "TUE": "FAIL",
+    "reference_verdict": "REJECT_AS_QUALITY_REFERENCE"
+  },
+  "RVE_failed_gates": {
+    "macro_minimum_0.80": 0.5501417233560091,
+    "A1_minimum_0.70": 0.6,
+    "A3_minimum_0.70": 0.01,
+    "A5_minimum_0.70": 0.21099206349206348,
+    "unavailable_action_false_selection_maximum_0.05": 1.0
+  },
+  "TUE_failed_gates": {
+    "macro_minimum_0.90": 0.5501417233560091,
+    "A1_minimum_0.85": 0.6,
+    "A2_minimum_0.85": 0.76,
+    "A3_minimum_0.85": 0.01,
+    "A4_minimum_0.85": 0.7,
+    "A5_minimum_0.85": 0.21099206349206348,
+    "A6_minimum_0.85": 0.77,
+    "A7_minimum_0.85": 0.8,
+    "A2_resolved_value_minimum_0.90": 0.5133333333333333,
+    "A5_exact_record_minimum_0.85": 0.0,
+    "unavailable_action_false_selection_maximum_0.02": 1.0,
+    "counterfactual_consistency_minimum_0.90": 0.35714285714285715
+  },
+  "scope": {
+    "ollama_used": false,
+    "benchmark_truth_changed": false,
+    "scorer_changed": false,
+    "schema_changed": false,
+    "manifest_changed": false,
+    "RVE_TUE_changed": false,
+    "prompt_changed": false,
+    "model_kernel_changed": false,
+    "TokenModel_changed": false,
+    "PPF_changed": false,
+    "N4_started": false,
+    "training_started": false,
+    "distillation_started": false
+  }
+}

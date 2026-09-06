@@ -1,0 +1,100 @@
+{
+  "benchmark_hashes": {
+    "calibration.jsonl": {
+      "actual": "7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb",
+      "expected": "7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb",
+      "match": true
+    },
+    "development.jsonl": {
+      "actual": "2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42",
+      "expected": "2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42",
+      "match": true
+    },
+    "human-review-sample.jsonl": {
+      "actual": "d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693",
+      "expected": "d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693",
+      "match": true
+    },
+    "schema.json": {
+      "actual": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+      "expected": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+      "match": true
+    },
+    "test.jsonl": {
+      "actual": "3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf",
+      "expected": "3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf",
+      "match": true
+    }
+  },
+  "certification_gate_pass": true,
+  "certification_verdict": "HARNESS CERTIFIED",
+  "certified_harness_commit": "4437dba66fd3ebbf3749479c180dfe5355d3eafe",
+  "certified_harness_sha256": "099385c485c92bca8435aebeb98142e240080b93f768b59db331c257db3a351a",
+  "command_check": {
+    "command": "D:\\WORK\\MODELS\\MindForge\\llama-b10793\\vulkan\\llama-server.exe -m D:\\WORK\\2.Ollama\\Qwen3.8-27B-Q4_K_M.gguf -c 8192 -ngl 10 --parallel 1 --cache-type-k f16 --cache-type-v f16 --reasoning off --reasoning-budget 0 --no-reasoning-preserve --host 127.0.0.1 --port 8080 --verbose",
+    "pass": true,
+    "required_tokens_missing": []
+  },
+  "expected_head": "8ff40dd637aa3eb16d9557621f311aed6351f876",
+  "fresh_heldout_authorization": "AUTHORIZED",
+  "hashes_pass": true,
+  "head_matches_expected": true,
+  "head_matches_origin": true,
+  "heldout_runner_sha256": "736ded6a083e59894e934ff66219258e3d4d8143763b60ef26e9655c277e1b92",
+  "inference_processes": [
+    {
+      "exe": "D:\\WORK\\MODELS\\MindForge\\llama-b10793\\vulkan\\llama-server.exe",
+      "name": "llama-server.exe",
+      "pid": 31832
+    }
+  ],
+  "isolation_pass": true,
+  "manifest_hash_map": {
+    "calibration.jsonl": "7c2e135fc5c405b298d4b460bbf482cfba4c4d180acbfd9fedb7650f131384bb",
+    "development.jsonl": "2a1b035d444bfb144891778590a7eab5603da04d221cfdc6e1682c4e2374ea42",
+    "human-review-sample.jsonl": "d81c29d6bd549d756cdac055c3e43c82579942871f0c9d6f942c136d831cf693",
+    "schema.json": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+    "test.jsonl": "3d220e1b5b0b98d04aa3f7e7eebf83008faf344155a94a571ee28f4755ba12cf"
+  },
+  "manifest_sha256": "09660d9e3b1d294fa82fbde702083d0d818431692a55f30387c78adfc697a210",
+  "model_bytes": 18973870432,
+  "model_path": "D:\\WORK\\2.Ollama\\Qwen3.8-27B-Q4_K_M.gguf",
+  "model_sha256": "31629f53165ab6a7dad8c9847dcfd1fdf55829dac1e6e748f4a68581b0033d34",
+  "origin_head": "8ff40dd637aa3eb16d9557621f311aed6351f876",
+  "pass": true,
+  "prompt_path": "D:\\WORK\\RESEARCH\\MindForge\\runs\\track-a-qwen38-reference-v1\\prompt-template.txt",
+  "prompt_sha256": "6e9325e89991df4244336e6ff8fc7effbf55fba1d53213ce6c014f58abece80d",
+  "repository_head": "8ff40dd637aa3eb16d9557621f311aed6351f876",
+  "schema_sha256": "6869e437e8c8a1b935be7ed3d6650977e0dc09a8531dbbdea191ca832d748feb",
+  "scorer_sha256": "5687848ee162a8d0de66167e524fac3b6f5bc3a9e40f4731451f6af2f2bea700",
+  "server_alive": true,
+  "server_command": [
+    "D:\\WORK\\MODELS\\MindForge\\llama-b10793\\vulkan\\llama-server.exe",
+    "-m",
+    "D:\\WORK\\2.Ollama\\Qwen3.8-27B-Q4_K_M.gguf",
+    "-c",
+    "8192",
+    "-ngl",
+    "10",
+    "--parallel",
+    "1",
+    "--cache-type-k",
+    "f16",
+    "--cache-type-v",
+    "f16",
+    "--reasoning",
+    "off",
+    "--reasoning-budget",
+    "0",
+    "--no-reasoning-preserve",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--verbose"
+  ],
+  "server_create_time": 1788655737.834687,
+  "server_path": "D:\\WORK\\MODELS\\MindForge\\llama-b10793\\vulkan\\llama-server.exe",
+  "server_pid": 31832,
+  "timestamp": "2026-09-06T00:51:09.759291+00:00"
+}

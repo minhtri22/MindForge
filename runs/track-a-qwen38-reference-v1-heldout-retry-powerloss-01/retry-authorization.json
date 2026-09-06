@@ -1,0 +1,13 @@
+{
+  "authorization": "FRESH_RETRY_AFTER_EXOGENOUS_POWER_LOSS",
+  "authorized_by": "user",
+  "user_report": "machine lost power during the previous fresh held-out attempt",
+  "previous_attempt": "runs/track-a-qwen38-reference-v1-heldout-final",
+  "previous_attempt_verdict": "INVALID / INCOMPLETE 21/700",
+  "previous_semantic_scoring_invoked": false,
+  "reuse_partial_predictions": false,
+  "resume_from_case_22": false,
+  "restart_from_case_1": true,
+  "semantic_changes_allowed": false,
+  "rationale": "The prior interruption is now attributed by the user to external machine power loss. Retry is preregistered before this attempt, with no tuning or reuse of partial outputs."
+}

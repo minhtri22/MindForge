@@ -1,0 +1,136 @@
+{
+  "RVE_PASS": false,
+  "TUE_PASS": false,
+  "cases": 700,
+  "counterfactual_consistency": 0.35714285714285715,
+  "difficulty_slices": {
+    "adversarial": {
+      "case_primary_mean": 0.5419455782312925,
+      "cases": 175,
+      "family_primary": {
+        "A1": 0.6,
+        "A2": 0.8,
+        "A3": 0.0,
+        "A4": 0.76,
+        "A5": 0.1936190476190476,
+        "A6": 0.64,
+        "A7": 0.8
+      },
+      "macro_family_primary": 0.5419455782312925
+    },
+    "contextual": {
+      "case_primary_mean": 0.5401425332037576,
+      "cases": 245,
+      "family_primary": {
+        "A1": 0.6,
+        "A2": 0.6857142857142857,
+        "A3": 0.0,
+        "A4": 0.6857142857142857,
+        "A5": 0.18099773242630385,
+        "A6": 0.8571428571428571,
+        "A7": 0.7714285714285715
+      },
+      "macro_family_primary": 0.5401425332037577
+    },
+    "straightforward": {
+      "case_primary_mean": 0.5640136054421768,
+      "cases": 280,
+      "family_primary": {
+        "A1": 0.6,
+        "A2": 0.8,
+        "A3": 0.025,
+        "A4": 0.675,
+        "A5": 0.2480952380952381,
+        "A6": 0.775,
+        "A7": 0.825
+      },
+      "macro_family_primary": 0.5640136054421768
+    }
+  },
+  "families": {
+    "A1": {
+      "primary": 0.6
+    },
+    "A2": {
+      "clarification_accuracy": 0.97,
+      "primary": 0.76,
+      "resolved_value_accuracy": 0.5133333333333333
+    },
+    "A3": {
+      "primary": 0.01
+    },
+    "A4": {
+      "primary": 0.7,
+      "unavailable_false_selection": 1.0
+    },
+    "A5": {
+      "exact_record_match": 0.0,
+      "primary": 0.21099206349206348
+    },
+    "A6": {
+      "over_clarification": 0.22,
+      "primary": 0.77,
+      "under_clarification": 0.0
+    },
+    "A7": {
+      "false_local": 0.0,
+      "primary": 0.8,
+      "unnecessary_external": 0.0
+    }
+  },
+  "family_counterfactual_consistency": {
+    "A1": 0.0,
+    "A2": 0.8,
+    "A3": 0.0,
+    "A4": 0.0,
+    "A5": 0.0,
+    "A6": 1.0,
+    "A7": 0.7
+  },
+  "language_slices": {
+    "en": {
+      "case_primary_mean": 0.5411337868480726,
+      "cases": 105,
+      "family_primary": {
+        "A1": 0.6,
+        "A2": 0.5333333333333333,
+        "A3": 0.06666666666666667,
+        "A4": 0.7333333333333333,
+        "A5": 0.18793650793650793,
+        "A6": 0.8,
+        "A7": 0.8666666666666667
+      },
+      "macro_family_primary": 0.5411337868480726
+    },
+    "vi": {
+      "case_primary_mean": 0.5554308390022675,
+      "cases": 420,
+      "family_primary": {
+        "A1": 0.6,
+        "A2": 0.8166666666666667,
+        "A3": 0.0,
+        "A4": 0.6833333333333333,
+        "A5": 0.17134920634920633,
+        "A6": 0.8,
+        "A7": 0.8166666666666667
+      },
+      "macro_family_primary": 0.5554308390022676
+    },
+    "vi_en": {
+      "case_primary_mean": 0.5428526077097505,
+      "cases": 175,
+      "family_primary": {
+        "A1": 0.6,
+        "A2": 0.76,
+        "A3": 0.0,
+        "A4": 0.72,
+        "A5": 0.31996825396825396,
+        "A6": 0.68,
+        "A7": 0.72
+      },
+      "macro_family_primary": 0.5428526077097505
+    }
+  },
+  "macro_family_primary": 0.5501417233560091,
+  "missing_predictions": 0
+}
