@@ -1,0 +1,1507 @@
+{
+  "canonical_hash_rule": "SHA256(canonical JSON excluding canonical_preregistration_sha256), UTF-8, sorted keys, compact separators.",
+  "canonical_preregistration_sha256": "ed63bd5a3dcd2364b5bb9fd13f70d34e6be11513e8ec8a4c2e272f13a8ce92e7",
+  "checkpoint_plan": {
+    "checkpoints_per_history": 5,
+    "offset_minutes": [
+      125,
+      245,
+      365,
+      485,
+      605
+    ]
+  },
+  "counterfactual_pairs": [
+    {
+      "arm_a_case_id": "case-f9b4ae80a730df",
+      "arm_b_case_id": "case-c929d250d9d7ad",
+      "pair_id": "C1-CF01",
+      "template": "full_observability_vs_permission_loss"
+    },
+    {
+      "arm_a_case_id": "case-be1dee8b910fe5",
+      "arm_b_case_id": "case-c6176a8964c399",
+      "pair_id": "C1-CF02",
+      "template": "full_observability_vs_permission_loss"
+    },
+    {
+      "arm_a_case_id": "case-edd169fe692c2d",
+      "arm_b_case_id": "case-7c9330b10786c2",
+      "pair_id": "C1-CF03",
+      "template": "normal_observation_vs_data_delayed"
+    },
+    {
+      "arm_a_case_id": "case-ab5d204ce10b27",
+      "arm_b_case_id": "case-e1e9b0739da0bd",
+      "pair_id": "C1-CF04",
+      "template": "normal_observation_vs_data_delayed"
+    },
+    {
+      "arm_a_case_id": "case-274ffc1eafd66a",
+      "arm_b_case_id": "case-ce008fae7189e1",
+      "pair_id": "C1-CF05",
+      "template": "observable_nonoccurrence_vs_no_observation"
+    },
+    {
+      "arm_a_case_id": "case-a271910a1dbce7",
+      "arm_b_case_id": "case-596f99d9fa732a",
+      "pair_id": "C1-CF06",
+      "template": "observable_nonoccurrence_vs_no_observation"
+    },
+    {
+      "arm_a_case_id": "case-41b43958970fc8",
+      "arm_b_case_id": "case-82af9ec9f358cd",
+      "pair_id": "C1-CF07",
+      "template": "observability_loss_with_lifecycle_control"
+    },
+    {
+      "arm_a_case_id": "case-9d9e79497785cd",
+      "arm_b_case_id": "case-f09621f7dd4d67",
+      "pair_id": "C1-CF08",
+      "template": "observability_loss_with_unknown_context"
+    }
+  ],
+  "expected_metric_vector": [
+    "exact_state_accuracy",
+    "false_promotion_rate",
+    "SUPPORTED_recall",
+    "NOT_OBSERVABLE_as_current",
+    "correction_resurrection",
+    "deleted_active_return",
+    "observable_non_occurrence_semantic_regression"
+  ],
+  "failure_rule": "Any primary or specificity condition failing means C1 is not blind confirmation; no treatment change or rerun is allowed.",
+  "history_count": 64,
+  "history_specifications": [
+    {
+      "behavior_replica": 0,
+      "case_id": "case-ddd6dc540be441",
+      "config_id": "c1-s01",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 14868296431924555730,
+        "config_seed": 11537946253205735253,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 12086463077251061239,
+        "person_seed": 2613302423525325467
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-e713273d0b72f3",
+      "config_id": "c1-s01",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 14868296431924555730,
+        "config_seed": 11537946253205735253,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 11545360748111815772,
+        "person_seed": 2613302423525325467
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-f30f071464bb6b",
+      "config_id": "c1-s01",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 8644194882723709283,
+        "config_seed": 11537946253205735253,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 12086463077251061239,
+        "person_seed": 2613302423525325467
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-2c5f57afd2cdbc",
+      "config_id": "c1-s01",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 8644194882723709283,
+        "config_seed": 11537946253205735253,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 11545360748111815772,
+        "person_seed": 2613302423525325467
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-ffe25004fe43d7",
+      "config_id": "c1-s02",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 7803719410673476080,
+        "config_seed": 14170259498477144956,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17705378778237492176,
+        "person_seed": 4312275777036122673
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-2ef443daabf29f",
+      "config_id": "c1-s02",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 7803719410673476080,
+        "config_seed": 14170259498477144956,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 2162780918476993054,
+        "person_seed": 4312275777036122673
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-55b14b6aa82af9",
+      "config_id": "c1-s02",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17296299544036251129,
+        "config_seed": 14170259498477144956,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17705378778237492176,
+        "person_seed": 4312275777036122673
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-2004847abad7f6",
+      "config_id": "c1-s02",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17296299544036251129,
+        "config_seed": 14170259498477144956,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 2162780918476993054,
+        "person_seed": 4312275777036122673
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-9809e694ee096d",
+      "config_id": "c1-s03",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17784961855076499707,
+        "config_seed": 13650394872029199116,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 1502612945943325170,
+        "person_seed": 5696205650513940693
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-0cda69f5c817a0",
+      "config_id": "c1-s03",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17784961855076499707,
+        "config_seed": 13650394872029199116,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 13012769293208587932,
+        "person_seed": 5696205650513940693
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-06fdbcfa1a2cbe",
+      "config_id": "c1-s03",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 2745001177821465223,
+        "config_seed": 13650394872029199116,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 1502612945943325170,
+        "person_seed": 5696205650513940693
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-1f34887e68d55b",
+      "config_id": "c1-s03",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 2745001177821465223,
+        "config_seed": 13650394872029199116,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 13012769293208587932,
+        "person_seed": 5696205650513940693
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-9275c8006e2d39",
+      "config_id": "c1-s04",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1842254734912444524,
+        "config_seed": 14958187357263844658,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17139282113293883787,
+        "person_seed": 5733372634585718590
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-cd39405dc813cf",
+      "config_id": "c1-s04",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1842254734912444524,
+        "config_seed": 14958187357263844658,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 4733364792842743023,
+        "person_seed": 5733372634585718590
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-56ffa279b5dcb0",
+      "config_id": "c1-s04",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 874295457343032863,
+        "config_seed": 14958187357263844658,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17139282113293883787,
+        "person_seed": 5733372634585718590
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-c5e62fc247a6db",
+      "config_id": "c1-s04",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 874295457343032863,
+        "config_seed": 14958187357263844658,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 4733364792842743023,
+        "person_seed": 5733372634585718590
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-9e5c0379f9b561",
+      "config_id": "c1-s05",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 16876727538271949106,
+        "config_seed": 6335717736857429321,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 14214756112067920985,
+        "person_seed": 272675466509970076
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-50c60d75146ded",
+      "config_id": "c1-s05",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 16876727538271949106,
+        "config_seed": 6335717736857429321,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 6698799787499446260,
+        "person_seed": 272675466509970076
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-d8637353d3d26b",
+      "config_id": "c1-s05",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 11476258874435600536,
+        "config_seed": 6335717736857429321,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 14214756112067920985,
+        "person_seed": 272675466509970076
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-e82b8939b69510",
+      "config_id": "c1-s05",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 11476258874435600536,
+        "config_seed": 6335717736857429321,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 6698799787499446260,
+        "person_seed": 272675466509970076
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-49d77fcad266c8",
+      "config_id": "c1-s06",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 13348562793936691386,
+        "config_seed": 17427582222571409947,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 5525951370553846968,
+        "person_seed": 16682365039098512336
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-5c660ab8d7d10a",
+      "config_id": "c1-s06",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 13348562793936691386,
+        "config_seed": 17427582222571409947,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 10950221475638191659,
+        "person_seed": 16682365039098512336
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-09d3b7842db8dc",
+      "config_id": "c1-s06",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 3932256830662214867,
+        "config_seed": 17427582222571409947,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 5525951370553846968,
+        "person_seed": 16682365039098512336
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-2d263e13a9d560",
+      "config_id": "c1-s06",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 3932256830662214867,
+        "config_seed": 17427582222571409947,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 10950221475638191659,
+        "person_seed": 16682365039098512336
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-2d9d09565a5281",
+      "config_id": "c1-s07",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17166571050399857268,
+        "config_seed": 10549969610740050784,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 339462025082101333,
+        "person_seed": 8293315703874642257
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-b171536a83ccff",
+      "config_id": "c1-s07",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17166571050399857268,
+        "config_seed": 10549969610740050784,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 8063920497026967051,
+        "person_seed": 8293315703874642257
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-eeca8cf1b60756",
+      "config_id": "c1-s07",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1843171278573269447,
+        "config_seed": 10549969610740050784,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 339462025082101333,
+        "person_seed": 8293315703874642257
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-cacb6cd6c44cbd",
+      "config_id": "c1-s07",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1843171278573269447,
+        "config_seed": 10549969610740050784,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 8063920497026967051,
+        "person_seed": 8293315703874642257
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-46ae54c3913311",
+      "config_id": "c1-s08",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 15413153757963874804,
+        "config_seed": 2898786458547810184,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 2442830300311045079,
+        "person_seed": 11209612357608644570
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-78a3c5ed413eec",
+      "config_id": "c1-s08",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 15413153757963874804,
+        "config_seed": 2898786458547810184,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 18282903459723525626,
+        "person_seed": 11209612357608644570
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-c2ee06739624d4",
+      "config_id": "c1-s08",
+      "observation_replica": 0,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 18200499565409622146,
+        "config_seed": 2898786458547810184,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 2442830300311045079,
+        "person_seed": 11209612357608644570
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-dc4e497fc6a1b9",
+      "config_id": "c1-s08",
+      "observation_replica": 1,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 18200499565409622146,
+        "config_seed": 2898786458547810184,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 18282903459723525626,
+        "person_seed": 11209612357608644570
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-f9b4ae80a730df",
+      "config_id": "c1-h01",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF01",
+      "pair_template": "full_observability_vs_permission_loss",
+      "seed_registry": {
+        "behavior_seed": 8847431599739868665,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 781070111209416256,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-c929d250d9d7ad",
+      "config_id": "c1-h01",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF01",
+      "pair_template": "full_observability_vs_permission_loss",
+      "seed_registry": {
+        "behavior_seed": 8847431599739868665,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 13029981985324063449,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-a7e3cc44ade04e",
+      "config_id": "c1-h01",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 8847431599739868665,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 12925094998801862803,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-00457c29550ea4",
+      "config_id": "c1-h01",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 8847431599739868665,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 5864450223807356989,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-be1dee8b910fe5",
+      "config_id": "c1-h01",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF02",
+      "pair_template": "full_observability_vs_permission_loss",
+      "seed_registry": {
+        "behavior_seed": 1274557790059411181,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 781070111209416256,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-c6176a8964c399",
+      "config_id": "c1-h01",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF02",
+      "pair_template": "full_observability_vs_permission_loss",
+      "seed_registry": {
+        "behavior_seed": 1274557790059411181,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 13029981985324063449,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-499595794da54b",
+      "config_id": "c1-h01",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1274557790059411181,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 12925094998801862803,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-087627dedaf2ed",
+      "config_id": "c1-h01",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1274557790059411181,
+        "config_seed": 5209262212568628052,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 5864450223807356989,
+        "person_seed": 8236090514170882074
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-edd169fe692c2d",
+      "config_id": "c1-h02",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF03",
+      "pair_template": "normal_observation_vs_data_delayed",
+      "seed_registry": {
+        "behavior_seed": 17614717585922420675,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 488199812635617433,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-7c9330b10786c2",
+      "config_id": "c1-h02",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF03",
+      "pair_template": "normal_observation_vs_data_delayed",
+      "seed_registry": {
+        "behavior_seed": 17614717585922420675,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 5569175480466007120,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-8aaef0e453bf86",
+      "config_id": "c1-h02",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17614717585922420675,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 8175097886405127160,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-ac76a7e806a187",
+      "config_id": "c1-h02",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17614717585922420675,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17957935495404900108,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-ab5d204ce10b27",
+      "config_id": "c1-h02",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF04",
+      "pair_template": "normal_observation_vs_data_delayed",
+      "seed_registry": {
+        "behavior_seed": 3455440944447761082,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 488199812635617433,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-e1e9b0739da0bd",
+      "config_id": "c1-h02",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF04",
+      "pair_template": "normal_observation_vs_data_delayed",
+      "seed_registry": {
+        "behavior_seed": 3455440944447761082,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 5569175480466007120,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-31496a6f45a3e5",
+      "config_id": "c1-h02",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 3455440944447761082,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 8175097886405127160,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-c5d47e109ce3d8",
+      "config_id": "c1-h02",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 3455440944447761082,
+        "config_seed": 16823558337001583699,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17957935495404900108,
+        "person_seed": 1882964416383389293
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-274ffc1eafd66a",
+      "config_id": "c1-h03",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF05",
+      "pair_template": "observable_nonoccurrence_vs_no_observation",
+      "seed_registry": {
+        "behavior_seed": 1096065312353526897,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 8901587469631260346,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-ce008fae7189e1",
+      "config_id": "c1-h03",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF05",
+      "pair_template": "observable_nonoccurrence_vs_no_observation",
+      "seed_registry": {
+        "behavior_seed": 1096065312353526897,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 7880236537642733511,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-a27320c5d3708e",
+      "config_id": "c1-h03",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1096065312353526897,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 12198275842303073474,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-01024c8749f6f8",
+      "config_id": "c1-h03",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 1096065312353526897,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17101161775140278339,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-a271910a1dbce7",
+      "config_id": "c1-h03",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF06",
+      "pair_template": "observable_nonoccurrence_vs_no_observation",
+      "seed_registry": {
+        "behavior_seed": 5772610950889759678,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 8901587469631260346,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-596f99d9fa732a",
+      "config_id": "c1-h03",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF06",
+      "pair_template": "observable_nonoccurrence_vs_no_observation",
+      "seed_registry": {
+        "behavior_seed": 5772610950889759678,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 7880236537642733511,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-dbc227a65061bc",
+      "config_id": "c1-h03",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 5772610950889759678,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 12198275842303073474,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-d59daa20df3fc4",
+      "config_id": "c1-h03",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 5772610950889759678,
+        "config_seed": 8357551124386542599,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17101161775140278339,
+        "person_seed": 13963646873051220752
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-41b43958970fc8",
+      "config_id": "c1-h04",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF07",
+      "pair_template": "observability_loss_with_lifecycle_control",
+      "seed_registry": {
+        "behavior_seed": 17627888131902682967,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 6728072239663618698,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-82af9ec9f358cd",
+      "config_id": "c1-h04",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF07",
+      "pair_template": "observability_loss_with_lifecycle_control",
+      "seed_registry": {
+        "behavior_seed": 17627888131902682967,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 10479647473819187135,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-d53d3ddbb3dcd8",
+      "config_id": "c1-h04",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17627888131902682967,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17828765754700807294,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 0,
+      "case_id": "case-980d42d5fa91d2",
+      "config_id": "c1-h04",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 17627888131902682967,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 4062065157185766926,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-9d9e79497785cd",
+      "config_id": "c1-h04",
+      "observation_replica": 0,
+      "pair_arm": "A",
+      "pair_id": "C1-CF08",
+      "pair_template": "observability_loss_with_unknown_context",
+      "seed_registry": {
+        "behavior_seed": 10946828204265376880,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 6728072239663618698,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-f09621f7dd4d67",
+      "config_id": "c1-h04",
+      "observation_replica": 1,
+      "pair_arm": "B",
+      "pair_id": "C1-CF08",
+      "pair_template": "observability_loss_with_unknown_context",
+      "seed_registry": {
+        "behavior_seed": 10946828204265376880,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 10479647473819187135,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-9711cb7d594b07",
+      "config_id": "c1-h04",
+      "observation_replica": 2,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 10946828204265376880,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 17828765754700807294,
+        "person_seed": 15760726479772749655
+      }
+    },
+    {
+      "behavior_replica": 1,
+      "case_id": "case-e0a5540ebbe936",
+      "config_id": "c1-h04",
+      "observation_replica": 3,
+      "pair_arm": null,
+      "pair_id": null,
+      "pair_template": null,
+      "seed_registry": {
+        "behavior_seed": 10946828204265376880,
+        "config_seed": 2651458271020967191,
+        "master_seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+        "observation_seed": 4062065157185766926,
+        "person_seed": 15760726479772749655
+      }
+    }
+  ],
+  "one_shot_policy": {
+    "no_rerolls": true,
+    "second_run_refused": true,
+    "semantic_run_count_max": 1
+  },
+  "persons": [
+    {
+      "person_id": "person-8290caa5b19ff4",
+      "person_key": "c1-p01",
+      "truth_config_id": "c1-s01"
+    },
+    {
+      "person_id": "person-c2ee203dd3c396",
+      "person_key": "c1-p02",
+      "truth_config_id": "c1-s02"
+    },
+    {
+      "person_id": "person-a16471fabc413b",
+      "person_key": "c1-p03",
+      "truth_config_id": "c1-s03"
+    },
+    {
+      "person_id": "person-0af9341cd33613",
+      "person_key": "c1-p04",
+      "truth_config_id": "c1-s04"
+    },
+    {
+      "person_id": "person-27e68e66e041b8",
+      "person_key": "c1-p05",
+      "truth_config_id": "c1-s05"
+    },
+    {
+      "person_id": "person-faa37ad7f3409c",
+      "person_key": "c1-p06",
+      "truth_config_id": "c1-s06"
+    },
+    {
+      "person_id": "person-26488287adceba",
+      "person_key": "c1-p07",
+      "truth_config_id": "c1-s07"
+    },
+    {
+      "person_id": "person-dfa58580c53e57",
+      "person_key": "c1-p08",
+      "truth_config_id": "c1-s08"
+    },
+    {
+      "person_id": "person-4bbd325e35611a",
+      "person_key": "c1-p09",
+      "truth_config_id": "c1-h01"
+    },
+    {
+      "person_id": "person-092571945223e6",
+      "person_key": "c1-p10",
+      "truth_config_id": "c1-h02"
+    },
+    {
+      "person_id": "person-6ecb61d79e10f7",
+      "person_key": "c1-p11",
+      "truth_config_id": "c1-h03"
+    },
+    {
+      "person_id": "person-74a7ed3549c5fb",
+      "person_key": "c1-p12",
+      "truth_config_id": "c1-h04"
+    }
+  ],
+  "private_evaluator_separation": {
+    "forbidden_method_inputs": [
+      "truth",
+      "expected answers",
+      "family",
+      "pair membership",
+      "risk class",
+      "structural holdout label",
+      "seed semantics"
+    ],
+    "method_visible": [
+      "history",
+      "checkpoint"
+    ]
+  },
+  "registered_before_generation": true,
+  "replication": {
+    "HIGH-RISK": "2 behavior x 4 observation = 8/config = 32",
+    "STANDARD": "2 behavior x 2 observation = 4/config = 32"
+  },
+  "reroll_count": 0,
+  "risk_allocation": {
+    "HIGH-RISK": 4,
+    "STANDARD": 8
+  },
+  "scientific_hypothesis": "Explicit Observability Eligibility before frozen B9 reduces false active claims caused by unavailable/unknown observation state while preserving SUPPORTED recall and lifecycle correctness.",
+  "seed_namespace": "mindforge-ppf-c1-confirmatory-v1",
+  "split": "c1-confirmatory",
+  "starting_commit": "aa90af6ba0f45903d99cec4829355962cb613fa2",
+  "structural_holdouts": [
+    {
+      "novelty": "permission loss after stable positive history with separate late recovery/source-unavailable variants",
+      "truth_config_id": "c1-h01"
+    },
+    {
+      "novelty": "mixed delayed and unknown-outcome observation schedules on a new temporal plan",
+      "truth_config_id": "c1-h02"
+    },
+    {
+      "novelty": "unknown context precedes observation loss and direct observable-nonoccurrence versus no-observation controls",
+      "truth_config_id": "c1-h03"
+    },
+    {
+      "novelty": "explicit lifecycle controls coexist with later observation unavailability without changing lifecycle precedence",
+      "truth_config_id": "c1-h04"
+    }
+  ],
+  "success_rule": [
+    "exact_state_accuracy(T1) > exact_state_accuracy(T0)",
+    "false_promotion_rate(T1) < false_promotion_rate(T0)",
+    "SUPPORTED_recall(T1) >= SUPPORTED_recall(T0)",
+    "NOT_OBSERVABLE_as_current(T1) < NOT_OBSERVABLE_as_current(T0)",
+    "correction_resurrection(T1) = 0",
+    "deleted_active_return(T1) = 0",
+    "observable_non_occurrence_semantic_regression(T1) = 0"
+  ],
+  "treatments": {
+    "T0": {
+      "baseline_id": "B9",
+      "baseline_source_sha256": "1c057043deb10fb64316c611bccd08c37c6ac63886537ee9f59ee73f15f46880",
+      "definition": "frozen L4 B9 Lifecycle-Naive Rule"
+    },
+    "T1": {
+      "components": [
+        "E1"
+      ],
+      "definition": "frozen L5 B9 + E1 Observability Eligibility",
+      "mechanism_lock_sha256": "092cb0bb367eac49284f377d1f7e3cfba425edf1f5298136bf8068dbe7cd4e70",
+      "mechanism_source_sha256": "2d42bf29dfd890e8a2ae8e4b61c1c9a2522c7a36aa0e70dbee8b34d8954f1aa6",
+      "treatment_id": "T1"
+    }
+  },
+  "truth_configurations": [
+    {
+      "config_id": "c1-s01",
+      "family": "routine/opportunity",
+      "person_key": "c1-p01",
+      "plan": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "risk_class": "STANDARD",
+      "scope": "activity:morning-mobility",
+      "semantic_mode": "ordinary",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s02",
+      "family": "preference/availability",
+      "person_key": "c1-p02",
+      "plan": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "risk_class": "STANDARD",
+      "scope": "choice:midday-beverage",
+      "semantic_mode": "ordinary",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s03",
+      "family": "context-conditioned pattern",
+      "person_key": "c1-p03",
+      "plan": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "risk_class": "STANDARD",
+      "scope": "activity:workspace-mode",
+      "semantic_mode": "context",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s04",
+      "family": "relationship-conditioned pattern",
+      "person_key": "c1-p04",
+      "plan": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "risk_class": "STANDARD",
+      "scope": "activity:collaboration-mode",
+      "semantic_mode": "relationship",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s05",
+      "family": "temporal sequence",
+      "person_key": "c1-p05",
+      "plan": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "risk_class": "STANDARD",
+      "scope": "sequence:evening-routine",
+      "semantic_mode": "conflict",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s06",
+      "family": "exception",
+      "person_key": "c1-p06",
+      "plan": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "risk_class": "STANDARD",
+      "scope": "activity:weekend-exception",
+      "semantic_mode": "negative-control",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s07",
+      "family": "explicit lifecycle",
+      "person_key": "c1-p07",
+      "plan": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "risk_class": "STANDARD",
+      "scope": "activity:notification-choice",
+      "semantic_mode": "lifecycle",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-s08",
+      "family": "fully observable positive control",
+      "person_key": "c1-p08",
+      "plan": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "risk_class": "STANDARD",
+      "scope": "activity:daily-checkin",
+      "semantic_mode": "ordinary",
+      "structural_holdout": false,
+      "structural_novelty": null
+    },
+    {
+      "config_id": "c1-h01",
+      "family": "observability / permission loss",
+      "person_key": "c1-p09",
+      "plan": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "risk_class": "HIGH-RISK",
+      "scope": "activity:location-routine",
+      "semantic_mode": "permission",
+      "structural_holdout": true,
+      "structural_novelty": "permission loss after stable positive history with separate late recovery/source-unavailable variants"
+    },
+    {
+      "config_id": "c1-h02",
+      "family": "delayed/unknown observation outcome",
+      "person_key": "c1-p10",
+      "plan": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "risk_class": "HIGH-RISK",
+      "scope": "activity:sync-routine",
+      "semantic_mode": "delay",
+      "structural_holdout": true,
+      "structural_novelty": "mixed delayed and unknown-outcome observation schedules on a new temporal plan"
+    },
+    {
+      "config_id": "c1-h03",
+      "family": "observability x context interaction",
+      "person_key": "c1-p11",
+      "plan": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "risk_class": "HIGH-RISK",
+      "scope": "activity:contextual-commute",
+      "semantic_mode": "obs-context",
+      "structural_holdout": true,
+      "structural_novelty": "unknown context precedes observation loss and direct observable-nonoccurrence versus no-observation controls"
+    },
+    {
+      "config_id": "c1-h04",
+      "family": "observability x lifecycle/currentness interaction",
+      "person_key": "c1-p12",
+      "plan": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "risk_class": "HIGH-RISK",
+      "scope": "activity:managed-reminder",
+      "semantic_mode": "obs-lifecycle",
+      "structural_holdout": true,
+      "structural_novelty": "explicit lifecycle controls coexist with later observation unavailability without changing lifecycle precedence"
+    }
+  ],
+  "version": "ppf-c1-confirmatory/v1"
+}

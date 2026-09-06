@@ -212,6 +212,20 @@ minimum mechanism        — identified on DEV + VALIDATION; blind confirmation 
 
 Current state: **PPF L5 COMPLETE — MINIMUM MECHANISM FOUND; NEW BLIND CONFIRMATION NOT YET AUTHORIZED**.
 
+## C1 — Blind Confirmatory Experiment
+
+Question: does locked `T1 = B9 + E1 Observability Eligibility` reproduce its L5 advantage over frozen B9 on a new protected blind holdout?
+
+Preregistered holdout: 12 persons, 12 configs, 64 histories, 8 STANDARD / 4 HIGH-RISK, 4 structural holdouts, 8 focused counterfactual pairs; canonical preregistration SHA-256 `ed63bd5a3dcd2364b5bb9fd13f70d34e6be11513e8ec8a4c2e272f13a8ce92e7`.
+
+Result: **REVISE — generator QA failed before dataset persistence/evaluation**. The single generation attempt produced 64/64 histories with zero overlaps/leaks/rerolls, but only 598/650 visible events were L2-valid: 52 observability-loss records used the non-enum `missingness_reason=C1_OBSERVATION_LIMITATION`.
+
+Policy consequence: no dataset lock, no run lock, semantic run count 0, and no T0/T1 confirmatory metrics. L5 remains **NOT BLINDLY CONFIRMED**.
+
+Commit: this C1 REVISE closure commit.
+
+Next candidate: separately reviewed C1 protocol repair/re-preregistration; no further stage authorized by this task.
+
 ## Ledger maintenance rule
 
 From L5 onward, every research task that changes the scientific state of PPF must update this ledger in the same commit. Historical verdicts are append-only: do not erase prior failures or revise history silently; if a result is superseded, record what superseded it and why. Keep each new stage entry concise and link detailed evidence to its dedicated report.
