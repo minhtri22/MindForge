@@ -210,3 +210,31 @@ No model executed.
 No benchmark executed.
 No training.
 No MindForge integration.
+## PIT-13.0.1 API Candidate Manifest Freeze
+
+Status:
+
+Completed
+
+Summary:
+
+Frozen API candidate manifest before model execution.
+
+Candidates:
+
+- Qwen3.8-Max
+- DeepSeek V4 Pro
+- MiniMax M3
+- Mistral Small 2603
+
+Execution layer:
+
+xKiro API
+
+Security:
+
+API credential stored externally only.
+
+Scope:
+
+No API calls. No inference. No benchmark. No teacher selected.

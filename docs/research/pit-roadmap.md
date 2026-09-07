@@ -21,6 +21,7 @@ Completed:
 - PIT-12.1 Candidate Access Policy Update
 - PIT-12.2 Candidate Execution Strategy Update
 - PIT-13.0 Candidate API Evaluation Freeze
+- PIT-13.0.1 API Candidate Manifest Freeze
 
 Current:
 
@@ -28,7 +29,7 @@ PIT-12.2 Candidate Execution Strategy Update completed.
 
 Next:
 
-PIT-13.0 Candidate API Evaluation Freeze completed.
+PIT-13.0.1 API Candidate Manifest Freeze completed.
 
 Next:
 
