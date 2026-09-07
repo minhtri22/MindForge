@@ -288,3 +288,19 @@ Unresolved risks:
 
 Next authorized phase:
 PPF-G3 Minimal Plugin Prototype Feasibility.
+
+## PPF-G3 Minimal Plugin Prototype Feasibility
+
+Question:
+Can a minimal PPF plugin prototype prove contract flow without introducing mechanism expansion?
+
+Evidence:
+- Reviewed G1 plugin contract feasibility.
+- Reviewed G2 runtime isolation proof.
+- Validated minimal PersonalEvent → Evidence Eligibility → Semantic State contract flow.
+
+Verdict:
+PASS — PPF can be represented as a minimal optional plugin contract without Kernel, Model, or Host contamination.
+
+Next authorized step:
+PPF-G4 Real World Interface Feasibility.
