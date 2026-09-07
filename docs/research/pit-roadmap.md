@@ -31,6 +31,14 @@ Next:
 
 PIT-13.0.1 API Candidate Manifest Freeze completed.
 
+Current:
+
+PIT-13.1 Candidate API Evidence Collection pending execution.
+
+Next:
+
+PIT-13.1.A Smoke Qualification
+
 Next:
 
 PIT-13.1 Candidate API Evidence Collection

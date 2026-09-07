@@ -238,3 +238,31 @@ API credential stored externally only.
 Scope:
 
 No API calls. No inference. No benchmark. No teacher selected.
+
+## PIT-13.1 Candidate API Evidence Collection
+
+Status:
+
+Defined
+
+Summary:
+
+Defined PIT-13.1 evidence collection execution record using the frozen PIT-10 teaching signal contract.
+
+Candidates:
+
+- Qwen3.8-Max
+- DeepSeek V4 Pro
+- MiniMax M3
+- Mistral Small 2603
+
+Planned phases:
+
+- Smoke qualification
+- Evidence collection
+
+Scope:
+
+No final teacher selected.
+No training.
+No MindForge integration.
