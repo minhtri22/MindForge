@@ -1,13 +1,21 @@
 name: OIR-PPV Historical Replay
 
-# OIR-PPV v0.13.11 replay workflow discovery refresh
+# P0.2: explicit replay inputs, no hidden defaults
 on:
   workflow_dispatch:
 
 jobs:
   replay:
-    name: Execute OIR-PPV v0.13.11 Replay
+    name: Execute OIR-PPV v0.11 Baseline Replay
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        case:
+          - S11-A
+          - S11-B
+          - S11-C
+        simulator_version:
+          - v0.11
 
     steps:
       - name: Checkout research branch
@@ -25,13 +33,20 @@ jobs:
           python --version
           git rev-parse HEAD
 
+      - name: Prepare result directory
+        run: |
+          mkdir -p docs/research/oir-ppv/artifacts/results/p0_reconstruction
+
       - name: Run historical replay
         run: |
-          python docs/research/oir-ppv/artifacts/simulator/runners/run_historical_replay.py
+          python docs/research/oir-ppv/artifacts/simulator/runners/run_historical_replay.py \
+            --case ${{ matrix.case }} \
+            --simulator-version ${{ matrix.simulator_version }} \
+            --output docs/research/oir-ppv/artifacts/results/p0_reconstruction/${{ matrix.case }}-${{ matrix.simulator_version }}.json
 
       - name: Upload replay artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: oir-ppv-replay-results
+          name: oir-ppv-p0-reconstruction-${{ matrix.case }}-${{ matrix.simulator_version }}
           path: docs/research/oir-ppv/artifacts/results/
