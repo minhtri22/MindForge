@@ -1,32 +1,38 @@
 {
   "task": "PIT-13.1.A Smoke Qualification Execution",
+  "attempt": "qwen3.7-candidate-amendment",
   "status": "FAIL",
   "branch": "research/pit",
-  "runner_commit": "80c71847aa9e48e65ac3c053d96c3b74579c53b0",
+  "runner_commit": "5df410c132b54aaa2a61075f312c1e74c2aa07e4",
   "planned_samples": 16,
   "records_written": 16,
-  "schema_valid": 4,
-  "verified_api_completed": 4,
-  "api_http_500": 4,
-  "parse_path_failures_with_raw_response_lost": 8,
-  "verified_model_identity_mismatches": 0,
-  "model_identity_unverified": 8,
+  "api_completed": 16,
+  "schema_valid": 9,
+  "parse_failures": 7,
+  "model_identity_mismatches": 0,
   "credential_leakage": 0,
   "manual_repairs": 0,
   "retries": 0,
   "per_model_tuning": 0,
+  "runner_exit_code": 0,
   "pit_13_1_b_started": false,
+  "candidate_results": {
+    "qwen/qwen3.7-max:free": {"api_completed": 4, "schema_valid": 4},
+    "deepseek/deepseek-v4-pro": {"api_completed": 4, "schema_valid": 4},
+    "minimax/minimax-m3:free": {"api_completed": 4, "schema_valid": 1},
+    "mistralai/mistral-small-2603": {"api_completed": 4, "schema_valid": 0}
+  },
   "acceptance": {
-    "api_completed_16_of_16": false,
+    "api_completed_16_of_16": true,
     "schema_valid_16_of_16": false,
-    "model_identity_mismatch_0": false,
+    "model_identity_mismatch_0": true,
     "credential_leakage_0": true,
     "manual_repair_0": true
   },
+  "failure_classification": "MODEL_OUTPUT_SCHEMA_NONCONFORMANCE",
   "notes": [
-    "Four DeepSeek responses were API-completed, schema-valid, and retained with matching model IDs.",
-    "Four Qwen requests returned HTTP 500 internal_error.",
-    "Eight MiniMax and Mistral records contain JSON parse-path errors, but the executed runner overwrote raw responses in its shared exception handler, so API completion and model identity cannot be proven from those records.",
-    "No failed sample was retried or manually repaired."
+    "Three MiniMax and four Mistral responses wrapped JSON in Markdown code fences.",
+    "Raw responses were preserved by the corrected runner.",
+    "No fence stripping, parser relaxation, retry, or manual repair was applied."
   ]
 }

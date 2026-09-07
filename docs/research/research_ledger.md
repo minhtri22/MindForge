@@ -323,3 +323,22 @@ No scenario, prompt, Teaching Signal schema, temperature, or scoring change.
 No smoke rerun in this amendment.
 No teacher selected.
 PIT-13.1.B not started.
+
+## PIT-13.1.A Smoke Retry — Qwen3.7 Amendment
+
+Status:
+
+Failed
+
+Summary:
+
+Executed one complete 16-sample smoke run using the amended Qwen3.7 candidate manifest. All 16 API requests completed with exact model identity matches and no credential leakage. Nine responses satisfied the frozen JSON schema. Three MiniMax and four Mistral responses wrapped JSON in Markdown code fences and failed strict parsing.
+
+Scope:
+
+No retries.
+No model-specific tuning.
+No manual output repair or fence stripping.
+No prompt, schema, temperature, scoring, or PIT contract change.
+No ranking or teacher selection.
+PIT-13.1.B not started.

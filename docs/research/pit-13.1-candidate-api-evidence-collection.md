@@ -63,6 +63,35 @@ Candidate amendment for future execution:
 - One non-evidence `Hello!` diagnostic returned HTTP 200 and the exact response model `qwen/qwen3.7-max:free`.
 - The failed Qwen3.8 records above remain unchanged and are not combined with any future attempt.
 
+## PIT-13.1.A Smoke Retry — Qwen3.7 Amendment
+
+Result: **FAIL**
+
+The complete amended manifest ran once across all 16 frozen samples with no retry, model-specific tuning, or manual repair.
+
+| Candidate | API completed | Schema valid | Identity mismatch | Outcome |
+| --- | ---: | ---: | ---: | --- |
+| `qwen/qwen3.7-max:free` | 4/4 | 4/4 | 0 | PASS |
+| `deepseek/deepseek-v4-pro` | 4/4 | 4/4 | 0 | PASS |
+| `minimax/minimax-m3:free` | 4/4 | 1/4 | 0 | Three responses wrapped JSON in Markdown fences |
+| `mistralai/mistral-small-2603` | 4/4 | 0/4 | 0 | Four responses wrapped JSON in Markdown fences |
+
+Acceptance gate:
+
+| Gate | Required | Observed | Result |
+| --- | ---: | ---: | --- |
+| API completed | 16/16 | 16/16 | PASS |
+| Schema valid | 16/16 | 9/16 | FAIL |
+| Model identity mismatch | 0 | 0 | PASS |
+| Credential leakage | 0 | 0 | PASS |
+| Manual repair | 0 | 0 | PASS |
+
+The seven invalid responses began with a Markdown `json` code fence instead of a JSON object. The raw responses were preserved. Removing fences or accepting fenced output would alter the frozen output contract or repair model output, so no parser change was made.
+
+Overall amended smoke verdict: **FAIL**.
+
+PIT-13.1.B remains **BLOCKED / NOT STARTED**.
+
 ## PIT-13.1.A.0 Runner Validation
 
 Issue observed:
@@ -115,6 +144,8 @@ Execution requires reproducible API access. No candidate ranking or teacher sele
 
 ## Next step
 
-A new PIT-13.1.A smoke attempt using the amended candidate manifest is required before PIT-13.1.B. PIT-13.1.B must not start unless that complete frozen smoke attempt passes all acceptance gates.
+The amended PIT-13.1.A smoke failed schema conformance. Independent review is required before any further action. PIT-13.1.B must not start.
 
-Execution artifact location (after smoke execution): `experiments/pit13/smoke/`.
+Current amended attempt: `experiments/pit13/smoke/`.
+
+Previous Qwen3.8 attempt: `experiments/pit13/smoke-attempt-01-qwen38-fail/`.
