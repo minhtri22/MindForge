@@ -45,3 +45,5 @@ Execution requires reproducible API access. No candidate ranking or teacher sele
 ## Next step
 
 PIT-13.1.A Smoke Qualification after execution access validation.
+
+Execution artifact location (after smoke execution): `experiments/pit13/smoke/`.
