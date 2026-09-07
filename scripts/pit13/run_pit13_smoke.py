@@ -77,6 +77,8 @@ def main() -> int:
     args = parser.parse_args()
 
     key = os.environ.get("XTROUTER_API_KEY")
+    if key:
+        key = key.strip()
     if not key:
         raise SystemExit("XTROUTER_API_KEY is missing")
 

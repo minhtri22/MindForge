@@ -17,6 +17,24 @@ The execution layer is xKiro API. Credentials remain external and are not stored
 
 NOT STARTED
 
+## PIT-13.1.A.0 Runner Validation
+
+Issue observed:
+
+Python runner requests returned HTTP 403 while a PowerShell xKiro API request succeeded.
+
+Root cause:
+
+Runner inspection found the request structure aligned with the expected xKiro API contract. The runner did not normalize the externally supplied API key value before constructing the Authorization header, which could preserve accidental surrounding whitespace from the process environment.
+
+Fix applied:
+
+Normalized `XTROUTER_API_KEY` after reading it from the process environment by trimming surrounding whitespace before request construction.
+
+Evidence execution status:
+
+Unchanged. No PIT evidence generated. Smoke qualification has not started.
+
 Required coverage:
 
 - Stable preference
