@@ -268,3 +268,23 @@ PASS — PPF can be modeled as an optional plugin capability. No Kernel, Model, 
 
 Next authorized step:
 PPF-G2 Boundary & Runtime Isolation Proof.
+
+## PPF-G2 Boundary & Runtime Isolation Proof
+
+Question:
+Can PPF remain isolated as an optional plugin capability without dependency leakage into MindForge Kernel, Model, or Host?
+
+Evidence:
+- Reviewed architecture invariants.
+- Reviewed PPF-G1 plugin contract feasibility.
+- Analyzed dependency direction, component ownership, lifecycle boundaries, and isolation questions.
+
+Decision:
+PASS — PPF remains isolated as an optional plugin capability. Kernel, Model, and Host boundaries remain uncontaminated.
+
+Unresolved risks:
+- Future runtime implementation must preserve dependency direction.
+- Plugin outputs must not become hidden reasoning authority.
+
+Next authorized phase:
+PPF-G3 Minimal Plugin Prototype Feasibility.
