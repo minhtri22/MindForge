@@ -36,3 +36,11 @@ Each milestone maintains:
 - reports
 
 No milestone is considered complete without evidence.
+
+## Developer task storage
+
+PM/QA-issued developer tasks are stored locally under:
+
+- `docs/research/oir-ppv/research/tasks/`
+
+The `tasks/` directory is local coordination state and must not be committed or pushed to GitHub. Task outcomes enter repository history only through developer implementation commits, handoff evidence, QA records, and milestone documentation.
