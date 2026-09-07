@@ -63,3 +63,44 @@ Proceed to next PIT research phase. Do not select model yet. Do not train yet.
 Scope boundary:
 
 No model downloaded. No training. No runtime changes. No PPF changes.
+
+
+## PIT-7 Start / Completion
+
+Date: 2026-09-07
+
+Milestone: PIT-7 — Teacher Strategy Selection
+
+Status: Completed
+
+Summary:
+
+Defined the PIT teacher strategy space before selecting any implementation candidate.
+
+Analyzed candidate strategies:
+
+- Memory-centric strategy
+- Reflection-centric strategy
+- Hybrid teacher strategy
+
+Key finding:
+
+PIT should be treated as a teaching capability and strategy layer, not as a single model choice.
+
+Evaluation criteria defined:
+
+- Decision improvement
+- Pattern quality
+- Correction recovery
+- Drift handling
+- Uncertainty calibration
+- Evidence traceability
+
+Decision:
+
+Do not select a teacher model yet.
+Proceed to teacher strategy evaluation protocol.
+
+Scope boundary:
+
+No model selection. No model download. No training. No runtime integration.
