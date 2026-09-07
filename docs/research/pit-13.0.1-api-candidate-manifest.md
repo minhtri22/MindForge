@@ -1,6 +1,6 @@
 # PIT-13.0.1 API Candidate Manifest Freeze
 
-Status: Completed
+Status: Completed / Amended after failed PIT-13.1.A smoke
 
 ## Purpose
 
@@ -21,10 +21,18 @@ Authentication:
 
 | Candidate | Model ID | Role |
 | --- | --- | --- |
-| Qwen3.8-Max | qwen/qwen3.8-max:free | General Intelligence Teacher candidate |
+| Qwen3.7-Max | qwen/qwen3.7-max:free | General Intelligence Teacher candidate |
 | DeepSeek V4 Pro | deepseek/deepseek-v4-pro | Reasoning / reflection teacher candidate |
 | MiniMax M3 | minimax/minimax-m3:free | Long-context teacher candidate |
 | Mistral Small 2603 | mistralai/mistral-small-2603 | Efficient general teacher candidate |
+
+## Candidate Amendment
+
+After the first PIT-13.1.A smoke attempt, `qwen/qwen3.8-max:free` returned HTTP 500 `internal_error` for all four frozen scenarios. The candidate was explicitly replaced with `qwen/qwen3.7-max:free` for future PIT execution.
+
+The replacement ID was present in the xKiro `/v1/models` response and returned HTTP 200 with an exact model identity match in a non-evidence connectivity diagnostic. The prior Qwen3.8 smoke records remain immutable historical evidence.
+
+This amendment changes only the Qwen candidate ID. The scenario set, system prompt, evaluation prompt, temperature, Teaching Signal schema, scoring criteria, and no-retry/no-manual-repair rules remain unchanged.
 
 ## Future Execution Metadata
 

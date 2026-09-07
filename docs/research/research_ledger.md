@@ -304,3 +304,22 @@ No model-specific tuning.
 No manual repair.
 No ranking or teacher selection.
 PIT-13.1.B not started.
+
+## PIT-13.1.A Candidate Amendment — Qwen3.7-Max
+
+Status:
+
+Completed
+
+Summary:
+
+Replaced `qwen/qwen3.8-max:free` with `qwen/qwen3.7-max:free` for future PIT smoke execution after Qwen3.8 returned HTTP 500 for all four scenarios. xKiro listed the new model ID, and one non-evidence connectivity diagnostic returned HTTP 200 with an exact model identity match.
+
+Scope:
+
+Only the Qwen candidate ID changed.
+Previous Qwen3.8 smoke evidence preserved unchanged.
+No scenario, prompt, Teaching Signal schema, temperature, or scoring change.
+No smoke rerun in this amendment.
+No teacher selected.
+PIT-13.1.B not started.

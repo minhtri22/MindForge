@@ -17,7 +17,7 @@ from openai import OpenAI
 
 BASE_URL = "https://api.xkiro.com/v1"
 MODELS = [
-    "qwen/qwen3.8-max:free",
+    "qwen/qwen3.7-max:free",
     "deepseek/deepseek-v4-pro",
     "minimax/minimax-m3:free",
     "mistralai/mistral-small-2603",

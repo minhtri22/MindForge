@@ -56,6 +56,13 @@ Post-failure infrastructure correction:
 
 The runner now records API and parse failures separately, preserves the raw API response when content parsing fails, and flushes every record after writing. This correction does not alter candidates, scenarios, prompt, Teaching Signal schema, temperature, scoring, or retry policy. The failed attempt was not rerun.
 
+Candidate amendment for future execution:
+
+- Replaced `qwen/qwen3.8-max:free` with `qwen/qwen3.7-max:free` by explicit research direction after the failed attempt.
+- xKiro `/v1/models` listed `qwen/qwen3.7-max:free`.
+- One non-evidence `Hello!` diagnostic returned HTTP 200 and the exact response model `qwen/qwen3.7-max:free`.
+- The failed Qwen3.8 records above remain unchanged and are not combined with any future attempt.
+
 ## PIT-13.1.A.0 Runner Validation
 
 Issue observed:
@@ -108,6 +115,6 @@ Execution requires reproducible API access. No candidate ranking or teacher sele
 
 ## Next step
 
-Independent review of the failed smoke and provider availability. PIT-13.1.B must not start unless a future frozen smoke attempt passes all acceptance gates.
+A new PIT-13.1.A smoke attempt using the amended candidate manifest is required before PIT-13.1.B. PIT-13.1.B must not start unless that complete frozen smoke attempt passes all acceptance gates.
 
 Execution artifact location (after smoke execution): `experiments/pit13/smoke/`.
