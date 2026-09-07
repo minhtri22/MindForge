@@ -56,6 +56,44 @@ Each candidate evaluation should produce:
 - teaching signal examples
 - qualification verdict
 
+## Teaching Signal Format
+
+Teaching signals must distinguish:
+
+1. Observation
+
+Direct evidence from user experience.
+
+2. Inference
+
+Pattern interpretation derived from observations.
+
+3. Confidence
+
+How certain the teacher is.
+
+4. Applicability Boundary
+
+When the pattern should not be applied.
+
+5. Revision Trigger
+
+What future evidence should update or invalidate the pattern.
+
+This ensures PIT evaluates pattern lifecycle behavior, not only pattern extraction accuracy.
+
+## Required Metrics
+
+### Pattern Lifecycle Quality
+
+Measures whether the teacher can:
+
+- create a pattern
+- maintain a valid pattern
+- detect outdated patterns
+- invalidate incorrect patterns
+- recover after correction
+
 ## Qualification Verdicts
 
 Possible outcomes:
@@ -63,6 +101,14 @@ Possible outcomes:
 - QUALIFIED
 - QUALIFIED_WITH_LIMITS
 - NOT_SUITABLE
+
+A candidate cannot PASS only by generating accurate patterns.
+
+It must also demonstrate:
+
+- evidence grounding
+- uncertainty awareness
+- pattern lifecycle management
 
 ## Constraints
 
