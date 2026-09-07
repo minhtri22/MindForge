@@ -94,3 +94,10 @@ Runtime:
 Hybrid candidates:
 
 External teacher capability may bootstrap local PIT capability.
+
+
+## Execution Strategy Constraint
+
+Teaching capability qualification must happen before local deployment optimization.
+
+Local LLM evaluation is a final feasibility step, not the first capability filter.

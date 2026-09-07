@@ -19,11 +19,14 @@ Completed:
 - PIT-11.2 Candidate Qualification Execution
 - PIT-12 Candidate Qualification Evidence Generation
 - PIT-12.1 Candidate Access Policy Update
+- PIT-12.2 Candidate Execution Strategy Update
 
 Current:
 
-PIT-6.1 completed.
+PIT-12.2 Candidate Execution Strategy Update completed.
 
 Next:
 
-PIT-7 Teacher Strategy Selection
+PIT-13 Candidate API Evidence Collection Execution
+
+PIT-14 Local Feasibility Validation

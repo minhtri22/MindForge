@@ -161,3 +161,31 @@ No model selected.
 No model downloaded.
 No inference.
 No training.
+
+
+## PIT-12.2 Candidate Execution Strategy Update
+
+Status:
+
+Completed
+
+Summary:
+
+Defined API-first candidate qualification strategy.
+
+Key decision:
+
+Local LLM evaluation is deferred until teacher capability is validated.
+
+Claude/Gemini:
+
+Deferred from execution pool due to access constraints.
+
+Not rejected from research universe.
+
+Scope:
+
+No model selected.
+No inference.
+No training.
+No runtime changes.

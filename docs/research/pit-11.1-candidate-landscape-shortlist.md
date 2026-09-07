@@ -127,3 +127,74 @@ Criteria:
 - legal/technical availability
 
 Claude/Gemini exclusion from the current execution shortlist does not remove them from the theoretical candidate universe. Candidate qualification depends on teaching signal quality, evidence grounding, and pattern lifecycle capability.
+
+
+## Candidate Universe
+
+The theoretical PIT candidate universe includes all relevant teacher candidates.
+
+Frontier General Teachers:
+
+- GPT class
+- Claude class
+- Gemini class
+- Qwen class
+
+Reasoning/local API candidates:
+
+- Qwen
+- DeepSeek
+- MiniMax
+- GLM
+
+Local candidates:
+
+- Qwen local
+- Llama family
+- Mistral family
+
+PIT-native candidates:
+
+- small personal intelligence models
+
+Universe membership does not mean immediate execution availability.
+
+## Current Candidate Execution Pool
+
+Criteria:
+
+- reproducible access
+- available API/local runtime
+- acceptable cost
+- stable execution
+
+Current priority:
+
+Tier 1:
+
+API-accessible candidates:
+
+- Qwen API
+- DeepSeek API
+- MiniMax API
+- GLM API
+
+Tier 2:
+
+Future frontier references:
+
+- Claude
+- Gemini
+- GPT
+
+Status:
+
+Deferred, not rejected.
+
+Tier 3:
+
+Local models.
+
+Status:
+
+Final deployment validation stage.
