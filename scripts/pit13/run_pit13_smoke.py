@@ -11,10 +11,11 @@ import datetime as dt
 import json
 import os
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from openai import OpenAI
 
 
-ENDPOINT = "https://api.xkiro.com/v1/chat/completions"
+BASE_URL = "https://api.xkiro.com/v1"
 MODELS = [
     "qwen/qwen3.8-max:free",
     "deepseek/deepseek-v4-pro",
@@ -56,13 +57,9 @@ def request_body(scenario: str) -> dict:
 def call_api(key: str, model: str, scenario: str) -> dict:
     payload = request_body(scenario)
     payload["model"] = model
-    req = Request(
-        ENDPOINT,
-        data=json.dumps(payload).encode(),
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-    )
-    with urlopen(req, timeout=60) as response:
-        return json.loads(response.read().decode())
+    client = OpenAI(api_key=key, base_url=BASE_URL, timeout=60.0)
+    response = client.chat.completions.create(**payload)
+    return response.model_dump(mode="json")
 
 
 def parse_response(data: dict) -> dict:

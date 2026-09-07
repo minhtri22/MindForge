@@ -275,10 +275,11 @@ Completed
 
 Summary:
 
-Validated API runner implementation before evidence execution.
+Validated API runner implementation before evidence execution. The OpenAI-compatible request path returned HTTP 200 for one diagnostic request with `mistralai/mistral-small-2603`; the model ID was unchanged.
 
 Scope:
 
 No PIT evidence generated.
 No teacher evaluated.
 No benchmark executed.
+Smoke qualification not started.

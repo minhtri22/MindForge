@@ -25,15 +25,22 @@ Python runner requests returned HTTP 403 while a PowerShell xKiro API request su
 
 Root cause:
 
-Runner inspection found the request structure aligned with the expected xKiro API contract. The runner did not normalize the externally supplied API key value before constructing the Authorization header, which could preserve accidental surrounding whitespace from the process environment.
+The runner bypassed xKiro's documented OpenAI-compatible client and manually constructed the HTTP request with Python `urllib`. That transport did not match the known-working OpenAI client request path and produced HTTP 403 even though the endpoint, bearer credential, payload, and model ID were otherwise aligned.
 
 Fix applied:
 
-Normalized `XTROUTER_API_KEY` after reading it from the process environment by trimming surrounding whitespace before request construction.
+Kept `XTROUTER_API_KEY` sourced from the process environment and normalized surrounding whitespace. Replaced the manual `urllib` transport with `OpenAI(api_key=..., base_url="https://api.xkiro.com/v1")`, which delegates the bearer header, JSON serialization, and `/chat/completions` request behavior to the provider-compatible client. Candidate IDs are passed unchanged.
 
 Evidence execution status:
 
 Unchanged. No PIT evidence generated. Smoke qualification has not started.
+
+Validation:
+
+- `python -m py_compile scripts/pit13/run_pit13_smoke.py`: PASS.
+- One diagnostic connectivity request using `mistralai/mistral-small-2603`: HTTP 200.
+- Requested and returned model IDs both remained `mistralai/mistral-small-2603`.
+- The diagnostic request was not written to the PIT evidence directory and is not PIT evidence.
 
 Required coverage:
 
