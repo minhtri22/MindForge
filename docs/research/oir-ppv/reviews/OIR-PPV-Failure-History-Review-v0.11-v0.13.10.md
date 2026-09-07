@@ -2,228 +2,157 @@
 
 ## Purpose
 
-This document freezes the adversarial review history before OIR-PPV Research Protocol v1.0.
-The objective is not to prove the hypothesis, but to document why the hypothesis survived or failed each challenge.
+This review freezes the adversarial learning history before OIR-PPV Research Protocol v1.0. It records why the hypothesis changed after each failure.
 
-## Frozen Research Hypothesis
+## Frozen hypothesis
 
-OIR-PPV investigates whether a system can discover **minimal generative invariants** from experience:
-
-- remove surface manifestations,
-- identify causal principles,
-- compress multiple solutions into a generator,
-- predict unseen manifestations,
-- validate through experiments.
+OIR-PPV studies whether a system can discover minimal generative invariants from experience, validate them causally, and preserve compact representations that explain existing observations and predict novel manifestations.
 
 ---
 
-# Failure Evolution
+## Failure evolution
 
-## v0.11 — Adversarial Reviewer Test
+### v0.11 — Adversarial Reviewer Test
 
-Failure:
+Failure: reward and frequency trap.
 
-High-frequency and high-reward patterns were selected over rare structural invariants.
+High-frequency and high-reward patterns were mistaken for important patterns.
 
 Lesson:
 
-`frequency != importance`
-
-`reward != structural value`
-
-Required change:
-Introduce hierarchy and long-horizon evaluation.
+`Popularity != Structural importance`
 
 ---
 
-## v0.12 — Invariant Challenger + Exploration
+### v0.12 — Invariant Challenger + Exploration
 
-Failure:
+Failure: useful patterns were confused with deep invariants.
 
-The system could find rare candidates but could not distinguish deep invariants from useful shallow patterns.
+Lesson: utility alone is insufficient. Structural depth is required.
+
+---
+
+### v0.13 — Invariant Hierarchy
+
+Introduced structural ranking between surface, behavior, strategy and architecture-level patterns.
+
+Lesson: invariant is not a pattern; it is a pattern with structural consequences.
+
+---
+
+### v0.13.1 — Blind Hierarchy Discovery
+
+Removed explicit hierarchy labels.
+
+Result: structural importance can be inferred from impact, reuse and dependencies.
+
+---
+
+### v0.13.2 — Dependency Graph Attack
+
+Failure: dependency was confused with causality.
+
+Lesson: correlation graphs are insufficient; intervention is required.
+
+---
+
+### v0.13.3 — True Intervention Validation
+
+Improved causal validation but strong proxy variables survived.
+
+Lesson: intervention alone does not eliminate hidden explanations.
+
+---
+
+### v0.13.4 — Confounder & Alternative Explanation Attack
+
+Added hidden cause analysis.
+
+Lesson: competing causal hypotheses are required.
+
+---
+
+### v0.13.5 — Competing Causal Hypothesis Test
+
+Tested direct cause, confounder and downstream symptom explanations.
+
+Lesson: causal does not automatically mean fundamental.
+
+---
+
+### v0.13.6 — Cross-Environment Invariance Test
+
+Failure: statistical stability was not enough.
 
 Lesson:
 
-Utility alone is insufficient.
-Structural depth matters.
+`Robust != Fundamental`
 
 ---
 
-## v0.13 — Invariant Hierarchy
+### v0.13.7 — Environment Intervention Stress Test
 
-Success:
+Added environment perturbation.
 
-Patterns could be separated into structural levels:
-
-- surface
-- behavior
-- strategy
-- architecture
-
-Lesson:
-
-Invariant is not just a frequent pattern; it has structural consequence.
+Lesson: implementation details must be separated from underlying principles.
 
 ---
 
-## v0.13.1 — Blind Hierarchy Discovery
+### v0.13.8 — Minimal Generative Invariant Test
 
-Question:
+Major transition:
 
-Was hierarchy only an oracle label?
+From:
 
-Result:
+"Which pattern survives?"
 
-The system could infer hierarchy from impact, dependency and transfer signals.
+To:
 
-Lesson:
-
-Hierarchy must be discovered, not assigned.
+"Which latent principle generates multiple successful manifestations?"
 
 ---
 
-## v0.13.2 — Dependency Graph Attack
+### v0.13.9 — Novel Manifestation Prediction
 
-Failure:
-
-Dependency was confused with causality.
-
-Lesson:
-
-Correlation graphs are insufficient.
-Intervention is required.
+Invariant must explain the past and predict unseen manifestations.
 
 ---
 
-## v0.13.3 — True Intervention Validation
+### v0.13.10 — Hypothesis Generation & Self-Experiment
 
-Partial success:
+Closed the loop:
 
-Simple correlations were rejected.
-
-Remaining issue:
-Strong proxies could survive intervention.
-
-Lesson:
-
-A single intervention is insufficient.
-Alternative explanations are required.
+```
+Observe
+ -> Infer invariant
+ -> Generate hypothesis
+ -> Design experiment
+ -> Update belief
+```
 
 ---
 
-## v0.13.4 — Confounder & Alternative Explanation Attack
-
-Partial success:
-
-Simple hidden causes were handled.
-
-Remaining issue:
-Multiple competing causal explanations remained.
-
----
-
-## v0.13.5 — Competing Causal Hypothesis Test
-
-Improvement:
-
-Added competing explanations:
-
-- direct cause
-- hidden confounder
-- downstream symptom
-
-Remaining issue:
-Causal does not automatically mean invariant.
-
----
-
-## v0.13.6 — Cross-Environment Invariance Test
-
-Failure:
-
-Some patterns remained stable statistically but were not fundamental principles.
-
-Lesson:
-
-`stable != invariant`
-
----
-
-## v0.13.7 — Environment Intervention Stress Test
-
-Improvement:
-
-Environment changes and mechanism perturbations removed many implementation-specific patterns.
-
-Remaining issue:
-Need to identify the minimal principle behind multiple implementations.
-
----
-
-## v0.13.8 — Minimal Generative Invariant Test
-
-Breakthrough:
-
-Shift from selecting surviving patterns to discovering latent generators.
-
-Invariant became:
-
-> A minimal causal principle capable of generating multiple successful manifestations.
-
----
-
-## v0.13.9 — Novel Manifestation Prediction Test
-
-Validation:
-
-A discovered invariant must explain existing observations and predict unseen manifestations.
-
-Criterion:
-
-`explain past + predict future`
-
----
-
-## v0.13.10 — Hypothesis Generation & Self Experiment
-
-Final capability added:
-
-Observe → infer invariant → generate hypothesis → experiment → update.
-
-This closes the invariant core loop.
-
----
-
-# Final Research Definition
+# Frozen definitions
 
 ## Invariant
 
-A minimal causal principle that:
-
-- survives environment changes,
-- remains valid under intervention,
-- generates multiple manifestations,
-- predicts unseen outcomes.
+A minimal causal principle that survives environment changes, survives intervention, generates multiple manifestations and predicts unseen manifestations.
 
 ## Generator
 
-The mechanism that maps an invariant into concrete implementations.
+The latent mechanism mapping an invariant into concrete implementations.
 
-## Validation
-
-Validation stack:
+## Validation stack
 
 1. Observation
 2. Intervention
-3. Counterfactual reasoning
+3. Counterfactual analysis
 4. Cross-environment testing
 5. Novel manifestation prediction
-6. Experiment
+6. Self experiment
 
-## Current Status
+## Research status
 
-OIR-PPV is:
+SUPPORTED IN SIMULATION
 
-`SUPPORTED IN SIMULATION`
-
-It is not yet validated on real-world datasets.
+NOT YET VALIDATED ON REAL DATA
