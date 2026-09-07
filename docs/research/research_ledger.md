@@ -252,3 +252,19 @@ Next candidate:
 PPF Plugin Contract / Prototype Feasibility.
 
 No mechanisms, recognizer, production integration, or architecture changes introduced.
+
+## PPF-G1 Plugin Contract Feasibility
+
+Question:
+Can PPF semantic capability be expressed as an isolated optional plugin contract without contaminating Kernel, Model, or Host?
+
+Evidence:
+- Reviewed architecture invariants.
+- Reviewed PPF-F1 placement decision.
+- Analyzed lifecycle, PersonalEvent, Evidence, Observation Eligibility, and Semantic State contract boundaries.
+
+Verdict:
+PASS — PPF can be modeled as an optional plugin capability. No Kernel, Model, or Host changes are required.
+
+Next authorized step:
+PPF-G2 Boundary & Runtime Isolation Proof.
