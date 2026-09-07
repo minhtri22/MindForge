@@ -15,8 +15,21 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+CASE_REGISTRY = Path("docs/research/oir-ppv/artifacts/cases")
 
-def load_case(path):
+
+def resolve_case(case_id):
+    """Resolve stable case id into a version-controlled case artifact."""
+    path = CASE_REGISTRY / f"{case_id}.json"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Unknown failure case: {case_id}. Expected artifact: {path}"
+        )
+    return path
+
+
+def load_case(case_id):
+    path = resolve_case(case_id)
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
