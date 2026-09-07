@@ -1,0 +1,36 @@
+name: OIR-PPV Historical Replay
+
+on:
+  workflow_dispatch:
+
+jobs:
+  replay:
+    name: Execute OIR-PPV v0.13.11 Replay
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/oir-ppv
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Show environment
+        run: |
+          python --version
+          git rev-parse HEAD
+
+      - name: Run historical replay
+        run: |
+          python docs/research/oir-ppv/artifacts/simulator/runners/run_historical_replay.py
+
+      - name: Upload replay artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oir-ppv-replay-results
+          path: docs/research/oir-ppv/artifacts/results/
