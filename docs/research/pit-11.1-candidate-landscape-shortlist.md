@@ -96,3 +96,34 @@ PIT-11.1 does not:
 ## Next Step
 
 PIT-11 candidate execution under the frozen evaluation contract.
+
+## Candidate Access Classification
+
+Candidate Universe:
+
+All theoretically relevant teacher candidates.
+
+Examples:
+
+- GPT class
+- Claude class
+- Gemini class
+- Qwen class
+- DeepSeek class
+- MiniMax class
+- GLM class
+- Local LLM families
+- PIT-specialized models
+
+Candidate Execution Pool:
+
+Candidates that can currently be evaluated reproducibly.
+
+Criteria:
+
+- available access
+- reproducible execution
+- acceptable cost
+- legal/technical availability
+
+Claude/Gemini exclusion from the current execution shortlist does not remove them from the theoretical candidate universe. Candidate qualification depends on teaching signal quality, evidence grounding, and pattern lifecycle capability.

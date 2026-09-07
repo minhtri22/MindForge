@@ -62,3 +62,35 @@ PIT-12 does not:
 ## Next Step
 
 Complete candidate evidence generation and prepare qualification review.
+
+## Candidate Execution Constraints
+
+External frontier candidates:
+
+Role:
+
+General Intelligence Teacher reference.
+
+Requirement:
+
+Stable API access required.
+
+Local candidates:
+
+Requirement:
+
+Must fit MindForge local deployment envelope:
+
+Hardware:
+
+- Intel Core Ultra 7 258V
+- RAM 32GB
+- Intel Arc 140V 16GB GPU
+
+Runtime:
+
+- llama.cpp / Vulkan
+
+Hybrid candidates:
+
+External teacher capability may bootstrap local PIT capability.

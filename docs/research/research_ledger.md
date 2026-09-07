@@ -141,3 +141,23 @@ No teacher selected.
 No model integrated.
 No training.
 No MindForge changes.
+
+## PIT-12.1 Candidate Access Policy
+
+Status:
+Completed
+
+Summary:
+
+Defined separation between theoretical candidate universe and executable candidate pool.
+
+Key decision:
+
+Lack of API access does not eliminate a candidate from theoretical PIT research.
+
+Scope:
+
+No model selected.
+No model downloaded.
+No inference.
+No training.
