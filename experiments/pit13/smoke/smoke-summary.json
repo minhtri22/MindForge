@@ -1,0 +1,32 @@
+{
+  "task": "PIT-13.1.A Smoke Qualification Execution",
+  "status": "FAIL",
+  "branch": "research/pit",
+  "runner_commit": "80c71847aa9e48e65ac3c053d96c3b74579c53b0",
+  "planned_samples": 16,
+  "records_written": 16,
+  "schema_valid": 4,
+  "verified_api_completed": 4,
+  "api_http_500": 4,
+  "parse_path_failures_with_raw_response_lost": 8,
+  "verified_model_identity_mismatches": 0,
+  "model_identity_unverified": 8,
+  "credential_leakage": 0,
+  "manual_repairs": 0,
+  "retries": 0,
+  "per_model_tuning": 0,
+  "pit_13_1_b_started": false,
+  "acceptance": {
+    "api_completed_16_of_16": false,
+    "schema_valid_16_of_16": false,
+    "model_identity_mismatch_0": false,
+    "credential_leakage_0": true,
+    "manual_repair_0": true
+  },
+  "notes": [
+    "Four DeepSeek responses were API-completed, schema-valid, and retained with matching model IDs.",
+    "Four Qwen requests returned HTTP 500 internal_error.",
+    "Eight MiniMax and Mistral records contain JSON parse-path errors, but the executed runner overwrote raw responses in its shared exception handler, so API completion and model identity cannot be proven from those records.",
+    "No failed sample was retried or manually repaired."
+  ]
+}

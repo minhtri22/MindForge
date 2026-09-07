@@ -2,7 +2,7 @@
 
 Status:
 
-NOT STARTED
+SMOKE FAILED
 
 ## Execution methodology
 
@@ -15,7 +15,46 @@ The execution layer is xKiro API. Credentials remain external and are not stored
 
 ## Smoke qualification result
 
-NOT STARTED
+FAIL
+
+Frozen execution:
+
+- Attempt: one 16-sample run (`4 models x 4 scenarios`).
+- Runner exit code: 0.
+- Records written: 16/16.
+- Schema-valid records: 4/16.
+- Verified model identity mismatches: 0; identity was not recoverable for eight parse-path failures because the runner overwrote their raw responses.
+- Credential leakage: 0.
+- Manual repair: 0.
+- Per-model tuning: 0.
+- Retry: 0.
+
+Candidate outcomes:
+
+| Candidate | Records | Verified API completed | Schema valid | Outcome |
+| --- | ---: | ---: | ---: | --- |
+| `qwen/qwen3.8-max:free` | 4 | 0 | 0 | Four HTTP 500 `internal_error` responses |
+| `deepseek/deepseek-v4-pro` | 4 | 4 | 4 | Completed and schema valid |
+| `minimax/minimax-m3:free` | 4 | Unverified | 0 | Four JSON parse-path failures; raw response lost by runner |
+| `mistralai/mistral-small-2603` | 4 | Unverified | 0 | Four JSON parse-path failures; raw response lost by runner |
+
+Acceptance gate:
+
+| Gate | Required | Observed | Result |
+| --- | ---: | ---: | --- |
+| API completed | 16/16 | 4 verified; 4 HTTP 500; 8 unverified parse-path failures | FAIL |
+| Schema valid | 16/16 | 4/16 | FAIL |
+| Model identity mismatch | 0 | 0 among recoverable responses; 8 unverified | FAIL (incomplete evidence) |
+| Credential leakage | 0 | 0 | PASS |
+| Manual repair | 0 | 0 | PASS |
+
+Overall smoke verdict: **FAIL**.
+
+PIT-13.1.B Evidence Collection remains **BLOCKED / NOT STARTED**.
+
+Post-failure infrastructure correction:
+
+The runner now records API and parse failures separately, preserves the raw API response when content parsing fails, and flushes every record after writing. This correction does not alter candidates, scenarios, prompt, Teaching Signal schema, temperature, scoring, or retry policy. The failed attempt was not rerun.
 
 ## PIT-13.1.A.0 Runner Validation
 
@@ -33,7 +72,7 @@ Kept `XTROUTER_API_KEY` sourced from the process environment and normalized surr
 
 Evidence execution status:
 
-Unchanged. No PIT evidence generated. Smoke qualification has not started.
+At PIT-13.1.A.0 validation time, no PIT evidence had been generated and smoke qualification had not started.
 
 Validation:
 
@@ -51,7 +90,7 @@ Required coverage:
 
 ## Evidence collection result
 
-NOT STARTED
+BLOCKED / NOT STARTED
 
 Required evidence coverage:
 
@@ -69,6 +108,6 @@ Execution requires reproducible API access. No candidate ranking or teacher sele
 
 ## Next step
 
-PIT-13.1.A Smoke Qualification after execution access validation.
+Independent review of the failed smoke and provider availability. PIT-13.1.B must not start unless a future frozen smoke attempt passes all acceptance gates.
 
 Execution artifact location (after smoke execution): `experiments/pit13/smoke/`.

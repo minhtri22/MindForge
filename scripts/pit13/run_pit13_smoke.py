@@ -97,15 +97,26 @@ def main() -> int:
                 try:
                     response = call_api(key, model, scenario)
                     record["raw_response"] = response
-                    parsed = parse_response(response)
-                    record["parsed_response"] = parsed
-                    record["schema_status"] = all(k in parsed for k in REQUIRED_FIELDS)
+                    record["api_status"] = "completed"
+                    try:
+                        parsed = parse_response(response)
+                        record["parsed_response"] = parsed
+                        record["schema_status"] = all(k in parsed for k in REQUIRED_FIELDS)
+                        record["parse_error"] = None
+                    except Exception as exc:
+                        record["parsed_response"] = None
+                        record["schema_status"] = False
+                        record["parse_error"] = str(exc)
                 except Exception as exc:
                     record["raw_response"] = {"error": str(exc)}
+                    record["api_status"] = "failed"
                     record["parsed_response"] = None
                     record["schema_status"] = False
+                    record["parse_error"] = None
                 raw_file.write(json.dumps(record, ensure_ascii=False) + "\n")
                 norm_file.write(json.dumps(record, ensure_ascii=False) + "\n")
+                raw_file.flush()
+                norm_file.flush()
                 results.append(record)
 
     (outdir / "results.json").write_text(json.dumps({"records": results}, indent=2), encoding="utf-8")

@@ -283,3 +283,24 @@ No PIT evidence generated.
 No teacher evaluated.
 No benchmark executed.
 Smoke qualification not started.
+
+## PIT-13.1.A Smoke Qualification
+
+Status:
+
+Failed
+
+Summary:
+
+Executed one frozen 16-sample smoke run across four candidates and four scenarios. DeepSeek completed 4/4 with valid Teaching Signal schema. Qwen returned HTTP 500 for 4/4. MiniMax and Mistral produced eight parse-path failures whose raw responses were not retained by the runner. Overall schema validity was 4/16, so the smoke acceptance gate failed.
+
+Infrastructure correction:
+
+Updated the runner after the failed attempt to preserve raw responses on content parse failure, classify API and parse status separately, and flush each record. No candidate, scenario, prompt, schema, temperature, or scoring contract changed. The failed attempt was not rerun.
+
+Scope:
+
+No model-specific tuning.
+No manual repair.
+No ranking or teacher selection.
+PIT-13.1.B not started.
