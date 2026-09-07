@@ -20,6 +20,7 @@ Completed:
 - PIT-12 Candidate Qualification Evidence Generation
 - PIT-12.1 Candidate Access Policy Update
 - PIT-12.2 Candidate Execution Strategy Update
+- PIT-13.0 Candidate API Evaluation Freeze
 
 Current:
 
@@ -27,6 +28,10 @@ PIT-12.2 Candidate Execution Strategy Update completed.
 
 Next:
 
-PIT-13 Candidate API Evidence Collection Execution
+PIT-13.0 Candidate API Evaluation Freeze completed.
+
+Next:
+
+PIT-13.1 Candidate API Evidence Collection
 
 PIT-14 Local Feasibility Validation

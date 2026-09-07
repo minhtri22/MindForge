@@ -189,3 +189,24 @@ No model selected.
 No inference.
 No training.
 No runtime changes.
+
+## PIT-13.0 Candidate API Evaluation Freeze
+
+Status:
+
+Completed
+
+Summary:
+
+Frozen API-first candidate execution strategy before model qualification.
+
+Key decision:
+
+Evaluate teacher capability before local deployment feasibility.
+
+Scope:
+
+No model executed.
+No benchmark executed.
+No training.
+No MindForge integration.
