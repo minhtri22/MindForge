@@ -229,3 +229,26 @@ Next candidate: separately reviewed C1 protocol repair/re-preregistration; no fu
 ## Ledger maintenance rule
 
 From L5 onward, every research task that changes the scientific state of PPF must update this ledger in the same commit. Historical verdicts are append-only: do not erase prior failures or revise history silently; if a result is superseded, record what superseded it and why. Keep each new stage entry concise and link detailed evidence to its dedicated report.
+
+## PPF-F1 Feasibility & Capability Placement Review
+
+Question:
+Determine what PPF has proven after PPF-C1 and where the capability belongs architecturally.
+
+Evidence reviewed:
+- PPF-L1/L2 frozen contracts
+- PPF-L3 frozen benchmark
+- PPF-L4 baseline analysis
+- PPF-L5 minimum missing mechanism analysis
+- PPF-C1 blind confirmation result
+
+Placement decision:
+PPF remains a research extension candidate. The proven primitive, Observability Eligibility, is not a kernel primitive and should be evaluated as an optional plugin capability.
+
+Continue/stop decision:
+Continue research.
+
+Next candidate:
+PPF Plugin Contract / Prototype Feasibility.
+
+No mechanisms, recognizer, production integration, or architecture changes introduced.
