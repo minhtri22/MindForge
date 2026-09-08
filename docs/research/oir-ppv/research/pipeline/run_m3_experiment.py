@@ -271,14 +271,20 @@ def _apply_overrides(base_config: dict, overrides: dict) -> dict:
 
     result = copy.deepcopy(base_config)
     for key, value in overrides.items():
+        # Frozen JSON manifests stringify YAML integer class keys. Reuse an
+        # existing key with the same textual identity so 0 and "0" cannot
+        # coexist or leave the base value effective after an override.
+        target_key = next(
+            (existing for existing in result if str(existing) == str(key)), key
+        )
         if (
-            key in result
-            and isinstance(result[key], dict)
+            target_key in result
+            and isinstance(result[target_key], dict)
             and isinstance(value, dict)
         ):
-            result[key] = _apply_overrides(result[key], value)
+            result[target_key] = _apply_overrides(result[target_key], value)
         else:
-            result[key] = copy.deepcopy(value)
+            result[target_key] = copy.deepcopy(value)
     return result
 
 

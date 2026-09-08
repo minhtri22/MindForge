@@ -18,6 +18,7 @@ from pipeline.learners_extended import (
     MLPEncoderTrainable,
     VAEEncoder,
 )
+from pipeline.run_m3_experiment import _apply_overrides
 
 
 @pytest.fixture
@@ -45,6 +46,21 @@ def _assert_representation_contract(encoder, X, labels=None, context=None):
 def test_pca_contract(classification_data):
     X, _, _ = classification_data
     _assert_representation_contract(PCAEncoder(output_dim=8, seed=42), X)
+
+
+def test_manifest_json_round_trip_preserves_numeric_override_identity():
+    base = {"shortcut": {"test_conditional_means": {0: 0.0, 1: 0.0, 2: 0.0}}}
+    override_after_json = {
+        "shortcut": {
+            "test_conditional_means": {"0": 1.5, "1": 0.0, "2": -1.5}
+        }
+    }
+    effective = _apply_overrides(base, override_after_json)
+    assert effective["shortcut"]["test_conditional_means"] == {
+        0: 1.5,
+        1: 0.0,
+        2: -1.5,
+    }
 
 
 def test_mlp_is_supervised_and_trainable(classification_data):
