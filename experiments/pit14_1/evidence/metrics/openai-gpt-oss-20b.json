@@ -1,0 +1,86 @@
+{
+  "candidate_id": "openai/gpt-oss-20b",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "sample_count": 7,
+  "api_completed": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {
+      "criterion_scores": [
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "temporal_reasoning": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "correction_recovery": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0,
+      "note": "Preserves unresolved conflict and correctly abstains on insufficient evidence."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        1,
+        1
+      ],
+      "mean": 1.5,
+      "note": "Some applicability/revision statements over-generalize to all future runs or introduce operational fallback behavior beyond evidence."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [
+        2,
+        1
+      ],
+      "mean": 1.5,
+      "note": "Primary conclusions are grounded; some fallback/policy language extends beyond supplied evidence."
+    },
+    "personalization_safety": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "pattern_lifecycle_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    }
+  },
+  "qualitative_findings": {
+    "conflicting_evidence_handling": [
+      "Core conflict is preserved rather than collapsed."
+    ],
+    "unsupported_heuristic_policy_invention": [
+      "Balanced summary-plus-inline fallback in unresolved conflict.",
+      "Some all-future-run policy language exceeds the observed scope."
+    ]
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

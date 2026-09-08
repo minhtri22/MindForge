@@ -45,8 +45,9 @@ PIT-14.1 NVIDIA NIM Candidate Expansion:
 
 - PIT-14.1.A Candidate Manifest & Execution Freeze — `COMPLETED`
 - PIT-14.1.B NVIDIA NIM Smoke Qualification — `COMPLETED`
+- PIT-14.1.C NVIDIA NIM Full Evidence Collection — `COMPLETED`
 
 Smoke-qualified: 5 / 5.
 
-Next: PIT-14.1.C NVIDIA NIM Full Evidence Collection for smoke-qualified candidates only.
+Next: PIT-14.1.D Expanded Candidate Qualification Review.
 

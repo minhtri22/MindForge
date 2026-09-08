@@ -1,0 +1,82 @@
+{
+  "candidate_id": "meta/muse-glimmer-30b",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "sample_count": 7,
+  "api_completed": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {
+      "criterion_scores": [
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "temporal_reasoning": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "correction_recovery": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0,
+      "note": "Preserves unresolved conflict and correctly abstains on insufficient evidence."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0,
+      "note": "Teaching Signals are concise, bounded, and evidence-conditioned."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "personalization_safety": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "pattern_lifecycle_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    }
+  },
+  "qualitative_findings": {
+    "conflicting_evidence_handling": [
+      "Conflict remains unresolved pending explicit clarification, matching frozen PIT semantics."
+    ],
+    "unsupported_heuristic_policy_invention": []
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

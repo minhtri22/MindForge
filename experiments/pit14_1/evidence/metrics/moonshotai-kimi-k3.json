@@ -1,0 +1,90 @@
+{
+  "candidate_id": "moonshotai/kimi-k3",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "sample_count": 7,
+  "api_completed": 6,
+  "schema_valid": 6,
+  "dimensions": {
+    "pattern_understanding": {
+      "criterion_scores": [
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0,
+      "note": "Stable pattern and rare-exception handling are well bounded; long-term consistency sample is unavailable due transport failure."
+    },
+    "temporal_reasoning": {
+      "criterion_scores": [
+        2,
+        1
+      ],
+      "mean": 1.5,
+      "note": "Preference drift is handled correctly, but long-term consistency evidence is missing."
+    },
+    "correction_recovery": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [
+        0,
+        2
+      ],
+      "mean": 1.0,
+      "note": "The conflict case treated the newer instruction as the best current default despite no supersession evidence; insufficient-evidence handling correctly abstained."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [
+        2,
+        1,
+        2,
+        2
+      ],
+      "mean": 1.75,
+      "note": "Signals are clear, but conflict confidence still supports an unsupported recency-based default."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [
+        2,
+        1
+      ],
+      "mean": 1.5,
+      "note": "Primary conclusions are grounded; conflict resolution adds unsupported temporal precedence."
+    },
+    "personalization_safety": {
+      "criterion_scores": [
+        1,
+        2
+      ],
+      "mean": 1.5,
+      "note": "Conflict was partially collapsed; sparse-evidence and exception boundaries were otherwise explicit."
+    },
+    "pattern_lifecycle_quality": {
+      "criterion_scores": [
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "mean": 1.8,
+      "note": "Long-term maintenance evidence is incomplete because one planned sample hit HTTP 429."
+    }
+  },
+  "qualitative_findings": {
+    "conflicting_evidence_handling": [
+      "UNSUPPORTED_CONFLICT_RESOLUTION in conflicting evidence.",
+      "Transport incompleteness on long-term consistency."
+    ],
+    "unsupported_heuristic_policy_invention": [
+      "Recency used as an unsupported default-selection rule in unresolved conflict."
+    ]
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

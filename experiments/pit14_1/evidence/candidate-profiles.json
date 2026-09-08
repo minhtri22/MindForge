@@ -1,0 +1,116 @@
+{
+  "task": "PIT-14.1.C NVIDIA NIM Candidate Evidence Profiles",
+  "provider": "NVIDIA NIM",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "profiles": [
+    {
+      "candidate_id": "moonshotai/kimi-k3",
+      "evidence_complete": true,
+      "api_completed": 6,
+      "schema_valid": 6,
+      "strengths": [
+        "Strong stable-pattern, drift, correction, rare-exception, and insufficient-evidence handling.",
+        "Clear applicability boundaries and revision triggers across valid samples."
+      ],
+      "limitations": [
+        "`conflicting_evidence_001` partially resolves ambiguity by choosing the newer message as the best current default.",
+        "`long_term_consistency_001` is missing due one HTTP 429 transport failure; no retry was performed."
+      ],
+      "critical_semantic_findings": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION in conflicting evidence.",
+        "Transport incompleteness on long-term consistency."
+      ],
+      "unsupported_heuristics": [
+        "Recency used as an unsupported default-selection rule in unresolved conflict."
+      ],
+      "qualification_verdict": null
+    },
+    {
+      "candidate_id": "meta/muse-glimmer-30b",
+      "evidence_complete": true,
+      "api_completed": 7,
+      "schema_valid": 7,
+      "strengths": [
+        "Preserves unresolved conflicting evidence without manufacturing supersession.",
+        "Strong drift, correction, rare-exception, insufficient-evidence, and long-term consistency handling."
+      ],
+      "limitations": [
+        "No material semantic failure identified within this seven-scenario evidence set; broader robustness is not established."
+      ],
+      "critical_semantic_findings": [
+        "Conflict remains unresolved pending explicit clarification, matching frozen PIT semantics."
+      ],
+      "unsupported_heuristics": [],
+      "qualification_verdict": null
+    },
+    {
+      "candidate_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "evidence_complete": true,
+      "api_completed": 7,
+      "schema_valid": 7,
+      "strengths": [
+        "Preserves unresolved conflict and handles insufficient evidence safely.",
+        "Strong lifecycle, correction, drift, exception, and long-term consistency behavior."
+      ],
+      "limitations": [
+        "Some revision triggers invent operational thresholds or external signals not frozen in the evidence."
+      ],
+      "critical_semantic_findings": [
+        "No conflict-collapse finding; uncertainty behavior is preserved."
+      ],
+      "unsupported_heuristics": [
+        "Three-consecutive-interaction threshold.",
+        "Satisfaction-metric decline trigger.",
+        "Default discard behavior for tasks lacking explicit cost/value signaling is broader than supplied evidence."
+      ],
+      "qualification_verdict": null
+    },
+    {
+      "candidate_id": "google/gemma-4-31b-it",
+      "evidence_complete": true,
+      "api_completed": 7,
+      "schema_valid": 7,
+      "strengths": [
+        "Strong stable-pattern, drift, correction, rare-exception, insufficient-evidence, and long-term handling.",
+        "Clear and concise Teaching Signals."
+      ],
+      "limitations": [
+        "`conflicting_evidence_001` resolves deliberately unresolved evidence using recency."
+      ],
+      "critical_semantic_findings": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION in conflicting evidence."
+      ],
+      "unsupported_heuristics": [
+        "Most-recent-message treated as likely current preference without explicit supersession."
+      ],
+      "qualification_verdict": null
+    },
+    {
+      "candidate_id": "openai/gpt-oss-20b",
+      "evidence_complete": true,
+      "api_completed": 7,
+      "schema_valid": 7,
+      "strengths": [
+        "Preserves unresolved conflicting evidence and requests clarification.",
+        "Strong correction, insufficient-evidence, rare-exception, and long-term lifecycle behavior."
+      ],
+      "limitations": [
+        "Some boundaries and revision triggers generalize beyond the exact evidence.",
+        "Conflict response proposes a balanced fallback if clarification is unavailable; that fallback is not evidence-grounded policy."
+      ],
+      "critical_semantic_findings": [
+        "Core conflict is preserved rather than collapsed."
+      ],
+      "unsupported_heuristics": [
+        "Balanced summary-plus-inline fallback in unresolved conflict.",
+        "Some all-future-run policy language exceeds the observed scope."
+      ],
+      "qualification_verdict": null
+    }
+  ],
+  "ranking": null,
+  "winner": null,
+  "cross_provider_comparison": false,
+  "teacher_selected": false
+}

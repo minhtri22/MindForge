@@ -1,0 +1,86 @@
+{
+  "candidate_id": "google/gemma-4-31b-it",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "sample_count": 7,
+  "api_completed": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {
+      "criterion_scores": [
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "temporal_reasoning": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "correction_recovery": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [
+        0,
+        2
+      ],
+      "mean": 1.0,
+      "note": "The conflict case selected the newest instruction as likely current despite the absence of supersession evidence."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [
+        2,
+        1,
+        2,
+        2
+      ],
+      "mean": 1.75,
+      "note": "Strong structure and boundaries, but confidence is too strong for unresolved conflict."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [
+        2,
+        1
+      ],
+      "mean": 1.5,
+      "note": "Conflict resolution adds unsupported recency logic."
+    },
+    "personalization_safety": {
+      "criterion_scores": [
+        1,
+        2
+      ],
+      "mean": 1.5,
+      "note": "Conflict is over-resolved; sparse evidence and exceptions are otherwise handled safely."
+    },
+    "pattern_lifecycle_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    }
+  },
+  "qualitative_findings": {
+    "conflicting_evidence_handling": [
+      "UNSUPPORTED_CONFLICT_RESOLUTION in conflicting evidence."
+    ],
+    "unsupported_heuristic_policy_invention": [
+      "Most-recent-message treated as likely current preference without explicit supersession."
+    ]
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

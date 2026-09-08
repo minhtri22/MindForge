@@ -1,0 +1,50 @@
+{
+  "task": "PIT-14.1.C NVIDIA NIM Full Evidence Collection",
+  "status": "COMPLETED",
+  "provider": "NVIDIA NIM",
+  "candidates_planned": 5,
+  "candidates_executed": [
+    "moonshotai/kimi-k3",
+    "meta/muse-glimmer-30b",
+    "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "google/gemma-4-31b-it",
+    "openai/gpt-oss-20b"
+  ],
+  "scenario_families": 7,
+  "total_scenarios": 7,
+  "planned_api_samples": 35,
+  "attempted_api_samples": 35,
+  "completed_api_samples": 34,
+  "schema_valid_samples": 34,
+  "parse_failures": 0,
+  "identity_mismatches": 0,
+  "manual_repairs": 0,
+  "semantic_retries": 0,
+  "per_model_tuning": 0,
+  "failure_counts": {
+    "TRANSPORT_OR_API_FAILURE": 1
+  },
+  "failure_details": [
+    {
+      "candidate_id": "moonshotai/kimi-k3",
+      "scenario_id": "long_term_consistency_001",
+      "classification": "TRANSPORT_OR_API_FAILURE",
+      "provider_status": 429
+    }
+  ],
+  "scenario_manifest_source": "experiments/pit13/evidence/scenarios.json",
+  "scenario_manifest_sha256": "3f8c71eba9cadc18854c2c6bf9f76926f29243d37a968481a72d6b3b5ff43fc1",
+  "metric_rubric": "experiments/pit13/evidence/metric-rubric.json",
+  "metric_rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "runner_sha256": "8e7413dd2310c312912fe21373ad505474289fd536b85b68ec2057cb7473b05c",
+  "raw_artifacts": true,
+  "normalized_artifacts": true,
+  "metrics_generated": true,
+  "candidate_profiles_generated": true,
+  "ranking_performed": false,
+  "winner_declared": false,
+  "teacher_selected": false,
+  "cross_provider_comparison": false,
+  "training": false,
+  "mindforge_integration": false
+}

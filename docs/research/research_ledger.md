@@ -630,3 +630,45 @@ No MindForge integration.
 Next:
 
 PIT-14.1.C NVIDIA NIM Full Evidence Collection for the five smoke-qualified candidates.
+
+## PIT-14.1.C NVIDIA NIM Full Evidence Collection
+
+Status:
+
+COMPLETED
+
+Candidates:
+
+- Kimi K3
+- Muse Glimmer 30B
+- Nemotron 3.5 Lightning 30B-A3B
+- Gemma 4 31B IT
+- GPT-OSS 20B
+
+Execution:
+
+Used the same seven frozen PIT scenario families and the same frozen PIT-13.1.B metric rubric. All 35 candidate-scenario pairs were attempted exactly once. API completion was 34/35 and schema validity was 34/35. Kimi K3 / `long_term_consistency_001` returned HTTP 429 and was preserved as `TRANSPORT_OR_API_FAILURE` with no retry.
+
+Evidence:
+
+Raw evidence generated: YES.
+Normalized evidence generated: YES.
+Metrics generated: YES.
+Candidate profiles generated: YES.
+Qualification verdicts remain null.
+
+Scope:
+
+No manual repair.
+No semantic retries.
+No per-model semantic tuning.
+No ranking.
+No winner declaration.
+No teacher selection.
+No cross-provider comparison.
+No training.
+No MindForge integration.
+
+Next:
+
+PIT-14.1.D Expanded Candidate Qualification Review.

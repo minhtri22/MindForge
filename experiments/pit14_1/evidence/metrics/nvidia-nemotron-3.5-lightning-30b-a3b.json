@@ -1,0 +1,87 @@
+{
+  "candidate_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "sample_count": 7,
+  "api_completed": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {
+      "criterion_scores": [
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "temporal_reasoning": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "correction_recovery": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0,
+      "note": "Preserves conflict and abstains on insufficient evidence."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "mean": 1.75,
+      "note": "Revision triggers introduce unsupported operational rules such as three consecutive interactions and satisfaction-metric decline."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [
+        2,
+        1
+      ],
+      "mean": 1.5,
+      "note": "Primary inferences are grounded; some revision logic extends beyond supplied evidence."
+    },
+    "personalization_safety": {
+      "criterion_scores": [
+        2,
+        2
+      ],
+      "mean": 2.0
+    },
+    "pattern_lifecycle_quality": {
+      "criterion_scores": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "mean": 2.0
+    }
+  },
+  "qualitative_findings": {
+    "conflicting_evidence_handling": [
+      "No conflict-collapse finding; uncertainty behavior is preserved."
+    ],
+    "unsupported_heuristic_policy_invention": [
+      "Three-consecutive-interaction threshold.",
+      "Satisfaction-metric decline trigger.",
+      "Default discard behavior for tasks lacking explicit cost/value signaling is broader than supplied evidence."
+    ]
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

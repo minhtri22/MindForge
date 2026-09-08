@@ -343,3 +343,84 @@ Interpretation boundary:
 This smoke result establishes only machine-consumable PIT Teaching Signal interface compliance under the frozen NVIDIA execution contract. It does not establish semantic teacher quality.
 
 No teacher ranking was performed. No semantic qualification verdict was assigned. No comparison against PIT-13 candidates was performed. No teacher was selected.
+
+## PIT-14.1.C NVIDIA NIM Full Evidence Collection
+
+Status: **COMPLETED**
+
+Execution date: 2026-09-08.
+
+Runner: `scripts/pit14_1/run_nvidia_evidence.py`
+
+Runner SHA256: `8e7413dd2310c312912fe21373ad505474289fd536b85b68ec2057cb7473b05c`
+
+Provider: `NVIDIA NIM`
+
+Candidates executed:
+
+- `moonshotai/kimi-k3`
+- `meta/muse-glimmer-30b`
+- `nvidia/nemotron-3.5-lightning-30b-a3b`
+- `google/gemma-4-31b-it`
+- `openai/gpt-oss-20b`
+
+Scenario families: 7.
+
+Scenario provenance source: `experiments/pit13/evidence/scenarios.json`.
+
+Scenario SHA256: `3f8c71eba9cadc18854c2c6bf9f76926f29243d37a968481a72d6b3b5ff43fc1`.
+
+The NVIDIA execution copy at `experiments/pit14_1/evidence/scenarios.json` is byte-identical to the PIT-13.1.B source.
+
+Metric rubric source: `experiments/pit13/evidence/metric-rubric.json`.
+
+Metric rubric SHA256: `f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227`.
+
+Planned sample pairs: 35 (`5 candidates x 7 scenarios`).
+
+All 35 planned pairs were attempted exactly once. API completion was 34/35 and schema validity was 34/35. The single non-completed sample was `moonshotai/kimi-k3` / `long_term_consistency_001`, where NVIDIA returned HTTP 429. It is preserved as `TRANSPORT_OR_API_FAILURE`; no retry or repair was performed.
+
+| Candidate | Attempts | API completed | Schema valid | Evidence collection note |
+| --- | ---: | ---: | ---: | --- |
+| `moonshotai/kimi-k3` | 7/7 | 6/7 | 6/7 | One HTTP 429 on `long_term_consistency_001`; no retry |
+| `meta/muse-glimmer-30b` | 7/7 | 7/7 | 7/7 | Complete |
+| `nvidia/nemotron-3.5-lightning-30b-a3b` | 7/7 | 7/7 | 7/7 | Complete |
+| `google/gemma-4-31b-it` | 7/7 | 7/7 | 7/7 | Complete |
+| `openai/gpt-oss-20b` | 7/7 | 7/7 | 7/7 | Complete |
+
+Candidate evidence profiling used only the already-frozen PIT-13.1.B metric rubric. `qualification_verdict` remains `null` for every NVIDIA candidate.
+
+Descriptive semantic findings for later PIT-14.1.D review:
+
+- Kimi K3: strong handling on available stable-pattern, drift, correction, rare-exception, and insufficient-evidence cases; the conflict case partially selects the newer instruction as the current default despite unresolved contradiction; long-term consistency evidence is missing due HTTP 429.
+- Muse Glimmer 30B: preserves unresolved conflicting evidence, abstains on insufficient evidence, and produces bounded lifecycle signals across all seven scenarios.
+- Nemotron 3.5 Lightning 30B-A3B: preserves unresolved conflict and strong lifecycle behavior; some revision triggers introduce unsupported operational thresholds or external signals.
+- Gemma 4 31B IT: strong across most scenario families, but resolves the deliberately unresolved conflict via recency.
+- GPT-OSS 20B: preserves unresolved conflict and handles lifecycle cases well; some fallback/boundary language extends beyond supplied evidence.
+
+These are candidate evidence findings only. No qualification verdict, ranking, winner, or strongest-model declaration is made in PIT-14.1.C.
+
+Artifacts:
+
+- Raw: `experiments/pit14_1/evidence/raw/`
+- Normalized: `experiments/pit14_1/evidence/normalized/`
+- Metrics: `experiments/pit14_1/evidence/metrics/`
+- Candidate profiles: `experiments/pit14_1/evidence/candidate-profiles.json`
+- Evidence summary: `experiments/pit14_1/evidence/evidence-summary.json`
+- Execution metadata: `experiments/pit14_1/evidence/execution-metadata.json`
+- Scenario copy: `experiments/pit14_1/evidence/scenarios.json`
+
+Scope controls:
+
+- Manual repair: 0.
+- Semantic retries: 0.
+- Per-model semantic tuning: 0.
+- Identity mismatches: 0.
+- Parse failures: 0.
+- No ranking.
+- No winner declaration.
+- No teacher selection.
+- No cross-provider comparison.
+- No training, distillation, or MindForge integration.
+
+Next: `PIT-14.1.D Expanded Candidate Qualification Review`.
