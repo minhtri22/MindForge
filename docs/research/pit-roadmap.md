@@ -41,5 +41,9 @@ Qualified / qualified-with-limits: 1 / 3.
 
 Strongest current candidate: `minimax/minimax-m3:free` under PIT-13 evidence.
 
-Next: PIT-15 Teaching Signal Guardrail Experiment.
+PIT-14.1 NVIDIA NIM Candidate Expansion:
+
+- PIT-14.1.A Candidate Manifest & Execution Freeze — `COMPLETED`
+
+Next: PIT-14.1.B NVIDIA NIM Smoke Qualification.
 

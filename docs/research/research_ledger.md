@@ -544,3 +544,50 @@ No Kernel, TokenModel, or PPF changes.
 Next:
 
 PIT-15 Teaching Signal Guardrail Experiment.
+
+## PIT-14.1.A NVIDIA NIM Candidate Manifest & Execution Freeze
+
+Status:
+
+COMPLETED
+
+Candidates frozen:
+
+- `moonshotai/kimi-k3`
+- `meta/muse-glimmer-30b`
+- `nvidia/nemotron-3.5-lightning-30b-a3b`
+- `google/gemma-4-31b-it`
+- `openai/gpt-oss-20b`
+
+Initial access state:
+
+`ACCESS_UNVERIFIED`
+
+Execution layer:
+
+NVIDIA NIM
+
+Frozen execution policies:
+
+- prompt-enforced JSON for all candidates
+- direct / non-thinking response where technically supported
+- `temperature=0`
+- `max_tokens=4096`
+- `stream=false`
+- per-candidate smoke gate
+
+Scope:
+
+API calls: 0.
+Inference: 0.
+`NVIDIA_API_KEY` not read.
+Existing PIT evidence unchanged.
+PIT-14 verdicts unchanged.
+No teacher selected.
+No training.
+No MindForge integration.
+PIT-15 not started.
+
+Next:
+
+PIT-14.1.B NVIDIA NIM Smoke Qualification.
