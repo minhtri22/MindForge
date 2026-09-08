@@ -23,25 +23,16 @@ Completed:
 - PIT-13.0 Candidate API Evaluation Freeze
 - PIT-13.0.1 API Candidate Manifest Freeze
 - PIT-13.1.A.1 Smoke Harness Contract Audit
+- PIT-13.1.A.2 Smoke Gate Semantics Review
 
 Current:
 
-PIT-13.1.A Smoke Qualification Rerun failed.
+PIT-13.1.A Candidate Smoke Qualification: `PARTIAL_CANDIDATE_QUALIFICATION`.
+
+Eligible: 3 / 4 candidates.
 
 Next:
 
-PIT-13.0.1 API Candidate Manifest Freeze completed.
-
-Current:
-
-PIT-13.1 Candidate API Evidence Collection pending execution.
-
-Next:
-
-Failure analysis / execution issue resolution only
-
-Next:
-
-PIT-13.1 Candidate API Evidence Collection
+PIT-13.1.B Evidence Collection for smoke-qualified candidates.
 
 PIT-14 Local Feasibility Validation

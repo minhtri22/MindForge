@@ -193,6 +193,46 @@ The previous PIT-13.1.A FAIL remains historical evidence and was not rewritten. 
 
 PIT-13.1.B remains **BLOCKED / NOT STARTED**.
 
+## PIT-13.1.A.2 Smoke Gate Semantics Review
+
+Status: **COMPLETED**
+
+Question reviewed:
+
+Whether PIT-13.1.A smoke qualification should use one pool-wide 16/16 gate or independent 4/4 gates for each teacher candidate.
+
+Evidence considered:
+
+- PIT teacher evaluation outputs and qualification verdicts are defined per candidate.
+- PIT-10, PIT-11.2, and PIT-12 define candidate-specific evaluation and candidate-specific Teaching Signal evidence.
+- PIT-12.1 distinguishes the research candidate universe from the executable candidate pool.
+- The latest frozen rerun produced candidate results of 4/4 for Qwen3.7, DeepSeek, and MiniMax, and 3/4 schema-valid samples for Mistral.
+
+Decision:
+
+**`ADOPT_PER_CANDIDATE_GATE`** prospectively for PIT-13.1.B eligibility.
+
+Frozen per-candidate smoke requirements remain strict: 4/4 API completion, 4/4 schema validity, zero model identity mismatch, zero credential leakage, zero manual repair, zero semantic retries, and zero model-specific tuning.
+
+Candidate consequences based only on existing frozen rerun evidence:
+
+- `qwen/qwen3.7-max:free`: `SMOKE_QUALIFIED`
+- `deepseek/deepseek-v4-pro`: `SMOKE_QUALIFIED`
+- `minimax/minimax-m3:free`: `SMOKE_QUALIFIED`
+- `mistralai/mistral-small-2603`: `SMOKE_NOT_QUALIFIED`
+
+Pool state for prospective eligibility tracking:
+
+`PARTIAL_CANDIDATE_QUALIFICATION`
+
+Historical evidence preservation:
+
+The initial PIT-13.1.A `FAIL`, the Qwen3.7-amended `FAIL`, and the latest 15/16 pool-wide rerun `FAIL` remain unchanged. No failed output is reclassified as valid. Mistral remains failed under the frozen smoke contract and is deferred from PIT-13.1.B without any teacher-quality verdict.
+
+Detailed review:
+
+`docs/research/pit-13.1.a.2-smoke-gate-semantics-review.md`
+
 ## PIT-13.1.A.0 Runner Validation
 
 Issue observed:

@@ -382,3 +382,40 @@ No teacher selection.
 No training.
 No MindForge integration.
 PIT-13.1.B remains blocked.
+
+## PIT-13.1.A.2 Smoke Gate Semantics Review
+
+Status:
+
+COMPLETED
+
+Decision:
+
+ADOPT_PER_CANDIDATE_GATE
+
+Summary:
+
+Reviewed the semantic unit of PIT-13.1.A smoke qualification against the frozen PIT teacher architecture. PIT-10, PIT-11.2, and PIT-12 define qualification evidence and verdicts per candidate, while PIT-12.1 already separates the research universe from the executable candidate pool. The smoke gate is therefore clarified prospectively as a per-candidate gate without changing any per-sample requirement or historical verdict.
+
+Candidate consequences from the existing frozen rerun:
+
+- Qwen3.7-Max: SMOKE_QUALIFIED
+- DeepSeek V4 Pro: SMOKE_QUALIFIED
+- MiniMax M3: SMOKE_QUALIFIED
+- Mistral Small 2603: SMOKE_NOT_QUALIFIED
+
+Pool state:
+
+PARTIAL_CANDIDATE_QUALIFICATION
+
+Scope:
+
+No API calls.
+No inference.
+No evidence modified.
+No raw response modified.
+No parser or Teaching Signal contract change.
+No teacher ranked.
+No teacher selected.
+Historical smoke FAIL verdicts preserved.
+PIT-13.1.B not executed.
