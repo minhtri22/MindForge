@@ -545,6 +545,73 @@ Next:
 
 PIT-15 Teaching Signal Guardrail Experiment.
 
+## PIT-15 Teaching Signal Guardrail Experiment
+
+Status:
+
+COMPLETED
+
+Design:
+
+Controlled causal comparison using 7 candidates × 7 frozen PIT scenarios. CONTROL is the previously recorded untreated Teaching Signal. TREATMENT applies deterministic `pit15-deterministic-guardrails-v1` validation to the unchanged Teaching Signal. No teacher API calls, regeneration, rewriting, or semantic repair occurred.
+
+Candidate set:
+
+- `meta/muse-glimmer-30b` — positive control
+- `minimax/minimax-m3:free` — heuristic-risk
+- `nvidia/nemotron-3.5-lightning-30b-a3b` — heuristic-risk
+- `openai/gpt-oss-20b` — heuristic-risk
+- `qwen/qwen3.7-max:free` — negative conflict control
+- `deepseek/deepseek-v4-pro` — negative conflict control
+- `google/gemma-4-31b-it` — negative conflict control
+
+Primary metrics:
+
+- Semantic failure detection: 100% (10/10 known failure samples).
+- False positive rate: 0% (0/39 known-valid samples).
+- Conflict failure detection: 100%.
+- Unsupported heuristic sample detection: 100%.
+- Muse positive-control preservation: 100% (7/7).
+- Lifecycle preservation: 100%.
+
+Secondary diagnostic:
+
+Violation-class recall was 12/13 = 92.3077%. Nemotron `stable_preference_001` was correctly FLAGged through `EVIDENCE_GROUNDING_FAILURE`, but its "three or more consecutive interactions" rule was not separately classified as `UNSUPPORTED_NUMERIC_THRESHOLD`. The v1 guardrail was not tuned after observing this treatment result.
+
+Candidate effects:
+
+- Muse Glimmer — `UNCHANGED_VALID`
+- MiniMax M3 — `IMPROVED_BY_GUARDRAIL`
+- Nemotron 3.5 Lightning — `IMPROVED_BY_GUARDRAIL`
+- GPT-OSS 20B — `IMPROVED_BY_GUARDRAIL`
+- Qwen3.7 — `IMPROVED_BY_GUARDRAIL`
+- DeepSeek V4 Pro — `IMPROVED_BY_GUARDRAIL`
+- Gemma 4 31B IT — `IMPROVED_BY_GUARDRAIL`
+
+Guardrail verdict:
+
+`GUARDRAIL_EFFECTIVE` under the frozen PIT-15 sample-level acceptance contract.
+
+Architectural implication:
+
+Within this frozen evidence set, `Teacher * Evidence-Bound Guardrail` improves system-level Teaching Signal safety without overblocking the qualified Muse positive control. This is not evidence that the underlying raw teachers improved intrinsically.
+
+Scope:
+
+Raw teacher verdicts remain unchanged.
+API calls: 0.
+New teacher inference: 0.
+Historical PIT-13/PIT-14.1 evidence modified: NO.
+Teacher selected: NO.
+Training: NO.
+Distillation: NO.
+MindForge integration: NO.
+Kernel, TokenModel, and PPF changes: NO.
+
+Next:
+
+PIT-16 Guardrail Refinement / Adversarial Validation.
+
 ## PIT-14.1.A NVIDIA NIM Candidate Manifest & Execution Freeze
 
 Status:

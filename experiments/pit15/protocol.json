@@ -1,0 +1,88 @@
+{
+  "protocol_version": "pit-15-guardrail-protocol-v1",
+  "guardrail_version": "pit15-deterministic-guardrails-v1",
+  "freeze_date": "2026-09-08",
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "causal_design": "CONTROL_VS_DETERMINISTIC_POST_GENERATION_GUARDRAIL",
+  "candidate_set": [
+    "meta/muse-glimmer-30b",
+    "minimax/minimax-m3:free",
+    "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3.7-max:free",
+    "deepseek/deepseek-v4-pro",
+    "google/gemma-4-31b-it"
+  ],
+  "candidate_roles": {
+    "meta/muse-glimmer-30b": "POSITIVE_CONTROL",
+    "minimax/minimax-m3:free": "HEURISTIC_RISK",
+    "nvidia/nemotron-3.5-lightning-30b-a3b": "HEURISTIC_RISK",
+    "openai/gpt-oss-20b": "HEURISTIC_RISK",
+    "qwen/qwen3.7-max:free": "NEGATIVE_CONFLICT_CONTROL",
+    "deepseek/deepseek-v4-pro": "NEGATIVE_CONFLICT_CONTROL",
+    "google/gemma-4-31b-it": "NEGATIVE_CONFLICT_CONTROL"
+  },
+  "excluded_candidates": {
+    "moonshotai/kimi-k3": "PIT-14.1.C long_term_consistency_001 control evidence unavailable due frozen HTTP 429"
+  },
+  "scenario_set": [
+    "stable_preference_001",
+    "preference_drift_001",
+    "conflicting_evidence_001",
+    "user_correction_001",
+    "rare_exception_001",
+    "insufficient_evidence_001",
+    "long_term_consistency_001"
+  ],
+  "scenario_source": "experiments/pit13/evidence/scenarios.json",
+  "control_sources": {
+    "xkiro": "experiments/pit13/evidence/normalized/",
+    "nvidia_nim": "experiments/pit14_1/evidence/normalized/"
+  },
+  "treatment": "Apply the same deterministic, model-agnostic guardrail validation to the unchanged frozen Teaching Signal. Do not regenerate or rewrite the signal.",
+  "violation_classes": [
+    "UNSUPPORTED_CONFLICT_RESOLUTION",
+    "UNSUPPORTED_NUMERIC_THRESHOLD",
+    "UNSUPPORTED_TEMPORAL_RULE",
+    "UNSUPPORTED_FALLBACK_POLICY",
+    "UNSUPPORTED_SCOPE_GENERALIZATION",
+    "EVIDENCE_GROUNDING_FAILURE"
+  ],
+  "success_criteria": {
+    "conflict_failure_detection_rate": 1.0,
+    "unsupported_heuristic_detection_rate": 1.0,
+    "positive_control_material_false_blocks": 0,
+    "positive_control_preservation_rate": 1.0,
+    "lifecycle_material_false_blocks": 0,
+    "lifecycle_preservation_rate": 1.0
+  },
+  "metric_definitions": {
+    "semantic_failure_detection_rate": "Known failure samples with treatment BLOCK or FLAG / all known failure samples.",
+    "false_positive_rate": "Known-valid samples with treatment BLOCK or FLAG / all known-valid samples.",
+    "conflict_failure_detection_rate": "Known UNSUPPORTED_CONFLICT_RESOLUTION samples with treatment BLOCK or FLAG / all such samples.",
+    "unsupported_heuristic_detection_rate": "Known non-conflict unsupported heuristic/policy samples with treatment BLOCK or FLAG / all such samples.",
+    "positive_control_preservation_rate": "Known-valid Muse samples accepted / known-valid Muse samples.",
+    "lifecycle_preservation_rate": "Known-valid correction, rare-exception, drift, insufficient-evidence, and long-term samples accepted / all known-valid samples in those families."
+  },
+  "oracle_source": "Frozen PIT-14 and PIT-14.1.D documented findings only; annotations are evaluation labels and are not used by guardrail decision logic.",
+  "known_expected_violations": {
+    "qwen/qwen3.7-max:free|conflicting_evidence_001": ["UNSUPPORTED_CONFLICT_RESOLUTION"],
+    "qwen/qwen3.7-max:free|insufficient_evidence_001": ["UNSUPPORTED_NUMERIC_THRESHOLD", "UNSUPPORTED_TEMPORAL_RULE"],
+    "deepseek/deepseek-v4-pro|conflicting_evidence_001": ["UNSUPPORTED_CONFLICT_RESOLUTION"],
+    "minimax/minimax-m3:free|stable_preference_001": ["UNSUPPORTED_NUMERIC_THRESHOLD", "UNSUPPORTED_TEMPORAL_RULE"],
+    "nvidia/nemotron-3.5-lightning-30b-a3b|stable_preference_001": ["UNSUPPORTED_NUMERIC_THRESHOLD", "EVIDENCE_GROUNDING_FAILURE"],
+    "nvidia/nemotron-3.5-lightning-30b-a3b|long_term_consistency_001": ["UNSUPPORTED_SCOPE_GENERALIZATION"],
+    "openai/gpt-oss-20b|preference_drift_001": ["UNSUPPORTED_SCOPE_GENERALIZATION"],
+    "openai/gpt-oss-20b|conflicting_evidence_001": ["UNSUPPORTED_FALLBACK_POLICY"],
+    "openai/gpt-oss-20b|user_correction_001": ["UNSUPPORTED_SCOPE_GENERALIZATION"],
+    "google/gemma-4-31b-it|conflicting_evidence_001": ["UNSUPPORTED_CONFLICT_RESOLUTION"]
+  },
+  "guardrail_constraints": {
+    "model_specific_rules": false,
+    "llm_calls": false,
+    "regeneration": false,
+    "semantic_repair": false,
+    "candidate_specific_thresholds": false,
+    "external_policy_sources": []
+  }
+}

@@ -58,5 +58,11 @@ Strongest current candidate: `meta/muse-glimmer-30b` under expanded PIT-14.1 evi
 
 This is not final teacher selection.
 
-Next: PIT-15 Teaching Signal Guardrail Experiment.
+PIT-15 Teaching Signal Guardrail Experiment: `COMPLETED`.
+
+Guardrail verdict: `GUARDRAIL_EFFECTIVE` under the frozen PIT-15 sample-level acceptance contract.
+
+Positive-control preservation: Muse Glimmer 7/7 accepted; material false BLOCKs = 0.
+
+Next: PIT-16 Guardrail Refinement / Adversarial Validation.
 
