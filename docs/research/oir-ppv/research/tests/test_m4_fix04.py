@@ -10,7 +10,11 @@ import pytest
 import yaml
 
 from pipeline.causal_validation import InterventionResult, _collect_failure_cases
-from pipeline.run_m3_experiment import PROTOCOL_VERSION, _protocol_identity
+from pipeline.run_m3_experiment import (
+    PROTOCOL_VERSION,
+    _protocol_identity,
+    run_m3_experiment,
+)
 
 
 def _intervention(score: float) -> InterventionResult:
@@ -51,6 +55,17 @@ def test_protocol_identity_mismatch_rejected():
     config["protocol"]["version"] = "M3-Protocol-v0.invalid"
     with pytest.raises(ValueError, match="Protocol identity mismatch"):
         _protocol_identity(config)
+
+
+def test_protocol_mismatch_rejected_before_output_creation(tmp_path: Path):
+    config = yaml.safe_load(Path("pipeline/stress_nuisance.yaml").read_text(encoding="utf-8"))
+    config["protocol"]["version"] = "M3-Protocol-v0.invalid"
+    config_path = tmp_path / "bad_protocol.yaml"
+    config_path.write_text(yaml.safe_dump(config), encoding="utf-8")
+    output = tmp_path / "should_not_exist"
+    with pytest.raises(ValueError, match="Protocol identity mismatch"):
+        run_m3_experiment(config_path, output)
+    assert not output.exists()
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows console compatibility regression")
