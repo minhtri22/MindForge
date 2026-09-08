@@ -22,10 +22,11 @@ Completed:
 - PIT-12.2 Candidate Execution Strategy Update
 - PIT-13.0 Candidate API Evaluation Freeze
 - PIT-13.0.1 API Candidate Manifest Freeze
+- PIT-13.1.A.1 Smoke Harness Contract Audit
 
 Current:
 
-PIT-12.2 Candidate Execution Strategy Update completed.
+PIT-13.1.A.1 Smoke Harness Contract Audit completed.
 
 Next:
 
@@ -37,7 +38,7 @@ PIT-13.1 Candidate API Evidence Collection pending execution.
 
 Next:
 
-PIT-13.1.A Smoke Qualification
+PIT-13.1.A Smoke Qualification Rerun
 
 Next:
 

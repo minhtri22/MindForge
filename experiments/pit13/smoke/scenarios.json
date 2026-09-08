@@ -1,0 +1,90 @@
+{
+  "version": "pit-13.1-a.1-smoke-scenario-evidence-v1",
+  "source": "Harness-contract freeze created after audit found no exact frozen smoke instances in PIT-10, PIT-12, PIT-13.1, experiments/pit6, or experiments/pit13 sources.",
+  "scenarios": [
+    {
+      "scenario_id": "stable_preference_001",
+      "scenario_type": "stable_preference",
+      "evidence": [
+        {
+          "timestamp": "2026-01-05T09:00:00Z",
+          "source": "user_message",
+          "content": "When I ask for planning help, I prefer short bullet lists first, then detail only if I ask."
+        },
+        {
+          "timestamp": "2026-01-19T14:20:00Z",
+          "source": "assistant_feedback",
+          "content": "That concise bullet outline worked well. Keep starting this way for planning tasks."
+        },
+        {
+          "timestamp": "2026-02-03T08:40:00Z",
+          "source": "user_message",
+          "content": "For roadmap decisions, give me the compact checklist before the reasoning."
+        }
+      ]
+    },
+    {
+      "scenario_id": "preference_drift_001",
+      "scenario_type": "preference_drift",
+      "evidence": [
+        {
+          "timestamp": "2026-01-07T10:15:00Z",
+          "source": "user_message",
+          "content": "For status updates, send me detailed progress notes every few minutes."
+        },
+        {
+          "timestamp": "2026-01-22T16:30:00Z",
+          "source": "assistant_feedback",
+          "content": "The detailed updates are useful while the experiment is new."
+        },
+        {
+          "timestamp": "2026-03-11T11:05:00Z",
+          "source": "user_message",
+          "content": "Now that the process is stable, keep routine progress quiet and only interrupt me for completion, failure, or decisions."
+        },
+        {
+          "timestamp": "2026-03-18T09:45:00Z",
+          "source": "assistant_feedback",
+          "content": "The quieter updates are better. Continue with that style for stable reruns."
+        }
+      ]
+    },
+    {
+      "scenario_id": "user_correction_001",
+      "scenario_type": "user_correction",
+      "evidence": [
+        {
+          "timestamp": "2026-02-01T13:00:00Z",
+          "source": "assistant_inference",
+          "content": "I inferred that the user prefers automatic cleanup of temporary experiment files after each run."
+        },
+        {
+          "timestamp": "2026-02-08T13:25:00Z",
+          "source": "user_correction",
+          "content": "Correction: do not auto-delete experiment files. Preserve temporary outputs until I explicitly approve cleanup."
+        },
+        {
+          "timestamp": "2026-02-09T09:10:00Z",
+          "source": "user_message",
+          "content": "Keep the raw logs from yesterday's run; I may need them for review."
+        }
+      ]
+    },
+    {
+      "scenario_id": "insufficient_evidence_001",
+      "scenario_type": "insufficient_evidence",
+      "evidence": [
+        {
+          "timestamp": "2026-04-04T18:10:00Z",
+          "source": "user_message",
+          "content": "I tried the dashboard in dark mode once tonight."
+        },
+        {
+          "timestamp": "2026-04-05T08:55:00Z",
+          "source": "assistant_observation",
+          "content": "No follow-up preference, repeated usage pattern, comparison, or correction was recorded after that single dark-mode session."
+        }
+      ]
+    }
+  ]
+}

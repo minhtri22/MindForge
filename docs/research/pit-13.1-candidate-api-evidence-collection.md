@@ -2,7 +2,7 @@
 
 Status:
 
-SMOKE FAILED
+SMOKE FAILED / HARNESS AUDIT COMPLETED
 
 ## Execution methodology
 
@@ -92,6 +92,50 @@ Overall amended smoke verdict: **FAIL**.
 
 PIT-13.1.B remains **BLOCKED / NOT STARTED**.
 
+## PIT-13.1.A.1 Smoke Harness Contract Audit
+
+Status: **COMPLETED**
+
+### A. Serialization normalization freeze
+
+The smoke harness now applies one deterministic, model-agnostic normalization function before `json.loads`.
+
+Accepted forms:
+
+- Bare JSON after leading/trailing whitespace removal.
+- A full response wrapped only in one outer `json` Markdown code fence.
+- A full response wrapped only in one outer generic Markdown code fence.
+
+Forbidden repair behaviors:
+
+- No JSON repair.
+- No quote, comma, trailing-comma, key, field, or value modification.
+- No extraction of JSON from prose.
+- No first-brace/last-brace search.
+- No model-specific handling.
+- No retry or semantic repair.
+
+Raw response preservation:
+
+The raw API response remains stored unchanged under `raw_response`. Normalization is applied only to the text passed into `json.loads` for parsing.
+
+### B. Scenario evidence mapping freeze
+
+Audit result:
+
+PIT-10, PIT-12, PIT-13.1, `experiments/pit6/`, and `experiments/pit13/` contained category-level requirements and historical smoke outputs, but no exact frozen evidence records for the four smoke scenario IDs. The four smoke instances are now frozen as a harness-contract manifest at `experiments/pit13/smoke/scenarios.json`.
+
+Frozen scenario IDs:
+
+- `stable_preference_001`
+- `preference_drift_001`
+- `user_correction_001`
+- `insufficient_evidence_001`
+
+The runner now resolves each scenario ID to non-empty evidence content and sends that evidence in the model-facing user message. It no longer sends only `PIT smoke scenario: <scenario_id>`.
+
+Previous PIT-13.1.A result remains **FAIL** and is not overwritten.
+
 ## PIT-13.1.A.0 Runner Validation
 
 Issue observed:
@@ -144,7 +188,7 @@ Execution requires reproducible API access. No candidate ranking or teacher sele
 
 ## Next step
 
-The amended PIT-13.1.A smoke failed schema conformance. Independent review is required before any further action. PIT-13.1.B must not start.
+The amended PIT-13.1.A smoke failed schema conformance. The harness contract audit is complete. Next is a PIT-13.1.A Smoke Qualification Rerun using the frozen scenario evidence manifest and deterministic fence normalization. PIT-13.1.B must not start unless that rerun passes all smoke gates.
 
 Current amended attempt: `experiments/pit13/smoke/`.
 

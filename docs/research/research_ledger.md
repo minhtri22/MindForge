@@ -342,3 +342,17 @@ No manual output repair or fence stripping.
 No prompt, schema, temperature, scoring, or PIT contract change.
 No ranking or teacher selection.
 PIT-13.1.B not started.
+
+## PIT-13.1.A.1 Smoke Harness Contract Audit
+
+Status:
+
+COMPLETED
+
+Scope:
+
+Deterministic fence normalization frozen.
+Scenario evidence mapping frozen.
+No API evidence generated.
+No teacher evaluated.
+Previous PIT-13.1.A FAIL preserved.
