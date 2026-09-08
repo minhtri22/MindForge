@@ -591,3 +591,42 @@ PIT-15 not started.
 Next:
 
 PIT-14.1.B NVIDIA NIM Smoke Qualification.
+
+## PIT-14.1.B NVIDIA NIM Smoke Qualification
+
+Status:
+
+COMPLETED
+
+Provider:
+
+NVIDIA NIM
+
+Candidates:
+
+- `moonshotai/kimi-k3` — `SMOKE_QUALIFIED`
+- `meta/muse-glimmer-30b` — `SMOKE_QUALIFIED`
+- `nvidia/nemotron-3.5-lightning-30b-a3b` — `SMOKE_QUALIFIED`
+- `google/gemma-4-31b-it` — `SMOKE_QUALIFIED`
+- `openai/gpt-oss-20b` — `SMOKE_QUALIFIED`
+
+Execution:
+
+20 planned smoke API samples executed using the four frozen PIT smoke scenarios. API completion was 20/20, schema validity was 20/20, identity mismatch count was 0, and all five candidates passed the per-candidate smoke gate.
+
+Scope:
+
+API calls executed: YES.
+No semantic retries.
+No manual repair.
+No per-model semantic tuning.
+No teacher ranking.
+No teacher qualification verdict.
+No cross-provider comparison.
+No teacher selection.
+No training.
+No MindForge integration.
+
+Next:
+
+PIT-14.1.C NVIDIA NIM Full Evidence Collection for the five smoke-qualified candidates.

@@ -1,0 +1,16 @@
+{
+  "provider": "NVIDIA NIM",
+  "base_url": "https://integrate.api.nvidia.com/v1",
+  "scenario_manifest_path": "experiments/pit13/smoke/scenarios.json",
+  "scenario_manifest_sha256": "af797edf9aa70aff74df219e9444b27b3ac1ea9ec10bbfb9476a3708cc8cb1df",
+  "candidate_manifest_reference": "docs/research/pit-14.1-nvidia-nim-candidate-expansion.md",
+  "temperature": 0,
+  "max_tokens": 4096,
+  "stream": false,
+  "structured_output_policy": "POLICY_B_PROMPT_ENFORCED_JSON_ALL_CANDIDATES",
+  "reasoning_policy": "POLICY_R1_DIRECT_NON_THINKING_WHERE_TECHNICALLY_SUPPORTED",
+  "execution_start": "2026-09-08T11:33:55.873623+07:00",
+  "execution_end": "2026-09-08T11:41:45.980944+07:00",
+  "runner_path": "scripts/pit14_1/run_nvidia_smoke.py",
+  "runner_sha256": "6a43760bffcf9cbc6a9d40b1c3e2877f5b4dbf45779e66924bc40b5f8d1100b5"
+}

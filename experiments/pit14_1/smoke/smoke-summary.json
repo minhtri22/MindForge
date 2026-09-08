@@ -1,0 +1,72 @@
+{
+  "task": "PIT-14.1.B NVIDIA NIM Smoke Qualification",
+  "status": "COMPLETED",
+  "provider": "NVIDIA NIM",
+  "planned_candidates": 5,
+  "scenario_count": 4,
+  "planned_samples": 20,
+  "completed_samples": 20,
+  "schema_valid_samples": 20,
+  "qualified_candidates": 5,
+  "candidate_results": {
+    "moonshotai/kimi-k3": {
+      "api_completed": 4,
+      "schema_valid": 4,
+      "parse_failures": 0,
+      "identity_mismatch": 0,
+      "credential_leakage": 0,
+      "manual_repair": 0,
+      "semantic_retries": 0,
+      "per_model_semantic_tuning": 0,
+      "status": "SMOKE_QUALIFIED"
+    },
+    "meta/muse-glimmer-30b": {
+      "api_completed": 4,
+      "schema_valid": 4,
+      "parse_failures": 0,
+      "identity_mismatch": 0,
+      "credential_leakage": 0,
+      "manual_repair": 0,
+      "semantic_retries": 0,
+      "per_model_semantic_tuning": 0,
+      "status": "SMOKE_QUALIFIED"
+    },
+    "nvidia/nemotron-3.5-lightning-30b-a3b": {
+      "api_completed": 4,
+      "schema_valid": 4,
+      "parse_failures": 0,
+      "identity_mismatch": 0,
+      "credential_leakage": 0,
+      "manual_repair": 0,
+      "semantic_retries": 0,
+      "per_model_semantic_tuning": 0,
+      "status": "SMOKE_QUALIFIED"
+    },
+    "google/gemma-4-31b-it": {
+      "api_completed": 4,
+      "schema_valid": 4,
+      "parse_failures": 0,
+      "identity_mismatch": 0,
+      "credential_leakage": 0,
+      "manual_repair": 0,
+      "semantic_retries": 0,
+      "per_model_semantic_tuning": 0,
+      "status": "SMOKE_QUALIFIED"
+    },
+    "openai/gpt-oss-20b": {
+      "api_completed": 4,
+      "schema_valid": 4,
+      "parse_failures": 0,
+      "identity_mismatch": 0,
+      "credential_leakage": 0,
+      "manual_repair": 0,
+      "semantic_retries": 0,
+      "per_model_semantic_tuning": 0,
+      "status": "SMOKE_QUALIFIED"
+    }
+  },
+  "ranking_performed": false,
+  "teacher_qualification_verdicts_assigned": false,
+  "cross_provider_comparison_performed": false,
+  "teacher_selected": false
+}

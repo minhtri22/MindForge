@@ -267,3 +267,79 @@ The NVIDIA candidate-expansion sequence is frozen as:
 Only after PIT-14.1.D may the research track reassess whether `PIT-15 Teaching Signal Guardrail Experiment` remains the smallest justified next step.
 
 PIT-15 is not started by this milestone.
+
+## PIT-14.1.B NVIDIA NIM Smoke Qualification
+
+Status: **COMPLETED**
+
+Execution date: 2026-09-08.
+
+Runner: `scripts/pit14_1/run_nvidia_smoke.py`
+
+Runner SHA256: `6a43760bffcf9cbc6a9d40b1c3e2877f5b4dbf45779e66924bc40b5f8d1100b5`
+
+Provider: `NVIDIA NIM`
+
+Frozen candidates executed:
+
+- `moonshotai/kimi-k3`
+- `meta/muse-glimmer-30b`
+- `nvidia/nemotron-3.5-lightning-30b-a3b`
+- `google/gemma-4-31b-it`
+- `openai/gpt-oss-20b`
+
+Frozen smoke scenarios:
+
+- `stable_preference_001`
+- `preference_drift_001`
+- `user_correction_001`
+- `insufficient_evidence_001`
+
+Scenario source: `experiments/pit13/smoke/scenarios.json`
+
+Scenario SHA256: `af797edf9aa70aff74df219e9444b27b3ac1ea9ec10bbfb9476a3708cc8cb1df`
+
+Planned samples: 20 (`5 candidates x 4 scenarios`).
+
+| Candidate | API completed | Schema valid | Identity mismatch | Smoke status |
+| --- | ---: | ---: | ---: | --- |
+| `moonshotai/kimi-k3` | 4/4 | 4/4 | 0 | `SMOKE_QUALIFIED` |
+| `meta/muse-glimmer-30b` | 4/4 | 4/4 | 0 | `SMOKE_QUALIFIED` |
+| `nvidia/nemotron-3.5-lightning-30b-a3b` | 4/4 | 4/4 | 0 | `SMOKE_QUALIFIED` |
+| `google/gemma-4-31b-it` | 4/4 | 4/4 | 0 | `SMOKE_QUALIFIED` |
+| `openai/gpt-oss-20b` | 4/4 | 4/4 | 0 | `SMOKE_QUALIFIED` |
+
+Pool summary:
+
+- Completed API samples: 20/20.
+- Schema-valid samples: 20/20.
+- Smoke-qualified candidates: 5/5.
+- Parse failures: 0.
+- Identity mismatches: 0.
+- Credential leakage: 0.
+- Manual repair: 0.
+- Semantic retries: 0.
+- Per-model semantic tuning: 0.
+
+Execution policies remained frozen:
+
+- prompt-enforced JSON for all candidates;
+- direct/non-thinking where technically supported;
+- `temperature=0`;
+- `max_tokens=4096`;
+- `stream=false`;
+- per-candidate smoke qualification.
+
+Artifacts:
+
+- `experiments/pit14_1/smoke/raw.jsonl`
+- `experiments/pit14_1/smoke/normalized.jsonl`
+- `experiments/pit14_1/smoke/results.json`
+- `experiments/pit14_1/smoke/smoke-summary.json`
+- `experiments/pit14_1/smoke/execution-metadata.json`
+
+Interpretation boundary:
+
+This smoke result establishes only machine-consumable PIT Teaching Signal interface compliance under the frozen NVIDIA execution contract. It does not establish semantic teacher quality.
+
+No teacher ranking was performed. No semantic qualification verdict was assigned. No comparison against PIT-13 candidates was performed. No teacher was selected.

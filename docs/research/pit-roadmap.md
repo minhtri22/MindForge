@@ -44,6 +44,9 @@ Strongest current candidate: `minimax/minimax-m3:free` under PIT-13 evidence.
 PIT-14.1 NVIDIA NIM Candidate Expansion:
 
 - PIT-14.1.A Candidate Manifest & Execution Freeze — `COMPLETED`
+- PIT-14.1.B NVIDIA NIM Smoke Qualification — `COMPLETED`
 
-Next: PIT-14.1.B NVIDIA NIM Smoke Qualification.
+Smoke-qualified: 5 / 5.
+
+Next: PIT-14.1.C NVIDIA NIM Full Evidence Collection for smoke-qualified candidates only.
 
