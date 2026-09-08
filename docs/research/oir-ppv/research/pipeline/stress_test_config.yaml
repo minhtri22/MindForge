@@ -1,0 +1,58 @@
+# Stress Test Config for Real Learners
+# Uses AutoencoderEncoder and MLPDecoder
+
+experiment:
+  id: "EXP-M4-STRESS-001"
+  name: "Stress Test with Real Learners"
+  milestone: "M4"
+  description: "Stress test with real AutoencoderEncoder and MLPDecoder learners"
+
+environment:
+  family: "ENV-3"
+  config_path: "environments/env3_config.yaml"
+  seed: 42
+  splits: ["train", "val", "test"]
+
+pipeline:
+  invariant_extractor:
+    type: "Autoencoder"
+    output_dim: 64
+    hidden_dim: 128
+    learning_rate: 0.01
+    epochs: 50
+    seed: 42
+  
+  generator:
+    type: "MLPDecoder"
+    output_dim: 6  # ENV-3 observation dim
+    hidden_dims: [128, 64]
+    learning_rate: 0.01
+    epochs: 50
+    seed: 42
+
+evaluation:
+  enabled: true
+  metrics:
+    - "invariant_consistency"
+    - "generation_validity"
+    - "reconstruction_quality"
+    - "invariant_preservation"
+    - "context_response"
+    - "diversity"
+    - "distribution_similarity"
+  
+  intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+  counterfactual: true
+  causal_validation: true
+  dependency_analysis: true
+
+output:
+  base_dir: "artifacts/stress_test"
+  save_intermediate: true
+  save_generated: true
+  save_evaluation: true
+
+provenance:
+  track_config_hashes: true
+  track_seeds: true
+  track_timing: true

@@ -1,0 +1,49 @@
+# B1: Domain Generalization Baseline Configuration
+# IRM (Invariant Risk Minimization), VREx class methods
+
+baseline:
+  id: "B1"
+  name: "Domain Generalization (IRM, VREx class)"
+  type: "dg"
+  version: "1.0"
+
+model:
+  architecture: "mlp"
+  hidden_dims: [256, 128, 64]
+  activation: "relu"
+  dropout: 0.1
+
+training:
+  optimizer: "adam"
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 100
+  early_stopping_patience: 10
+  base_loss: "cross_entropy"
+
+# Domain generalization methods
+dg_method: "irm"  # Options: "irm", "vrex", "groupdro", "coral"
+
+# IRM specific
+irm:
+  penalty_weight: 1.0
+  warmup_epochs: 10
+
+# VREx specific
+vrex:
+  penalty_weight: 1.0
+
+# GroupDRO specific
+groupdro:
+  eta: 0.01
+
+# CORAL specific
+coral:
+  penalty_weight: 1.0
+
+# Context handling: domain labels required
+context_handling: "domain_label"
+
+evaluation:
+  metrics: ["accuracy", "auroc", "f1"]
+  ood_splits: true

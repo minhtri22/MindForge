@@ -1,0 +1,39 @@
+# B2: Encoder Representation Baseline Configuration
+# Learn encoder representation without explicit invariant constraint
+
+baseline:
+  id: "B2"
+  name: "Encoder Representation Baseline"
+  type: "encoder"
+  version: "1.0"
+
+encoder:
+  architecture: "mlp"
+  hidden_dims: [256, 128]
+  latent_dim: 64
+  activation: "relu"
+  dropout: 0.1
+
+predictor:
+  architecture: "mlp"
+  hidden_dims: [64, 32]
+  activation: "relu"
+
+training:
+  optimizer: "adam"
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 100
+  early_stopping_patience: 10
+  loss: "cross_entropy"
+
+# No explicit invariant loss - just representation learning
+representation_loss:
+  enabled: false
+
+# Context handling: encoder sees context but not forced to be invariant
+context_handling: "encoder_input"
+
+evaluation:
+  metrics: ["accuracy", "auroc", "f1", "representation_quality"]
+  ood_splits: true

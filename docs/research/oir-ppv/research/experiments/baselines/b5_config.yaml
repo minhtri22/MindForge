@@ -1,0 +1,57 @@
+# B5: Oracle Invariant Baseline Configuration
+# Ground truth invariant representation (upper bound)
+
+baseline:
+  id: "B5"
+  name: "Oracle Invariant"
+  type: "oracle"
+  version: "1.0"
+
+# Oracle has access to true structural variables
+oracle:
+  uses_true_structural_variables: true
+  structural_variables: ["core_feature", "core_category", "shape", "size", "S", "A"]
+  ignores: ["spurious_feature", "background_noise", "lighting", "texture_noise", "occlusion", "background_color", "rotation", "N"]
+
+# Perfect invariant representation = true structural variables
+invariant_representation:
+  type: "ground_truth"
+  dimension: "variable"  # Depends on environment
+
+# Perfect predictor on true invariant
+predictor:
+  architecture: "optimal"
+  # In practice: logistic regression or simple MLP on true features
+
+training:
+  # No training needed for oracle - uses ground truth
+  # But we simulate training for fair comparison
+  optimizer: "adam"
+  learning_rate: 0.01
+  batch_size: 64
+  epochs: 50
+  loss: "cross_entropy"
+
+# No invariant constraint needed - already invariant by construction
+invariant_constraint:
+  enabled: false
+
+# No generator needed for oracle (or perfect generator)
+generator:
+  enabled: false
+
+context_handling: "oracle"
+
+evaluation:
+  metrics: ["accuracy", "auroc", "f1", "oracle_gap"]
+  ood_splits: true
+
+# Oracle should achieve perfect intervention/counterfactual
+intervention:
+  enabled: true
+  types: ["do(A)", "do(Z)", "do(N)"]
+  num_trials: 100
+
+counterfactual:
+  enabled: true
+  num_samples: 500

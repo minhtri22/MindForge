@@ -1,0 +1,95 @@
+# B4: OIR-PPV Full Pipeline Configuration
+# Invariant representation I + Manifestation Generator G(I,Z,N)
+
+baseline:
+  id: "B4"
+  name: "OIR-PPV Invariant + Generator Pipeline"
+  type: "oir_ppv"
+  version: "1.0"
+
+# Stage 1: Invariant Learner
+invariant_learner:
+  architecture: "mlp"
+  hidden_dims: [256, 128]
+  invariant_dim: 64
+  activation: "relu"
+  dropout: 0.1
+
+predictor:
+  architecture: "mlp"
+  hidden_dims: [64, 32]
+  activation: "relu"
+
+training_stage1:
+  optimizer: "adam"
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 100
+  early_stopping_patience: 10
+  base_loss: "cross_entropy"
+
+invariant_constraint:
+  enabled: true
+  method: "hsic"
+  weight: 1.0
+  hsic:
+    kernel: "rbf"
+    sigma: 1.0
+
+# Stage 2: Manifestation Generator G(I, Z, N)
+generator:
+  enabled: true
+  architecture: "conditional_mlp"
+  hidden_dims: [256, 128, 256]
+  activation: "relu"
+  output_activation: "tanh"
+  
+  # Input: concatenated [I, Z_embedding, N]
+  context_embedding_dim: 32
+  nuisance_dim: 16
+
+training_stage2:
+  optimizer: "adam"
+  learning_rate: 0.0005
+  batch_size: 64
+  epochs: 50
+  early_stopping_patience: 10
+  
+  # Generation losses
+  reconstruction_loss: "mse"
+  invariant_preservation_loss:
+    enabled: true
+    weight: 1.0
+    method: "predictor_consistency"  # Generated samples should have same prediction
+  context_response_loss:
+    enabled: true
+    weight: 0.5
+    method: "context_classification"  # Generated samples should reflect Z
+
+# Joint fine-tuning (optional)
+joint_finetune:
+  enabled: false
+  epochs: 20
+  learning_rate: 0.0001
+
+context_handling: "generator_conditioning"
+
+evaluation:
+  metrics: [
+    "accuracy", "auroc", "f1",
+    "invariant_quality", "nuisance_independence",
+    "generation_fid", "invariant_preservation", "context_response_accuracy",
+    "intervention_consistency", "counterfactual_validity"
+  ]
+  ood_splits: true
+
+# Intervention evaluation
+intervention:
+  enabled: true
+  types: ["do(A)", "do(Z)", "do(N)"]
+  num_trials: 100
+
+# Counterfactual evaluation
+counterfactual:
+  enabled: true
+  num_samples: 500

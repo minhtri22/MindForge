@@ -1,0 +1,73 @@
+protocol:
+  name: "M3_PROTOCOL"
+  version: "M3-Protocol-v1.0"
+  path: "benchmark/M3_PROTOCOL.md"
+
+# Stress Scenario 2: Context Distribution Shift
+# ENV-3 with shifted context distribution
+
+experiment:
+  id: "EXP-M4-STRESS-CONTEXT"
+  name: "Stress Test: Context Distribution Shift"
+  milestone: "M4"
+  description: "Test invariance under context distribution shift"
+
+environment:
+  family: "ENV-3"
+  config_path: "environments/env3_config.yaml"
+  seed: 42
+  splits: ["train", "val", "test"]
+  overrides:
+    generation:
+      num_episodes: 300
+    ood_splits:
+      - name: "shifted_context"
+        holdout: ["ctx_3"]
+
+stress_assertion:
+  type: "context_distribution"
+  ood_split: "ood_shifted_context"
+  min_total_variation: 0.5
+
+pipeline:
+  invariant_extractor:
+    type: "Autoencoder"
+    output_dim: 64
+    hidden_dim: 128
+    learning_rate: 0.01
+    epochs: 50
+    seed: 42
+  
+  generator:
+    type: "MLPDecoder"
+    output_dim: 6
+    hidden_dims: [128, 64]
+    learning_rate: 0.01
+    epochs: 50
+    seed: 42
+
+evaluation:
+  enabled: true
+  metrics:
+    - "invariant_consistency"
+    - "generation_validity"
+    - "reconstruction_quality"
+    - "invariant_preservation"
+    - "context_response"
+    - "diversity"
+    - "distribution_similarity"
+  intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+  counterfactual: true
+  causal_validation: true
+  dependency_analysis: true
+
+output:
+  base_dir: "artifacts/stress_test"
+  save_intermediate: true
+  save_generated: true
+  save_evaluation: true
+
+provenance:
+  track_config_hashes: true
+  track_seeds: true
+  track_timing: true

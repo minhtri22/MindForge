@@ -1,0 +1,108 @@
+# OIR-PPV Benchmark Configuration Skeleton
+# This file defines the benchmark structure. Actual values filled per experiment.
+
+benchmark:
+  name: "OIR-PPV"
+  version: "1.0"
+  description: "Controlled Causal Benchmark for Invariant Representation → Prediction → Validation"
+
+# Environment families (ENV-1 to ENV-4)
+environments:
+  - family: "ENV-1"
+    name: "Identity and Style Shift"
+    description: "Keep mechanism fixed, vary style/identity/presentation"
+    variants:
+      - "default"
+    config_path: "environments/env1_config.yaml"
+
+  - family: "ENV-2"
+    name: "Compositional Generation"
+    description: "Evaluate unseen combinations of character, style, context"
+    variants:
+      - "default"
+    config_path: "environments/env2_config.yaml"
+
+  - family: "ENV-3"
+    name: "Causal Dynamics"
+    description: "Structural stability with state, action, outcome, intervention"
+    variants:
+      - "default"
+    config_path: "environments/env3_config.yaml"
+
+  - family: "ENV-4"
+    name: "Adversarial Shortcut"
+    description: "Training correlations between nuisance and outcome, test shortcut resistance"
+    variants:
+      - "default"
+    config_path: "environments/env4_config.yaml"
+
+# Baseline methods (B0 to B5)
+baselines:
+  - id: "B0"
+    name: "ERM / Context Memorization"
+    type: "erm"
+    config_path: "baselines/b0_config.yaml"
+
+  - id: "B1"
+    name: "Domain Generalization (IRM, VREx class)"
+    type: "dg"
+    config_path: "baselines/b1_config.yaml"
+
+  - id: "B2"
+    name: "Encoder Representation Baseline"
+    type: "encoder"
+    config_path: "baselines/b2_config.yaml"
+
+  - id: "B3"
+    name: "Invariant Representation Only"
+    type: "invariant_only"
+    config_path: "baselines/b3_config.yaml"
+
+  - id: "B4"
+    name: "OIR-PPV Invariant + Generator Pipeline"
+    type: "oir_ppv"
+    config_path: "baselines/b4_config.yaml"
+
+  - id: "B5"
+    name: "Oracle Invariant"
+    type: "oracle"
+    config_path: "baselines/b5_config.yaml"
+
+# Evaluation protocol
+evaluation:
+  protocol: "fixed_split"
+  splits:
+    - "train"
+    - "val"
+    - "test"
+    - "ood"  # out-of-distribution
+  metrics:
+    generalization:
+      - "accuracy"
+      - "auroc"
+      - "f1"
+    causal_stability:
+      - "delta_causal"
+      - "intervention_consistency"
+    generation_validity:
+      - "fid"
+      - "invariant_preservation_score"
+      - "context_response_accuracy"
+
+# Experiment execution
+execution:
+  seeds: [42, 123, 456, 789, 999]  # Multiple seeds for statistical validity
+  num_runs_per_seed: 1
+  device: "cpu"  # CPU-friendly per CLDP rules
+  log_level: "INFO"
+  output_dir: "artifacts/experiments/"
+
+# Provenance tracking
+provenance:
+  template: "artifacts/provenance_template.yaml"
+  required_fields:
+    - "experiment.id"
+    - "experiment.git_commit"
+    - "environment.seed"
+    - "environment.config_hash"
+    - "invariant_learner.config_hash"

@@ -1,0 +1,145 @@
+# OIR-PPV Benchmark Suite Example Configuration
+# Run with: python -m benchmark.run_benchmark suite --suite-config benchmark/suite_example.yaml
+
+experiments:
+  # ENV-1 with all baselines
+  - experiment_id: "EXP-M2-ENV1-B0"
+    env_config: "environments/env1_config.yaml"
+    baseline: "B0"
+    baseline_config: "experiments/baselines/b0_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV1-B1"
+    env_config: "environments/env1_config.yaml"
+    baseline: "B1"
+    baseline_config: "experiments/baselines/b1_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV1-B2"
+    env_config: "environments/env1_config.yaml"
+    baseline: "B2"
+    baseline_config: "experiments/baselines/b2_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV1-B3"
+    env_config: "environments/env1_config.yaml"
+    baseline: "B3"
+    baseline_config: "experiments/baselines/b3_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV1-B4"
+    env_config: "environments/env1_config.yaml"
+    baseline: "B4"
+    baseline_config: "experiments/baselines/b4_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV1-B5"
+    env_config: "environments/env1_config.yaml"
+    baseline: "B5"
+    baseline_config: "experiments/baselines/b5_config.yaml"
+    seed: 42
+
+  # ENV-2 with all baselines
+  - experiment_id: "EXP-M2-ENV2-B0"
+    env_config: "environments/env2_config.yaml"
+    baseline: "B0"
+    baseline_config: "experiments/baselines/b0_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV2-B1"
+    env_config: "environments/env2_config.yaml"
+    baseline: "B1"
+    baseline_config: "experiments/baselines/b1_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV2-B2"
+    env_config: "environments/env2_config.yaml"
+    baseline: "B2"
+    baseline_config: "experiments/baselines/b2_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV2-B3"
+    env_config: "environments/env2_config.yaml"
+    baseline: "B3"
+    baseline_config: "experiments/baselines/b3_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV2-B4"
+    env_config: "environments/env2_config.yaml"
+    baseline: "B4"
+    baseline_config: "experiments/baselines/b4_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV2-B5"
+    env_config: "environments/env2_config.yaml"
+    baseline: "B5"
+    baseline_config: "experiments/baselines/b5_config.yaml"
+    seed: 42
+
+  # ENV-3 with all baselines + intervention
+  - experiment_id: "EXP-M2-ENV3-B0"
+    env_config: "environments/env3_config.yaml"
+    baseline: "B0"
+    baseline_config: "experiments/baselines/b0_config.yaml"
+    seed: 42
+    intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+  
+  - experiment_id: "EXP-M2-ENV3-B3"
+    env_config: "environments/env3_config.yaml"
+    baseline: "B3"
+    baseline_config: "experiments/baselines/b3_config.yaml"
+    seed: 42
+    intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+  
+  - experiment_id: "EXP-M2-ENV3-B4"
+    env_config: "environments/env3_config.yaml"
+    baseline: "B4"
+    baseline_config: "experiments/baselines/b4_config.yaml"
+    seed: 42
+    intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+    counterfactual: true
+  
+  - experiment_id: "EXP-M2-ENV3-B5"
+    env_config: "environments/env3_config.yaml"
+    baseline: "B5"
+    baseline_config: "experiments/baselines/b5_config.yaml"
+    seed: 42
+    intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+    counterfactual: true
+
+  # ENV-4 with all baselines
+  - experiment_id: "EXP-M2-ENV4-B0"
+    env_config: "environments/env4_config.yaml"
+    baseline: "B0"
+    baseline_config: "experiments/baselines/b0_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV4-B1"
+    env_config: "environments/env4_config.yaml"
+    baseline: "B1"
+    baseline_config: "experiments/baselines/b1_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV4-B2"
+    env_config: "environments/env4_config.yaml"
+    baseline: "B2"
+    baseline_config: "experiments/baselines/b2_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV4-B3"
+    env_config: "environments/env4_config.yaml"
+    baseline: "B3"
+    baseline_config: "experiments/baselines/b3_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV4-B4"
+    env_config: "environments/env4_config.yaml"
+    baseline: "B4"
+    baseline_config: "experiments/baselines/b4_config.yaml"
+    seed: 42
+  
+  - experiment_id: "EXP-M2-ENV4-B5"
+    env_config: "environments/env4_config.yaml"
+    baseline: "B5"
+    baseline_config: "experiments/baselines/b5_config.yaml"
+    seed: 42

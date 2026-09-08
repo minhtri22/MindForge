@@ -1,0 +1,104 @@
+# ENV-4: Adversarial Shortcut Configuration
+# Introduce training correlations between nuisance variables and outcomes,
+# then test shortcut resistance
+
+environment:
+  family: "ENV-4"
+  name: "Adversarial Shortcut"
+  version: "1.0"
+
+generation:
+  mechanism: "shortcut_injection"
+  num_samples: 10000
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+# True invariant mechanism
+true_mechanism:
+  structural_variables:
+    - name: "core_feature"
+      type: "continuous"
+      distribution: "normal"
+      params: {mean: 0.0, std: 1.0}
+    - name: "core_category"
+      type: "categorical"
+      values: ["cat_0", "cat_1", "cat_2"]
+      distribution: "uniform"
+  
+  outcome:
+    name: "true_label"
+    type: "categorical"
+    determined_by: ["core_category"]
+    mapping:
+      "cat_0": 0
+      "cat_1": 1
+      "cat_2": 2
+
+# Spurious correlation injection (only in training)
+shortcut:
+  nuisance_variable:
+    name: "spurious_feature"
+    type: "continuous"
+    distribution: "normal"
+    params: {mean: 0.0, std: 1.0}
+  
+  # In training: spurious_feature correlates with true_label
+  # Correlation strength (0 = no shortcut, 1 = perfect shortcut)
+  correlation_strength: 0.9
+  
+  # How shortcut is injected
+  injection_method: "conditional"  # P(spurious | label) shifted
+  train_conditional_means:
+    0: -1.5  # class 0 -> spurious_feature ~ N(-1.5, 1)
+    1: 0.0   # class 1 -> spurious_feature ~ N(0.0, 1)
+    2: 1.5   # class 2 -> spurious_feature ~ N(1.5, 1)
+  
+  # In test: correlation broken (spurious_feature independent of label)
+  test_conditional_means:
+    0: 0.0
+    1: 0.0
+    2: 0.0
+
+# Additional nuisance variables (not correlated)
+other_nuisance:
+  - name: "background_color"
+    type: "categorical"
+    values: ["red", "green", "blue"]
+    distribution: "uniform"
+  - name: "rotation"
+    type: "continuous"
+    distribution: "uniform"
+    params: {low: -3.14, high: 3.14}
+
+# Context variables (Z)
+context_variables:
+  - name: "domain"
+    type: "categorical"
+    values: ["domain_A", "domain_B"]
+    distribution: "uniform"
+    # Shortcut strength may vary by domain
+    domain_shortcut_strength:
+      "domain_A": 0.9
+      "domain_B": 0.3
+
+# Intervention targets
+intervention_targets:
+  - "spurious_feature"
+  - "background_color"
+  - "rotation"
+  - "domain"
+
+# OOD test splits - shortcut broken
+ood_splits:
+  - name: "shortcut_broken"
+    description: "Test set where spurious correlation is removed"
+    shortcut_strength: 0.0
+  - name: "reversed_shortcut"
+    description: "Test set with reversed correlation"
+    train_conditional_means:
+      0: 1.5
+      1: 0.0
+      2: -1.5
+  - name: "unseen_domain"
+    holdout: ["domain_B"]

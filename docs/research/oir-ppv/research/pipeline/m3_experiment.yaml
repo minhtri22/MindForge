@@ -1,0 +1,64 @@
+# M3 OIR-PPV Pipeline Experiment Configuration
+# Run with: python -m pipeline.run_m3_experiment --config pipeline/m3_experiment.yaml
+
+experiment:
+  id: "EXP-M3-001"
+  name: "OIR-PPV Pipeline M3 Evaluation"
+  milestone: "M3"
+  description: "End-to-end pipeline evaluation: Experience -> I -> G(I,Z,N) -> Manifestation"
+
+# Environment
+environment:
+  family: "ENV-3"
+  config_path: "environments/env3_config.yaml"
+  seed: 42
+  splits: ["train", "val", "test"]
+
+# Pipeline components
+pipeline:
+  # Invariant Extractor
+  invariant_extractor:
+    type: "OIRInvariantExtractor"  # Options: PlaceholderInvariantExtractor, OIRInvariantExtractor
+    invariant_dim: 64
+    encoder_hidden: [256, 128]
+    predictor_hidden: [64, 32]
+    invariant_weight: 1.0
+    seed: 42
+  
+  # Manifestation Generator
+  generator:
+    type: "OIRManifestationGenerator"  # Options: PlaceholderManifestationGenerator, OIRManifestationGenerator
+    output_dim: 6  # ENV-3 observation dim
+    invariant_dim: 64
+    context_dim: 3  # Z one-hot
+    nuisance_dim: 1  # N
+    decoder_hidden: [256, 128, 256]
+    seed: 42
+
+# Evaluation
+evaluation:
+  enabled: true
+  metrics:
+    - "invariant_consistency"
+    - "generation_validity"
+    - "reconstruction_quality"
+    - "invariant_preservation"
+    - "context_response"
+    - "diversity"
+    - "distribution_similarity"
+  
+  intervention_targets: ["do(A)", "do(Z)", "do(N)"]
+  counterfactual: true
+
+# Output
+output:
+  base_dir: "artifacts/pipeline"
+  save_intermediate: true
+  save_generated: true
+  save_evaluation: true
+
+# Provenance
+provenance:
+  track_config_hashes: true
+  track_seeds: true
+  track_timing: true
