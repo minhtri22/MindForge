@@ -41,7 +41,11 @@ class Env2CompositionalGeneration(BaseEnvironment):
         
         observations_list = []
         labels_list = []
-        metadata_list = {"factor_values": {name: [] for name in factor_names}}
+        nuisance_names = [v["name"] for v in self.config.raw_config.get("nuisance_variables", [])]
+        metadata_list = {
+            "factor_values": {name: [] for name in factor_names},
+            "nuisance_variables": {name: [] for name in nuisance_names},
+        }
         combo_indices = {"train": [], "val": [], "test": [], "ood": []}
         current_idx = 0
         
@@ -68,6 +72,10 @@ class Env2CompositionalGeneration(BaseEnvironment):
             # Track metadata
             for fname, fval in zip(factor_names, combo):
                 metadata_list["factor_values"][fname].extend([fval] * n_combo_samples)
+            for nuisance_name, nuisance_values in nuisances.items():
+                metadata_list["nuisance_variables"][nuisance_name].extend(
+                    nuisance_values.tolist()
+                )
             
             # Track combo indices
             is_train = combo in train_combos
@@ -109,6 +117,16 @@ class Env2CompositionalGeneration(BaseEnvironment):
         # Convert metadata lists to arrays
         for fname in metadata_list["factor_values"]:
             metadata_list["factor_values"][fname] = np.array(metadata_list["factor_values"][fname])
+        for name in metadata_list["nuisance_variables"]:
+            metadata_list["nuisance_variables"][name] = np.array(
+                metadata_list["nuisance_variables"][name]
+            )
+        # Character determines the target; style/context are domains, not labels.
+        metadata_list["context_variables"] = {
+            name: metadata_list["factor_values"][name]
+            for name in factor_names
+            if name not in self.config.raw_config["outcome"].get("determined_by", [])
+        }
         
         return GeneratedData(
             observations=observations,
@@ -160,9 +178,12 @@ class Env2CompositionalGeneration(BaseEnvironment):
         # Nuisance variables
         for name, arr in nuisances.items():
             if arr.ndim == 1:
-                if arr.dtype.kind in 'SU':
-                    unique = np.unique(arr)
-                    for u in unique:
+                if arr.dtype.kind in 'SUO':
+                    config = next(
+                        v for v in self.config.raw_config["nuisance_variables"]
+                        if v["name"] == name
+                    )
+                    for u in config.get("values", []):
                         all_arrays.append((arr == u).astype(float))
                 else:
                     all_arrays.append(arr)
@@ -205,17 +226,27 @@ class Env2CompositionalGeneration(BaseEnvironment):
     
     def intervene(self, data: GeneratedData, target: str, value: Any) -> GeneratedData:
         """Apply intervention on factor or nuisance variable."""
-        new_metadata = {k: v.copy() if isinstance(v, dict) else v for k, v in data.metadata.items()}
+        import copy
+        new_metadata = copy.deepcopy(data.metadata)
         
         if target in new_metadata.get("factor_values", {}):
             new_metadata["factor_values"][target] = np.full_like(
                 new_metadata["factor_values"][target], value
             )
+            if target in new_metadata.get("context_variables", {}):
+                new_metadata["context_variables"][target] = np.full_like(
+                    new_metadata["context_variables"][target], value
+                )
+        elif target in new_metadata.get("nuisance_variables", {}):
+            new_metadata["nuisance_variables"][target] = np.full_like(
+                new_metadata["nuisance_variables"][target], value
+            )
         
-        # Rebuild observations (simplified - full rebuild would need factor configs)
-        # For now, return copy with metadata updated
+        new_obs = self._rebuild_observations(
+            new_metadata["factor_values"], new_metadata["nuisance_variables"]
+        )
         return GeneratedData(
-            observations=data.observations.copy(),
+            observations=new_obs,
             labels=data.labels.copy(),
             metadata=new_metadata,
             splits=data.splits.copy(),
@@ -223,6 +254,25 @@ class Env2CompositionalGeneration(BaseEnvironment):
             seed=data.seed,
             timestamp=datetime.now().isoformat()
         )
+
+    def _rebuild_observations(
+        self, factor_values: Dict[str, np.ndarray],
+        nuisance_values: Dict[str, np.ndarray]
+    ) -> np.ndarray:
+        """Rebuild the fixed observation schema after an intervention."""
+        columns = []
+        for factor in self.config.raw_config.get("factors", []):
+            values = np.asarray(factor_values[factor["name"]])
+            for category in factor.get("values", []):
+                columns.append((values == category).astype(float))
+        for nuisance in self.config.raw_config.get("nuisance_variables", []):
+            values = np.asarray(nuisance_values[nuisance["name"]])
+            if nuisance["type"] == "categorical":
+                for category in nuisance.get("values", []):
+                    columns.append((values == category).astype(float))
+            else:
+                columns.append(values.astype(float))
+        return np.column_stack(columns)
 
 
 from datetime import datetime

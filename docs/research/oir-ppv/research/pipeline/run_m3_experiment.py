@@ -15,6 +15,7 @@ from typing import Any, Dict, Iterable, Optional
 import numpy as np
 import yaml
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -32,6 +33,7 @@ from pipeline.dependency_analysis import run_dependency_analysis
 from pipeline.generator import GenerationResult
 from pipeline.invariant_extractor import InvariantExtractionResult
 from pipeline.learners import LearnerRegistry, create_learner_from_config
+import pipeline.learners_extended  # noqa: F401 -- production registry side effects
 
 
 RESEARCH_ROOT = Path(__file__).parent.parent
@@ -394,6 +396,29 @@ def validate_shift_assertion(env_data: Any, assertion: dict) -> dict:
                 "passed": len(ood) > 0 and len(overlap) == 0,
             }
         )
+    elif kind == "composition_holdout":
+        factors = env_data.metadata.get("factor_values", {})
+        if not isinstance(factors, dict) or not factors:
+            raise ValueError("composition_holdout requires factor_values metadata")
+        names = sorted(factors)
+        train_combinations = {
+            tuple(str(np.asarray(factors[name])[index]) for name in names)
+            for index in train
+        }
+        test_combinations = {
+            tuple(str(np.asarray(factors[name])[index]) for name in names)
+            for index in test
+        }
+        overlap = train_combinations & test_combinations
+        evidence.update(
+            {
+                "factor_names": names,
+                "train_combination_count": len(train_combinations),
+                "test_combination_count": len(test_combinations),
+                "combination_overlap": len(overlap),
+                "passed": bool(test_combinations) and not overlap,
+            }
+        )
     else:
         raise ValueError(f"Unknown stress assertion type: {kind!r}")
 
@@ -495,6 +520,7 @@ def _source_snapshot_provenance() -> dict:
 def _dependency_versions() -> dict:
     import scipy
     import sklearn
+    import torch
 
     return {
         "python": platform.python_version(),
@@ -502,6 +528,7 @@ def _dependency_versions() -> dict:
         "pyyaml": yaml.__version__,
         "scikit_learn": sklearn.__version__,
         "scipy": scipy.__version__,
+        "torch": torch.__version__,
     }
 
 
@@ -518,6 +545,30 @@ def _classification_scores(
     predictor.fit(train_i, train_labels)
     train_score = float(predictor.score(train_i, train_labels))
     seen_score = float(predictor.score(seen_i, seen_labels))
+
+    def auroc(features: np.ndarray, labels: np.ndarray) -> tuple[Optional[float], Optional[str]]:
+        try:
+            probabilities = predictor.predict_proba(features)
+            if probabilities.shape[1] == 2:
+                return float(roc_auc_score(labels, probabilities[:, 1])), None
+            return float(
+                roc_auc_score(
+                    labels, probabilities, multi_class="ovr",
+                    labels=predictor.classes_,
+                )
+            ), None
+        except ValueError as error:
+            return None, str(error)
+
+    seen_auroc, seen_auroc_reason = auroc(seen_i, seen_labels)
+    task_metrics = {
+        "task_type": "classification",
+        "accuracy": seen_score,
+        "auroc": seen_auroc,
+        "auroc_missing_reason": seen_auroc_reason,
+        "r2": None,
+        "r2_missing_reason": "classification task",
+    }
     if ood_i is None or not len(ood_i):
         return {
             "train_environment_score": train_score,
@@ -526,14 +577,20 @@ def _classification_scores(
             "generalization_delta": None,
             "generalization_delta_direction": "unseen_minus_train",
             "missing_reason": "no non-empty OOD split",
+            "task_metrics": task_metrics,
         }
     unseen_score = float(predictor.score(ood_i, ood_labels))
+    unseen_auroc, unseen_auroc_reason = auroc(ood_i, ood_labels)
+    task_metrics["unseen_accuracy"] = unseen_score
+    task_metrics["unseen_auroc"] = unseen_auroc
+    task_metrics["unseen_auroc_missing_reason"] = unseen_auroc_reason
     return {
         "train_environment_score": train_score,
         "seen_environment_score": seen_score,
         "unseen_environment_score": unseen_score,
         "generalization_delta": unseen_score - train_score,
         "generalization_delta_direction": "unseen_minus_train",
+        "task_metrics": task_metrics,
     }
 
 

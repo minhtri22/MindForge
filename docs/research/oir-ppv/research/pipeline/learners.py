@@ -153,10 +153,18 @@ class MLPEncoder(EncoderLearner):
         return {"status": "placeholder_fitted", "note": "MLP training not implemented"}
     
     def encode(self, observations: np.ndarray) -> np.ndarray:
-        # Fallback to PCA
+        # Fallback to PCA with safe n_components and pad to output_dim
         from sklearn.decomposition import PCA
-        pca = PCA(n_components=min(self.output_dim, observations.shape[1]))
-        return pca.fit_transform(observations)
+        n_components = min(self.output_dim, observations.shape[1], observations.shape[0])
+        if n_components <= 0:
+            n_components = 1
+        pca = PCA(n_components=n_components)
+        I = pca.fit_transform(observations)
+        # Pad with zeros to reach output_dim
+        if I.shape[1] < self.output_dim:
+            pad = np.zeros((I.shape[0], self.output_dim - I.shape[1]))
+            I = np.hstack([I, pad])
+        return I
     
     def get_output_dim(self) -> int:
         return self.output_dim
