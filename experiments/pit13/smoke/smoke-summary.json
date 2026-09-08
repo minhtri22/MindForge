@@ -1,38 +1,50 @@
 {
-  "task": "PIT-13.1.A Smoke Qualification Execution",
-  "attempt": "qwen3.7-candidate-amendment",
+  "task": "PIT-13.1.A Smoke Qualification Rerun",
   "status": "FAIL",
   "branch": "research/pit",
-  "runner_commit": "5df410c132b54aaa2a61075f312c1e74c2aa07e4",
+  "runner_commit": "5d6373eaa410cbde08fae0ab980d5da5aa225016",
+  "scenario_manifest": "experiments/pit13/smoke/scenarios.json",
+  "scenario_manifest_sha256": "af797edf9aa70aff74df219e9444b27b3ac1ea9ec10bbfb9476a3708cc8cb1df",
+  "execution_start": "2026-09-08T08:19:18.356491+07:00",
+  "execution_end": "2026-09-08T08:21:41.564673+07:00",
   "planned_samples": 16,
   "records_written": 16,
   "api_completed": 16,
-  "schema_valid": 9,
-  "parse_failures": 7,
+  "schema_valid": 15,
+  "parse_failures": 1,
   "model_identity_mismatches": 0,
   "credential_leakage": 0,
   "manual_repairs": 0,
-  "retries": 0,
+  "semantic_retries": 0,
   "per_model_tuning": 0,
   "runner_exit_code": 0,
   "pit_13_1_b_started": false,
   "candidate_results": {
-    "qwen/qwen3.7-max:free": {"api_completed": 4, "schema_valid": 4},
-    "deepseek/deepseek-v4-pro": {"api_completed": 4, "schema_valid": 4},
-    "minimax/minimax-m3:free": {"api_completed": 4, "schema_valid": 1},
-    "mistralai/mistral-small-2603": {"api_completed": 4, "schema_valid": 0}
+    "qwen/qwen3.7-max:free": {"api_completed": 4, "schema_valid": 4, "parse_failures": 0},
+    "deepseek/deepseek-v4-pro": {"api_completed": 4, "schema_valid": 4, "parse_failures": 0},
+    "minimax/minimax-m3:free": {"api_completed": 4, "schema_valid": 4, "parse_failures": 0},
+    "mistralai/mistral-small-2603": {"api_completed": 4, "schema_valid": 3, "parse_failures": 1}
   },
   "acceptance": {
     "api_completed_16_of_16": true,
     "schema_valid_16_of_16": false,
     "model_identity_mismatch_0": true,
     "credential_leakage_0": true,
-    "manual_repair_0": true
+    "manual_repair_0": true,
+    "semantic_retries_0": true,
+    "per_model_tuning_0": true
   },
-  "failure_classification": "MODEL_OUTPUT_SCHEMA_NONCONFORMANCE",
+  "failure_classification": [
+    "SERIALIZATION_NONCONFORMANCE_AFTER_FROZEN_NORMALIZATION"
+  ],
+  "failure_detail": {
+    "candidate_id": "mistralai/mistral-small-2603",
+    "scenario_id": "preference_drift_001",
+    "parse_error": "Invalid control character at: line 57 column 86 (char 2254)"
+  },
   "notes": [
-    "Three MiniMax and four Mistral responses wrapped JSON in Markdown code fences.",
-    "Raw responses were preserved by the corrected runner.",
-    "No fence stripping, parser relaxation, retry, or manual repair was applied."
+    "Historical PIT-13.1.A FAIL artifacts were preserved under experiments/pit13/smoke/history/pit-13.1a-qwen37-amended-fail-c7a0e3c/ before rerun.",
+    "Raw API responses were preserved unchanged.",
+    "No PIT-13.1.B evidence collection was started."
   ]
 }

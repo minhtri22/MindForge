@@ -2,7 +2,7 @@
 
 Status:
 
-SMOKE FAILED / HARNESS AUDIT COMPLETED
+SMOKE RERUN FAILED
 
 ## Execution methodology
 
@@ -136,6 +136,63 @@ The runner now resolves each scenario ID to non-empty evidence content and sends
 
 Previous PIT-13.1.A result remains **FAIL** and is not overwritten.
 
+## PIT-13.1.A Smoke Qualification Rerun
+
+Execution date:
+
+2026-09-08
+
+Runner commit:
+
+`5d6373eaa410cbde08fae0ab980d5da5aa225016`
+
+Scenario manifest:
+
+`experiments/pit13/smoke/scenarios.json`
+
+Scenario manifest SHA256:
+
+`af797edf9aa70aff74df219e9444b27b3ac1ea9ec10bbfb9476a3708cc8cb1df`
+
+Candidate manifest:
+
+- `qwen/qwen3.7-max:free`
+- `deepseek/deepseek-v4-pro`
+- `minimax/minimax-m3:free`
+- `mistralai/mistral-small-2603`
+
+Sample count:
+
+16 samples (`4 candidates x 4 scenarios`)
+
+Result:
+
+| Gate | Required | Observed | Result |
+| --- | ---: | ---: | --- |
+| API completed | 16/16 | 16/16 | PASS |
+| Schema valid | 16/16 | 15/16 | FAIL |
+| Model identity mismatch | 0 | 0 | PASS |
+| Credential leakage | 0 | 0 | PASS |
+| Manual repair | 0 | 0 | PASS |
+| Semantic retries | 0 | 0 | PASS |
+| Per-model tuning | 0 | 0 | PASS |
+
+Parse failures:
+
+- `mistralai/mistral-small-2603` / `preference_drift_001`: `Invalid control character at: line 57 column 86 (char 2254)`
+
+Failure classification:
+
+`SERIALIZATION_NONCONFORMANCE_AFTER_FROZEN_NORMALIZATION`
+
+Acceptance verdict:
+
+**FAIL**
+
+The previous PIT-13.1.A FAIL remains historical evidence and was not rewritten. It is preserved under `experiments/pit13/smoke/history/pit-13.1a-qwen37-amended-fail-c7a0e3c/`.
+
+PIT-13.1.B remains **BLOCKED / NOT STARTED**.
+
 ## PIT-13.1.A.0 Runner Validation
 
 Issue observed:
@@ -188,7 +245,7 @@ Execution requires reproducible API access. No candidate ranking or teacher sele
 
 ## Next step
 
-The amended PIT-13.1.A smoke failed schema conformance. The harness contract audit is complete. Next is a PIT-13.1.A Smoke Qualification Rerun using the frozen scenario evidence manifest and deterministic fence normalization. PIT-13.1.B must not start unless that rerun passes all smoke gates.
+The PIT-13.1.A Smoke Qualification Rerun failed serialization/schema conformance after frozen normalization. PIT-13.1.B must not start.
 
 Current amended attempt: `experiments/pit13/smoke/`.
 

@@ -26,7 +26,7 @@ Completed:
 
 Current:
 
-PIT-13.1.A.1 Smoke Harness Contract Audit completed.
+PIT-13.1.A Smoke Qualification Rerun failed.
 
 Next:
 
@@ -38,7 +38,7 @@ PIT-13.1 Candidate API Evidence Collection pending execution.
 
 Next:
 
-PIT-13.1.A Smoke Qualification Rerun
+Failure analysis / execution issue resolution only
 
 Next:
 

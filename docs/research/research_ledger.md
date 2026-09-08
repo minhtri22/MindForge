@@ -356,3 +356,29 @@ Scenario evidence mapping frozen.
 No API evidence generated.
 No teacher evaluated.
 Previous PIT-13.1.A FAIL preserved.
+
+## PIT-13.1.A Smoke Qualification Rerun
+
+Status:
+
+COMPLETED
+
+Result:
+
+FAIL
+
+Evidence:
+
+16 frozen samples executed with deterministic normalization active and frozen scenario evidence active. API completion was 16/16, schema validity was 15/16, model identity mismatches were 0, credential leakage was 0, and manual repair/retry count was 0.
+
+Failure classification:
+
+SERIALIZATION_NONCONFORMANCE_AFTER_FROZEN_NORMALIZATION
+
+Scope:
+
+No teacher ranking.
+No teacher selection.
+No training.
+No MindForge integration.
+PIT-13.1.B remains blocked.
