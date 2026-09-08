@@ -1,0 +1,190 @@
+{
+  "errors": [
+    {
+      "source": "PIT15",
+      "sample_id": "meta/muse-glimmer-30b|user_correction_001",
+      "expected_classes": [],
+      "detected_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "error_taxonomy": [
+        "SCOPE_NORMALIZATION_ERROR"
+      ]
+    },
+    {
+      "source": "PIT15",
+      "sample_id": "nvidia/nemotron-3.5-lightning-30b-a3b|long_term_consistency_001",
+      "expected_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "SCOPE_NORMALIZATION_ERROR"
+      ]
+    },
+    {
+      "source": "PIT15",
+      "sample_id": "qwen/qwen3.7-max:free|conflicting_evidence_001",
+      "expected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT15",
+      "sample_id": "qwen/qwen3.7-max:free|insufficient_evidence_001",
+      "expected_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD",
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT15",
+      "sample_id": "deepseek/deepseek-v4-pro|insufficient_evidence_001",
+      "expected_classes": [],
+      "detected_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_POSITIVE"
+      ]
+    },
+    {
+      "source": "PIT15",
+      "sample_id": "google/gemma-4-31b-it|conflicting_evidence_001",
+      "expected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT15",
+      "sample_id": "google/gemma-4-31b-it|user_correction_001",
+      "expected_classes": [],
+      "detected_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "error_taxonomy": [
+        "SCOPE_NORMALIZATION_ERROR"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "conflict-04",
+      "expected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "detected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION",
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "error_taxonomy": [
+        "SCOPE_NORMALIZATION_ERROR"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "conflict-07",
+      "expected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "conflict-09",
+      "expected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "numeric-05",
+      "expected_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "temporal-04",
+      "expected_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "detected_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD",
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_POSITIVE"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "fallback-05",
+      "expected_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "detected_classes": [],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "grounding-09",
+      "expected_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "detected_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION",
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "error_taxonomy": [
+        "SCOPE_NORMALIZATION_ERROR"
+      ]
+    },
+    {
+      "source": "PIT16_HELD_OUT",
+      "sample_id": "compound-05",
+      "expected_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY",
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "detected_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "error_taxonomy": [
+        "FACT_EXTRACTION_FALSE_NEGATIVE"
+      ]
+    }
+  ],
+  "error_distribution": {
+    "SCOPE_NORMALIZATION_ERROR": 5,
+    "FACT_EXTRACTION_FALSE_NEGATIVE": 8,
+    "FACT_EXTRACTION_FALSE_POSITIVE": 2,
+    "SUPPORT_RELATION_ERROR": 0,
+    "GUARDRAIL_POLICY_ERROR": 0,
+    "AMBIGUOUS_INPUT": 0
+  }
+}

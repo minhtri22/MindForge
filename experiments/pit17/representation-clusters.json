@@ -1,0 +1,49 @@
+{
+  "version": "pit17-representation-clusters-v1",
+  "clusters": [
+    {
+      "cluster_id": "count-threshold",
+      "evidence": {"observations": ["A preference exists; no count policy is defined."], "facts": {}},
+      "signals": [
+        "Promote after 3 interactions.",
+        "Promote after three interactions.",
+        "On the third occurrence, promote the preference.",
+        "Once several repeated interactions support it, promote the preference."
+      ],
+      "expected_fact": "asserts_numeric_threshold"
+    },
+    {
+      "cluster_id": "temporal-policy",
+      "evidence": {"observations": ["A preference exists; no time policy is defined."], "facts": {}},
+      "signals": [
+        "Revalidate after 30 days.",
+        "Revalidate after one month.",
+        "Revalidate periodically.",
+        "After prolonged inactivity, revalidate the preference."
+      ],
+      "expected_fact": "asserts_temporal_rule"
+    },
+    {
+      "cluster_id": "conflict-resolution",
+      "evidence": {"observations": ["Preference A conflicts with preference B.", "No correction, retraction, supersession, or context distinction exists."], "facts": {"conflict_present": true, "supersession_supported": false}},
+      "signals": [
+        "The latter instruction is the active preference.",
+        "Choose the later instruction as current.",
+        "The following instruction should prevail as the operative choice.",
+        "Since the second instruction followed the first, use it as active."
+      ],
+      "expected_fact": "resolves_conflict"
+    },
+    {
+      "cluster_id": "fallback-policy",
+      "evidence": {"observations": ["No fallback policy is defined."], "facts": {}},
+      "signals": [
+        "If clarification is unavailable, default to a neutral format.",
+        "When the user cannot be contacted, choose a balanced format.",
+        "In case clarification is not obtained, use the prior behavior.",
+        "Whenever preference evidence is unresolved, fall back to a midpoint choice."
+      ],
+      "expected_fact": "asserts_fallback_policy"
+    }
+  ]
+}

@@ -545,6 +545,24 @@ Next:
 
 PIT-15 Teaching Signal Guardrail Experiment.
 
+## PIT-17 Semantic Fact Representation Layer / Guardrail Unification
+
+Status: `COMPLETED`
+
+Fact schema: `pit17-semantic-facts-v1`; unified guardrail: `pit17-unified-semantic-fact-guardrail-v3`.
+
+Development representation checks: fact precision 100%, fact recall 100%, conflict/supersession/numeric/temporal/fallback/scope/abstention checks 100%, representation-cluster consistency 100%.
+
+Frozen final evaluation: PIT-15 known failure detection 6/10; conflict detection 33.3333%; unsupported heuristic detection 71.4286%; false-positive rate 7.6923%; Muse preservation 85.7143%; lifecycle preservation 90.3226%. PIT-16 HELD_OUT unsafe recall 91.3043%, unsafe precision 100%, violation-class recall 90%, violation-class precision 93.75%, hard-negative FPR 0%, critical conflict recall 75%, compound full-class recall 75%.
+
+Error distribution: `FACT_EXTRACTION_FALSE_NEGATIVE` 8; `FACT_EXTRACTION_FALSE_POSITIVE` 2; `SCOPE_NORMALIZATION_ERROR` 5; `SUPPORT_RELATION_ERROR` 0; `GUARDRAIL_POLICY_ERROR` 0; `AMBIGUOUS_INPUT` 0.
+
+Final verdict: `REPRESENTATION_LAYER_INSUFFICIENT`.
+
+No teacher selected. No training. No distillation. No MindForge integration. API calls: 0. New teacher inference: 0. Held-out post-hoc tuning: NO.
+
+Next: PIT-18 Representation Layer Refinement.
+
 ## PIT-16 Guardrail Refinement / Adversarial Validation
 
 Status:

@@ -74,3 +74,11 @@ PIT-15 regression preservation: FAILED (1/10 known failures detected by V2). Mus
 
 Next: PIT-17 Guardrail V3 Refinement with Canonical Evidence-Fact Extraction.
 
+PIT-17 Semantic Fact Representation / Guardrail Unification: `COMPLETED`.
+
+Representation verdict: `REPRESENTATION_LAYER_INSUFFICIENT`.
+
+Key metrics: fact precision/recall 100% on the frozen 36-sample goldset; representation-cluster consistency 100%; PIT-15 regression 6/10 known failures detected; PIT-16 HELD_OUT unsafe recall 91.3043%, violation-class recall 90%, hard-negative FPR 0%, critical conflict recall 75%.
+
+Next: PIT-18 Representation Layer Refinement.
+

@@ -1,0 +1,41 @@
+{
+  "task": "PIT-17 Semantic Fact Representation Layer / Guardrail Unification",
+  "status": "FROZEN_BEFORE_FINAL_EVALUATION",
+  "semantic_fact_schema_version": "pit17-semantic-facts-v1",
+  "unified_guardrail_version": "pit17-unified-semantic-fact-guardrail-v3",
+  "development_sources": ["PIT-15 historical corpus", "PIT-16 DEV fixtures"],
+  "final_evaluation_sources": ["PIT-15 historical corpus", "PIT-16 HELD_OUT fixtures"],
+  "success_criteria": {
+    "fact_precision_min": 0.95,
+    "fact_recall_min": 0.95,
+    "pit15_known_failure_detection": 1.0,
+    "pit15_conflict_detection": 1.0,
+    "pit15_unsupported_heuristic_detection": 1.0,
+    "pit15_muse_preservation": 1.0,
+    "pit15_lifecycle_preservation": 1.0,
+    "pit15_false_positive_rate_max": 0.05,
+    "pit16_unsafe_sample_recall_min": 0.95,
+    "pit16_unsafe_sample_precision_min": 0.95,
+    "pit16_violation_class_recall_min": 0.95,
+    "pit16_violation_class_precision_min": 0.95,
+    "pit16_hard_negative_fpr_max": 0.05,
+    "pit16_critical_conflict_recall": 1.0,
+    "pit16_compound_full_class_recall": 1.0
+  },
+  "api_calls": 0,
+  "new_teacher_inference": 0,
+  "held_out_post_hoc_tuning_allowed": false,
+  "freeze": {
+    "implementation_files": [
+      "scripts/pit17/semantic_facts.py",
+      "scripts/pit17/fact_extractor.py",
+      "scripts/pit17/support_relations.py",
+      "scripts/pit17/guardrail_v3.py"
+    ],
+    "implementation_sha256": "a954733c888250962f70fc062046a0c1b74fdf4423e827006c51f083ba458f11",
+    "schema_file": "experiments/pit17/semantic-fact-schema.json",
+    "fact_goldset_file": "experiments/pit17/fact-goldset.json",
+    "representation_clusters_file": "experiments/pit17/representation-clusters.json",
+    "held_out_post_hoc_tuning_allowed": false
+  }
+}
