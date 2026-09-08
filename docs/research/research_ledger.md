@@ -500,3 +500,47 @@ No qualification verdict.
 No teacher selection.
 No training.
 No MindForge integration.
+
+## PIT-14 Candidate Qualification Review
+
+Status:
+
+COMPLETED
+
+Reviewed:
+
+- Qwen3.7-Max — `NOT_SUITABLE`
+- DeepSeek V4 Pro — `NOT_SUITABLE`
+- MiniMax M3 — `QUALIFIED_WITH_LIMITS`
+
+Strongest current candidate:
+
+`minimax/minimax-m3:free` — `STRONGEST_CURRENT_PIT_CANDIDATE_UNDER_PIT_13_EVIDENCE`
+
+Critical discriminator:
+
+MiniMax preserved unresolved conflicting evidence and requested clarification. Qwen3.7 and DeepSeek resolved the same deliberately unresolved conflict using recency without explicit supersession evidence.
+
+Unsupported heuristic findings:
+
+- Qwen3.7: unsupported conflict-resolution rule plus unsupported dark-mode revision threshold.
+- DeepSeek V4 Pro: unsupported conflict-resolution rule.
+- MiniMax M3: unsupported preference-decay / operational revision heuristics requiring evidence-bound guardrails.
+
+Mistral:
+
+No PIT-14 semantic verdict assigned. Full PIT-13.1.B semantic evidence was not collected because the candidate was smoke-not-qualified and excluded from execution.
+
+Scope:
+
+No API calls.
+No new inference evidence.
+No existing PIT-13.1.B evidence modified.
+No training.
+No distillation.
+No MindForge integration.
+No Kernel, TokenModel, or PPF changes.
+
+Next:
+
+PIT-15 Teaching Signal Guardrail Experiment.
