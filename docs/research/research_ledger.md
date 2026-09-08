@@ -672,3 +672,65 @@ No MindForge integration.
 Next:
 
 PIT-14.1.D Expanded Candidate Qualification Review.
+
+## PIT-14.1.D Expanded Candidate Qualification Review
+
+Status:
+
+COMPLETED
+
+Evidence boundary:
+
+Reviewed only the frozen PIT-14.1.C NVIDIA evidence and the existing frozen PIT-14 candidate review. No API calls, reruns, new inference evidence, or historical evidence edits were performed.
+
+NVIDIA verdicts:
+
+- `moonshotai/kimi-k3` — `NOT_SUITABLE`
+- `meta/muse-glimmer-30b` — `QUALIFIED`
+- `nvidia/nemotron-3.5-lightning-30b-a3b` — `QUALIFIED_WITH_LIMITS`
+- `google/gemma-4-31b-it` — `NOT_SUITABLE`
+- `openai/gpt-oss-20b` — `QUALIFIED_WITH_LIMITS`
+
+Existing PIT-14 verdicts remain unchanged:
+
+- Qwen3.7-Max — `NOT_SUITABLE`
+- DeepSeek V4 Pro — `NOT_SUITABLE`
+- MiniMax M3 — `QUALIFIED_WITH_LIMITS`
+
+Strongest current candidate:
+
+`meta/muse-glimmer-30b` — `STRONGEST_CURRENT_PIT_CANDIDATE_UNDER_EXPANDED_PIT_14_1_EVIDENCE`
+
+Critical discriminator:
+
+Muse Glimmer preserved unresolved conflict, correctly abstained under insufficient evidence, respected explicit correction and lifecycle boundaries, completed all seven frozen scenarios, and had no unsupported heuristic identified in the frozen candidate profile.
+
+Key limits retained:
+
+- Kimi K3: material recency-based conflict collapse; long-term consistency sample unavailable due the preserved HTTP 429.
+- Nemotron 3.5 Lightning: unsupported operational thresholds/external signals and broader discard-default policy.
+- Gemma 4 31B IT: material recency-based conflict collapse.
+- GPT-OSS 20B: unsupported fallback and scope-generalization policy language.
+- MiniMax M3: prior unsupported preference-decay / revision heuristics remain unchanged.
+
+Expanded qualification count:
+
+Qualified / qualified-with-limits: 4 / 8.
+Unrestricted qualified: 1 / 8.
+
+Scope:
+
+API calls: 0.
+Reruns: 0.
+New inference evidence: 0.
+Historical evidence modified: NO.
+Historical verdicts modified: NO.
+Teacher selected: NO.
+Training: NO.
+Distillation: NO.
+MindForge integration: NO.
+Kernel, TokenModel, and PPF changes: NO.
+
+Next:
+
+PIT-15 Teaching Signal Guardrail Experiment.

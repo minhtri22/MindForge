@@ -424,3 +424,31 @@ Scope controls:
 - No training, distillation, or MindForge integration.
 
 Next: `PIT-14.1.D Expanded Candidate Qualification Review`.
+
+## PIT-14.1.D Expanded Candidate Qualification Review
+
+Status: **COMPLETED**
+
+Review source: frozen PIT-14.1.C evidence only. No API calls, reruns, or new inference evidence were produced.
+
+NVIDIA qualification verdicts:
+
+| Candidate | Verdict | Critical basis |
+| --- | --- | --- |
+| `moonshotai/kimi-k3` | `NOT_SUITABLE` | Material recency-based conflict collapse; long-term sample missing due preserved HTTP 429 |
+| `meta/muse-glimmer-30b` | `QUALIFIED` | Preserved conflict and uncertainty semantics; complete 7/7 evidence; no unsupported heuristic identified |
+| `nvidia/nemotron-3.5-lightning-30b-a3b` | `QUALIFIED_WITH_LIMITS` | Core semantics preserved; unsupported operational thresholds/external signals require guardrails |
+| `google/gemma-4-31b-it` | `NOT_SUITABLE` | Material recency-based conflict collapse |
+| `openai/gpt-oss-20b` | `QUALIFIED_WITH_LIMITS` | Core conflict semantics preserved; unsupported fallback and scope-generalization language require guardrails |
+
+Existing PIT-14 verdicts remain unchanged.
+
+Strongest current candidate under expanded evidence:
+
+`meta/muse-glimmer-30b` — `STRONGEST_CURRENT_PIT_CANDIDATE_UNDER_EXPANDED_PIT_14_1_EVIDENCE`
+
+This is not a final teacher selection.
+
+Detailed review: `docs/research/pit-14.1-d-expanded-candidate-qualification-review.md`.
+
+Next: `PIT-15 Teaching Signal Guardrail Experiment`.

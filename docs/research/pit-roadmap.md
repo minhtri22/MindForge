@@ -46,8 +46,17 @@ PIT-14.1 NVIDIA NIM Candidate Expansion:
 - PIT-14.1.A Candidate Manifest & Execution Freeze — `COMPLETED`
 - PIT-14.1.B NVIDIA NIM Smoke Qualification — `COMPLETED`
 - PIT-14.1.C NVIDIA NIM Full Evidence Collection — `COMPLETED`
+- PIT-14.1.D Expanded Candidate Qualification Review — `COMPLETED`
 
 Smoke-qualified: 5 / 5.
 
-Next: PIT-14.1.D Expanded Candidate Qualification Review.
+Expanded reviewed candidates: 8.
+
+Qualified / qualified-with-limits under expanded evidence: 4 / 8.
+
+Strongest current candidate: `meta/muse-glimmer-30b` under expanded PIT-14.1 evidence.
+
+This is not final teacher selection.
+
+Next: PIT-15 Teaching Signal Guardrail Experiment.
 
