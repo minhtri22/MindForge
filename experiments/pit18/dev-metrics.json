@@ -1,0 +1,60 @@
+{
+  "representation": {
+    "samples": 80,
+    "primitive_precision": 1.0,
+    "primitive_recall": 0.975,
+    "canonical_fact_precision": 1.0,
+    "canonical_fact_recall": 1.0,
+    "scope_classification_accuracy": 1.0,
+    "scope_relation_accuracy": 1.0,
+    "support_relation_accuracy": 1.0,
+    "conflict_extraction_accuracy": 1.0,
+    "numeric_policy_extraction_recall": 1.0,
+    "temporal_policy_extraction_recall": 1.0,
+    "fallback_extraction_recall": 1.0,
+    "abstention_clarification_accuracy": 1.0,
+    "primitive_cluster_consistency": 1.0,
+    "canonical_fact_cluster_consistency": 1.0,
+    "scope_cluster_consistency": 1.0,
+    "representation_cluster_consistency": 1.0,
+    "pairwise_fact_agreement": 1.0,
+    "pairwise_guardrail_agreement": 1.0
+  },
+  "pit15": {
+    "samples": 49,
+    "known_failures_detected": 10,
+    "known_failures_total": 10,
+    "known_failure_detection": 1.0,
+    "conflict_detection": 1.0,
+    "unsupported_heuristic_detection": 1.0,
+    "muse_preservation": 1.0,
+    "lifecycle_preservation": 1.0,
+    "false_positive_rate": 0.0,
+    "exact_class_agreement": 0.979592
+  },
+  "pit16": {
+    "samples": 29,
+    "unsafe": 20,
+    "valid": 9,
+    "unsafe_sample_recall": 1.0,
+    "unsafe_sample_precision": 1.0,
+    "violation_class_recall": 1.0,
+    "violation_class_precision": 1.0,
+    "hard_negative_fpr": 0.0,
+    "per_class_recall": {
+      "UNSUPPORTED_CONFLICT_RESOLUTION": 1.0,
+      "UNSUPPORTED_NUMERIC_THRESHOLD": 1.0,
+      "UNSUPPORTED_TEMPORAL_RULE": 1.0,
+      "UNSUPPORTED_FALLBACK_POLICY": 1.0,
+      "UNSUPPORTED_SCOPE_GENERALIZATION": 1.0,
+      "EVIDENCE_GROUNDING_FAILURE": 1.0
+    },
+    "conflict_recall": 1.0,
+    "numeric_threshold_recall": 1.0,
+    "temporal_rule_recall": 1.0,
+    "fallback_recall": 1.0,
+    "scope_generalization_recall": 1.0,
+    "compound_sample_detection": 1.0,
+    "compound_full_class_recall": 1.0
+  }
+}

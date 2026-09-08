@@ -889,3 +889,96 @@ Kernel, TokenModel, and PPF changes: NO.
 Next:
 
 PIT-15 Teaching Signal Guardrail Experiment.
+
+## PIT-18 Representation Layer Refinement
+
+Status:
+
+`COMPLETED`
+
+Execution boundary:
+
+- Branch: `research/pit`
+- Baseline before PIT-18: `f422f9c6b5f593f29293fce332c6eff9a8c4a503`
+- API calls: 0
+- New teacher inference: 0
+- Guardrail V3 changed: NO
+- Teacher selected: NO
+- Training: NO
+- Distillation: NO
+- MindForge integration: NO
+
+Frozen hashes:
+
+- Representation V2: `ca83f3ebc3ab24812013f5819d14aee2309be7b196ab42f678fd76a0fc60ebd6`
+- Guardrail V3: `1523ad7729f4f66ea67ac40704174a7207d7762e69d54d4d815754b432d7706f`
+- Primitive schema: `3928c6ca3281c1dad0f6daaa315690ca978749a940d6162fb7d3dd028b6f7834`
+- Scope lattice: `615b2065eaf4243be65dfff979e0d252f272355a55cc8872658e21d4ce462514`
+- Support relations V2: `5c23b17aa6ecba5d864f1595db239018b6ec97d1ca7be1caf133ad8ea0694d3d`
+
+Representation HELD_OUT, 40 samples:
+
+- Primitive precision: 87.8788%
+- Primitive recall: 90.625%
+- Canonical fact precision: 86.2069%
+- Canonical fact recall: 89.2857%
+- Scope classification: 100%
+- Scope relation: 100%
+- Support relation: 92.5%
+- Verdict: FAIL
+
+PIT-15 final regression:
+
+- Known failures: 10 / 10
+- Conflict detection: 100%
+- Unsupported heuristic detection: 100%
+- Muse preservation: 100%
+- Lifecycle preservation: 100%
+- FPR: 0%
+- Verdict: PASS
+
+PIT-16 FULL HELD_OUT, 67 samples:
+
+- Unsafe recall: 93.4783%
+- Unsafe precision: 100%
+- Violation-class recall: 94%
+- Violation-class precision: 94%
+- Hard-negative FPR: 0%
+- Conflict recall: 75%
+- Numeric recall: 100%
+- Temporal recall: 100%
+- Fallback recall: 100%
+- Scope recall: 88.8889%
+- Compound full-class recall: 100%
+- Verdict: FAIL
+
+PIT-16 PRISTINE HELD_OUT, 62 samples:
+
+- Unsafe recall: 92.6829%
+- Unsafe precision: 100%
+- Violation-class recall: 93.3333%
+- Violation-class precision: 97.6744%
+- Hard-negative FPR: 0%
+- Conflict recall: 33.3333%
+- Numeric recall: 100%
+- Temporal recall: 100%
+- Fallback recall: 100%
+- Scope recall: 88.8889%
+- Compound full-class recall: 100%
+- Verdict: FAIL
+
+Held-out integrity incident:
+
+PIT-16 HELD_OUT partial surface pre-exposure occurred before final freeze for exactly `conflict-04`, `conflict-05`, `conflict-06`, `conflict-07`, and `conflict-08`. No labels/gold outputs were exposed. The cases remained frozen, were retained in FULL evaluation, were not used for refinement according to repository/process evidence, and were separately reported. No claim of pristine isolation is made for those five samples.
+
+PRE_EXPOSED diagnostic subset: sample recall 100%, violation-class recall 100%, conflict recall 100%.
+
+Methodology status: `PASS_WITH_PRE_EXPOSURE_LIMITATION`.
+
+Final verdict: `REPRESENTATION_V2_INSUFFICIENT`.
+
+Architectural interpretation: remaining frozen failures concentrate in primitive extraction and scope classification; no independent Guardrail V3 policy defect was demonstrated.
+
+Next:
+
+PIT-19 Representation V3 Refinement. Do not start automatically.

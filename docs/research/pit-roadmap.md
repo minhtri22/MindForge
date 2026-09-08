@@ -82,3 +82,13 @@ Key metrics: fact precision/recall 100% on the frozen 36-sample goldset; represe
 
 Next: PIT-18 Representation Layer Refinement.
 
+PIT-18 Representation Layer Refinement: `COMPLETED`.
+
+Final verdict: `REPRESENTATION_V2_INSUFFICIENT`.
+
+Representation HELD_OUT failed the frozen gates; PIT-15 regression passed; PIT-16 FULL and PRISTINE held-out both failed. The strongest generalization view is PRISTINE HELD_OUT.
+
+Methodology: `PASS_WITH_PRE_EXPOSURE_LIMITATION`. Five PIT-16 held-out conflict surfaces (`conflict-04` through `conflict-08`) were accidentally exposed before freeze, remained frozen, and were reported separately.
+
+Next: PIT-19 Representation V3 Refinement. Do not start automatically.
+

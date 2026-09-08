@@ -1,0 +1,1382 @@
+{
+  "version": "pit18-representation-gold-heldout-v1",
+  "frozen_before_final_evaluation": true,
+  "samples": [
+    {
+      "gold_id": "heldout-cluster-01-01",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No quantity gate appears in the evidence."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Promotion begins upon the fourth confirmation.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-01-numeric"
+    },
+    {
+      "gold_id": "heldout-cluster-01-02",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No quantity gate appears in the evidence."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Four confirmations are the minimum before promotion.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-01-numeric"
+    },
+    {
+      "gold_id": "heldout-cluster-01-03",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No quantity gate appears in the evidence."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Do not promote until confirmation number four.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-01-numeric"
+    },
+    {
+      "gold_id": "heldout-cluster-01-04",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No quantity gate appears in the evidence."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Once confirmations reach four, promotion is allowed.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-01-numeric"
+    },
+    {
+      "gold_id": "heldout-cluster-02-01",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence provides no ageing rule."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Retire the state after six weeks.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-02-temporal"
+    },
+    {
+      "gold_id": "heldout-cluster-02-02",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence provides no ageing rule."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Six weeks from now, the state expires.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-02-temporal"
+    },
+    {
+      "gold_id": "heldout-cluster-02-03",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence provides no ageing rule."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Revisit the state once a six-week interval has elapsed.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-02-temporal"
+    },
+    {
+      "gold_id": "heldout-cluster-02-04",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence provides no ageing rule."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Age the state out following six weeks of inactivity.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-02-temporal"
+    },
+    {
+      "gold_id": "heldout-cluster-03-01",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No contingency action is recorded."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Should the source be missing, retain the previous behavior.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "fallback_policy_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-03-fallback"
+    },
+    {
+      "gold_id": "heldout-cluster-03-02",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No contingency action is recorded."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Retain prior behavior whenever the source cannot be obtained.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "fallback_policy_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-03-fallback"
+    },
+    {
+      "gold_id": "heldout-cluster-03-03",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No contingency action is recorded."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "If evidence becomes unavailable, choose the conservative option.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "fallback_policy_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-03-fallback"
+    },
+    {
+      "gold_id": "heldout-cluster-03-04",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "No contingency action is recorded."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "When the source is absent, fall back to the previous state.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "fallback_policy_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-03-fallback"
+    },
+    {
+      "gold_id": "heldout-cluster-04-01",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Evidence is restricted to one workflow."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Make this the rule for every future workflow.",
+        "applicability_boundary": "Make this the rule for every future workflow."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "scope_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-04-scope"
+    },
+    {
+      "gold_id": "heldout-cluster-04-02",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Evidence is restricted to one workflow."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Across all workflows from now on, apply this policy.",
+        "applicability_boundary": "Across all workflows from now on, apply this policy."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "scope_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-04-scope"
+    },
+    {
+      "gold_id": "heldout-cluster-04-03",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Evidence is restricted to one workflow."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Any future workflow should inherit this rule.",
+        "applicability_boundary": "Any future workflow should inherit this rule."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "scope_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-04-scope"
+    },
+    {
+      "gold_id": "heldout-cluster-04-04",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Evidence is restricted to one workflow."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Use this universally for future workflows.",
+        "applicability_boundary": "Use this universally for future workflows."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "scope_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-04-scope"
+    },
+    {
+      "gold_id": "heldout-cluster-05-01",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The instructions are mutually exclusive.",
+          "There is no explicit retraction or supersession."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "inference": "Treat the most recent statement as authoritative.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-05-conflict"
+    },
+    {
+      "gold_id": "heldout-cluster-05-02",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The instructions are mutually exclusive.",
+          "There is no explicit retraction or supersession."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "inference": "The newest instruction becomes operative.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-05-conflict"
+    },
+    {
+      "gold_id": "heldout-cluster-05-03",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The instructions are mutually exclusive.",
+          "There is no explicit retraction or supersession."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "inference": "The instruction issued later governs the choice.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-05-conflict"
+    },
+    {
+      "gold_id": "heldout-cluster-05-04",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The instructions are mutually exclusive.",
+          "There is no explicit retraction or supersession."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "inference": "Prefer the subsequent statement because it arrived later.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false
+        }
+      },
+      "cluster_id": "heldout-cluster-05-conflict"
+    },
+    {
+      "gold_id": "heldout-extra-01",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence is too sparse to establish a preference."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "There is not enough evidence to infer a stable preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:ABSTAINS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": true,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-02",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Two preferences conflict and remain unresolved."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Ask the user for clarification before choosing either preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:REQUESTS_CLARIFICATION"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": true,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-03",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This workflow defines the behavior."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Apply it only within this workflow.",
+        "applicability_boundary": "Apply it only within this workflow."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "WORKFLOW",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-04",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Planning tasks share this policy."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Use it for similar planning tasks in this domain.",
+        "applicability_boundary": "Use it for similar planning tasks in this domain."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "DOMAIN",
+        "asserted_scope": "DOMAIN",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-05",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This task defines the exception."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Keep the exception specific to this task.",
+        "applicability_boundary": "Keep the exception specific to this task."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "TASK",
+        "asserted_scope": "TASK",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-06",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence is too sparse to establish a preference."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "There is not enough evidence to infer a stable preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:ABSTAINS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": true,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-07",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Two preferences conflict and remain unresolved."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Ask the user for clarification before choosing either preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:REQUESTS_CLARIFICATION"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": true,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-08",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This workflow defines the behavior."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Apply it only within this workflow.",
+        "applicability_boundary": "Apply it only within this workflow."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "WORKFLOW",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-09",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Planning tasks share this policy."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Use it for similar planning tasks in this domain.",
+        "applicability_boundary": "Use it for similar planning tasks in this domain."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "DOMAIN",
+        "asserted_scope": "DOMAIN",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-10",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This task defines the exception."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Keep the exception specific to this task.",
+        "applicability_boundary": "Keep the exception specific to this task."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "TASK",
+        "asserted_scope": "TASK",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-11",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence is too sparse to establish a preference."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "There is not enough evidence to infer a stable preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:ABSTAINS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": true,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-12",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Two preferences conflict and remain unresolved."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Ask the user for clarification before choosing either preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:REQUESTS_CLARIFICATION"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": true,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-13",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This workflow defines the behavior."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Apply it only within this workflow.",
+        "applicability_boundary": "Apply it only within this workflow."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "WORKFLOW",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-14",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Planning tasks share this policy."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Use it for similar planning tasks in this domain.",
+        "applicability_boundary": "Use it for similar planning tasks in this domain."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "DOMAIN",
+        "asserted_scope": "DOMAIN",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-15",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This task defines the exception."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Keep the exception specific to this task.",
+        "applicability_boundary": "Keep the exception specific to this task."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "TASK",
+        "asserted_scope": "TASK",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-16",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "The evidence is too sparse to establish a preference."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "There is not enough evidence to infer a stable preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:ABSTAINS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": true,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-17",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Two preferences conflict and remain unresolved."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Ask the user for clarification before choosing either preference.",
+        "applicability_boundary": "This observation only."
+      },
+      "expected": {
+        "primitive_labels": [
+          "TS:REQUESTS_CLARIFICATION"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": true,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-18",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This workflow defines the behavior."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Apply it only within this workflow.",
+        "applicability_boundary": "Apply it only within this workflow."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "WORKFLOW",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-19",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "Planning tasks share this policy."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Use it for similar planning tasks in this domain.",
+        "applicability_boundary": "Use it for similar planning tasks in this domain."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "DOMAIN",
+        "asserted_scope": "DOMAIN",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    },
+    {
+      "gold_id": "heldout-extra-20",
+      "source": "REPRESENTATION_HELDOUT",
+      "evidence": {
+        "observations": [
+          "This task defines the exception."
+        ]
+      },
+      "teaching_signal": {
+        "inference": "Keep the exception specific to this task.",
+        "applicability_boundary": "Keep the exception specific to this task."
+      },
+      "expected": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "TASK",
+        "asserted_scope": "TASK",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        }
+      }
+    }
+  ]
+}

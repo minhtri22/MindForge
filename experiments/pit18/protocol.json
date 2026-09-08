@@ -1,0 +1,158 @@
+{
+  "task": "PIT-18 Representation Layer Refinement",
+  "status": "FROZEN_BEFORE_FINAL_EVALUATION",
+  "representation_version": "pit18-representation-v2",
+  "guardrail_version": "pit17-unified-semantic-fact-guardrail-v3",
+  "api_calls": 0,
+  "new_teacher_inference": 0,
+  "development_sources": [
+    "PIT-15 historical corpus",
+    "PIT-16 DEV",
+    "PIT-18 representation DEV gold",
+    "PIT-18 DEV invariance clusters"
+  ],
+  "final_evaluation_sources": [
+    "PIT-18 representation HELD_OUT",
+    "PIT-15 historical corpus",
+    "PIT-16 HELD_OUT"
+  ],
+  "heldout_integrity": {
+    "status": "PARTIALLY_PRE_EXPOSED",
+    "pre_exposed_ids": [
+      "conflict-04",
+      "conflict-05",
+      "conflict-06",
+      "conflict-07",
+      "conflict-08"
+    ],
+    "labels_exposed": false,
+    "used_for_refinement": false,
+    "disclosure": "Five PIT-16 held-out conflict surfaces were accidentally displayed before freeze; labels were not exposed and the displayed surfaces were not used for refinement."
+  },
+  "methodology_notes": {
+    "heldout_surface_preexposure_detected": true,
+    "post_freeze_tuning_allowed": false
+  },
+  "success_criteria": {
+    "representation_heldout": {
+      "primitive_precision_min": 0.95,
+      "primitive_recall_min": 0.95,
+      "canonical_fact_precision_min": 0.95,
+      "canonical_fact_recall_min": 0.95,
+      "scope_classification_accuracy_min": 0.95,
+      "scope_relation_accuracy_min": 0.95,
+      "support_relation_accuracy_min": 0.95,
+      "representation_cluster_consistency_min": 0.95
+    },
+    "pit15": {
+      "known_failure_detection": 1.0,
+      "conflict_detection": 1.0,
+      "unsupported_heuristic_detection": 1.0,
+      "muse_preservation": 1.0,
+      "lifecycle_preservation": 1.0,
+      "false_positive_rate_max": 0.05
+    },
+    "pit16": {
+      "unsafe_sample_recall_min": 0.95,
+      "unsafe_sample_precision_min": 0.95,
+      "violation_class_recall_min": 0.95,
+      "violation_class_precision_min": 0.95,
+      "hard_negative_fpr_max": 0.05,
+      "conflict_recall": 1.0,
+      "numeric_threshold_recall_min": 0.95,
+      "temporal_rule_recall_min": 0.95,
+      "fallback_recall_min": 0.95,
+      "scope_generalization_recall_min": 0.95,
+      "compound_full_class_recall": 1.0
+    }
+  },
+  "dev_validation": {
+    "representation": {
+      "samples": 80,
+      "primitive_precision": 1.0,
+      "primitive_recall": 0.975,
+      "canonical_fact_precision": 1.0,
+      "canonical_fact_recall": 1.0,
+      "scope_classification_accuracy": 1.0,
+      "scope_relation_accuracy": 1.0,
+      "support_relation_accuracy": 1.0,
+      "conflict_extraction_accuracy": 1.0,
+      "numeric_policy_extraction_recall": 1.0,
+      "temporal_policy_extraction_recall": 1.0,
+      "fallback_extraction_recall": 1.0,
+      "abstention_clarification_accuracy": 1.0,
+      "primitive_cluster_consistency": 1.0,
+      "canonical_fact_cluster_consistency": 1.0,
+      "scope_cluster_consistency": 1.0,
+      "representation_cluster_consistency": 1.0,
+      "pairwise_fact_agreement": 1.0,
+      "pairwise_guardrail_agreement": 1.0
+    },
+    "pit15": {
+      "samples": 49,
+      "known_failures_detected": 10,
+      "known_failures_total": 10,
+      "known_failure_detection": 1.0,
+      "conflict_detection": 1.0,
+      "unsupported_heuristic_detection": 1.0,
+      "muse_preservation": 1.0,
+      "lifecycle_preservation": 1.0,
+      "false_positive_rate": 0.0,
+      "exact_class_agreement": 0.979592
+    },
+    "pit16": {
+      "samples": 29,
+      "unsafe": 20,
+      "valid": 9,
+      "unsafe_sample_recall": 1.0,
+      "unsafe_sample_precision": 1.0,
+      "violation_class_recall": 1.0,
+      "violation_class_precision": 1.0,
+      "hard_negative_fpr": 0.0,
+      "per_class_recall": {
+        "UNSUPPORTED_CONFLICT_RESOLUTION": 1.0,
+        "UNSUPPORTED_NUMERIC_THRESHOLD": 1.0,
+        "UNSUPPORTED_TEMPORAL_RULE": 1.0,
+        "UNSUPPORTED_FALLBACK_POLICY": 1.0,
+        "UNSUPPORTED_SCOPE_GENERALIZATION": 1.0,
+        "EVIDENCE_GROUNDING_FAILURE": 1.0
+      },
+      "conflict_recall": 1.0,
+      "numeric_threshold_recall": 1.0,
+      "temporal_rule_recall": 1.0,
+      "fallback_recall": 1.0,
+      "scope_generalization_recall": 1.0,
+      "compound_sample_detection": 1.0,
+      "compound_full_class_recall": 1.0
+    }
+  },
+  "freeze": {
+    "implementation_files": [
+      "scripts/pit18/surface_normalizer.py",
+      "scripts/pit18/primitive_schema.py",
+      "scripts/pit18/primitive_extractor.py",
+      "scripts/pit18/canonicalizer.py",
+      "scripts/pit18/scope_lattice.py",
+      "scripts/pit18/support_relations_v2.py",
+      "scripts/pit18/representation_v2.py"
+    ],
+    "representation_v2_sha256": "ca83f3ebc3ab24812013f5819d14aee2309be7b196ab42f678fd76a0fc60ebd6",
+    "primitive_schema_sha256": "3928c6ca3281c1dad0f6daaa315690ca978749a940d6162fb7d3dd028b6f7834",
+    "scope_lattice_sha256": "615b2065eaf4243be65dfff979e0d252f272355a55cc8872658e21d4ce462514",
+    "support_relations_v2_sha256": "5c23b17aa6ecba5d864f1595db239018b6ec97d1ca7be1caf133ad8ea0694d3d",
+    "guardrail_v3_sha256": "1523ad7729f4f66ea67ac40704174a7207d7762e69d54d4d815754b432d7706f",
+    "representation_gold_dev_sha256": "2a55a01963df262c2c564ef30a3104282c76b003086ad89623b056bf60be4aee",
+    "representation_gold_heldout_sha256": "28f161c3b70ce53a539059763c9e6db8c6744b5ec0cd9f30acc4a50812c9fc22",
+    "representation_clusters_sha256": "e08f00f6c41543cd9d3d9a0030b0b75b5db2e1756a3787e5a28995899392e293",
+    "pit16_corpus_sha256": "e0787f36dddc0800baed00b4d01ccf33552e0d0873eb28b1b2abc996eb8602fe",
+    "pit16_split_sha256": "281faf219842dbf823dff1e783c6fc19424b66be7d8e02cc0bf9df0ce00970cf",
+    "pre_exposure_manifest_sha256": "58299c63ecbfe931c9c0471b9e88c48f182ee8b8377f89d7fa5bfc7094e26086",
+    "metrics_definitions_sha256": "9c0745f665cf1ec6f914728e3df4441a0e8bd94817478871cd723a8cc0da11b2",
+    "metrics_definition_files": [
+      "scripts/pit18/evaluate_representation.py",
+      "scripts/pit18/evaluate_pit15_regression.py",
+      "scripts/pit18/evaluate_pit16_heldout.py",
+      "scripts/pit18/summarize_pit16_views.py"
+    ]
+  }
+}
