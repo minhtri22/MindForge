@@ -1,0 +1,103 @@
+{
+  "status": "COMPLETED",
+  "verdict": "DETERMINISTIC_REPRESENTATION_CEILING_SUSPECTED",
+  "evidence_basis": {
+    "dev": "PASS",
+    "pit15_regression": "PASS",
+    "pit16_full_regression": "PASS",
+    "pit16_historical_pristine_regression": "PASS",
+    "clean_heldout_integrity": "PRISTINE",
+    "clean_heldout_representation": "FAIL",
+    "clean_heldout_end_to_end": "FAIL",
+    "clean_heldout_execution_count": 1,
+    "methodology": "PASS"
+  },
+  "failed_acceptance_gates": [
+    {
+      "group": "representation",
+      "metric": "primitive_recall",
+      "value": 0.773913,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "representation",
+      "metric": "canonical_fact_recall",
+      "value": 0.783019,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "representation",
+      "metric": "support_relation_accuracy",
+      "value": 0.918919,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "representation",
+      "metric": "cluster_consistency",
+      "value": 0.4,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "unsafe_sample_recall",
+      "value": 0.885714,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "unsafe_sample_precision",
+      "value": 0.911765,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "violation_class_recall",
+      "value": 0.839506,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "violation_class_precision",
+      "value": 0.918919,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "numeric_threshold_recall",
+      "value": 0.8,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "fallback_recall",
+      "value": 0.9,
+      "criterion": ">= 0.95"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "hard_negative_fpr",
+      "value": 0.2,
+      "criterion": "<= 0.05"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "conflict_recall",
+      "value": 0.4,
+      "criterion": "= 1.0"
+    },
+    {
+      "group": "end_to_end",
+      "metric": "compound_full_class_recall",
+      "value": 0.545455,
+      "criterion": "= 1.0"
+    }
+  ],
+  "historical_regression_state": "FULLY_RECOVERED_ON_FROZEN_PIT15_AND_PIT16_REGRESSION",
+  "clean_heldout_integrity": "PRISTINE",
+  "methodology_status": "PASS",
+  "dominant_failure_layer": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+  "guardrail_policy_defect_identified": false,
+  "deterministic_ceiling_interpretation": "Evidence supports a suspected practical ceiling for the tested deterministic representation architecture and refinement history. It does not prove that deterministic semantic extraction is impossible. Further blind deterministic rule accumulation is not the highest-value next experiment.",
+  "next_research_question": "Can a learned or LLM-assisted semantic extractor improve semantic representation generalization while retaining deterministic evidence-bound verification and low false-positive behavior?",
+  "next_recommended_milestone": "PIT-20 — Learned / LLM-Assisted Semantic Extractor Feasibility"
+}

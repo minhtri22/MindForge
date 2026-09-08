@@ -1,0 +1,2363 @@
+{
+  "status": "COMPLETED_FROM_FROZEN_ONE_SHOT_RESULTS",
+  "source_execution_count": 1,
+  "clean_heldout_integrity": "PRISTINE",
+  "classification_order": [
+    "primitive extraction",
+    "canonicalization",
+    "scope classification",
+    "scope relation",
+    "support relation",
+    "guardrail policy"
+  ],
+  "failure_sample_count": 25,
+  "distribution": {
+    "SURFACE_NORMALIZATION_ERROR": 0,
+    "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE": 16,
+    "PRIMITIVE_EXTRACTION_FALSE_POSITIVE": 0,
+    "CANONICALIZATION_ERROR": 1,
+    "SCOPE_CLASSIFICATION_ERROR": 2,
+    "SCOPE_RELATION_ERROR": 0,
+    "SUPPORT_RELATION_ERROR": 6,
+    "GUARDRAIL_POLICY_ERROR": 0,
+    "AMBIGUOUS_INPUT": 0,
+    "BENCHMARK_INTEGRITY_ERROR": 0
+  },
+  "dominant_failure_layer": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+  "guardrail_policy_defect_identified": false,
+  "errors": [
+    {
+      "fixture_id": "clean-conflict-01",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-01",
+        "primitive_difference": {
+          "missing": [
+            "EV:CONTRADICTS",
+            "TS:RECENCY_ORDER",
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "evidence_has_conflict": {
+            "expected": true,
+            "actual": false
+          },
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-01"
+      ]
+    },
+    {
+      "fixture_id": "clean-conflict-02",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:RECENCY_ORDER"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-02",
+        "primitive_difference": {
+          "missing": [
+            "EV:CONTRADICTS",
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "evidence_has_conflict": {
+            "expected": true,
+            "actual": false
+          },
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-01"
+      ]
+    },
+    {
+      "fixture_id": "clean-conflict-03",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-03",
+        "primitive_difference": {
+          "missing": [
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-01"
+      ]
+    },
+    {
+      "fixture_id": "clean-conflict-05",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-05",
+        "primitive_difference": {
+          "missing": [
+            "EV:CONTRADICTS",
+            "TS:RECENCY_ORDER",
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "evidence_has_conflict": {
+            "expected": true,
+            "actual": false
+          },
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-conflict-06",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-06",
+        "primitive_difference": {
+          "missing": [
+            "EV:CONTRADICTS",
+            "TS:RECENCY_ORDER",
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "evidence_has_conflict": {
+            "expected": true,
+            "actual": false
+          },
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-conflict-10",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-10",
+        "primitive_difference": {
+          "missing": [
+            "EV:CONTRADICTS",
+            "TS:RECENCY_ORDER",
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "evidence_has_conflict": {
+            "expected": true,
+            "actual": false
+          },
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-conflict-12",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION",
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "SUPPORT_RELATION_ERROR",
+      "primary_difference": {
+        "supersession_supported": {
+          "expected": false,
+          "actual": true
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-12",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-conflict-13",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION",
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-13",
+        "primitive_difference": {
+          "missing": [
+            "TS:RECENCY_ORDER",
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-conflict-14",
+      "family": "conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER",
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION",
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "BLOCK"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS",
+          "TS:RECENCY_ORDER"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:RESOLVES_BY_RECENCY"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-conflict-14",
+        "primitive_difference": {
+          "missing": [
+            "TS:RESOLVES_BY_RECENCY"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "BLOCK",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-numeric-08",
+      "family": "numeric",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_NUMERIC_THRESHOLD"
+        ],
+        "status": "FLAG"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-numeric-08",
+        "primitive_difference": {
+          "missing": [
+            "TS:COUNT_THRESHOLD"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_numeric_threshold": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "numeric_threshold_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "FLAG",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_NUMERIC_THRESHOLD"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-numeric-10",
+      "family": "numeric",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_NUMERIC_THRESHOLD"
+        ],
+        "status": "FLAG"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-numeric-10",
+        "primitive_difference": {
+          "missing": [
+            "TS:COUNT_THRESHOLD"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_numeric_threshold": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "numeric_threshold_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "FLAG",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [
+            "UNSUPPORTED_NUMERIC_THRESHOLD"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-numeric-15",
+      "family": "numeric",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "numeric_threshold_supported": false,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_NUMERIC_THRESHOLD",
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-numeric-15",
+        "primitive_difference": {
+          "missing": [
+            "TS:COUNT_THRESHOLD"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_numeric_threshold": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "numeric_threshold_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "FLAG",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [
+            "UNSUPPORTED_NUMERIC_THRESHOLD"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "clean-fallback-09",
+      "family": "fallback",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "fallback_policy_supported": false,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_FALLBACK_POLICY",
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "GLOBAL",
+        "scope_relation": "BROADER",
+        "support": {
+          "fallback_policy_supported": true,
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#clean-fallback-09",
+        "primitive_difference": {
+          "missing": [
+            "TS:FALLBACK"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_fallback_policy": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "fallback_policy_supported": {
+            "expected": false,
+            "actual": true
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "FLAG",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [
+            "UNSUPPORTED_FALLBACK_POLICY"
+          ],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "safe-conflict-01",
+      "family": "supported_conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "primary_error_class": "SUPPORT_RELATION_ERROR",
+      "primary_difference": {
+        "supersession_supported": {
+          "expected": true,
+          "actual": false
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-conflict-01",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "ACCEPT",
+          "actual_status": "BLOCK",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ]
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-06"
+      ]
+    },
+    {
+      "fixture_id": "safe-conflict-02",
+      "family": "supported_conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_CONFLICT_RESOLUTION"
+        ],
+        "status": "BLOCK"
+      },
+      "primary_error_class": "SUPPORT_RELATION_ERROR",
+      "primary_difference": {
+        "supersession_supported": {
+          "expected": true,
+          "actual": false
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-conflict-02",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "ACCEPT",
+          "actual_status": "BLOCK",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": [
+            "UNSUPPORTED_CONFLICT_RESOLUTION"
+          ]
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-06"
+      ]
+    },
+    {
+      "fixture_id": "safe-conflict-04",
+      "family": "supported_conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "representation mismatch without end-to-end class/status error",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-conflict-04",
+        "primitive_difference": {
+          "missing": [
+            "EV:CONTRADICTS"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "evidence_has_conflict": {
+            "expected": true,
+            "actual": false
+          },
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "ACCEPT",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-06"
+      ]
+    },
+    {
+      "fixture_id": "safe-conflict-06",
+      "family": "supported_conflict",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": true,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "EV:CONTRADICTS"
+        ],
+        "canonical": {
+          "evidence_has_conflict": true,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "supersession_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "CANONICALIZATION_ERROR",
+      "primary_difference": {
+        "resolves_conflict": {
+          "expected": true,
+          "actual": false
+        }
+      },
+      "downstream_effect": "representation mismatch without end-to-end class/status error",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-conflict-06",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "resolves_conflict": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "supersession_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "ACCEPT",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "safe-num-03",
+      "family": "supported_numeric",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "representation mismatch without end-to-end class/status error",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-num-03",
+        "primitive_difference": {
+          "missing": [
+            "TS:COUNT_THRESHOLD"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_numeric_threshold": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "ACCEPT",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-07"
+      ]
+    },
+    {
+      "fixture_id": "safe-num-04",
+      "family": "supported_numeric",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "representation mismatch without end-to-end class/status error",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-num-04",
+        "primitive_difference": {
+          "missing": [
+            "TS:COUNT_THRESHOLD"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_numeric_threshold": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "ACCEPT",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-07"
+      ]
+    },
+    {
+      "fixture_id": "safe-num-06",
+      "family": "supported_numeric",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": true,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "numeric_threshold_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "PRIMITIVE_EXTRACTION_FALSE_NEGATIVE",
+      "primary_difference": {
+        "missing_primitive_labels": [
+          "TS:COUNT_THRESHOLD"
+        ],
+        "unexpected_primitive_labels": []
+      },
+      "downstream_effect": "representation mismatch without end-to-end class/status error",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-num-06",
+        "primitive_difference": {
+          "missing": [
+            "TS:COUNT_THRESHOLD"
+          ],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {
+          "asserts_numeric_threshold": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "ACCEPT",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "safe-time-03",
+      "family": "supported_temporal",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_TEMPORAL_RULE"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "SUPPORT_RELATION_ERROR",
+      "primary_difference": {
+        "temporal_rule_supported": {
+          "expected": true,
+          "actual": false
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-time-03",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "temporal_rule_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "ACCEPT",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": [
+            "UNSUPPORTED_TEMPORAL_RULE"
+          ]
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-08"
+      ]
+    },
+    {
+      "fixture_id": "safe-time-06",
+      "family": "supported_temporal",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:TEMPORAL_POLICY"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": true,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "temporal_rule_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_TEMPORAL_RULE"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "SUPPORT_RELATION_ERROR",
+      "primary_difference": {
+        "temporal_rule_supported": {
+          "expected": true,
+          "actual": false
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-time-06",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "temporal_rule_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "ACCEPT",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": [
+            "UNSUPPORTED_TEMPORAL_RULE"
+          ]
+        }
+      },
+      "inconsistent_invariance_clusters": []
+    },
+    {
+      "fixture_id": "safe-fallback-01",
+      "family": "supported_fallback",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "fallback_policy_supported": true,
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [
+          "TS:FALLBACK"
+        ],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": true,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "fallback_policy_supported": false,
+          "scope_supported": true
+        },
+        "violation_classes": [
+          "UNSUPPORTED_FALLBACK_POLICY"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "SUPPORT_RELATION_ERROR",
+      "primary_difference": {
+        "fallback_policy_supported": {
+          "expected": true,
+          "actual": false
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-fallback-01",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {},
+        "scope_relation_difference": null,
+        "support_relation_difference": {
+          "fallback_policy_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "ACCEPT",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": [
+            "UNSUPPORTED_FALLBACK_POLICY"
+          ]
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-09"
+      ]
+    },
+    {
+      "fixture_id": "safe-scope-01",
+      "family": "supported_scope",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "DOMAIN",
+        "asserted_scope": "DOMAIN",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "OBSERVATION",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "primary_error_class": "SCOPE_CLASSIFICATION_ERROR",
+      "primary_difference": {
+        "evidence_scope": {
+          "expected": "DOMAIN",
+          "actual": "OBSERVATION"
+        },
+        "asserted_scope": {
+          "expected": "DOMAIN",
+          "actual": "OBSERVATION"
+        }
+      },
+      "downstream_effect": "representation mismatch without end-to-end class/status error",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-scope-01",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {
+          "evidence_scope": {
+            "expected": "DOMAIN",
+            "actual": "OBSERVATION"
+          },
+          "asserted_scope": {
+            "expected": "DOMAIN",
+            "actual": "OBSERVATION"
+          }
+        },
+        "scope_relation_difference": null,
+        "support_relation_difference": {},
+        "guardrail_decision_difference": {
+          "status_changed": false,
+          "expected_status": "ACCEPT",
+          "actual_status": "ACCEPT",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": []
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-10"
+      ]
+    },
+    {
+      "fixture_id": "safe-scope-02",
+      "family": "supported_scope",
+      "expected_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "WORKFLOW",
+        "asserted_scope": "WORKFLOW",
+        "scope_relation": "EQUAL",
+        "support": {
+          "scope_supported": true
+        },
+        "violation_classes": [],
+        "status": "ACCEPT"
+      },
+      "observed_semantic_fact_class": {
+        "primitive_labels": [],
+        "canonical": {
+          "evidence_has_conflict": false,
+          "resolves_conflict": false,
+          "asserts_numeric_threshold": false,
+          "asserts_temporal_rule": false,
+          "asserts_fallback_policy": false,
+          "abstains": false,
+          "requests_clarification": false,
+          "has_operational_signal": false
+        },
+        "evidence_scope": "OBSERVATION",
+        "asserted_scope": "WORKFLOW",
+        "scope_relation": "BROADER",
+        "support": {
+          "scope_supported": false
+        },
+        "violation_classes": [
+          "UNSUPPORTED_SCOPE_GENERALIZATION"
+        ],
+        "status": "FLAG"
+      },
+      "primary_error_class": "SCOPE_CLASSIFICATION_ERROR",
+      "primary_difference": {
+        "evidence_scope": {
+          "expected": "WORKFLOW",
+          "actual": "OBSERVATION"
+        }
+      },
+      "downstream_effect": "end-to-end decision mismatch",
+      "trace": {
+        "raw_input_ref": "experiments/pit19/clean-heldout.json#safe-scope-02",
+        "primitive_difference": {
+          "missing": [],
+          "unexpected": []
+        },
+        "canonical_fact_difference": {},
+        "scope_difference": {
+          "evidence_scope": {
+            "expected": "WORKFLOW",
+            "actual": "OBSERVATION"
+          }
+        },
+        "scope_relation_difference": {
+          "expected": "EQUAL",
+          "actual": "BROADER"
+        },
+        "support_relation_difference": {
+          "scope_supported": {
+            "expected": true,
+            "actual": false
+          }
+        },
+        "guardrail_decision_difference": {
+          "status_changed": true,
+          "expected_status": "ACCEPT",
+          "actual_status": "FLAG",
+          "missing_violation_classes": [],
+          "unexpected_violation_classes": [
+            "UNSUPPORTED_SCOPE_GENERALIZATION"
+          ]
+        }
+      },
+      "inconsistent_invariance_clusters": [
+        "clean-cluster-10"
+      ]
+    }
+  ]
+}

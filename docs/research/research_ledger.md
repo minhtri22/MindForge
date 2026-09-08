@@ -982,3 +982,32 @@ Architectural interpretation: remaining frozen failures concentrate in primitive
 Next:
 
 PIT-19 Representation V3 Refinement. Do not start automatically.
+
+
+## PIT-19 Representation V3 Refinement + Clean Held-Out Reset
+
+Status:
+
+`COMPLETED`
+
+Representation: V3 (`b09e284cfd8316140d202e43be216e7fb4ff1743ed4e4900589fb5a0bb5ca1e9`).
+
+Guardrail: V3 unchanged (`1523ad7729f4f66ea67ac40704174a7207d7762e69d54d4d815754b432d7706f`).
+
+DEV: PASS — 120 samples; primitive precision/recall 99.1379% / 99.1379%; canonical precision/recall 100% / 100%; scope/support/cluster gates 100%.
+
+PIT-15 regression: PASS — 10/10 known failures; conflict/unsupported heuristic/Muse/lifecycle 100%; FPR 0%.
+
+PIT-16 regression: PASS — FULL and historical PRISTINE views satisfy all frozen metrics; FPR 0%.
+
+CLEAN_HELD_OUT integrity: `PRISTINE`; 100 samples (70 unsafe, 30 hard negatives); overlap PASS; suspicious overlaps 0; execution count 1.
+
+CLEAN_HELD_OUT: FAIL — representation primitive recall 77.39%, canonical recall 78.30%, support 91.89%, cluster consistency 40%; end-to-end unsafe recall 88.57%, class recall 83.95%, hard-negative FPR 20%, conflict recall 40%, compound full-class recall 54.55%.
+
+Methodology: `PASS`; no clean-heldout leakage, gold leakage, post-hoc tuning, scenario/provider/candidate logic, or Guardrail V3 change.
+
+Final verdict: `DETERMINISTIC_REPRESENTATION_CEILING_SUSPECTED`. Dominant failure layer: primitive extraction/generalization; no Guardrail V3 policy defect identified.
+
+API calls: 0. New teacher inference: 0. Teacher selected: NO. Training: NO. Distillation: NO. MindForge integration: NO.
+
+Next: PIT-20 — Learned / LLM-Assisted Semantic Extractor Feasibility. Do not start automatically.

@@ -92,3 +92,12 @@ Methodology: `PASS_WITH_PRE_EXPOSURE_LIMITATION`. Five PIT-16 held-out conflict 
 
 Next: PIT-19 Representation V3 Refinement. Do not start automatically.
 
+
+
+PIT-19 Representation V3 Refinement + Clean Held-Out Reset: `COMPLETED`.
+
+Result: `DETERMINISTIC_REPRESENTATION_CEILING_SUSPECTED`.
+
+Key evidence: DEV PASS; PIT-15 PASS; PIT-16 historical regression PASS; CLEAN_HELD_OUT integrity `PRISTINE`; CLEAN_HELD_OUT FAIL. The final pristine distribution shows benchmark recovery without sufficient generalization, dominated by primitive extraction/generalization failures; no Guardrail V3 policy defect was identified.
+
+Next: PIT-20 — Learned / LLM-Assisted Semantic Extractor Feasibility. Do not start automatically.

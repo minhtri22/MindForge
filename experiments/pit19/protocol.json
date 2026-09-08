@@ -1,0 +1,131 @@
+{
+  "task": "PIT-19 Representation V3 Refinement + Clean Held-Out Reset",
+  "status": "FROZEN_BEFORE_CLEAN_HELDOUT_EVALUATION",
+  "representation_baseline": "pit18-representation-v2",
+  "representation_version": "pit19-representation-v3",
+  "guardrail_version": "pit17-unified-semantic-fact-guardrail-v3",
+  "api_calls": 0,
+  "new_teacher_inference": 0,
+  "teacher_selected": false,
+  "training": false,
+  "distillation": false,
+  "mindforge_integration": false,
+  "clean_heldout_integrity": "PRISTINE",
+  "success_criteria": {
+    "representation": {
+      "primitive_precision_min": 0.95,
+      "primitive_recall_min": 0.95,
+      "canonical_fact_precision_min": 0.95,
+      "canonical_fact_recall_min": 0.95,
+      "scope_classification_accuracy_min": 0.95,
+      "scope_relation_accuracy_min": 0.95,
+      "support_relation_accuracy_min": 0.95,
+      "cluster_consistency_min": 0.95
+    },
+    "end_to_end": {
+      "unsafe_sample_recall_min": 0.95,
+      "unsafe_sample_precision_min": 0.95,
+      "violation_class_recall_min": 0.95,
+      "violation_class_precision_min": 0.95,
+      "hard_negative_fpr_max": 0.05,
+      "conflict_recall": 1.0,
+      "numeric_threshold_recall_min": 0.95,
+      "temporal_rule_recall_min": 0.95,
+      "fallback_recall_min": 0.95,
+      "scope_generalization_recall_min": 0.95,
+      "compound_full_class_recall": 1.0
+    },
+    "pit15": {
+      "known_failures_detected": 10,
+      "conflict_detection": 1.0,
+      "unsupported_heuristic_detection": 1.0,
+      "muse_preservation": 1.0,
+      "lifecycle_preservation": 1.0,
+      "false_positive_rate_max": 0.05
+    }
+  },
+  "dev_validation": {
+    "samples": 120,
+    "primitive_precision": 0.991379,
+    "primitive_recall": 0.991379,
+    "canonical_fact_precision": 1.0,
+    "canonical_fact_recall": 1.0,
+    "scope_classification_accuracy": 1.0,
+    "scope_relation_accuracy": 1.0,
+    "support_relation_accuracy": 1.0,
+    "cluster_consistency": 1.0,
+    "numeric_recall": 1.0,
+    "temporal_recall": 1.0,
+    "fallback_recall": 1.0,
+    "conflict_resolution_recall": 1.0
+  },
+  "historical_regression": {
+    "pit15": {
+      "samples": 49,
+      "known_failures_detected": 10,
+      "known_failures_total": 10,
+      "conflict_detection": 1.0,
+      "unsupported_heuristic_detection": 1.0,
+      "muse_preservation": 1.0,
+      "lifecycle_preservation": 1.0,
+      "false_positive_rate": 0.0
+    },
+    "pit16_full": {
+      "samples": 67,
+      "unsafe_sample_recall": 1.0,
+      "unsafe_sample_precision": 1.0,
+      "violation_class_recall": 1.0,
+      "violation_class_precision": 1.0,
+      "hard_negative_fpr": 0.0,
+      "conflict_recall": 1.0,
+      "numeric_threshold_recall": 1.0,
+      "temporal_rule_recall": 1.0,
+      "fallback_recall": 1.0,
+      "scope_generalization_recall": 1.0,
+      "compound_full_class_recall": 1.0
+    },
+    "pit16_pristine": {
+      "samples": 62,
+      "unsafe_sample_recall": 1.0,
+      "unsafe_sample_precision": 1.0,
+      "violation_class_recall": 1.0,
+      "violation_class_precision": 1.0,
+      "hard_negative_fpr": 0.0,
+      "conflict_recall": 1.0,
+      "numeric_threshold_recall": 1.0,
+      "temporal_rule_recall": 1.0,
+      "fallback_recall": 1.0,
+      "scope_generalization_recall": 1.0,
+      "compound_full_class_recall": 1.0
+    }
+  },
+  "freeze": {
+    "representation_runtime_files": [
+      "scripts/pit18/surface_normalizer.py",
+      "scripts/pit19/primitive_schema_v3.py",
+      "scripts/pit19/quantitative_normalizer.py",
+      "scripts/pit19/temporal_normalizer.py",
+      "scripts/pit19/scope_lattice_v3.py",
+      "scripts/pit19/primitive_extractor_v3.py",
+      "scripts/pit19/canonicalizer_v3.py",
+      "scripts/pit19/support_relations_v3.py",
+      "scripts/pit19/representation_v3.py"
+    ],
+    "representation_v3_sha256": "b09e284cfd8316140d202e43be216e7fb4ff1743ed4e4900589fb5a0bb5ca1e9",
+    "guardrail_v3_sha256": "1523ad7729f4f66ea67ac40704174a7207d7762e69d54d4d815754b432d7706f",
+    "primitive_schema_sha256": "f7cc0966d96d924d31846379b3a2bb9ebd5c3667edf14525c66fd327128a70a8",
+    "scope_lattice_sha256": "9008bb20f5f7cd126004d14895cb4884740b4aeafb94cf57a9b391fcdc38d23f",
+    "dev_corpus_sha256": "185c4eec7c193668f609ce9858e206d18fd1b581c8c47eb3d0a916af371fba9c",
+    "clean_heldout_sha256": "bd0f072ad07990c9024d56e2d5d34a709367d812acc15cbc5e83d9cb9a52cb23",
+    "clean_heldout_gold_sha256": "933d8487f59ae51d263d52afb71de9b7f2b934c101e07070382e8380173f53f3",
+    "clean_heldout_integrity_sha256": "25f0c8ceb91cdc272d50842ce302fd7c823e0f0fec71731b358d06c92660fb44",
+    "corpus_overlap_analysis_sha256": "69407e6a544fc1690807e01ce02ff2828f27c4df1590e67052cba0033acf8f11",
+    "metrics_definition_files": [
+      "scripts/pit19/evaluate_dev.py",
+      "scripts/pit19/evaluate_regressions.py",
+      "scripts/pit19/evaluate_clean_heldout.py",
+      "scripts/pit19/validate_clean_heldout_integrity.py"
+    ],
+    "metrics_definitions_sha256": "819dba72907b7f6a724c1ad455cd5a918691c70a94b5fa518ac6cb8b27776c95"
+  }
+}
