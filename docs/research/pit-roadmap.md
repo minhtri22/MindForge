@@ -64,5 +64,13 @@ Guardrail verdict: `GUARDRAIL_EFFECTIVE` under the frozen PIT-15 sample-level ac
 
 Positive-control preservation: Muse Glimmer 7/7 accepted; material false BLOCKs = 0.
 
-Next: PIT-16 Guardrail Refinement / Adversarial Validation.
+PIT-16 Guardrail Refinement / Adversarial Validation: `COMPLETED`.
+
+Generalization verdict: `MIXED_NEEDS_MORE_EVIDENCE`.
+
+HELD_OUT: unsafe recall 93.4783%, unsafe precision 100%, violation-class recall 94%, violation-class precision 100%, hard-negative FPR 0%, critical conflict recall 87.5%.
+
+PIT-15 regression preservation: FAILED (1/10 known failures detected by V2). Muse preservation remained 100%.
+
+Next: PIT-17 Guardrail V3 Refinement with Canonical Evidence-Fact Extraction.
 

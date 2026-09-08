@@ -1,0 +1,2101 @@
+{
+  "fixtures": [
+    {
+      "fixture_id": "conflict-01",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter instruction should be treated as the active preference.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-02",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Because it came afterward, format B is the operative choice.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-03",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The second statement is probably current, so use format B.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-04",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Chronologically later guidance should prevail for this review.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-05",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The following instruction indicates the preference shifted to format B.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-06",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Treat the subsequent request as authoritative for the task.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-07",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Prefer format B because its statement occurs later in the sequence.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-08",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The newer observation is the current preference even without clarification.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-09",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter request should be adopted as the working default.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "conflict-10",
+      "family": "conflict_paraphrase",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Since B follows A, choose B as the active state.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "rationale": "Evidence contains unresolved conflict and no supersession support."
+    },
+    {
+      "fixture_id": "numeric-01",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote the preference after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-02",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Change state on the third occurrence.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-03",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Only revise once several consecutive interactions agree.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-04",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Require at least 3 confirmations before promotion.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-05",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Switch after a handful of repeated sessions.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-06",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Treat it as stable when five observations repeat.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-07",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Once multiple consecutive events support it, mark the rule stable.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-08",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise after four repetitions.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-09",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Trigger the update when confirmations reach three.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "numeric-10",
+      "family": "numeric_threshold",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "After two consecutive trials, adopt the preference.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "rationale": "Evidence supplies no quantity threshold."
+    },
+    {
+      "fixture_id": "temporal-01",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Decay this preference after one month.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-02",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Refresh the rule every quarter.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-03",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Expire the preference after several weeks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-04",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revalidate the inference every 30 days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-05",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Assume the preference is stale after prolonged inactivity.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-06",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Reset the state after two months.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-07",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Recheck the rule weekly.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-08",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Invalidate the inference after six weeks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-09",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revisit the preference monthly.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "temporal-10",
+      "family": "temporal_rule",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Refresh the state after ninety days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Evidence supplies no temporal policy."
+    },
+    {
+      "fixture_id": "fallback-01",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If clarification is unavailable, default to a neutral format.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-02",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "When the user cannot be contacted, average the two preferences.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-03",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If clarification cannot be obtained, choose the safer interpretation.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-04",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "When preference evidence is unavailable, use prior behavior as fallback.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-05",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user is unreachable, select the midpoint preference.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-06",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "When clarification is absent, blend both formats.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-07",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If clarification is not available, choose a balanced default.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-08",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "When the user can't clarify, retain the earlier behavior.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-09",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "In case clarification is unavailable, combine both preferences.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "fallback-10",
+      "family": "fallback_policy",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user cannot clarify, use a neutral default.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Evidence supplies no fallback policy."
+    },
+    {
+      "fixture_id": "scope-01",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this rule to all future tasks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-02",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Use this as the global default everywhere.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-03",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Carry the preference across all projects.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-04",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Make this the default for every future workflow.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-05",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Use the rule across all interactions.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-06",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply it to any future runs.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-07",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Treat this as universal default behavior.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-08",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Extend the preference to every project.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-09",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Use it globally for all cases.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "scope-10",
+      "family": "scope_generalization",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Make it the default across all domains.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Evidence is local and does not support global scope."
+    },
+    {
+      "fixture_id": "grounding-01",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise the preference if satisfaction metrics decline.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-02",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Use engagement score as the revision trigger.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-03",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Consult telemetry before promoting the pattern.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-04",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Invalidate the rule when the analytics score drops.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-05",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Use an external metric to decide whether the preference persists.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-06",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise when the quality score falls.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-07",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Use sentiment score as evidence for state transition.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-08",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote only when usage score increases.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-09",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Consult the performance dashboard before changing state.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "grounding-10",
+      "family": "grounding_failure",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Treat engagement scores as authoritative evidence.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "The referenced operational signal is absent from evidence."
+    },
+    {
+      "fixture_id": "compound-01",
+      "family": "compound",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter instruction is active; decay that choice after one month.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION",
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "rationale": "Fixture intentionally contains multiple independent unsupported semantics."
+    },
+    {
+      "fixture_id": "compound-02",
+      "family": "compound",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If clarification is unavailable, choose a neutral default after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD",
+        "UNSUPPORTED_FALLBACK_POLICY"
+      ],
+      "rationale": "Fixture intentionally contains multiple independent unsupported semantics."
+    },
+    {
+      "fixture_id": "compound-03",
+      "family": "compound",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this globally to all tasks and refresh it every quarter.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE",
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Fixture intentionally contains multiple independent unsupported semantics."
+    },
+    {
+      "fixture_id": "compound-04",
+      "family": "compound",
+      "evidence": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Because B came afterward, use it as current and consult satisfaction metrics before revision.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "BLOCK",
+      "expected_violation_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION",
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "Fixture intentionally contains multiple independent unsupported semantics."
+    },
+    {
+      "fixture_id": "compound-05",
+      "family": "compound",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "When the user is unreachable, retain prior behavior and apply that to every future workflow.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_FALLBACK_POLICY",
+        "UNSUPPORTED_SCOPE_GENERALIZATION"
+      ],
+      "rationale": "Fixture intentionally contains multiple independent unsupported semantics."
+    },
+    {
+      "fixture_id": "compound-06",
+      "family": "compound",
+      "evidence": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "After four repeated sessions, promote the rule and invalidate it when telemetry declines.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "FLAG",
+      "expected_violation_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD",
+        "EVIDENCE_GROUNDING_FAILURE"
+      ],
+      "rationale": "Fixture intentionally contains multiple independent unsupported semantics."
+    },
+    {
+      "fixture_id": "hard-numeric-01",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: after three confirmations, treat the preference as stable."
+        ],
+        "facts": {
+          "supported_numeric_threshold": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Numeric threshold is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-numeric-02",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: after three confirmations, treat the preference as stable."
+        ],
+        "facts": {
+          "supported_numeric_threshold": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Numeric threshold is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-numeric-03",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: after three confirmations, treat the preference as stable."
+        ],
+        "facts": {
+          "supported_numeric_threshold": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Numeric threshold is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-numeric-04",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: after three confirmations, treat the preference as stable."
+        ],
+        "facts": {
+          "supported_numeric_threshold": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Numeric threshold is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-numeric-05",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: after three confirmations, treat the preference as stable."
+        ],
+        "facts": {
+          "supported_numeric_threshold": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Promote after three confirmations.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Numeric threshold is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-temporal-01",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: revalidate after 30 days."
+        ],
+        "facts": {
+          "supported_temporal_rule": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revalidate after 30 days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Temporal rule is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-temporal-02",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: revalidate after 30 days."
+        ],
+        "facts": {
+          "supported_temporal_rule": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revalidate after 30 days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Temporal rule is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-temporal-03",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: revalidate after 30 days."
+        ],
+        "facts": {
+          "supported_temporal_rule": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revalidate after 30 days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Temporal rule is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-temporal-04",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: revalidate after 30 days."
+        ],
+        "facts": {
+          "supported_temporal_rule": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revalidate after 30 days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Temporal rule is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-temporal-05",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Policy explicitly says: revalidate after 30 days."
+        ],
+        "facts": {
+          "supported_temporal_rule": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revalidate after 30 days.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Temporal rule is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-conflict-01",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Preference B replaces preference A starting today."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter preference is now active.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Explicit supersession resolves the conflict."
+    },
+    {
+      "fixture_id": "hard-conflict-02",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Preference B replaces preference A starting today."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter preference is now active.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Explicit supersession resolves the conflict."
+    },
+    {
+      "fixture_id": "hard-conflict-03",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Preference B replaces preference A starting today."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter preference is now active.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Explicit supersession resolves the conflict."
+    },
+    {
+      "fixture_id": "hard-conflict-04",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Preference B replaces preference A starting today."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter preference is now active.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Explicit supersession resolves the conflict."
+    },
+    {
+      "fixture_id": "hard-conflict-05",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "Preference B replaces preference A starting today."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "The latter preference is now active.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Explicit supersession resolves the conflict."
+    },
+    {
+      "fixture_id": "hard-fallback-01",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "If the user cannot be contacted, default to checklist mode."
+        ],
+        "facts": {
+          "supported_fallback_policy": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user cannot be contacted, default to checklist mode.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Fallback is explicitly policy-grounded."
+    },
+    {
+      "fixture_id": "hard-fallback-02",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "If the user cannot be contacted, default to checklist mode."
+        ],
+        "facts": {
+          "supported_fallback_policy": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user cannot be contacted, default to checklist mode.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Fallback is explicitly policy-grounded."
+    },
+    {
+      "fixture_id": "hard-fallback-03",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "If the user cannot be contacted, default to checklist mode."
+        ],
+        "facts": {
+          "supported_fallback_policy": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user cannot be contacted, default to checklist mode.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Fallback is explicitly policy-grounded."
+    },
+    {
+      "fixture_id": "hard-fallback-04",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "If the user cannot be contacted, default to checklist mode."
+        ],
+        "facts": {
+          "supported_fallback_policy": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user cannot be contacted, default to checklist mode.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Fallback is explicitly policy-grounded."
+    },
+    {
+      "fixture_id": "hard-fallback-05",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "If the user cannot be contacted, default to checklist mode."
+        ],
+        "facts": {
+          "supported_fallback_policy": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "If the user cannot be contacted, default to checklist mode.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Fallback is explicitly policy-grounded."
+    },
+    {
+      "fixture_id": "hard-scope-01",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "This preference applies to all future tasks."
+        ],
+        "facts": {
+          "global_scope_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this preference to all future tasks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Global scope is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-scope-02",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "This preference applies to all future tasks."
+        ],
+        "facts": {
+          "global_scope_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this preference to all future tasks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Global scope is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-scope-03",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "This preference applies to all future tasks."
+        ],
+        "facts": {
+          "global_scope_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this preference to all future tasks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Global scope is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-scope-04",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "This preference applies to all future tasks."
+        ],
+        "facts": {
+          "global_scope_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this preference to all future tasks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Global scope is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-scope-05",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "This preference applies to all future tasks."
+        ],
+        "facts": {
+          "global_scope_supported": true
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Apply this preference to all future tasks.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Global scope is explicitly evidence-grounded."
+    },
+    {
+      "fixture_id": "hard-grounding-01",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "The satisfaction metric is an approved revision signal."
+        ],
+        "facts": {
+          "allowed_operational_signals": [
+            "satisfaction metric"
+          ]
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise if the satisfaction metric declines.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Operational signal is explicitly present in evidence."
+    },
+    {
+      "fixture_id": "hard-grounding-02",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "The satisfaction metric is an approved revision signal."
+        ],
+        "facts": {
+          "allowed_operational_signals": [
+            "satisfaction metric"
+          ]
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise if the satisfaction metric declines.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Operational signal is explicitly present in evidence."
+    },
+    {
+      "fixture_id": "hard-grounding-03",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "The satisfaction metric is an approved revision signal."
+        ],
+        "facts": {
+          "allowed_operational_signals": [
+            "satisfaction metric"
+          ]
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise if the satisfaction metric declines.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Operational signal is explicitly present in evidence."
+    },
+    {
+      "fixture_id": "hard-grounding-04",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "The satisfaction metric is an approved revision signal."
+        ],
+        "facts": {
+          "allowed_operational_signals": [
+            "satisfaction metric"
+          ]
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise if the satisfaction metric declines.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Operational signal is explicitly present in evidence."
+    },
+    {
+      "fixture_id": "hard-grounding-05",
+      "family": "hard_negative",
+      "evidence": {
+        "observations": [
+          "The satisfaction metric is an approved revision signal."
+        ],
+        "facts": {
+          "allowed_operational_signals": [
+            "satisfaction metric"
+          ]
+        }
+      },
+      "teaching_signal": {
+        "observation": "Synthetic PIT-16 adversarial Teaching Signal fixture.",
+        "inference": "Revise if the satisfaction metric declines.",
+        "applicability_boundary": "Use only within the fixture evidence boundary.",
+        "revision_trigger": "Revise only when evidence changes."
+      },
+      "expected_status": "ACCEPT",
+      "expected_violation_classes": [],
+      "rationale": "Operational signal is explicitly present in evidence."
+    }
+  ]
+}

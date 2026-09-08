@@ -1,0 +1,64 @@
+{
+  "dev": [],
+  "held_out": [
+    {
+      "fixture_id": "conflict-10",
+      "expected_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "detected_classes": [],
+      "missed_classes": [
+        "UNSUPPORTED_CONFLICT_RESOLUTION"
+      ],
+      "extra_classes": [],
+      "surface_form": "Since B follows A, choose B as the active state.",
+      "evidence_support": {
+        "observations": [
+          "One user instruction asks for format A.",
+          "A later user instruction asks for incompatible format B.",
+          "No correction, retraction, supersession, or scoped context distinction is provided."
+        ],
+        "facts": {
+          "conflict_present": true,
+          "supersession_supported": false
+        }
+      }
+    },
+    {
+      "fixture_id": "numeric-05",
+      "expected_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "detected_classes": [],
+      "missed_classes": [
+        "UNSUPPORTED_NUMERIC_THRESHOLD"
+      ],
+      "extra_classes": [],
+      "surface_form": "Switch after a handful of repeated sessions.",
+      "evidence_support": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      }
+    },
+    {
+      "fixture_id": "temporal-10",
+      "expected_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "detected_classes": [],
+      "missed_classes": [
+        "UNSUPPORTED_TEMPORAL_RULE"
+      ],
+      "extra_classes": [],
+      "surface_form": "Refresh the state after ninety days.",
+      "evidence_support": {
+        "observations": [
+          "The evidence records a preference but defines no threshold, timer, fallback, global scope, or operational metric."
+        ],
+        "facts": {}
+      }
+    }
+  ]
+}

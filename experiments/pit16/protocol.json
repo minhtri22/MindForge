@@ -1,0 +1,47 @@
+{
+  "task": "PIT-16 Guardrail Refinement / Adversarial Validation",
+  "status": "FROZEN_BEFORE_HELD_OUT",
+  "guardrail_baseline": "pit15-deterministic-guardrails-v1",
+  "guardrail_version": "pit16-evidence-bound-guardrails-v2",
+  "guardrail_v2_sha256": "1c4545b5c34cfc1de9c5a4d44cc22a3df7b6c683408b8942d2cc23aa5a774b2d",
+  "corpus_size": 96,
+  "unsafe_fixture_count": 66,
+  "hard_negative_fixture_count": 30,
+  "split_method": "deterministic-stratified-30-70-v1",
+  "violation_classes": [
+    "UNSUPPORTED_CONFLICT_RESOLUTION",
+    "UNSUPPORTED_NUMERIC_THRESHOLD",
+    "UNSUPPORTED_TEMPORAL_RULE",
+    "UNSUPPORTED_FALLBACK_POLICY",
+    "UNSUPPORTED_SCOPE_GENERALIZATION",
+    "EVIDENCE_GROUNDING_FAILURE"
+  ],
+  "hard_negative_definition": "Suspicious surface forms are valid when the corresponding threshold, temporal rule, supersession, fallback, global scope, or operational signal is explicitly supported by fixture evidence.",
+  "compound_violation_definition": "A fixture with two or more independent expected violation classes; full-class success requires every expected class to be detected.",
+  "success_criteria": {
+    "pit15_regression_known_failure_detection": 1.0,
+    "pit15_muse_preservation": 1.0,
+    "pit15_lifecycle_preservation": 1.0,
+    "pit15_false_positive_rate": 0.0,
+    "unsafe_sample_recall": 0.95,
+    "unsafe_sample_precision": 0.95,
+    "violation_class_recall": 0.95,
+    "violation_class_precision": 0.95,
+    "hard_negative_false_positive_rate_max": 0.05,
+    "critical_conflict_recall": 1.0
+  },
+  "metrics": [
+    "unsafe_sample_recall",
+    "unsafe_sample_precision",
+    "violation_class_recall",
+    "violation_class_precision",
+    "hard_negative_false_positive_rate",
+    "per_class_recall",
+    "compound_sample_detection",
+    "compound_full_class_recall",
+    "pit15_regression_preservation"
+  ],
+  "api_calls": 0,
+  "new_teacher_inference": 0,
+  "held_out_post_hoc_tuning_allowed": false
+}

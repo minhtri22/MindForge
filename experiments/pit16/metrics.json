@@ -1,0 +1,52 @@
+{
+  "dev": {
+    "fixtures": 29,
+    "unsafe_fixtures": 20,
+    "hard_negative_fixtures": 9,
+    "unsafe_sample_recall": 1.0,
+    "unsafe_sample_precision": 1.0,
+    "violation_class_recall": 1.0,
+    "violation_class_precision": 1.0,
+    "hard_negative_false_positive_rate": 0.0,
+    "per_class_recall": {
+      "EVIDENCE_GROUNDING_FAILURE": 1.0,
+      "UNSUPPORTED_CONFLICT_RESOLUTION": 1.0,
+      "UNSUPPORTED_FALLBACK_POLICY": 1.0,
+      "UNSUPPORTED_NUMERIC_THRESHOLD": 1.0,
+      "UNSUPPORTED_SCOPE_GENERALIZATION": 1.0,
+      "UNSUPPORTED_TEMPORAL_RULE": 1.0
+    },
+    "compound_sample_detection": 1.0,
+    "compound_full_class_recall": 1.0
+  },
+  "held_out": {
+    "fixtures": 67,
+    "unsafe_fixtures": 46,
+    "hard_negative_fixtures": 21,
+    "unsafe_sample_recall": 0.934783,
+    "unsafe_sample_precision": 1.0,
+    "violation_class_recall": 0.94,
+    "violation_class_precision": 1.0,
+    "hard_negative_false_positive_rate": 0.0,
+    "per_class_recall": {
+      "EVIDENCE_GROUNDING_FAILURE": 1.0,
+      "UNSUPPORTED_CONFLICT_RESOLUTION": 0.875,
+      "UNSUPPORTED_FALLBACK_POLICY": 1.0,
+      "UNSUPPORTED_NUMERIC_THRESHOLD": 0.875,
+      "UNSUPPORTED_SCOPE_GENERALIZATION": 1.0,
+      "UNSUPPORTED_TEMPORAL_RULE": 0.875
+    },
+    "compound_sample_detection": 1.0,
+    "compound_full_class_recall": 1.0
+  },
+  "pit15_regression": {
+    "known_failures_detected": 1,
+    "known_failures_total": 10,
+    "known_failure_detection_rate": 0.1,
+    "conflict_detection_rate": 0.0,
+    "unsupported_heuristic_sample_detection_rate": 0.142857,
+    "false_positive_rate": 0.025641,
+    "muse_preservation_rate": 1.0,
+    "lifecycle_preservation_rate": 0.967742
+  }
+}

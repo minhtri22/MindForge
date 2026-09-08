@@ -545,6 +545,76 @@ Next:
 
 PIT-15 Teaching Signal Guardrail Experiment.
 
+## PIT-16 Guardrail Refinement / Adversarial Validation
+
+Status:
+
+COMPLETED
+
+Guardrail V2:
+
+`pit16-evidence-bound-guardrails-v2`
+
+Corpus and split:
+
+- 96 new adversarial fixtures.
+- 66 unsafe fixtures.
+- 30 clean hard negatives.
+- DEV: 29.
+- HELD_OUT: 67.
+
+V2 was refined only against DEV and frozen by SHA256 before HELD_OUT. HELD_OUT was executed once. No post-hoc V2 modification or rerun occurred.
+
+PIT-15 regression:
+
+- known failures detected: 1/10 (10%);
+- conflict detection: 0%;
+- unsupported-heuristic sample detection: 14.2857%;
+- false-positive rate: 2.5641%;
+- Muse preservation: 100%;
+- lifecycle preservation: 96.7742%.
+
+HELD_OUT:
+
+- unsafe recall: 93.4783%;
+- unsafe precision: 100%;
+- violation-class recall: 94%;
+- violation-class precision: 100%;
+- hard-negative FPR: 0%;
+- critical conflict recall: 87.5%;
+- numeric threshold recall: 87.5%;
+- temporal rule recall: 87.5%;
+- fallback recall: 100%;
+- scope-generalization recall: 100%;
+- compound sample detection: 100%;
+- compound full-class recall: 100%.
+
+Final generalization verdict:
+
+`MIXED_NEEDS_MORE_EVIDENCE`
+
+Interpretation:
+
+V2 generalized substantially on the synthetic adversarial corpus without held-out overblocking, but missed frozen recall gates and did not preserve PIT-15 regression. The main architectural issue is canonical evidence representation/extraction between raw event evidence and invariant guardrail facts.
+
+Raw teacher verdicts remain unchanged.
+
+No teacher selected.
+
+API calls: 0.
+
+New teacher inference: 0.
+
+No training.
+
+No distillation.
+
+No MindForge integration.
+
+Next:
+
+PIT-17 Guardrail V3 Refinement with Canonical Evidence-Fact Extraction.
+
 ## PIT-15 Teaching Signal Guardrail Experiment
 
 Status:
