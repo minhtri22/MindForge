@@ -1,0 +1,34 @@
+{
+  "candidate_id": "deepseek/deepseek-v4-pro",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "sample_count": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {"criterion_scores": [2, 2, 2], "mean": 2.0},
+    "temporal_reasoning": {"criterion_scores": [2, 2], "mean": 2.0},
+    "correction_recovery": {"criterion_scores": [2, 2], "mean": 2.0},
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [0, 2],
+      "mean": 1.0,
+      "note": "The conflicting-evidence signal chose the newer instruction as the active preference despite the frozen scenario stating that no correction, supersession, or contextual distinction was present. The insufficient-evidence signal correctly retained uncertainty."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [2, 1, 2, 2],
+      "mean": 1.75,
+      "note": "Signals are concise and actionable. Confidence on the unresolved-conflict inference is stronger than the evidence supports."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [2, 1],
+      "mean": 1.5,
+      "note": "The outputs trace well to supplied observations, but the conflict case adds a temporal-precedence resolution rule that is not frozen in the scenario or PIT contract."
+    },
+    "personalization_safety": {
+      "criterion_scores": [1, 2],
+      "mean": 1.5,
+      "note": "Exception and insufficient-evidence boundaries are handled well. The unresolved conflict is over-resolved instead of preserved as ambiguity."
+    },
+    "pattern_lifecycle_quality": {"criterion_scores": [2, 2, 2, 2, 2], "mean": 2.0}
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

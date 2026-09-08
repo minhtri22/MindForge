@@ -1,0 +1,30 @@
+{
+  "candidate_id": "minimax/minimax-m3:free",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "sample_count": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {"criterion_scores": [2, 2, 2], "mean": 2.0},
+    "temporal_reasoning": {"criterion_scores": [2, 2], "mean": 2.0},
+    "correction_recovery": {"criterion_scores": [2, 2], "mean": 2.0},
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [2, 2],
+      "mean": 2.0,
+      "note": "The conflicting-evidence signal explicitly preserved the contradiction and requested clarification; the insufficient-evidence signal correctly declined to infer a stable dark-mode preference."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [2, 2, 2, 1],
+      "mean": 1.75,
+      "note": "Signals are detailed and well bounded. Some revision triggers introduce extra heuristics, including an unsupported sixty-day decay condition in the stable-preference case."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [2, 1],
+      "mean": 1.5,
+      "note": "Primary conclusions are traceable to the supplied evidence, while some secondary revision heuristics and operational rules extend beyond what the scenarios establish."
+    },
+    "personalization_safety": {"criterion_scores": [2, 2], "mean": 2.0},
+    "pattern_lifecycle_quality": {"criterion_scores": [2, 2, 2, 2, 2], "mean": 2.0}
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

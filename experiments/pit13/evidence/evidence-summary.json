@@ -1,0 +1,36 @@
+{
+  "task": "PIT-13.1.B Evidence Collection",
+  "status": "COMPLETED",
+  "qualified_candidates_planned": 3,
+  "candidates_executed": [
+    "qwen/qwen3.7-max:free",
+    "deepseek/deepseek-v4-pro",
+    "minimax/minimax-m3:free"
+  ],
+  "excluded_candidates": {
+    "mistralai/mistral-small-2603": {
+      "pit_13_1_b_calls": 0,
+      "status": "EXCLUDED_FROM_EXECUTION",
+      "reason": "SMOKE_NOT_QUALIFIED"
+    }
+  },
+  "scenario_families": 7,
+  "total_scenarios": 7,
+  "planned_api_samples": 21,
+  "completed_api_samples": 21,
+  "schema_valid_samples": 21,
+  "model_identity_mismatches": 0,
+  "manual_repairs": 0,
+  "semantic_retries": 0,
+  "per_model_tuning": 0,
+  "failure_counts": {},
+  "raw_artifacts": true,
+  "normalized_artifacts": true,
+  "metrics_generated": true,
+  "candidate_profiles_generated": true,
+  "ranking_performed": false,
+  "winner_declared": false,
+  "teacher_selected": false,
+  "training": false,
+  "mindforge_integration": false
+}

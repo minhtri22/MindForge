@@ -1,0 +1,46 @@
+{
+  "task": "PIT-13.1.B Candidate Evidence Profiles",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "profiles": [
+    {
+      "candidate_id": "qwen/qwen3.7-max:free",
+      "evidence_complete": true,
+      "strengths": [
+        "Strong stable-pattern, drift, correction, rare-exception, and long-term lifecycle handling under the frozen scenarios.",
+        "Consistent applicability boundaries and explicit revision triggers."
+      ],
+      "limitations": [
+        "Resolved the deliberately unresolved conflicting-evidence case by treating the newest message as superseding the older one.",
+        "Introduced a specific dark-mode revision threshold not present in the supplied evidence."
+      ],
+      "qualification_verdict": null
+    },
+    {
+      "candidate_id": "deepseek/deepseek-v4-pro",
+      "evidence_complete": true,
+      "strengths": [
+        "Strong temporal drift, correction recovery, rare-exception, and long-term consistency signals.",
+        "Concise Teaching Signals with usable applicability and revision boundaries."
+      ],
+      "limitations": [
+        "Resolved the deliberately unresolved conflicting-evidence case using recency despite the absence of explicit supersession."
+      ],
+      "qualification_verdict": null
+    },
+    {
+      "candidate_id": "minimax/minimax-m3:free",
+      "evidence_complete": true,
+      "strengths": [
+        "Preserved unresolved conflicting evidence and explicitly requested clarification instead of manufacturing certainty.",
+        "Strong pattern lifecycle and contextual exception handling across the frozen scenario set."
+      ],
+      "limitations": [
+        "Some revision triggers add operational heuristics not established by the frozen evidence, including a sixty-day preference-decay condition."
+      ],
+      "qualification_verdict": null
+    }
+  ],
+  "ranking": null,
+  "winner": null,
+  "teacher_selected": false
+}

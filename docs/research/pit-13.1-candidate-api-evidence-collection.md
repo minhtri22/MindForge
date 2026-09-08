@@ -359,3 +359,36 @@ Current counts:
 - Per-model tuning: 0
 
 No ranking performed. No winner declared. No teacher selected. No training or MindForge integration performed.
+
+### PIT-13.1.B Resume and Completion
+
+Status: **COMPLETED**
+
+After explicit authorization to load the existing local `.env` credential file, `XTROUTER_API_KEY` was loaded into the process environment without printing or storing the credential in research artifacts. The frozen PIT-13.1.B runner then executed the already-frozen seven-scenario manifest exactly once for the three smoke-qualified candidates only.
+
+Execution result:
+
+- Qwen3.7-Max: 7/7 API completed, 7/7 schema valid.
+- DeepSeek V4 Pro: 7/7 API completed, 7/7 schema valid.
+- MiniMax M3: 7/7 API completed, 7/7 schema valid.
+- Mistral Small 2603: 0 PIT-13.1.B calls; remains `EXCLUDED_FROM_EXECUTION` because `SMOKE_NOT_QUALIFIED`.
+- Total: 21/21 API samples completed and 21/21 schema valid.
+- Model identity mismatches: 0.
+- Manual repair: 0.
+- Semantic retries: 0.
+- Per-model tuning: 0.
+
+Artifacts:
+
+- Raw: `experiments/pit13/evidence/raw/`
+- Normalized: `experiments/pit13/evidence/normalized/`
+- Execution summary: `experiments/pit13/evidence/execution-summary.json`
+- Candidate metrics: `experiments/pit13/evidence/metrics/`
+- Candidate profiles: `experiments/pit13/evidence/candidate-profiles.json`
+- Evidence summary: `experiments/pit13/evidence/evidence-summary.json`
+
+Candidate-level semantic profiling used only the rubric frozen before execution. No overall score, rank order, winner, qualification verdict, or teacher selection was produced.
+
+Observed evidence-profile limitations include unresolved-conflict handling: Qwen3.7 and DeepSeek used recency to resolve the frozen `conflicting_evidence_001` case despite no explicit supersession signal; MiniMax preserved the conflict and requested clarification. Some candidates also introduced revision heuristics not present in the frozen evidence. These are candidate evidence findings for later PIT-14 review, not teacher verdicts.
+
+No ranking performed. No winner declared. No teacher selected. No training or MindForge integration performed.

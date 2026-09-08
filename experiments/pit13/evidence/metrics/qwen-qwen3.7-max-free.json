@@ -1,0 +1,34 @@
+{
+  "candidate_id": "qwen/qwen3.7-max:free",
+  "rubric_version": "pit-13.1-b-metric-rubric-v1",
+  "sample_count": 7,
+  "schema_valid": 7,
+  "dimensions": {
+    "pattern_understanding": {"criterion_scores": [2, 2, 2], "mean": 2.0},
+    "temporal_reasoning": {"criterion_scores": [2, 2], "mean": 2.0},
+    "correction_recovery": {"criterion_scores": [2, 2], "mean": 2.0},
+    "uncertainty_abstention_quality": {
+      "criterion_scores": [0, 2],
+      "mean": 1.0,
+      "note": "The conflicting-evidence signal selected the newest instruction as superseding the earlier instruction even though the scenario explicitly contained no retraction, correction, or context disambiguation. The insufficient-evidence signal correctly abstained from promoting one dark-mode event into a stable preference."
+    },
+    "teaching_signal_quality": {
+      "criterion_scores": [2, 1, 2, 1],
+      "mean": 1.5,
+      "note": "Signals are structurally clear and bounded. Confidence is too strong for the unresolved-conflict case, and the insufficient-evidence revision trigger introduced a specific two-session/seven-day threshold that was not supplied by the evidence."
+    },
+    "evidence_traceability": {
+      "criterion_scores": [2, 1],
+      "mean": 1.5,
+      "note": "Core conclusions are grounded in supplied observations. The conflict-resolution rule and specific dark-mode revision threshold add unsupported decision logic beyond the evidence."
+    },
+    "personalization_safety": {
+      "criterion_scores": [1, 2],
+      "mean": 1.5,
+      "note": "Sparse-evidence and exception boundaries are explicit, but unresolved conflicting preferences were converted into a current preference instead of being preserved as unresolved."
+    },
+    "pattern_lifecycle_quality": {"criterion_scores": [2, 2, 2, 2, 2], "mean": 2.0}
+  },
+  "qualification_verdict": null,
+  "ranking": null
+}

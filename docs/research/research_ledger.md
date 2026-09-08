@@ -267,6 +267,7 @@ No final teacher selected.
 No training.
 No MindForge integration.
 
+
 ## PIT-13.1.A.0 Runner Validation
 
 Status:
@@ -453,6 +454,49 @@ No manual repair.
 No semantic retries.
 No per-model tuning.
 No ranking.
+No teacher selection.
+No training.
+No MindForge integration.
+
+## PIT-13.1.B Evidence Collection — Resume and Completion
+
+Status:
+
+COMPLETED
+
+Execution:
+
+Resumed the previously prepared PIT-13.1.B run after explicit authorization to load `XTROUTER_API_KEY` from the existing local `.env` file. The credential was loaded into process memory only and was not printed, copied into evidence, or committed.
+
+Candidates executed:
+
+- Qwen3.7-Max: 7/7 API completed, 7/7 schema valid.
+- DeepSeek V4 Pro: 7/7 API completed, 7/7 schema valid.
+- MiniMax M3: 7/7 API completed, 7/7 schema valid.
+
+Excluded:
+
+- Mistral Small 2603 — `SMOKE_NOT_QUALIFIED`; PIT-13.1.B calls: 0.
+
+Evidence:
+
+Raw evidence generated: YES.
+Normalized evidence generated: YES.
+Candidate metrics generated: YES.
+Candidate profiles generated: YES.
+Total planned samples: 21.
+Total completed samples: 21.
+Schema-valid samples: 21.
+Model identity mismatches: 0.
+Manual repair: 0.
+Semantic retries: 0.
+Per-model tuning: 0.
+
+Scope:
+
+No ranking.
+No winner declaration.
+No qualification verdict.
 No teacher selection.
 No training.
 No MindForge integration.

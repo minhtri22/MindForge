@@ -1,0 +1,22 @@
+{
+  "task": "PIT-13.1.B Evidence Collection",
+  "execution_date": "2026-09-08T03:58:18.158117+00:00",
+  "scenario_manifest": "experiments/pit13/evidence/scenarios.json",
+  "scenario_manifest_sha256": "3f8c71eba9cadc18854c2c6bf9f76926f29243d37a968481a72d6b3b5ff43fc1",
+  "qualified_candidates": [
+    "qwen/qwen3.7-max:free",
+    "deepseek/deepseek-v4-pro",
+    "minimax/minimax-m3:free"
+  ],
+  "excluded_candidates": {
+    "mistralai/mistral-small-2603": "EXCLUDED_FROM_EXECUTION_DUE_TO_SMOKE_NONQUALIFICATION"
+  },
+  "scenario_count": 7,
+  "planned_samples": 21,
+  "completed_samples": 21,
+  "schema_valid": 21,
+  "identity_mismatches": 0,
+  "manual_repairs": 0,
+  "semantic_retries": 0,
+  "per_model_tuning": 0
+}
