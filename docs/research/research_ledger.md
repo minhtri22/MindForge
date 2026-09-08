@@ -419,3 +419,40 @@ No teacher ranked.
 No teacher selected.
 Historical smoke FAIL verdicts preserved.
 PIT-13.1.B not executed.
+
+## PIT-13.1.B Evidence Collection
+
+Status:
+
+PARTIAL / BLOCKED BEFORE API EXECUTION
+
+Candidates planned:
+
+- Qwen3.7-Max
+- DeepSeek V4 Pro
+- MiniMax M3
+
+Excluded:
+
+- Mistral Small 2603 — `SMOKE_NOT_QUALIFIED`; zero PIT-13.1.B calls.
+
+Preparation:
+
+Frozen the seven-family evidence scenario manifest before candidate execution. Reused all four PIT-13.1.A.1 smoke instances verbatim and materialized the three required missing full-evidence families from existing PIT protocol semantics. Froze a candidate-level metric rubric before candidate outputs because PIT-10 defines dimensions but no numeric formulas.
+
+Blocker:
+
+`XTROUTER_API_KEY` was absent from the process environment. The credential contract forbids reading `.env` as a substitute, so no API execution was attempted.
+
+Scope:
+
+Raw candidate evidence generated: NO.
+Normalized candidate evidence generated: NO.
+Candidate metrics generated: NO.
+No manual repair.
+No semantic retries.
+No per-model tuning.
+No ranking.
+No teacher selection.
+No training.
+No MindForge integration.

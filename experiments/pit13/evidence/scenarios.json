@@ -1,0 +1,86 @@
+{
+  "version": "pit-13.1-b-full-scenario-evidence-v1",
+  "freeze_date": "2026-09-08",
+  "source": "PIT-13.1.B pre-execution materialization. Four exact PIT-13.1.A.1 smoke instances are reused verbatim. Three additional instances materialize existing PIT protocol families before any PIT-13.1.B API execution; no candidate output was observed before this freeze.",
+  "scenarios": [
+    {
+      "scenario_id": "stable_preference_001",
+      "scenario_type": "stable_preference",
+      "provenance": "verbatim: experiments/pit13/smoke/scenarios.json#stable_preference_001",
+      "version": "pit-13.1-a.1-smoke-scenario-evidence-v1",
+      "evidence": [
+        {"timestamp": "2026-01-05T09:00:00Z", "source": "user_message", "content": "When I ask for planning help, I prefer short bullet lists first, then detail only if I ask."},
+        {"timestamp": "2026-01-19T14:20:00Z", "source": "assistant_feedback", "content": "That concise bullet outline worked well. Keep starting this way for planning tasks."},
+        {"timestamp": "2026-02-03T08:40:00Z", "source": "user_message", "content": "For roadmap decisions, give me the compact checklist before the reasoning."}
+      ]
+    },
+    {
+      "scenario_id": "preference_drift_001",
+      "scenario_type": "preference_drift",
+      "provenance": "verbatim: experiments/pit13/smoke/scenarios.json#preference_drift_001",
+      "version": "pit-13.1-a.1-smoke-scenario-evidence-v1",
+      "evidence": [
+        {"timestamp": "2026-01-07T10:15:00Z", "source": "user_message", "content": "For status updates, send me detailed progress notes every few minutes."},
+        {"timestamp": "2026-01-22T16:30:00Z", "source": "assistant_feedback", "content": "The detailed updates are useful while the experiment is new."},
+        {"timestamp": "2026-03-11T11:05:00Z", "source": "user_message", "content": "Now that the process is stable, keep routine progress quiet and only interrupt me for completion, failure, or decisions."},
+        {"timestamp": "2026-03-18T09:45:00Z", "source": "assistant_feedback", "content": "The quieter updates are better. Continue with that style for stable reruns."}
+      ]
+    },
+    {
+      "scenario_id": "conflicting_evidence_001",
+      "scenario_type": "conflicting_evidence",
+      "provenance": "materialized pre-execution from PIT-10/PIT-11.2/PIT-12 conflicting-evidence semantics: resolve contradictory observations with evidence tracking without inventing certainty",
+      "version": "pit-13.1-b-materialized-v1",
+      "evidence": [
+        {"timestamp": "2026-04-01T09:00:00Z", "source": "user_message", "content": "For code reviews, give me inline comments on each issue so I can fix them one by one."},
+        {"timestamp": "2026-04-03T15:30:00Z", "source": "user_message", "content": "For code reviews, I prefer one compact summary instead of lots of inline comments."},
+        {"timestamp": "2026-04-04T08:10:00Z", "source": "assistant_observation", "content": "Both instructions refer to code reviews; no explicit context difference, correction, or supersession statement was recorded."}
+      ]
+    },
+    {
+      "scenario_id": "user_correction_001",
+      "scenario_type": "user_correction",
+      "provenance": "verbatim: experiments/pit13/smoke/scenarios.json#user_correction_001",
+      "version": "pit-13.1-a.1-smoke-scenario-evidence-v1",
+      "evidence": [
+        {"timestamp": "2026-02-01T13:00:00Z", "source": "assistant_inference", "content": "I inferred that the user prefers automatic cleanup of temporary experiment files after each run."},
+        {"timestamp": "2026-02-08T13:25:00Z", "source": "user_correction", "content": "Correction: do not auto-delete experiment files. Preserve temporary outputs until I explicitly approve cleanup."},
+        {"timestamp": "2026-02-09T09:10:00Z", "source": "user_message", "content": "Keep the raw logs from yesterday's run; I may need them for review."}
+      ]
+    },
+    {
+      "scenario_id": "rare_exception_001",
+      "scenario_type": "rare_exception",
+      "provenance": "materialized pre-execution from PIT-10/PIT-11.2/PIT-12 rare-exception semantics: preserve an exception without incorrectly changing a general pattern",
+      "version": "pit-13.1-b-materialized-v1",
+      "evidence": [
+        {"timestamp": "2026-01-05T09:00:00Z", "source": "user_message", "content": "For planning tasks, start with a compact checklist and only expand details if needed."},
+        {"timestamp": "2026-02-03T08:40:00Z", "source": "user_message", "content": "Keep roadmap planning concise and checklist-first."},
+        {"timestamp": "2026-04-12T12:00:00Z", "source": "user_message", "content": "For this one regulatory migration plan, write the full rationale first because I need to send it to legal."},
+        {"timestamp": "2026-04-15T10:20:00Z", "source": "user_message", "content": "Back to the normal checklist-first format for the next roadmap plan."}
+      ]
+    },
+    {
+      "scenario_id": "insufficient_evidence_001",
+      "scenario_type": "insufficient_evidence",
+      "provenance": "verbatim: experiments/pit13/smoke/scenarios.json#insufficient_evidence_001",
+      "version": "pit-13.1-a.1-smoke-scenario-evidence-v1",
+      "evidence": [
+        {"timestamp": "2026-04-04T18:10:00Z", "source": "user_message", "content": "I tried the dashboard in dark mode once tonight."},
+        {"timestamp": "2026-04-05T08:55:00Z", "source": "assistant_observation", "content": "No follow-up preference, repeated usage pattern, comparison, or correction was recorded after that single dark-mode session."}
+      ]
+    },
+    {
+      "scenario_id": "long_term_consistency_001",
+      "scenario_type": "long_term_consistency",
+      "provenance": "materialized pre-execution from PIT-13.1 required full-evidence coverage and PIT lifecycle semantics: maintain a durable pattern across time while preserving scope and revision conditions",
+      "version": "pit-13.1-b-materialized-v1",
+      "evidence": [
+        {"timestamp": "2025-10-10T09:00:00Z", "source": "user_message", "content": "When experiments are expensive, preserve the raw evidence and checkpoint before doing another run."},
+        {"timestamp": "2026-01-14T11:30:00Z", "source": "user_message", "content": "Keep completed benchmark evidence; resume from the recorded checkpoint instead of broadly rerunning."},
+        {"timestamp": "2026-05-22T16:10:00Z", "source": "user_message", "content": "For this tiny throwaway UI test only, you can discard the temporary screenshots after validation."},
+        {"timestamp": "2026-08-20T08:45:00Z", "source": "user_message", "content": "For costly benchmark work, continue preserving evidence and resuming from checkpoints unless I explicitly authorize a rerun."}
+      ]
+    }
+  ]
+}

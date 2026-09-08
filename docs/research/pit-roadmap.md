@@ -33,6 +33,8 @@ Eligible: 3 / 4 candidates.
 
 Next:
 
-PIT-13.1.B Evidence Collection for smoke-qualified candidates.
+PIT-13.1.B Evidence Collection for smoke-qualified candidates: prepared and `BLOCKED_BEFORE_API_EXECUTION` because `XTROUTER_API_KEY` is absent from the process environment.
+
+Resume PIT-13.1.B from the frozen seven-scenario manifest when the required process credential is available. Do not rerun smoke and do not execute Mistral.
 
 PIT-14 Local Feasibility Validation

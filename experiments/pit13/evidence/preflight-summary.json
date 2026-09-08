@@ -1,0 +1,29 @@
+{
+  "task": "PIT-13.1.B Evidence Collection",
+  "status": "PARTIAL_BLOCKED_BEFORE_API_EXECUTION",
+  "date": "2026-09-08",
+  "scenario_manifest": "experiments/pit13/evidence/scenarios.json",
+  "scenario_manifest_sha256": "3f8c71eba9cadc18854c2c6bf9f76926f29243d37a968481a72d6b3b5ff43fc1",
+  "metric_rubric": "experiments/pit13/evidence/metric-rubric.json",
+  "metric_rubric_sha256": "f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227",
+  "qualified_candidates": [
+    "qwen/qwen3.7-max:free",
+    "deepseek/deepseek-v4-pro",
+    "minimax/minimax-m3:free"
+  ],
+  "excluded_candidates": {
+    "mistralai/mistral-small-2603": "EXCLUDED_FROM_EXECUTION_DUE_TO_SMOKE_NONQUALIFICATION"
+  },
+  "scenario_families": 7,
+  "total_scenarios": 7,
+  "planned_samples": 21,
+  "api_samples_attempted": 0,
+  "api_samples_completed": 0,
+  "blocker": "XTROUTER_API_KEY_MISSING_FROM_PROCESS_ENVIRONMENT",
+  "security_boundary": "Credential was not read from .env or any repository file.",
+  "manual_repairs": 0,
+  "semantic_retries": 0,
+  "per_model_tuning": 0,
+  "ranking_performed": false,
+  "teacher_selected": false
+}

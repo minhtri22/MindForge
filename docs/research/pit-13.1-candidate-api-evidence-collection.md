@@ -290,3 +290,72 @@ The PIT-13.1.A Smoke Qualification Rerun failed serialization/schema conformance
 Current amended attempt: `experiments/pit13/smoke/`.
 
 Previous Qwen3.8 attempt: `experiments/pit13/smoke-attempt-01-qwen38-fail/`.
+
+## PIT-13.1.B Evidence Collection
+
+Status: **PARTIAL / BLOCKED BEFORE API EXECUTION**
+
+Execution preparation date: 2026-09-08.
+
+Qualified execution candidates:
+
+- `qwen/qwen3.7-max:free`
+- `deepseek/deepseek-v4-pro`
+- `minimax/minimax-m3:free`
+
+Excluded candidate:
+
+- `mistralai/mistral-small-2603` — `SMOKE_NOT_QUALIFIED`; `EXCLUDED_FROM_EXECUTION_DUE_TO_SMOKE_NONQUALIFICATION`.
+
+Scenario provenance was frozen before any PIT-13.1.B candidate output was observed. The four exact PIT-13.1.A.1 smoke instances are reused verbatim. The three missing required full-evidence families (`conflicting_evidence`, `rare_exception`, and `long_term_consistency`) were materialized before execution from the already-frozen PIT protocol semantics.
+
+Scenario manifest:
+
+`experiments/pit13/evidence/scenarios.json`
+
+Scenario manifest SHA256:
+
+`3f8c71eba9cadc18854c2c6bf9f76926f29243d37a968481a72d6b3b5ff43fc1`
+
+Metric rubric was also frozen before execution because PIT-10 defines required dimensions and lifecycle concepts but does not provide numeric formulas. The rubric is descriptive candidate-level scoring only and forbids rank or winner derivation.
+
+Metric rubric:
+
+`experiments/pit13/evidence/metric-rubric.json`
+
+Metric rubric SHA256:
+
+`f34b52ba10c8f250e5a7c0e4226c70211be1600eaa6e4797254574c2a93e5227`
+
+Planned coverage:
+
+- Scenario families: 7
+- Exact scenarios: 7
+- Qualified candidates: 3
+- Planned API samples: 21
+
+Preflight validation:
+
+- Evidence runner syntax: PASS.
+- Four smoke scenario evidence payloads reused verbatim: PASS.
+- Frozen scenario family set exactly matches the required seven families: PASS.
+- `XTROUTER_API_KEY` present in process environment: **NO**.
+
+Execution consequence:
+
+No PIT-13.1.B API call was made. The task explicitly requires credentials to be read from the process environment only; `.env` was not read or loaded. Therefore raw candidate evidence, normalized Teaching Signals, candidate metrics, and candidate profiles have not yet been generated.
+
+Preflight artifact:
+
+`experiments/pit13/evidence/preflight-summary.json`
+
+Current counts:
+
+- API samples attempted: 0/21
+- API samples completed: 0/21
+- Mistral PIT-13.1.B calls: 0
+- Manual repair: 0
+- Semantic retries: 0
+- Per-model tuning: 0
+
+No ranking performed. No winner declared. No teacher selected. No training or MindForge integration performed.
