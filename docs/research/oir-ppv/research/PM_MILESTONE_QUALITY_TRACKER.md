@@ -34,8 +34,8 @@ Reviewed sources:
 Current repository state observed during PM review:
 
 - branch: `oir-ppv-research`
-- HEAD: `17c9b258218b37924d042adcf11ed912d79ec524`
-- `origin/oir-ppv-research`: `17c9b258218b37924d042adcf11ed912d79ec524`;
+- latest decisive evidence commit before G8: `f15fa5784bf0c59b48ad4513abca4a105d6f31b9`;
+- remote alignment is re-verified at final G8 publication audit;
 - H3R v1.1 freeze-package publication commit: `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`;
 - worktree contains existing modified/untracked research artifacts, so future
   handoffs must record exact staged/source provenance rather than assume a clean
@@ -55,8 +55,8 @@ Current repository state observed during PM review:
 | H2 closure | Transfer | `QA_REPORT_HANDOFF_010_H2.md` PASS | CLOSED / FALSIFIED_UNDER_TESTED_CONDITIONS | 60/60 paired evidence valid; L1-L4 all negative vs L0/PCA under frozen rule |
 | H3 closure | Nuisance robustness | `QA_REPORT_HANDOFF_011_H3_v3.md` PASS_WITH_LIMITS | CLOSED_WITH_LIMITS / NOT_SUPPORTED | correction_v3 accepted with metadata erratum; exact target-specific boundary preserved |
 | H3R v1.0 | Revised observation-noise robustness under Formal v1.0 | frozen v1.0 protocol + `H3R_v1.0_DECISIVE_EXECUTION_CLOSURE.md` + preserved `EXP-H3R-001` failure provenance | CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN | One-shot access was consumed; implementation violated numeric-only perturbation realization on mixed ENV-1 observations; evidence preserved and rerun forbidden |
-| H3R v1.1 | Versioned recovery with unchanged scientific core and fresh test identity | `QA_REPORT_H3R_PROTOCOL_v1.1_FREEZE.md` + `H3R_v1.1_freeze_manifest.json` + publication closure | FROZEN / PUBLISHED / QA_PASS_WITH_LIMITS / NOT_EXECUTED / TEST_LOCKED | P0=0/P1=0; 5/5 regression PASS; 20/20 hash-only preflight PASS; 8/8 published canonical hashes verified; scientific access count remains 0 |
-| H4 closure | Counterfactual accuracy | owner explicitly deferred after H3 closure | NOT_OPENED / DEFERRED_BY_OWNER | Do not instantiate H4 while H3R is active frontier |
+| H3R v1.1 | Versioned recovery with unchanged scientific core and fresh test identity | G1-G7 reports + immutable `EXP-H3R-002` + decisive closure | CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN | Exactly one decisive access; 20/20 valid cells; 6039/6039 rows; G3 PASS_WITH_LIMITS, G4 PASS, G6 PASS_WITH_LIMITS; P2 provenance-only metadata erratum retained |
+| H4 closure | Counterfactual accuracy | owner explicitly deferred after H3 closure | NOT_OPENED / DEFERRED_BY_OWNER | H3R v1.1 is now closed; H4 still requires a new explicit owner decision |
 | H5 closure | Minimal sufficiency | no closure protocol yet | PLANNED / BLOCKED | Requires ablation/redundancy protocol after earlier evidence stabilizes |
 | M5 | MindForge learner integration | dependency in PLAN | BLOCKED_BY_CLAIM_SEQUENCE_DECISION | Reference benchmark is frozen; integration timing must remain PM-controlled |
 | M7 / H6 | Creative recombination | parked branch | PARKED | Do not let H6 alter core closure evidence |
@@ -70,8 +70,8 @@ Current repository state observed during PM review:
 | H2 Transfer | PROTOCOL_FROZEN + QA_REVIEWED | 60/60 paired primary evidence complete | `FALSIFIED_UNDER_TESTED_CONDITIONS` | CLOSED | Applies only to tested L1-L4 vs L0/PCA on ENV-1/3/4 x 5 seeds; no generalization to invariant learning/MindForge/canonical methods |
 | H3 Nuisance Robustness | PROTOCOL_EXECUTED + QA_REVIEWED | correction_v3 accepted; 100/100 cells, 60/60 eligible pairs | `NOT_SUPPORTED` | CLOSED_WITH_LIMITS | P2 metadata erratum: h3_summary_v3 embeds version=2; frozen bytes preserved |
 | H3R Revised Robustness v1.0 | FORMAL v1 / versioned predecessor | one decisive access consumed; execution failed before first scientific cell | `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT` | CLOSED / NO_RERUN | Failure is implementation fidelity, not scientific support/falsification; immutable predecessor evidence retained |
-| H3R Revised Robustness v1.1 | FORMAL v1 FROZEN + PUBLISHED | no decisive scientific evidence; fresh test access count 0 | FREEZE QA `PASS_WITH_LIMITS` | FROZEN / PUBLISHED / NOT_EXECUTED / TEST_LOCKED | Scientific core retained from v1.0; fresh seeds/test lock; P2 wording ambiguity closed by erratum; separate owner authorization required before execution |
-| H4 Counterfactual Accuracy | HISTORICAL_FORMALIZATION_ONLY | no active protocol | UNREVIEWED | NOT_OPENED | Owner deferred H4; H3R is current frontier |
+| H3R Revised Robustness v1.1 | FORMAL v1 FROZEN + PUBLISHED + EXECUTED | `EXP-H3R-002`: 20/20 valid cells, 6039/6039 rows, exactly one decisive access | `FALSIFIED_UNDER_TESTED_CONDITIONS` | CLOSED_WITH_LIMITS / NO_RERUN | All L1-L4 fail frozen joint robustness/utility support; P2 post-check observation-hash metadata erratum retained; no rescue/rerun |
+| H4 Counterfactual Accuracy | HISTORICAL_FORMALIZATION_ONLY | no active protocol | UNREVIEWED | NOT_OPENED | Owner deferred H4; post-H3R frontier decision is pending |
 | H5 Minimal Sufficiency | FORMALIZED | not yet collected | UNREVIEWED | BLOCKED | Ablation/redundancy protocol and acceptance thresholds absent |
 | H6 Creative Recombination | PARKED / FORMALIZATION_PENDING | prototype only | UNREVIEWED | PARKED | Must not be promoted until core benchmark/claim sequence permits it |
 
@@ -136,7 +136,7 @@ task-preserving intervention stability explain part of that distinction.
 | H2 scientific evidence | CLOSED / FALSIFIED_UNDER_TESTED_CONDITIONS | Preserve frozen negative result and narrow claim boundary |
 | H3 scientific evidence | CLOSED_WITH_LIMITS / NOT_SUPPORTED | Preserve target-specific historical boundary and accepted metadata erratum |
 | H3R v1.0 execution | CLOSED / PROTOCOL_DEVIATION | Preserve consumed access event and immutable failed-attempt evidence; no rerun |
-| H3R v1.1 freeze/publication | PASS_WITH_LIMITS / CLOSED | Preserve frozen bytes and publication SHA; decisive execution remains separately gated |
+| H3R v1.1 decisive closure | PASS_WITH_LIMITS / CLOSED_WITH_LIMITS | Preserve frozen protocol and immutable decisive evidence; scientific result is FALSIFIED_UNDER_TESTED_CONDITIONS; no rerun |
 | H4 scientific evidence | NOT_OPENED / DEFERRED_BY_OWNER | Requires explicit owner decision after H3R frontier is resolved |
 | H5 scientific evidence | OPEN | Requires ablation/redundancy protocol |
 | External validity | OPEN / HIGH DEBT | Claims remain bounded to controlled synthetic environment families |
@@ -155,14 +155,15 @@ task-preserving intervention stability explain part of that distinction.
 | ED-08 | ENV-1..ENV-4 are synthetic/narrow | limits external validity | RETAIN_UNTIL_NEW_RESEARCH_PHASE |
 | ED-09 | H3R v1.0 one-shot execution failed from mixed-schema implementation deviation after consuming scientific access | prevents valid v1.0 rerun or scientific verdict | CLOSED_BY_VERSIONED_SUCCESSOR; preserve v1.0 evidence permanently |
 | ED-10 | H3R v1.1 freeze package required byte-identical Git publication and provenance closure | could invalidate frozen identity through line-ending normalization | CLOSED; `-text -eol` scoped rule, 8/8 canonical hashes verified at publication commit |
+| ED-11 | `EXP-H3R-002/cells/*.json` records observation hash with a different helper than the frozen value-stable identity helper | redundant post-check provenance field differs in 20/20 cells | RETAIN_AS_P2_ERRATUM; correct frozen identity was enforced before metrics; do not rewrite evidence or rerun |
 
 ## 8. Documentation Consistency Findings
 
 Current PM-critical governance documents are synchronized on the H3R frontier:
 
-1. `PLAN.md` records H3R v1.0 as closed `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN` and H3R v1.1 as frozen, published, not executed, and test locked.
+1. `PLAN.md` records H3R v1.0 as closed `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN` and H3R v1.1 as `CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN`.
 2. `governance/research_status_v1.0.md` and `governance/claim_registry.md` carry the same versioned H3R boundary.
-3. Publication/provenance is closed at freeze-package commit `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`; closure/governance HEAD is `17c9b258218b37924d042adcf11ed912d79ec524`.
+3. Freeze publication remains anchored at `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`; decisive evidence is anchored by commit `f15fa5784bf0c59b48ad4513abca4a105d6f31b9`. Final closure publication alignment is verified in G8.
 
 Non-blocking historical documentation debt remains in broader explanatory material such as `README.md` / `THEORY.md`; it must not override frozen protocol, QA, claim-registry, or PLAN authority.
 
@@ -175,7 +176,7 @@ Non-blocking historical documentation debt remains in broader explanatory materi
 | Protocol changes after seeing negative results | Medium | Critical | Versioned amendment only; retain old evidence |
 | Dirty worktree weakens provenance clarity | High | High | Record exact source/dirty state and stage only scoped files |
 | Accidental rerun/overwrite of consumed H3R v1.0 | Low | Critical | Treat `EXP-H3R-001` and access event as immutable; v1.0 rerun forbidden |
-| H3R v1.1 decisive execution occurs without hash-bound owner authorization | Medium | Critical | Keep test locked; require separate authorization bound to frozen v1.1 protocol and test-manifest hashes |
+| Accidental rerun/repair of consumed H3R v1.1 decisive evidence | Low | Critical | Treat `EXP-H3R-002` and `H3R_V1_1_DECISIVE_ACCESS_001` as immutable; v1.1 rerun and post-access repair forbidden |
 | H6 or MindForge expands scope before H2-H4 closure logic is settled | Medium | High | Keep PM gate and one active closure hypothesis at a time |
 | Synthetic environment conclusions are presented as general intelligence claims | Medium | Critical | Keep external-validity boundary explicit |
 
@@ -300,11 +301,31 @@ Non-blocking historical documentation debt remains in broader explanatory materi
 - Scientific state is unchanged: H3R v1.1 remains `NOT_EXECUTED / TEST_LOCKED`, scientific access count `0`.
 - Next gate: `SEPARATELY AUTHORIZE H3R v1.1 DECISIVE EXECUTION`. H4 remains `NOT_OPENED / DEFERRED_BY_OWNER`.
 
+### PM-DEC-2026-09-09-14
+
+- Decision: accept G1 decisive pre-execution QA as `PASS` and record the separate owner authorization as valid only for the frozen H3R v1.1 protocol/test-manifest identity.
+- Evidence: `QA_REPORT_H3R_v1.1_DECISIVE_PRE_EXECUTION.md`, authorization snapshot, protocol SHA256 `5cdecfe758b9908f0f2199b6e7cd5632e9636b887e141d265fdb9265c107334d`, test-manifest SHA256 `371799bb474f2f425db7acacf63cba3de7ca4876f61cbfa5a88549363d97255d`.
+- Impact: exactly one decisive execution was eligible; rerun remained prohibited after scientific access consumption.
+
+### PM-DEC-2026-09-09-15
+
+- Decision: accept H3R v1.1 G2-G7 closure with `GATE_VERDICT = PASS_WITH_LIMITS` and `SCIENTIFIC_VERDICT = FALSIFIED_UNDER_TESTED_CONDITIONS`.
+- Evidence: `EXP-H3R-002`, G3/G4/G5/G6/G7 reports, and `governance/H3R_v1.1_DECISIVE_EXECUTION_CLOSURE.md`.
+- Integrity: exactly one decisive access event, 20/20 valid frozen cells, 6039/6039 test rows, no P0/P1 blockers.
+- P2: redundant per-cell observation-hash metadata mismatch is retained by `governance/H3R_v1.1_DECISIVE_EVIDENCE_ERRATUM_001.md`; correct identity was enforced before metric access.
+- Impact: H3R v1.1 is `CLOSED_WITH_LIMITS / NO_RERUN`. The negative result must not be rescued by tuning, seed/baseline/candidate changes, threshold changes, evidence repair, or rerun.
+
+### PM-DEC-2026-09-09-16
+
+- Decision: keep H4 `NOT_OPENED / DEFERRED_BY_OWNER` after H3R v1.1 closure.
+- Reason: the autonomous H3R task closes H3R only; it does not contain owner authorization to instantiate H4.
+- Next gate: explicit owner decision on the post-H3R research frontier.
+
 ## 11. Next Executable Step
 
-`SEPARATELY AUTHORIZE H3R v1.1 DECISIVE EXECUTION` (publication closure itself does not unlock execution).
+`OWNER DECISION ON POST-H3R FRONTIER`.
 
-Publication/provenance closure is complete without changing frozen scientific semantics. H3R v1.1 decisive execution requires a separate owner action bound to the frozen v1.1 protocol and test-manifest hashes and remains locked until then. Do not open H4 while H3R remains the active frontier.
+H3R v1.1 is scientifically closed with a bounded negative result and no rerun. H4 remains `NOT_OPENED / DEFERRED_BY_OWNER` until an explicit owner decision opens it.
 
 ## 12. Overall Project State
 
@@ -315,10 +336,10 @@ H1: CLOSED_WITH_LIMITS
 H2: CLOSED / FALSIFIED_UNDER_TESTED_CONDITIONS
 H3: CLOSED_WITH_LIMITS / NOT_SUPPORTED
 H3R v1.0: CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN
-H3R v1.1: FROZEN / PUBLISHED / QA_PASS_WITH_LIMITS / NOT_EXECUTED / TEST_LOCKED
+H3R v1.1: CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN
 H4: NOT_OPENED / DEFERRED_BY_OWNER
 H5 scientific closure: OPEN
 External validity: AT_RISK / UNPROVEN
 Research release: NOT_READY
-Current frontier: H3R v1.1 DECISIVE EXECUTION — AWAITING SEPARATE HASH-BOUND OWNER AUTHORIZATION
+Current frontier: POST-H3R OWNER DECISION — H4 REMAINS NOT_OPENED
 ```

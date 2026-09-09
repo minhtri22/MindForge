@@ -268,7 +268,7 @@ robustness criteria over the PCA reference.
 
 ### H3R — Revised Robustness under Formal Spec v1.0
 
-State: `PROTOCOL_PREPARATION / NOT_EXECUTED / NOT_FROZEN`.
+State: `v1.0 CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN`; `v1.1 CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN`.
 
 H3R is a revised successor protocol, not a rerun or relabeling of H3.
 
@@ -286,7 +286,7 @@ family that preserves mechanism semantics, retained clean utility, Formal v1.0
 representation lifecycle/split/metric/evidence/test-lock contracts, and explicit
 separation of `eta`, `Z_e`, `S_t`, and `I_M`.
 
-H3R inherits H3 design lineage only. `evidence_status = NONE_YET`.
+H3R inherits H3 design lineage only. H3R v1.1 now has one-shot decisive evidence in `EXP-H3R-002`: 20/20 valid cells, 6039/6039 frozen test rows, final QA `PASS_WITH_LIMITS`, and scientific verdict `FALSIFIED_UNDER_TESTED_CONDITIONS`. The only execution-integrity debt is the provenance-only P2 observation-hash metadata erratum recorded in `governance/H3R_v1.1_DECISIVE_EVIDENCE_ERRATUM_001.md`; decisive evidence is immutable and rerun is forbidden.
 
 ### H4 — Counterfactual / Causal Accuracy
 
@@ -295,7 +295,7 @@ Representation giữ causal response dưới intervention và giảm counterfact
 State: `NOT_OPENED / DEFERRED_BY_OWNER`.
 
 H4 has historical formalization material, but no H4 task/protocol is active after
-H3 closure. H3R review/freeze is the only active frontier.
+H3R v1.1 closure. Opening H4 requires a new explicit owner decision.
 
 ### H5 — Minimal Sufficiency
 
@@ -717,7 +717,8 @@ Current closure state:
 H1  CLOSED_WITH_LIMITS / SUPPORTED_WITH_LIMITS
 H2  CLOSED / FALSIFIED_UNDER_TESTED_CONDITIONS
 H3  CLOSED_WITH_LIMITS / NOT_SUPPORTED
-H3R PROTOCOL_v1.0_FROZEN / NOT_EXECUTED / TEST_LOCKED
+H3R v1.0 CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN
+H3R v1.1 CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN
 H4  NOT_OPENED / DEFERRED_BY_OWNER
 H5  FORMALIZED / LATER
 ```
@@ -1088,7 +1089,7 @@ M3    ACCEPTED
 M4    ACCEPTED FOR INFRASTRUCTURE/PROTOCOL
 M4.1  ACCEPTED_WITH_LIMITS
 M5    ELIGIBLE_BUT_DEFERRED
-M6    ACTIVE — H1 CLOSED_WITH_LIMITS; H2 FALSIFIED; H3 CLOSED_WITH_LIMITS; H3R v1.1 FROZEN_PUBLISHED
+M6    ACTIVE — H1 CLOSED_WITH_LIMITS; H2 FALSIFIED; H3 CLOSED_WITH_LIMITS; H3R v1.1 CLOSED_WITH_LIMITS / FALSIFIED
 M7    PARKED
 M8    NOT_READY
 ```
@@ -1101,7 +1102,7 @@ H1 scientific claim: SUPPORTED_WITH_LIMITS within frozen MEM comparator scope
 H2 scientific claim: FALSIFIED_UNDER_TESTED_CONDITIONS within frozen L1-L4 vs L0/PCA scope
 H3 scientific claim: NOT_SUPPORTED within frozen target-specific historical scope
 H3R v1.0: CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN
-H3R v1.1: FROZEN / PUBLISHED / QA_PASS_WITH_LIMITS / NOT_EXECUTED / TEST_LOCKED
+H3R v1.1: CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN
 H4: NOT_OPENED
 H5 scientific claim: OPEN
 ```
@@ -1114,29 +1115,18 @@ risks remain active.
 
 ## 16. Next executable step
 
-H3R v1.0 consumed its one-shot access and is closed as `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT`; it must not be rerun. H3R v1.1 has completed independent freeze QA with `PASS_WITH_LIMITS`, `P0=0`, `P1=0`, scientific test access count `0`, and publication/provenance at commit `723dac1f291206a1daa5d7e45ffa21ffe7f3a312` is remotely verified.
+H3R v1.0 remains closed as `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN`. H3R v1.1 consumed exactly one owner-authorized decisive access event and is now closed as `CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN` after G1-G7 review.
 
-The next governance action is now OPEN:
+Closure authority:
 
-```text
-SEPARATELY AUTHORIZE H3R v1.1 DECISIVE EXECUTION
-```
+- `QA_REPORT_H3R_v1.1_DECISIVE_PRE_EXECUTION.md`;
+- `experiments/OIR_PPV/H3R/EXP-H3R-002/`;
+- `QA_REPORT_H3R_v1.1_EXECUTION_INTEGRITY_G3.md`;
+- `QA_REPORT_H3R_v1.1_STATISTICAL_G4.md`;
+- `H3R_v1.1_RESEARCHER_INTERPRETATION_G5.md`;
+- `QA_REPORT_H3R_v1.1_ADVERSARIAL_G6.md`;
+- `QA_REPORT_H3R_v1.1_FINAL_CLOSURE_G7.md`;
+- `governance/H3R_v1.1_DECISIVE_EVIDENCE_ERRATUM_001.md`;
+- `governance/H3R_v1.1_DECISIVE_EXECUTION_CLOSURE.md`.
 
-Frozen H3R v1.1 authority:
-
-- `protocols/h3r/H3R_PROTOCOL_v1.1.md`;
-- `protocols/h3r/H3R_PROTOCOL_v1.1.sha256`;
-- `protocols/h3r/h3r_protocol_v1.1.json`;
-- `protocols/h3r/h3r_test_manifest_v1.1.json`;
-- `protocols/h3r/h3r_test_access_log_v1.1.md`;
-- `protocols/h3r/h3r_freeze_checklist_v1.1.md`;
-- `pipeline/run_h3r_v11.py`;
-- `tests/test_h3r_v11_execution.py`;
-- `governance/H3R_v1.1_freeze_manifest.json`;
-- `governance/H3R_v1.1_FREEZE_ERRATUM_001.md`;
-- `QA_REPORT_H3R_PROTOCOL_v1.1_FREEZE.md`;
-- `governance/H3R_v1.0_DECISIVE_EXECUTION_CLOSURE.md` for preserved predecessor lineage.
-
-Publication/provenance is closed by `governance/H3R_v1.1_FREEZE_PUBLICATION_CLOSURE.md`. Any decisive execution authorization must be a separate owner action bound to the frozen v1.1 protocol and test-manifest hashes.
-
-Decisive H3R v1.1 execution remains locked. H4 remains unopened.
+The next governance step is an explicit owner decision on the post-H3R frontier. H4 remains `NOT_OPENED / DEFERRED_BY_OWNER`; this closure does not instantiate or authorize H4.
