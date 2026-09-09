@@ -1113,10 +1113,10 @@ risks remain active.
 
 ## 16. Next executable step
 
-The protocol review/freeze action is complete. The next governance action is:
+The protocol review/freeze and publication/provenance closure actions are complete. The freeze package was published at `7e90366fc062b425d0e5c529c4be81ad2bd54ac2`. The next governance action is:
 
 ```text
-COMMIT / PUBLISH H3R v1.0 FREEZE PACKAGE FROM MINDFORGE REPOSITORY ROOT
+SEPARATELY AUTHORIZE H3R DECISIVE EXECUTION
 ```
 
 Frozen H3R authority:
@@ -1133,6 +1133,6 @@ Frozen H3R authority:
 - historical H3 lineage and preserved closure evidence.
 
 Independent review reports `PASS_WITH_LIMITS`, `P0=0`, `P1=0`; final
-protocol/test/candidate identities are locked. Decisive H3R execution remains
-forbidden until the owner-delegated commit/provenance publication step is complete
-and a later execution task explicitly unlocks the test. H4 remains unopened.
+protocol/test/candidate identities are locked. Publication/provenance debt is closed.
+Decisive H3R execution remains forbidden until a separate explicit execution task
+unlocks the test. H4 remains unopened.

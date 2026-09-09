@@ -3,7 +3,7 @@
   "integration_timestamp_utc": "2026-09-09T08:29:13.563725+00:00",
   "repo_branch_at_integration": "oir-ppv-research",
   "repo_commit_at_integration_start": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
-  "repo_commit_containing_manifest": "RESOLVE_FROM_GIT_HISTORY_AFTER_COMMIT",
+  "repo_commit_containing_manifest": "7e90366fc062b425d0e5c529c4be81ad2bd54ac2",
   "canonical": {
     "ontology": {
       "path": "ontology/ontology_v1.0.md",
@@ -81,7 +81,7 @@
     },
     "research_status": {
       "path": "governance/research_status_v1.0.md",
-      "sha256": "e4dd6d398d023a6c4b9d55a5cfcea0860c9b5979b7f90c4f1f8ded36194aa89f"
+      "sha256": "d430236e209a1704753179459741f518a9632947cd5bc14cadcf275cacc1fd53"
     },
     "protocol_versioning": {
       "path": "governance/protocol_versioning.md",
@@ -94,6 +94,16 @@
     "archive_index": {
       "path": "archive/README.md",
       "sha256": "f1ed7ddf56e1977d1426ea4c44247233e9078972ccb3d1ac36848ff4ee63443d"
+    },
+    "publication_exclusions": {
+      "path": "governance/publication_exclusions_v1.0.json",
+      "sha256": "3542b3c9740c1a521290f5461ed0ed9e5fc2fbb7a710c01c6d9212ab5c80d955",
+      "h3r_freeze_semantic_impact": "NONE"
+    },
+    "h3r_freeze_publication_closure": {
+      "path": "governance/H3R_FREEZE_PUBLICATION_CLOSURE_v1.0.md",
+      "sha256": "2bb1c05959e81bd2bf9d9cd88a2cfd0e7dee08ab8d5873a054c5a1ed60cbbcc2",
+      "status": "P2_PROVENANCE_PUBLICATION_DEBT_CLOSED"
     }
   },
   "historical_sources": {
@@ -115,8 +125,19 @@
     "H4": "NOT_OPENED"
   },
   "freeze_limitations": {
-    "P2": "PROVENANCE_PUBLICATION_DEBT",
-    "commit_status": "OWNER_DELEGATED_TO_LATER_AGENT_FROM_MINDFORGE_REPOSITORY_ROOT",
-    "execution_gate": "DO_NOT_UNLOCK_H3R_TEST_UNTIL_FREEZE_PACKAGE_COMMIT_SHA_IS_RECORDED"
+    "P2": "CLOSED",
+    "former_debt": "PROVENANCE_PUBLICATION_DEBT",
+    "commit_status": "PUBLISHED_AND_REMOTE_VERIFIED",
+    "published_freeze_package_commit": "7e90366fc062b425d0e5c529c4be81ad2bd54ac2",
+    "execution_gate": "PUBLICATION_GATE_SATISFIED; H3R_TEST_REMAINS_LOCKED_PENDING_SEPARATE_EXPLICIT_EXECUTION_AUTHORIZATION"
+  },
+  "publication": {
+    "freeze_package_commit": "7e90366fc062b425d0e5c529c4be81ad2bd54ac2",
+    "remote_ref_verified": "origin/oir-ppv-research",
+    "publication_verified": true,
+    "publication_scope": "docs/research/oir-ppv/**",
+    "publication_exclusions_manifest": "governance/publication_exclusions_v1.0.json",
+    "scientific_semantics_changed": false,
+    "decisive_execution_authorized_by_publication": false
   }
 }

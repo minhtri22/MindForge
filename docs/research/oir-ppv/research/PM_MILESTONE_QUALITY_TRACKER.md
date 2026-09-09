@@ -258,13 +258,21 @@ protocol evidence are not mixed with roadmap cleanup.
 - P2 debt: commit/publish freeze package from MindForge repository root and record the resulting commit SHA before test unlock.
 - H4 remains `NOT_OPENED / DEFERRED_BY_OWNER`.
 
+### PM-DEC-2026-09-09-10
+
+- Decision: close `P2 / PROVENANCE_PUBLICATION_DEBT` after publication-only remediation.
+- Published freeze package commit: `7e90366fc062b425d0e5c529c4be81ad2bd54ac2`; remote verification: exact commit observed on `origin/oir-ppv-research`.
+- Publication scope was sanitized to `docs/research/oir-ppv/**`; `.env`, Track-A, PIT13, unrelated run logs, and other out-of-scope paths were excluded from the publication commit.
+- Four historical M4 raw JSON blobs above GitHub's 100 MB limit were omitted from Git and recorded by exact path/size/SHA256 in `governance/publication_exclusions_v1.0.json`; H3R frozen semantic impact: `NONE`.
+- Frozen H3R protocol/test bytes and hashes remain unchanged. No scientific execution was performed.
+- H3R remains `NOT_EXECUTED / TEST_LOCKED`; decisive execution requires a separate explicit authorization task.
+- H4 remains `NOT_OPENED / DEFERRED_BY_OWNER`.
+
 ## 11. Next Executable Step
 
-`COMMIT / PUBLISH H3R v1.0 FREEZE PACKAGE FROM MINDFORGE REPOSITORY ROOT`.
+`SEPARATELY AUTHORIZE H3R DECISIVE EXECUTION` (publication closure itself does not unlock execution).
 
-Do not alter frozen scientific semantics during provenance publication. After the
-commit SHA is recorded, H3R decisive execution requires a separate explicit task.
-Do not open H4 while H3R remains the active frontier.
+Publication/provenance closure is complete without changing frozen scientific semantics. H3R decisive execution requires a separate explicit task and remains locked until then. Do not open H4 while H3R remains the active frontier.
 
 ## 12. Overall Project State
 
@@ -279,5 +287,5 @@ H4: NOT_OPENED / DEFERRED_BY_OWNER
 H5 scientific closure: OPEN
 External validity: AT_RISK / UNPROVEN
 Research release: NOT_READY
-Current frontier: H3R FREEZE-PACKAGE PROVENANCE PUBLICATION
+Current frontier: H3R DECISIVE EXECUTION — AWAITING SEPARATE EXPLICIT AUTHORIZATION
 ```
