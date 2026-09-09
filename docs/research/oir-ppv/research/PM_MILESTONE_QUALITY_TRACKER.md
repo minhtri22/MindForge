@@ -34,8 +34,8 @@ Reviewed sources:
 Current repository state observed during PM review:
 
 - branch: `oir-ppv-research`
-- latest decisive evidence commit before G8: `f15fa5784bf0c59b48ad4513abca4a105d6f31b9`;
-- remote alignment is re-verified at final G8 publication audit;
+- decisive evidence commit: `f15fa5784bf0c59b48ad4513abca4a105d6f31b9`;
+- G3-G8 closure package commit: `feeb5dc5d3d8beb1f14db1260c1f615356d70f19`, remotely verified on `origin/oir-ppv-research`;
 - H3R v1.1 freeze-package publication commit: `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`;
 - worktree contains existing modified/untracked research artifacts, so future
   handoffs must record exact staged/source provenance rather than assume a clean
@@ -163,7 +163,7 @@ Current PM-critical governance documents are synchronized on the H3R frontier:
 
 1. `PLAN.md` records H3R v1.0 as closed `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN` and H3R v1.1 as `CLOSED_WITH_LIMITS / FALSIFIED_UNDER_TESTED_CONDITIONS / NO_RERUN`.
 2. `governance/research_status_v1.0.md` and `governance/claim_registry.md` carry the same versioned H3R boundary.
-3. Freeze publication remains anchored at `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`; decisive evidence is anchored by commit `f15fa5784bf0c59b48ad4513abca4a105d6f31b9`. Final closure publication alignment is verified in G8.
+3. Freeze publication remains anchored at `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`; decisive evidence is anchored by `f15fa5784bf0c59b48ad4513abca4a105d6f31b9`; G3-G8 closure package `feeb5dc5d3d8beb1f14db1260c1f615356d70f19` is remotely verified.
 
 Non-blocking historical documentation debt remains in broader explanatory material such as `README.md` / `THEORY.md`; it must not override frozen protocol, QA, claim-registry, or PLAN authority.
 

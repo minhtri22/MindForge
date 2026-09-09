@@ -49,4 +49,9 @@ The P2 metadata erratum does not authorize repair of decisive artifacts. No reru
 
 H4 remains `NOT_OPENED / DEFERRED_BY_OWNER`. G8 does not instantiate H4.
 
-Publication/provenance status at this report boundary: `PENDING_SCOPED_COMMIT_PUSH_AND_REMOTE_ALIGNMENT_AUDIT`.
+## Publication / provenance audit
+
+- Scoped G3-G8 closure package commit: `feeb5dc5d3d8beb1f14db1260c1f615356d70f19`.
+- Remote verification: `origin/oir-ppv-research` resolved to the same commit after push.
+- Unrelated `.env`, Track-A, PIT13, stress-test outputs, and unrelated run logs were not staged or committed by the closure package.
+- Publication/provenance status: `CLOSED / REMOTE_VERIFIED`.
