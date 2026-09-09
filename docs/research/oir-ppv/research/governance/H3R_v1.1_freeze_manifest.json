@@ -2,7 +2,7 @@
   "manifest_id": "H3R-v1.1-FREEZE",
   "protocol_id": "OIR-PPV-H3R",
   "protocol_version": "v1.1",
-  "status": "FROZEN_LOCAL_UNPUBLISHED",
+  "status": "FROZEN_PUBLISHED",
   "freeze_timestamp_utc": "2026-09-09T10:43:48.7398025+00:00",
   "source_anchor_head": "d11dd978a19aa7ca6ac33dc7c144f8d3d1e74c2c",
   "successor_of": {
@@ -56,8 +56,10 @@
     "h4": "NOT_OPENED / DEFERRED_BY_OWNER"
   },
   "publication": {
-    "status": "PENDING_SEPARATE_COMMIT_PUBLICATION_TASK",
-    "commit_sha": null
+    "status": "CLOSED_REMOTE_VERIFIED",
+    "commit_sha": "723dac1f291206a1daa5d7e45ffa21ffe7f3a312",
+    "remote_branch": "origin/oir-ppv-research",
+    "closure_record": "governance/H3R_v1.1_FREEZE_PUBLICATION_CLOSURE.md"
   },
-  "execution_gate": "LOCKED_PENDING_INDEPENDENT_QA_PUBLICATION_AND_SEPARATE_OWNER_AUTHORIZATION"
+  "execution_gate": "LOCKED_PENDING_SEPARATE_OWNER_AUTHORIZATION"
 }

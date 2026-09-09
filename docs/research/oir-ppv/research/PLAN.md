@@ -1088,7 +1088,7 @@ M3    ACCEPTED
 M4    ACCEPTED FOR INFRASTRUCTURE/PROTOCOL
 M4.1  ACCEPTED_WITH_LIMITS
 M5    ELIGIBLE_BUT_DEFERRED
-M6    ACTIVE — H1 CLOSED_WITH_LIMITS; H2 FALSIFIED; H3 CLOSED_WITH_LIMITS; H3R v1.1 FREEZE_QA_PASS
+M6    ACTIVE — H1 CLOSED_WITH_LIMITS; H2 FALSIFIED; H3 CLOSED_WITH_LIMITS; H3R v1.1 FROZEN_PUBLISHED
 M7    PARKED
 M8    NOT_READY
 ```
@@ -1101,7 +1101,7 @@ H1 scientific claim: SUPPORTED_WITH_LIMITS within frozen MEM comparator scope
 H2 scientific claim: FALSIFIED_UNDER_TESTED_CONDITIONS within frozen L1-L4 vs L0/PCA scope
 H3 scientific claim: NOT_SUPPORTED within frozen target-specific historical scope
 H3R v1.0: CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT / NO_RERUN
-H3R v1.1: FROZEN / QA_PASS_WITH_LIMITS / NOT_EXECUTED / PUBLICATION_PENDING / TEST_LOCKED
+H3R v1.1: FROZEN / PUBLISHED / QA_PASS_WITH_LIMITS / NOT_EXECUTED / TEST_LOCKED
 H4: NOT_OPENED
 H5 scientific claim: OPEN
 ```
@@ -1114,12 +1114,12 @@ risks remain active.
 
 ## 16. Next executable step
 
-H3R v1.0 consumed its one-shot access and is closed as `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT`; it must not be rerun. H3R v1.1 has completed independent freeze QA with `PASS_WITH_LIMITS`, `P0=0`, `P1=0`, and scientific test access count `0`.
+H3R v1.0 consumed its one-shot access and is closed as `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT`; it must not be rerun. H3R v1.1 has completed independent freeze QA with `PASS_WITH_LIMITS`, `P0=0`, `P1=0`, scientific test access count `0`, and publication/provenance at commit `723dac1f291206a1daa5d7e45ffa21ffe7f3a312` is remotely verified.
 
 The next governance action is now OPEN:
 
 ```text
-PUBLISH H3R v1.1 FREEZE PACKAGE / CLOSE PUBLICATION-PROVENANCE
+SEPARATELY AUTHORIZE H3R v1.1 DECISIVE EXECUTION
 ```
 
 Frozen H3R v1.1 authority:
@@ -1137,6 +1137,6 @@ Frozen H3R v1.1 authority:
 - `QA_REPORT_H3R_PROTOCOL_v1.1_FREEZE.md`;
 - `governance/H3R_v1.0_DECISIVE_EXECUTION_CLOSURE.md` for preserved predecessor lineage.
 
-Publication/provenance must record the resulting published commit SHA without modifying frozen scientific bytes. Only after that gate closes may the project request a separate owner authorization bound to the frozen v1.1 protocol and test-manifest hashes.
+Publication/provenance is closed by `governance/H3R_v1.1_FREEZE_PUBLICATION_CLOSURE.md`. Any decisive execution authorization must be a separate owner action bound to the frozen v1.1 protocol and test-manifest hashes.
 
 Decisive H3R v1.1 execution remains locked. H4 remains unopened.

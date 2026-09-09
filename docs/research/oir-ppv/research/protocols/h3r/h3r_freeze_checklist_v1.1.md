@@ -1,6 +1,6 @@
 # H3R v1.1 Freeze Checklist
 
-Status: `FROZEN / QA_PASS_WITH_LIMITS / NOT_EXECUTED / PUBLICATION_PENDING`
+Status: `FROZEN / PUBLISHED / QA_PASS_WITH_LIMITS / NOT_EXECUTED / TEST_LOCKED`
 
 - [x] H3 historical closure preserved
 - [x] H3R v1.0 one-shot failure preserved; no rerun/overwrite
@@ -24,10 +24,10 @@ Status: `FROZEN / QA_PASS_WITH_LIMITS / NOT_EXECUTED / PUBLICATION_PENDING`
 - [x] P0 = 0
 - [x] P1 = 0
 - [x] P2 metadata ambiguity closed by `governance/H3R_v1.1_FREEZE_ERRATUM_001.md`
-- [ ] freeze package publication/provenance commit recorded
+- [x] freeze package publication/provenance commit recorded: `723dac1f291206a1daa5d7e45ffa21ffe7f3a312`
 
 Canonical successor protocol: `H3R_PROTOCOL_v1.1.md`.
 
-QA has opened the publication/provenance gate. v1.1 decisive execution remains forbidden until publication/provenance is closed and a separate owner authorization is bound to the frozen v1.1 protocol and test-manifest hashes.
+Publication/provenance is closed and remotely verified. v1.1 decisive execution remains forbidden until a separate owner authorization is bound to the frozen v1.1 protocol and test-manifest hashes.
 
 H4 remains `NOT_OPENED / DEFERRED_BY_OWNER`.
