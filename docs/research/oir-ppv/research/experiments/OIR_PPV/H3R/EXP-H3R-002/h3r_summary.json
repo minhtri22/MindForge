@@ -1,0 +1,309 @@
+{
+  "candidate_results": {
+    "L1": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.2637633497494207,
+        "ci_level": 0.9875,
+        "ci_low": 0.16453963520071554,
+        "estimate": 0.21405169271785124,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.00885684054073677,
+        "ci_level": 0.9875,
+        "ci_low": -0.02689167406658595,
+        "estimate": -0.01778737801832314,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.0028791398303593396,
+        "ENV-2": -0.05531250000000001,
+        "ENV-3": -0.010938374125874117,
+        "ENV-4": -0.0077777777777777776
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    },
+    "L2": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.2442340712810226,
+        "ci_level": 0.9875,
+        "ci_low": 0.11873573939504765,
+        "estimate": 0.17800612564941834,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.008413027987637335,
+        "ci_level": 0.9875,
+        "ci_low": -0.02494456422483766,
+        "estimate": -0.016717837717837716,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.0007215007215007119,
+        "ENV-2": -0.051124999999999976,
+        "ENV-3": -0.0150789627039627,
+        "ENV-4": -0.001388888888888894
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    },
+    "L3": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.26930553153443804,
+        "ci_level": 0.9875,
+        "ci_low": 0.15546477673537507,
+        "estimate": 0.21147926768353598,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.006424215992711126,
+        "ci_level": 0.9875,
+        "ci_low": -0.024944704838373858,
+        "estimate": -0.015782234576060792,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.00037509238728751504,
+        "ENV-2": -0.05037499999999999,
+        "ENV-3": -0.010351252913752917,
+        "ENV-4": -0.002777777777777779
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    },
+    "L4": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.25475371183377093,
+        "ci_level": 0.9875,
+        "ci_low": 0.1639426939189706,
+        "estimate": 0.20957522068040363,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.0042177880604638476,
+        "ci_level": 0.9875,
+        "ci_low": -0.022281753500405857,
+        "estimate": -0.013455910409035415,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.005411255411255422,
+        "ENV-2": -0.051000000000000045,
+        "ENV-3": -0.00851267482517482,
+        "ENV-4": 0.00027777777777778667
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    }
+  },
+  "claim_boundary": {
+    "explicit_nonclaims": [
+      "full causal understanding",
+      "transfer overall",
+      "canonical IRM/DANN/VAE/MLP superiority",
+      "robustness to mechanism-changing shifts",
+      "H4 counterfactual success",
+      "H5 minimal sufficiency",
+      "H6 generation",
+      "MindForge product behavior",
+      "real-world robustness",
+      "human-like invariance"
+    ],
+    "tested_scope": "L1-L4 historical learner definitions retrained under H3R vs L0/PCA on ENV-1..4, five H3R seeds, frozen generator-native test support, delta=0.10 train-scale-normalized L_inf observation noise, four replicates, shared LR probe, and frozen multiplicity/utility rules."
+  },
+  "completed_at_utc": "2026-09-09T13:08:51.874971+00:00",
+  "execution_started_by_access_event_utc": "2026-09-09T13:08:15.633202+00:00",
+  "experiment_id": "EXP-H3R-002",
+  "global_verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+  "matrix": {
+    "expected_cells": 20,
+    "total_test_rows": 6039,
+    "valid_cells": 20
+  },
+  "no_retry_policy": "ONE_SHOT_COMPLETE; NO RESULT-DEPENDENT RETRY",
+  "protocol_id": "OIR-PPV-H3R",
+  "protocol_version": "v1.1",
+  "static_contract": {
+    "checks": [
+      {
+        "detail": "D:\\WORK\\RESEARCH\\MindForge-oir-publish\\docs\\research\\oir-ppv\\research\\protocols\\h3r\\H3R_PROTOCOL_v1.1.md",
+        "name": "freeze_hash:h3r_protocol_frozen",
+        "passed": true
+      },
+      {
+        "detail": "D:\\WORK\\RESEARCH\\MindForge-oir-publish\\docs\\research\\oir-ppv\\research\\protocols\\h3r\\h3r_protocol_v1.1.json",
+        "name": "freeze_hash:h3r_protocol_instance",
+        "passed": true
+      },
+      {
+        "detail": "D:\\WORK\\RESEARCH\\MindForge-oir-publish\\docs\\research\\oir-ppv\\research\\protocols\\h3r\\h3r_test_manifest_v1.1.json",
+        "name": "freeze_hash:h3r_test_manifest",
+        "passed": true
+      },
+      {
+        "detail": "protocols/h3r/h3r_test_access_log_v1.1.md",
+        "name": "freeze_hash:h3r_test_access_log",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "protocol_status",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "execution_status_at_freeze",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "test_access_count_at_freeze",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "test_manifest_hash",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "protocol_markdown_hash",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "h3r_seed_set",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "cell_count",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "total_test_rows",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "observation_hash_encoding",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "noise_replicates",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "noise_delta",
+        "passed": true
+      },
+      {
+        "detail": "environments/base.py",
+        "name": "source_hash:environments/base.py",
+        "passed": true
+      },
+      {
+        "detail": "environments/env1_config.yaml",
+        "name": "source_hash:environments/env1_config.yaml",
+        "passed": true
+      },
+      {
+        "detail": "environments/env1_generator.py",
+        "name": "source_hash:environments/env1_generator.py",
+        "passed": true
+      },
+      {
+        "detail": "environments/env2_config.yaml",
+        "name": "source_hash:environments/env2_config.yaml",
+        "passed": true
+      },
+      {
+        "detail": "environments/env2_generator.py",
+        "name": "source_hash:environments/env2_generator.py",
+        "passed": true
+      },
+      {
+        "detail": "environments/env3_config.yaml",
+        "name": "source_hash:environments/env3_config.yaml",
+        "passed": true
+      },
+      {
+        "detail": "environments/env3_generator.py",
+        "name": "source_hash:environments/env3_generator.py",
+        "passed": true
+      },
+      {
+        "detail": "environments/env4_config.yaml",
+        "name": "source_hash:environments/env4_config.yaml",
+        "passed": true
+      },
+      {
+        "detail": "environments/env4_generator.py",
+        "name": "source_hash:environments/env4_generator.py",
+        "passed": true
+      },
+      {
+        "detail": "experiments/OIR_PPV/Learner_Benchmark/EXP-LRN-001/matrix_manifest.json",
+        "name": "source_hash:experiments/OIR_PPV/Learner_Benchmark/EXP-LRN-001/matrix_manifest.json",
+        "passed": true
+      },
+      {
+        "detail": "pipeline/run_h3r_v11.py",
+        "name": "source_hash:pipeline/run_h3r_v11.py",
+        "passed": true
+      },
+      {
+        "detail": "pipeline/run_m3_experiment.py",
+        "name": "source_hash:pipeline/run_m3_experiment.py",
+        "passed": true
+      },
+      {
+        "detail": "tests/test_h3r_v11_execution.py",
+        "name": "source_hash:tests/test_h3r_v11_execution.py",
+        "passed": true
+      },
+      {
+        "detail": [
+          "L0",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "name": "learner_ids",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "learner_manifest_hash",
+        "passed": true
+      },
+      {
+        "detail": null,
+        "name": "h4_not_opened_plan",
+        "passed": true
+      }
+    ],
+    "status": "PASS"
+  }
+}

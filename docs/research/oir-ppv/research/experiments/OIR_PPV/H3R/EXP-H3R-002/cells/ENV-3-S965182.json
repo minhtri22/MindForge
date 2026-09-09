@@ -1,0 +1,169 @@
+{
+  "candidate_effects": {
+    "L1": {
+      "DeltaR_clean_vs_L0": 0.12,
+      "E_noise": -0.044999999999999984
+    },
+    "L2": {
+      "DeltaR_clean_vs_L0": 0.08666666666666667,
+      "E_noise": -0.04000000000000001
+    },
+    "L3": {
+      "DeltaR_clean_vs_L0": 0.10666666666666669,
+      "E_noise": -0.03666666666666668
+    },
+    "L4": {
+      "DeltaR_clean_vs_L0": 0.1266666666666667,
+      "E_noise": -0.03666666666666668
+    }
+  },
+  "environment": "ENV-3",
+  "realized_shift_validator": {
+    "categorical_channel_indices": [],
+    "categorical_channels_preserved": true,
+    "env_intervene_called": false,
+    "label_dependent_noise": false,
+    "max_train_scale_normalized_l_inf": 0.0999647208801778,
+    "numeric_channel_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "numeric_mask_source": "train_observations_only",
+    "regeneration_between_pair_members": false,
+    "replicate_hashes": [
+      "e006d2df135a3b80ca826a55fc2d352f5826c1432f93d7bbb2b9db847c525811",
+      "d8c7cec339b7d5ee9ce1499d8070b9a65c6b04c56ed9f50bc3aa6935f46a7558",
+      "ca664eb470b345e47ddaa94c93a49362cd8c025b5204e45da9ca1afabbcfe35b",
+      "35affe324c0f441e8435a764d4006ebd63957e29187e192299f0fa916843cd4a"
+    ],
+    "same_environment_seed_row_label_metadata": true,
+    "same_noisy_observation_shared_across_systems": true,
+    "validator_passed": true
+  },
+  "seed": 965182,
+  "system_metrics": {
+    "L0": {
+      "DeltaR_noise": 0.03666666666666668,
+      "R_clean": 0.15333333333333332,
+      "R_noisy": 0.19,
+      "clean_prediction_sha256": "a8e81e8191f1d28abb08bf13535ba61f19e9095f6592d76e534c0ba87080138f",
+      "noisy_prediction_sha256": [
+        "5cfb7b79e3b0f067515ac4b37f742a320054d68d813de64b638d954be68a458d",
+        "718b82797205c6f21c5ecfbb6dc8de494f174879b8a5dffef4f5d9100bd2dd17",
+        "1b0a4e955de4fa9579356c71a730b1c2e38d41a7b317587ea90b094bfaac1fe4",
+        "fdfdcaa0c6dfa8a88023980843469c68189b05339593d742a79b858787e29d3e"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 965182,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "PCAEncoder",
+      "train_representation_sha256": "6cf75bae346531885cc612c4da6e728ce191b29133411598e336ccf70e59f368"
+    },
+    "L1": {
+      "DeltaR_noise": -0.008333333333333304,
+      "R_clean": 0.2733333333333333,
+      "R_noisy": 0.265,
+      "clean_prediction_sha256": "529b5a423b277c7ffddef5889a58c4ed0facd287863e36d4110fc0cf80047950",
+      "noisy_prediction_sha256": [
+        "e8a37b84bbaebf631d76795fd4b5e29c61b4fa9f776d84d5952c74a926cfd796",
+        "08296c2d77c4952715000ab9f1b0ceb3ec956d6d33afd772595699239ef4184d",
+        "6036e0cea7a6d5f4cb97a46867f70aa9a1251e06ba1667b7261a9a50ed225f58",
+        "1345a4d45c9e956845b3d113b5d79da06b59011d9b42bb0febc2f693bb7e797a"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 965182,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "MLPEncoderTrainable",
+      "train_representation_sha256": "3a3dcf7543ff69b12ecdc32d57a693153d677f2567f0625e7bc8865bc1e65826"
+    },
+    "L2": {
+      "DeltaR_noise": -0.003333333333333327,
+      "R_clean": 0.24,
+      "R_noisy": 0.23666666666666666,
+      "clean_prediction_sha256": "5c6450625b98a18fd02d1251bf2a5cdf5241852c795d92ea3fa7fccb0f3dceaf",
+      "noisy_prediction_sha256": [
+        "7a376a2a0d2f00363885989e151291cfb6ee738fab889621c2ca6ae6056d173b",
+        "bc16ff33685b98d30daa4af85f65b4a8041f350d572cfcafa8f839c069b4004d",
+        "18809afd3372d2690bfcec1582d945f0894b77194a1a06187f232c4d4983fc1a",
+        "dedecd311f68479ae8b105428cd46aa2601bb929ff9baa46c0ebaa7a1981dba8"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 965182,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "VAEEncoder",
+      "train_representation_sha256": "f0ce23695f56d16e8ecb1630418091568746353afbcd236b9bb7cd25b9b2fb10"
+    },
+    "L3": {
+      "DeltaR_noise": 0.0,
+      "R_clean": 0.26,
+      "R_noisy": 0.26,
+      "clean_prediction_sha256": "f245347bd1ed54f3bce991d1256b09e11ef625639d15036ee6d774ce958c8c1e",
+      "noisy_prediction_sha256": [
+        "039f6d7e8983e5cd32af514104a5c7068f1a524a3ca1a1cdb72584d70694cf8d",
+        "c628540946c83036a067560214650913d23b0e68b67dbc2333467a7ae7a57c00",
+        "eec3ba23cbb3b2109240af7e2cc176a66f6ce282bc496893423cf98330179888",
+        "f0cf34cdca72f0df44d40917dfca5996f7fad69816aa03498db4e5a1dcc002d2"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 965182,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "IRMStyleEncoderSurrogate",
+      "train_representation_sha256": "1bcdd6bc8ad058a3d9e5d64ac9b94c8c06bbc187ac64e2a3d156c27fb8995277"
+    },
+    "L4": {
+      "DeltaR_noise": 0.0,
+      "R_clean": 0.28,
+      "R_noisy": 0.28,
+      "clean_prediction_sha256": "2bc3811f6258de2502f13bfadac924222062ac63dcd339857c6ddb0edebf2ab0",
+      "noisy_prediction_sha256": [
+        "b8dad22b0d6a4a245c6d53c41434509395dea9b8bf8f349fe7e3fd3996de46c2",
+        "fa5f3d55b5df26f03541514e3f2c6a5233bfbad0a83a25af1a8b6b8baa8066fd",
+        "c68a6a3c53678381b585578408dfc64e5ad1c4e75ad1b73e23cc178068ae73ca",
+        "bd3aa4cef6be3fd586c2c9a0320807b19dd384b5151542cda513ed2b103b54db"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 965182,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "DANNSurrogateEncoder",
+      "train_representation_sha256": "631ca0f15b4386a7c38dd5189ed7c77a8f28a6a54c03a28d1bdb055f5eb05135"
+    }
+  },
+  "test_identity": {
+    "index_sha256": "60c65d6ed140d280686e4763e8f2bfb118e852c2948248cc3e99f0122734e202",
+    "label_sha256": "4857f401a06ce771bb85d714d4cba0d8393ba97973851f0c7beb5aad339b6804",
+    "observation_sha256": "911f726d53d0f6f83afe831c76036d6605a60cfa750f77ddde18201addc66f17"
+  },
+  "test_rows": 150,
+  "train_rows": 640,
+  "train_scale_sha256": "d9ea793049361f7f6f8f575eafa9b0b5385a9fa4d326940e63f64609e14439ff",
+  "valid": true
+}

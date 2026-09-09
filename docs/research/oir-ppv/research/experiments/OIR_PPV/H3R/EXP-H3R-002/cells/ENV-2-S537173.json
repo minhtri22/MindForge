@@ -1,0 +1,178 @@
+{
+  "candidate_effects": {
+    "L1": {
+      "DeltaR_clean_vs_L0": 0.32874999999999993,
+      "E_noise": -0.0446875000000001
+    },
+    "L2": {
+      "DeltaR_clean_vs_L0": 0.5237499999999999,
+      "E_noise": -0.03281250000000002
+    },
+    "L3": {
+      "DeltaR_clean_vs_L0": 0.30875,
+      "E_noise": -0.028125000000000067
+    },
+    "L4": {
+      "DeltaR_clean_vs_L0": 0.32,
+      "E_noise": -0.03875000000000006
+    }
+  },
+  "environment": "ENV-2",
+  "realized_shift_validator": {
+    "categorical_channel_indices": [],
+    "categorical_channels_preserved": true,
+    "env_intervene_called": false,
+    "label_dependent_noise": false,
+    "max_train_scale_normalized_l_inf": 0.09999846395229244,
+    "numeric_channel_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "numeric_mask_source": "train_observations_only",
+    "regeneration_between_pair_members": false,
+    "replicate_hashes": [
+      "9b429f09850a3262898fab18005b7b7137220da5baa8e36daa747e1035e8d3f7",
+      "0abffe835090c585ca42c58838cd32373daaf4ed474deeb89a32a50fb36e078b",
+      "70677cf90e47ffed1bab3f973922c7db72b2c02155890f9dc6907e6e5f5789af",
+      "beab6e4a6e78a4ef1b90db897d90e71f6653d2f4de86de815f3eb0b97b8fc141"
+    ],
+    "same_environment_seed_row_label_metadata": true,
+    "same_noisy_observation_shared_across_systems": true,
+    "validator_passed": true
+  },
+  "seed": 537173,
+  "system_metrics": {
+    "L0": {
+      "DeltaR_noise": 0.03500000000000003,
+      "R_clean": 0.30875,
+      "R_noisy": 0.34375000000000006,
+      "clean_prediction_sha256": "2cfb2d08f8af0c40610d181b7e2a8520bc430d284dfa76bf77d7d6fd6f4469a1",
+      "noisy_prediction_sha256": [
+        "95b524b710044e4e84a3f69001b095cdacea37f1275e2d053d967299e336fb2c",
+        "b8e579459ae2b345c752a9c60fe8809ff22c598738d055ab1ea814f2f3e5163d",
+        "597efb4dbae1eca93e6023573b213e19629f705fa13bd34e44da3c3c0c1fa031",
+        "d523343306aca2ed81de7a65a613d74b530c5a52e58a8ecfc00db4501dea843b"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 537173,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "PCAEncoder",
+      "train_representation_sha256": "6da5b99304a4fe64be88fd9aaf343786d7f65fcc7ace27462c8bce6f7bc50247"
+    },
+    "L1": {
+      "DeltaR_noise": -0.009687500000000071,
+      "R_clean": 0.6375,
+      "R_noisy": 0.6278124999999999,
+      "clean_prediction_sha256": "cff3e8a2f66c7eaa7dce9e0a634fa0b1413b8cceefbc706e466337b98664455f",
+      "noisy_prediction_sha256": [
+        "16034ab3dadbf00d8a81c721729da1a00bb68f434f75d1440de1ad9558e247a3",
+        "661dd2e4c251bf77a57c1e8c99b4d7724c23ac5d7b8d718f6f8394435cbca37e",
+        "dc1de09dc7766036d60b4c4a90dadfa30801b2f5f631ee7b5968c524e9e851d3",
+        "f8f000ba37a9ae44334d8789c5cdf4ce262f5541c0d18d7b462e61b614c466ba"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 537173,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "MLPEncoderTrainable",
+      "train_representation_sha256": "1a3f3793e4a4945ffb0694cf82060f76d4d2b3d33d7a3fa6e6933e5adccf6c05"
+    },
+    "L2": {
+      "DeltaR_noise": 0.002187500000000009,
+      "R_clean": 0.8325,
+      "R_noisy": 0.8346875,
+      "clean_prediction_sha256": "dd8feb719ea9009fc5bb7c1779c1079b368dff86e087cd63f01ab4c0345e7ea7",
+      "noisy_prediction_sha256": [
+        "9feabc7f4afc0b370aec7bcf870c5daea1182778a70d86299eb5809c40213789",
+        "b6b780659eca80fb0b0e1cbf239ba5b4a2c502f59208a4eb5d6260de0b99c4ec",
+        "ebe893cb454d1af2ef975bd73bfd2934cf93bd8b4fd0ff23de6deae5253f15c5",
+        "d64b6e6d44f6ca9aae0424cb0c5f36f50d7a763902e26346bb83e2cbf14d0b51"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 537173,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "VAEEncoder",
+      "train_representation_sha256": "47ef737b7aee75ce29a2a182ab2e28235a39ed008b58474cb0dd3a33972b0986"
+    },
+    "L3": {
+      "DeltaR_noise": 0.0068749999999999645,
+      "R_clean": 0.6175,
+      "R_noisy": 0.624375,
+      "clean_prediction_sha256": "c85384be602b70449fe35a9a92d793bb575bd843ee6915fab22f6cd110e432dc",
+      "noisy_prediction_sha256": [
+        "89909ab576cf87f434bbb1f106e8d593fbf0c7f767b4ede5a5c3261131723972",
+        "61d4bde2a9f2a0ffd98a32b208116b12e11b917807c2789542c2f37da1e61f5b",
+        "abcb3aec4cfa43de138561a1b2965c6fb84c0f5f50df28e138b1e93b9d782bd6",
+        "e7bc5ad729372c0bb4428f0f4ec013987a48358766f59583de17596788fbbdb2"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 537173,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "IRMStyleEncoderSurrogate",
+      "train_representation_sha256": "c8cfc35ffa01fb877337a9c4c22636b03fe29529fcc653b361aa8b42ac18d62d"
+    },
+    "L4": {
+      "DeltaR_noise": -0.003750000000000031,
+      "R_clean": 0.62875,
+      "R_noisy": 0.625,
+      "clean_prediction_sha256": "4bba4e3a8f992886f12712248cb12b2fa6705ae73a361af02b120a6c1a0b19cc",
+      "noisy_prediction_sha256": [
+        "1467d24df1eddca6a3e1d7d96d9bb13af50885e1826a17b5f2ca6aef38015b26",
+        "531774c109168e967e514c0ca9d811d9e923789d12fd5413a2aff47620e1c780",
+        "3ed19d053e96b58d79717df1cd9643df0a48ebf79fce67a8af5597287f52c306",
+        "526613f0fb884f9f0714e381b3da90d27a5acd19fb056c420ed33c2239bb575e"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 537173,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "DANNSurrogateEncoder",
+      "train_representation_sha256": "f905cdad0e70a1e029779e55bba3c9fb6d266514131cdbffae952141c345866e"
+    }
+  },
+  "test_identity": {
+    "index_sha256": "36376ba5722e90b22a8e71e7f752ed02dc8ddc6b3fb8b08e32f37ba64a06afd5",
+    "label_sha256": "6dc65a2793a30ea8e0461346962e7913fae92b0b4633db5f50c1e4b84828689a",
+    "observation_sha256": "81d1e877772fc0e896e589b32bf97b50097638de9e74f9886c37b415aeed5def"
+  },
+  "test_rows": 800,
+  "train_rows": 629,
+  "train_scale_sha256": "dfe24b5d074d733eac8a3135b7b65e0b352e26657ca3221e12c52efb4b84e63e",
+  "valid": true
+}

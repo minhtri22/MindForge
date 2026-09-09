@@ -1,0 +1,169 @@
+{
+  "candidate_effects": {
+    "L1": {
+      "DeltaR_clean_vs_L0": 0.1,
+      "E_noise": 0.012499999999999983
+    },
+    "L2": {
+      "DeltaR_clean_vs_L0": 0.20833333333333334,
+      "E_noise": -0.010416666666666657
+    },
+    "L3": {
+      "DeltaR_clean_vs_L0": 0.1,
+      "E_noise": 0.012499999999999983
+    },
+    "L4": {
+      "DeltaR_clean_vs_L0": 0.11666666666666667,
+      "E_noise": -0.002083333333333326
+    }
+  },
+  "environment": "ENV-3",
+  "realized_shift_validator": {
+    "categorical_channel_indices": [],
+    "categorical_channels_preserved": true,
+    "env_intervene_called": false,
+    "label_dependent_noise": false,
+    "max_train_scale_normalized_l_inf": 0.0999077888537145,
+    "numeric_channel_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "numeric_mask_source": "train_observations_only",
+    "regeneration_between_pair_members": false,
+    "replicate_hashes": [
+      "7c2e9659c2e75e41c08cd3b7bc88836f3b43cd1219c036599d01421192c7959b",
+      "480716af43b037cc7049e5dd58cdced5b1e2a0b4c991ce92d089f876a339b1f6",
+      "c6b8e3ffe9eac686046b16fc6ca50f1614c08e06ddd5393dc291d667c4700beb",
+      "3350a859ca8245d3cf6f7458a02f824e866353fb0e888893dd00d791a8f8c7d1"
+    ],
+    "same_environment_seed_row_label_metadata": true,
+    "same_noisy_observation_shared_across_systems": true,
+    "validator_passed": true
+  },
+  "seed": 538839,
+  "system_metrics": {
+    "L0": {
+      "DeltaR_noise": -0.0062500000000000056,
+      "R_clean": 0.1,
+      "R_noisy": 0.09375,
+      "clean_prediction_sha256": "7122fce047b67121effd80cdb1b25ad4f67e7ddca59ecd2f9fe8d09505a8576c",
+      "noisy_prediction_sha256": [
+        "7122fce047b67121effd80cdb1b25ad4f67e7ddca59ecd2f9fe8d09505a8576c",
+        "dddbac8f1d7bb7fa4ab646e9d3a3a22e26746f3f3dd46597c3925edfd15a6074",
+        "7500903eced967a01283c64c8f04bf32c2a09d44eacde1931517a804c4d305df",
+        "7122fce047b67121effd80cdb1b25ad4f67e7ddca59ecd2f9fe8d09505a8576c"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 538839,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "PCAEncoder",
+      "train_representation_sha256": "2a8a8f6135a5578d8b25fda6c6c77c582657e43d7851da4d5eae485fd55fbf4b"
+    },
+    "L1": {
+      "DeltaR_noise": 0.006249999999999978,
+      "R_clean": 0.2,
+      "R_noisy": 0.20625,
+      "clean_prediction_sha256": "760d1672b0492da7790ab1221cb1926d019b92ed03cc5f6d009b4cdc84233592",
+      "noisy_prediction_sha256": [
+        "33b4047ab09c148d3af5f11ab3d9f65a3ae4809d9f93e8340630e69900a248dc",
+        "6e743d4b1f73d60e70991f5ffd94fed843d86565e181bfe7d16d7494c7da4b2e",
+        "f161ba8f2e7e03dddfe504d36b26069326fa9b28ea5e3574474fa53175affc5f",
+        "002907ed38c5883df70020c9029daf389b8339143cdc8007512c8594a8d094e0"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 538839,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "MLPEncoderTrainable",
+      "train_representation_sha256": "30d2cb0b0aa69d3edecf5c50f85e2e48aaced814162650e1ba76587c4c08fe85"
+    },
+    "L2": {
+      "DeltaR_noise": -0.016666666666666663,
+      "R_clean": 0.30833333333333335,
+      "R_noisy": 0.2916666666666667,
+      "clean_prediction_sha256": "bd86cf180bf636955869824bed07187254fd193033f07bb3f32b5a9b109c5ce9",
+      "noisy_prediction_sha256": [
+        "cf46a5a8c12f94b402b111d8305bc574024353b6df1be617aef8c856d548e83b",
+        "afd0fee37483065b27688fae19b5447bfed8f0ebe6513b9083c02cc774b58cf2",
+        "8185f45aa573c1b948e54fb87b914974ca43a2849c04d4a0b96ec165d5d64410",
+        "ebed06c173daf2aab62549cbc0fa18be4e5914a4a899e7d914914c4542317615"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 538839,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "VAEEncoder",
+      "train_representation_sha256": "556cffbbd2b4eb99145ae481ef51257adcc26848f6fa623e8d6b0c60d7231eb6"
+    },
+    "L3": {
+      "DeltaR_noise": 0.006249999999999978,
+      "R_clean": 0.2,
+      "R_noisy": 0.20625,
+      "clean_prediction_sha256": "760d1672b0492da7790ab1221cb1926d019b92ed03cc5f6d009b4cdc84233592",
+      "noisy_prediction_sha256": [
+        "33b4047ab09c148d3af5f11ab3d9f65a3ae4809d9f93e8340630e69900a248dc",
+        "6e743d4b1f73d60e70991f5ffd94fed843d86565e181bfe7d16d7494c7da4b2e",
+        "f161ba8f2e7e03dddfe504d36b26069326fa9b28ea5e3574474fa53175affc5f",
+        "002907ed38c5883df70020c9029daf389b8339143cdc8007512c8594a8d094e0"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 538839,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "IRMStyleEncoderSurrogate",
+      "train_representation_sha256": "caae1cb567e77d8d56794452d82d0ec65c2fba836edc3020d4ce0c3b445ff282"
+    },
+    "L4": {
+      "DeltaR_noise": -0.008333333333333331,
+      "R_clean": 0.21666666666666667,
+      "R_noisy": 0.20833333333333334,
+      "clean_prediction_sha256": "44e73a2b1bd381c16630f327f92d4a0fd0ace5466be4411cf8dbbbb79a6cb4d2",
+      "noisy_prediction_sha256": [
+        "ed43a7fcea8fe6edf1c712c6f2bb8536ddf831e9f10bc16b8753345d5059fd40",
+        "9b31e766116776d3bead505d45776a90f53de2f3e3e70b2fbe84ba20bea94cc0",
+        "75d2c6ccbeb5215d90983b643dcfb87bf3370793e057aa39dbe0cfeae775810f",
+        "e4ebcfb870f1e3dd51378cfea39c21076b9a552af219ea39b52007ad83d3ca8d"
+      ],
+      "probe": {
+        "C": 1.0,
+        "id": "H3R-LR-v1",
+        "max_iter": 1000,
+        "penalty": "l2",
+        "seed": 538839,
+        "solver": "lbfgs"
+      },
+      "runtime_encoder_type": "DANNSurrogateEncoder",
+      "train_representation_sha256": "3bae9ed00a1436b2e5e93024049b8a3daf93168652a49bfa7785f9711be15042"
+    }
+  },
+  "test_identity": {
+    "index_sha256": "aef5c86f2afd7044079d755ea258c8a375299879d384a874bf55b1daa68f4bd5",
+    "label_sha256": "7046c14cabcc2657feae10644518d780ddfa6d43a871d4e15828cde45e598a32",
+    "observation_sha256": "de2e48aef984347b9e57f07f69b01478dffb6255c9e1e321db463c2ea72502c9"
+  },
+  "test_rows": 120,
+  "train_rows": 700,
+  "train_scale_sha256": "6185f5f6346a28e7ae2a866b362d30e1d7b36e3ad37b1f361cefbbee57d9f5ca",
+  "valid": true
+}
