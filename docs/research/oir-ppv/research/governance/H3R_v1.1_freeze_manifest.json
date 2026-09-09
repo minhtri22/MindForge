@@ -1,0 +1,63 @@
+{
+  "manifest_id": "H3R-v1.1-FREEZE",
+  "protocol_id": "OIR-PPV-H3R",
+  "protocol_version": "v1.1",
+  "status": "FROZEN_LOCAL_UNPUBLISHED",
+  "freeze_timestamp_utc": "2026-09-09T10:43:48.7398025+00:00",
+  "source_anchor_head": "d11dd978a19aa7ca6ac33dc7c144f8d3d1e74c2c",
+  "successor_of": {
+    "protocol_version": "v1.0",
+    "execution_status": "CLOSED / PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT",
+    "rerun_permitted": false
+  },
+  "canonical": {
+    "h3r_protocol_frozen": {
+      "path": "protocols/h3r/H3R_PROTOCOL_v1.1.md",
+      "sha256": "5cdecfe758b9908f0f2199b6e7cd5632e9636b887e141d265fdb9265c107334d"
+    },
+    "h3r_protocol_instance": {
+      "path": "protocols/h3r/h3r_protocol_v1.1.json",
+      "sha256": "1194aca3f517a9f30c07e31e78529d78918d345d64326b13e6ca3c3878048268"
+    },
+    "h3r_protocol_sha_file": {
+      "path": "protocols/h3r/H3R_PROTOCOL_v1.1.sha256",
+      "sha256": "c95cc8bd8590d09f0987dbbc8aa8e4a4f3ccd16ce9a24c8051ea5f1ee4d2f404"
+    },
+    "h3r_test_manifest": {
+      "path": "protocols/h3r/h3r_test_manifest_v1.1.json",
+      "sha256": "371799bb474f2f425db7acacf63cba3de7ca4876f61cbfa5a88549363d97255d"
+    },
+    "h3r_test_access_log": {
+      "path": "protocols/h3r/h3r_test_access_log_v1.1.md",
+      "sha256": "747a647e7caf0151d877a7c5fb1fc4073d8b379ac6b14dda58953d46a8ce8960"
+    },
+    "h3r_runner": {
+      "path": "pipeline/run_h3r_v11.py",
+      "sha256": "660d38a3815b2f118236b1532e78fc80a479e656358732da438d5badab5e4f68"
+    },
+    "h3r_e0_tests": {
+      "path": "tests/test_h3r_v11_execution.py",
+      "sha256": "9e2dbba27ef5dd2a0934d9fee96048fe88534093f390e70d641359376fc97f4c"
+    },
+    "h3r_v1_0_decisive_execution_closure": {
+      "path": "governance/H3R_v1.0_DECISIVE_EXECUTION_CLOSURE.md",
+      "sha256": "12d100db0b9e86791175eab567cb9707a66b8f5720d0302d36b6654f7b134af3"
+    }
+  },
+  "scientific_contract": {
+    "semantic_delta_from_v1_0": "NONE",
+    "implementation_delta": "train-only numeric-channel mask; categorical preservation validator; stable mixed-observation identity encoding",
+    "baseline": "L0/PCA",
+    "candidates": ["L1", "L2", "L3", "L4"],
+    "seeds": [223691, 965182, 537173, 538839, 124586],
+    "cell_count": 20,
+    "total_test_rows": 6039,
+    "scientific_test_access_count_at_freeze": 0,
+    "h4": "NOT_OPENED / DEFERRED_BY_OWNER"
+  },
+  "publication": {
+    "status": "PENDING_SEPARATE_COMMIT_PUBLICATION_TASK",
+    "commit_sha": null
+  },
+  "execution_gate": "LOCKED_PENDING_INDEPENDENT_QA_PUBLICATION_AND_SEPARATE_OWNER_AUTHORIZATION"
+}

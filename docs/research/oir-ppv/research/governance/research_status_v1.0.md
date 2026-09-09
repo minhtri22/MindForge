@@ -7,7 +7,7 @@
 | H1 | `HISTORICAL / PROTOCOL-BOUND / CLOSED_WITH_LIMITS` |
 | H2 | `FALSIFIED_UNDER_TESTED_CONDITIONS / PROTOCOL-BOUND / CLOSED` |
 | H3 | `HISTORICAL / CLOSED_WITH_LIMITS / NOT_SUPPORTED / PRESERVED` |
-| H3R | `PROTOCOL v1.0 FROZEN / PUBLISHED / NOT EXECUTED / TEST LOCKED PENDING EXPLICIT AUTHORIZATION` |
+| H3R | `v1.0 CLOSED PROTOCOL_DEVIATION / NO SCIENTIFIC VERDICT; v1.1 FROZEN / QA_PASS_WITH_LIMITS / NOT EXECUTED / PUBLICATION PENDING` |
 | H4 | `NOT YET INSTANTIATED UNDER FORMAL v1.0 / NOT OPENED` |
 | H5 | `NOT YET INSTANTIATED UNDER FORMAL v1.0` |
 | H6 | `NOT YET INSTANTIATED UNDER FORMAL v1.0` |
@@ -15,9 +15,9 @@
 
 ## Current frontier
 
-H3 is closed by independent QA evidence. H3R Protocol v1.0 is independently reviewed, frozen, and published at commit `7e90366fc062b425d0e5c529c4be81ad2bd54ac2`. Publication/provenance debt is closed. The active frontier is a separately authorized H3R decisive execution. H4 remains unopened by owner decision.
+H3 is closed by independent QA evidence. H3R v1.0 consumed its one-shot test access and is preserved as `PROTOCOL_DEVIATION / NO_SCIENTIFIC_VERDICT`; rerun is forbidden. H3R v1.1 is the fresh successor, frozen with a new test lock and independently QA-reviewed `PASS_WITH_LIMITS` with `P0=0/P1=0`. The active frontier is publication/provenance of the v1.1 freeze package. H4 remains unopened by owner decision.
 
-H3R decisive execution is not yet authorized. Protocol review/freeze and publication/provenance closure are complete with P0=0/P1=0. The test remains locked and must be explicitly unlocked in a separate later execution task.
+H3R v1.1 decisive execution is not authorized. Freeze QA is complete with P0=0/P1=0 and the v1.1 scientific access count remains 0. Publication/provenance must be closed first; a separate later owner authorization is still required to unlock decisive execution.
 
 ## H3 metadata debt retained
 

@@ -1,0 +1,285 @@
+{
+  "identity": {
+    "protocol_id": "OIR-PPV-H3R",
+    "protocol_version": "v1.1",
+    "hypothesis_id": "H3R",
+    "ontology_version": "v1.0",
+    "formal_spec_version": "v1.0",
+    "benchmark_version": "H3R-v1.1",
+    "status": "FROZEN",
+    "execution_status": "NOT_EXECUTED",
+    "freeze_status": "FROZEN"
+  },
+  "historical_lineage": {
+    "historical_parent": "H3 / M3-Protocol-v1.0 / correction_v3",
+    "relation_to_historical_h3": "REVISED_SUCCESSOR",
+    "successor_of": "H3R v1.0 decisive attempt / implementation PROTOCOL_DEVIATION",
+    "scientific_semantics": "UNCHANGED_FROM_H3R_v1.0",
+    "supersedes_protocol_semantics": true,
+    "supersedes_historical_evidence": false,
+    "historical_evidence_reused_as_h3r_evidence": false
+  },
+  "representation_scope": {
+    "representation_scope": "ENVIRONMENT_CONDITIONED",
+    "representation_update_after_train": false,
+    "allowed_post_train_inputs": [
+      "frozen environment identity",
+      "frozen clean/noisy evaluation observations",
+      "frozen deterministic noise replicate identity"
+    ],
+    "forbidden_post_train_inputs": [
+      "test labels or outcomes during representation extraction",
+      "aggregate or per-candidate test metrics",
+      "outputs from other candidates",
+      "hidden mechanism parameters not exposed by the environment contract",
+      "future test cells",
+      "any test-derived model, threshold, seed, candidate, or noise selection signal"
+    ],
+    "adaptation_budget": 0,
+    "adaptation_steps": 0,
+    "adaptation_data_source": "NONE"
+  },
+  "mechanism_contract": {
+    "M_shared": "Within each clean/noisy paired row, the environment-specific simulator mechanism and realized factual row are identical; no cross-ENV-1..4 mechanism identity is claimed.",
+    "G_shared": "Environment-specific causal/dependency structure from the frozen generator/config is unchanged between clean and noisy pair members.",
+    "F_shared": "Structural/outcome functions, label mapping, and factual latent/context realization are unchanged; noise is applied only after generate().",
+    "Theta_shared": "Effective generator configuration, generator seed, structural/context/nuisance realization, task label, and split identity are fixed within each pair.",
+    "Inv_S_k": [
+      "generator code/config",
+      "causal graph/dependency structure",
+      "structural state",
+      "context/environment condition",
+      "nuisance realization",
+      "task label/outcome mapping",
+      "split row identity"
+    ],
+    "Delta_e_allowed": "Bounded observation-channel perturbation eta only; no state, metadata, label, parameter, graph, or mechanism mutation.",
+    "mechanism_ground_truth_availability": true
+  },
+  "shift_contract": {
+    "shift_class_declared": "OBSERVATION_NOISE",
+    "shift_profile_expected": "Bounded measurement corruption of numeric observation channels after factual simulator generation.",
+    "realized_shift_validator": "Verify identical environment/seed/test row/metadata/label; no env.intervene or regeneration; train-derived numeric mask only; categorical observation values unchanged; normalized numeric-channel L_inf <= 0.10; frozen label-independent noise seed derivation; identical noisy observation across L0-L4.",
+    "surface_shift": "EXPECTED_BOUNDED_OBSERVATION_CHANGE",
+    "state_distribution_shift": "NONE",
+    "parameter_shift": "NONE",
+    "environment_condition_shift": "NONE",
+    "mechanism_component_shift": "NONE",
+    "graph_shift": "NONE"
+  },
+  "split_contract": {
+    "split_unit": "COMPOSITE",
+    "split_definition": "(environment_id, generator_seed, generator-native split element); native element is row identity for ENV-1/2/4 and episode-derived row identity for ENV-3.",
+    "split_support_train": "generator-native train support for ENV-1..4 x seeds [223691,965182,537173,538839,124586]",
+    "split_support_validation": "generator-native val support for the same 20 cells; integrity/smoke only, no candidate pruning or threshold selection",
+    "split_support_test": "generator-native test support frozen by protocols/h3r/h3r_test_manifest_v1.1.json; 20 cells / 6039 clean rows"
+  },
+  "noise_contract": {
+    "N_delta": "{eta: max_j |eta_j|/s_j <= 0.10}, with s_j=max(std_train(X_j),1e-6) from candidate-independent raw clean train observations",
+    "q_eta": "Independent per-numeric-channel Uniform[-0.10*s_j,+0.10*s_j], four deterministic replicates per frozen test row",
+    "norm": "TRAIN_SCALE_NORMALIZED_L_INF",
+    "delta": 0.1,
+    "variables_affected": ["all numeric observation channels only; numeric mask fit from clean train observations"],
+    "categorical_channel_rule": "Non-numeric/categorical channels are copied unchanged into every noisy replicate; test values cannot determine the numeric mask.",
+    "pairing_rule": "same environment + generator seed + test row + noise replicate; identical clean/noisy observations across L0-L4",
+    "state_dependence": "NONE; channel scale uses train-only statistics and each noise draw is independent of test state",
+    "label_dependence": "FORBIDDEN",
+    "mechanism_preservation_assumption": "Observation noise is applied after factual generation and cannot mutate state, metadata, label, generator parameters, graph, or mechanism."
+  },
+  "metrics": {
+    "R_clean": "mean 0/1 classification error on frozen clean test rows",
+    "R_noisy": "mean 0/1 classification error after averaging four frozen observation-noise replicates per test row",
+    "DeltaR_noise": "R_noisy - R_clean",
+    "R_int_clean": null,
+    "R_int_noisy": null,
+    "DeltaR_int_noise": null,
+    "R_repr_noise": null
+  },
+  "metric_registry": [
+    {
+      "metric_id": "R_clean",
+      "metric_version": "v1",
+      "estimand_id": "CLEAN_TASK_RISK",
+      "orientation": "LOWER_IS_BETTER",
+      "requires_ground_truth_mechanism": false,
+      "requires_intervention": false,
+      "requires_counterfactual_pairing": false,
+      "real_data_applicable": true,
+      "proxy_metric_if_no_ground_truth": null,
+      "identification_basis_required": false,
+      "aggregation_rule": "mean 0/1 loss over frozen clean rows within cell",
+      "uncertainty_rule": "candidate-minus-L0 paired cell effects use the frozen stratified bootstrap",
+      "acceptance_rule": "used by retained clean-utility guard with epsilon_utility=0.02"
+    },
+    {
+      "metric_id": "R_noisy",
+      "metric_version": "v1",
+      "estimand_id": "NOISY_TASK_RISK",
+      "orientation": "LOWER_IS_BETTER",
+      "requires_ground_truth_mechanism": false,
+      "requires_intervention": false,
+      "requires_counterfactual_pairing": true,
+      "real_data_applicable": true,
+      "proxy_metric_if_no_ground_truth": null,
+      "identification_basis_required": false,
+      "aggregation_rule": "mean four frozen noise-replicate losses per row, then mean rows within cell",
+      "uncertainty_rule": "comparison-layer stratified paired bootstrap over environment x seed cell effects",
+      "acceptance_rule": "primary component of DeltaR_noise"
+    },
+    {
+      "metric_id": "DeltaR_noise",
+      "metric_version": "v1",
+      "estimand_id": "NOISE_INDUCED_RISK_INCREASE",
+      "orientation": "LOWER_IS_BETTER",
+      "requires_ground_truth_mechanism": false,
+      "requires_intervention": false,
+      "requires_counterfactual_pairing": true,
+      "real_data_applicable": true,
+      "proxy_metric_if_no_ground_truth": null,
+      "identification_basis_required": false,
+      "aggregation_rule": "per cell R_noisy-R_clean; candidate effect E_noise=DeltaR_noise(candidate)-DeltaR_noise(L0); equal-weight environment aggregation",
+      "uncertainty_rule": "10000 deterministic stratified paired bootstrap resamples, seed 20260909, Bonferroni-adjusted 98.75% CI",
+      "acceptance_rule": "support requires adjusted CI upper bound for E_noise < -0.01"
+    },
+    {
+      "metric_id": "DeltaR_clean_vs_L0",
+      "metric_version": "v1",
+      "estimand_id": "CLEAN_UTILITY_GAP_VS_BASELINE",
+      "orientation": "LOWER_IS_BETTER",
+      "requires_ground_truth_mechanism": false,
+      "requires_intervention": false,
+      "requires_counterfactual_pairing": true,
+      "real_data_applicable": true,
+      "proxy_metric_if_no_ground_truth": null,
+      "identification_basis_required": false,
+      "aggregation_rule": "R_clean(candidate)-R_clean(L0) per cell; equal-weight environment aggregation",
+      "uncertainty_rule": "same 10000-resample stratified paired bootstrap and 98.75% multiplicity-adjusted CI",
+      "acceptance_rule": "support requires adjusted CI upper bound <= +0.02"
+    }
+  ],
+  "utility_guard": {
+    "metric_id": "DeltaR_clean_vs_L0",
+    "epsilon_utility": 0.02,
+    "orientation": "LOWER_IS_BETTER",
+    "acceptance_rule": "candidate support requires multiplicity-adjusted CI upper bound <= 0.02; lower bound > 0.02 clearly falsifies retained clean utility"
+  },
+  "baseline": {
+    "baseline_id": "L0/PCA",
+    "training_source": "historical learner definition/hyperparameters from EXP-LRN-001; retrained on H3R clean train split for each environment x H3R seed",
+    "artifact_reuse": "NONE_FOR_SCIENTIFIC_EVIDENCE",
+    "retraining_status": "REQUIRED_FROM_SCRATCH_FOR_H3R",
+    "model_selection_dependency": "NONE_ON_H3R_TEST"
+  },
+  "candidate_set": {
+    "candidate_ids": ["L1", "L2", "L3", "L4"],
+    "training_source": "historical architecture/hyperparameter definitions from EXP-LRN-001; retrained on H3R clean train split for each environment x H3R seed",
+    "artifact_reuse": "NONE_FOR_SCIENTIFIC_EVIDENCE",
+    "retraining_status": "REQUIRED_FROM_SCRATCH_FOR_H3R",
+    "model_selection_dependency": "candidate family and hyperparameters are locked before H3R test; validation is integrity/smoke only"
+  },
+  "equivalence_contract": {
+    "mode": "REPRESENTATION_WITH_SHARED_PROBE",
+    "probe_id": "H3R-LR-v1",
+    "architecture": "sklearn LogisticRegression",
+    "solver": "lbfgs",
+    "penalty": "l2",
+    "C": 1.0,
+    "max_iter": 1000,
+    "training_data": "clean train representations only",
+    "selection_rule": "no test-derived hyperparameter/checkpoint selection",
+    "seeds": [223691, 965182, 537173, 538839, 124586]
+  },
+  "evidence_contract": {
+    "evidence_level": "E4",
+    "mechanism_ground_truth_available": true,
+    "identification_basis": "KNOWN_SCM_GROUND_TRUTH",
+    "adjustment_set": [],
+    "positivity_support": "not required for the primary synthetic observation-noise risk estimand",
+    "consistency_assumption": "paired clean/noisy observations refer to the same factual simulator row",
+    "interference_assumption": "noise applied to one row does not alter any other row",
+    "unmeasured_confounding_assumption": "not applicable to frozen randomized synthetic observation noise"
+  },
+  "statistical_plan": {
+    "seeds": [223691, 965182, 537173, 538839, 124586],
+    "environment_count": 4,
+    "state_count": 6039,
+    "intervention_count": 0,
+    "design": "PAIRED",
+    "ci_method": "deterministic stratified paired bootstrap: resample 5 seed-level cell effects with replacement within each environment, compute environment means, then average four environments equally",
+    "bootstrap_resamples": 10000,
+    "alpha_or_confidence_level": 0.9875,
+    "multiple_comparison_rule": "Bonferroni familywise alpha 0.05 across four L1-L4 vs L0 primary contrasts; two-sided CI level 98.75%",
+    "practical_equivalence_margin": 0.01,
+    "aggregation_mode": "noise replicate -> row -> environment x seed cell -> equal-weight environment mean",
+    "worst_case_rule": "support veto if any environment mean E_noise(I,L0) > +0.02 or any realized-shift validator failure occurs"
+  },
+  "pareto_rule": {
+    "enabled": false,
+    "pareto_uncertainty_rule": null,
+    "dominance_alpha": null,
+    "multiple_comparison_rule": null,
+    "practical_equivalence_margin": null
+  },
+  "cost_contract": {
+    "enabled": false,
+    "components": {},
+    "scalarization_rule": null
+  },
+  "test_lock": {
+    "test_manifest": "protocols/h3r/h3r_test_manifest_v1.1.json",
+    "test_hash": "371799bb474f2f425db7acacf63cba3de7ca4876f61cbfa5a88549363d97255d",
+    "test_generation_timestamp": "2026-09-09T10:42:14.837192+00:00",
+    "protocol_freeze_timestamp": "2026-09-09T10:43:48.7398025+00:00",
+    "candidate_lock_timestamp": "2026-09-09T10:43:48.7398025+00:00",
+    "test_unlock_timestamp": null,
+    "test_access_log": "protocols/h3r/h3r_test_access_log_v1.1.md",
+    "test_access_count": 0
+  },
+  "acceptance": {
+    "allowed_scientific_labels": [
+      "SUPPORTED_UNDER_TESTED_CONDITIONS",
+      "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "INCONCLUSIVE",
+      "INVALID_PROTOCOL",
+      "PROTOCOL_DEVIATION"
+    ],
+    "support_rule": "A candidate requires 20/20 valid cells; adjusted 98.75% CI upper bound E_noise< -0.01; adjusted CI upper bound clean-risk gap<=+0.02; worst-case veto passes. Global support if at least one candidate supports.",
+    "falsification_rule": "Candidate falsified if complete valid evidence has adjusted CI lower bound E_noise> -0.01 or adjusted CI lower bound clean-risk gap>+0.02. Global falsified only if all four candidates are falsified.",
+    "inconclusive_rule": "No candidate supports and at least one valid candidate comparison remains statistically unresolved around the frozen practical/utility margins.",
+    "invalid_protocol_rule": "Frozen mechanism/shift/test identity cannot be realized or the realized-shift validator shows the perturbation changed state, label, metadata, parameters, graph, or mechanism.",
+    "protocol_deviation_rule": "Any decisive execution that changes frozen seeds, support, candidates, baseline, noise contract, metrics, margins, statistical rule, stopping rule, or accesses test before authorized unlock is a protocol deviation."
+  },
+  "claim_boundary": {
+    "tested_scope": "L1-L4 historical learner definitions retrained under H3R vs L0/PCA on ENV-1..4, five H3R seeds, frozen generator-native test support, delta=0.10 train-scale-normalized L_inf observation noise, four replicates, shared LR probe, and frozen multiplicity/utility rules.",
+    "explicit_nonclaims": [
+      "full causal understanding",
+      "transfer overall",
+      "canonical IRM/DANN/VAE/MLP superiority",
+      "robustness to mechanism-changing shifts",
+      "H4 counterfactual success",
+      "H5 minimal sufficiency",
+      "H6 generation",
+      "MindForge product behavior",
+      "real-world robustness",
+      "human-like invariance"
+    ]
+  },
+  "provenance": {
+    "repo_commit": "d11dd978a19aa7ca6ac33dc7c144f8d3d1e74c2c",
+    "protocol_sha256": "5cdecfe758b9908f0f2199b6e7cd5632e9636b887e141d265fdb9265c107334d",
+    "ontology_sha256": "ef880cc7c361ec806ac9e6042bdb3321b3b9e1d798a750955fee78f0e087cbc6",
+    "formal_spec_sha256": "649a020b6859265805dc5c195b76ad3f299382be15b900f1f580c1f21d88ec35",
+    "environment_config_hashes": {
+      "ENV-1": "2923ab3cd848f725c764ab4c283d887a306221c2c688207f2b408b5ff24e24f0",
+      "ENV-2": "68c753b7972c6194bf8114f0d71711964c4a2f402675a4c6b53dfa53d529b965",
+      "ENV-3": "38c668e35cf6a97337aa0f1e679c3249cc1df4a762c5d87bd9fb2cee1e45d953",
+      "ENV-4": "d4607f8e56b154b2e3267f9d4c4a390e95d26dfc11b1ed4866dbbb9027266716"
+    },
+    "learner_artifact_hashes": {
+      "status": "NONE_YET_RETRAINING_REQUIRED",
+      "historical_definition_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656"
+    },
+    "runtime_manifest": "NOT_EXECUTED; execution runtime manifest is required after explicit test unlock",
+    "created_at": "2026-09-09T10:43:48.7398025+00:00"
+  }
+}
