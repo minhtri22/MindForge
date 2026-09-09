@@ -1,0 +1,125 @@
+counterfactual_queries:
+- counterfactual:
+  - A
+  factual:
+  - S
+  - A
+  - Z
+  - N
+  name: Y_if_A_different
+  query: What would Y be if A had been a', given observed (S,A,Z,N,Y)?
+- counterfactual:
+  - Z
+  factual:
+  - S
+  - A
+  - Z
+  - N
+  name: Y_if_Z_different
+  query: What would Y be if Z had been z', given observed (S,A,Z,N,Y)?
+environment:
+  family: ENV-3
+  name: Causal Dynamics
+  version: '1.0'
+generation:
+  context_distribution:
+  - 0.8
+  - 0.1
+  - 0.1
+  episode_length: 10
+  mechanism: scm
+  num_episodes: 5000
+  test_ratio: 0.15
+  train_ratio: 0.7
+  val_ratio: 0.15
+intervention_targets:
+- name: do(A)
+  values:
+  - -2.0
+  - -1.0
+  - 0.0
+  - 1.0
+  - 2.0
+  variable: A
+- name: do(Z)
+  values:
+  - ctx_1
+  - ctx_2
+  - ctx_3
+  variable: Z
+- name: do(N)
+  values:
+  - -0.5
+  - 0.0
+  - 0.5
+  variable: N
+ood_splits:
+- holdout:
+  - ctx_3
+  name: unseen_context
+- action_range:
+  - -3.0
+  - 3.0
+  name: extrapolated_action
+- name: high_nuisance
+  nuisance_std: 0.5
+scm:
+  endogenous:
+  - equation: S = U_state
+    name: S
+    parents:
+    - U_state
+    type: continuous
+  - equation: A = 0.5 * S + U_action
+    name: A
+    parents:
+    - S
+    - U_action
+    type: continuous
+  - distribution: uniform
+    name: Z
+    parents: []
+    type: categorical
+    values:
+    - ctx_1
+    - ctx_2
+    - ctx_3
+  - distribution: normal
+    name: N
+    params:
+      mean: 0.0
+      std: 0.2
+    parents: []
+    type: continuous
+  - context_effects:
+      ctx_1: 0.0
+      ctx_2: 0.5
+      ctx_3: -0.5
+    equation: 'Y = 1.0 * S + 0.8 * A + context_effect(Z) + N
+
+      '
+    name: Y
+    parents:
+    - S
+    - A
+    - Z
+    type: continuous
+  exogenous:
+  - distribution: normal
+    name: U_state
+    params:
+      mean: 0.0
+      std: 1.0
+    type: continuous
+  - distribution: normal
+    name: U_action
+    params:
+      mean: 0.0
+      std: 0.5
+    type: continuous
+  - distribution: normal
+    name: U_outcome
+    params:
+      mean: 0.0
+      std: 0.3
+    type: continuous

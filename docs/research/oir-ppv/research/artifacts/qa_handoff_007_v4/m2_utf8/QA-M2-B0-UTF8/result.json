@@ -1,0 +1,30 @@
+{
+  "experiment_id": "QA-M2-B0-UTF8",
+  "environment_family": "ENV-1",
+  "baseline_id": "B0",
+  "seed": 42,
+  "config_hashes": {
+    "environment": "036b28f8bb439169",
+    "baseline": "8f23ff383046d06e"
+  },
+  "generalization": {
+    "accuracy": 0.32709113607990015,
+    "f1_macro": 0.317081886887109,
+    "f1_micro": 0.32709113607990015,
+    "auroc": 0.4927118640490214
+  },
+  "intervention_stability": {},
+  "generation_quality": {},
+  "counterfactual": {},
+  "limitations": {
+    "implementation": "placeholder",
+    "method": "1-NN memorization (not true ERM)",
+    "notes": "Uses KNN as proxy for ERM; no gradient-based training"
+  },
+  "train_time_ms": 0.06103515625,
+  "eval_time_ms": 12.56561279296875,
+  "intervention_time_ms": 0.0,
+  "status": "success",
+  "error": null,
+  "timestamp": "2026-09-08T17:18:24.211868"
+}

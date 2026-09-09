@@ -1,0 +1,41 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "cell_id": "RAW-ENV-2-S42",
+  "status": "complete",
+  "condition": "RAW",
+  "environment": "ENV-2",
+  "seed": 42,
+  "utility": {
+    "train_environment_score": 1.0,
+    "seen_environment_score": 1.0,
+    "unseen_environment_score": null,
+    "generalization_delta": null,
+    "generalization_delta_direction": "unseen_minus_train",
+    "missing_reason": "no non-empty OOD split",
+    "task_metrics": {
+      "task_type": "classification",
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_missing_reason": null,
+      "r2": null,
+      "r2_missing_reason": "classification task"
+    }
+  },
+  "mem_stats": null,
+  "shift_assertion": {
+    "type": "composition_holdout",
+    "passed": true,
+    "factor_names": [
+      "character",
+      "context",
+      "style"
+    ],
+    "train_combination_count": 8,
+    "test_combination_count": 8,
+    "combination_overlap": 0
+  },
+  "ood_split": "ood",
+  "train_count": 629,
+  "test_count": 800,
+  "ood_count": 0
+}

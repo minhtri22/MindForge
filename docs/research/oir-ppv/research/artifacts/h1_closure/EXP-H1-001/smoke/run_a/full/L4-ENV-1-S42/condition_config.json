@@ -1,0 +1,36 @@
+{
+  "condition": {
+    "condition": "L4",
+    "kind": "learner",
+    "learner_id": "L4",
+    "display_name": "Domain-Adversarial encoder",
+    "type": "DANN",
+    "fidelity": "adapted",
+    "paper": "Ganin et al., 2016, Domain-Adversarial Training of Neural Networks, JMLR 17(59)",
+    "implementation_source": "project-owned PyTorch implementation",
+    "params": {
+      "output_dim": 8,
+      "hidden_dim": 24,
+      "learning_rate": 0.01,
+      "epochs": 4,
+      "domain_penalty_weight": 0.5
+    },
+    "deviations": "Compact full-batch DANN with task head, domain head, and gradient reversal."
+  },
+  "environment": {
+    "environment_id": "ENV-1",
+    "config_path": "environments/env1_config.yaml",
+    "generator_output_dim": 12,
+    "overrides": {
+      "generation": {
+        "num_samples": 1200
+      }
+    },
+    "assertion": {
+      "type": "ood_holdout",
+      "ood_split": "ood_unseen_style"
+    }
+  },
+  "seed": 42,
+  "attempt": 1
+}

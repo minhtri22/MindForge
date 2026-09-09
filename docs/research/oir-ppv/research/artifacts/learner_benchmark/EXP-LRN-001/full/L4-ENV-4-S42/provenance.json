@@ -1,0 +1,133 @@
+{
+  "experiment_id": "L4-ENV-4-S42",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "timestamp": "2026-09-08T21:32:20.871676",
+  "source_config": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L4-ENV-4-S42.yaml",
+  "command": "python -m pipeline.run_m3_experiment --config D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L4-ENV-4-S42.yaml --output D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full",
+  "artifact_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L4-ENV-4-S42",
+  "seed": 42,
+  "environment": {
+    "family": "ENV-4",
+    "base_config": "environments/env4_config.yaml",
+    "effective_config": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L4-ENV-4-S42\\effective_env_config.yaml",
+    "effective_config_sha256": "440305e1e65e36e59f1255d2929640d00406f8b961088c570d13837b356ed50d",
+    "overrides": {
+      "generation": {
+        "num_samples": 1200
+      },
+      "shortcut": {
+        "correlation_strength": 0.95,
+        "test_conditional_means": {
+          "0": 1.5,
+          "1": 0.0,
+          "2": -1.5
+        }
+      }
+    },
+    "overrides_sha256": "ae44ec7402e701f301b7b6662ba29fd68a233bbb6ac3d2c2bd34dcdd639e830c"
+  },
+  "invariant_extractor": {
+    "requested_type": "DANN",
+    "runtime_wrapper_type": "EncoderWrapper",
+    "wrapped_learner_type": "DANNSurrogateEncoder",
+    "config": {
+      "type": "DANN",
+      "output_dim": 8,
+      "hidden_dim": 24,
+      "learning_rate": 0.01,
+      "epochs": 4,
+      "domain_penalty_weight": 0.5,
+      "seed": 42
+    },
+    "config_hash": "102c125dc80d0b02"
+  },
+  "generator": {
+    "requested_type": "MLPDecoder",
+    "runtime_wrapper_type": "DecoderWrapper",
+    "wrapped_learner_type": "MLPDecoder",
+    "config": {
+      "type": "MLPDecoder",
+      "output_dim": 11,
+      "hidden_dims": [
+        24
+      ],
+      "learning_rate": 0.01,
+      "epochs": 4,
+      "seed": 42
+    },
+    "config_hash": "c8e4c36f050c0f44",
+    "fit": {
+      "status": "fitted",
+      "method": "MLP Decoder (numpy gradient descent)",
+      "initial_loss": 1.4567829309071918,
+      "final_loss": 1.2044995652575357,
+      "architecture": [
+        12,
+        24,
+        11
+      ],
+      "epochs": 4,
+      "learning_rate": 0.01
+    }
+  },
+  "splits": {
+    "train": 840,
+    "test": 180,
+    "ood_name": "ood_reversed_shortcut",
+    "ood": 90
+  },
+  "interventions": [
+    "do(N)",
+    "do(Z)"
+  ],
+  "git": {
+    "root": "D:/WORK/RESEARCH/MindForge",
+    "branch": "research/pit",
+    "head": "8d57175f5b5ce7195b6132fec7863331080ac1fe",
+    "dirty": true
+  },
+  "source_snapshot": {
+    "paths": [
+      "benchmark",
+      "environments",
+      "pipeline"
+    ],
+    "file_count": 46,
+    "tree_sha256": "2bf9390a7a590fa88c86007195b1071e675a122fe283edd5af42ab4f381b9cb2",
+    "dirty": false,
+    "status": []
+  },
+  "dependencies": {
+    "python": "3.13.12",
+    "numpy": "2.4.4",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.1",
+    "torch": "2.12.0+cpu"
+  },
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L4-ENV-4-S42\\generated.npz",
+    "sha256": "791dd4debd895dad9284fcd0dd84b69c1c769f525bb5a33e3169b4c1f3453cca",
+    "arrays": {
+      "generated": {
+        "shape": [
+          180,
+          11
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

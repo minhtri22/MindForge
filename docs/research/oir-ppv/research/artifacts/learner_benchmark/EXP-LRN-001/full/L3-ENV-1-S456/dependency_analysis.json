@@ -1,0 +1,93 @@
+{
+  "extractor_type": "extractor",
+  "extractor_config_hash": "74e1b95dd7c8d866",
+  "environment": "env",
+  "seed": 456,
+  "context_sensitivities": [
+    {
+      "variable_name": "context_0",
+      "variable_type": "context",
+      "linear_sensitivity": 0.37322406891586934,
+      "mi_sensitivity": 0.0,
+      "predictability_r2": 0.1473813997259763,
+      "leakage_score": 0.37322406891586934,
+      "per_dim_sensitivity": {
+        "0": 0.4346366429332474,
+        "1": 0.32038394093591654,
+        "2": 0.31930060812877387,
+        "3": 0.3637504305282983,
+        "4": 0.3823643857012223,
+        "5": 0.3176976202470189,
+        "6": 0.2708066946220194,
+        "7": 0.5768522302475529
+      }
+    },
+    {
+      "variable_name": "context_1",
+      "variable_type": "context",
+      "linear_sensitivity": 0.21050245861614597,
+      "mi_sensitivity": 0.0,
+      "predictability_r2": 0.06273979195818458,
+      "leakage_score": 0.21050245861614597,
+      "per_dim_sensitivity": {
+        "0": 0.42532080143878154,
+        "1": 0.12758905697854317,
+        "2": 0.3342583012373855,
+        "3": 0.3584683295736129,
+        "4": 0.01859126829701655,
+        "5": 0.20002577551852788,
+        "6": 0.11199323456928337,
+        "7": 0.10777290056831033
+      }
+    }
+  ],
+  "nuisance_sensitivities": [
+    {
+      "variable_name": "nuisance_0",
+      "variable_type": "nuisance",
+      "linear_sensitivity": 0.23429955088618298,
+      "mi_sensitivity": 0.0,
+      "predictability_r2": 0.06555976848448199,
+      "leakage_score": 0.23429955088618298,
+      "per_dim_sensitivity": {
+        "0": 0.2769249282666752,
+        "1": 0.19737659245117817,
+        "2": 0.4075582644537159,
+        "3": 0.24825871408025846,
+        "4": 0.1642892451830146,
+        "5": 0.02754738022837048,
+        "6": 0.25683528074714757,
+        "7": 0.29560600300854895
+      }
+    },
+    {
+      "variable_name": "nuisance_1",
+      "variable_type": "nuisance",
+      "linear_sensitivity": 0.22330560218199408,
+      "mi_sensitivity": 0.0,
+      "predictability_r2": 0.05961173250023423,
+      "leakage_score": 0.22330560218199408,
+      "per_dim_sensitivity": {
+        "0": 0.3344963212722396,
+        "1": 0.25219104088185285,
+        "2": 0.10574074032640193,
+        "3": 0.37292592391225604,
+        "4": 0.26302155781802183,
+        "5": 0.07290276046341906,
+        "6": 0.22779080113624034,
+        "7": 0.15737566401150085
+      }
+    }
+  ],
+  "max_context_sensitivity": 0.37322406891586934,
+  "max_nuisance_sensitivity": 0.23429955088618298,
+  "avg_context_sensitivity": 0.2918632637660077,
+  "avg_nuisance_sensitivity": 0.22880257653408853,
+  "context_leakage_detected": true,
+  "nuisance_leakage_detected": false,
+  "shortcut_learning_score": 0.3037618099010262,
+  "shortcut_metric_status": "valid",
+  "nan_policy": "non-finite component metrics are replaced with 0.0 and reported as finite summaries",
+  "timestamp": "2026-09-08T21:31:46.312934",
+  "config_hash": "74e1b95dd7c8d866"
+}

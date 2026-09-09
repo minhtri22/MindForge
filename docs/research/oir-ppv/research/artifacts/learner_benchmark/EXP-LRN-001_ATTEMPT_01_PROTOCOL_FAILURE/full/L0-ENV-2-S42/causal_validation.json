@@ -1,0 +1,207 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "4f37150436fdf9d1",
+  "environment": "Env2CompositionalGeneration",
+  "seed": 42,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "occlusion",
+      "intervention_value": "heavy",
+      "I_before_shape": [
+        800,
+        8
+      ],
+      "I_after_shape": [
+        800,
+        8
+      ],
+      "mean_shift": 0.3241897939407071,
+      "correlation": 0.8145567358242389,
+      "invariance_score": 0.7551787550212585,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "occlusion",
+      "intervention_value": "none",
+      "I_before_shape": [
+        800,
+        8
+      ],
+      "I_after_shape": [
+        800,
+        8
+      ],
+      "mean_shift": 0.10283868640058674,
+      "correlation": 0.8145567358242389,
+      "invariance_score": 0.9067509258890538,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "occlusion",
+      "intervention_value": "partial",
+      "I_before_shape": [
+        800,
+        8
+      ],
+      "I_after_shape": [
+        800,
+        8
+      ],
+      "mean_shift": 0.25275766260896604,
+      "correlation": 0.814556735824239,
+      "invariance_score": 0.7982389809673338,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "context",
+      "intervention_value": "ctx_1",
+      "I_before_shape": [
+        800,
+        8
+      ],
+      "I_after_shape": [
+        800,
+        8
+      ],
+      "mean_shift": 0.2568562326761175,
+      "correlation": 0.8110708522786491,
+      "invariance_score": 0.7956359478528302,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "context",
+      "intervention_value": "ctx_2",
+      "I_before_shape": [
+        800,
+        8
+      ],
+      "I_after_shape": [
+        800,
+        8
+      ],
+      "mean_shift": 0.2502522839595671,
+      "correlation": 0.811070852278649,
+      "invariance_score": 0.7998385708466659,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "context",
+      "intervention_value": "ctx_3",
+      "I_before_shape": [
+        800,
+        8
+      ],
+      "I_after_shape": [
+        800,
+        8
+      ],
+      "mean_shift": 0.24812667085205825,
+      "correlation": 0.811070852278649,
+      "invariance_score": 0.8012007301449061,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    }
+  ],
+  "avg_nuisance_invariance": 0.8200562206258821,
+  "avg_context_invariance": 0.7988917496148007,
+  "overall_invariance": 0.8094739851203414,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T21:24:52.966333",
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L0-ENV-2-S42\\causal_arrays.npz",
+    "sha256": "6774189821730e49c6617a27fc72ec0bc97571a90631e4697581cd96aecd76bd",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_0_before": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_0_after": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_1_before": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_1_after": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_2_before": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_2_after": {
+        "shape": [
+          800,
+          8
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

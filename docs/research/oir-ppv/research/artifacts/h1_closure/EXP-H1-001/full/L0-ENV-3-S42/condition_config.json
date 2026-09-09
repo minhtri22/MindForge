@@ -1,0 +1,33 @@
+{
+  "condition": {
+    "condition": "L0",
+    "kind": "learner",
+    "learner_id": "L0",
+    "display_name": "PCA",
+    "type": "PCA",
+    "fidelity": "faithful",
+    "paper": "Pearson, 1901, On Lines and Planes of Closest Fit",
+    "implementation_source": "project-owned sklearn adapter",
+    "params": {
+      "output_dim": 8
+    },
+    "deviations": "Uses scikit-learn PCA with deterministic full SVD behavior."
+  },
+  "environment": {
+    "environment_id": "ENV-3",
+    "config_path": "environments/env3_config.yaml",
+    "generator_output_dim": 6,
+    "overrides": {
+      "generation": {
+        "num_episodes": 150
+      }
+    },
+    "assertion": {
+      "type": "context_distribution",
+      "ood_split": "ood_unseen_context",
+      "min_total_variation": 0.5
+    }
+  },
+  "seed": 42,
+  "attempt": 1
+}

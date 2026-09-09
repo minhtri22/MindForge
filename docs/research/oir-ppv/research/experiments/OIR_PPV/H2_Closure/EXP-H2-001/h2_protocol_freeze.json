@@ -1,0 +1,112 @@
+{
+  "experiment_id": "EXP-H2-001",
+  "hypothesis_id": "H2",
+  "status": "frozen_before_decisive_analysis",
+  "frozen_at": "2026-09-09T00:32:42.106383",
+  "base_protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark\\M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "reference_benchmark": {
+    "experiment_id": "EXP-LRN-001",
+    "manifest_path": "experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\matrix_manifest.json",
+    "manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "artifact_root": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full"
+  },
+  "raw_control": {
+    "experiment_id": "EXP-H1-001",
+    "protocol_path": "experiments\\OIR_PPV\\H1_Closure\\EXP-H1-001\\h1_protocol_freeze.json",
+    "protocol_sha256": "8d055da087c9032f9d8e4ae310c07ee2d6eef99c4526e241222430f1d934f7d3",
+    "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "artifact_root": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\full"
+  },
+  "source": {
+    "branch": "oir-ppv-research",
+    "head": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
+    "dirty": true
+  },
+  "learners": [
+    {
+      "learner_id": "L0",
+      "fidelity": "faithful"
+    },
+    {
+      "learner_id": "L1",
+      "fidelity": "adapted"
+    },
+    {
+      "learner_id": "L2",
+      "fidelity": "adapted"
+    },
+    {
+      "learner_id": "L3",
+      "fidelity": "surrogate"
+    },
+    {
+      "learner_id": "L4",
+      "fidelity": "adapted"
+    }
+  ],
+  "primary_baseline": "L0",
+  "secondary_control": "RAW",
+  "eligible_environments": [
+    "ENV-1",
+    "ENV-3",
+    "ENV-4"
+  ],
+  "inapplicable_environment": {
+    "environment": "ENV-2",
+    "status": "INAPPLICABLE_FOR_H2_PRIMARY",
+    "reason": "Frozen EXP-LRN-001 unseen_environment_score is null for ENV-2; no score may be imputed."
+  },
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    1011
+  ],
+  "paired_comparison_unit": "same environment + same seed + learner vs L0",
+  "primary_metric": "delta_ood = unseen_environment_score(learner) - unseen_environment_score(L0)",
+  "secondary_metrics": [
+    "learner/baseline generalization_delta",
+    "delta_generalization_delta",
+    "unseen_accuracy",
+    "unseen_auroc",
+    "seen accuracy",
+    "seen auroc",
+    "delta_ood_vs_raw when split identity is proven compatible"
+  ],
+  "confidence_interval": {
+    "method": "deterministic paired bootstrap percentile CI of mean delta over 15 eligible pairs",
+    "level": 0.95,
+    "bootstrap_repetitions": 10000,
+    "rng_seed": 20260909
+  },
+  "tie_tolerance": 1e-12,
+  "catastrophic_regression_rule": {
+    "threshold": -0.2,
+    "rule": "delta_ood < -0.20 absolute score",
+    "effect": "any catastrophic regression prevents global SUPPORTED for that learner"
+  },
+  "failed_inapplicable_policy": "retain every missing/failed/inapplicable cell; no imputation, seed replacement, or silent drop",
+  "candidate_classification_rules": {
+    "SUPPORTED": "15/15 valid pairs, mean delta > 0, paired CI lower bound > 0, and zero catastrophic regressions",
+    "FALSIFIED_UNDER_TESTED_CONDITIONS": "15/15 valid pairs, mean delta < 0, paired CI upper bound < 0, and losses exceed wins",
+    "NOT_SUPPORTED": "valid complete evidence that does not satisfy SUPPORTED or FALSIFIED_UNDER_TESTED_CONDITIONS",
+    "INCONCLUSIVE": "required comparable evidence is missing/invalid; negative evidence alone is not inconclusive",
+    "SUPPORTED_WITH_LIMITS": "not used by this closure unless a subset rule is separately pre-frozen before decisive analysis"
+  },
+  "artifact_sources": {
+    "reference_results": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full",
+    "raw_results": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\full"
+  },
+  "config_hashes": {
+    "learners": "545882300add136c544307cb1a4eccaa09930945195e0cf7da7c66556b61fd7a",
+    "environments": "5e4433bce6cbcb6104729390168d55a3e50a4732a9110fbe4db93e6ca4f9e915",
+    "seeds": "46cc42e6d6a02535453435de4d99dcc0c18e2fdfff2de5f6c3c19d8a01f099c5",
+    "statistical_rules": "2794c1fe0b96517c046dda16656ad5d5f9020fc9be712fe79c437fc5eb261d97"
+  }
+}

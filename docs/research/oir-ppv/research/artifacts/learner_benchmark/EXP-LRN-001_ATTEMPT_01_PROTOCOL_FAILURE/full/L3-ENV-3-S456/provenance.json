@@ -1,0 +1,125 @@
+{
+  "experiment_id": "L3-ENV-3-S456",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "timestamp": "2026-09-08T21:25:35.782588",
+  "source_config": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L3-ENV-3-S456.yaml",
+  "command": "python -m pipeline.run_m3_experiment --config D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L3-ENV-3-S456.yaml --output D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full",
+  "artifact_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L3-ENV-3-S456",
+  "seed": 456,
+  "environment": {
+    "family": "ENV-3",
+    "base_config": "environments/env3_config.yaml",
+    "effective_config": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L3-ENV-3-S456\\effective_env_config.yaml",
+    "effective_config_sha256": "9631b0734abcb495bdf751f22a1e819aa48183dbb43701edbab5a7a921d975ca",
+    "overrides": {
+      "generation": {
+        "num_episodes": 150
+      }
+    },
+    "overrides_sha256": "df481680e5d2cc60507003e683d93a33b32ae1d55e576f20af3658e87205ec6c"
+  },
+  "invariant_extractor": {
+    "requested_type": "IRMStyle",
+    "runtime_wrapper_type": "EncoderWrapper",
+    "wrapped_learner_type": "IRMStyleEncoderSurrogate",
+    "config": {
+      "type": "IRMStyle",
+      "output_dim": 8,
+      "hidden_dim": 24,
+      "learning_rate": 0.01,
+      "epochs": 4,
+      "irm_penalty_weight": 1.0,
+      "seed": 456
+    },
+    "config_hash": "74e1b95dd7c8d866"
+  },
+  "generator": {
+    "requested_type": "MLPDecoder",
+    "runtime_wrapper_type": "DecoderWrapper",
+    "wrapped_learner_type": "MLPDecoder",
+    "config": {
+      "type": "MLPDecoder",
+      "output_dim": 6,
+      "hidden_dims": [
+        24
+      ],
+      "learning_rate": 0.01,
+      "epochs": 4,
+      "seed": 456
+    },
+    "config_hash": "df34f1bde64d6da3",
+    "fit": {
+      "status": "fitted",
+      "method": "MLP Decoder (numpy gradient descent)",
+      "initial_loss": 2.073511676452678,
+      "final_loss": 1.3647875895965973,
+      "architecture": [
+        10,
+        24,
+        6
+      ],
+      "epochs": 4,
+      "learning_rate": 0.01
+    }
+  },
+  "splits": {
+    "train": 700,
+    "test": 150,
+    "ood_name": "ood_unseen_context",
+    "ood": 490
+  },
+  "interventions": [
+    "do(N)",
+    "do(Z)"
+  ],
+  "git": {
+    "root": "D:/WORK/RESEARCH/MindForge",
+    "branch": "research/pit",
+    "head": "33da43667ecf3288058fd0aaf77889aa0c1f2fd6",
+    "dirty": true
+  },
+  "source_snapshot": {
+    "paths": [
+      "benchmark",
+      "environments",
+      "pipeline"
+    ],
+    "file_count": 46,
+    "tree_sha256": "d76fe260e935538376e93af2cf84331f75ca9b9ce986c42a8c2a11524d801770",
+    "dirty": false,
+    "status": []
+  },
+  "dependencies": {
+    "python": "3.13.12",
+    "numpy": "2.4.4",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.1",
+    "torch": "2.12.0+cpu"
+  },
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L3-ENV-3-S456\\generated.npz",
+    "sha256": "fffe16d0e515848ac87c664bea7dbb2a655f81a1b2c825d4168c372ec01f9635",
+    "arrays": {
+      "generated": {
+        "shape": [
+          150,
+          6
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

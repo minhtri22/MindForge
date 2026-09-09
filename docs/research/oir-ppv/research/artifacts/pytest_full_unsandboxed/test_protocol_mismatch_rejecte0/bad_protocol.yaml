@@ -1,0 +1,73 @@
+environment:
+  config_path: environments/env4_config.yaml
+  family: ENV-4
+  overrides:
+    generation:
+      num_samples: 3000
+    shortcut:
+      correlation_strength: 0.95
+      test_conditional_means:
+        0: 3.0
+        1: 3.0
+        2: 3.0
+  seed: 42
+  splits:
+  - train
+  - val
+  - test
+evaluation:
+  causal_validation: true
+  counterfactual: true
+  dependency_analysis: true
+  enabled: true
+  intervention_targets:
+  - do(A)
+  - do(Z)
+  - do(N)
+  metrics:
+  - invariant_consistency
+  - generation_validity
+  - reconstruction_quality
+  - invariant_preservation
+  - context_response
+  - diversity
+  - distribution_similarity
+experiment:
+  description: Test invariance under strong nuisance distribution shift
+  id: EXP-M4-STRESS-NUISANCE
+  milestone: M4
+  name: 'Stress Test: Strong Nuisance Shift'
+output:
+  base_dir: artifacts/stress_test
+  save_evaluation: true
+  save_generated: true
+  save_intermediate: true
+pipeline:
+  generator:
+    epochs: 50
+    hidden_dims:
+    - 128
+    - 64
+    learning_rate: 0.01
+    output_dim: 11
+    seed: 42
+    type: MLPDecoder
+  invariant_extractor:
+    epochs: 50
+    hidden_dim: 128
+    learning_rate: 0.01
+    output_dim: 64
+    seed: 42
+    type: Autoencoder
+protocol:
+  name: M3_PROTOCOL
+  path: benchmark/M3_PROTOCOL.md
+  version: M3-Protocol-v0.invalid
+provenance:
+  track_config_hashes: true
+  track_seeds: true
+  track_timing: true
+stress_assertion:
+  feature: spurious_feature
+  min_mean_shift: 1.0
+  type: nuisance_distribution

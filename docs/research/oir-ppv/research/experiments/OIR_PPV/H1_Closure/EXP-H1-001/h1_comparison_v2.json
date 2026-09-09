@@ -1,0 +1,4095 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "correction": "DEV_TASK_009_FIX_01",
+  "version": "v2",
+  "developer_candidate_h1": "SUPPORTED",
+  "candidate_authority": "DEVELOPER_CANDIDATE_ONLY",
+  "epsilon": 0.02,
+  "protocol_freeze_sha256": "8d055da087c9032f9d8e4ae310c07ee2d6eef99c4526e241222430f1d934f7d3",
+  "matrix_manifest_sha256": "55127d173e36028e069c841331b9807ee0dc4948241408c110b3a460be21823c",
+  "complete_cells": 140,
+  "failed_cells": 0,
+  "inapplicable_cells": 0,
+  "comparisons": [
+    {
+      "condition": "L0",
+      "vs_mem": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": 0.5560996883888409,
+          "median": 0.5888888888888889,
+          "min": 0.32000000000000006,
+          "max": 0.7166666666666666
+        },
+        "utility_noninferior_count": 20,
+        "utility_noninferior_rate": 1.0,
+        "c_total_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "combined_h1_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0,
+          "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+        },
+        "c_total_delta": {
+          "mean": -59859.8,
+          "median": -62046.5,
+          "min": -78534.0,
+          "max": -34941.0
+        },
+        "c_total_ratio": {
+          "mean": 0.02251044742693578,
+          "median": 0.02069456325658796,
+          "min": 0.01650553524019436,
+          "max": 0.03199946852093806
+        },
+        "compression_ratio_mem_over_learner": {
+          "mean": 46.86774076761683,
+          "median": 48.35045246697035,
+          "min": 31.25051903114187,
+          "max": 60.585735963581186
+        },
+        "h1_success_count": 20,
+        "h1_success_rate": 1.0
+      },
+      "vs_raw": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 1,
+          "losses": 8,
+          "ties": 11
+        },
+        "utility_delta": {
+          "mean": -0.0704236111111111,
+          "median": 0.0,
+          "min": -0.32875,
+          "max": 0.005555555555555536
+        },
+        "utility_noninferior_count": 15,
+        "utility_noninferior_rate": 0.75,
+        "c_total_delta": {
+          "mean": 1307.25,
+          "median": 1381.5,
+          "min": 852.0,
+          "max": 1614.0
+        },
+        "c_total_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW C_total=0 causes division by zero"
+        },
+        "compression_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW retained-state baseline is zero; compression ratio is not meaningful"
+        }
+      },
+      "per_environment": {
+        "ENV-1": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.655701041137063,
+              "median": 0.6481481481481481,
+              "min": 0.6185567010309279,
+              "max": 0.7045454545454546
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -44783.2,
+              "median": -45051.0,
+              "min": -45772.0,
+              "max": -43712.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03126636159605729,
+              "median": 0.03107794218857536,
+              "min": 0.03060338437427198,
+              "max": 0.03199946852093806
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 31.991833910034604,
+              "median": 32.17716262975779,
+              "min": 31.25051903114187,
+              "max": 32.67612456747405
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 0,
+              "ties": 5
+            },
+            "utility_delta": {
+              "mean": 0.0,
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0
+          }
+        },
+        "ENV-2": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.47075000000000006,
+              "median": 0.47624999999999995,
+              "min": 0.42125,
+              "max": 0.5
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -78321.0,
+              "median": -78321.0,
+              "min": -78321.0,
+              "max": -78321.0
+            },
+            "c_total_ratio": {
+              "mean": 0.02019140551698255,
+              "median": 0.02019140551698255,
+              "min": 0.02019140551698255,
+              "max": 0.02019140551698255
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 49.526022304832715,
+              "median": 49.526022304832715,
+              "min": 49.526022304832715,
+              "max": 49.526022304832715
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.27925,
+              "median": -0.27375000000000005,
+              "min": -0.32875,
+              "max": -0.25
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-3": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.4623921568627451,
+              "median": 0.47,
+              "min": 0.32000000000000006,
+              "max": 0.6
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -37801.0,
+              "median": -38241.0,
+              "min": -39341.0,
+              "max": -34941.0
+            },
+            "c_total_ratio": {
+              "mean": 0.022078487354508913,
+              "median": 0.021794183101834088,
+              "min": 0.021197720996193367,
+              "max": 0.02380353700444221
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 45.367370892018776,
+              "median": 45.88380281690141,
+              "min": 42.01056338028169,
+              "max": 47.174882629107984
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 1,
+              "ties": 4
+            },
+            "utility_delta": {
+              "mean": -0.0013333333333333196,
+              "median": 0.0,
+              "min": -0.006666666666666599,
+              "max": 0.0
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0
+          }
+        },
+        "ENV-4": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.6355555555555555,
+              "median": 0.6166666666666667,
+              "min": 0.5888888888888888,
+              "max": 0.7166666666666666
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -78534.0,
+              "median": -78534.0,
+              "min": -78534.0,
+              "max": -78534.0
+            },
+            "c_total_ratio": {
+              "mean": 0.01650553524019436,
+              "median": 0.01650553524019436,
+              "min": 0.01650553524019436,
+              "max": 0.01650553524019436
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 60.58573596358119,
+              "median": 60.585735963581186,
+              "min": 60.585735963581186,
+              "max": 60.585735963581186
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 1,
+              "losses": 2,
+              "ties": 2
+            },
+            "utility_delta": {
+              "mean": -0.0011111111111111293,
+              "median": 0.0,
+              "min": -0.005555555555555647,
+              "max": 0.005555555555555536
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0
+          }
+        }
+      },
+      "pairs": [
+        {
+          "environment": "ENV-1",
+          "seed": 42,
+          "learner_cell_id": "L0-ENV-1-S42",
+          "mem_cell_id": "MEM-ENV-1-S42",
+          "raw_cell_id": "RAW-ENV-1-S42",
+          "learner_c_total_bytes": 1445,
+          "mem_c_total_bytes": 45157,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43712,
+          "c_total_ratio_vs_mem": 0.03199946852093806,
+          "compression_ratio_mem_over_learner": 31.25051903114187,
+          "utility_delta_vs_mem": 0.6185567010309279,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1445,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 123,
+          "learner_cell_id": "L0-ENV-1-S123",
+          "mem_cell_id": "MEM-ENV-1-S123",
+          "raw_cell_id": "RAW-ENV-1-S123",
+          "learner_c_total_bytes": 1445,
+          "mem_c_total_bytes": 45569,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -44124,
+          "c_total_ratio_vs_mem": 0.03171015383264939,
+          "compression_ratio_mem_over_learner": 31.535640138408304,
+          "utility_delta_vs_mem": 0.6481481481481481,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1445,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 456,
+          "learner_cell_id": "L0-ENV-1-S456",
+          "mem_cell_id": "MEM-ENV-1-S456",
+          "raw_cell_id": "RAW-ENV-1-S456",
+          "learner_c_total_bytes": 1445,
+          "mem_c_total_bytes": 46702,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -45257,
+          "c_total_ratio_vs_mem": 0.030940859063851654,
+          "compression_ratio_mem_over_learner": 32.319723183391005,
+          "utility_delta_vs_mem": 0.6699999999999999,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1445,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 789,
+          "learner_cell_id": "L0-ENV-1-S789",
+          "mem_cell_id": "MEM-ENV-1-S789",
+          "raw_cell_id": "RAW-ENV-1-S789",
+          "learner_c_total_bytes": 1445,
+          "mem_c_total_bytes": 46496,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -45051,
+          "c_total_ratio_vs_mem": 0.03107794218857536,
+          "compression_ratio_mem_over_learner": 32.17716262975779,
+          "utility_delta_vs_mem": 0.6372549019607843,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1445,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 1011,
+          "learner_cell_id": "L0-ENV-1-S1011",
+          "mem_cell_id": "MEM-ENV-1-S1011",
+          "raw_cell_id": "RAW-ENV-1-S1011",
+          "learner_c_total_bytes": 1445,
+          "mem_c_total_bytes": 47217,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -45772,
+          "c_total_ratio_vs_mem": 0.03060338437427198,
+          "compression_ratio_mem_over_learner": 32.67612456747405,
+          "utility_delta_vs_mem": 0.7045454545454546,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1445,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 42,
+          "learner_cell_id": "L0-ENV-2-S42",
+          "mem_cell_id": "MEM-ENV-2-S42",
+          "raw_cell_id": "RAW-ENV-2-S42",
+          "learner_c_total_bytes": 1614,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78321,
+          "c_total_ratio_vs_mem": 0.02019140551698255,
+          "compression_ratio_mem_over_learner": 49.526022304832715,
+          "utility_delta_vs_mem": 0.5,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1614,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.25,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 123,
+          "learner_cell_id": "L0-ENV-2-S123",
+          "mem_cell_id": "MEM-ENV-2-S123",
+          "raw_cell_id": "RAW-ENV-2-S123",
+          "learner_c_total_bytes": 1614,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78321,
+          "c_total_ratio_vs_mem": 0.02019140551698255,
+          "compression_ratio_mem_over_learner": 49.526022304832715,
+          "utility_delta_vs_mem": 0.45625000000000004,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1614,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.29374999999999996,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 456,
+          "learner_cell_id": "L0-ENV-2-S456",
+          "mem_cell_id": "MEM-ENV-2-S456",
+          "raw_cell_id": "RAW-ENV-2-S456",
+          "learner_c_total_bytes": 1614,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78321,
+          "c_total_ratio_vs_mem": 0.02019140551698255,
+          "compression_ratio_mem_over_learner": 49.526022304832715,
+          "utility_delta_vs_mem": 0.47624999999999995,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1614,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.27375000000000005,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 789,
+          "learner_cell_id": "L0-ENV-2-S789",
+          "mem_cell_id": "MEM-ENV-2-S789",
+          "raw_cell_id": "RAW-ENV-2-S789",
+          "learner_c_total_bytes": 1614,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78321,
+          "c_total_ratio_vs_mem": 0.02019140551698255,
+          "compression_ratio_mem_over_learner": 49.526022304832715,
+          "utility_delta_vs_mem": 0.42125,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1614,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.32875,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 1011,
+          "learner_cell_id": "L0-ENV-2-S1011",
+          "mem_cell_id": "MEM-ENV-2-S1011",
+          "raw_cell_id": "RAW-ENV-2-S1011",
+          "learner_c_total_bytes": 1614,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78321,
+          "c_total_ratio_vs_mem": 0.02019140551698255,
+          "compression_ratio_mem_over_learner": 49.526022304832715,
+          "utility_delta_vs_mem": 0.5,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1614,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.25,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 42,
+          "learner_cell_id": "L0-ENV-3-S42",
+          "mem_cell_id": "MEM-ENV-3-S42",
+          "raw_cell_id": "RAW-ENV-3-S42",
+          "learner_c_total_bytes": 852,
+          "mem_c_total_bytes": 35793,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -34941,
+          "c_total_ratio_vs_mem": 0.02380353700444221,
+          "compression_ratio_mem_over_learner": 42.01056338028169,
+          "utility_delta_vs_mem": 0.6,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 852,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 123,
+          "learner_cell_id": "L0-ENV-3-S123",
+          "mem_cell_id": "MEM-ENV-3-S123",
+          "raw_cell_id": "RAW-ENV-3-S123",
+          "learner_c_total_bytes": 852,
+          "mem_c_total_bytes": 40193,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -39341,
+          "c_total_ratio_vs_mem": 0.021197720996193367,
+          "compression_ratio_mem_over_learner": 47.174882629107984,
+          "utility_delta_vs_mem": 0.32000000000000006,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 852,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.006666666666666599,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 456,
+          "learner_cell_id": "L0-ENV-3-S456",
+          "mem_cell_id": "MEM-ENV-3-S456",
+          "raw_cell_id": "RAW-ENV-3-S456",
+          "learner_c_total_bytes": 852,
+          "mem_c_total_bytes": 38543,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37691,
+          "c_total_ratio_vs_mem": 0.022105181226162986,
+          "compression_ratio_mem_over_learner": 45.23826291079812,
+          "utility_delta_vs_mem": 0.48666666666666664,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 852,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 789,
+          "learner_cell_id": "L0-ENV-3-S789",
+          "mem_cell_id": "MEM-ENV-3-S789",
+          "raw_cell_id": "RAW-ENV-3-S789",
+          "learner_c_total_bytes": 852,
+          "mem_c_total_bytes": 39643,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -38791,
+          "c_total_ratio_vs_mem": 0.021491814443911912,
+          "compression_ratio_mem_over_learner": 46.529342723004696,
+          "utility_delta_vs_mem": 0.43529411764705883,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 852,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 1011,
+          "learner_cell_id": "L0-ENV-3-S1011",
+          "mem_cell_id": "MEM-ENV-3-S1011",
+          "raw_cell_id": "RAW-ENV-3-S1011",
+          "learner_c_total_bytes": 852,
+          "mem_c_total_bytes": 39093,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -38241,
+          "c_total_ratio_vs_mem": 0.021794183101834088,
+          "compression_ratio_mem_over_learner": 45.88380281690141,
+          "utility_delta_vs_mem": 0.47,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 852,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 42,
+          "learner_cell_id": "L0-ENV-4-S42",
+          "mem_cell_id": "MEM-ENV-4-S42",
+          "raw_cell_id": "RAW-ENV-4-S42",
+          "learner_c_total_bytes": 1318,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78534,
+          "c_total_ratio_vs_mem": 0.01650553524019436,
+          "compression_ratio_mem_over_learner": 60.585735963581186,
+          "utility_delta_vs_mem": 0.5888888888888888,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1318,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.005555555555555536,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 123,
+          "learner_cell_id": "L0-ENV-4-S123",
+          "mem_cell_id": "MEM-ENV-4-S123",
+          "raw_cell_id": "RAW-ENV-4-S123",
+          "learner_c_total_bytes": 1318,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78534,
+          "c_total_ratio_vs_mem": 0.01650553524019436,
+          "compression_ratio_mem_over_learner": 60.585735963581186,
+          "utility_delta_vs_mem": 0.6166666666666667,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1318,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 456,
+          "learner_cell_id": "L0-ENV-4-S456",
+          "mem_cell_id": "MEM-ENV-4-S456",
+          "raw_cell_id": "RAW-ENV-4-S456",
+          "learner_c_total_bytes": 1318,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78534,
+          "c_total_ratio_vs_mem": 0.01650553524019436,
+          "compression_ratio_mem_over_learner": 60.585735963581186,
+          "utility_delta_vs_mem": 0.7166666666666666,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1318,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 789,
+          "learner_cell_id": "L0-ENV-4-S789",
+          "mem_cell_id": "MEM-ENV-4-S789",
+          "raw_cell_id": "RAW-ENV-4-S789",
+          "learner_c_total_bytes": 1318,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78534,
+          "c_total_ratio_vs_mem": 0.01650553524019436,
+          "compression_ratio_mem_over_learner": 60.585735963581186,
+          "utility_delta_vs_mem": 0.588888888888889,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1318,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.005555555555555536,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 1011,
+          "learner_cell_id": "L0-ENV-4-S1011",
+          "mem_cell_id": "MEM-ENV-4-S1011",
+          "raw_cell_id": "RAW-ENV-4-S1011",
+          "learner_c_total_bytes": 1318,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -78534,
+          "c_total_ratio_vs_mem": 0.01650553524019436,
+          "compression_ratio_mem_over_learner": 60.585735963581186,
+          "utility_delta_vs_mem": 0.6666666666666666,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 1318,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.005555555555555647,
+          "utility_noninferior_vs_raw": true
+        }
+      ],
+      "failed_or_inapplicable_cells": []
+    },
+    {
+      "condition": "L1",
+      "vs_mem": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 19,
+          "losses": 1,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": 0.30938186238777504,
+          "median": 0.2852941176470588,
+          "min": -0.07750000000000001,
+          "max": 0.7055555555555555
+        },
+        "utility_noninferior_count": 19,
+        "utility_noninferior_rate": 0.95,
+        "c_total_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "combined_h1_wins_losses_ties": {
+          "wins": 19,
+          "losses": 1,
+          "ties": 0,
+          "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+        },
+        "c_total_delta": {
+          "mean": -58421.8,
+          "median": -60552.5,
+          "min": -77120.0,
+          "max": -33591.0
+        },
+        "c_total_ratio": {
+          "mean": 0.048327935161742996,
+          "median": 0.047133869191864214,
+          "min": 0.03421329459500075,
+          "max": 0.06402108200279026
+        },
+        "compression_ratio_mem_over_learner": {
+          "mean": 22.025080616351232,
+          "median": 21.790449315002263,
+          "min": 15.619854721549636,
+          "max": 29.228404099560763
+        },
+        "h1_success_count": 19,
+        "h1_success_rate": 0.95
+      },
+      "vs_raw": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 0,
+          "losses": 20,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": -0.3171414371121769,
+          "median": -0.24166666666666664,
+          "min": -0.8275,
+          "max": -0.011111111111111072
+        },
+        "utility_noninferior_count": 1,
+        "utility_noninferior_rate": 0.05,
+        "c_total_delta": {
+          "mean": 2745.25,
+          "median": 2811.5,
+          "min": 2202.0,
+          "max": 3156.0
+        },
+        "c_total_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW C_total=0 causes division by zero"
+        },
+        "compression_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW retained-state baseline is zero; compression ratio is not meaningful"
+        }
+      },
+      "per_environment": {
+        "ENV-1": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.3214620900739761,
+              "median": 0.33,
+              "min": 0.10309278350515466,
+              "max": 0.5113636363636362
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -43337.2,
+              "median": -43605.0,
+              "min": -44326.0,
+              "max": -42266.0
+            },
+            "c_total_ratio": {
+              "mean": 0.06255436081259627,
+              "median": 0.062177391603578804,
+              "min": 0.06122794756125972,
+              "max": 0.06402108200279026
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 15.990383950190246,
+              "median": 16.083016257350398,
+              "min": 15.619854721549636,
+              "max": 16.332410930473884
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.3342389510630869,
+              "median": -0.33999999999999997,
+              "min": -0.5154639175257731,
+              "max": -0.19318181818181823
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-2": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 4,
+              "losses": 1,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.086,
+              "median": 0.11125000000000002,
+              "min": -0.07750000000000001,
+              "max": 0.15250000000000002
+            },
+            "utility_noninferior_count": 4,
+            "utility_noninferior_rate": 0.8,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 4,
+              "losses": 1,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -76779.0,
+              "median": -76779.0,
+              "min": -76779.0,
+              "max": -76779.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03948207918934134,
+              "median": 0.03948207918934134,
+              "min": 0.03948207918934134,
+              "max": 0.03948207918934134
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 25.327946768060837,
+              "median": 25.327946768060837,
+              "min": 25.327946768060837,
+              "max": 25.327946768060837
+            },
+            "h1_success_count": 4,
+            "h1_success_rate": 0.8
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.664,
+              "median": -0.6387499999999999,
+              "min": -0.8275,
+              "max": -0.5974999999999999
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-3": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.2545098039215687,
+              "median": 0.26000000000000006,
+              "min": 0.16000000000000003,
+              "max": 0.3666666666666667
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -36451.0,
+              "median": -36891.0,
+              "min": -37991.0,
+              "max": -33591.0
+            },
+            "c_total_ratio": {
+              "mean": 0.0570620060500336,
+              "median": 0.05632721970685289,
+              "min": 0.05478565919438708,
+              "max": 0.061520409018523174
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 17.553587647593098,
+              "median": 17.75340599455041,
+              "min": 16.254768392370572,
+              "max": 18.25295186194369
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.20921568627450976,
+              "median": -0.22666666666666657,
+              "min": -0.30999999999999994,
+              "max": -0.12941176470588234
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-4": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.5755555555555555,
+              "median": 0.5333333333333334,
+              "min": 0.5222222222222221,
+              "max": 0.7055555555555555
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -77120.0,
+              "median": -77120.0,
+              "min": -77120.0,
+              "max": -77120.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03421329459500075,
+              "median": 0.03421329459500075,
+              "min": 0.03421329459500075,
+              "max": 0.03421329459500075
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 29.22840409956076,
+              "median": 29.228404099560763,
+              "min": 29.228404099560763,
+              "max": 29.228404099560763
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.061111111111111116,
+              "median": -0.061111111111111116,
+              "min": -0.13888888888888895,
+              "max": -0.011111111111111072
+            },
+            "utility_noninferior_count": 1,
+            "utility_noninferior_rate": 0.2
+          }
+        }
+      },
+      "pairs": [
+        {
+          "environment": "ENV-1",
+          "seed": 42,
+          "learner_cell_id": "L1-ENV-1-S42",
+          "mem_cell_id": "MEM-ENV-1-S42",
+          "raw_cell_id": "RAW-ENV-1-S42",
+          "learner_c_total_bytes": 2891,
+          "mem_c_total_bytes": 45157,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42266,
+          "c_total_ratio_vs_mem": 0.06402108200279026,
+          "compression_ratio_mem_over_learner": 15.619854721549636,
+          "utility_delta_vs_mem": 0.10309278350515466,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2891,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.5154639175257731,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 123,
+          "learner_cell_id": "L1-ENV-1-S123",
+          "mem_cell_id": "MEM-ENV-1-S123",
+          "raw_cell_id": "RAW-ENV-1-S123",
+          "learner_c_total_bytes": 2891,
+          "mem_c_total_bytes": 45569,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42678,
+          "c_total_ratio_vs_mem": 0.06344225240843555,
+          "compression_ratio_mem_over_learner": 15.762365963334487,
+          "utility_delta_vs_mem": 0.39814814814814814,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2891,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.25,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 456,
+          "learner_cell_id": "L1-ENV-1-S456",
+          "mem_cell_id": "MEM-ENV-1-S456",
+          "raw_cell_id": "RAW-ENV-1-S456",
+          "learner_c_total_bytes": 2891,
+          "mem_c_total_bytes": 46702,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43811,
+          "c_total_ratio_vs_mem": 0.06190313048691705,
+          "compression_ratio_mem_over_learner": 16.154271878242824,
+          "utility_delta_vs_mem": 0.33,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2891,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.33999999999999997,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 789,
+          "learner_cell_id": "L1-ENV-1-S789",
+          "mem_cell_id": "MEM-ENV-1-S789",
+          "raw_cell_id": "RAW-ENV-1-S789",
+          "learner_c_total_bytes": 2891,
+          "mem_c_total_bytes": 46496,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43605,
+          "c_total_ratio_vs_mem": 0.062177391603578804,
+          "compression_ratio_mem_over_learner": 16.083016257350398,
+          "utility_delta_vs_mem": 0.2647058823529412,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2891,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.37254901960784315,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 1011,
+          "learner_cell_id": "L1-ENV-1-S1011",
+          "mem_cell_id": "MEM-ENV-1-S1011",
+          "raw_cell_id": "RAW-ENV-1-S1011",
+          "learner_c_total_bytes": 2891,
+          "mem_c_total_bytes": 47217,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -44326,
+          "c_total_ratio_vs_mem": 0.06122794756125972,
+          "compression_ratio_mem_over_learner": 16.332410930473884,
+          "utility_delta_vs_mem": 0.5113636363636362,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2891,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.19318181818181823,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 42,
+          "learner_cell_id": "L1-ENV-2-S42",
+          "mem_cell_id": "MEM-ENV-2-S42",
+          "raw_cell_id": "RAW-ENV-2-S42",
+          "learner_c_total_bytes": 3156,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76779,
+          "c_total_ratio_vs_mem": 0.03948207918934134,
+          "compression_ratio_mem_over_learner": 25.327946768060837,
+          "utility_delta_vs_mem": 0.14125,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3156,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.60875,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 123,
+          "learner_cell_id": "L1-ENV-2-S123",
+          "mem_cell_id": "MEM-ENV-2-S123",
+          "raw_cell_id": "RAW-ENV-2-S123",
+          "learner_c_total_bytes": 3156,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76779,
+          "c_total_ratio_vs_mem": 0.03948207918934134,
+          "compression_ratio_mem_over_learner": 25.327946768060837,
+          "utility_delta_vs_mem": 0.11125000000000002,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3156,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.6387499999999999,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 456,
+          "learner_cell_id": "L1-ENV-2-S456",
+          "mem_cell_id": "MEM-ENV-2-S456",
+          "raw_cell_id": "RAW-ENV-2-S456",
+          "learner_c_total_bytes": 3156,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76779,
+          "c_total_ratio_vs_mem": 0.03948207918934134,
+          "compression_ratio_mem_over_learner": 25.327946768060837,
+          "utility_delta_vs_mem": 0.10249999999999998,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3156,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.6475,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 789,
+          "learner_cell_id": "L1-ENV-2-S789",
+          "mem_cell_id": "MEM-ENV-2-S789",
+          "raw_cell_id": "RAW-ENV-2-S789",
+          "learner_c_total_bytes": 3156,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76779,
+          "c_total_ratio_vs_mem": 0.03948207918934134,
+          "compression_ratio_mem_over_learner": 25.327946768060837,
+          "utility_delta_vs_mem": -0.07750000000000001,
+          "utility_noninferior_vs_mem": false,
+          "meets_h1_vs_mem": false,
+          "c_total_delta_vs_raw": 3156,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.8275,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 1011,
+          "learner_cell_id": "L1-ENV-2-S1011",
+          "mem_cell_id": "MEM-ENV-2-S1011",
+          "raw_cell_id": "RAW-ENV-2-S1011",
+          "learner_c_total_bytes": 3156,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76779,
+          "c_total_ratio_vs_mem": 0.03948207918934134,
+          "compression_ratio_mem_over_learner": 25.327946768060837,
+          "utility_delta_vs_mem": 0.15250000000000002,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3156,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.5974999999999999,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 42,
+          "learner_cell_id": "L1-ENV-3-S42",
+          "mem_cell_id": "MEM-ENV-3-S42",
+          "raw_cell_id": "RAW-ENV-3-S42",
+          "learner_c_total_bytes": 2202,
+          "mem_c_total_bytes": 35793,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -33591,
+          "c_total_ratio_vs_mem": 0.061520409018523174,
+          "compression_ratio_mem_over_learner": 16.254768392370572,
+          "utility_delta_vs_mem": 0.3666666666666667,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2202,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.23333333333333328,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 123,
+          "learner_cell_id": "L1-ENV-3-S123",
+          "mem_cell_id": "MEM-ENV-3-S123",
+          "raw_cell_id": "RAW-ENV-3-S123",
+          "learner_c_total_bytes": 2202,
+          "mem_c_total_bytes": 40193,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37991,
+          "c_total_ratio_vs_mem": 0.05478565919438708,
+          "compression_ratio_mem_over_learner": 18.25295186194369,
+          "utility_delta_vs_mem": 0.18000000000000005,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2202,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.1466666666666666,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 456,
+          "learner_cell_id": "L1-ENV-3-S456",
+          "mem_cell_id": "MEM-ENV-3-S456",
+          "raw_cell_id": "RAW-ENV-3-S456",
+          "learner_c_total_bytes": 2202,
+          "mem_c_total_bytes": 38543,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36341,
+          "c_total_ratio_vs_mem": 0.05713099654930857,
+          "compression_ratio_mem_over_learner": 17.50363306085377,
+          "utility_delta_vs_mem": 0.26000000000000006,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2202,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.22666666666666657,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 789,
+          "learner_cell_id": "L1-ENV-3-S789",
+          "mem_cell_id": "MEM-ENV-3-S789",
+          "raw_cell_id": "RAW-ENV-3-S789",
+          "learner_c_total_bytes": 2202,
+          "mem_c_total_bytes": 39643,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37441,
+          "c_total_ratio_vs_mem": 0.055545745781096285,
+          "compression_ratio_mem_over_learner": 18.00317892824705,
+          "utility_delta_vs_mem": 0.3058823529411765,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2202,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.12941176470588234,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 1011,
+          "learner_cell_id": "L1-ENV-3-S1011",
+          "mem_cell_id": "MEM-ENV-3-S1011",
+          "raw_cell_id": "RAW-ENV-3-S1011",
+          "learner_c_total_bytes": 2202,
+          "mem_c_total_bytes": 39093,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36891,
+          "c_total_ratio_vs_mem": 0.05632721970685289,
+          "compression_ratio_mem_over_learner": 17.75340599455041,
+          "utility_delta_vs_mem": 0.16000000000000003,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2202,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.30999999999999994,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 42,
+          "learner_cell_id": "L1-ENV-4-S42",
+          "mem_cell_id": "MEM-ENV-4-S42",
+          "raw_cell_id": "RAW-ENV-4-S42",
+          "learner_c_total_bytes": 2732,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77120,
+          "c_total_ratio_vs_mem": 0.03421329459500075,
+          "compression_ratio_mem_over_learner": 29.228404099560763,
+          "utility_delta_vs_mem": 0.5222222222222221,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2732,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.061111111111111116,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 123,
+          "learner_cell_id": "L1-ENV-4-S123",
+          "mem_cell_id": "MEM-ENV-4-S123",
+          "raw_cell_id": "RAW-ENV-4-S123",
+          "learner_c_total_bytes": 2732,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77120,
+          "c_total_ratio_vs_mem": 0.03421329459500075,
+          "compression_ratio_mem_over_learner": 29.228404099560763,
+          "utility_delta_vs_mem": 0.5833333333333333,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2732,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.033333333333333326,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 456,
+          "learner_cell_id": "L1-ENV-4-S456",
+          "mem_cell_id": "MEM-ENV-4-S456",
+          "raw_cell_id": "RAW-ENV-4-S456",
+          "learner_c_total_bytes": 2732,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77120,
+          "c_total_ratio_vs_mem": 0.03421329459500075,
+          "compression_ratio_mem_over_learner": 29.228404099560763,
+          "utility_delta_vs_mem": 0.7055555555555555,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2732,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.011111111111111072,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 789,
+          "learner_cell_id": "L1-ENV-4-S789",
+          "mem_cell_id": "MEM-ENV-4-S789",
+          "raw_cell_id": "RAW-ENV-4-S789",
+          "learner_c_total_bytes": 2732,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77120,
+          "c_total_ratio_vs_mem": 0.03421329459500075,
+          "compression_ratio_mem_over_learner": 29.228404099560763,
+          "utility_delta_vs_mem": 0.5333333333333334,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2732,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.061111111111111116,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 1011,
+          "learner_cell_id": "L1-ENV-4-S1011",
+          "mem_cell_id": "MEM-ENV-4-S1011",
+          "raw_cell_id": "RAW-ENV-4-S1011",
+          "learner_c_total_bytes": 2732,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77120,
+          "c_total_ratio_vs_mem": 0.03421329459500075,
+          "compression_ratio_mem_over_learner": 29.228404099560763,
+          "utility_delta_vs_mem": 0.5333333333333333,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2732,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.13888888888888895,
+          "utility_noninferior_vs_raw": false
+        }
+      ],
+      "failed_or_inapplicable_cells": []
+    },
+    {
+      "condition": "L2",
+      "vs_mem": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 19,
+          "losses": 1,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": 0.32953798828184816,
+          "median": 0.29500000000000004,
+          "min": -0.057499999999999996,
+          "max": 0.7111111111111111
+        },
+        "utility_noninferior_count": 19,
+        "utility_noninferior_rate": 0.95,
+        "c_total_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "combined_h1_wins_losses_ties": {
+          "wins": 19,
+          "losses": 1,
+          "ties": 0,
+          "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+        },
+        "c_total_delta": {
+          "mean": -58388.8,
+          "median": -60519.5,
+          "min": -77087.0,
+          "max": -33558.0
+        },
+        "c_total_ratio": {
+          "mean": 0.04892675869256894,
+          "median": 0.04775080615090174,
+          "min": 0.03462655913439864,
+          "max": 0.06475186571295702
+        },
+        "compression_ratio_mem_over_learner": {
+          "mean": 21.762435611793478,
+          "median": 21.524648277110288,
+          "min": 15.443570451436388,
+          "max": 28.879566003616638
+        },
+        "h1_success_count": 19,
+        "h1_success_rate": 0.95
+      },
+      "vs_raw": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 2,
+          "losses": 18,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": -0.29698531121810384,
+          "median": -0.18872549019607843,
+          "min": -0.8075,
+          "max": 0.03888888888888886
+        },
+        "utility_noninferior_count": 2,
+        "utility_noninferior_rate": 0.1,
+        "c_total_delta": {
+          "mean": 2778.25,
+          "median": 2844.5,
+          "min": 2235.0,
+          "max": 3189.0
+        },
+        "c_total_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW C_total=0 causes division by zero"
+        },
+        "compression_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW retained-state baseline is zero; compression ratio is not meaningful"
+        }
+      },
+      "per_environment": {
+        "ENV-1": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.32141665900974575,
+              "median": 0.33,
+              "min": 0.12371134020618557,
+              "max": 0.5340909090909092
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -43304.2,
+              "median": -43572.0,
+              "min": -44293.0,
+              "max": -42233.0
+            },
+            "c_total_ratio": {
+              "mean": 0.0632684022884924,
+              "median": 0.06288713007570544,
+              "min": 0.061926848380879765,
+              "max": 0.06475186571295702
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 15.809917920656636,
+              "median": 15.901504787961697,
+              "min": 15.443570451436388,
+              "max": 16.14808481532148
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.33428438212731726,
+              "median": -0.33999999999999997,
+              "min": -0.5092592592592593,
+              "max": -0.1568627450980392
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-2": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 4,
+              "losses": 1,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.1165,
+              "median": 0.11875000000000002,
+              "min": -0.057499999999999996,
+              "max": 0.25125
+            },
+            "utility_noninferior_count": 4,
+            "utility_noninferior_rate": 0.8,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 4,
+              "losses": 1,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -76746.0,
+              "median": -76746.0,
+              "min": -76746.0,
+              "max": -76746.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03989491461812723,
+              "median": 0.03989491461812723,
+              "min": 0.03989491461812723,
+              "max": 0.03989491461812723
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 25.06585136406397,
+              "median": 25.06585136406397,
+              "min": 25.06585136406397,
+              "max": 25.06585136406397
+            },
+            "h1_success_count": 4,
+            "h1_success_rate": 0.8
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.6335,
+              "median": -0.63125,
+              "min": -0.8075,
+              "max": -0.49875
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-3": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.27690196078431367,
+              "median": 0.26,
+              "min": 0.09999999999999998,
+              "max": 0.41666666666666663
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -36418.0,
+              "median": -36858.0,
+              "min": -37958.0,
+              "max": -33558.0
+            },
+            "c_total_ratio": {
+              "mean": 0.05791715872925753,
+              "median": 0.05717136060164224,
+              "min": 0.055606697683676265,
+              "max": 0.0624423770010896
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 17.294407158836687,
+              "median": 17.491275167785236,
+              "min": 16.01476510067114,
+              "max": 17.9834451901566
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.1868235294117647,
+              "median": -0.18333333333333335,
+              "min": -0.37,
+              "max": -0.06666666666666665
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-4": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.6033333333333333,
+              "median": 0.6333333333333333,
+              "min": 0.5166666666666666,
+              "max": 0.7111111111111111
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -77087.0,
+              "median": -77087.0,
+              "min": -77087.0,
+              "max": -77087.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03462655913439864,
+              "median": 0.03462655913439864,
+              "min": 0.03462655913439864,
+              "max": 0.03462655913439864
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 28.879566003616638,
+              "median": 28.879566003616638,
+              "min": 28.879566003616638,
+              "max": 28.879566003616638
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 2,
+              "losses": 3,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.033333333333333326,
+              "median": -0.06666666666666665,
+              "min": -0.09999999999999998,
+              "max": 0.03888888888888886
+            },
+            "utility_noninferior_count": 2,
+            "utility_noninferior_rate": 0.4
+          }
+        }
+      },
+      "pairs": [
+        {
+          "environment": "ENV-1",
+          "seed": 42,
+          "learner_cell_id": "L2-ENV-1-S42",
+          "mem_cell_id": "MEM-ENV-1-S42",
+          "raw_cell_id": "RAW-ENV-1-S42",
+          "learner_c_total_bytes": 2924,
+          "mem_c_total_bytes": 45157,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42233,
+          "c_total_ratio_vs_mem": 0.06475186571295702,
+          "compression_ratio_mem_over_learner": 15.443570451436388,
+          "utility_delta_vs_mem": 0.12371134020618557,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2924,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.4948453608247423,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 123,
+          "learner_cell_id": "L2-ENV-1-S123",
+          "mem_cell_id": "MEM-ENV-1-S123",
+          "raw_cell_id": "RAW-ENV-1-S123",
+          "learner_c_total_bytes": 2924,
+          "mem_c_total_bytes": 45569,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42645,
+          "c_total_ratio_vs_mem": 0.06416642893194935,
+          "compression_ratio_mem_over_learner": 15.584473324213405,
+          "utility_delta_vs_mem": 0.1388888888888889,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2924,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.5092592592592593,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 456,
+          "learner_cell_id": "L2-ENV-1-S456",
+          "mem_cell_id": "MEM-ENV-1-S456",
+          "raw_cell_id": "RAW-ENV-1-S456",
+          "learner_c_total_bytes": 2924,
+          "mem_c_total_bytes": 46702,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43778,
+          "c_total_ratio_vs_mem": 0.0626097383409704,
+          "compression_ratio_mem_over_learner": 15.971956224350205,
+          "utility_delta_vs_mem": 0.33,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2924,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.33999999999999997,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 789,
+          "learner_cell_id": "L2-ENV-1-S789",
+          "mem_cell_id": "MEM-ENV-1-S789",
+          "raw_cell_id": "RAW-ENV-1-S789",
+          "learner_c_total_bytes": 2924,
+          "mem_c_total_bytes": 46496,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43572,
+          "c_total_ratio_vs_mem": 0.06288713007570544,
+          "compression_ratio_mem_over_learner": 15.901504787961697,
+          "utility_delta_vs_mem": 0.4803921568627451,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2924,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.1568627450980392,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 1011,
+          "learner_cell_id": "L2-ENV-1-S1011",
+          "mem_cell_id": "MEM-ENV-1-S1011",
+          "raw_cell_id": "RAW-ENV-1-S1011",
+          "learner_c_total_bytes": 2924,
+          "mem_c_total_bytes": 47217,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -44293,
+          "c_total_ratio_vs_mem": 0.061926848380879765,
+          "compression_ratio_mem_over_learner": 16.14808481532148,
+          "utility_delta_vs_mem": 0.5340909090909092,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2924,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.17045454545454541,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 42,
+          "learner_cell_id": "L2-ENV-2-S42",
+          "mem_cell_id": "MEM-ENV-2-S42",
+          "raw_cell_id": "RAW-ENV-2-S42",
+          "learner_c_total_bytes": 3189,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76746,
+          "c_total_ratio_vs_mem": 0.03989491461812723,
+          "compression_ratio_mem_over_learner": 25.06585136406397,
+          "utility_delta_vs_mem": -0.057499999999999996,
+          "utility_noninferior_vs_mem": false,
+          "meets_h1_vs_mem": false,
+          "c_total_delta_vs_raw": 3189,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.8075,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 123,
+          "learner_cell_id": "L2-ENV-2-S123",
+          "mem_cell_id": "MEM-ENV-2-S123",
+          "raw_cell_id": "RAW-ENV-2-S123",
+          "learner_c_total_bytes": 3189,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76746,
+          "c_total_ratio_vs_mem": 0.03989491461812723,
+          "compression_ratio_mem_over_learner": 25.06585136406397,
+          "utility_delta_vs_mem": 0.07374999999999998,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3189,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.67625,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 456,
+          "learner_cell_id": "L2-ENV-2-S456",
+          "mem_cell_id": "MEM-ENV-2-S456",
+          "raw_cell_id": "RAW-ENV-2-S456",
+          "learner_c_total_bytes": 3189,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76746,
+          "c_total_ratio_vs_mem": 0.03989491461812723,
+          "compression_ratio_mem_over_learner": 25.06585136406397,
+          "utility_delta_vs_mem": 0.25125,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3189,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.49875,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 789,
+          "learner_cell_id": "L2-ENV-2-S789",
+          "mem_cell_id": "MEM-ENV-2-S789",
+          "raw_cell_id": "RAW-ENV-2-S789",
+          "learner_c_total_bytes": 3189,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76746,
+          "c_total_ratio_vs_mem": 0.03989491461812723,
+          "compression_ratio_mem_over_learner": 25.06585136406397,
+          "utility_delta_vs_mem": 0.11875000000000002,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3189,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.63125,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 1011,
+          "learner_cell_id": "L2-ENV-2-S1011",
+          "mem_cell_id": "MEM-ENV-2-S1011",
+          "raw_cell_id": "RAW-ENV-2-S1011",
+          "learner_c_total_bytes": 3189,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76746,
+          "c_total_ratio_vs_mem": 0.03989491461812723,
+          "compression_ratio_mem_over_learner": 25.06585136406397,
+          "utility_delta_vs_mem": 0.19624999999999998,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3189,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.55375,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 42,
+          "learner_cell_id": "L2-ENV-3-S42",
+          "mem_cell_id": "MEM-ENV-3-S42",
+          "raw_cell_id": "RAW-ENV-3-S42",
+          "learner_c_total_bytes": 2235,
+          "mem_c_total_bytes": 35793,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -33558,
+          "c_total_ratio_vs_mem": 0.0624423770010896,
+          "compression_ratio_mem_over_learner": 16.01476510067114,
+          "utility_delta_vs_mem": 0.41666666666666663,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2235,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.18333333333333335,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 123,
+          "learner_cell_id": "L2-ENV-3-S123",
+          "mem_cell_id": "MEM-ENV-3-S123",
+          "raw_cell_id": "RAW-ENV-3-S123",
+          "learner_c_total_bytes": 2235,
+          "mem_c_total_bytes": 40193,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37958,
+          "c_total_ratio_vs_mem": 0.055606697683676265,
+          "compression_ratio_mem_over_learner": 17.9834451901566,
+          "utility_delta_vs_mem": 0.26,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2235,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.06666666666666665,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 456,
+          "learner_cell_id": "L2-ENV-3-S456",
+          "mem_cell_id": "MEM-ENV-3-S456",
+          "raw_cell_id": "RAW-ENV-3-S456",
+          "learner_c_total_bytes": 2235,
+          "mem_c_total_bytes": 38543,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36308,
+          "c_total_ratio_vs_mem": 0.05798718314609657,
+          "compression_ratio_mem_over_learner": 17.245190156599552,
+          "utility_delta_vs_mem": 0.36666666666666664,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2235,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.12,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 789,
+          "learner_cell_id": "L2-ENV-3-S789",
+          "mem_cell_id": "MEM-ENV-3-S789",
+          "raw_cell_id": "RAW-ENV-3-S789",
+          "learner_c_total_bytes": 2235,
+          "mem_c_total_bytes": 39643,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37408,
+          "c_total_ratio_vs_mem": 0.056378175213783015,
+          "compression_ratio_mem_over_learner": 17.737360178970917,
+          "utility_delta_vs_mem": 0.24117647058823533,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2235,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.1941176470588235,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 1011,
+          "learner_cell_id": "L2-ENV-3-S1011",
+          "mem_cell_id": "MEM-ENV-3-S1011",
+          "raw_cell_id": "RAW-ENV-3-S1011",
+          "learner_c_total_bytes": 2235,
+          "mem_c_total_bytes": 39093,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36858,
+          "c_total_ratio_vs_mem": 0.05717136060164224,
+          "compression_ratio_mem_over_learner": 17.491275167785236,
+          "utility_delta_vs_mem": 0.09999999999999998,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2235,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.37,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 42,
+          "learner_cell_id": "L2-ENV-4-S42",
+          "mem_cell_id": "MEM-ENV-4-S42",
+          "raw_cell_id": "RAW-ENV-4-S42",
+          "learner_c_total_bytes": 2765,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77087,
+          "c_total_ratio_vs_mem": 0.03462655913439864,
+          "compression_ratio_mem_over_learner": 28.879566003616638,
+          "utility_delta_vs_mem": 0.5166666666666666,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2765,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.06666666666666665,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 123,
+          "learner_cell_id": "L2-ENV-4-S123",
+          "mem_cell_id": "MEM-ENV-4-S123",
+          "raw_cell_id": "RAW-ENV-4-S123",
+          "learner_c_total_bytes": 2765,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77087,
+          "c_total_ratio_vs_mem": 0.03462655913439864,
+          "compression_ratio_mem_over_learner": 28.879566003616638,
+          "utility_delta_vs_mem": 0.5166666666666666,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2765,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.09999999999999998,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 456,
+          "learner_cell_id": "L2-ENV-4-S456",
+          "mem_cell_id": "MEM-ENV-4-S456",
+          "raw_cell_id": "RAW-ENV-4-S456",
+          "learner_c_total_bytes": 2765,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77087,
+          "c_total_ratio_vs_mem": 0.03462655913439864,
+          "compression_ratio_mem_over_learner": 28.879566003616638,
+          "utility_delta_vs_mem": 0.6388888888888888,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2765,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.07777777777777772,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 789,
+          "learner_cell_id": "L2-ENV-4-S789",
+          "mem_cell_id": "MEM-ENV-4-S789",
+          "raw_cell_id": "RAW-ENV-4-S789",
+          "learner_c_total_bytes": 2765,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77087,
+          "c_total_ratio_vs_mem": 0.03462655913439864,
+          "compression_ratio_mem_over_learner": 28.879566003616638,
+          "utility_delta_vs_mem": 0.6333333333333333,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2765,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.03888888888888886,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 1011,
+          "learner_cell_id": "L2-ENV-4-S1011",
+          "mem_cell_id": "MEM-ENV-4-S1011",
+          "raw_cell_id": "RAW-ENV-4-S1011",
+          "learner_c_total_bytes": 2765,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77087,
+          "c_total_ratio_vs_mem": 0.03462655913439864,
+          "compression_ratio_mem_over_learner": 28.879566003616638,
+          "utility_delta_vs_mem": 0.7111111111111111,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2765,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.03888888888888886,
+          "utility_noninferior_vs_raw": true
+        }
+      ],
+      "failed_or_inapplicable_cells": []
+    },
+    {
+      "condition": "L3",
+      "vs_mem": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": 0.316653958347371,
+          "median": 0.2852941176470588,
+          "min": 0.010000000000000009,
+          "max": 0.7166666666666666
+        },
+        "utility_noninferior_count": 20,
+        "utility_noninferior_rate": 1.0,
+        "c_total_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "combined_h1_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0,
+          "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+        },
+        "c_total_delta": {
+          "mean": -58396.8,
+          "median": -60527.5,
+          "min": -77095.0,
+          "max": -33566.0
+        },
+        "c_total_ratio": {
+          "mean": 0.04878158935176267,
+          "median": 0.047601245675983554,
+          "min": 0.034526373791514305,
+          "max": 0.06457470602564387
+        },
+        "compression_ratio_mem_over_learner": {
+          "mean": 21.8255204744328,
+          "median": 21.588468492834714,
+          "min": 15.48593964334705,
+          "max": 28.96336597751179
+        },
+        "h1_success_count": 20,
+        "h1_success_rate": 1.0
+      },
+      "vs_raw": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 0,
+          "losses": 19,
+          "ties": 1
+        },
+        "utility_delta": {
+          "mean": -0.30986934115258097,
+          "median": -0.24166666666666664,
+          "min": -0.74,
+          "max": 0.0
+        },
+        "utility_noninferior_count": 1,
+        "utility_noninferior_rate": 0.05,
+        "c_total_delta": {
+          "mean": 2770.25,
+          "median": 2836.5,
+          "min": 2227.0,
+          "max": 3181.0
+        },
+        "c_total_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW C_total=0 causes division by zero"
+        },
+        "compression_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW retained-state baseline is zero; compression ratio is not meaningful"
+        }
+      },
+      "per_environment": {
+        "ENV-1": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.3151893628012488,
+              "median": 0.31,
+              "min": 0.10309278350515466,
+              "max": 0.49999999999999994
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -43312.2,
+              "median": -43580.0,
+              "min": -44301.0,
+              "max": -42241.0
+            },
+            "c_total_ratio": {
+              "mean": 0.06309530132463878,
+              "median": 0.0627150722642808,
+              "min": 0.061757417879153696,
+              "max": 0.06457470602564387
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 15.853292181069957,
+              "median": 15.945130315500686,
+              "min": 15.48593964334705,
+              "max": 16.19238683127572
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.34051167833581414,
+              "median": -0.36,
+              "min": -0.5154639175257731,
+              "max": -0.20454545454545459
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-2": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.12025000000000001,
+              "median": 0.13624999999999998,
+              "min": 0.010000000000000009,
+              "max": 0.18625000000000003
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -76754.0,
+              "median": -76754.0,
+              "min": -76754.0,
+              "max": -76754.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03979483330205792,
+              "median": 0.03979483330205792,
+              "min": 0.03979483330205792,
+              "max": 0.03979483330205792
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 25.128890286073563,
+              "median": 25.128890286073563,
+              "min": 25.128890286073563,
+              "max": 25.128890286073563
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.62975,
+              "median": -0.61375,
+              "min": -0.74,
+              "max": -0.56375
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-3": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.25784313725490204,
+              "median": 0.26000000000000006,
+              "min": 0.17000000000000004,
+              "max": 0.3666666666666667
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -36426.0,
+              "median": -36866.0,
+              "min": -37966.0,
+              "max": -33566.0
+            },
+            "c_total_ratio": {
+              "mean": 0.05770984898883961,
+              "median": 0.056966720384723606,
+              "min": 0.055407658049909186,
+              "max": 0.06221886961137653
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 17.356533453075887,
+              "median": 17.55410866636731,
+              "min": 16.072294566681634,
+              "max": 18.04804669959587
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.20588235294117646,
+              "median": -0.22666666666666657,
+              "min": -0.29999999999999993,
+              "max": -0.12941176470588234
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-4": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.5733333333333333,
+              "median": 0.5333333333333334,
+              "min": 0.5166666666666666,
+              "max": 0.7166666666666666
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -77095.0,
+              "median": -77095.0,
+              "min": -77095.0,
+              "max": -77095.0
+            },
+            "c_total_ratio": {
+              "mean": 0.034526373791514305,
+              "median": 0.034526373791514305,
+              "min": 0.034526373791514305,
+              "max": 0.034526373791514305
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 28.963365977511792,
+              "median": 28.96336597751179,
+              "min": 28.96336597751179,
+              "max": 28.96336597751179
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 4,
+              "ties": 1
+            },
+            "utility_delta": {
+              "mean": -0.06333333333333332,
+              "median": -0.061111111111111116,
+              "min": -0.1444444444444445,
+              "max": 0.0
+            },
+            "utility_noninferior_count": 1,
+            "utility_noninferior_rate": 0.2
+          }
+        }
+      },
+      "pairs": [
+        {
+          "environment": "ENV-1",
+          "seed": 42,
+          "learner_cell_id": "L3-ENV-1-S42",
+          "mem_cell_id": "MEM-ENV-1-S42",
+          "raw_cell_id": "RAW-ENV-1-S42",
+          "learner_c_total_bytes": 2916,
+          "mem_c_total_bytes": 45157,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42241,
+          "c_total_ratio_vs_mem": 0.06457470602564387,
+          "compression_ratio_mem_over_learner": 15.48593964334705,
+          "utility_delta_vs_mem": 0.10309278350515466,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2916,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.5154639175257731,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 123,
+          "learner_cell_id": "L3-ENV-1-S123",
+          "mem_cell_id": "MEM-ENV-1-S123",
+          "raw_cell_id": "RAW-ENV-1-S123",
+          "learner_c_total_bytes": 2916,
+          "mem_c_total_bytes": 45569,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42653,
+          "c_total_ratio_vs_mem": 0.0639908709868551,
+          "compression_ratio_mem_over_learner": 15.627229080932784,
+          "utility_delta_vs_mem": 0.39814814814814814,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2916,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.25,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 456,
+          "learner_cell_id": "L3-ENV-1-S456",
+          "mem_cell_id": "MEM-ENV-1-S456",
+          "raw_cell_id": "RAW-ENV-1-S456",
+          "learner_c_total_bytes": 2916,
+          "mem_c_total_bytes": 46702,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43786,
+          "c_total_ratio_vs_mem": 0.0624384394672605,
+          "compression_ratio_mem_over_learner": 16.015775034293554,
+          "utility_delta_vs_mem": 0.31,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2916,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.36,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 789,
+          "learner_cell_id": "L3-ENV-1-S789",
+          "mem_cell_id": "MEM-ENV-1-S789",
+          "raw_cell_id": "RAW-ENV-1-S789",
+          "learner_c_total_bytes": 2916,
+          "mem_c_total_bytes": 46496,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43580,
+          "c_total_ratio_vs_mem": 0.0627150722642808,
+          "compression_ratio_mem_over_learner": 15.945130315500686,
+          "utility_delta_vs_mem": 0.2647058823529412,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2916,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.37254901960784315,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 1011,
+          "learner_cell_id": "L3-ENV-1-S1011",
+          "mem_cell_id": "MEM-ENV-1-S1011",
+          "raw_cell_id": "RAW-ENV-1-S1011",
+          "learner_c_total_bytes": 2916,
+          "mem_c_total_bytes": 47217,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -44301,
+          "c_total_ratio_vs_mem": 0.061757417879153696,
+          "compression_ratio_mem_over_learner": 16.19238683127572,
+          "utility_delta_vs_mem": 0.49999999999999994,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2916,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.20454545454545459,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 42,
+          "learner_cell_id": "L3-ENV-2-S42",
+          "mem_cell_id": "MEM-ENV-2-S42",
+          "raw_cell_id": "RAW-ENV-2-S42",
+          "learner_c_total_bytes": 3181,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76754,
+          "c_total_ratio_vs_mem": 0.03979483330205792,
+          "compression_ratio_mem_over_learner": 25.128890286073563,
+          "utility_delta_vs_mem": 0.18625000000000003,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3181,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.56375,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 123,
+          "learner_cell_id": "L3-ENV-2-S123",
+          "mem_cell_id": "MEM-ENV-2-S123",
+          "raw_cell_id": "RAW-ENV-2-S123",
+          "learner_c_total_bytes": 3181,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76754,
+          "c_total_ratio_vs_mem": 0.03979483330205792,
+          "compression_ratio_mem_over_learner": 25.128890286073563,
+          "utility_delta_vs_mem": 0.15125,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3181,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.59875,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 456,
+          "learner_cell_id": "L3-ENV-2-S456",
+          "mem_cell_id": "MEM-ENV-2-S456",
+          "raw_cell_id": "RAW-ENV-2-S456",
+          "learner_c_total_bytes": 3181,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76754,
+          "c_total_ratio_vs_mem": 0.03979483330205792,
+          "compression_ratio_mem_over_learner": 25.128890286073563,
+          "utility_delta_vs_mem": 0.1175,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3181,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.6325000000000001,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 789,
+          "learner_cell_id": "L3-ENV-2-S789",
+          "mem_cell_id": "MEM-ENV-2-S789",
+          "raw_cell_id": "RAW-ENV-2-S789",
+          "learner_c_total_bytes": 3181,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76754,
+          "c_total_ratio_vs_mem": 0.03979483330205792,
+          "compression_ratio_mem_over_learner": 25.128890286073563,
+          "utility_delta_vs_mem": 0.010000000000000009,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3181,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.74,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 1011,
+          "learner_cell_id": "L3-ENV-2-S1011",
+          "mem_cell_id": "MEM-ENV-2-S1011",
+          "raw_cell_id": "RAW-ENV-2-S1011",
+          "learner_c_total_bytes": 3181,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76754,
+          "c_total_ratio_vs_mem": 0.03979483330205792,
+          "compression_ratio_mem_over_learner": 25.128890286073563,
+          "utility_delta_vs_mem": 0.13624999999999998,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3181,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.61375,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 42,
+          "learner_cell_id": "L3-ENV-3-S42",
+          "mem_cell_id": "MEM-ENV-3-S42",
+          "raw_cell_id": "RAW-ENV-3-S42",
+          "learner_c_total_bytes": 2227,
+          "mem_c_total_bytes": 35793,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -33566,
+          "c_total_ratio_vs_mem": 0.06221886961137653,
+          "compression_ratio_mem_over_learner": 16.072294566681634,
+          "utility_delta_vs_mem": 0.3666666666666667,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2227,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.23333333333333328,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 123,
+          "learner_cell_id": "L3-ENV-3-S123",
+          "mem_cell_id": "MEM-ENV-3-S123",
+          "raw_cell_id": "RAW-ENV-3-S123",
+          "learner_c_total_bytes": 2227,
+          "mem_c_total_bytes": 40193,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37966,
+          "c_total_ratio_vs_mem": 0.055407658049909186,
+          "compression_ratio_mem_over_learner": 18.04804669959587,
+          "utility_delta_vs_mem": 0.18666666666666665,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2227,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.14,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 456,
+          "learner_cell_id": "L3-ENV-3-S456",
+          "mem_cell_id": "MEM-ENV-3-S456",
+          "raw_cell_id": "RAW-ENV-3-S456",
+          "learner_c_total_bytes": 2227,
+          "mem_c_total_bytes": 38543,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36316,
+          "c_total_ratio_vs_mem": 0.057779622758996445,
+          "compression_ratio_mem_over_learner": 17.30713964975303,
+          "utility_delta_vs_mem": 0.26000000000000006,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2227,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.22666666666666657,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 789,
+          "learner_cell_id": "L3-ENV-3-S789",
+          "mem_cell_id": "MEM-ENV-3-S789",
+          "raw_cell_id": "RAW-ENV-3-S789",
+          "learner_c_total_bytes": 2227,
+          "mem_c_total_bytes": 39643,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37416,
+          "c_total_ratio_vs_mem": 0.05617637413919229,
+          "compression_ratio_mem_over_learner": 17.80107768298159,
+          "utility_delta_vs_mem": 0.3058823529411765,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2227,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.12941176470588234,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 1011,
+          "learner_cell_id": "L3-ENV-3-S1011",
+          "mem_cell_id": "MEM-ENV-3-S1011",
+          "raw_cell_id": "RAW-ENV-3-S1011",
+          "learner_c_total_bytes": 2227,
+          "mem_c_total_bytes": 39093,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36866,
+          "c_total_ratio_vs_mem": 0.056966720384723606,
+          "compression_ratio_mem_over_learner": 17.55410866636731,
+          "utility_delta_vs_mem": 0.17000000000000004,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2227,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.29999999999999993,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 42,
+          "learner_cell_id": "L3-ENV-4-S42",
+          "mem_cell_id": "MEM-ENV-4-S42",
+          "raw_cell_id": "RAW-ENV-4-S42",
+          "learner_c_total_bytes": 2757,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77095,
+          "c_total_ratio_vs_mem": 0.034526373791514305,
+          "compression_ratio_mem_over_learner": 28.96336597751179,
+          "utility_delta_vs_mem": 0.5166666666666666,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2757,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.06666666666666665,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 123,
+          "learner_cell_id": "L3-ENV-4-S123",
+          "mem_cell_id": "MEM-ENV-4-S123",
+          "raw_cell_id": "RAW-ENV-4-S123",
+          "learner_c_total_bytes": 2757,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77095,
+          "c_total_ratio_vs_mem": 0.034526373791514305,
+          "compression_ratio_mem_over_learner": 28.96336597751179,
+          "utility_delta_vs_mem": 0.5722222222222222,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2757,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.0444444444444444,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 456,
+          "learner_cell_id": "L3-ENV-4-S456",
+          "mem_cell_id": "MEM-ENV-4-S456",
+          "raw_cell_id": "RAW-ENV-4-S456",
+          "learner_c_total_bytes": 2757,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77095,
+          "c_total_ratio_vs_mem": 0.034526373791514305,
+          "compression_ratio_mem_over_learner": 28.96336597751179,
+          "utility_delta_vs_mem": 0.7166666666666666,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2757,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.0,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 789,
+          "learner_cell_id": "L3-ENV-4-S789",
+          "mem_cell_id": "MEM-ENV-4-S789",
+          "raw_cell_id": "RAW-ENV-4-S789",
+          "learner_c_total_bytes": 2757,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77095,
+          "c_total_ratio_vs_mem": 0.034526373791514305,
+          "compression_ratio_mem_over_learner": 28.96336597751179,
+          "utility_delta_vs_mem": 0.5333333333333334,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2757,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.061111111111111116,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 1011,
+          "learner_cell_id": "L3-ENV-4-S1011",
+          "mem_cell_id": "MEM-ENV-4-S1011",
+          "raw_cell_id": "RAW-ENV-4-S1011",
+          "learner_c_total_bytes": 2757,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77095,
+          "c_total_ratio_vs_mem": 0.034526373791514305,
+          "compression_ratio_mem_over_learner": 28.96336597751179,
+          "utility_delta_vs_mem": 0.5277777777777778,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2757,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.1444444444444445,
+          "utility_noninferior_vs_raw": false
+        }
+      ],
+      "failed_or_inapplicable_cells": []
+    },
+    {
+      "condition": "L4",
+      "vs_mem": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 19,
+          "losses": 1,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": 0.3171168434649711,
+          "median": 0.3088235294117647,
+          "min": -0.07625000000000001,
+          "max": 0.7222222222222221
+        },
+        "utility_noninferior_count": 19,
+        "utility_noninferior_rate": 0.95,
+        "c_total_wins_losses_ties": {
+          "wins": 20,
+          "losses": 0,
+          "ties": 0
+        },
+        "combined_h1_wins_losses_ties": {
+          "wins": 19,
+          "losses": 1,
+          "ties": 0,
+          "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+        },
+        "c_total_delta": {
+          "mean": -58384.8,
+          "median": -60515.5,
+          "min": -77083.0,
+          "max": -33554.0
+        },
+        "c_total_ratio": {
+          "mean": 0.04899934336297209,
+          "median": 0.04782558638836084,
+          "min": 0.03467665180584081,
+          "max": 0.0648404455566136
+        },
+        "compression_ratio_mem_over_learner": {
+          "mean": 21.731032031615506,
+          "median": 21.49288395632082,
+          "min": 15.422472677595628,
+          "max": 28.837847598410978
+        },
+        "h1_success_count": 19,
+        "h1_success_rate": 0.95
+      },
+      "vs_raw": {
+        "pair_count": 20,
+        "utility_wins_losses_ties": {
+          "wins": 1,
+          "losses": 19,
+          "ties": 0
+        },
+        "utility_delta": {
+          "mean": -0.30940645603498085,
+          "median": -0.20833333333333331,
+          "min": -0.82625,
+          "max": 0.005555555555555536
+        },
+        "utility_noninferior_count": 1,
+        "utility_noninferior_rate": 0.05,
+        "c_total_delta": {
+          "mean": 2782.25,
+          "median": 2848.5,
+          "min": 2239.0,
+          "max": 3193.0
+        },
+        "c_total_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW C_total=0 causes division by zero"
+        },
+        "compression_ratio": {
+          "mean": null,
+          "median": null,
+          "min": null,
+          "max": null,
+          "reason": "RAW retained-state baseline is zero; compression ratio is not meaningful"
+        }
+      },
+      "per_environment": {
+        "ENV-1": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.33167815817360996,
+              "median": 0.33,
+              "min": 0.134020618556701,
+              "max": 0.5113636363636362
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -43300.2,
+              "median": -43568.0,
+              "min": -44289.0,
+              "max": -42229.0
+            },
+            "c_total_ratio": {
+              "mean": 0.0633549527704192,
+              "median": 0.06297315898141775,
+              "min": 0.0620115636317428,
+              "max": 0.0648404455566136
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 15.788319672131147,
+              "median": 15.879781420765028,
+              "min": 15.422472677595628,
+              "max": 16.126024590163933
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.3240228829634531,
+              "median": -0.33999999999999997,
+              "min": -0.48453608247422686,
+              "max": -0.19318181818181823
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-2": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 4,
+              "losses": 1,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.07675000000000001,
+              "median": 0.125,
+              "min": -0.07625000000000001,
+              "max": 0.15250000000000002
+            },
+            "utility_noninferior_count": 4,
+            "utility_noninferior_rate": 0.8,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 4,
+              "losses": 1,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -76742.0,
+              "median": -76742.0,
+              "min": -76742.0,
+              "max": -76742.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03994495527616188,
+              "median": 0.03994495527616188,
+              "min": 0.03994495527616188,
+              "max": 0.03994495527616188
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 25.034450360162857,
+              "median": 25.034450360162857,
+              "min": 25.034450360162857,
+              "max": 25.034450360162857
+            },
+            "h1_success_count": 4,
+            "h1_success_rate": 0.8
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.67325,
+              "median": -0.625,
+              "min": -0.82625,
+              "max": -0.5974999999999999
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-3": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.2900392156862745,
+              "median": 0.27999999999999997,
+              "min": 0.18666666666666665,
+              "max": 0.4
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -36414.0,
+              "median": -36854.0,
+              "min": -37954.0,
+              "max": -33554.0
+            },
+            "c_total_ratio": {
+              "mean": 0.0580208135994665,
+              "median": 0.057273680710101554,
+              "min": 0.0557062175005598,
+              "max": 0.06255413069594613
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 17.263510495757032,
+              "median": 17.460026797677536,
+              "min": 15.986154533273783,
+              "max": 17.951317552478784
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 0,
+              "losses": 5,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.17368627450980392,
+              "median": -0.19999999999999996,
+              "min": -0.20999999999999996,
+              "max": -0.11176470588235299
+            },
+            "utility_noninferior_count": 0,
+            "utility_noninferior_rate": 0.0
+          }
+        },
+        "ENV-4": {
+          "vs_mem": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": 0.57,
+              "median": 0.55,
+              "min": 0.4888888888888889,
+              "max": 0.7222222222222221
+            },
+            "utility_noninferior_count": 5,
+            "utility_noninferior_rate": 1.0,
+            "c_total_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0
+            },
+            "combined_h1_wins_losses_ties": {
+              "wins": 5,
+              "losses": 0,
+              "ties": 0,
+              "semantics": "win=paired H1 criterion satisfied; loss=criterion not satisfied"
+            },
+            "c_total_delta": {
+              "mean": -77083.0,
+              "median": -77083.0,
+              "min": -77083.0,
+              "max": -77083.0
+            },
+            "c_total_ratio": {
+              "mean": 0.03467665180584081,
+              "median": 0.03467665180584081,
+              "min": 0.03467665180584081,
+              "max": 0.03467665180584081
+            },
+            "compression_ratio_mem_over_learner": {
+              "mean": 28.83784759841098,
+              "median": 28.837847598410978,
+              "min": 28.837847598410978,
+              "max": 28.837847598410978
+            },
+            "h1_success_count": 5,
+            "h1_success_rate": 1.0
+          },
+          "vs_raw": {
+            "pair_count": 5,
+            "utility_wins_losses_ties": {
+              "wins": 1,
+              "losses": 4,
+              "ties": 0
+            },
+            "utility_delta": {
+              "mean": -0.06666666666666668,
+              "median": -0.06666666666666665,
+              "min": -0.1166666666666667,
+              "max": 0.005555555555555536
+            },
+            "utility_noninferior_count": 1,
+            "utility_noninferior_rate": 0.2
+          }
+        }
+      },
+      "pairs": [
+        {
+          "environment": "ENV-1",
+          "seed": 42,
+          "learner_cell_id": "L4-ENV-1-S42",
+          "mem_cell_id": "MEM-ENV-1-S42",
+          "raw_cell_id": "RAW-ENV-1-S42",
+          "learner_c_total_bytes": 2928,
+          "mem_c_total_bytes": 45157,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42229,
+          "c_total_ratio_vs_mem": 0.0648404455566136,
+          "compression_ratio_mem_over_learner": 15.422472677595628,
+          "utility_delta_vs_mem": 0.134020618556701,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2928,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.48453608247422686,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 123,
+          "learner_cell_id": "L4-ENV-1-S123",
+          "mem_cell_id": "MEM-ENV-1-S123",
+          "raw_cell_id": "RAW-ENV-1-S123",
+          "learner_c_total_bytes": 2928,
+          "mem_c_total_bytes": 45569,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -42641,
+          "c_total_ratio_vs_mem": 0.06425420790449647,
+          "compression_ratio_mem_over_learner": 15.56318306010929,
+          "utility_delta_vs_mem": 0.38888888888888884,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2928,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.2592592592592593,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 456,
+          "learner_cell_id": "L4-ENV-1-S456",
+          "mem_cell_id": "MEM-ENV-1-S456",
+          "raw_cell_id": "RAW-ENV-1-S456",
+          "learner_c_total_bytes": 2928,
+          "mem_c_total_bytes": 46702,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43774,
+          "c_total_ratio_vs_mem": 0.06269538777782536,
+          "compression_ratio_mem_over_learner": 15.950136612021858,
+          "utility_delta_vs_mem": 0.33,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2928,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.33999999999999997,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 789,
+          "learner_cell_id": "L4-ENV-1-S789",
+          "mem_cell_id": "MEM-ENV-1-S789",
+          "raw_cell_id": "RAW-ENV-1-S789",
+          "learner_c_total_bytes": 2928,
+          "mem_c_total_bytes": 46496,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -43568,
+          "c_total_ratio_vs_mem": 0.06297315898141775,
+          "compression_ratio_mem_over_learner": 15.879781420765028,
+          "utility_delta_vs_mem": 0.29411764705882354,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2928,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.3431372549019608,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-1",
+          "seed": 1011,
+          "learner_cell_id": "L4-ENV-1-S1011",
+          "mem_cell_id": "MEM-ENV-1-S1011",
+          "raw_cell_id": "RAW-ENV-1-S1011",
+          "learner_c_total_bytes": 2928,
+          "mem_c_total_bytes": 47217,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -44289,
+          "c_total_ratio_vs_mem": 0.0620115636317428,
+          "compression_ratio_mem_over_learner": 16.126024590163933,
+          "utility_delta_vs_mem": 0.5113636363636362,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2928,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.19318181818181823,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 42,
+          "learner_cell_id": "L4-ENV-2-S42",
+          "mem_cell_id": "MEM-ENV-2-S42",
+          "raw_cell_id": "RAW-ENV-2-S42",
+          "learner_c_total_bytes": 3193,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76742,
+          "c_total_ratio_vs_mem": 0.03994495527616188,
+          "compression_ratio_mem_over_learner": 25.034450360162857,
+          "utility_delta_vs_mem": 0.15250000000000002,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3193,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.5974999999999999,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 123,
+          "learner_cell_id": "L4-ENV-2-S123",
+          "mem_cell_id": "MEM-ENV-2-S123",
+          "raw_cell_id": "RAW-ENV-2-S123",
+          "learner_c_total_bytes": 3193,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76742,
+          "c_total_ratio_vs_mem": 0.03994495527616188,
+          "compression_ratio_mem_over_learner": 25.034450360162857,
+          "utility_delta_vs_mem": 0.03749999999999998,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3193,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.7125,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 456,
+          "learner_cell_id": "L4-ENV-2-S456",
+          "mem_cell_id": "MEM-ENV-2-S456",
+          "raw_cell_id": "RAW-ENV-2-S456",
+          "learner_c_total_bytes": 3193,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76742,
+          "c_total_ratio_vs_mem": 0.03994495527616188,
+          "compression_ratio_mem_over_learner": 25.034450360162857,
+          "utility_delta_vs_mem": 0.125,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3193,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.625,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 789,
+          "learner_cell_id": "L4-ENV-2-S789",
+          "mem_cell_id": "MEM-ENV-2-S789",
+          "raw_cell_id": "RAW-ENV-2-S789",
+          "learner_c_total_bytes": 3193,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76742,
+          "c_total_ratio_vs_mem": 0.03994495527616188,
+          "compression_ratio_mem_over_learner": 25.034450360162857,
+          "utility_delta_vs_mem": -0.07625000000000001,
+          "utility_noninferior_vs_mem": false,
+          "meets_h1_vs_mem": false,
+          "c_total_delta_vs_raw": 3193,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.82625,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-2",
+          "seed": 1011,
+          "learner_cell_id": "L4-ENV-2-S1011",
+          "mem_cell_id": "MEM-ENV-2-S1011",
+          "raw_cell_id": "RAW-ENV-2-S1011",
+          "learner_c_total_bytes": 3193,
+          "mem_c_total_bytes": 79935,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -76742,
+          "c_total_ratio_vs_mem": 0.03994495527616188,
+          "compression_ratio_mem_over_learner": 25.034450360162857,
+          "utility_delta_vs_mem": 0.14500000000000002,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 3193,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.605,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 42,
+          "learner_cell_id": "L4-ENV-3-S42",
+          "mem_cell_id": "MEM-ENV-3-S42",
+          "raw_cell_id": "RAW-ENV-3-S42",
+          "learner_c_total_bytes": 2239,
+          "mem_c_total_bytes": 35793,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -33554,
+          "c_total_ratio_vs_mem": 0.06255413069594613,
+          "compression_ratio_mem_over_learner": 15.986154533273783,
+          "utility_delta_vs_mem": 0.4,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2239,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.19999999999999996,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 123,
+          "learner_cell_id": "L4-ENV-3-S123",
+          "mem_cell_id": "MEM-ENV-3-S123",
+          "raw_cell_id": "RAW-ENV-3-S123",
+          "learner_c_total_bytes": 2239,
+          "mem_c_total_bytes": 40193,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37954,
+          "c_total_ratio_vs_mem": 0.0557062175005598,
+          "compression_ratio_mem_over_learner": 17.951317552478784,
+          "utility_delta_vs_mem": 0.18666666666666665,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2239,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.14,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 456,
+          "learner_cell_id": "L4-ENV-3-S456",
+          "mem_cell_id": "MEM-ENV-3-S456",
+          "raw_cell_id": "RAW-ENV-3-S456",
+          "learner_c_total_bytes": 2239,
+          "mem_c_total_bytes": 38543,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36304,
+          "c_total_ratio_vs_mem": 0.058090963339646626,
+          "compression_ratio_mem_over_learner": 17.214381420276908,
+          "utility_delta_vs_mem": 0.27999999999999997,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2239,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.20666666666666667,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 789,
+          "learner_cell_id": "L4-ENV-3-S789",
+          "mem_cell_id": "MEM-ENV-3-S789",
+          "raw_cell_id": "RAW-ENV-3-S789",
+          "learner_c_total_bytes": 2239,
+          "mem_c_total_bytes": 39643,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -37404,
+          "c_total_ratio_vs_mem": 0.05647907575107838,
+          "compression_ratio_mem_over_learner": 17.70567217507816,
+          "utility_delta_vs_mem": 0.32352941176470584,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2239,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.11176470588235299,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-3",
+          "seed": 1011,
+          "learner_cell_id": "L4-ENV-3-S1011",
+          "mem_cell_id": "MEM-ENV-3-S1011",
+          "raw_cell_id": "RAW-ENV-3-S1011",
+          "learner_c_total_bytes": 2239,
+          "mem_c_total_bytes": 39093,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -36854,
+          "c_total_ratio_vs_mem": 0.057273680710101554,
+          "compression_ratio_mem_over_learner": 17.460026797677536,
+          "utility_delta_vs_mem": 0.26,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2239,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.20999999999999996,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 42,
+          "learner_cell_id": "L4-ENV-4-S42",
+          "mem_cell_id": "MEM-ENV-4-S42",
+          "raw_cell_id": "RAW-ENV-4-S42",
+          "learner_c_total_bytes": 2769,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77083,
+          "c_total_ratio_vs_mem": 0.03467665180584081,
+          "compression_ratio_mem_over_learner": 28.837847598410978,
+          "utility_delta_vs_mem": 0.4888888888888889,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2769,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.09444444444444444,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 123,
+          "learner_cell_id": "L4-ENV-4-S123",
+          "mem_cell_id": "MEM-ENV-4-S123",
+          "raw_cell_id": "RAW-ENV-4-S123",
+          "learner_c_total_bytes": 2769,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77083,
+          "c_total_ratio_vs_mem": 0.03467665180584081,
+          "compression_ratio_mem_over_learner": 28.837847598410978,
+          "utility_delta_vs_mem": 0.55,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2769,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.06666666666666665,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 456,
+          "learner_cell_id": "L4-ENV-4-S456",
+          "mem_cell_id": "MEM-ENV-4-S456",
+          "raw_cell_id": "RAW-ENV-4-S456",
+          "learner_c_total_bytes": 2769,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77083,
+          "c_total_ratio_vs_mem": 0.03467665180584081,
+          "compression_ratio_mem_over_learner": 28.837847598410978,
+          "utility_delta_vs_mem": 0.7222222222222221,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2769,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": 0.005555555555555536,
+          "utility_noninferior_vs_raw": true
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 789,
+          "learner_cell_id": "L4-ENV-4-S789",
+          "mem_cell_id": "MEM-ENV-4-S789",
+          "raw_cell_id": "RAW-ENV-4-S789",
+          "learner_c_total_bytes": 2769,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77083,
+          "c_total_ratio_vs_mem": 0.03467665180584081,
+          "compression_ratio_mem_over_learner": 28.837847598410978,
+          "utility_delta_vs_mem": 0.5333333333333334,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2769,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.061111111111111116,
+          "utility_noninferior_vs_raw": false
+        },
+        {
+          "environment": "ENV-4",
+          "seed": 1011,
+          "learner_cell_id": "L4-ENV-4-S1011",
+          "mem_cell_id": "MEM-ENV-4-S1011",
+          "raw_cell_id": "RAW-ENV-4-S1011",
+          "learner_c_total_bytes": 2769,
+          "mem_c_total_bytes": 79852,
+          "raw_c_total_bytes": 0,
+          "c_total_delta_vs_mem": -77083,
+          "c_total_ratio_vs_mem": 0.03467665180584081,
+          "compression_ratio_mem_over_learner": 28.837847598410978,
+          "utility_delta_vs_mem": 0.5555555555555556,
+          "utility_noninferior_vs_mem": true,
+          "meets_h1_vs_mem": true,
+          "c_total_delta_vs_raw": 2769,
+          "c_total_ratio_vs_raw": null,
+          "c_total_ratio_vs_raw_reason": "RAW C_total is frozen at 0; learner/RAW ratio divides by zero",
+          "compression_ratio_vs_raw": null,
+          "compression_ratio_vs_raw_reason": "RAW has no retained inference state; storage compression ratio is not meaningful",
+          "utility_delta_vs_raw": -0.1166666666666667,
+          "utility_noninferior_vs_raw": false
+        }
+      ],
+      "failed_or_inapplicable_cells": []
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    {
+      "id": "MEM_ZERO_TEST_HITS",
+      "detail": "MEM exact-row lookup has 0 test hits across all 20 MEM environment/seed cells; test utility uses the frozen global-majority fallback."
+    },
+    {
+      "id": "RAW_ZERO_C_TOTAL",
+      "detail": "RAW C_total=0 because raw input storage and the common downstream task head are excluded by the frozen accounting."
+    },
+    {
+      "id": "MEM_COMPARATOR_SCOPE",
+      "detail": "H1 evidence supports claims only relative to the frozen exact-row MEM comparator under ENV-1..ENV-4 and the five frozen seeds."
+    },
+    {
+      "id": "NO_RAW_SUPERIORITY",
+      "detail": "The evidence does not establish learned-representation superiority to RAW; negative RAW utility deltas are retained."
+    },
+    {
+      "id": "FIDELITY_LABELS",
+      "detail": "L3 remains IRM-style surrogate and L4 remains adapted DANN exactly as frozen in EXP-LRN-001."
+    }
+  ],
+  "corrected_complexity_root": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\correction_v2\\cells",
+  "original_scientific_results_root": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\full"
+}

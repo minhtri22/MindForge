@@ -1,0 +1,56 @@
+{
+  "cell_id": "L3-ENV-3-S1011",
+  "status": "inapplicable",
+  "learner": "L3",
+  "environment": "ENV-3",
+  "seed": 1011,
+  "factual_sample_sha256": "c56735d51cee3c3d19bb83d963034a0d0b313bf37f4221e9e984988926805c73",
+  "task_label_sha256": "4bc475a1911c6efe040878eb3f1a77d5773835f6e5ecb11eb6338cbc37ec8bf7",
+  "nuisance_target": "do(N)",
+  "nuisance_values": [
+    -0.5,
+    0.0,
+    0.5
+  ],
+  "factual_predictive_utility": 0.64,
+  "leak_n": 0.3881552354772132,
+  "nuisance_leakage_detected": true,
+  "avg_nuisance_sensitivity": 0.3881552354772132,
+  "shortcut_learning_score": null,
+  "interventions": [
+    {
+      "index": 0,
+      "target": "do(N)",
+      "value": -0.5,
+      "task_preserving": false,
+      "reason": "environment intervention changed task labels"
+    },
+    {
+      "index": 1,
+      "target": "do(N)",
+      "value": 0.0,
+      "task_preserving": false,
+      "reason": "environment intervention changed task labels"
+    },
+    {
+      "index": 2,
+      "target": "do(N)",
+      "value": 0.5,
+      "task_preserving": false,
+      "reason": "environment intervention changed task labels"
+    }
+  ],
+  "mean_abs_delta_n": null,
+  "mean_do_n_invariance": null,
+  "failure_count": 0,
+  "task_preserving": false,
+  "provenance": {
+    "config_path": "experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L3-ENV-3-S1011.yaml",
+    "config_sha256": "5c441d87338c0d949ca5fb18fc4ad675f79b04813dd80c3a9542a64fa00cdc8b",
+    "effective_config_sha256": "9631b0734abcb495bdf751f22a1e819aa48183dbb43701edbab5a7a921d975ca",
+    "h3_execution_manifest_sha256": "045da7b6b9b1ac0cb0045d72e0166d22f71839c895928ca9d129396ce72c5aad",
+    "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "m3_protocol_sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a",
+    "extractor_config_hash": "89d3a4170d44eb42"
+  }
+}

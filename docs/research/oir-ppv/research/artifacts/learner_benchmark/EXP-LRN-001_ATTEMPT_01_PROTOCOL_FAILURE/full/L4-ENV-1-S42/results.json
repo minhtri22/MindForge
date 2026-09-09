@@ -1,0 +1,427 @@
+{
+  "experiment_id": "L4-ENV-1-S42",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "environment_family": "ENV-1",
+  "shift_assertions": {
+    "type": "ood_holdout",
+    "passed": true,
+    "ood_split": "ood_unseen_style",
+    "train_count": 438,
+    "ood_count": 406,
+    "train_ood_overlap": 0
+  },
+  "invariant_result": {
+    "shape": [
+      97,
+      8
+    ],
+    "metadata": {
+      "method": "DANNSurrogateEncoder",
+      "requested_type": "DANN",
+      "runtime_wrapper": "EncoderWrapper",
+      "fit": {
+        "status": "fitted",
+        "fidelity": "adapted",
+        "method": "DANN adaptation (task head + domain head + gradient reversal)",
+        "domain_source": "frozen context rows",
+        "domain_count": 8,
+        "domain_signal_available": true,
+        "domain_penalty_weight": 0.5,
+        "epochs": 4,
+        "initial_loss": 3.230309009552002,
+        "final_loss": 3.1621460914611816
+      }
+    }
+  },
+  "generation_result": {
+    "shape": [
+      97,
+      12
+    ],
+    "metadata": {
+      "method": "MLPDecoder",
+      "requested_type": "MLPDecoder",
+      "runtime_wrapper": "DecoderWrapper",
+      "fit": {
+        "status": "fitted",
+        "method": "MLP Decoder (numpy gradient descent)",
+        "initial_loss": 1.134497266171075,
+        "final_loss": 0.9737403830184895,
+        "architecture": [
+          12,
+          24,
+          12
+        ],
+        "epochs": 4,
+        "learning_rate": 0.01
+      }
+    }
+  },
+  "evaluation": {
+    "invariant_metrics": {
+      "invariance_score": 0.8366043040290385,
+      "context_sensitivity": 0.3706383980793323,
+      "nuisance_sensitivity": 0.19530821821505973,
+      "predictive_utility": 0.4647368421052632,
+      "effective_rank": 8,
+      "explained_variance": 1.0,
+      "config_hash": "102c125dc80d0b02"
+    },
+    "generation_metrics": {
+      "reconstruction_mse": 0.17775183005990736,
+      "reconstruction_mae": 0.3130408278296642,
+      "invariant_preservation": 0.5081815123558044,
+      "context_response": 0.0,
+      "diversity_score": 0.3210501038617621,
+      "novelty_score": 1.0305108393734168,
+      "distribution_similarity": 0.721330880906057,
+      "config_hash": "102c125dc80d0b02"
+    },
+    "overall_score": 0.5537645942368337,
+    "timestamp": "2026-09-08T21:25:37.798155",
+    "generalization": {
+      "train_environment_score": 0.5707762557077626,
+      "seen_environment_score": 0.5154639175257731,
+      "unseen_environment_score": 0.270935960591133,
+      "generalization_delta": -0.2998402951166296,
+      "generalization_delta_direction": "unseen_minus_train",
+      "task_metrics": {
+        "task_type": "classification",
+        "accuracy": 0.5154639175257731,
+        "auroc": 0.7013728753766705,
+        "auroc_missing_reason": null,
+        "r2": null,
+        "r2_missing_reason": "classification task",
+        "unseen_accuracy": 0.270935960591133,
+        "unseen_auroc": 0.5,
+        "unseen_auroc_missing_reason": null
+      },
+      "ood_split": "ood_unseen_style"
+    }
+  },
+  "causal_validation": {
+    "extractor_type": "EncoderWrapper",
+    "extractor_config_hash": "102c125dc80d0b02",
+    "environment": "Env1IdentityStyleShift",
+    "seed": 42,
+    "nuisance_interventions": [
+      {
+        "intervention_target": "background_noise",
+        "intervention_value": -0.13230397117893647,
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.07286496460437775,
+        "correlation": 0.905335020198441,
+        "invariance_score": 0.9320837505107207,
+        "config_hash": "102c125dc80d0b02",
+        "seed": 42
+      },
+      {
+        "intervention_target": "background_noise",
+        "intervention_value": 0.00442170029001831,
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.04550217092037201,
+        "correlation": 0.9502386535675722,
+        "invariance_score": 0.9564781669651478,
+        "config_hash": "102c125dc80d0b02",
+        "seed": 42
+      },
+      {
+        "intervention_target": "background_noise",
+        "intervention_value": 0.12414274167932847,
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.07081928104162216,
+        "correlation": 0.9236287116843698,
+        "invariance_score": 0.9338643949586584,
+        "config_hash": "102c125dc80d0b02",
+        "seed": 42
+      }
+    ],
+    "context_interventions": [
+      {
+        "intervention_target": "identity",
+        "intervention_value": "id_1",
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.16716687381267548,
+        "correlation": 0.5989552204257099,
+        "invariance_score": 0.8567755155125274,
+        "config_hash": "102c125dc80d0b02",
+        "seed": 42
+      },
+      {
+        "intervention_target": "identity",
+        "intervention_value": "id_2",
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.14414727687835693,
+        "correlation": 0.627413400221928,
+        "invariance_score": 0.8740133549313317,
+        "config_hash": "102c125dc80d0b02",
+        "seed": 42
+      },
+      {
+        "intervention_target": "identity",
+        "intervention_value": "id_3",
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.138834148645401,
+        "correlation": 0.6088970595310278,
+        "invariance_score": 0.8780909855833364,
+        "config_hash": "102c125dc80d0b02",
+        "seed": 42
+      }
+    ],
+    "avg_nuisance_invariance": 0.9408087708115089,
+    "avg_context_invariance": 0.8696266186757319,
+    "overall_invariance": 0.9052176947436203,
+    "failure_cases": [],
+    "timestamp": "2026-09-08T21:25:37.834203",
+    "arrays": {
+      "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L4-ENV-1-S42\\causal_arrays.npz",
+      "sha256": "8dc26edc84394ff8b784b713a25db1aa911003d1655bc03bec6c0ef97fe363e3",
+      "entries": {
+        "nuisance_0_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_0_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_1_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_1_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_2_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_2_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_0_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_0_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_1_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_1_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_2_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_2_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  },
+  "dependency_analysis": {
+    "extractor_type": "extractor",
+    "extractor_config_hash": "102c125dc80d0b02",
+    "environment": "env",
+    "seed": 42,
+    "context_sensitivities": [
+      {
+        "variable_name": "context_0",
+        "variable_type": "context",
+        "linear_sensitivity": 0.4103735927820376,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.22823871204255797,
+        "leakage_score": 0.4103735927820376,
+        "per_dim_sensitivity": {
+          "0": 0.2480095997959341,
+          "1": 0.0953357132052312,
+          "2": 0.13364575774205315,
+          "3": 0.4971977544724478,
+          "4": 0.48140505657075233,
+          "5": 0.2986010509856716,
+          "6": 0.7834570380086138,
+          "7": 0.7453367657478165
+        }
+      },
+      {
+        "variable_name": "context_1",
+        "variable_type": "context",
+        "linear_sensitivity": 0.33090320337662704,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.14618884264085635,
+        "leakage_score": 0.33090320337662704,
+        "per_dim_sensitivity": {
+          "0": 0.12162023195350125,
+          "1": 0.542301100213939,
+          "2": 0.5517647208629073,
+          "3": 0.10884312228691669,
+          "4": 0.09214759565403254,
+          "5": 0.2769113902737382,
+          "6": 0.42962589302500487,
+          "7": 0.5240115830298078
+        }
+      }
+    ],
+    "nuisance_sensitivities": [
+      {
+        "variable_name": "nuisance_0",
+        "variable_type": "nuisance",
+        "linear_sensitivity": 0.14378607285269634,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.043297804300569995,
+        "leakage_score": 0.14378607285269634,
+        "per_dim_sensitivity": {
+          "0": 0.0404403398955477,
+          "1": 0.054237381156017256,
+          "2": 0.5111696967776926,
+          "3": 0.036463838994137306,
+          "4": 0.049240402274791976,
+          "5": 0.21562100030778825,
+          "6": 0.14041984572306562,
+          "7": 0.10269607236032767
+        }
+      },
+      {
+        "variable_name": "nuisance_1",
+        "variable_type": "nuisance",
+        "linear_sensitivity": 0.24683036357742305,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.09665804887590494,
+        "leakage_score": 0.24683036357742305,
+        "per_dim_sensitivity": {
+          "0": 0.2240610483553491,
+          "1": 0.56283384567962,
+          "2": 0.5104715706955636,
+          "3": 0.11657917376934465,
+          "4": 0.2903863608598914,
+          "5": 0.05020653505428414,
+          "6": 0.007486912906914094,
+          "7": 0.21261745678332386
+        }
+      }
+    ],
+    "max_context_sensitivity": 0.4103735927820376,
+    "max_nuisance_sensitivity": 0.24683036357742305,
+    "avg_context_sensitivity": 0.3706383980793323,
+    "avg_nuisance_sensitivity": 0.1953082182150597,
+    "context_leakage_detected": true,
+    "nuisance_leakage_detected": false,
+    "shortcut_learning_score": 0.32860197817973036,
+    "shortcut_metric_status": "valid",
+    "nan_policy": "non-finite component metrics are replaced with 0.0 and reported as finite summaries",
+    "timestamp": "2026-09-08T21:25:37.977323",
+    "config_hash": "102c125dc80d0b02"
+  },
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L4-ENV-1-S42\\generated.npz",
+    "sha256": "7c0c73c552f5b671aefdb4ffa95b0573a04a70b1afe27cedcd7a519f8edcec45",
+    "arrays": {
+      "generated": {
+        "shape": [
+          97,
+          12
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          97,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

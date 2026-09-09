@@ -1,0 +1,58 @@
+# OIR-PPV Experiment Provenance Template
+# Copy this file for each experiment and fill in all fields.
+
+experiment:
+  id: "EXP-XXXX"              # Unique experiment identifier
+  name: "Descriptive name"    # Human-readable name
+  milestone: "M1"             # M1-M5 from PLAN.md
+  date: "YYYY-MM-DD"          # Execution date
+  git_commit: "SHA"           # Full commit SHA at execution time
+
+environment:
+  family: "ENV-1"             # ENV-1, ENV-2, ENV-3, ENV-4
+  variant: "default"          # Specific variant/configuration name
+  seed: 42                    # Random seed for reproducibility
+  config_hash: "SHA256"       # Hash of environment config file
+
+invariant_learner:
+  method: "B0"                # B0-B5 from PLAN.md
+  config_hash: "SHA256"       # Hash of learner config
+  checkpoint: "path"          # Path to model checkpoint (if applicable)
+
+generation:
+  generator_type: "G"         # Generator identifier
+  config_hash: "SHA256"       # Hash of generator config
+  num_samples: 1000           # Number of generated manifestations
+
+intervention:
+  type: "do(A)"               # do(A), do(Z), do(N), or none
+  targets: []                 # Intervention target values
+  num_trials: 100             # Number of intervention trials
+
+counterfactual:
+  enabled: false              # Whether counterfactual evaluation was run
+  query: ""                   # Counterfactual query description
+  num_samples: 0              # Number of counterfactual samples
+
+metrics:
+  generalization:
+    - name: "accuracy"
+      value: 0.0
+      split: "test"
+  causal_stability:
+    - name: "delta_causal"
+      value: 0.0
+  generation_validity:
+    - name: "fid"
+      value: 0.0
+    - name: "invariant_preservation"
+      value: 0.0
+
+artifacts:
+  - path: "artifacts/experiments/EXP-XXXX/"
+    description: "Experiment outputs"
+  - path: "reports/EXP-XXXX.md"
+    description: "Experiment report"
+
+notes: ""
+  # Any additional context, known issues, or deviations from protocol

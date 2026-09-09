@@ -1,0 +1,176 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "66e5da9705048cb2",
+  "environment": "Env3CausalDynamics",
+  "seed": 456,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "do(N)",
+      "intervention_value": -0.5,
+      "I_before_shape": [
+        150,
+        8
+      ],
+      "I_after_shape": [
+        150,
+        8
+      ],
+      "mean_shift": 0.12073774635791779,
+      "correlation": 0.848208297636739,
+      "invariance_score": 0.8922694031228255,
+      "config_hash": "66e5da9705048cb2",
+      "seed": 456
+    },
+    {
+      "intervention_target": "do(N)",
+      "intervention_value": 0.0,
+      "I_before_shape": [
+        150,
+        8
+      ],
+      "I_after_shape": [
+        150,
+        8
+      ],
+      "mean_shift": 0.0507204644382,
+      "correlation": 0.9126921561951313,
+      "invariance_score": 0.9517279179811928,
+      "config_hash": "66e5da9705048cb2",
+      "seed": 456
+    },
+    {
+      "intervention_target": "do(N)",
+      "intervention_value": 0.5,
+      "I_before_shape": [
+        150,
+        8
+      ],
+      "I_after_shape": [
+        150,
+        8
+      ],
+      "mean_shift": 0.12366865575313568,
+      "correlation": 0.8099775219047767,
+      "invariance_score": 0.889942061549944,
+      "config_hash": "66e5da9705048cb2",
+      "seed": 456
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "do(Z)",
+      "intervention_value": "ctx_1",
+      "I_before_shape": [
+        150,
+        8
+      ],
+      "I_after_shape": [
+        150,
+        8
+      ],
+      "mean_shift": 0.13989727199077606,
+      "correlation": 0.5179145574628727,
+      "invariance_score": 0.8772720354471485,
+      "config_hash": "66e5da9705048cb2",
+      "seed": 456
+    },
+    {
+      "intervention_target": "do(Z)",
+      "intervention_value": "ctx_2",
+      "I_before_shape": [
+        150,
+        8
+      ],
+      "I_after_shape": [
+        150,
+        8
+      ],
+      "mean_shift": 0.1540345996618271,
+      "correlation": 0.5166929051164428,
+      "invariance_score": 0.8665251460337804,
+      "config_hash": "66e5da9705048cb2",
+      "seed": 456
+    }
+  ],
+  "avg_nuisance_invariance": 0.9113131275513208,
+  "avg_context_invariance": 0.8718985907404644,
+  "overall_invariance": 0.8916058591458926,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T21:31:15.614511",
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L1-ENV-3-S456\\causal_arrays.npz",
+    "sha256": "f5f3a7b7690948ebe25d93de22aec92f92f10dc033ec6dceedb4df0a2b536a77",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_0_before": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_0_after": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_1_before": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_1_after": {
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

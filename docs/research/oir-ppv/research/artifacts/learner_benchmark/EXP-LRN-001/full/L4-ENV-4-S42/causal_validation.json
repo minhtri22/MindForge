@@ -1,0 +1,176 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "102c125dc80d0b02",
+  "environment": "Env4AdversarialShortcut",
+  "seed": 42,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": -1.7985198387132053,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.0660613477230072,
+      "correlation": 0.9305405235752546,
+      "invariance_score": 0.9380323206876348,
+      "config_hash": "102c125dc80d0b02",
+      "seed": 42
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 0.040322987365344606,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.04533466324210167,
+      "correlation": 0.9562130448283876,
+      "invariance_score": 0.9566314360020394,
+      "config_hash": "102c125dc80d0b02",
+      "seed": 42
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 1.9124792614892996,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.06700468808412552,
+      "correlation": 0.9314480623896972,
+      "invariance_score": 0.9372030049798219,
+      "config_hash": "102c125dc80d0b02",
+      "seed": 42
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_A",
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.08095773309469223,
+      "correlation": 0.8726017080751569,
+      "invariance_score": 0.9251055516639702,
+      "config_hash": "102c125dc80d0b02",
+      "seed": 42
+    },
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_B",
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.07914233207702637,
+      "correlation": 0.8778814661598205,
+      "invariance_score": 0.9266618223337593,
+      "config_hash": "102c125dc80d0b02",
+      "seed": 42
+    }
+  ],
+  "avg_nuisance_invariance": 0.9439555872231654,
+  "avg_context_invariance": 0.9258836869988647,
+  "overall_invariance": 0.9349196371110151,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T21:32:20.608057",
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L4-ENV-4-S42\\causal_arrays.npz",
+    "sha256": "5c8b67deb937feba9d865e57558905e19762a969509b0b52b96dd6740c73afae",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_0_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_0_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_1_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_1_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

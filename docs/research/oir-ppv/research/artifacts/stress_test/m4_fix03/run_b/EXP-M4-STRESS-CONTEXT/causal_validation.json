@@ -1,0 +1,176 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "702f26a2221a66a0",
+  "environment": "Env3CausalDynamics",
+  "seed": 42,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "do(N)",
+      "intervention_value": -0.5,
+      "I_before_shape": [
+        290,
+        64
+      ],
+      "I_after_shape": [
+        290,
+        64
+      ],
+      "mean_shift": 0.07279463623151314,
+      "correlation": 0.8560458600072425,
+      "invariance_score": 0.9321448544082731,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    },
+    {
+      "intervention_target": "do(N)",
+      "intervention_value": 0.0,
+      "I_before_shape": [
+        290,
+        64
+      ],
+      "I_after_shape": [
+        290,
+        64
+      ],
+      "mean_shift": 0.023461579596080317,
+      "correlation": 0.8566702754637507,
+      "invariance_score": 0.9770762478398654,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    },
+    {
+      "intervention_target": "do(N)",
+      "intervention_value": 0.5,
+      "I_before_shape": [
+        290,
+        64
+      ],
+      "I_after_shape": [
+        290,
+        64
+      ],
+      "mean_shift": 0.07000840557768835,
+      "correlation": 0.8568751985818008,
+      "invariance_score": 0.9345720975529239,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "do(Z)",
+      "intervention_value": "ctx_1",
+      "I_before_shape": [
+        290,
+        64
+      ],
+      "I_after_shape": [
+        290,
+        64
+      ],
+      "mean_shift": 0.04564099198759281,
+      "correlation": 0.7257663831201759,
+      "invariance_score": 0.9563511833054318,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    },
+    {
+      "intervention_target": "do(Z)",
+      "intervention_value": "ctx_2",
+      "I_before_shape": [
+        290,
+        64
+      ],
+      "I_after_shape": [
+        290,
+        64
+      ],
+      "mean_shift": 0.056330923886696874,
+      "correlation": 0.7232588628448284,
+      "invariance_score": 0.9466730334094252,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    }
+  ],
+  "avg_nuisance_invariance": 0.9479310666003542,
+  "avg_context_invariance": 0.9515121083574285,
+  "overall_invariance": 0.9497215874788913,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T17:07:34.819910",
+  "arrays": {
+    "path": "artifacts\\stress_test\\m4_fix03\\run_b\\EXP-M4-STRESS-CONTEXT\\causal_arrays.npz",
+    "sha256": "efa9a939e5b34dec2860850bcebd3b1cc9f50415341113afcb31a4e1d976cb72",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_0_before": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_0_after": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_1_before": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_1_after": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

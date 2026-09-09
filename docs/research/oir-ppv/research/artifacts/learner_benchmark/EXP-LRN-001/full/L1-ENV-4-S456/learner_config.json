@@ -1,0 +1,23 @@
+{
+  "learner_id": "L1",
+  "display_name": "Supervised MLP encoder",
+  "type": "MLPTrainable",
+  "fidelity": "adapted",
+  "paper": "Rumelhart, Hinton, Williams, 1986, Learning representations by back-propagating errors",
+  "implementation_source": "project-owned PyTorch implementation",
+  "params": {
+    "output_dim": 8,
+    "hidden_dims": [
+      24
+    ],
+    "learning_rate": 0.01,
+    "epochs": 4
+  },
+  "deviations": "Compact full-batch classifier used as the nonlinear representation baseline.",
+  "seed": 456,
+  "environment_id": "ENV-4",
+  "config_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L1-ENV-4-S456.yaml",
+  "config_sha256": "69bce6544807a541553e9dce4a2c87fa731dddb04f00d5bbab92fc74ab3f3d43",
+  "status": "complete",
+  "error": null
+}

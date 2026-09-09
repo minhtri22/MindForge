@@ -1,0 +1,207 @@
+{
+  "cell_id": "L4-ENV-4-S123",
+  "status": "complete",
+  "learner": "L4",
+  "environment": "ENV-4",
+  "seed": 123,
+  "factual_sample_sha256": "645b63be3cc518849e44deff7e55abc283ad32997985c44954834603cdf0df79",
+  "task_label_sha256": "573f2d29940dfeefae64c68d3cb3a47f0f52e6711326f04f597df0c82ec716d2",
+  "nuisance_target": "spurious_feature",
+  "nuisance_values": [
+    -1.808397725267925,
+    0.10931919507089947,
+    2.351777969032273
+  ],
+  "factual_predictive_utility": 0.85,
+  "leak_n": 0.3155779612495327,
+  "nuisance_leakage_detected": true,
+  "avg_nuisance_sensitivity": 0.22489280756425237,
+  "shortcut_learning_score": 0.32599456959774,
+  "interventions": [
+    {
+      "index": 0,
+      "target": "spurious_feature",
+      "value": -1.808397725267925,
+      "task_preserving": true,
+      "factual_accuracy": 0.85,
+      "intervened_accuracy": 0.8333333333333334,
+      "delta_n": 0.016666666666666607,
+      "abs_delta_n": 0.016666666666666607,
+      "mean_shift": 0.08582817763090134,
+      "invariance_score": 0.9209560228781645,
+      "failure_below_frozen_0_5": false,
+      "intervened_observation_sha256": "4a133e702e53b5e5fb0a8805832a1701a80e02c13b35def78547be21e042987c",
+      "intervened_representation_sha256": "4d062bb782803c3ad2a0cb22fbfefbb9f18d290652d477ebcb7173fbb4f79670",
+      "causal_isolation": {
+        "before": {
+          "observations_sha256": "dc7572def2edb7196ed3282df3f2af45fbdf03cdf2f1ec150655803fe395cc02",
+          "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+          "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+          "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+          "full_nuisance_sha256": "b2e01f23ee9aaac16913cc480f7ae9f71ee6958ac5420f3b0830ae54e3148c20",
+          "nuisance_variables_sha256": {
+            "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+            "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+            "spurious_feature": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d"
+          },
+          "target_nuisance_sha256": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d",
+          "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+        },
+        "after": {
+          "observations_sha256": "e5debbb49b4154d0e36b0c1980b9209bd647e59bf9ff020af5aec9a94ebf73e0",
+          "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+          "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+          "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+          "full_nuisance_sha256": "7edaf00fcdc924d9ab752148776ad8a192ed4ed4f6bca150d356695cfe4f6df6",
+          "nuisance_variables_sha256": {
+            "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+            "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+            "spurious_feature": "57032574a57e60aea9427fadc3d57fb92c9b6ee092e8fa72d54e8747f706a1c5"
+          },
+          "target_nuisance_sha256": "57032574a57e60aea9427fadc3d57fb92c9b6ee092e8fa72d54e8747f706a1c5",
+          "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+        },
+        "task_state_same": true,
+        "context_same": true,
+        "labels_same": true,
+        "target_nuisance_changed": true,
+        "non_target_nuisance_same": true,
+        "observations_changed": true
+      }
+    },
+    {
+      "index": 1,
+      "target": "spurious_feature",
+      "value": 0.10931919507089947,
+      "task_preserving": true,
+      "factual_accuracy": 0.85,
+      "intervened_accuracy": 0.9722222222222222,
+      "delta_n": -0.12222222222222223,
+      "abs_delta_n": 0.12222222222222223,
+      "mean_shift": 0.056609418243169785,
+      "invariance_score": 0.9464235153825389,
+      "failure_below_frozen_0_5": false,
+      "intervened_observation_sha256": "c8ef1568a8146e9478aa75ea364771a32dcb59aaa34d881155f8b6c27d751464",
+      "intervened_representation_sha256": "835c5323f564f1411c484105731b00fa0d110bf941f2c233c4d3cc501308a5c2",
+      "causal_isolation": {
+        "before": {
+          "observations_sha256": "dc7572def2edb7196ed3282df3f2af45fbdf03cdf2f1ec150655803fe395cc02",
+          "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+          "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+          "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+          "full_nuisance_sha256": "b2e01f23ee9aaac16913cc480f7ae9f71ee6958ac5420f3b0830ae54e3148c20",
+          "nuisance_variables_sha256": {
+            "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+            "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+            "spurious_feature": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d"
+          },
+          "target_nuisance_sha256": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d",
+          "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+        },
+        "after": {
+          "observations_sha256": "b48ec746c770095db3a27706fa6350cb880e223a8bdbc9d41310092da393acba",
+          "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+          "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+          "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+          "full_nuisance_sha256": "35e215cfe9cda82fef02a6b53c65fe22f56488d4da6d27db34cc4041067f8743",
+          "nuisance_variables_sha256": {
+            "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+            "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+            "spurious_feature": "2637c76bcc062802fac4bb00d7313cfe8f98713dc098cf9cffd5ade0e69a7c7d"
+          },
+          "target_nuisance_sha256": "2637c76bcc062802fac4bb00d7313cfe8f98713dc098cf9cffd5ade0e69a7c7d",
+          "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+        },
+        "task_state_same": true,
+        "context_same": true,
+        "labels_same": true,
+        "target_nuisance_changed": true,
+        "non_target_nuisance_same": true,
+        "observations_changed": true
+      }
+    },
+    {
+      "index": 2,
+      "target": "spurious_feature",
+      "value": 2.351777969032273,
+      "task_preserving": true,
+      "factual_accuracy": 0.85,
+      "intervened_accuracy": 0.9666666666666667,
+      "delta_n": -0.1166666666666667,
+      "abs_delta_n": 0.1166666666666667,
+      "mean_shift": 0.10253946483135223,
+      "invariance_score": 0.9069970118057978,
+      "failure_below_frozen_0_5": false,
+      "intervened_observation_sha256": "2df5faffd35d603dfc0f43afd011b1600ed287e26432da1d63770736f6f536a2",
+      "intervened_representation_sha256": "152dee467cb5467e091124dc0056bf98a1be3852527947a580c6f39a52c52076",
+      "causal_isolation": {
+        "before": {
+          "observations_sha256": "dc7572def2edb7196ed3282df3f2af45fbdf03cdf2f1ec150655803fe395cc02",
+          "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+          "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+          "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+          "full_nuisance_sha256": "b2e01f23ee9aaac16913cc480f7ae9f71ee6958ac5420f3b0830ae54e3148c20",
+          "nuisance_variables_sha256": {
+            "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+            "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+            "spurious_feature": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d"
+          },
+          "target_nuisance_sha256": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d",
+          "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+        },
+        "after": {
+          "observations_sha256": "90045bf503e923daed01270c1e368b54f322cbf81a9d2ecfd6cb0915a89e8434",
+          "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+          "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+          "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+          "full_nuisance_sha256": "832beb6ee16341ba74798610cf6b0da065a11cfd84511e09b90f8ca04e439626",
+          "nuisance_variables_sha256": {
+            "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+            "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+            "spurious_feature": "e1b7a2c0f55b30d4ce572af77d49c233d6725af672e75fc937ea569978fe1ae4"
+          },
+          "target_nuisance_sha256": "e1b7a2c0f55b30d4ce572af77d49c233d6725af672e75fc937ea569978fe1ae4",
+          "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+        },
+        "task_state_same": true,
+        "context_same": true,
+        "labels_same": true,
+        "target_nuisance_changed": true,
+        "non_target_nuisance_same": true,
+        "observations_changed": true
+      }
+    }
+  ],
+  "mean_abs_delta_n": 0.08518518518518518,
+  "mean_do_n_invariance": 0.9247921833555003,
+  "failure_count": 0,
+  "task_preserving": true,
+  "causal_isolation_factual": {
+    "observations_sha256": "dc7572def2edb7196ed3282df3f2af45fbdf03cdf2f1ec150655803fe395cc02",
+    "labels_sha256": "aaad7cc740067a4fba9a5c846b33446a97ee7b40eecc3e457ef1950cd1074d95",
+    "task_state_sha256": "58dfe27360101f10aa0a2221514fa2f24317ab050bfd5c563fc7d12411922353",
+    "context_sha256": "499aecad91a926a9e51227b57de959b687c62eb6c7e2d60f54e067b50904d4a7",
+    "full_nuisance_sha256": "b2e01f23ee9aaac16913cc480f7ae9f71ee6958ac5420f3b0830ae54e3148c20",
+    "nuisance_variables_sha256": {
+      "background_color": "5057678b593f61166fe688d3107f4d2d5398ae87b17680b9251adbcc2534364e",
+      "rotation": "e41cebdf885bb893817106f7e540b1df1e2777c0508d288d291584c90c7675f4",
+      "spurious_feature": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d"
+    },
+    "target_nuisance_sha256": "6a94c1837a4d65549339f49175db9ed213f165da3465b8d705d71ca2fa008b8d",
+    "non_target_nuisance_sha256": "1ebf91407d5c4bef6b29b552a318bc39a73f6d49ddbce3a9986b8dbabc66dac6"
+  },
+  "raw_latent_shift_role": "SCALE_SENSITIVE_DIAGNOSTIC_ONLY",
+  "provenance": {
+    "config_path": "experiments/OIR_PPV/Learner_Benchmark/EXP-LRN-001/configs/full/L4-ENV-4-S123.yaml",
+    "config_sha256": "6fcb0c43d525fbbab78227c808a664a8082d265fc57ca96b2e83004987c8493a",
+    "effective_config_sha256": "440305e1e65e36e59f1255d2929640d00406f8b961088c570d13837b356ed50d",
+    "h3_execution_manifest_sha256": "045da7b6b9b1ac0cb0045d72e0166d22f71839c895928ca9d129396ce72c5aad",
+    "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "m3_protocol_sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a",
+    "extractor_config_hash": "efc609f612b62c63",
+    "h3_execution_manifest_v2_sha256": "4c4ea8d57234966760358bc5edf5b7bcf001c1e7a280617716873a2cd395dfa0",
+    "source_manifest_v2_sha256": "8edf260aafa71524181dcdc31bea8d892fc6aa6d32d8a74358e60c3f39361f72",
+    "runtime_environment_v2_sha256": "5c7d9d9fbb4aa1ccf4e5e71db095cc87d286a3538e4f928cf4a0d2dbd6e69f9b",
+    "canonical_hash_algorithm": "H3-CANONICAL-NESTED-SHA256-v1"
+  }
+}

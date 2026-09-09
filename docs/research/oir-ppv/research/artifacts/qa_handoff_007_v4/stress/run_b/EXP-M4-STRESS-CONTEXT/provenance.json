@@ -1,0 +1,117 @@
+{
+  "experiment_id": "EXP-M4-STRESS-CONTEXT",
+  "timestamp": "2026-09-08T17:16:33.127432",
+  "source_config": "pipeline\\stress_context.yaml",
+  "command": "python -m pipeline.run_m3_experiment --config pipeline\\stress_context.yaml --output artifacts\\qa_handoff_007_v4\\stress\\run_b",
+  "artifact_path": "artifacts\\qa_handoff_007_v4\\stress\\run_b\\EXP-M4-STRESS-CONTEXT",
+  "seed": 42,
+  "environment": {
+    "family": "ENV-3",
+    "base_config": "environments/env3_config.yaml",
+    "effective_config": "artifacts\\qa_handoff_007_v4\\stress\\run_b\\EXP-M4-STRESS-CONTEXT\\effective_env_config.yaml",
+    "effective_config_sha256": "4db72a9e25a9e64140eec7b7871f9eea741f08c10cd4b1e9061deafac289dfbc",
+    "overrides": {
+      "generation": {
+        "num_episodes": 300
+      },
+      "ood_splits": [
+        {
+          "name": "shifted_context",
+          "holdout": [
+            "ctx_3"
+          ]
+        }
+      ]
+    },
+    "overrides_sha256": "fffb14d5a396b1b976178e2a7bbacc1cb60dd6ea088507a38a512929fb82d792"
+  },
+  "invariant_extractor": {
+    "requested_type": "Autoencoder",
+    "runtime_wrapper_type": "EncoderWrapper",
+    "wrapped_learner_type": "AutoencoderEncoder",
+    "config": {
+      "type": "Autoencoder",
+      "output_dim": 64,
+      "hidden_dim": 128,
+      "learning_rate": 0.01,
+      "epochs": 50,
+      "seed": 42
+    },
+    "config_hash": "702f26a2221a66a0"
+  },
+  "generator": {
+    "requested_type": "MLPDecoder",
+    "runtime_wrapper_type": "DecoderWrapper",
+    "wrapped_learner_type": "MLPDecoder",
+    "config": {
+      "type": "MLPDecoder",
+      "output_dim": 6,
+      "hidden_dims": [
+        128,
+        64
+      ],
+      "learning_rate": 0.01,
+      "epochs": 50,
+      "seed": 42
+    },
+    "config_hash": "d472a6eee04b5ac4",
+    "fit": {
+      "status": "fitted",
+      "method": "MLP Decoder (numpy gradient descent)",
+      "initial_loss": 1.4199206211342887,
+      "final_loss": 0.43018838822205796,
+      "architecture": [
+        66,
+        128,
+        64,
+        6
+      ],
+      "epochs": 50,
+      "learning_rate": 0.01
+    }
+  },
+  "splits": {
+    "train": 1410,
+    "test": 290,
+    "ood_name": "ood_shifted_context",
+    "ood": 970
+  },
+  "interventions": [
+    "do(A)",
+    "do(Z)",
+    "do(N)"
+  ],
+  "git": {
+    "root": "D:/WORK/RESEARCH/MindForge",
+    "branch": "research/pit",
+    "head": "8a1628d0fba93029f9b9bd6825865145278ff0c9",
+    "dirty": true
+  },
+  "dependencies": {
+    "python": "3.13.12",
+    "numpy": "2.4.4",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.1"
+  },
+  "arrays": {
+    "path": "artifacts\\qa_handoff_007_v4\\stress\\run_b\\EXP-M4-STRESS-CONTEXT\\generated.npz",
+    "sha256": "40e566ac32c693a4a9687785b5e9f684829af10db265c08f7ce719ae6357ca53",
+    "arrays": {
+      "generated": {
+        "shape": [
+          290,
+          6
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

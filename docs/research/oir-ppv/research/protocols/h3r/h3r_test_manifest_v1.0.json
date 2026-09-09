@@ -1,0 +1,70 @@
+{
+  "manifest_id": "H3R-TEST-LOCK-v1.0",
+  "protocol_id": "OIR-PPV-H3R",
+  "protocol_version": "v1.0",
+  "status": "FROZEN_TEST_IDENTITY_NOT_EXECUTED",
+  "generation_timestamp_utc": "2026-09-09T08:28:58.714121+00:00",
+  "source_anchor_head": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
+  "historical_test_seeds_excluded": [42, 123, 456, 789, 1011],
+  "h3r_seeds": [271828, 314159, 161803, 141421, 173205],
+  "environments": ["ENV-1", "ENV-2", "ENV-3", "ENV-4"],
+  "environment_generation_overrides": {
+    "ENV-1": {"generation": {"num_samples": 1200}},
+    "ENV-2": {"generation": {"num_samples": 1600}},
+    "ENV-3": {"generation": {"num_episodes": 150}},
+    "ENV-4": {
+      "generation": {"num_samples": 1200},
+      "shortcut": {
+        "correlation_strength": 0.95,
+        "test_conditional_means": {"0": 1.5, "1": 0.0, "2": -1.5}
+      }
+    }
+  },
+  "source_hashes": {
+    "environments/env1_config.yaml": "2923ab3cd848f725c764ab4c283d887a306221c2c688207f2b408b5ff24e24f0",
+    "environments/env2_config.yaml": "68c753b7972c6194bf8114f0d71711964c4a2f402675a4c6b53dfa53d529b965",
+    "environments/env3_config.yaml": "38c668e35cf6a97337aa0f1e679c3249cc1df4a762c5d87bd9fb2cee1e45d953",
+    "environments/env4_config.yaml": "d4607f8e56b154b2e3267f9d4c4a390e95d26dfc11b1ed4866dbbb9027266716",
+    "environments/env1_generator.py": "f5d472ff880a26be2741c4dfa42c00a0ce0a625780f0f8b617f5d421edc3d107",
+    "environments/env2_generator.py": "864e5a5dd181e00996d316a48d6b3b7c7d3b11bdcb1650633b7fe04ea5c7aa41",
+    "environments/env3_generator.py": "c08de3f271310e6ac068450483b4a2f11f51aafdaafb3c7377c36af1fe51396c",
+    "environments/env4_generator.py": "4503be88c799ffd9b083fcfa69c6fc737f4507c7fccda440f455f27ff1d638a7",
+    "environments/base.py": "ca9c270646b7cd0c7e353ee0dbeb7adda82d9b2f61dfe61a3b364fbdc14c3e08",
+    "pipeline/run_m3_experiment.py": "2cecb43ebb70b989dee002359656e0c4de24d8a15f3fe375281229cbe281cda4",
+    "experiments/OIR_PPV/Learner_Benchmark/EXP-LRN-001/matrix_manifest.json": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656"
+  },
+  "noise_contract": {
+    "norm": "TRAIN_SCALE_NORMALIZED_L_INF",
+    "delta": 0.1,
+    "distribution": "INDEPENDENT_UNIFORM_PER_CHANNEL",
+    "replicates_per_test_row": 4,
+    "seed_derivation": "uint32(SHA256('OIR-PPV-H3R|v1.0|<environment>|<generator_seed>|<test_row_identity>|<replicate_index>'))",
+    "pairing": "same clean test row and same noisy observation across L0-L4"
+  },
+  "cells": [
+    {"environment":"ENV-1","seed":271828,"test_count":104,"test_index_sha256":"37b127032f79804fcd8de8f5091de3c9bf12dd59e6f7965527860bd59ad577a9","test_observation_sha256":"96dbb43c7b1aaefa878face2b08d1f8cfae551b40a56a3e7ee9a22bb426a8919","test_label_sha256":"cd0d6eb46f63ba08920fbf0e60f172d1f51a3c8fc26929ab8eb8474f42fd5a94"},
+    {"environment":"ENV-1","seed":314159,"test_count":102,"test_index_sha256":"85b0b9fff8759a1b36f457ae8e2188ae2f624a5ebc4bb6f46356cf9a40687ae2","test_observation_sha256":"295351d6c42f60166f64498d91a504913467a1923e4625c47ce4a2b7a7dd244f","test_label_sha256":"f7446b86dc3563730444cb4d0db778d68e8b0ad0a95ed9e884e33d0be44d81eb"},
+    {"environment":"ENV-1","seed":161803,"test_count":95,"test_index_sha256":"acb69a95bb004472cd196f40005427a56f37bf5d71893cfc56c6f5fc46d51bd0","test_observation_sha256":"f3f60ed0ec46db7e565d711ed111ede0738f7072bb23a12230e0d43ebc5a89b0","test_label_sha256":"b3acdbd401be687efc6e9005e9abcaf31a0794515c98f0ab0895585380d0db02"},
+    {"environment":"ENV-1","seed":141421,"test_count":97,"test_index_sha256":"c1b5239b3c851986c8d9793b69ee9d8c26000c561d5602c61d227e23c079177f","test_observation_sha256":"26a4c353ff0d97574086bde0b56db433dab5f5c72311329df5579995e22f4c3d","test_label_sha256":"4125d64585e00dededa298087d0232e35df45e822be1098634fa3bbca89f5da0"},
+    {"environment":"ENV-1","seed":173205,"test_count":93,"test_index_sha256":"a3eec31fcd049719468f5f2ac4bcefce58b12f60ff9643ee162652be38e7677e","test_observation_sha256":"6dae1a9cdb8d2445b5c4fb34217e4e18245811b6873cf0c275b212576d1786a5","test_label_sha256":"6fc1bdb725fda1f195359c5b85f62d9bd7bfe2325695d088d357d01358400cd3"},
+    {"environment":"ENV-2","seed":271828,"test_count":800,"test_index_sha256":"6103358d9ee252e9b86e4a4a3a7d2d36af46b1080a23f3322c4d53364ca2f3d7","test_observation_sha256":"4d6d6375656cb8dc6c5f3319d9cd151f146bf48eb999dc764640e5d564d48c2f","test_label_sha256":"8f64f1dbbed0b245e74eb2535014be80b65223aba86359e8f1a4f4a14e611308"},
+    {"environment":"ENV-2","seed":314159,"test_count":800,"test_index_sha256":"1d45c95e6ed6588a10a568d864531ab141e1ea11b226121a8227f10d83ed9cb7","test_observation_sha256":"1c380090f448eed5f2a73ae54fbe46fb502bf0f181f87fe907706ce5485826ee","test_label_sha256":"056db67d5021aba2b66f009cc6562d067e82e1da4b5a7d38a3698ec77aa1f9e7"},
+    {"environment":"ENV-2","seed":161803,"test_count":800,"test_index_sha256":"822580ecaf37f9fd566bfa684bca109c36065b90f31647e1b65af8c098a6ec12","test_observation_sha256":"ecd6e09515375d69e46efc6d5eeb068ca7b7429ed4e8d92ed3d9ea757455333e","test_label_sha256":"7b71d48121bfcf520cc1506e9432b3499a64265d1c8207fb94b6af578b888a81"},
+    {"environment":"ENV-2","seed":141421,"test_count":800,"test_index_sha256":"e49b9ffd5dbc45582ab9bcd2b6545b98b68118a897bba2e7d0bb9b98fa1de403","test_observation_sha256":"eaaabf1a72943eb688382847a565c40477dbeeb9aa4d22a27096186c28ecce21","test_label_sha256":"231d9c8942983faad0cea6e184f8406b1943f2aee61bd759eb472d0155f75937"},
+    {"environment":"ENV-2","seed":173205,"test_count":800,"test_index_sha256":"1ed9a24b675ca568af280cdd7f9937ceb75d804e31f4ebe6944c6b4128ae6a50","test_observation_sha256":"e3d76805f1f7ef217c685b409bf10723cd947f901812bf32a3e6433cfccfb261","test_label_sha256":"06c931d5a11593f5ac24c0626f5d0c2948bf8bdda1d750e67482ea2e22cb1eda"},
+    {"environment":"ENV-3","seed":271828,"test_count":120,"test_index_sha256":"567d2f177012fbd9cf30b06bae70a4dd57ebfa43052de407b454212582196a1e","test_observation_sha256":"25e22171227577d5ee79694a342864844e42c119102fdcbfaa28256b029b68dc","test_label_sha256":"7aecea0aae1a8f7d06397213666087e6c4565dff66e624b1ece243121159821f"},
+    {"environment":"ENV-3","seed":314159,"test_count":180,"test_index_sha256":"f06b9f5bac12025da1e74072b5538c38e1ee8a4582514288c3c85c59c84049c5","test_observation_sha256":"f9eedb2d4c1eef6b5e2de230ff3831d42b634038fccb7bfe0666d1e83aebedf3","test_label_sha256":"bc4e167233f11a4346e1745560a6f70dc67f70818ea69403d317b20cb10df8ad"},
+    {"environment":"ENV-3","seed":161803,"test_count":140,"test_index_sha256":"fac55059aacbe793a52730017a3cc5f476303e6c357e32204520604a23e6bb2d","test_observation_sha256":"b4fbbb9da209507f7f31523b425ae453833bda15bfb1fbf7ec6b62deaa9f3f38","test_label_sha256":"8c874b52d3442464140c0dbcb7def1b7293dca86bed887a782b3e157b03747f5"},
+    {"environment":"ENV-3","seed":141421,"test_count":140,"test_index_sha256":"9b0b40e8c635d5e8e0dd7dfc7cf805982b0d7d6b25057a060b38fb1e4981eeb9","test_observation_sha256":"e40e6cd6b167ad0b5a63970dbb78158a08973c99eaf5d27bdc62318026e88ffc","test_label_sha256":"72c06666ba36b137914dd6e6f188850654d21e855a3fcfc2b3c0284f2ac1707c"},
+    {"environment":"ENV-3","seed":173205,"test_count":160,"test_index_sha256":"8b6d7025cbb9918dd62bf0febfea937afe66905d1c89b996b465d4d7caa83a99","test_observation_sha256":"34add302bedf26122a8550d0faaa4b26ad1000b4a29fc19d3b74870694ee4ac1","test_label_sha256":"6dd4bd03735bc5095ef6cac55654672e4940520b693c511954f86cd406ffee48"},
+    {"environment":"ENV-4","seed":271828,"test_count":180,"test_index_sha256":"53cc81efc6222a527e6a180c4cc1bdbda3d7a705bb401865a3b1e3ac44949f4e","test_observation_sha256":"62b4cc8ccfc30c8179972f0b1e8bf8c1dd31fae5f51dab5033ecf3738bb449dc","test_label_sha256":"14f84f222e3a51bc141f4916bdf25ff6b64e2e9b1a5a1d254409705e46f0fa95"},
+    {"environment":"ENV-4","seed":314159,"test_count":180,"test_index_sha256":"486f2c7df772a7e81a365701d91d16959f1b6a46c02d487bb35a25f26e6ee876","test_observation_sha256":"b0823c99d673a71852d448fcc9ec5eed2ccebea6b331f9a0b452e28ebb4a10a2","test_label_sha256":"980c7eb7a04848f787c75603c47b0c221931c62a8b488c43076ceafa9dcf35dd"},
+    {"environment":"ENV-4","seed":161803,"test_count":180,"test_index_sha256":"b341bdb6e05fc9d67516e7aea2769ee2b4a930acb6e240c033b62eb00ada06c8","test_observation_sha256":"427570176e81eb69268ed5cff744c287ac788dd9269929e6ad90ee3f0a07d8b8","test_label_sha256":"f87aaba6e0f845a6705fbf4290395470edd0999059024e6589c658d422ecd61b"},
+    {"environment":"ENV-4","seed":141421,"test_count":180,"test_index_sha256":"5fb8f3b7a4adb245c1b872277cc3c281731eb7a0066248b2828144b0c1df2ed8","test_observation_sha256":"b1233a036e5a93f8d9249628335388d42490f8e67fe8414156804e648d3ff955","test_label_sha256":"6f4eab641f868ec5416af03881333f7d58a383a4ac57f0b399dc8dc9041a15d8"},
+    {"environment":"ENV-4","seed":173205,"test_count":180,"test_index_sha256":"7b845fc3b0306f5070c60c7a5601082fcb0b6766fac3b3d9f984f0d9c071a05e","test_observation_sha256":"2c10590c660110cacc14afcc18b0e469dbc8993026df61ca48a1789ef0474d44","test_label_sha256":"ac5f90d8b88b6bc1a4b846c02d57969de5c180d67e778ec7ed06ad768defcf64"}
+  ],
+  "cell_count": 20,
+  "total_test_rows": 6131,
+  "scientific_test_access_count_at_freeze": 0,
+  "test_unlock_timestamp": null
+}

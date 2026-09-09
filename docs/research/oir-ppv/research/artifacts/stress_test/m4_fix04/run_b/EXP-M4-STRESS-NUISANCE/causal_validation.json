@@ -1,0 +1,176 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "702f26a2221a66a0",
+  "environment": "Env4AdversarialShortcut",
+  "seed": 42,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 1.748680808520612,
+      "I_before_shape": [
+        450,
+        64
+      ],
+      "I_after_shape": [
+        450,
+        64
+      ],
+      "mean_shift": 0.02146790293663973,
+      "correlation": 0.9779420511572428,
+      "invariance_score": 0.9789832819269981,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 2.8685064723617746,
+      "I_before_shape": [
+        450,
+        64
+      ],
+      "I_after_shape": [
+        450,
+        64
+      ],
+      "mean_shift": 0.012928877813708686,
+      "correlation": 0.9780289102837116,
+      "invariance_score": 0.9872361445142979,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 4.051390190797527,
+      "I_before_shape": [
+        450,
+        64
+      ],
+      "I_after_shape": [
+        450,
+        64
+      ],
+      "mean_shift": 0.021969179970761463,
+      "correlation": 0.9779305359497699,
+      "invariance_score": 0.9785030895242945,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_A",
+      "I_before_shape": [
+        450,
+        64
+      ],
+      "I_after_shape": [
+        450,
+        64
+      ],
+      "mean_shift": 0.050472744138458585,
+      "correlation": 0.873988646795693,
+      "invariance_score": 0.9519523524812121,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    },
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_B",
+      "I_before_shape": [
+        450,
+        64
+      ],
+      "I_after_shape": [
+        450,
+        64
+      ],
+      "mean_shift": 0.0465729533955127,
+      "correlation": 0.8741451239911318,
+      "invariance_score": 0.9554995633659261,
+      "config_hash": "702f26a2221a66a0",
+      "seed": 42
+    }
+  ],
+  "avg_nuisance_invariance": 0.9815741719885303,
+  "avg_context_invariance": 0.9537259579235691,
+  "overall_invariance": 0.9676500649560497,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T17:38:05.957022",
+  "arrays": {
+    "path": "artifacts\\stress_test\\m4_fix04\\run_b\\EXP-M4-STRESS-NUISANCE\\causal_arrays.npz",
+    "sha256": "dcd1edbe45bd3abccad0fcd26b14e080e242402d3f81f55177b8c876d70ffd0c",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_0_before": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_0_after": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_1_before": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      },
+      "context_1_after": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

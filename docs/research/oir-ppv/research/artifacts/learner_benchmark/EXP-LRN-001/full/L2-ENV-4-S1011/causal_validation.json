@@ -1,0 +1,176 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "82c24db510e45b6a",
+  "environment": "Env4AdversarialShortcut",
+  "seed": 1011,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": -2.066477439151161,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.05164152756333351,
+      "correlation": 0.979805590387659,
+      "invariance_score": 0.9508943625657428,
+      "config_hash": "82c24db510e45b6a",
+      "seed": 1011
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": -0.14308639703830695,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.030276259407401085,
+      "correlation": 0.9845851447437661,
+      "invariance_score": 0.9706134552446977,
+      "config_hash": "82c24db510e45b6a",
+      "seed": 1011
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 1.8387616212371138,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.05110560357570648,
+      "correlation": 0.97851637458942,
+      "invariance_score": 0.9513791921555239,
+      "config_hash": "82c24db510e45b6a",
+      "seed": 1011
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_A",
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.10746079683303833,
+      "correlation": 0.8332232907133805,
+      "invariance_score": 0.9029665003579904,
+      "config_hash": "82c24db510e45b6a",
+      "seed": 1011
+    },
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_B",
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.13190530240535736,
+      "correlation": 0.8288540968710301,
+      "invariance_score": 0.883466132612815,
+      "config_hash": "82c24db510e45b6a",
+      "seed": 1011
+    }
+  ],
+  "avg_nuisance_invariance": 0.9576290033219882,
+  "avg_context_invariance": 0.8932163164854028,
+  "overall_invariance": 0.9254226599036954,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T21:31:43.096499",
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L2-ENV-4-S1011\\causal_arrays.npz",
+    "sha256": "c9dc50c445d4f2d3355e1373e430b5e2b668adc8223e6f2a07f319cbf406754d",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_0_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_0_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_1_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      },
+      "context_1_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

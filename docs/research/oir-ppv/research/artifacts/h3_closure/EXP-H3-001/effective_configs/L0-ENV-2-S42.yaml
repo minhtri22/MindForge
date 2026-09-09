@@ -1,0 +1,128 @@
+environment:
+  family: ENV-2
+  name: Compositional Generation
+  version: '1.0'
+generation:
+  mechanism: compositional
+  num_samples: 1600
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+factors:
+- name: character
+  type: categorical
+  values:
+  - char_A
+  - char_B
+  - char_C
+  - char_D
+  description: Base character identity
+- name: style
+  type: categorical
+  values:
+  - style_X
+  - style_Y
+  - style_Z
+  description: Visual/style variation
+- name: context
+  type: categorical
+  values:
+  - ctx_1
+  - ctx_2
+  - ctx_3
+  - ctx_4
+  description: Background/context setting
+train_combinations:
+- - char_A
+  - style_X
+  - ctx_1
+- - char_A
+  - style_Y
+  - ctx_2
+- - char_B
+  - style_X
+  - ctx_2
+- - char_B
+  - style_Z
+  - ctx_3
+- - char_C
+  - style_Y
+  - ctx_1
+- - char_C
+  - style_Z
+  - ctx_4
+- - char_D
+  - style_X
+  - ctx_3
+- - char_D
+  - style_Y
+  - ctx_4
+test_combinations:
+- - char_A
+  - style_Z
+  - ctx_3
+- - char_A
+  - style_X
+  - ctx_4
+- - char_B
+  - style_Y
+  - ctx_1
+- - char_B
+  - style_X
+  - ctx_4
+- - char_C
+  - style_X
+  - ctx_2
+- - char_C
+  - style_Y
+  - ctx_3
+- - char_D
+  - style_Z
+  - ctx_1
+- - char_D
+  - style_Z
+  - ctx_2
+nuisance_variables:
+- name: texture_noise
+  type: continuous
+  distribution: normal
+  params:
+    mean: 0.0
+    std: 0.05
+- name: occlusion
+  type: categorical
+  values:
+  - none
+  - partial
+  - heavy
+  distribution: categorical
+  probs:
+  - 0.7
+  - 0.2
+  - 0.1
+outcome:
+  name: character_class
+  type: categorical
+  determined_by:
+  - character
+  mapping:
+    char_A: 0
+    char_B: 1
+    char_C: 2
+    char_D: 3
+intervention_targets:
+- style
+- context
+- texture_noise
+- occlusion
+ood_splits:
+- name: unseen_character_style
+  holdout_factor: style
+  holdout_values:
+  - style_Z
+- name: unseen_character_context
+  holdout_factor: context
+  holdout_values:
+  - ctx_4
+- name: fully_unseen_composition
+  holdout_combinations: test_combinations

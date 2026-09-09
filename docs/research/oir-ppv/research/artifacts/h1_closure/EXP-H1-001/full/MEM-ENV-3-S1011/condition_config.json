@@ -1,0 +1,24 @@
+{
+  "condition": {
+    "condition": "MEM",
+    "kind": "memorization",
+    "display_name": "Exact memorization control"
+  },
+  "environment": {
+    "environment_id": "ENV-3",
+    "config_path": "environments/env3_config.yaml",
+    "generator_output_dim": 6,
+    "overrides": {
+      "generation": {
+        "num_episodes": 150
+      }
+    },
+    "assertion": {
+      "type": "context_distribution",
+      "ood_split": "ood_unseen_context",
+      "min_total_variation": 0.5
+    }
+  },
+  "seed": 1011,
+  "attempt": 1
+}

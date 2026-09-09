@@ -1,0 +1,47 @@
+{
+  "condition": {
+    "condition": "L1",
+    "kind": "learner",
+    "learner_id": "L1",
+    "display_name": "Supervised MLP encoder",
+    "type": "MLPTrainable",
+    "fidelity": "adapted",
+    "paper": "Rumelhart, Hinton, Williams, 1986, Learning representations by back-propagating errors",
+    "implementation_source": "project-owned PyTorch implementation",
+    "params": {
+      "output_dim": 8,
+      "hidden_dims": [
+        24
+      ],
+      "learning_rate": 0.01,
+      "epochs": 4
+    },
+    "deviations": "Compact full-batch classifier used as the nonlinear representation baseline."
+  },
+  "environment": {
+    "environment_id": "ENV-4",
+    "config_path": "environments/env4_config.yaml",
+    "generator_output_dim": 11,
+    "overrides": {
+      "generation": {
+        "num_samples": 1200
+      },
+      "shortcut": {
+        "correlation_strength": 0.95,
+        "test_conditional_means": {
+          "0": 1.5,
+          "1": 0.0,
+          "2": -1.5
+        }
+      }
+    },
+    "assertion": {
+      "type": "shortcut_reversal",
+      "feature": "spurious_feature",
+      "min_train_correlation": 0.3,
+      "max_test_correlation": -0.3
+    }
+  },
+  "seed": 1011,
+  "attempt": 1
+}

@@ -1,0 +1,134 @@
+{
+  "experiment_id": "EXP-M4-STRESS-NUISANCE",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "timestamp": "2026-09-08T17:38:11.033702",
+  "source_config": "pipeline\\stress_nuisance.yaml",
+  "command": "python -m pipeline.run_m3_experiment --config pipeline\\stress_nuisance.yaml --output artifacts\\stress_test\\m4_fix04\\run_b",
+  "artifact_path": "artifacts\\stress_test\\m4_fix04\\run_b\\EXP-M4-STRESS-NUISANCE",
+  "seed": 42,
+  "environment": {
+    "family": "ENV-4",
+    "base_config": "environments/env4_config.yaml",
+    "effective_config": "artifacts\\stress_test\\m4_fix04\\run_b\\EXP-M4-STRESS-NUISANCE\\effective_env_config.yaml",
+    "effective_config_sha256": "5cb970df80dd038dc1b0d1b2eb5b6f35a492280636902779c053821b63f6062e",
+    "overrides": {
+      "generation": {
+        "num_samples": 3000
+      },
+      "shortcut": {
+        "correlation_strength": 0.95,
+        "test_conditional_means": {
+          "0": 3.0,
+          "1": 3.0,
+          "2": 3.0
+        }
+      }
+    },
+    "overrides_sha256": "7beef6429d324748f8672e6ae8cbf155667a31011f34b855ce170388c50601be"
+  },
+  "invariant_extractor": {
+    "requested_type": "Autoencoder",
+    "runtime_wrapper_type": "EncoderWrapper",
+    "wrapped_learner_type": "AutoencoderEncoder",
+    "config": {
+      "type": "Autoencoder",
+      "output_dim": 64,
+      "hidden_dim": 128,
+      "learning_rate": 0.01,
+      "epochs": 50,
+      "seed": 42
+    },
+    "config_hash": "702f26a2221a66a0"
+  },
+  "generator": {
+    "requested_type": "MLPDecoder",
+    "runtime_wrapper_type": "DecoderWrapper",
+    "wrapped_learner_type": "MLPDecoder",
+    "config": {
+      "type": "MLPDecoder",
+      "output_dim": 11,
+      "hidden_dims": [
+        128,
+        64
+      ],
+      "learning_rate": 0.01,
+      "epochs": 50,
+      "seed": 42
+    },
+    "config_hash": "10d996ea607c9177",
+    "fit": {
+      "status": "fitted",
+      "method": "MLP Decoder (numpy gradient descent)",
+      "initial_loss": 1.9812292924719008,
+      "final_loss": 0.7465547412684953,
+      "architecture": [
+        68,
+        128,
+        64,
+        11
+      ],
+      "epochs": 50,
+      "learning_rate": 0.01
+    }
+  },
+  "splits": {
+    "train": 2100,
+    "test": 450,
+    "ood_name": "ood_reversed_shortcut",
+    "ood": 225
+  },
+  "interventions": [
+    "do(A)",
+    "do(Z)",
+    "do(N)"
+  ],
+  "git": {
+    "root": "D:/WORK/RESEARCH/MindForge",
+    "branch": "research/pit",
+    "head": "f7e446d64d1c040cd168ae859d04503509cfe8ec",
+    "dirty": true
+  },
+  "source_snapshot": {
+    "paths": [
+      "benchmark",
+      "environments",
+      "pipeline"
+    ],
+    "file_count": 44,
+    "tree_sha256": "18acaaa5ef46b9ccdd8b2af72f1b4bd99e2c660e8d6018995c312c2fa25bcb83",
+    "dirty": false,
+    "status": []
+  },
+  "dependencies": {
+    "python": "3.13.12",
+    "numpy": "2.4.4",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.1"
+  },
+  "arrays": {
+    "path": "artifacts\\stress_test\\m4_fix04\\run_b\\EXP-M4-STRESS-NUISANCE\\generated.npz",
+    "sha256": "1f7b701e9bf67bad0744bd593e4ebe0c03df19e6c8a5983f987aeb401d98ee0f",
+    "arrays": {
+      "generated": {
+        "shape": [
+          450,
+          11
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          450,
+          64
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

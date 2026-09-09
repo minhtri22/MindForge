@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-M2-REGRESSION",
+  "environment_family": "ENV-1",
+  "baseline_id": "B0",
+  "seed": 42,
+  "config_hashes": {
+    "environment": "036b28f8bb439169",
+    "baseline": "8f23ff383046d06e"
+  },
+  "generalization": {
+    "accuracy": 0.3333333333333333,
+    "f1_macro": 0.2986152086755704,
+    "f1_micro": 0.3333333333333333,
+    "auroc": 0.4783861552471495
+  },
+  "intervention_stability": {},
+  "generation_quality": {},
+  "counterfactual": {},
+  "limitations": {
+    "implementation": "placeholder",
+    "method": "1-NN memorization (not true ERM)",
+    "notes": "Uses KNN as proxy for ERM; no gradient-based training"
+  },
+  "train_time_ms": 0.06937980651855469,
+  "eval_time_ms": 11.368274688720703,
+  "intervention_time_ms": 0.0,
+  "status": "success",
+  "error": null,
+  "timestamp": "2026-09-08T00:27:23.199612"
+}

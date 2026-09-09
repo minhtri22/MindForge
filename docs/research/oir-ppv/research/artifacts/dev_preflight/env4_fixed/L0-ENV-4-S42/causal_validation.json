@@ -1,0 +1,176 @@
+{
+  "extractor_type": "EncoderWrapper",
+  "extractor_config_hash": "4f37150436fdf9d1",
+  "environment": "Env4AdversarialShortcut",
+  "seed": 42,
+  "nuisance_interventions": [
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": -1.7985198387132053,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.34750031852265956,
+      "correlation": 0.9438320137740013,
+      "invariance_score": 0.742114852407869,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 0.040322987365344606,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.22063545078891222,
+      "correlation": 0.9438320137740014,
+      "invariance_score": 0.8192454179121926,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "spurious_feature",
+      "intervention_value": 1.9124792614892996,
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.3388043145490273,
+      "correlation": 0.9438320137740013,
+      "invariance_score": 0.7469351488733791,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    }
+  ],
+  "context_interventions": [
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_A",
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.10386175978572613,
+      "correlation": 0.9028041421552224,
+      "invariance_score": 0.9059105373793481,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    },
+    {
+      "intervention_target": "domain",
+      "intervention_value": "domain_B",
+      "I_before_shape": [
+        180,
+        8
+      ],
+      "I_after_shape": [
+        180,
+        8
+      ],
+      "mean_shift": 0.0993460310993902,
+      "correlation": 0.9028041421552224,
+      "invariance_score": 0.9096317007666457,
+      "config_hash": "4f37150436fdf9d1",
+      "seed": 42
+    }
+  ],
+  "avg_nuisance_invariance": 0.7694318063978135,
+  "avg_context_invariance": 0.9077711190729969,
+  "overall_invariance": 0.8386014627354053,
+  "failure_cases": [],
+  "timestamp": "2026-09-08T21:28:17.742085",
+  "arrays": {
+    "path": "artifacts\\dev_preflight\\env4_fixed\\L0-ENV-4-S42\\causal_arrays.npz",
+    "sha256": "e91e9222f827cbfbddcf74a558e57cc99d061179fa3874f44a89cf076a8ef526",
+    "entries": {
+      "nuisance_0_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_0_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_1_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "nuisance_2_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_0_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_0_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_1_before": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "context_1_after": {
+        "shape": [
+          180,
+          8
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

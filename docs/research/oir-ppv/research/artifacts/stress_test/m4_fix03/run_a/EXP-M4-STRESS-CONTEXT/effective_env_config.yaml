@@ -1,0 +1,115 @@
+environment:
+  family: ENV-3
+  name: Causal Dynamics
+  version: '1.0'
+generation:
+  mechanism: scm
+  num_episodes: 300
+  episode_length: 10
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+scm:
+  exogenous:
+  - name: U_state
+    type: continuous
+    distribution: normal
+    params:
+      mean: 0.0
+      std: 1.0
+  - name: U_action
+    type: continuous
+    distribution: normal
+    params:
+      mean: 0.0
+      std: 0.5
+  - name: U_outcome
+    type: continuous
+    distribution: normal
+    params:
+      mean: 0.0
+      std: 0.3
+  endogenous:
+  - name: S
+    type: continuous
+    parents:
+    - U_state
+    equation: S = U_state
+  - name: A
+    type: continuous
+    parents:
+    - S
+    - U_action
+    equation: A = 0.5 * S + U_action
+  - name: Z
+    type: categorical
+    values:
+    - ctx_1
+    - ctx_2
+    - ctx_3
+    distribution: uniform
+    parents: []
+  - name: N
+    type: continuous
+    distribution: normal
+    params:
+      mean: 0.0
+      std: 0.2
+    parents: []
+  - name: Y
+    type: continuous
+    parents:
+    - S
+    - A
+    - Z
+    equation: 'Y = 1.0 * S + 0.8 * A + context_effect(Z) + N
+
+      '
+    context_effects:
+      ctx_1: 0.0
+      ctx_2: 0.5
+      ctx_3: -0.5
+intervention_targets:
+- name: do(A)
+  variable: A
+  values:
+  - -2.0
+  - -1.0
+  - 0.0
+  - 1.0
+  - 2.0
+- name: do(Z)
+  variable: Z
+  values:
+  - ctx_1
+  - ctx_2
+  - ctx_3
+- name: do(N)
+  variable: N
+  values:
+  - -0.5
+  - 0.0
+  - 0.5
+counterfactual_queries:
+- name: Y_if_A_different
+  query: What would Y be if A had been a', given observed (S,A,Z,N,Y)?
+  factual:
+  - S
+  - A
+  - Z
+  - N
+  counterfactual:
+  - A
+- name: Y_if_Z_different
+  query: What would Y be if Z had been z', given observed (S,A,Z,N,Y)?
+  factual:
+  - S
+  - A
+  - Z
+  - N
+  counterfactual:
+  - Z
+ood_splits:
+- name: shifted_context
+  holdout:
+  - ctx_3

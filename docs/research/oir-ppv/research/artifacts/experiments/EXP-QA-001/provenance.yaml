@@ -1,0 +1,37 @@
+experiment:
+  id: EXP-QA-001
+  name: QA verification
+  milestone: M0
+  date: '2026-09-07'
+  git_commit: qa-check
+environment:
+  family: ENV-1
+  variant: Identity and Style Shift
+  seed: 42
+  config_hash: 036b28f8bb439169
+invariant_learner:
+  method: unknown
+  config_hash: f19ffa07d4a1250b
+  checkpoint: ''
+generation:
+  generator_type: none
+  config_hash: ''
+  num_samples: 0
+intervention:
+  type: none
+  targets: []
+  num_trials: 0
+counterfactual:
+  enabled: false
+  query: ''
+  num_samples: 0
+metrics:
+  generalization: []
+  causal_stability: []
+  generation_validity: []
+artifacts:
+- path: artifacts\experiments\EXP-QA-001
+  description: Experiment outputs
+- path: reports/EXP-QA-001.md
+  description: Experiment report
+notes: ''

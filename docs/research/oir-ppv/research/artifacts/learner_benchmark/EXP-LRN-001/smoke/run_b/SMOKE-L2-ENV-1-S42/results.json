@@ -1,0 +1,427 @@
+{
+  "experiment_id": "SMOKE-L2-ENV-1-S42",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "environment_family": "ENV-1",
+  "shift_assertions": {
+    "type": "ood_holdout",
+    "passed": true,
+    "ood_split": "ood_unseen_style",
+    "train_count": 438,
+    "ood_count": 406,
+    "train_ood_overlap": 0
+  },
+  "invariant_result": {
+    "shape": [
+      97,
+      8
+    ],
+    "metadata": {
+      "method": "VAEEncoder",
+      "requested_type": "VAE",
+      "runtime_wrapper": "EncoderWrapper",
+      "fit": {
+        "status": "fitted",
+        "fidelity": "adapted",
+        "method": "VAE (reconstruction + KL; posterior mean evaluation)",
+        "objective": "mse_reconstruction + beta*KL",
+        "beta": 0.1,
+        "epochs": 4,
+        "initial_loss": 0.9318591356277466,
+        "final_loss": 0.8636115193367004,
+        "final_reconstruction": 0.8578172326087952,
+        "final_kl": 0.05794269219040871
+      }
+    }
+  },
+  "generation_result": {
+    "shape": [
+      97,
+      12
+    ],
+    "metadata": {
+      "method": "MLPDecoder",
+      "requested_type": "MLPDecoder",
+      "runtime_wrapper": "DecoderWrapper",
+      "fit": {
+        "status": "fitted",
+        "method": "MLP Decoder (numpy gradient descent)",
+        "initial_loss": 1.1225890240252399,
+        "final_loss": 0.9624227303640109,
+        "architecture": [
+          12,
+          24,
+          12
+        ],
+        "epochs": 4,
+        "learning_rate": 0.01
+      }
+    }
+  },
+  "evaluation": {
+    "invariant_metrics": {
+      "invariance_score": 0.7433661929880839,
+      "context_sensitivity": 0.30210790719265096,
+      "nuisance_sensitivity": 0.34523201274506965,
+      "predictive_utility": 0.35210526315789475,
+      "effective_rank": 8,
+      "explained_variance": 1.0,
+      "config_hash": "260c74c92e8b57fa"
+    },
+    "generation_metrics": {
+      "reconstruction_mse": 0.18172378696433553,
+      "reconstruction_mae": 0.3140368091200106,
+      "invariant_preservation": 0.2998383939266205,
+      "context_response": 0.0,
+      "diversity_score": 0.319756326545384,
+      "novelty_score": 1.019643145024025,
+      "distribution_similarity": 0.7112157769408476,
+      "config_hash": "260c74c92e8b57fa"
+    },
+    "overall_score": 0.46008095585445535,
+    "timestamp": "2026-09-08T21:29:54.008231",
+    "generalization": {
+      "train_environment_score": 0.5730593607305936,
+      "seen_environment_score": 0.5051546391752577,
+      "unseen_environment_score": 0.270935960591133,
+      "generalization_delta": -0.3021234001394606,
+      "generalization_delta_direction": "unseen_minus_train",
+      "task_metrics": {
+        "task_type": "classification",
+        "accuracy": 0.5051546391752577,
+        "auroc": 0.7342773135451274,
+        "auroc_missing_reason": null,
+        "r2": null,
+        "r2_missing_reason": "classification task",
+        "unseen_accuracy": 0.270935960591133,
+        "unseen_auroc": 0.5197696271784843,
+        "unseen_auroc_missing_reason": null
+      },
+      "ood_split": "ood_unseen_style"
+    }
+  },
+  "causal_validation": {
+    "extractor_type": "EncoderWrapper",
+    "extractor_config_hash": "260c74c92e8b57fa",
+    "environment": "Env1IdentityStyleShift",
+    "seed": 42,
+    "nuisance_interventions": [
+      {
+        "intervention_target": "background_noise",
+        "intervention_value": -0.13230397117893647,
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.12885430455207825,
+        "correlation": 0.9173685543018812,
+        "invariance_score": 0.8858539104360268,
+        "config_hash": "260c74c92e8b57fa",
+        "seed": 42
+      },
+      {
+        "intervention_target": "background_noise",
+        "intervention_value": 0.00442170029001831,
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.07709739357233047,
+        "correlation": 0.9242156154373189,
+        "invariance_score": 0.9284211492550111,
+        "config_hash": "260c74c92e8b57fa",
+        "seed": 42
+      },
+      {
+        "intervention_target": "background_noise",
+        "intervention_value": 0.12414274167932847,
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.12200325727462769,
+        "correlation": 0.9178506224884926,
+        "invariance_score": 0.8912630097251443,
+        "config_hash": "260c74c92e8b57fa",
+        "seed": 42
+      }
+    ],
+    "context_interventions": [
+      {
+        "intervention_target": "identity",
+        "intervention_value": "id_1",
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.1846209317445755,
+        "correlation": 0.6174297882428772,
+        "invariance_score": 0.8441518912951448,
+        "config_hash": "260c74c92e8b57fa",
+        "seed": 42
+      },
+      {
+        "intervention_target": "identity",
+        "intervention_value": "id_2",
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.1677209585905075,
+        "correlation": 0.6285504363698651,
+        "invariance_score": 0.8563689746624448,
+        "config_hash": "260c74c92e8b57fa",
+        "seed": 42
+      },
+      {
+        "intervention_target": "identity",
+        "intervention_value": "id_3",
+        "I_before_shape": [
+          97,
+          8
+        ],
+        "I_after_shape": [
+          97,
+          8
+        ],
+        "mean_shift": 0.20068243145942688,
+        "correlation": 0.6288131320207835,
+        "invariance_score": 0.8328596919541016,
+        "config_hash": "260c74c92e8b57fa",
+        "seed": 42
+      }
+    ],
+    "avg_nuisance_invariance": 0.9018460231387273,
+    "avg_context_invariance": 0.8444601859705637,
+    "overall_invariance": 0.8731531045546455,
+    "failure_cases": [],
+    "timestamp": "2026-09-08T21:29:54.064955",
+    "arrays": {
+      "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\smoke\\run_b\\SMOKE-L2-ENV-1-S42\\causal_arrays.npz",
+      "sha256": "1d21cf95543ba8cb4561d9a76b81a974d53dc27f926225da3eed6a7093620b02",
+      "entries": {
+        "nuisance_0_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_0_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_1_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_1_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_2_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "nuisance_2_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_0_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_0_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_1_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_1_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_2_before": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "context_2_after": {
+          "shape": [
+            97,
+            8
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  },
+  "dependency_analysis": {
+    "extractor_type": "extractor",
+    "extractor_config_hash": "260c74c92e8b57fa",
+    "environment": "env",
+    "seed": 42,
+    "context_sensitivities": [
+      {
+        "variable_name": "context_0",
+        "variable_type": "context",
+        "linear_sensitivity": 0.3831548328190358,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.21713274646838202,
+        "leakage_score": 0.3831548328190358,
+        "per_dim_sensitivity": {
+          "0": 0.0858735711108668,
+          "1": 0.15224502723526806,
+          "2": 0.2015613035754431,
+          "3": 0.4942044943194,
+          "4": 0.6774031627335984,
+          "5": 0.22369917262546482,
+          "6": 0.8943819832556741,
+          "7": 0.3358699379554185
+        }
+      },
+      {
+        "variable_name": "context_1",
+        "variable_type": "context",
+        "linear_sensitivity": 0.22106098156626608,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.09543016675563035,
+        "leakage_score": 0.22106098156626608,
+        "per_dim_sensitivity": {
+          "0": 0.4256792185680235,
+          "1": 0.01494536123957815,
+          "2": 0.010531924221457198,
+          "3": 0.2536988728192165,
+          "4": 0.06509806988375712,
+          "5": 0.6501679018895635,
+          "6": 0.05190188974982005,
+          "7": 0.2964646152487023
+        }
+      }
+    ],
+    "nuisance_sensitivities": [
+      {
+        "variable_name": "nuisance_0",
+        "variable_type": "nuisance",
+        "linear_sensitivity": 0.34154771289760094,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.14327126958858366,
+        "leakage_score": 0.34154771289760094,
+        "per_dim_sensitivity": {
+          "0": 0.42247680298155127,
+          "1": 0.030141021830321472,
+          "2": 0.6042710505358175,
+          "3": 0.3310191445010256,
+          "4": 0.3169128478692604,
+          "5": 0.4587859229188647,
+          "6": 0.18593157799237076,
+          "7": 0.3828433387228734
+        }
+      },
+      {
+        "variable_name": "nuisance_1",
+        "variable_type": "nuisance",
+        "linear_sensitivity": 0.34891631259253847,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.16448131822570994,
+        "leakage_score": 0.34891631259253847,
+        "per_dim_sensitivity": {
+          "0": 0.6383050615181237,
+          "1": 0.5466580914683251,
+          "2": 0.5103606921957461,
+          "3": 0.044720135412745526,
+          "4": 0.34042712980452333,
+          "5": 0.10281704497754665,
+          "6": 0.17024062266211415,
+          "7": 0.43780172861596894
+        }
+      }
+    ],
+    "max_context_sensitivity": 0.3831548328190358,
+    "max_nuisance_sensitivity": 0.34891631259253847,
+    "avg_context_sensitivity": 0.3021079071926509,
+    "avg_nuisance_sensitivity": 0.3452320127450697,
+    "context_leakage_detected": true,
+    "nuisance_leakage_detected": true,
+    "shortcut_learning_score": 0.3660355727057871,
+    "shortcut_metric_status": "valid",
+    "nan_policy": "non-finite component metrics are replaced with 0.0 and reported as finite summaries",
+    "timestamp": "2026-09-08T21:29:54.173115",
+    "config_hash": "260c74c92e8b57fa"
+  },
+  "arrays": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\smoke\\run_b\\SMOKE-L2-ENV-1-S42\\generated.npz",
+    "sha256": "cd748cf5b19668ddd57567d26c14818a2bbb7f0968d9714bfed402735f97a47b",
+    "arrays": {
+      "generated": {
+        "shape": [
+          97,
+          12
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          97,
+          8
+        ],
+        "dtype": "float32"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-H2-001",
+  "pair_id": "L3-vs-L0-ENV-1-S789",
+  "artifact_type": "derived",
+  "protocol_freeze_sha256": "5d851da06b06b36e1c3272c2d7dc4b1ad8f7c360a4654803945b05e3cd84c661",
+  "matrix_manifest_sha256": "ffd96baa9f342cbcc830f1eef04bc99aff8c6835ac97ed9bf2c21bc9a416616e",
+  "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+  "source_paths": {
+    "learner": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L3-ENV-1-S789",
+    "baseline": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001\\full\\L0-ENV-1-S789",
+    "raw": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\full\\RAW-ENV-1-S789"
+  },
+  "source_hashes": {
+    "learner_results": "615c457387dffaa7a9693e31d18b4fe4aa2950d061be77ffb77eaf072d0b4d9c",
+    "learner_provenance": "d50a79fff1bc6fa624b73dafb2297a4aeba865adc7f56aa4c5c35f2376b5f982",
+    "baseline_results": "88d5b9d8ef997dc5465546593b540db08ff707b720ba6436eabd5d2d8308607b",
+    "baseline_provenance": "a55cbb93d9a38573c81df9418c3634ce3cb5a05551ee442cf087902cca01c3ea",
+    "raw": {
+      "path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\full\\RAW-ENV-1-S789",
+      "results_sha256": "35a55f0125356af93662a5ae6504b52b09a7be6f775f33e161b0af99e95704a8",
+      "provenance_sha256": "898fb2d0fd00b37a893c0b38f4ddb7ce59baea0d2d042c46ceb72eb0d4588df8",
+      "condition_config_sha256": "5b11b7b4220df382eacd56eedd2fe9501481e8623a02dd97667389e91d574dcf"
+    }
+  },
+  "git": {
+    "branch": "oir-ppv-research",
+    "head": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
+    "dirty": true
+  },
+  "analysis_script": "pipeline\\run_h2_closure.py",
+  "analysis_script_sha256": "41a9c9b6197ade1fb8fecffb35c8c8374d7d5cbf9bf11716f0175c925aad2395",
+  "seed": 789,
+  "command": "python -m pipeline.run_h2_closure derive",
+  "runtime": {
+    "python": "3.13.12",
+    "numpy": "2.4.4",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

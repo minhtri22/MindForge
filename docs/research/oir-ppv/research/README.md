@@ -1,88 +1,202 @@
-# OIR-PPV Controlled Causal Benchmark (CCB)
+# OIR-PPV Research v1.0
 
-## Overview
+Invariant -> Generator -> Manifestation -> Causal Validation
+============================================================
+# OIR-PPV v1.0
+## Invariant → Representation → Generation → Predictive Validation
 
-OIR-PPV (Invariant Representation → Prediction → Validation) is a research benchmark protocol for testing whether an invariant representation can support reliable prediction, controlled generation, and causal validation under distribution shift.
+## 1. Research Motivation
 
-The goal is not to introduce a new invariant learning method. Existing work has studied invariant prediction, causal representation learning, and domain generalization. OIR-PPV defines an evaluation pipeline that connects these capabilities into one measurable protocol.
+OIR-PPV xuất phát từ một quan sát:
 
-## Research Question
+Một hệ thống có thể thay đổi biểu hiện bên ngoài nhưng vẫn duy trì một cấu trúc hành vi ổn định.
 
-Given experience generated from a controlled environment:
+Ví dụ:
+
+Một nhân vật cartoon có thể xuất hiện trong:
+
+- phòng livestream
+- công sở
+- gia đình
+- môi trường giả tưởng
+
+Nhưng vẫn giữ:
+
+- cách phản ứng
+- mục tiêu
+- phong cách hành động
+- quan hệ nhân quả
+
+Câu hỏi nghiên cứu:
+
+> Liệu một hệ thống học được một latent invariant representation có thể sinh biểu hiện mới theo context và vẫn duy trì causal structure hay không?
+
+---
+
+# 2. Research Status
+
+## Historical artifacts
+
+Các phiên bản:
+
+- v0.1 → v0.13.10
+
+được xem là quá trình phát triển giả thuyết.
+
+Hiện trạng:
+
+- một số mô tả thiết kế còn tồn tại;
+- source code, seed và raw experiment artifact của v0.13.10 chưa được xác nhận.
+
+Vì vậy:
+
+v0.13.10 được xem là:
+
+
+Historical hypothesis checkpoint
+
+
+không phải:
+
+
+Verified implementation
+
+
+---
+
+# 3. Core Research Question
+
+OIR-PPV nghiên cứu pipeline:
 
 \[
-E=(S,A,Y,Z,N)
+E
+\rightarrow
+I
+\rightarrow
+G(I,Z,N)
+\rightarrow
+X'
+\rightarrow
+Intervention
+\rightarrow
+Counterfactual Validation
 \]
 
-can a learned invariant representation \(I\) preserve useful structure when:
+Trong đó:
 
-- context changes,
-- nuisance variables change,
-- new manifestations must be generated,
-- interventions are applied,
-- counterfactual outcomes are evaluated?
+- E: experience
+- I: invariant representation
+- Z: meaningful context
+- N: nuisance variation
+- X: manifestation
 
-## Architecture
+---
 
-```text
-                 Ground Truth SCM
-                       |
-                       v
-             Environment Generator
-                       |
-                       v
-          Experience Collector (S,A,Y,Z,N)
-                       |
-                       v
-             Invariant Learner
-                       |
-                       v
-              Latent Invariant I
-                 /             \
-                v               v
-       Policy Generator   Manifestation Generator
-          π(I,S,Z)             G(I,Z,N)
-                \             /
-                 v           v
-              Intervention Engine
-                       |
-                       v
-            Counterfactual Evaluator
-                       |
-                       v
-                    Evidence
-```
+# 4. Main Hypothesis
 
-## Benchmark Families
+Một invariant representation tốt phải:
 
-### ENV-1 Identity and Style Shift
+1. dự đoán được outcome;
+2. tổng quát sang context mới;
+3. không phụ thuộc nuisance;
+4. sinh được manifestation mới;
+5. giữ causal relationship dưới intervention.
 
-Keep the underlying mechanism fixed while changing style, identity, or presentation variables.
+---
 
-### ENV-2 Compositional Generation
+# 5. Research Contribution
 
-Evaluate unseen combinations of character, style, and context factors.
+OIR-PPV không tuyên bố phát minh:
 
-### ENV-3 Causal Dynamics
+- invariant learning;
+- causal representation learning;
+- domain generalization.
 
-Evaluate structural stability using state, action, outcome and intervention variables.
+Các lĩnh vực này đã có nền tảng.
 
-### ENV-4 Adversarial Shortcut
+Đóng góp mục tiêu:
 
-Introduce training correlations between nuisance variables and outcomes, then test shortcut resistance.
+Xây dựng benchmark thống nhất kiểm tra:
 
-## Baselines
+\[
+Invariant
+\rightarrow
+Generator
+\rightarrow
+Manifestation
+\rightarrow
+Causal Validation
+\]
 
-| ID | Method |
-|---|---|
-| B0 | ERM / context memorization |
-| B1 | Domain generalization baseline (IRM, VREx class) |
-| B2 | Encoder representation baseline |
-| B3 | Invariant representation only |
-| B4 | OIR-PPV invariant + generator pipeline |
-| B5 | Oracle invariant |
+---
 
-## Current Research Status
+# 6. Experimental Philosophy
 
-This repository contains the research specification, theory, and benchmark design. Experimental implementations must preserve provenance, controlled environments, and frozen evaluation protocols.
+Không chứng minh bằng:
 
+- reconstruction score;
+- visual similarity;
+- prediction trên cùng domain.
+
+Phải chứng minh bằng:
+
+- transfer;
+- nuisance robustness;
+- counterfactual accuracy;
+- causal consistency;
+- complexity control.
+
+---
+
+# 7. Research Pipeline
+
+
+Environment Generator
+|
+v
+Experience Collection
+|
+v
+Invariant Learner
+|
+v
+Invariant Representation I
+|
++----------------+
+| |
+v v
+
+Policy Model Generator
+
+    |                |
+    +-------+--------+
+
+            |
+            v
+
+    Intervention Engine
+
+            |
+            v
+
+    Counterfactual Evaluation
+
+            |
+            v
+
+         Evidence
+
+---
+
+# 8. Claim Boundary
+
+Claim được phép:
+
+> Trong các environment nhân quả được kiểm soát, invariant representation kết hợp context-conditioned generator có thể cải thiện transfer, robustness và counterfactual consistency so với baseline.
+
+Không claim:
+
+- invariant giống con người;
+- consciousness;
+- identity tâm lý;
+- AGI.

@@ -1,0 +1,25 @@
+{
+  "learner_id": "L4",
+  "display_name": "Domain-Adversarial encoder",
+  "type": "DANN",
+  "fidelity": "adapted",
+  "paper": "Ganin et al., 2016, Domain-Adversarial Training of Neural Networks, JMLR 17(59)",
+  "implementation_source": "project-owned PyTorch implementation",
+  "params": {
+    "output_dim": 8,
+    "hidden_dim": 24,
+    "learning_rate": 0.01,
+    "epochs": 4,
+    "domain_penalty_weight": 0.5
+  },
+  "deviations": "Compact full-batch DANN with task head, domain head, and gradient reversal.",
+  "seed": 789,
+  "environment_id": "ENV-4",
+  "config_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L4-ENV-4-S789.yaml",
+  "config_sha256": "9554e287d369a07d38d9cc4c8299aa53a1cad8d6eaff3e4d274dd8571aec293f",
+  "status": "failed",
+  "error": {
+    "type": "TypeError",
+    "message": "'<' not supported between instances of 'str' and 'int'"
+  }
+}

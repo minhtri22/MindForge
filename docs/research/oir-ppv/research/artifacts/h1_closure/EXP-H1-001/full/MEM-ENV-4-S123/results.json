@@ -1,0 +1,48 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "cell_id": "MEM-ENV-4-S123",
+  "status": "complete",
+  "condition": "MEM",
+  "environment": "ENV-4",
+  "seed": 123,
+  "utility": {
+    "train_environment_score": 1.0,
+    "seen_environment_score": 0.3,
+    "unseen_environment_score": 0.26666666666666666,
+    "generalization_delta": -0.7333333333333334,
+    "generalization_delta_direction": "unseen_minus_train",
+    "task_metrics": {
+      "task_type": "classification",
+      "accuracy": 0.3,
+      "auroc": null,
+      "auroc_missing_reason": "MEM emits hard labels only",
+      "r2": null,
+      "r2_missing_reason": "classification task",
+      "unseen_accuracy": 0.26666666666666666,
+      "unseen_auroc": null,
+      "unseen_auroc_missing_reason": "MEM emits hard labels only"
+    }
+  },
+  "mem_stats": {
+    "train_hits": 840,
+    "train_misses": 0,
+    "test_hits": 0,
+    "test_misses": 180,
+    "ood_hits": 0,
+    "ood_misses": 90
+  },
+  "shift_assertion": {
+    "type": "shortcut_reversal",
+    "passed": true,
+    "feature": "spurious_feature",
+    "train_mean": -0.029052936183159093,
+    "test_mean": 0.23376695002430103,
+    "mean_shift": 0.2628198862074601,
+    "train_correlation": 0.7832935531081122,
+    "test_correlation": -0.7907803244260266
+  },
+  "ood_split": "ood_reversed_shortcut",
+  "train_count": 840,
+  "test_count": 180,
+  "ood_count": 90
+}

@@ -1,0 +1,187 @@
+{
+  "protocol": "m4_stress_reproducibility_v1",
+  "scenario_count": 4,
+  "all_passed": true,
+  "scenarios": [
+    {
+      "experiment_id": "EXP-M4-STRESS-CONTEXT",
+      "seed": 42,
+      "comparison_policy": "exact canonical JSON and exact decoded array content; timestamps, commands, paths, and container-file hashes excluded",
+      "json": {
+        "evaluation.json": {
+          "run_a_hash": "f6fbc20e75f60bc39e3662b964a32cce2cc497c22a4ac21cec97bb3ff9a0c6bc",
+          "run_b_hash": "f6fbc20e75f60bc39e3662b964a32cce2cc497c22a4ac21cec97bb3ff9a0c6bc",
+          "equal": true
+        },
+        "dependency_analysis.json": {
+          "run_a_hash": "c6f72f571962595e9ddead46cb72d9b2ebee874f7e99e9f71e1b5a49f5a4ddf5",
+          "run_b_hash": "c6f72f571962595e9ddead46cb72d9b2ebee874f7e99e9f71e1b5a49f5a4ddf5",
+          "equal": true
+        },
+        "causal_validation.json": {
+          "run_a_hash": "c10b92fb08ae8b79cd19e4510b7ca147d8a181fae5e413be41b69b23ee9399c7",
+          "run_b_hash": "c10b92fb08ae8b79cd19e4510b7ca147d8a181fae5e413be41b69b23ee9399c7",
+          "equal": true
+        },
+        "shift_assertions.json": {
+          "run_a_hash": "cdb2e3fd97ed27ac09d0ba304f25cd513fdc700413abce7b52ce0bef65ea993d",
+          "run_b_hash": "cdb2e3fd97ed27ac09d0ba304f25cd513fdc700413abce7b52ce0bef65ea993d",
+          "equal": true
+        },
+        "results.json": {
+          "run_a_hash": "a78122a1acfdded452c7c1f414facf9ebbfd3e745e2941d8ffe58982ef24cfa9",
+          "run_b_hash": "a78122a1acfdded452c7c1f414facf9ebbfd3e745e2941d8ffe58982ef24cfa9",
+          "equal": true
+        }
+      },
+      "arrays": {
+        "generated.npz": {
+          "run_a_content_hash": "40954eb7df2cd8cc9788f86b1bae3c1914151b5adb032e1f928d3e4d46738b54",
+          "run_b_content_hash": "40954eb7df2cd8cc9788f86b1bae3c1914151b5adb032e1f928d3e4d46738b54",
+          "equal": true
+        },
+        "causal_arrays.npz": {
+          "run_a_content_hash": "73723c7aa598bd291d776e9be73d3657782ca98808b4e00aae1e98c963781b5f",
+          "run_b_content_hash": "73723c7aa598bd291d776e9be73d3657782ca98808b4e00aae1e98c963781b5f",
+          "equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "experiment_id": "EXP-M4-STRESS-NUISANCE",
+      "seed": 42,
+      "comparison_policy": "exact canonical JSON and exact decoded array content; timestamps, commands, paths, and container-file hashes excluded",
+      "json": {
+        "evaluation.json": {
+          "run_a_hash": "6544503d39db79348c66aab75b441cdc84d85e2803b91988754340f45f12550f",
+          "run_b_hash": "6544503d39db79348c66aab75b441cdc84d85e2803b91988754340f45f12550f",
+          "equal": true
+        },
+        "dependency_analysis.json": {
+          "run_a_hash": "93e160f15fd099fbaf3871007a5b0f57653276e7de2ec42189e637aa6342d220",
+          "run_b_hash": "93e160f15fd099fbaf3871007a5b0f57653276e7de2ec42189e637aa6342d220",
+          "equal": true
+        },
+        "causal_validation.json": {
+          "run_a_hash": "9248ab98ff3484c005912e1215bffc8ddeae6276116f76a3b987195d83f55359",
+          "run_b_hash": "9248ab98ff3484c005912e1215bffc8ddeae6276116f76a3b987195d83f55359",
+          "equal": true
+        },
+        "shift_assertions.json": {
+          "run_a_hash": "92215741802eea2cb2f1ac2ce33ba61fc74ba2f8321befbdf4884922e47e279d",
+          "run_b_hash": "92215741802eea2cb2f1ac2ce33ba61fc74ba2f8321befbdf4884922e47e279d",
+          "equal": true
+        },
+        "results.json": {
+          "run_a_hash": "bfbe39b3c5ea83586b9887392c87aaa71d284d65f51e23f1ba9539d45e8f0653",
+          "run_b_hash": "bfbe39b3c5ea83586b9887392c87aaa71d284d65f51e23f1ba9539d45e8f0653",
+          "equal": true
+        }
+      },
+      "arrays": {
+        "generated.npz": {
+          "run_a_content_hash": "fdaacc37737effa0422f3c0b0f243769d2952bb6127393a180b692709b31437a",
+          "run_b_content_hash": "fdaacc37737effa0422f3c0b0f243769d2952bb6127393a180b692709b31437a",
+          "equal": true
+        },
+        "causal_arrays.npz": {
+          "run_a_content_hash": "925832fd9785ef6edb723db498e70456b3fe1ecacae340fc394cfb709a821958",
+          "run_b_content_hash": "925832fd9785ef6edb723db498e70456b3fe1ecacae340fc394cfb709a821958",
+          "equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "experiment_id": "EXP-M4-STRESS-OOD",
+      "seed": 42,
+      "comparison_policy": "exact canonical JSON and exact decoded array content; timestamps, commands, paths, and container-file hashes excluded",
+      "json": {
+        "evaluation.json": {
+          "run_a_hash": "11b1be3123429826fe5f8e8036b4cdba52683db2ddb4be1700c3fcdb8af40d54",
+          "run_b_hash": "11b1be3123429826fe5f8e8036b4cdba52683db2ddb4be1700c3fcdb8af40d54",
+          "equal": true
+        },
+        "dependency_analysis.json": {
+          "run_a_hash": "7c57850bb8920938b6cc2b2ccd0fa61aeaa488b5c19ae8e283ec7492bb9dc5f1",
+          "run_b_hash": "7c57850bb8920938b6cc2b2ccd0fa61aeaa488b5c19ae8e283ec7492bb9dc5f1",
+          "equal": true
+        },
+        "causal_validation.json": {
+          "run_a_hash": "d5c0f824db5d8a514e2a7a386bb432f5ce414ebbd94a995fb7ff22af62e6613d",
+          "run_b_hash": "d5c0f824db5d8a514e2a7a386bb432f5ce414ebbd94a995fb7ff22af62e6613d",
+          "equal": true
+        },
+        "shift_assertions.json": {
+          "run_a_hash": "ae7e190a503ae19486b76feb0ba82724dc033a965d71746809932086177934bb",
+          "run_b_hash": "ae7e190a503ae19486b76feb0ba82724dc033a965d71746809932086177934bb",
+          "equal": true
+        },
+        "results.json": {
+          "run_a_hash": "4720b9fa450fc35089041dcede6d9c5d68dfdfa18f2f84d0dc3b7f993f02f1ea",
+          "run_b_hash": "4720b9fa450fc35089041dcede6d9c5d68dfdfa18f2f84d0dc3b7f993f02f1ea",
+          "equal": true
+        }
+      },
+      "arrays": {
+        "generated.npz": {
+          "run_a_content_hash": "4a1daba3cdee8786cf741e412fab3cd1b7b45c5c26baab76773dc4c018d5f176",
+          "run_b_content_hash": "4a1daba3cdee8786cf741e412fab3cd1b7b45c5c26baab76773dc4c018d5f176",
+          "equal": true
+        },
+        "causal_arrays.npz": {
+          "run_a_content_hash": "5727b00d2227225154b46f4c2b9673319cf129cb09b61241e53852c97825d24a",
+          "run_b_content_hash": "5727b00d2227225154b46f4c2b9673319cf129cb09b61241e53852c97825d24a",
+          "equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "experiment_id": "EXP-M4-STRESS-SHORTCUT",
+      "seed": 42,
+      "comparison_policy": "exact canonical JSON and exact decoded array content; timestamps, commands, paths, and container-file hashes excluded",
+      "json": {
+        "evaluation.json": {
+          "run_a_hash": "ad6ceb1e543506d12fa95fd8336db75fac1171db62f56abda1c1757a78d4ef1a",
+          "run_b_hash": "ad6ceb1e543506d12fa95fd8336db75fac1171db62f56abda1c1757a78d4ef1a",
+          "equal": true
+        },
+        "dependency_analysis.json": {
+          "run_a_hash": "735248d4a6a708a61e9d14c4b7ad6ee2c9483e5f957024442313caa043d1ed8b",
+          "run_b_hash": "735248d4a6a708a61e9d14c4b7ad6ee2c9483e5f957024442313caa043d1ed8b",
+          "equal": true
+        },
+        "causal_validation.json": {
+          "run_a_hash": "c1a0f9b4c9ccf8fafb61ef99182d00ac2188d7b3f152498e59cd153ea6cd7da8",
+          "run_b_hash": "c1a0f9b4c9ccf8fafb61ef99182d00ac2188d7b3f152498e59cd153ea6cd7da8",
+          "equal": true
+        },
+        "shift_assertions.json": {
+          "run_a_hash": "1f28e48cfa5b3ae6d77003e3d4b1ccd2de20e46eea48e10f23dbee620aefd0b1",
+          "run_b_hash": "1f28e48cfa5b3ae6d77003e3d4b1ccd2de20e46eea48e10f23dbee620aefd0b1",
+          "equal": true
+        },
+        "results.json": {
+          "run_a_hash": "519e22e3f380d5833556c67c501d5304c8b457f6f3fab0be59884ccf30cc7bab",
+          "run_b_hash": "519e22e3f380d5833556c67c501d5304c8b457f6f3fab0be59884ccf30cc7bab",
+          "equal": true
+        }
+      },
+      "arrays": {
+        "generated.npz": {
+          "run_a_content_hash": "a4eb913994af82d802b26ee5725f10f1e48c7e91bb6ff73ca7e657330b9a1868",
+          "run_b_content_hash": "a4eb913994af82d802b26ee5725f10f1e48c7e91bb6ff73ca7e657330b9a1868",
+          "equal": true
+        },
+        "causal_arrays.npz": {
+          "run_a_content_hash": "dcdeb55ff0c5c9f8f24a8f994a16220503a018e8b270766f6b09343cbdc7cdc7",
+          "run_b_content_hash": "dcdeb55ff0c5c9f8f24a8f994a16220503a018e8b270766f6b09343cbdc7cdc7",
+          "equal": true
+        }
+      },
+      "passed": true
+    }
+  ]
+}

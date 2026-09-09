@@ -1,0 +1,72 @@
+context_variables:
+- distribution: uniform
+  name: style
+  type: categorical
+  values:
+  - style_a
+  - style_b
+  - style_c
+- distribution: uniform
+  name: identity
+  type: categorical
+  values:
+  - id_1
+  - id_2
+  - id_3
+  - id_4
+  - id_5
+environment:
+  family: ENV-1
+  name: Identity and Style Shift
+  version: '1.0'
+generation:
+  mechanism: fixed
+  num_samples: 10000
+  test_ratio: 0.15
+  train_ratio: 0.7
+  val_ratio: 0.15
+intervention_targets:
+- style
+- identity
+- background_noise
+- lighting
+nuisance_variables:
+- distribution: normal
+  name: background_noise
+  params:
+    mean: 0.0
+    std: 0.1
+  type: continuous
+- distribution: uniform
+  name: lighting
+  params:
+    high: 1.5
+    low: 0.5
+  type: continuous
+ood_splits:
+- holdout:
+  - - style_c
+    - id_5
+  name: unseen_style_context
+outcome:
+  determined_by:
+  - shape
+  mapping:
+    circle: 0
+    square: 1
+    triangle: 2
+  name: class_label
+  type: categorical
+structural_variables:
+- name: shape
+  type: categorical
+  values:
+  - circle
+  - square
+  - triangle
+- distribution: uniform
+  name: size
+  params:
+    high: 1.0
+    low: 0.3
+  type: continuous

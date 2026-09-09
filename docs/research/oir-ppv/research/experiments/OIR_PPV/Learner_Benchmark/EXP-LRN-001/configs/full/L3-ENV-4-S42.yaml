@@ -1,0 +1,70 @@
+protocol:
+  name: M3_PROTOCOL
+  version: M3-Protocol-v1.0
+  path: benchmark/M3_PROTOCOL.md
+experiment:
+  id: L3-ENV-4-S42
+  name: EXP-LRN-001 reference learner cell
+  milestone: M4.1
+environment:
+  family: ENV-4
+  config_path: environments/env4_config.yaml
+  seed: 42
+  splits:
+  - train
+  - val
+  - test
+  - ood
+  overrides:
+    generation:
+      num_samples: 1200
+    shortcut:
+      correlation_strength: 0.95
+      test_conditional_means:
+        '0': 1.5
+        '1': 0.0
+        '2': -1.5
+stress_assertion:
+  type: shortcut_reversal
+  feature: spurious_feature
+  min_train_correlation: 0.3
+  max_test_correlation: -0.3
+pipeline:
+  invariant_extractor:
+    type: IRMStyle
+    output_dim: 8
+    hidden_dim: 24
+    learning_rate: 0.01
+    epochs: 4
+    irm_penalty_weight: 1.0
+    seed: 42
+  generator:
+    type: MLPDecoder
+    output_dim: 11
+    hidden_dims:
+    - 24
+    learning_rate: 0.01
+    epochs: 4
+    seed: 42
+evaluation:
+  enabled: true
+  metrics:
+  - invariant_consistency
+  - generation_validity
+  - reconstruction_quality
+  - invariant_preservation
+  - context_response
+  - diversity
+  - distribution_similarity
+  intervention_targets:
+  - do(N)
+  - do(Z)
+  counterfactual: true
+  causal_validation: true
+  dependency_analysis: true
+output:
+  base_dir: artifacts/learner_benchmark/EXP-LRN-001
+provenance:
+  track_config_hashes: true
+  track_seeds: true
+  track_timing: true

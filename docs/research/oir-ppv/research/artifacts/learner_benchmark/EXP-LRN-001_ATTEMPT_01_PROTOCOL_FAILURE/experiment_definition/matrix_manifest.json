@@ -1,0 +1,186 @@
+{
+  "experiment_id": "EXP-LRN-001",
+  "status": "frozen",
+  "frozen_at": "2026-09-08T21:24:32.986709",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "source": {
+    "git_head": "33da43667ecf3288058fd0aaf77889aa0c1f2fd6",
+    "git_branch": "research/pit",
+    "source_tree_sha256": "d76fe260e935538376e93af2cf84331f75ca9b9ce986c42a8c2a11524d801770",
+    "source_file_count": 46,
+    "source_status": []
+  },
+  "learners": [
+    {
+      "learner_id": "L0",
+      "display_name": "PCA",
+      "type": "PCA",
+      "fidelity": "faithful",
+      "paper": "Pearson, 1901, On Lines and Planes of Closest Fit",
+      "implementation_source": "project-owned sklearn adapter",
+      "params": {
+        "output_dim": 8
+      },
+      "deviations": "Uses scikit-learn PCA with deterministic full SVD behavior."
+    },
+    {
+      "learner_id": "L1",
+      "display_name": "Supervised MLP encoder",
+      "type": "MLPTrainable",
+      "fidelity": "adapted",
+      "paper": "Rumelhart, Hinton, Williams, 1986, Learning representations by back-propagating errors",
+      "implementation_source": "project-owned PyTorch implementation",
+      "params": {
+        "output_dim": 8,
+        "hidden_dims": [
+          24
+        ],
+        "learning_rate": 0.01,
+        "epochs": 4
+      },
+      "deviations": "Compact full-batch classifier used as the nonlinear representation baseline."
+    },
+    {
+      "learner_id": "L2",
+      "display_name": "Variational Autoencoder",
+      "type": "VAE",
+      "fidelity": "adapted",
+      "paper": "Kingma and Welling, 2013, Auto-Encoding Variational Bayes, arXiv:1312.6114",
+      "implementation_source": "project-owned PyTorch implementation",
+      "params": {
+        "output_dim": 8,
+        "hidden_dim": 24,
+        "learning_rate": 0.005,
+        "epochs": 4,
+        "beta": 0.1
+      },
+      "deviations": "Compact full-batch VAE; posterior mean is used for deterministic evaluation."
+    },
+    {
+      "learner_id": "L3",
+      "display_name": "IRM-style encoder",
+      "type": "IRMStyle",
+      "fidelity": "surrogate",
+      "paper": "Arjovsky et al., 2019, Invariant Risk Minimization, arXiv:1907.02893",
+      "implementation_source": "project-owned PyTorch implementation",
+      "params": {
+        "output_dim": 8,
+        "hidden_dim": 24,
+        "learning_rate": 0.01,
+        "epochs": 4,
+        "irm_penalty_weight": 1.0
+      },
+      "deviations": "Risk-variance surrogate across explicit context domains; not canonical IRMv1."
+    },
+    {
+      "learner_id": "L4",
+      "display_name": "Domain-Adversarial encoder",
+      "type": "DANN",
+      "fidelity": "adapted",
+      "paper": "Ganin et al., 2016, Domain-Adversarial Training of Neural Networks, JMLR 17(59)",
+      "implementation_source": "project-owned PyTorch implementation",
+      "params": {
+        "output_dim": 8,
+        "hidden_dim": 24,
+        "learning_rate": 0.01,
+        "epochs": 4,
+        "domain_penalty_weight": 0.5
+      },
+      "deviations": "Compact full-batch DANN with task head, domain head, and gradient reversal."
+    }
+  ],
+  "environments": [
+    {
+      "environment_id": "ENV-1",
+      "config_path": "environments/env1_config.yaml",
+      "generator_output_dim": 12,
+      "overrides": {
+        "generation": {
+          "num_samples": 1200
+        }
+      },
+      "assertion": {
+        "type": "ood_holdout",
+        "ood_split": "ood_unseen_style"
+      }
+    },
+    {
+      "environment_id": "ENV-2",
+      "config_path": "environments/env2_config.yaml",
+      "generator_output_dim": 15,
+      "overrides": {
+        "generation": {
+          "num_samples": 1600
+        }
+      },
+      "assertion": {
+        "type": "composition_holdout"
+      }
+    },
+    {
+      "environment_id": "ENV-3",
+      "config_path": "environments/env3_config.yaml",
+      "generator_output_dim": 6,
+      "overrides": {
+        "generation": {
+          "num_episodes": 150
+        }
+      },
+      "assertion": {
+        "type": "context_distribution",
+        "ood_split": "ood_unseen_context",
+        "min_total_variation": 0.5
+      }
+    },
+    {
+      "environment_id": "ENV-4",
+      "config_path": "environments/env4_config.yaml",
+      "generator_output_dim": 11,
+      "overrides": {
+        "generation": {
+          "num_samples": 1200
+        },
+        "shortcut": {
+          "correlation_strength": 0.95,
+          "test_conditional_means": {
+            "0": 1.5,
+            "1": 0.0,
+            "2": -1.5
+          }
+        }
+      },
+      "assertion": {
+        "type": "shortcut_reversal",
+        "feature": "spurious_feature",
+        "min_train_correlation": 0.3,
+        "max_test_correlation": -0.3
+      }
+    }
+  ],
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    1011
+  ],
+  "splits": [
+    "train",
+    "val",
+    "test",
+    "ood"
+  ],
+  "interventions": [
+    "do(N)",
+    "do(Z)"
+  ],
+  "matrix_cell_count": 100,
+  "failed_run_policy": "retain failure artifact; no silent retry or seed replacement",
+  "smoke_evidence": "artifacts/learner_benchmark/EXP-LRN-001/smoke/smoke_report.json",
+  "smoke_audit_evidence": "artifacts/learner_benchmark/EXP-LRN-001/smoke/smoke_artifact_audit.json"
+}

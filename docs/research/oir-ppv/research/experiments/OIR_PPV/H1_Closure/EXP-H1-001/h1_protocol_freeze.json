@@ -1,0 +1,98 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "hypothesis_id": "H1",
+  "status": "frozen_before_final_execution",
+  "frozen_at": "2026-09-08T23:28:31.277253",
+  "base_protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "reference_benchmark": {
+    "experiment_id": "EXP-LRN-001",
+    "manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "historical_source": {
+      "git_head": "8d57175f5b5ce7195b6132fec7863331080ac1fe",
+      "git_branch": "research/pit",
+      "source_tree_sha256": "2bf9390a7a590fa88c86007195b1071e675a122fe283edd5af42ab4f381b9cb2",
+      "source_file_count": 46,
+      "source_status": []
+    },
+    "artifact_root": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\learner_benchmark\\EXP-LRN-001"
+  },
+  "source": {
+    "branch": "oir-ppv-research",
+    "head": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
+    "dirty": true
+  },
+  "environments": [
+    "ENV-1",
+    "ENV-2",
+    "ENV-3",
+    "ENV-4"
+  ],
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    1011
+  ],
+  "conditions": [
+    "RAW",
+    "MEM",
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "utility_metric": {
+    "ENV-1": "seen_environment_score / classification accuracy",
+    "ENV-2": "seen_environment_score / classification accuracy",
+    "ENV-3": "seen_environment_score / classification accuracy",
+    "ENV-4": "seen_environment_score / classification accuracy"
+  },
+  "ood_utility_metric": {
+    "ENV-1": "unseen_environment_score when frozen OOD split is non-empty; otherwise null",
+    "ENV-2": "unseen_environment_score when frozen OOD split is non-empty; otherwise null",
+    "ENV-3": "unseen_environment_score when frozen OOD split is non-empty; otherwise null",
+    "ENV-4": "unseen_environment_score when frozen OOD split is non-empty; otherwise null"
+  },
+  "primary_complexity_formula": "C_total = model_bytes + retained_state_bytes",
+  "byte_counting_rules": {
+    "common_downstream_predictor": "excluded from every condition as common task-head overhead",
+    "RAW": "model_bytes=0; retained_state_bytes=0",
+    "MEM": "model_bytes=0; retained_state_bytes=pickle protocol 5 bytes of sorted exact lookup state plus fallback label",
+    "L0-L4": "model_bytes=pickle protocol 5 bytes of fitted EncoderWrapper required for representation inference; retained_state_bytes=0",
+    "serialized_artifact_bytes": "same canonical inference-state serialization; excludes reports/logs/temp artifacts",
+    "mutual_exclusion": "model_bytes and retained_state_bytes never overlap"
+  },
+  "utility_noninferiority_tolerance": {
+    "type": "absolute",
+    "epsilon": 0.02,
+    "scale": "classification accuracy in [0,1]",
+    "rule": "Delta_U >= -epsilon against MEM",
+    "justification": "Task default; all current downstream utility metrics are normalized accuracy."
+  },
+  "failed_run_handling": "retain failed attempt; no seed replacement, tuning, or silent retry",
+  "matrix": {
+    "condition_count": 7,
+    "environment_count": 4,
+    "seed_count": 5,
+    "nominal_cells": 140
+  },
+  "mem_semantics": {
+    "lookup_key": "float64 raw-observation row bytes from training split",
+    "value": "majority training label per duplicate key; deterministic tie break",
+    "fallback": "global majority training label; deterministic tie break",
+    "test_labels_available_to_mem": false
+  },
+  "config_hashes": {
+    "learners": "e1067bd2470f405b0c7ea55f9c1e5bd31127b759a7e1c758c1efe8cfcf9575e1",
+    "environments": "9adc3a110f0bfca67eb1f4f533a9381b4294c6c13602f4f861914882ae376926",
+    "seeds": "46cc42e6d6a02535453435de4d99dcc0c18e2fdfff2de5f6c3c19d8a01f099c5",
+    "conditions": "ade41f80c60f089f492a999f16b90b54d31c0d6acebf3af0b7e2dc8d19efba87"
+  }
+}

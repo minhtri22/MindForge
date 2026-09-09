@@ -1,0 +1,1328 @@
+{
+  "version": 2,
+  "experiment_id": "EXP-H3-001",
+  "correction_namespace": "correction_v2",
+  "status": "frozen_before_correction_replay",
+  "v1_scientific_identity": {
+    "experiment_id": "EXP-H3-001",
+    "hypothesis_id": "H3",
+    "status": "frozen_before_decisive_execution",
+    "frozen_at": "2026-09-09T01:23:17.848336",
+    "source": {
+      "branch": "oir-ppv-research",
+      "head": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
+      "dirty": true
+    },
+    "base_protocol": {
+      "name": "M3_PROTOCOL",
+      "version": "M3-Protocol-v1.0",
+      "path": "benchmark\\M3_PROTOCOL.md",
+      "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+    },
+    "reference_benchmark": {
+      "experiment_id": "EXP-LRN-001",
+      "manifest_path": "experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\matrix_manifest.json",
+      "manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656"
+    },
+    "primary_baseline": "L0",
+    "learners": [
+      {
+        "learner_id": "L0",
+        "fidelity": "faithful"
+      },
+      {
+        "learner_id": "L1",
+        "fidelity": "adapted"
+      },
+      {
+        "learner_id": "L2",
+        "fidelity": "adapted"
+      },
+      {
+        "learner_id": "L3",
+        "fidelity": "surrogate"
+      },
+      {
+        "learner_id": "L4",
+        "fidelity": "adapted"
+      }
+    ],
+    "environments": [
+      "ENV-1",
+      "ENV-2",
+      "ENV-3",
+      "ENV-4"
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1011
+    ],
+    "cell_count": 100,
+    "cells": [
+      {
+        "cell_id": "L0-ENV-1-S42",
+        "learner": "L0",
+        "environment": "ENV-1",
+        "seed": 42
+      },
+      {
+        "cell_id": "L0-ENV-1-S123",
+        "learner": "L0",
+        "environment": "ENV-1",
+        "seed": 123
+      },
+      {
+        "cell_id": "L0-ENV-1-S456",
+        "learner": "L0",
+        "environment": "ENV-1",
+        "seed": 456
+      },
+      {
+        "cell_id": "L0-ENV-1-S789",
+        "learner": "L0",
+        "environment": "ENV-1",
+        "seed": 789
+      },
+      {
+        "cell_id": "L0-ENV-1-S1011",
+        "learner": "L0",
+        "environment": "ENV-1",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L0-ENV-2-S42",
+        "learner": "L0",
+        "environment": "ENV-2",
+        "seed": 42
+      },
+      {
+        "cell_id": "L0-ENV-2-S123",
+        "learner": "L0",
+        "environment": "ENV-2",
+        "seed": 123
+      },
+      {
+        "cell_id": "L0-ENV-2-S456",
+        "learner": "L0",
+        "environment": "ENV-2",
+        "seed": 456
+      },
+      {
+        "cell_id": "L0-ENV-2-S789",
+        "learner": "L0",
+        "environment": "ENV-2",
+        "seed": 789
+      },
+      {
+        "cell_id": "L0-ENV-2-S1011",
+        "learner": "L0",
+        "environment": "ENV-2",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L0-ENV-3-S42",
+        "learner": "L0",
+        "environment": "ENV-3",
+        "seed": 42
+      },
+      {
+        "cell_id": "L0-ENV-3-S123",
+        "learner": "L0",
+        "environment": "ENV-3",
+        "seed": 123
+      },
+      {
+        "cell_id": "L0-ENV-3-S456",
+        "learner": "L0",
+        "environment": "ENV-3",
+        "seed": 456
+      },
+      {
+        "cell_id": "L0-ENV-3-S789",
+        "learner": "L0",
+        "environment": "ENV-3",
+        "seed": 789
+      },
+      {
+        "cell_id": "L0-ENV-3-S1011",
+        "learner": "L0",
+        "environment": "ENV-3",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L0-ENV-4-S42",
+        "learner": "L0",
+        "environment": "ENV-4",
+        "seed": 42
+      },
+      {
+        "cell_id": "L0-ENV-4-S123",
+        "learner": "L0",
+        "environment": "ENV-4",
+        "seed": 123
+      },
+      {
+        "cell_id": "L0-ENV-4-S456",
+        "learner": "L0",
+        "environment": "ENV-4",
+        "seed": 456
+      },
+      {
+        "cell_id": "L0-ENV-4-S789",
+        "learner": "L0",
+        "environment": "ENV-4",
+        "seed": 789
+      },
+      {
+        "cell_id": "L0-ENV-4-S1011",
+        "learner": "L0",
+        "environment": "ENV-4",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L1-ENV-1-S42",
+        "learner": "L1",
+        "environment": "ENV-1",
+        "seed": 42
+      },
+      {
+        "cell_id": "L1-ENV-1-S123",
+        "learner": "L1",
+        "environment": "ENV-1",
+        "seed": 123
+      },
+      {
+        "cell_id": "L1-ENV-1-S456",
+        "learner": "L1",
+        "environment": "ENV-1",
+        "seed": 456
+      },
+      {
+        "cell_id": "L1-ENV-1-S789",
+        "learner": "L1",
+        "environment": "ENV-1",
+        "seed": 789
+      },
+      {
+        "cell_id": "L1-ENV-1-S1011",
+        "learner": "L1",
+        "environment": "ENV-1",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L1-ENV-2-S42",
+        "learner": "L1",
+        "environment": "ENV-2",
+        "seed": 42
+      },
+      {
+        "cell_id": "L1-ENV-2-S123",
+        "learner": "L1",
+        "environment": "ENV-2",
+        "seed": 123
+      },
+      {
+        "cell_id": "L1-ENV-2-S456",
+        "learner": "L1",
+        "environment": "ENV-2",
+        "seed": 456
+      },
+      {
+        "cell_id": "L1-ENV-2-S789",
+        "learner": "L1",
+        "environment": "ENV-2",
+        "seed": 789
+      },
+      {
+        "cell_id": "L1-ENV-2-S1011",
+        "learner": "L1",
+        "environment": "ENV-2",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L1-ENV-3-S42",
+        "learner": "L1",
+        "environment": "ENV-3",
+        "seed": 42
+      },
+      {
+        "cell_id": "L1-ENV-3-S123",
+        "learner": "L1",
+        "environment": "ENV-3",
+        "seed": 123
+      },
+      {
+        "cell_id": "L1-ENV-3-S456",
+        "learner": "L1",
+        "environment": "ENV-3",
+        "seed": 456
+      },
+      {
+        "cell_id": "L1-ENV-3-S789",
+        "learner": "L1",
+        "environment": "ENV-3",
+        "seed": 789
+      },
+      {
+        "cell_id": "L1-ENV-3-S1011",
+        "learner": "L1",
+        "environment": "ENV-3",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L1-ENV-4-S42",
+        "learner": "L1",
+        "environment": "ENV-4",
+        "seed": 42
+      },
+      {
+        "cell_id": "L1-ENV-4-S123",
+        "learner": "L1",
+        "environment": "ENV-4",
+        "seed": 123
+      },
+      {
+        "cell_id": "L1-ENV-4-S456",
+        "learner": "L1",
+        "environment": "ENV-4",
+        "seed": 456
+      },
+      {
+        "cell_id": "L1-ENV-4-S789",
+        "learner": "L1",
+        "environment": "ENV-4",
+        "seed": 789
+      },
+      {
+        "cell_id": "L1-ENV-4-S1011",
+        "learner": "L1",
+        "environment": "ENV-4",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L2-ENV-1-S42",
+        "learner": "L2",
+        "environment": "ENV-1",
+        "seed": 42
+      },
+      {
+        "cell_id": "L2-ENV-1-S123",
+        "learner": "L2",
+        "environment": "ENV-1",
+        "seed": 123
+      },
+      {
+        "cell_id": "L2-ENV-1-S456",
+        "learner": "L2",
+        "environment": "ENV-1",
+        "seed": 456
+      },
+      {
+        "cell_id": "L2-ENV-1-S789",
+        "learner": "L2",
+        "environment": "ENV-1",
+        "seed": 789
+      },
+      {
+        "cell_id": "L2-ENV-1-S1011",
+        "learner": "L2",
+        "environment": "ENV-1",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L2-ENV-2-S42",
+        "learner": "L2",
+        "environment": "ENV-2",
+        "seed": 42
+      },
+      {
+        "cell_id": "L2-ENV-2-S123",
+        "learner": "L2",
+        "environment": "ENV-2",
+        "seed": 123
+      },
+      {
+        "cell_id": "L2-ENV-2-S456",
+        "learner": "L2",
+        "environment": "ENV-2",
+        "seed": 456
+      },
+      {
+        "cell_id": "L2-ENV-2-S789",
+        "learner": "L2",
+        "environment": "ENV-2",
+        "seed": 789
+      },
+      {
+        "cell_id": "L2-ENV-2-S1011",
+        "learner": "L2",
+        "environment": "ENV-2",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L2-ENV-3-S42",
+        "learner": "L2",
+        "environment": "ENV-3",
+        "seed": 42
+      },
+      {
+        "cell_id": "L2-ENV-3-S123",
+        "learner": "L2",
+        "environment": "ENV-3",
+        "seed": 123
+      },
+      {
+        "cell_id": "L2-ENV-3-S456",
+        "learner": "L2",
+        "environment": "ENV-3",
+        "seed": 456
+      },
+      {
+        "cell_id": "L2-ENV-3-S789",
+        "learner": "L2",
+        "environment": "ENV-3",
+        "seed": 789
+      },
+      {
+        "cell_id": "L2-ENV-3-S1011",
+        "learner": "L2",
+        "environment": "ENV-3",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L2-ENV-4-S42",
+        "learner": "L2",
+        "environment": "ENV-4",
+        "seed": 42
+      },
+      {
+        "cell_id": "L2-ENV-4-S123",
+        "learner": "L2",
+        "environment": "ENV-4",
+        "seed": 123
+      },
+      {
+        "cell_id": "L2-ENV-4-S456",
+        "learner": "L2",
+        "environment": "ENV-4",
+        "seed": 456
+      },
+      {
+        "cell_id": "L2-ENV-4-S789",
+        "learner": "L2",
+        "environment": "ENV-4",
+        "seed": 789
+      },
+      {
+        "cell_id": "L2-ENV-4-S1011",
+        "learner": "L2",
+        "environment": "ENV-4",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L3-ENV-1-S42",
+        "learner": "L3",
+        "environment": "ENV-1",
+        "seed": 42
+      },
+      {
+        "cell_id": "L3-ENV-1-S123",
+        "learner": "L3",
+        "environment": "ENV-1",
+        "seed": 123
+      },
+      {
+        "cell_id": "L3-ENV-1-S456",
+        "learner": "L3",
+        "environment": "ENV-1",
+        "seed": 456
+      },
+      {
+        "cell_id": "L3-ENV-1-S789",
+        "learner": "L3",
+        "environment": "ENV-1",
+        "seed": 789
+      },
+      {
+        "cell_id": "L3-ENV-1-S1011",
+        "learner": "L3",
+        "environment": "ENV-1",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L3-ENV-2-S42",
+        "learner": "L3",
+        "environment": "ENV-2",
+        "seed": 42
+      },
+      {
+        "cell_id": "L3-ENV-2-S123",
+        "learner": "L3",
+        "environment": "ENV-2",
+        "seed": 123
+      },
+      {
+        "cell_id": "L3-ENV-2-S456",
+        "learner": "L3",
+        "environment": "ENV-2",
+        "seed": 456
+      },
+      {
+        "cell_id": "L3-ENV-2-S789",
+        "learner": "L3",
+        "environment": "ENV-2",
+        "seed": 789
+      },
+      {
+        "cell_id": "L3-ENV-2-S1011",
+        "learner": "L3",
+        "environment": "ENV-2",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L3-ENV-3-S42",
+        "learner": "L3",
+        "environment": "ENV-3",
+        "seed": 42
+      },
+      {
+        "cell_id": "L3-ENV-3-S123",
+        "learner": "L3",
+        "environment": "ENV-3",
+        "seed": 123
+      },
+      {
+        "cell_id": "L3-ENV-3-S456",
+        "learner": "L3",
+        "environment": "ENV-3",
+        "seed": 456
+      },
+      {
+        "cell_id": "L3-ENV-3-S789",
+        "learner": "L3",
+        "environment": "ENV-3",
+        "seed": 789
+      },
+      {
+        "cell_id": "L3-ENV-3-S1011",
+        "learner": "L3",
+        "environment": "ENV-3",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L3-ENV-4-S42",
+        "learner": "L3",
+        "environment": "ENV-4",
+        "seed": 42
+      },
+      {
+        "cell_id": "L3-ENV-4-S123",
+        "learner": "L3",
+        "environment": "ENV-4",
+        "seed": 123
+      },
+      {
+        "cell_id": "L3-ENV-4-S456",
+        "learner": "L3",
+        "environment": "ENV-4",
+        "seed": 456
+      },
+      {
+        "cell_id": "L3-ENV-4-S789",
+        "learner": "L3",
+        "environment": "ENV-4",
+        "seed": 789
+      },
+      {
+        "cell_id": "L3-ENV-4-S1011",
+        "learner": "L3",
+        "environment": "ENV-4",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L4-ENV-1-S42",
+        "learner": "L4",
+        "environment": "ENV-1",
+        "seed": 42
+      },
+      {
+        "cell_id": "L4-ENV-1-S123",
+        "learner": "L4",
+        "environment": "ENV-1",
+        "seed": 123
+      },
+      {
+        "cell_id": "L4-ENV-1-S456",
+        "learner": "L4",
+        "environment": "ENV-1",
+        "seed": 456
+      },
+      {
+        "cell_id": "L4-ENV-1-S789",
+        "learner": "L4",
+        "environment": "ENV-1",
+        "seed": 789
+      },
+      {
+        "cell_id": "L4-ENV-1-S1011",
+        "learner": "L4",
+        "environment": "ENV-1",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L4-ENV-2-S42",
+        "learner": "L4",
+        "environment": "ENV-2",
+        "seed": 42
+      },
+      {
+        "cell_id": "L4-ENV-2-S123",
+        "learner": "L4",
+        "environment": "ENV-2",
+        "seed": 123
+      },
+      {
+        "cell_id": "L4-ENV-2-S456",
+        "learner": "L4",
+        "environment": "ENV-2",
+        "seed": 456
+      },
+      {
+        "cell_id": "L4-ENV-2-S789",
+        "learner": "L4",
+        "environment": "ENV-2",
+        "seed": 789
+      },
+      {
+        "cell_id": "L4-ENV-2-S1011",
+        "learner": "L4",
+        "environment": "ENV-2",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L4-ENV-3-S42",
+        "learner": "L4",
+        "environment": "ENV-3",
+        "seed": 42
+      },
+      {
+        "cell_id": "L4-ENV-3-S123",
+        "learner": "L4",
+        "environment": "ENV-3",
+        "seed": 123
+      },
+      {
+        "cell_id": "L4-ENV-3-S456",
+        "learner": "L4",
+        "environment": "ENV-3",
+        "seed": 456
+      },
+      {
+        "cell_id": "L4-ENV-3-S789",
+        "learner": "L4",
+        "environment": "ENV-3",
+        "seed": 789
+      },
+      {
+        "cell_id": "L4-ENV-3-S1011",
+        "learner": "L4",
+        "environment": "ENV-3",
+        "seed": 1011
+      },
+      {
+        "cell_id": "L4-ENV-4-S42",
+        "learner": "L4",
+        "environment": "ENV-4",
+        "seed": 42
+      },
+      {
+        "cell_id": "L4-ENV-4-S123",
+        "learner": "L4",
+        "environment": "ENV-4",
+        "seed": 123
+      },
+      {
+        "cell_id": "L4-ENV-4-S456",
+        "learner": "L4",
+        "environment": "ENV-4",
+        "seed": 456
+      },
+      {
+        "cell_id": "L4-ENV-4-S789",
+        "learner": "L4",
+        "environment": "ENV-4",
+        "seed": 789
+      },
+      {
+        "cell_id": "L4-ENV-4-S1011",
+        "learner": "L4",
+        "environment": "ENV-4",
+        "seed": 1011
+      }
+    ],
+    "paired_rule": "same environment + seed + factual rows + nuisance target/value for candidate and L0",
+    "primary_metric": "Delta_N = Perf_factual - Perf_do(N); smaller absolute degradation is better",
+    "leakage_metric": "max nuisance leakage_score emitted by the frozen DependencyAnalyzer probe",
+    "retained_utility_metric": "factual downstream classification accuracy using M3 LogisticRegression semantics",
+    "do_N_response": "mean absolute representation shift and invariance_score = 1/(1+mean_shift)",
+    "closure_rule": {
+      "SUPPORTED": "paired mean absolute Delta_N lower than L0, paired mean leakage lower/equal to L0, and paired mean factual predictive utility retained relative to L0",
+      "NOT_SUPPORTED": "valid comparable evidence where leakage or task degradation is not improved, or apparent invariance loses useful predictive signal",
+      "INCONCLUSIVE": "required comparable evidence missing/invalid or nuisance cannot be cleanly isolated",
+      "DEGENERATE": "evidence flag only; final label remains NOT_SUPPORTED"
+    },
+    "environment_semantics": {
+      "ENV-1": "task-preserving nuisance intervention supported",
+      "ENV-2": "task-preserving nuisance intervention supported",
+      "ENV-3": "existing do(N) recomputes Y and labels; retain as inapplicable/inconclusive for task-preserving H3 evidence",
+      "ENV-4": "task-preserving shortcut/nuisance intervention supported"
+    },
+    "failed_cell_policy": "retain failed/null/inapplicable evidence; no replacement, silent retry, or seed substitution"
+  },
+  "v1_execution_manifest_sha256": "045da7b6b9b1ac0cb0045d72e0166d22f71839c895928ca9d129396ce72c5aad",
+  "v1_preservation_manifest_sha256": "f7aa648559e66ec2d884406b960aff511d73af042af9e7c49d6a59402f8ddfeb",
+  "source_manifest_sha256": "8edf260aafa71524181dcdc31bea8d892fc6aa6d32d8a74358e60c3f39361f72",
+  "runtime_manifest_sha256": "5c7d9d9fbb4aa1ccf4e5e71db095cc87d286a3538e4f928cf4a0d2dbd6e69f9b",
+  "m3_protocol_sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a",
+  "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+  "matrix": [
+    {
+      "cell_id": "L0-ENV-1-S42",
+      "learner": "L0",
+      "environment": "ENV-1",
+      "seed": 42
+    },
+    {
+      "cell_id": "L0-ENV-1-S123",
+      "learner": "L0",
+      "environment": "ENV-1",
+      "seed": 123
+    },
+    {
+      "cell_id": "L0-ENV-1-S456",
+      "learner": "L0",
+      "environment": "ENV-1",
+      "seed": 456
+    },
+    {
+      "cell_id": "L0-ENV-1-S789",
+      "learner": "L0",
+      "environment": "ENV-1",
+      "seed": 789
+    },
+    {
+      "cell_id": "L0-ENV-1-S1011",
+      "learner": "L0",
+      "environment": "ENV-1",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L0-ENV-2-S42",
+      "learner": "L0",
+      "environment": "ENV-2",
+      "seed": 42
+    },
+    {
+      "cell_id": "L0-ENV-2-S123",
+      "learner": "L0",
+      "environment": "ENV-2",
+      "seed": 123
+    },
+    {
+      "cell_id": "L0-ENV-2-S456",
+      "learner": "L0",
+      "environment": "ENV-2",
+      "seed": 456
+    },
+    {
+      "cell_id": "L0-ENV-2-S789",
+      "learner": "L0",
+      "environment": "ENV-2",
+      "seed": 789
+    },
+    {
+      "cell_id": "L0-ENV-2-S1011",
+      "learner": "L0",
+      "environment": "ENV-2",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L0-ENV-3-S42",
+      "learner": "L0",
+      "environment": "ENV-3",
+      "seed": 42
+    },
+    {
+      "cell_id": "L0-ENV-3-S123",
+      "learner": "L0",
+      "environment": "ENV-3",
+      "seed": 123
+    },
+    {
+      "cell_id": "L0-ENV-3-S456",
+      "learner": "L0",
+      "environment": "ENV-3",
+      "seed": 456
+    },
+    {
+      "cell_id": "L0-ENV-3-S789",
+      "learner": "L0",
+      "environment": "ENV-3",
+      "seed": 789
+    },
+    {
+      "cell_id": "L0-ENV-3-S1011",
+      "learner": "L0",
+      "environment": "ENV-3",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L0-ENV-4-S42",
+      "learner": "L0",
+      "environment": "ENV-4",
+      "seed": 42
+    },
+    {
+      "cell_id": "L0-ENV-4-S123",
+      "learner": "L0",
+      "environment": "ENV-4",
+      "seed": 123
+    },
+    {
+      "cell_id": "L0-ENV-4-S456",
+      "learner": "L0",
+      "environment": "ENV-4",
+      "seed": 456
+    },
+    {
+      "cell_id": "L0-ENV-4-S789",
+      "learner": "L0",
+      "environment": "ENV-4",
+      "seed": 789
+    },
+    {
+      "cell_id": "L0-ENV-4-S1011",
+      "learner": "L0",
+      "environment": "ENV-4",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L1-ENV-1-S42",
+      "learner": "L1",
+      "environment": "ENV-1",
+      "seed": 42
+    },
+    {
+      "cell_id": "L1-ENV-1-S123",
+      "learner": "L1",
+      "environment": "ENV-1",
+      "seed": 123
+    },
+    {
+      "cell_id": "L1-ENV-1-S456",
+      "learner": "L1",
+      "environment": "ENV-1",
+      "seed": 456
+    },
+    {
+      "cell_id": "L1-ENV-1-S789",
+      "learner": "L1",
+      "environment": "ENV-1",
+      "seed": 789
+    },
+    {
+      "cell_id": "L1-ENV-1-S1011",
+      "learner": "L1",
+      "environment": "ENV-1",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L1-ENV-2-S42",
+      "learner": "L1",
+      "environment": "ENV-2",
+      "seed": 42
+    },
+    {
+      "cell_id": "L1-ENV-2-S123",
+      "learner": "L1",
+      "environment": "ENV-2",
+      "seed": 123
+    },
+    {
+      "cell_id": "L1-ENV-2-S456",
+      "learner": "L1",
+      "environment": "ENV-2",
+      "seed": 456
+    },
+    {
+      "cell_id": "L1-ENV-2-S789",
+      "learner": "L1",
+      "environment": "ENV-2",
+      "seed": 789
+    },
+    {
+      "cell_id": "L1-ENV-2-S1011",
+      "learner": "L1",
+      "environment": "ENV-2",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L1-ENV-3-S42",
+      "learner": "L1",
+      "environment": "ENV-3",
+      "seed": 42
+    },
+    {
+      "cell_id": "L1-ENV-3-S123",
+      "learner": "L1",
+      "environment": "ENV-3",
+      "seed": 123
+    },
+    {
+      "cell_id": "L1-ENV-3-S456",
+      "learner": "L1",
+      "environment": "ENV-3",
+      "seed": 456
+    },
+    {
+      "cell_id": "L1-ENV-3-S789",
+      "learner": "L1",
+      "environment": "ENV-3",
+      "seed": 789
+    },
+    {
+      "cell_id": "L1-ENV-3-S1011",
+      "learner": "L1",
+      "environment": "ENV-3",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L1-ENV-4-S42",
+      "learner": "L1",
+      "environment": "ENV-4",
+      "seed": 42
+    },
+    {
+      "cell_id": "L1-ENV-4-S123",
+      "learner": "L1",
+      "environment": "ENV-4",
+      "seed": 123
+    },
+    {
+      "cell_id": "L1-ENV-4-S456",
+      "learner": "L1",
+      "environment": "ENV-4",
+      "seed": 456
+    },
+    {
+      "cell_id": "L1-ENV-4-S789",
+      "learner": "L1",
+      "environment": "ENV-4",
+      "seed": 789
+    },
+    {
+      "cell_id": "L1-ENV-4-S1011",
+      "learner": "L1",
+      "environment": "ENV-4",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L2-ENV-1-S42",
+      "learner": "L2",
+      "environment": "ENV-1",
+      "seed": 42
+    },
+    {
+      "cell_id": "L2-ENV-1-S123",
+      "learner": "L2",
+      "environment": "ENV-1",
+      "seed": 123
+    },
+    {
+      "cell_id": "L2-ENV-1-S456",
+      "learner": "L2",
+      "environment": "ENV-1",
+      "seed": 456
+    },
+    {
+      "cell_id": "L2-ENV-1-S789",
+      "learner": "L2",
+      "environment": "ENV-1",
+      "seed": 789
+    },
+    {
+      "cell_id": "L2-ENV-1-S1011",
+      "learner": "L2",
+      "environment": "ENV-1",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L2-ENV-2-S42",
+      "learner": "L2",
+      "environment": "ENV-2",
+      "seed": 42
+    },
+    {
+      "cell_id": "L2-ENV-2-S123",
+      "learner": "L2",
+      "environment": "ENV-2",
+      "seed": 123
+    },
+    {
+      "cell_id": "L2-ENV-2-S456",
+      "learner": "L2",
+      "environment": "ENV-2",
+      "seed": 456
+    },
+    {
+      "cell_id": "L2-ENV-2-S789",
+      "learner": "L2",
+      "environment": "ENV-2",
+      "seed": 789
+    },
+    {
+      "cell_id": "L2-ENV-2-S1011",
+      "learner": "L2",
+      "environment": "ENV-2",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L2-ENV-3-S42",
+      "learner": "L2",
+      "environment": "ENV-3",
+      "seed": 42
+    },
+    {
+      "cell_id": "L2-ENV-3-S123",
+      "learner": "L2",
+      "environment": "ENV-3",
+      "seed": 123
+    },
+    {
+      "cell_id": "L2-ENV-3-S456",
+      "learner": "L2",
+      "environment": "ENV-3",
+      "seed": 456
+    },
+    {
+      "cell_id": "L2-ENV-3-S789",
+      "learner": "L2",
+      "environment": "ENV-3",
+      "seed": 789
+    },
+    {
+      "cell_id": "L2-ENV-3-S1011",
+      "learner": "L2",
+      "environment": "ENV-3",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L2-ENV-4-S42",
+      "learner": "L2",
+      "environment": "ENV-4",
+      "seed": 42
+    },
+    {
+      "cell_id": "L2-ENV-4-S123",
+      "learner": "L2",
+      "environment": "ENV-4",
+      "seed": 123
+    },
+    {
+      "cell_id": "L2-ENV-4-S456",
+      "learner": "L2",
+      "environment": "ENV-4",
+      "seed": 456
+    },
+    {
+      "cell_id": "L2-ENV-4-S789",
+      "learner": "L2",
+      "environment": "ENV-4",
+      "seed": 789
+    },
+    {
+      "cell_id": "L2-ENV-4-S1011",
+      "learner": "L2",
+      "environment": "ENV-4",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L3-ENV-1-S42",
+      "learner": "L3",
+      "environment": "ENV-1",
+      "seed": 42
+    },
+    {
+      "cell_id": "L3-ENV-1-S123",
+      "learner": "L3",
+      "environment": "ENV-1",
+      "seed": 123
+    },
+    {
+      "cell_id": "L3-ENV-1-S456",
+      "learner": "L3",
+      "environment": "ENV-1",
+      "seed": 456
+    },
+    {
+      "cell_id": "L3-ENV-1-S789",
+      "learner": "L3",
+      "environment": "ENV-1",
+      "seed": 789
+    },
+    {
+      "cell_id": "L3-ENV-1-S1011",
+      "learner": "L3",
+      "environment": "ENV-1",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L3-ENV-2-S42",
+      "learner": "L3",
+      "environment": "ENV-2",
+      "seed": 42
+    },
+    {
+      "cell_id": "L3-ENV-2-S123",
+      "learner": "L3",
+      "environment": "ENV-2",
+      "seed": 123
+    },
+    {
+      "cell_id": "L3-ENV-2-S456",
+      "learner": "L3",
+      "environment": "ENV-2",
+      "seed": 456
+    },
+    {
+      "cell_id": "L3-ENV-2-S789",
+      "learner": "L3",
+      "environment": "ENV-2",
+      "seed": 789
+    },
+    {
+      "cell_id": "L3-ENV-2-S1011",
+      "learner": "L3",
+      "environment": "ENV-2",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L3-ENV-3-S42",
+      "learner": "L3",
+      "environment": "ENV-3",
+      "seed": 42
+    },
+    {
+      "cell_id": "L3-ENV-3-S123",
+      "learner": "L3",
+      "environment": "ENV-3",
+      "seed": 123
+    },
+    {
+      "cell_id": "L3-ENV-3-S456",
+      "learner": "L3",
+      "environment": "ENV-3",
+      "seed": 456
+    },
+    {
+      "cell_id": "L3-ENV-3-S789",
+      "learner": "L3",
+      "environment": "ENV-3",
+      "seed": 789
+    },
+    {
+      "cell_id": "L3-ENV-3-S1011",
+      "learner": "L3",
+      "environment": "ENV-3",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L3-ENV-4-S42",
+      "learner": "L3",
+      "environment": "ENV-4",
+      "seed": 42
+    },
+    {
+      "cell_id": "L3-ENV-4-S123",
+      "learner": "L3",
+      "environment": "ENV-4",
+      "seed": 123
+    },
+    {
+      "cell_id": "L3-ENV-4-S456",
+      "learner": "L3",
+      "environment": "ENV-4",
+      "seed": 456
+    },
+    {
+      "cell_id": "L3-ENV-4-S789",
+      "learner": "L3",
+      "environment": "ENV-4",
+      "seed": 789
+    },
+    {
+      "cell_id": "L3-ENV-4-S1011",
+      "learner": "L3",
+      "environment": "ENV-4",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L4-ENV-1-S42",
+      "learner": "L4",
+      "environment": "ENV-1",
+      "seed": 42
+    },
+    {
+      "cell_id": "L4-ENV-1-S123",
+      "learner": "L4",
+      "environment": "ENV-1",
+      "seed": 123
+    },
+    {
+      "cell_id": "L4-ENV-1-S456",
+      "learner": "L4",
+      "environment": "ENV-1",
+      "seed": 456
+    },
+    {
+      "cell_id": "L4-ENV-1-S789",
+      "learner": "L4",
+      "environment": "ENV-1",
+      "seed": 789
+    },
+    {
+      "cell_id": "L4-ENV-1-S1011",
+      "learner": "L4",
+      "environment": "ENV-1",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L4-ENV-2-S42",
+      "learner": "L4",
+      "environment": "ENV-2",
+      "seed": 42
+    },
+    {
+      "cell_id": "L4-ENV-2-S123",
+      "learner": "L4",
+      "environment": "ENV-2",
+      "seed": 123
+    },
+    {
+      "cell_id": "L4-ENV-2-S456",
+      "learner": "L4",
+      "environment": "ENV-2",
+      "seed": 456
+    },
+    {
+      "cell_id": "L4-ENV-2-S789",
+      "learner": "L4",
+      "environment": "ENV-2",
+      "seed": 789
+    },
+    {
+      "cell_id": "L4-ENV-2-S1011",
+      "learner": "L4",
+      "environment": "ENV-2",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L4-ENV-3-S42",
+      "learner": "L4",
+      "environment": "ENV-3",
+      "seed": 42
+    },
+    {
+      "cell_id": "L4-ENV-3-S123",
+      "learner": "L4",
+      "environment": "ENV-3",
+      "seed": 123
+    },
+    {
+      "cell_id": "L4-ENV-3-S456",
+      "learner": "L4",
+      "environment": "ENV-3",
+      "seed": 456
+    },
+    {
+      "cell_id": "L4-ENV-3-S789",
+      "learner": "L4",
+      "environment": "ENV-3",
+      "seed": 789
+    },
+    {
+      "cell_id": "L4-ENV-3-S1011",
+      "learner": "L4",
+      "environment": "ENV-3",
+      "seed": 1011
+    },
+    {
+      "cell_id": "L4-ENV-4-S42",
+      "learner": "L4",
+      "environment": "ENV-4",
+      "seed": 42
+    },
+    {
+      "cell_id": "L4-ENV-4-S123",
+      "learner": "L4",
+      "environment": "ENV-4",
+      "seed": 123
+    },
+    {
+      "cell_id": "L4-ENV-4-S456",
+      "learner": "L4",
+      "environment": "ENV-4",
+      "seed": 456
+    },
+    {
+      "cell_id": "L4-ENV-4-S789",
+      "learner": "L4",
+      "environment": "ENV-4",
+      "seed": 789
+    },
+    {
+      "cell_id": "L4-ENV-4-S1011",
+      "learner": "L4",
+      "environment": "ENV-4",
+      "seed": 1011
+    }
+  ],
+  "cell_count": 100,
+  "one_attempt_no_retry_policy": true,
+  "canonical_metadata_hash": {
+    "algorithm": "H3-CANONICAL-NESTED-SHA256-v1",
+    "dictionary_keys": "sorted",
+    "ndarray": "dtype+shape+C-order-bytes"
+  },
+  "scientific_reconciliation_rule": "project every v2 object onto v1 scientific keys, excluding provenance; exact JSON equality; additive v2 provenance/causal-isolation fields ignored",
+  "numerical_comparison_policy": "exact emitted JSON scalar equality; no tolerance",
+  "commands": {
+    "freeze": "python pipeline/run_h3_correction_v2.py freeze",
+    "smoke": "python pipeline/run_h3_correction_v2.py smoke",
+    "matrix": "python pipeline/run_h3_correction_v2.py run",
+    "aggregate": "python pipeline/run_h3_correction_v2.py aggregate",
+    "reconcile": "python pipeline/run_h3_correction_v2.py reconcile",
+    "verify_v1_after": "python pipeline/run_h3_correction_v2.py verify-v1-after",
+    "compile": "python -m py_compile pipeline/run_h3_closure.py pipeline/run_h3_correction_v2.py",
+    "focused_tests": "python -m pytest tests/test_h3_correction_v2.py -q -p no:cacheprovider --basetemp artifacts/h3_v2_pytest_focused_20260909",
+    "regression_tests": "python -m pytest tests/test_h3_closure.py tests/test_h2_closure.py tests/test_learner_contract.py tests/test_real_learners.py tests/test_h3_correction_v2.py -q -p no:cacheprovider --basetemp artifacts/h3_v2_pytest_regression_20260909"
+  },
+  "expected_outputs": [
+    "experiments/OIR_PPV/H3_Closure/EXP-H3-001/correction_v2/h3_smoke_evidence_v2.json",
+    "artifacts/h3_closure/EXP-H3-001/correction_v2/matrix_execution_v2.json",
+    "experiments/OIR_PPV/H3_Closure/EXP-H3-001/correction_v2/artifact_reconciliation_v2.json",
+    "experiments/OIR_PPV/H3_Closure/EXP-H3-001/correction_v2/h3_summary_v2.json",
+    "experiments/OIR_PPV/H3_Closure/EXP-H3-001/correction_v2/H3_CLOSURE_REPORT_v2.md",
+    "artifacts/h3_closure/EXP-H3-001/correction_v2/execution_log_v2.jsonl"
+  ],
+  "raw_latent_shift_role": "SCALE_SENSITIVE_DIAGNOSTIC_ONLY",
+  "selected_targets": {
+    "ENV-1": "background_noise",
+    "ENV-2": "occlusion",
+    "ENV-3": "do(N)",
+    "ENV-4": "spurious_feature"
+  }
+}

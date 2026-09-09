@@ -1,100 +1,364 @@
-# OIR-PPV Theory
+# Theory
 
-## 1. Problem Definition
+E={(S_t,A_t,Y_t,Z_t,N_t)}
 
-An environment produces observations:
+I=f(E)
+
+X=G(I,Z,N)
+
+I*=argmin_I[C(I)+lambda L(E|I)]
+
+SCM:
+S(t+1)=F_S(S,A,Z,U_S)
+A=F_A(I,S,Z,U_A)
+Y=F_Y(S,A,Z,U_Y)
+============================================
+# OIR-PPV Theory Specification v1.0
+
+# 1. Formal Environment Model
+
+Một environment sinh experience:
 
 \[
-E=(S,A,Y,Z,N)
+E=
+\{(S_t,A_t,Y_t,Z_t,N_t)\}_{t=1}^{T}
 \]
 
-where:
 
-- \(S\): system state,
-- \(A\): action or intervention variable,
-- \(Y\): target outcome,
-- \(Z\): context variable,
-- \(N\): nuisance variable.
+Trong đó:
 
-The objective is to learn a representation:
+| Symbol | Meaning |
+|-|-|
+| S | state |
+| A | action |
+| Y | outcome |
+| Z | context |
+| N | nuisance |
+
+---
+
+# 2. Structural Causal Model
+
+Hệ thống được mô hình hóa:
+
+\[
+S_{t+1}
+=
+F_S(S_t,A_t,Z_t,U_S)
+\]
+
+
+\[
+A_t
+=
+F_A(I,S_t,Z_t,U_A)
+\]
+
+
+\[
+Y_t
+=
+F_Y(S_t,A_t,Z_t,U_Y)
+\]
+
+
+Invariant I ảnh hưởng tới policy nhưng không phụ thuộc nuisance.
+
+---
+
+# 3. Invariant Representation
+
+Mục tiêu:
 
 \[
 I=f(E)
 \]
 
-that captures stable structure while reducing dependence on nuisance variation.
 
-## 2. Invariant Representation
+Một invariant tốt phải giữ:
 
-The desired property is that the predictive relationship remains stable across environments:
+- predictive information;
+- causal information;
+- transfer ability.
+
+---
+
+# 4. Minimal Invariant Objective
+
+Không giả định invariant tối giản tuyệt đối.
+
+Định nghĩa:
 
 \[
-P(Y|I,Z_i) \approx P(Y|I,Z_j)
+I^*
+=
+\arg\min_I
+[
+C(I)
++
+\lambda L(E|I)
+]
 \]
 
-for different contexts \(Z_i,Z_j\).
 
-Shortcut resistance is evaluated by measuring dependence between invariant representation and nuisance factors:
+Trong đó:
+
+## Complexity
+
+\[
+C(I)
+=
+\alpha d_I
++
+\beta DL(I)
++
+\gamma Params(I)
+\]
+
+
+## Explanation loss
+
+\[
+L(E|I)
+\]
+
+đo lượng thông tin mất khi chỉ sử dụng invariant.
+
+Claim:
+
+\[
+Empirically\ minimal
+under\ defined\ complexity
+\]
+
+---
+
+# 5. Invariance Constraint
+
+Invariant không được encode nuisance:
 
 \[
 I \perp N
 \]
 
-## 3. Generation Hypothesis
 
-OIR-PPV extends evaluation from representation quality to manifestation generation.
+Thực nghiệm:
 
-The generator is defined as:
-
-\[
-X_{new}=G(I,Z_{new},N)
-\]
-
-The generated manifestation must preserve the invariant mechanism while allowing controlled context variation.
-
-## 4. Intervention Validation
-
-The benchmark uses a structural causal model:
+Khi thay:
 
 \[
-SCM=(U,V,F)
+do(N=n_1)
 \]
 
-and evaluates intervention stability:
+sang:
 
 \[
-P(Y|do(A),I)
+do(N=n_2)
 \]
 
-across environments.
-
-## 5. Core Evaluation Metrics
-
-### Generalization
+policy phải ổn định:
 
 \[
-Perf(I,Z_{new}) > Perf(Baseline,Z_{new})
+D(
+\pi_I(N_1),
+\pi_I(N_2)
+)
+\rightarrow min
 \]
 
-### Causal Stability
+---
 
-Compare intervention outcomes under controlled changes:
+# 6. Generator Model
+
+Invariant phải sinh manifestation:
 
 \[
-\Delta_{causal}=P(Y|do(A),I,Z_1)-P(Y|do(A),I,Z_2)
+X=G(I,Z,N)
 \]
 
-### Generation Validity
 
-Generated samples are evaluated for preservation of invariant factors and correct response to context changes.
+Một generator tốt:
 
-## 6. Research Position
+- giữ invariant;
+- thay đổi context;
+- cho phép variation hợp lệ.
 
-OIR-PPV evaluates the complete chain:
+---
+
+# 7. Intervention Model
+
+## Context intervention
 
 \[
-E \rightarrow I \rightarrow G(I,Z,N) \rightarrow X' \rightarrow SCM \rightarrow Counterfactual
+do(Z=z')
 \]
 
-The contribution is a unified benchmark protocol connecting invariant learning, generation, and causal validation.
 
+Mục tiêu:
+
+Test transfer.
+
+---
+
+## Nuisance intervention
+
+\[
+do(N=n')
+\]
+
+
+Mục tiêu:
+
+Test robustness.
+
+---
+
+## Action intervention
+
+\[
+do(A=a')
+\]
+
+
+Mục tiêu:
+
+Test causal response.
+
+---
+
+# 8. Counterfactual Validation
+
+Counterfactual:
+
+\[
+Y^{cf}(z')
+=
+Y(do(Z=z'))
+\]
+
+
+Sai số:
+
+\[
+D_{cf}
+=
+d(
+\hat Y^{cf},
+Y^{cf}_{SCM}
+)
+\]
+
+
+Điều kiện:
+
+Ground truth phải đến từ SCM/environment.
+
+Không được dùng:
+
+\[
+Generator
+\rightarrow
+GroundTruth
+\]
+
+vì gây circular evaluation.
+
+---
+
+# 9. Hypotheses
+
+## H1 Compression
+
+Invariant đạt trade-off tốt hơn:
+
+\[
+C(I)<C(M)
+\]
+
+với:
+
+\[
+Performance_I
+\geq
+Performance_M
+\]
+
+
+---
+
+## H2 Transfer
+
+Context mới:
+
+\[
+\Delta_{new}
+=
+Perf_{I,new}
+-
+Perf_{baseline,new}
+>0
+\]
+
+
+---
+
+## H3 Nuisance Robustness
+
+\[
+D(
+\pi_I(N_1),
+\pi_I(N_2)
+)
+<
+D(
+\pi_M(N_1),
+\pi_M(N_2)
+)
+\]
+
+
+---
+
+## H4 Counterfactual Accuracy
+
+\[
+D_{cf}(I)
+<
+D_{cf}(M)
+\]
+
+
+---
+
+## H5 Minimal Sufficiency
+
+Ablation:
+
+Loại thành phần quan trọng:
+
+\[
+\Delta Performance<0
+\]
+
+
+Thêm thành phần dư thừa:
+
+\[
+\Delta Transfer\leq0
+\]
+
+---
+
+# 10. Success Criteria
+
+OIR-PPV được hỗ trợ nếu:
+
+1. invariant model vượt baseline trên novel context;
+2. giữ policy dưới nuisance shift;
+3. giảm counterfactual error;
+4. generator sinh manifestation hợp lệ;
+5. kết quả lặp lại qua nhiều seed.
+
+Nếu không đạt:
+
+Giả thuyết bị bác bỏ.

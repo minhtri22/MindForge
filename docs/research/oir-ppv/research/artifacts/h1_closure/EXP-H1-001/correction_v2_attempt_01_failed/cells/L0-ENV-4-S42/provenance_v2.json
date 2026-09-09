@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "correction": "DEV_TASK_009_FIX_01",
+  "correction_version": "v2",
+  "mode": "derived_accounting_deterministic_reconstruction",
+  "cell_id": "L0-ENV-4-S42",
+  "condition": "L0",
+  "environment": "ENV-4",
+  "seed": 42,
+  "git": {
+    "branch": "oir-ppv-research",
+    "head": "0521c5754a32e2625930de75fe2635c6ce5ec9a0",
+    "dirty": true
+  },
+  "protocol_sha256": "8d055da087c9032f9d8e4ae310c07ee2d6eef99c4526e241222430f1d934f7d3",
+  "matrix_sha256": "55127d173e36028e069c841331b9807ee0dc4948241408c110b3a460be21823c",
+  "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+  "original_results_sha256": "f7b0a356a7c18e76277037d197f6f03ed8ee9ad581ce8d0e280e60e429abb1a0",
+  "original_complexity_sha256": "d26aa1c5e2a20d774aa239a8b41f71bdd9a2195ea14f3924e5f404c16624cb25",
+  "canonical_serialization": {
+    "method": "pickle protocol 5 over minimal replayable X->I payload",
+    "included_components": [
+      "table_encoder",
+      "pca",
+      "_fitted"
+    ],
+    "excluded_training_only_components": [
+      "rng",
+      "seed",
+      "output_dim",
+      "fit_metadata"
+    ],
+    "deterministic_repeat_equal": true,
+    "exact_representation_replay": true,
+    "reconstructed_utility_matches_original": true
+  },
+  "dependencies": {
+    "python": "3.13.12",
+    "numpy": "2.4.4",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.1",
+    "torch": "2.12.0+cpu"
+  },
+  "corrected_complexity_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\artifacts\\h1_closure\\EXP-H1-001\\correction_v2\\cells\\L0-ENV-4-S42\\complexity_v2.json"
+}

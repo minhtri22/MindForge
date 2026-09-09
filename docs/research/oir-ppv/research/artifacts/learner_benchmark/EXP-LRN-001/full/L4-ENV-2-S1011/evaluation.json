@@ -1,0 +1,40 @@
+{
+  "invariant_metrics": {
+    "invariance_score": 0.7812353336099154,
+    "context_sensitivity": 0.3620518419114247,
+    "nuisance_sensitivity": 0.2800240298646267,
+    "predictive_utility": 0.95625,
+    "effective_rank": 8,
+    "explained_variance": 1.0,
+    "config_hash": "46895f035f484036"
+  },
+  "generation_metrics": {
+    "reconstruction_mse": 0.20609759197277003,
+    "reconstruction_mae": 0.3492430858798937,
+    "invariant_preservation": 0.4805672764778137,
+    "context_response": 0.0,
+    "diversity_score": 0.32817687858350375,
+    "novelty_score": 1.3041781853638996,
+    "distribution_similarity": 0.5695059167498899,
+    "config_hash": "46895f035f484036"
+  },
+  "overall_score": 0.6071599428910209,
+  "timestamp": "2026-09-08T21:32:14.434650",
+  "generalization": {
+    "train_environment_score": 0.9984101748807631,
+    "seen_environment_score": 0.395,
+    "unseen_environment_score": null,
+    "generalization_delta": null,
+    "generalization_delta_direction": "unseen_minus_train",
+    "missing_reason": "no non-empty OOD split",
+    "task_metrics": {
+      "task_type": "classification",
+      "accuracy": 0.395,
+      "auroc": 0.66655,
+      "auroc_missing_reason": null,
+      "r2": null,
+      "r2_missing_reason": "classification task"
+    },
+    "ood_split": "ood"
+  }
+}

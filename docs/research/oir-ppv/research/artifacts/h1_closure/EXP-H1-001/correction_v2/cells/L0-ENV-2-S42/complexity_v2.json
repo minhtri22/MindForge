@@ -1,0 +1,44 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "cell_id": "L0-ENV-2-S42",
+  "condition": "L0",
+  "environment": "ENV-2",
+  "seed": 42,
+  "input_dimension": 15,
+  "representation_dimension": 8,
+  "effective_rank": 8,
+  "trainable_parameter_count": 159,
+  "model_bytes": 1614,
+  "retained_state_bytes": 0,
+  "retained_state_bytes_per_training_sample": 0.0,
+  "c_total_bytes": 1614,
+  "serialized_artifact_bytes": 1614,
+  "train_cpu_seconds": 0.0,
+  "inference_cpu_seconds": 0.0,
+  "peak_process_memory_bytes": null,
+  "measurement_method": {
+    "common_task_head": "LogisticRegression(max_iter=1000, random_state=seed), excluded from C_total",
+    "state": "pickle protocol 5 canonical X->I inference payload",
+    "runtime_class": "EncoderWrapper",
+    "wrapped_runtime_class": "PCAEncoder",
+    "canonical_format": "oir-ppv-h1-canonical-inference-state-v2",
+    "included_components": [
+      "table_encoder",
+      "pca.components_",
+      "pca.mean_"
+    ],
+    "excluded_training_only_components": [
+      "rng",
+      "seed",
+      "output_dim",
+      "fit_metadata",
+      "PCA training diagnostics"
+    ],
+    "derived_from_frozen_cell": "L0-ENV-2-S42"
+  },
+  "limitations": [
+    "peak process memory not measured reliably on this Windows run"
+  ],
+  "correction_version": "v2",
+  "original_model_bytes": 2741
+}

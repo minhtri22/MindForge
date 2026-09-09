@@ -1,0 +1,40 @@
+{
+  "protocol": "controlled_comparison_v1",
+  "seed": 42,
+  "tolerance": 1e-09,
+  "split_identifiers": {
+    "environment": "ENV-3",
+    "train_split": "train",
+    "test_split": "test",
+    "train_samples": 120,
+    "test_samples": 60
+  },
+  "metrics": {
+    "placeholder": {
+      "definition": "PCA representation plus seeded random manifestation generator",
+      "reconstruction_mse": 0.4448829313300041,
+      "predictive_accuracy": 0.8166666666666667
+    },
+    "untrained": {
+      "definition": "evaluation-only initialized random encoder and decoder forward pass",
+      "reconstruction_mse": 0.2127152114204332,
+      "predictive_accuracy": 0.7833333333333333
+    },
+    "trained": {
+      "definition": "AutoencoderEncoder and MLPDecoder fitted on the training split",
+      "reconstruction_mse": 0.2333491529164222,
+      "predictive_accuracy": 0.8166666666666667,
+      "encoder_initial_loss": 1.1019386030175522,
+      "encoder_final_loss": 0.9961870997066534,
+      "decoder_initial_loss": 0.9808643179341607,
+      "decoder_final_loss": 0.8751746981608235
+    }
+  },
+  "checks": {
+    "encoder_loss_decreased": true,
+    "decoder_loss_decreased": true,
+    "trained_mse_below_untrained": false,
+    "trained_mse_below_placeholder": true
+  },
+  "learning_demonstrated": false
+}

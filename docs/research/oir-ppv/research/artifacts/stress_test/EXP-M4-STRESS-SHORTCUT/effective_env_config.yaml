@@ -1,0 +1,94 @@
+context_variables:
+- distribution: uniform
+  domain_shortcut_strength:
+    domain_A: 0.9
+    domain_B: 0.3
+  name: domain
+  type: categorical
+  values:
+  - domain_A
+  - domain_B
+environment:
+  family: ENV-4
+  name: Adversarial Shortcut
+  version: '1.0'
+generation:
+  mechanism: shortcut_injection
+  num_samples: 10000
+  test_ratio: 0.15
+  train_ratio: 0.7
+  val_ratio: 0.15
+intervention_targets:
+- spurious_feature
+- background_color
+- rotation
+- domain
+ood_splits:
+- description: Test set where spurious correlation is removed
+  name: shortcut_broken
+  shortcut_strength: 0.0
+- description: Test set with reversed correlation
+  name: reversed_shortcut
+  train_conditional_means:
+    0: 1.5
+    1: 0.0
+    2: -1.5
+- holdout:
+  - domain_B
+  name: unseen_domain
+other_nuisance:
+- distribution: uniform
+  name: background_color
+  type: categorical
+  values:
+  - red
+  - green
+  - blue
+- distribution: uniform
+  name: rotation
+  params:
+    high: 3.14
+    low: -3.14
+  type: continuous
+shortcut:
+  correlation_strength: 0.9
+  injection_method: conditional
+  nuisance_variable:
+    distribution: normal
+    name: spurious_feature
+    params:
+      mean: 0.0
+      std: 1.0
+    type: continuous
+  test_conditional_means:
+    0: 2.0
+    1: 0.0
+    2: -2.0
+  train_conditional_means:
+    0: -1.5
+    1: 0.0
+    2: 1.5
+true_mechanism:
+  outcome:
+    determined_by:
+    - core_category
+    mapping:
+      cat_0: 0
+      cat_1: 1
+      cat_2: 2
+    name: true_label
+    type: categorical
+  structural_variables:
+  - distribution: normal
+    name: core_feature
+    params:
+      mean: 0.0
+      std: 1.0
+    type: continuous
+  - distribution: uniform
+    name: core_category
+    type: categorical
+    values:
+    - cat_0
+    - cat_1
+    - cat_2

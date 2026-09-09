@@ -1,0 +1,22 @@
+{
+  "learner_id": "L2",
+  "display_name": "Variational Autoencoder",
+  "type": "VAE",
+  "fidelity": "adapted",
+  "paper": "Kingma and Welling, 2013, Auto-Encoding Variational Bayes, arXiv:1312.6114",
+  "implementation_source": "project-owned PyTorch implementation",
+  "params": {
+    "output_dim": 8,
+    "hidden_dim": 24,
+    "learning_rate": 0.005,
+    "epochs": 4,
+    "beta": 0.1
+  },
+  "deviations": "Compact full-batch VAE; posterior mean is used for deterministic evaluation.",
+  "seed": 789,
+  "environment_id": "ENV-4",
+  "config_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L2-ENV-4-S789.yaml",
+  "config_sha256": "0f551016f1a36147345166150d7779c90a5bacc8c7a7f5836f6a1a3581c7e4fe",
+  "status": "complete",
+  "error": null
+}

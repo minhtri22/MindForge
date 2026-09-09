@@ -1,0 +1,44 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "cell_id": "L4-ENV-3-S123",
+  "status": "complete",
+  "condition": "L4",
+  "environment": "ENV-3",
+  "seed": 123,
+  "utility": {
+    "train_environment_score": 0.8041095890410959,
+    "seen_environment_score": 0.7866666666666666,
+    "unseen_environment_score": 0.6622222222222223,
+    "generalization_delta": -0.1418873668188736,
+    "generalization_delta_direction": "unseen_minus_train",
+    "task_metrics": {
+      "task_type": "classification",
+      "accuracy": 0.7866666666666666,
+      "auroc": 0.9344245680955542,
+      "auroc_missing_reason": null,
+      "r2": null,
+      "r2_missing_reason": "classification task",
+      "unseen_accuracy": 0.6622222222222223,
+      "unseen_auroc": 0.5,
+      "unseen_auroc_missing_reason": null
+    }
+  },
+  "mem_stats": null,
+  "shift_assertion": {
+    "type": "context_distribution",
+    "passed": true,
+    "shifted_split": "ood_unseen_context",
+    "train_distribution": {
+      "ctx_1": 0.4657534246575342,
+      "ctx_2": 0.5342465753424658
+    },
+    "shifted_distribution": {
+      "ctx_3": 1.0
+    },
+    "total_variation": 1.0
+  },
+  "ood_split": "ood_unseen_context",
+  "train_count": 730,
+  "test_count": 150,
+  "ood_count": 450
+}

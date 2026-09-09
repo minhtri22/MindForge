@@ -1,0 +1,22 @@
+{
+  "learner_id": "L3",
+  "display_name": "IRM-style encoder",
+  "type": "IRMStyle",
+  "fidelity": "surrogate",
+  "paper": "Arjovsky et al., 2019, Invariant Risk Minimization, arXiv:1907.02893",
+  "implementation_source": "project-owned PyTorch implementation",
+  "params": {
+    "output_dim": 8,
+    "hidden_dim": 24,
+    "learning_rate": 0.01,
+    "epochs": 4,
+    "irm_penalty_weight": 1.0
+  },
+  "deviations": "Risk-variance surrogate across explicit context domains; not canonical IRMv1.",
+  "seed": 123,
+  "environment_id": "ENV-2",
+  "config_path": "D:\\WORK\\RESEARCH\\MindForge\\docs\\research\\oir-ppv\\research\\experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L3-ENV-2-S123.yaml",
+  "config_sha256": "199541b296eb97fcba9c67686d78caef930c9f897efbdce045e2ad8285560c7d",
+  "status": "complete",
+  "error": null
+}

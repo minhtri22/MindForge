@@ -1,0 +1,80 @@
+{
+  "cell_id": "L2-ENV-4-S1011",
+  "status": "complete",
+  "learner": "L2",
+  "environment": "ENV-4",
+  "seed": 1011,
+  "factual_sample_sha256": "4bd4a26151b7acdac5c475851bc6a393f72943e1605114d071628a6bae3516c6",
+  "task_label_sha256": "bcc566bbba14664c85fa57b2e8f46ce69214dcfa8d4e1b309db87f4cf8f7c74a",
+  "nuisance_target": "spurious_feature",
+  "nuisance_values": [
+    -2.066477439151161,
+    -0.14308639703830695,
+    1.8387616212371138
+  ],
+  "factual_predictive_utility": 0.9944444444444445,
+  "leak_n": 0.33856646512461663,
+  "nuisance_leakage_detected": true,
+  "avg_nuisance_sensitivity": 0.3149240849588565,
+  "shortcut_learning_score": 0.3893987557131394,
+  "interventions": [
+    {
+      "index": 0,
+      "target": "spurious_feature",
+      "value": -2.066477439151161,
+      "task_preserving": true,
+      "factual_accuracy": 0.9944444444444445,
+      "intervened_accuracy": 1.0,
+      "delta_n": -0.005555555555555536,
+      "abs_delta_n": 0.005555555555555536,
+      "mean_shift": 0.05164152756333351,
+      "invariance_score": 0.9508943625657428,
+      "failure_below_frozen_0_5": false,
+      "intervened_observation_sha256": "17305d08a0e35bbefbfa6517c4ae383b8c60cb900ad4a8d73185efc2af229c11",
+      "intervened_representation_sha256": "fcc401dfbe7e8c459f5500e41ca8923eaf7504b486a4a7a9290bd1538d0a38d6"
+    },
+    {
+      "index": 1,
+      "target": "spurious_feature",
+      "value": -0.14308639703830695,
+      "task_preserving": true,
+      "factual_accuracy": 0.9944444444444445,
+      "intervened_accuracy": 1.0,
+      "delta_n": -0.005555555555555536,
+      "abs_delta_n": 0.005555555555555536,
+      "mean_shift": 0.030276259407401085,
+      "invariance_score": 0.9706134552446977,
+      "failure_below_frozen_0_5": false,
+      "intervened_observation_sha256": "6952c03953dc91d32b6cc64aac40b3223a98f267ad220ef22c705482a248ba41",
+      "intervened_representation_sha256": "e033770b75ea1449de2ecd97d1914ae85d90e561540b43595872c85dfceb9221"
+    },
+    {
+      "index": 2,
+      "target": "spurious_feature",
+      "value": 1.8387616212371138,
+      "task_preserving": true,
+      "factual_accuracy": 0.9944444444444445,
+      "intervened_accuracy": 1.0,
+      "delta_n": -0.005555555555555536,
+      "abs_delta_n": 0.005555555555555536,
+      "mean_shift": 0.05110560357570648,
+      "invariance_score": 0.9513791921555239,
+      "failure_below_frozen_0_5": false,
+      "intervened_observation_sha256": "65f02b14af5e0eb7b1f91795c82c34db4aaf048103316dfea0e45ba430a3520b",
+      "intervened_representation_sha256": "82b4e7b8e483aa87c168963502fe209e629a2907f129a5dff00930783c23be54"
+    }
+  ],
+  "mean_abs_delta_n": 0.005555555555555536,
+  "mean_do_n_invariance": 0.9576290033219882,
+  "failure_count": 0,
+  "task_preserving": true,
+  "provenance": {
+    "config_path": "experiments\\OIR_PPV\\Learner_Benchmark\\EXP-LRN-001\\configs\\full\\L2-ENV-4-S1011.yaml",
+    "config_sha256": "13b742af7a2b5927024c7e542eeb64200ae780dcc3d3117d7293df5f7adc5d08",
+    "effective_config_sha256": "440305e1e65e36e59f1255d2929640d00406f8b961088c570d13837b356ed50d",
+    "h3_execution_manifest_sha256": "045da7b6b9b1ac0cb0045d72e0166d22f71839c895928ca9d129396ce72c5aad",
+    "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "m3_protocol_sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a",
+    "extractor_config_hash": "82c24db510e45b6a"
+  }
+}

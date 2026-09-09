@@ -1,0 +1,29 @@
+baseline:
+  id: B0
+  name: ERM / Context Memorization
+  type: erm
+  version: '1.0'
+context_handling: concat
+evaluation:
+  metrics:
+  - accuracy
+  - auroc
+  - f1
+  ood_splits: true
+invariant_constraint:
+  enabled: false
+model:
+  activation: relu
+  architecture: mlp
+  dropout: 0.1
+  hidden_dims:
+  - 256
+  - 128
+  - 64
+training:
+  batch_size: 64
+  early_stopping_patience: 10
+  epochs: 100
+  learning_rate: 0.001
+  loss: cross_entropy
+  optimizer: adam

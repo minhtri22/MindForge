@@ -1,0 +1,467 @@
+{
+  "experiment_id": "EXP-M4-STRESS-CONTEXT",
+  "protocol": {
+    "name": "M3_PROTOCOL",
+    "version": "M3-Protocol-v1.0",
+    "path": "benchmark/M3_PROTOCOL.md",
+    "sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a"
+  },
+  "environment_family": "ENV-3",
+  "shift_assertions": {
+    "type": "context_distribution",
+    "passed": true,
+    "shifted_split": "ood_shifted_context",
+    "train_distribution": {
+      "ctx_1": 0.5531914893617021,
+      "ctx_2": 0.44680851063829785
+    },
+    "shifted_distribution": {
+      "ctx_3": 1.0
+    },
+    "total_variation": 1.0
+  },
+  "invariant_result": {
+    "shape": [
+      290,
+      64
+    ],
+    "metadata": {
+      "method": "AutoencoderEncoder",
+      "requested_type": "Autoencoder",
+      "runtime_wrapper": "EncoderWrapper",
+      "fit": {
+        "status": "fitted",
+        "method": "Autoencoder (numpy gradient descent)",
+        "initial_loss": 1.300591110877708,
+        "final_loss": 0.7460339570226941,
+        "loss_history_length": 50,
+        "input_dim": 6,
+        "hidden_dim": 128,
+        "output_dim": 64,
+        "epochs": 50,
+        "learning_rate": 0.01
+      }
+    }
+  },
+  "generation_result": {
+    "shape": [
+      290,
+      6
+    ],
+    "metadata": {
+      "method": "MLPDecoder",
+      "requested_type": "MLPDecoder",
+      "runtime_wrapper": "DecoderWrapper",
+      "fit": {
+        "status": "fitted",
+        "method": "MLP Decoder (numpy gradient descent)",
+        "initial_loss": 1.4199206211342887,
+        "final_loss": 0.43018838822205796,
+        "architecture": [
+          66,
+          128,
+          64,
+          6
+        ],
+        "epochs": 50,
+        "learning_rate": 0.01
+      }
+    }
+  },
+  "evaluation": {
+    "invariant_metrics": {
+      "invariance_score": 0.7176685036371524,
+      "context_sensitivity": 0.6087693501361728,
+      "nuisance_sensitivity": 0.39340098517907407,
+      "predictive_utility": 0.8620689655172413,
+      "effective_rank": 5,
+      "explained_variance": 0.9999998496559038,
+      "config_hash": "702f26a2221a66a0"
+    },
+    "generation_metrics": {
+      "reconstruction_mse": 0.12010372447617612,
+      "reconstruction_mae": 0.24013615387089068,
+      "invariant_preservation": 0.8914150842434587,
+      "context_response": 1.0,
+      "diversity_score": 0.5032995539201116,
+      "novelty_score": 0.37419125337404074,
+      "distribution_similarity": 0.8304441835321286,
+      "config_hash": "702f26a2221a66a0"
+    },
+    "overall_score": 0.8405639885731051,
+    "timestamp": "2026-09-08T17:35:36.698227",
+    "generalization": {
+      "train_environment_score": 0.9078014184397163,
+      "seen_environment_score": 0.9448275862068966,
+      "unseen_environment_score": 0.07731958762886598,
+      "generalization_delta": -0.8304818308108504,
+      "generalization_delta_direction": "unseen_minus_train",
+      "ood_split": "ood_shifted_context"
+    }
+  },
+  "causal_validation": {
+    "extractor_type": "EncoderWrapper",
+    "extractor_config_hash": "702f26a2221a66a0",
+    "environment": "Env3CausalDynamics",
+    "seed": 42,
+    "nuisance_interventions": [
+      {
+        "intervention_target": "do(N)",
+        "intervention_value": -0.5,
+        "I_before_shape": [
+          290,
+          64
+        ],
+        "I_after_shape": [
+          290,
+          64
+        ],
+        "mean_shift": 0.07279463623151314,
+        "correlation": 0.8560458600072425,
+        "invariance_score": 0.9321448544082731,
+        "config_hash": "702f26a2221a66a0",
+        "seed": 42
+      },
+      {
+        "intervention_target": "do(N)",
+        "intervention_value": 0.0,
+        "I_before_shape": [
+          290,
+          64
+        ],
+        "I_after_shape": [
+          290,
+          64
+        ],
+        "mean_shift": 0.023461579596080317,
+        "correlation": 0.8566702754637507,
+        "invariance_score": 0.9770762478398654,
+        "config_hash": "702f26a2221a66a0",
+        "seed": 42
+      },
+      {
+        "intervention_target": "do(N)",
+        "intervention_value": 0.5,
+        "I_before_shape": [
+          290,
+          64
+        ],
+        "I_after_shape": [
+          290,
+          64
+        ],
+        "mean_shift": 0.07000840557768835,
+        "correlation": 0.8568751985818008,
+        "invariance_score": 0.9345720975529239,
+        "config_hash": "702f26a2221a66a0",
+        "seed": 42
+      }
+    ],
+    "context_interventions": [
+      {
+        "intervention_target": "do(Z)",
+        "intervention_value": "ctx_1",
+        "I_before_shape": [
+          290,
+          64
+        ],
+        "I_after_shape": [
+          290,
+          64
+        ],
+        "mean_shift": 0.04564099198759281,
+        "correlation": 0.7257663831201759,
+        "invariance_score": 0.9563511833054318,
+        "config_hash": "702f26a2221a66a0",
+        "seed": 42
+      },
+      {
+        "intervention_target": "do(Z)",
+        "intervention_value": "ctx_2",
+        "I_before_shape": [
+          290,
+          64
+        ],
+        "I_after_shape": [
+          290,
+          64
+        ],
+        "mean_shift": 0.056330923886696874,
+        "correlation": 0.7232588628448284,
+        "invariance_score": 0.9466730334094252,
+        "config_hash": "702f26a2221a66a0",
+        "seed": 42
+      }
+    ],
+    "avg_nuisance_invariance": 0.9479310666003542,
+    "avg_context_invariance": 0.9515121083574285,
+    "overall_invariance": 0.9497215874788913,
+    "failure_cases": [],
+    "timestamp": "2026-09-08T17:35:36.986006",
+    "arrays": {
+      "path": "artifacts\\stress_test\\m4_fix04\\run_a\\EXP-M4-STRESS-CONTEXT\\causal_arrays.npz",
+      "sha256": "efa9a939e5b34dec2860850bcebd3b1cc9f50415341113afcb31a4e1d976cb72",
+      "entries": {
+        "nuisance_0_before": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "nuisance_0_after": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "nuisance_1_before": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "nuisance_1_after": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "nuisance_2_before": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "nuisance_2_after": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "context_0_before": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "context_0_after": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "context_1_before": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "context_1_after": {
+          "shape": [
+            290,
+            64
+          ],
+          "dtype": "float64"
+        }
+      }
+    }
+  },
+  "dependency_analysis": {
+    "extractor_type": "extractor",
+    "extractor_config_hash": "702f26a2221a66a0",
+    "environment": "env",
+    "seed": 42,
+    "context_sensitivities": [
+      {
+        "variable_name": "context_0",
+        "variable_type": "context",
+        "linear_sensitivity": 0.6087693501361728,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.4526908827907027,
+        "leakage_score": 0.6087693501361728,
+        "per_dim_sensitivity": {
+          "0": 0.6177366853993647,
+          "1": 0.8489020897259306,
+          "2": 0.9092271071008575,
+          "3": 0.5107371438269271,
+          "4": 0.28430668266050213,
+          "5": 0.8204530434179955,
+          "6": 0.4575717676700444,
+          "7": 0.46715304178785305,
+          "8": 0.659934552279846,
+          "9": 0.8978778365454819,
+          "10": 0.1903983576501762,
+          "11": 0.5132872435158832,
+          "12": 0.7862697596123642,
+          "13": 0.603851178542557,
+          "14": 0.4900738281869241,
+          "15": 0.5541787437972553,
+          "16": 0.35371034262310563,
+          "17": 0.9198948680614853,
+          "18": 0.8800002816341633,
+          "19": 0.4234158154530935,
+          "20": 0.026906522248154003,
+          "21": 0.3872654963847971,
+          "22": 0.3040721294518381,
+          "23": 0.7149652883648192,
+          "24": 0.25580013376860833,
+          "25": 0.9353046226480325,
+          "26": 0.9696450458242862,
+          "27": 0.6435875205289457,
+          "28": 0.5265761553149503,
+          "29": 0.9022711048044433,
+          "30": 0.8504239050764799,
+          "31": 0.08526694525272921,
+          "32": 0.13877388715176914,
+          "33": 0.9183331738073387,
+          "34": 0.732429963110792,
+          "35": 0.9320504041660924,
+          "36": 0.8709272752844396,
+          "37": 0.3289678668689341,
+          "38": 0.12898777776949413,
+          "39": 0.8416006358012644,
+          "40": 0.6442782617940697,
+          "41": 0.4829222114493576,
+          "42": 0.4413256545344929,
+          "43": 0.24075395074004582,
+          "44": 0.82410359226767,
+          "45": 0.8395672730311496,
+          "46": 0.9520747485879506,
+          "47": 0.36507416062102066,
+          "48": 0.46243231016303804,
+          "49": 0.8535164887836023,
+          "50": 0.005815974463621732,
+          "51": 0.7867863735246726,
+          "52": 0.8070546785673726,
+          "53": 0.7118616764837963,
+          "54": 0.9117211754661159,
+          "55": 0.9383810346670253,
+          "56": 0.3104392010388928,
+          "57": 0.1547193263771223,
+          "58": 0.08635963059410354,
+          "59": 0.7958637908207438,
+          "60": 0.8836460590066416,
+          "61": 0.9162809933334466,
+          "62": 0.9513295953909868,
+          "63": 0.9117940238880907
+        }
+      }
+    ],
+    "nuisance_sensitivities": [
+      {
+        "variable_name": "nuisance_0",
+        "variable_type": "nuisance",
+        "linear_sensitivity": 0.39340098517907407,
+        "mi_sensitivity": 0.0,
+        "predictability_r2": 0.2314709387016358,
+        "leakage_score": 0.39340098517907407,
+        "per_dim_sensitivity": {
+          "0": 0.7857704363519528,
+          "1": 0.5040748478318867,
+          "2": 0.21549309593167115,
+          "3": 0.12711777248131578,
+          "4": 0.7812493578582269,
+          "5": 0.28868346983815596,
+          "6": 0.5949005901566173,
+          "7": 0.7167113414577578,
+          "8": 0.39474720308536326,
+          "9": 0.32419583841909533,
+          "10": 0.8765392220706998,
+          "11": 0.06293072852612974,
+          "12": 0.043435554440409654,
+          "13": 0.24091737884147346,
+          "14": 0.3091821477360747,
+          "15": 0.38016347432305897,
+          "16": 0.9247336480246221,
+          "17": 0.28010319374296244,
+          "18": 0.44234439892838734,
+          "19": 0.13328415093613344,
+          "20": 0.8625465883494853,
+          "21": 0.7788629669983905,
+          "22": 0.19952413630142737,
+          "23": 0.0028473933676177684,
+          "24": 0.6253685930458188,
+          "25": 0.28048611383676475,
+          "26": 0.1405151191340189,
+          "27": 0.24124350779604173,
+          "28": 0.2305295304702755,
+          "29": 0.27844277452965405,
+          "30": 0.09894703865888944,
+          "31": 0.27050743123575105,
+          "32": 0.38908445002890824,
+          "33": 0.3671645806595077,
+          "34": 0.556348149506462,
+          "35": 0.06135988899344932,
+          "36": 0.039222694932531076,
+          "37": 0.8888986116784195,
+          "38": 0.7412871841282825,
+          "39": 0.030873308897218156,
+          "40": 0.3947396893298379,
+          "41": 0.7576961783620944,
+          "42": 0.6185189415383145,
+          "43": 0.056038262476503384,
+          "44": 0.0816184151981167,
+          "45": 0.39835596704852544,
+          "46": 0.26240923383708115,
+          "47": 0.719403401734585,
+          "48": 0.8417090506989447,
+          "49": 0.31293022795842057,
+          "50": 0.6881277184545198,
+          "51": 0.329831886009279,
+          "52": 0.0698875004653445,
+          "53": 0.5703576736184666,
+          "54": 0.12097104612121863,
+          "55": 0.18982115206741706,
+          "56": 0.10285804414560415,
+          "57": 0.8549839688411796,
+          "58": 0.9123970384915109,
+          "59": 0.5935347126433314,
+          "60": 0.16773774735966993,
+          "61": 0.2428221689890256,
+          "62": 0.2959562349379223,
+          "63": 0.08431887760292227
+        }
+      }
+    ],
+    "max_context_sensitivity": 0.6087693501361728,
+    "max_nuisance_sensitivity": 0.39340098517907407,
+    "avg_context_sensitivity": 0.6087693501361728,
+    "avg_nuisance_sensitivity": 0.39340098517907407,
+    "context_leakage_detected": true,
+    "nuisance_leakage_detected": true,
+    "shortcut_learning_score": 0.5010851676576235,
+    "shortcut_metric_status": "valid",
+    "nan_policy": "non-finite component metrics are replaced with 0.0 and reported as finite summaries",
+    "timestamp": "2026-09-08T17:35:38.162200",
+    "config_hash": "702f26a2221a66a0"
+  },
+  "arrays": {
+    "path": "artifacts\\stress_test\\m4_fix04\\run_a\\EXP-M4-STRESS-CONTEXT\\generated.npz",
+    "sha256": "40e566ac32c693a4a9687785b5e9f684829af10db265c08f7ce719ae6357ca53",
+    "arrays": {
+      "generated": {
+        "shape": [
+          290,
+          6
+        ],
+        "dtype": "float64"
+      },
+      "invariant": {
+        "shape": [
+          290,
+          64
+        ],
+        "dtype": "float64"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-H1-001",
+  "cell_id": "MEM-ENV-1-S456",
+  "status": "complete",
+  "condition": "MEM",
+  "environment": "ENV-1",
+  "seed": 456,
+  "utility": {
+    "train_environment_score": 1.0,
+    "seen_environment_score": 0.33,
+    "unseen_environment_score": 0.345,
+    "generalization_delta": -0.655,
+    "generalization_delta_direction": "unseen_minus_train",
+    "task_metrics": {
+      "task_type": "classification",
+      "accuracy": 0.33,
+      "auroc": null,
+      "auroc_missing_reason": "MEM emits hard labels only",
+      "r2": null,
+      "r2_missing_reason": "classification task",
+      "unseen_accuracy": 0.345,
+      "unseen_auroc": null,
+      "unseen_auroc_missing_reason": "MEM emits hard labels only"
+    }
+  },
+  "mem_stats": {
+    "train_hits": 453,
+    "train_misses": 0,
+    "test_hits": 0,
+    "test_misses": 100,
+    "ood_hits": 0,
+    "ood_misses": 400
+  },
+  "shift_assertion": {
+    "type": "ood_holdout",
+    "passed": true,
+    "ood_split": "ood_unseen_style",
+    "train_count": 453,
+    "ood_count": 400,
+    "train_ood_overlap": 0
+  },
+  "ood_split": "ood_unseen_style",
+  "train_count": 453,
+  "test_count": 100,
+  "ood_count": 400
+}

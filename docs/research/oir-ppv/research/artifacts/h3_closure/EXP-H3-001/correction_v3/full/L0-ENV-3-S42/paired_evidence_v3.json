@@ -1,0 +1,169 @@
+{
+  "cell_id": "L0-ENV-3-S42",
+  "status": "inapplicable",
+  "learner": "L0",
+  "environment": "ENV-3",
+  "seed": 42,
+  "factual_sample_sha256": "1404a508fd842b146ba148d00806de835c77ad60a398ca2a1e98893f8c983e3f",
+  "task_label_sha256": "e789d4087b22c338e167ffdb751bca7971eabd06c3ce6362ead42f9a79b26e76",
+  "nuisance_target": "do(N)",
+  "nuisance_values": [
+    -0.5,
+    0.0,
+    0.5
+  ],
+  "factual_predictive_utility": 0.9722222222222222,
+  "leak_n": 0.34557617296502396,
+  "nuisance_leakage_detected": true,
+  "avg_nuisance_sensitivity": 0.30850446652395436,
+  "shortcut_learning_score": null,
+  "interventions": [
+    {
+      "index": 0,
+      "target": "do(N)",
+      "value": -0.5,
+      "task_preserving": false,
+      "reason": "environment intervention changed task labels",
+      "causal_isolation": {
+        "before": {
+          "observations_sha256": "a06fe6debe994eae546f74011aabf9030c7c839ab6aef4b179652af048d4f402",
+          "labels_sha256": "b6ca20edee832e2d8ea39ddabb9d8561aa5cddc9774c50c32436b21600a5f440",
+          "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+          "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+          "full_nuisance_sha256": "f5aad1964e9a513a38ab9b15f6676d0da8dda5be89c9532d49ce10d378a56154",
+          "nuisance_variables_sha256": {
+            "N": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934"
+          },
+          "target_nuisance_sha256": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934",
+          "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+        },
+        "after": {
+          "observations_sha256": "fd558fc12adb7e23e2df8778201447019535092caa22fd3514643d431f5b3088",
+          "labels_sha256": "b1270b759042582cc3085ef20cae09425991938218d44569a67f753d541f9b7d",
+          "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+          "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+          "full_nuisance_sha256": "38fb40f70602e79b31c44e32fbec22857a19cd5bc3abee7cc0503aac9ca986ed",
+          "nuisance_variables_sha256": {
+            "N": "89f9929beced9b8425a8e942d06f5136b2cfc654822b07bab2a7c64846e04c2d"
+          },
+          "target_nuisance_sha256": "89f9929beced9b8425a8e942d06f5136b2cfc654822b07bab2a7c64846e04c2d",
+          "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+        },
+        "task_state_same": true,
+        "context_same": true,
+        "labels_same": false,
+        "target_nuisance_changed": true,
+        "non_target_nuisance_same": true,
+        "observations_changed": true
+      }
+    },
+    {
+      "index": 1,
+      "target": "do(N)",
+      "value": 0.0,
+      "task_preserving": false,
+      "reason": "environment intervention changed task labels",
+      "causal_isolation": {
+        "before": {
+          "observations_sha256": "a06fe6debe994eae546f74011aabf9030c7c839ab6aef4b179652af048d4f402",
+          "labels_sha256": "b6ca20edee832e2d8ea39ddabb9d8561aa5cddc9774c50c32436b21600a5f440",
+          "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+          "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+          "full_nuisance_sha256": "f5aad1964e9a513a38ab9b15f6676d0da8dda5be89c9532d49ce10d378a56154",
+          "nuisance_variables_sha256": {
+            "N": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934"
+          },
+          "target_nuisance_sha256": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934",
+          "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+        },
+        "after": {
+          "observations_sha256": "9d5e1a3c46d5b2aafe2ef904b058a162aa1e07f220090a44394869b52edb3a73",
+          "labels_sha256": "591a84478e6895c737513fe2a576b02bc7c2e1cb909e60ecca54236bd7956eb4",
+          "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+          "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+          "full_nuisance_sha256": "c169ea3485a0757e55abf23de6ae6151f4f95566d32f8d186d2ba390816e1518",
+          "nuisance_variables_sha256": {
+            "N": "a2176136247b0857adabd3b1f1405915c72a41b80a54345f29cc6fd8729fa1a3"
+          },
+          "target_nuisance_sha256": "a2176136247b0857adabd3b1f1405915c72a41b80a54345f29cc6fd8729fa1a3",
+          "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+        },
+        "task_state_same": true,
+        "context_same": true,
+        "labels_same": false,
+        "target_nuisance_changed": true,
+        "non_target_nuisance_same": true,
+        "observations_changed": true
+      }
+    },
+    {
+      "index": 2,
+      "target": "do(N)",
+      "value": 0.5,
+      "task_preserving": false,
+      "reason": "environment intervention changed task labels",
+      "causal_isolation": {
+        "before": {
+          "observations_sha256": "a06fe6debe994eae546f74011aabf9030c7c839ab6aef4b179652af048d4f402",
+          "labels_sha256": "b6ca20edee832e2d8ea39ddabb9d8561aa5cddc9774c50c32436b21600a5f440",
+          "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+          "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+          "full_nuisance_sha256": "f5aad1964e9a513a38ab9b15f6676d0da8dda5be89c9532d49ce10d378a56154",
+          "nuisance_variables_sha256": {
+            "N": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934"
+          },
+          "target_nuisance_sha256": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934",
+          "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+        },
+        "after": {
+          "observations_sha256": "6a0f4e197a409564f17377f359798e5e1126a81a0bb4eee8b8fa7de8cee5b7e9",
+          "labels_sha256": "0fc773eab3feb1249d023add506f9c584523f7acd86d8315e37a0f9eb04379ed",
+          "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+          "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+          "full_nuisance_sha256": "d37856acb2af73a65fcd6b877804d58694de49241915d8b3dc474f69cae56c60",
+          "nuisance_variables_sha256": {
+            "N": "c599e60c53d1e399bcc965f3f11066846a90292585b1a8e0441ab3fa714d42b4"
+          },
+          "target_nuisance_sha256": "c599e60c53d1e399bcc965f3f11066846a90292585b1a8e0441ab3fa714d42b4",
+          "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+        },
+        "task_state_same": true,
+        "context_same": true,
+        "labels_same": false,
+        "target_nuisance_changed": true,
+        "non_target_nuisance_same": true,
+        "observations_changed": true
+      }
+    }
+  ],
+  "mean_abs_delta_n": null,
+  "mean_do_n_invariance": null,
+  "failure_count": 0,
+  "task_preserving": false,
+  "causal_isolation_factual": {
+    "observations_sha256": "a06fe6debe994eae546f74011aabf9030c7c839ab6aef4b179652af048d4f402",
+    "labels_sha256": "b6ca20edee832e2d8ea39ddabb9d8561aa5cddc9774c50c32436b21600a5f440",
+    "task_state_sha256": "0e663cc889bb958e78c04ed03de5e0c153455566f42afc8c426ce2a075d2dc92",
+    "context_sha256": "a1954c235c0c07c75e0dd263cf9d8930f578e609800e57f69fd5aba68bf863bb",
+    "full_nuisance_sha256": "f5aad1964e9a513a38ab9b15f6676d0da8dda5be89c9532d49ce10d378a56154",
+    "nuisance_variables_sha256": {
+      "N": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934"
+    },
+    "target_nuisance_sha256": "a0212a85d2b7988a268737a6b150314c57ad6d3efc773d756f2bebb25be3b934",
+    "non_target_nuisance_sha256": "ad1dc21dfec58caffbb688952139a162b5f2c9b8b3027a521f30e9e752674dd4"
+  },
+  "raw_latent_shift_role": "SCALE_SENSITIVE_DIAGNOSTIC_ONLY",
+  "provenance": {
+    "config_path": "experiments/OIR_PPV/Learner_Benchmark/EXP-LRN-001/configs/full/L0-ENV-3-S42.yaml",
+    "config_sha256": "cd19b0ccaa1d1a101ea49fa11ab608216dec3dab01162cdcde398c85e60c763b",
+    "effective_config_sha256": "9631b0734abcb495bdf751f22a1e819aa48183dbb43701edbab5a7a921d975ca",
+    "h3_execution_manifest_sha256": "045da7b6b9b1ac0cb0045d72e0166d22f71839c895928ca9d129396ce72c5aad",
+    "reference_manifest_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+    "m3_protocol_sha256": "f7df21e8a0d24c4c9ddb5a5c504cca9c7d3a7a2c89fd7c4bef876da2d0f58e3a",
+    "extractor_config_hash": "4f37150436fdf9d1",
+    "h3_execution_manifest_v3_sha256": "666f007c18df39fd27b6d9ffe42d691b3db18281aee9a053ff7c92b97caa969a",
+    "source_manifest_v3_sha256": "af52a6cebdf18e7032fb9ca5fa0255bbb400cc2a46af8069bf0ae8ea134142d4",
+    "runtime_environment_v3_sha256": "7f4183f4c49777057469d9c6a5a289c047723ee753a772ec30c5f05bf03b2d74",
+    "canonical_hash_algorithm": "H3-CANONICAL-NESTED-SHA256-v1"
+  }
+}
