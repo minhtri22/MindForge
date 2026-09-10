@@ -1,0 +1,47 @@
+{
+  "access_log_sha256_after": "f4eb053696095c18c2d873107ebf1823b49cfb871b7a24e190a2cb76766d4bbb",
+  "access_log_sha256_before": "f4eb053696095c18c2d873107ebf1823b49cfb871b7a24e190a2cb76766d4bbb",
+  "analysis_id": "QH3R1_DIAGNOSTIC_V1",
+  "between_environment_variance": {
+    "latent_absolute_drift": 0.0005311388970907487,
+    "support_shift": 0.0010769215912462499,
+    "task_probe_clean_accuracy": 0.016201210124671038,
+    "task_probe_degradation": 3.579122225500124e-06
+  },
+  "between_seed_variance": {
+    "latent_absolute_drift": 2.641662991492546e-05,
+    "support_shift": 1.3738370055657667e-06,
+    "task_probe_clean_accuracy": 0.0011251681756989918,
+    "task_probe_degradation": 7.114798974460416e-08
+  },
+  "categorical_channels_preserved": true,
+  "datasets": 12,
+  "diagnostic_seeds": [
+    610101,
+    610103,
+    610107
+  ],
+  "evidence_mode": "FRESH_NON_TEST_EXPLORATORY",
+  "forbidden_seed_count": 15,
+  "h3r_execute_decisive_called": false,
+  "h3r_raw_tree_sha256_after": "26eeee35501dcf2cbd0471d555b0429080b14956065ecaa547b7d7e0932f9e62",
+  "h3r_raw_tree_sha256_before": "26eeee35501dcf2cbd0471d555b0429080b14956065ecaa547b7d7e0932f9e62",
+  "noise_delta": 0.1,
+  "noise_replicates": 3,
+  "numeric_noise_within_delta": true,
+  "rows": 60,
+  "seed_disjoint": true,
+  "shared_probe_contract": {
+    "C": 1.0,
+    "family": "LogisticRegression",
+    "max_iter": 1000,
+    "penalty": "l2",
+    "same_config_across_representations_within_seed": true,
+    "solver": "lbfgs"
+  },
+  "splits_accessed": [
+    "train",
+    "val"
+  ],
+  "test_split_accessed": false
+}

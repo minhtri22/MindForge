@@ -1,0 +1,448 @@
+{
+  "analysis_id": "QH3R1_DIAGNOSTIC_SYNTHESIS_V1",
+  "candidate_correlations": {
+    "clean_accuracy_vs_task_degradation": {
+      "n": 48,
+      "pearson": 0.16724075383434905
+    },
+    "interaction_uplift_vs_clean_accuracy": {
+      "n": 48,
+      "pearson": -0.8724718894150656
+    },
+    "latent_drift_vs_task_degradation": {
+      "n": 48,
+      "pearson": 0.2667026959344843
+    },
+    "nuisance_recoverability_vs_task_degradation": {
+      "n": 48,
+      "pearson": -0.08525012971991054
+    },
+    "support_shift_vs_task_degradation": {
+      "n": 48,
+      "pearson": 0.0157302771596223
+    },
+    "task_variable_recoverability_vs_clean_accuracy": {
+      "n": 48,
+      "pearson": 0.6460345573001925
+    }
+  },
+  "environment": {
+    "ENV-1": {
+      "latent_absolute_drift": 0.1755840123992195,
+      "support_shift": 0.014033956275618912,
+      "task_probe_clean_accuracy": 0.7513090860106417,
+      "task_probe_degradation": -0.0002699086235154136
+    },
+    "ENV-2": {
+      "latent_absolute_drift": 0.14460103625227935,
+      "support_shift": 0.10054387398436632,
+      "task_probe_clean_accuracy": 0.9902534113060428,
+      "task_probe_degradation": 0.0005198180636777276
+    },
+    "ENV-3": {
+      "latent_absolute_drift": 0.19092222382733728,
+      "support_shift": 0.019420969459880696,
+      "task_probe_clean_accuracy": 0.7584848484848484,
+      "task_probe_degradation": 0.0063364413364413045
+    },
+    "ENV-4": {
+      "latent_absolute_drift": 0.16237802570774112,
+      "support_shift": 0.011470095623284944,
+      "task_probe_clean_accuracy": 0.9296296296296295,
+      "task_probe_degradation": 0.002716049382716057
+    }
+  },
+  "learner": {
+    "L0": {
+      "interaction_clean_uplift": {
+        "mean": -0.0034536065786065773,
+        "median": 0.0,
+        "std": 0.028074716614726197
+      },
+      "interaction_noisy_uplift": {
+        "mean": 0.0045129446171112975,
+        "median": 0.0,
+        "std": 0.013936206585965045
+      },
+      "interaction_probe_clean_accuracy": {
+        "mean": 0.9746102855477856,
+        "median": 1.0,
+        "std": 0.06259924212613421
+      },
+      "interaction_probe_noisy_accuracy": {
+        "mean": 0.9781019327894328,
+        "median": 1.0,
+        "std": 0.057327002993791266
+      },
+      "latent_absolute_drift": {
+        "mean": 0.14043455853024472,
+        "median": 0.13615373546883808,
+        "std": 0.014273119406335157
+      },
+      "nuisance_clean_recoverability": {
+        "mean": 0.8704445654425804,
+        "median": 0.9999962933111095,
+        "std": 0.2246648621628621
+      },
+      "nuisance_noisy_recoverability": {
+        "mean": 0.8682981477103288,
+        "median": 0.9967725983510705,
+        "std": 0.2233429089845767
+      },
+      "relevant_Z_clean_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "relevant_Z_noisy_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "support_shift": {
+        "mean": 0.0404903536895472,
+        "median": 0.0107348495717213,
+        "std": 0.055254946607576814
+      },
+      "task_probe_clean_accuracy": {
+        "mean": 0.978063892126392,
+        "median": 0.9972222222222222,
+        "std": 0.039384152306728946
+      },
+      "task_probe_degradation": {
+        "mean": 0.00447490395407063,
+        "median": 0.0,
+        "std": 0.013286615458152384
+      },
+      "task_probe_noisy_accuracy": {
+        "mean": 0.9735889881723215,
+        "median": 0.9944444444444445,
+        "std": 0.04971911090456955
+      },
+      "task_variable_clean_recoverability": {
+        "mean": 0.9999993929518806,
+        "median": 1.0,
+        "std": 1.0515098368300255e-06
+      },
+      "task_variable_noisy_recoverability": {
+        "mean": 0.9989790694462007,
+        "median": 1.0,
+        "std": 0.0018351274176377874
+      }
+    },
+    "L1": {
+      "interaction_clean_uplift": {
+        "mean": 0.08913672898297985,
+        "median": 0.04965277777777782,
+        "std": 0.0972925148357103
+      },
+      "interaction_noisy_uplift": {
+        "mean": 0.08531650131272635,
+        "median": 0.05347222222222203,
+        "std": 0.08641389606856627
+      },
+      "interaction_probe_clean_accuracy": {
+        "mean": 0.9180079692950979,
+        "median": 0.9505555555555556,
+        "std": 0.07939101537498815
+      },
+      "interaction_probe_noisy_accuracy": {
+        "mean": 0.9086700607800619,
+        "median": 0.9456410256410255,
+        "std": 0.0869758671449784
+      },
+      "latent_absolute_drift": {
+        "mean": 0.17882581781940876,
+        "median": 0.17654922727978883,
+        "std": 0.0334477406077449
+      },
+      "nuisance_clean_recoverability": {
+        "mean": 0.6496683302910323,
+        "median": 0.6012014322502317,
+        "std": 0.18176641642916055
+      },
+      "nuisance_noisy_recoverability": {
+        "mean": 0.6488184600004796,
+        "median": 0.5988510122011281,
+        "std": 0.18074944456851252
+      },
+      "relevant_Z_clean_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "relevant_Z_noisy_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "support_shift": {
+        "mean": 0.03459507518967561,
+        "median": 0.01988217666888148,
+        "std": 0.03174851312134409
+      },
+      "task_probe_clean_accuracy": {
+        "mean": 0.8288712403121181,
+        "median": 0.8336805555555555,
+        "std": 0.1552950459863169
+      },
+      "task_probe_degradation": {
+        "mean": 0.005517680844782602,
+        "median": 0.002592592592592591,
+        "std": 0.0130160079652825
+      },
+      "task_probe_noisy_accuracy": {
+        "mean": 0.8233535594673356,
+        "median": 0.8126157407407408,
+        "std": 0.1553534951188715
+      },
+      "task_variable_clean_recoverability": {
+        "mean": 0.866611672004938,
+        "median": 0.9054980428378284,
+        "std": 0.13395147171260577
+      },
+      "task_variable_noisy_recoverability": {
+        "mean": 0.8665837395330368,
+        "median": 0.8992621669480807,
+        "std": 0.13007663591875682
+      }
+    },
+    "L2": {
+      "interaction_clean_uplift": {
+        "mean": 0.11067168994933178,
+        "median": 0.06262626262626264,
+        "std": 0.1209797438896823
+      },
+      "interaction_noisy_uplift": {
+        "mean": 0.10450260119979744,
+        "median": 0.08408340834083405,
+        "std": 0.10648989059586347
+      },
+      "interaction_probe_clean_accuracy": {
+        "mean": 0.9434204221377134,
+        "median": 0.9822115384615384,
+        "std": 0.06581617310214738
+      },
+      "interaction_probe_noisy_accuracy": {
+        "mean": 0.9393553524090418,
+        "median": 0.9674679487179487,
+        "std": 0.06441341453598634
+      },
+      "latent_absolute_drift": {
+        "mean": 0.16018852891383834,
+        "median": 0.15686741348183225,
+        "std": 0.013234009602276872
+      },
+      "nuisance_clean_recoverability": {
+        "mean": 0.8740766666423299,
+        "median": 0.9008221786504031,
+        "std": 0.10703622318877623
+      },
+      "nuisance_noisy_recoverability": {
+        "mean": 0.8695645319845963,
+        "median": 0.8961636966026361,
+        "std": 0.1067748062368333
+      },
+      "relevant_Z_clean_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "relevant_Z_noisy_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "support_shift": {
+        "mean": 0.03621875988112495,
+        "median": 0.01537978589655642,
+        "std": 0.035667480234034404
+      },
+      "task_probe_clean_accuracy": {
+        "mean": 0.8327487321883819,
+        "median": 0.8200000000000001,
+        "std": 0.13784574677609573
+      },
+      "task_probe_degradation": {
+        "mean": -0.0021040190208625,
+        "median": -0.002641325536062389,
+        "std": 0.016671448260793798
+      },
+      "task_probe_noisy_accuracy": {
+        "mean": 0.8348527512092443,
+        "median": 0.8255128205128206,
+        "std": 0.13385419796679168
+      },
+      "task_variable_clean_recoverability": {
+        "mean": 0.9498680231678961,
+        "median": 0.9875041392674623,
+        "std": 0.07483154009081758
+      },
+      "task_variable_noisy_recoverability": {
+        "mean": 0.9467607892141156,
+        "median": 0.9817612450193206,
+        "std": 0.0738520692029368
+      }
+    },
+    "L3": {
+      "interaction_clean_uplift": {
+        "mean": 0.08571067479950921,
+        "median": 0.0559027777777778,
+        "std": 0.09717342349384939
+      },
+      "interaction_noisy_uplift": {
+        "mean": 0.08388395502843134,
+        "median": 0.059722222222222066,
+        "std": 0.0875818994870268
+      },
+      "interaction_probe_clean_accuracy": {
+        "mean": 0.9196951649234507,
+        "median": 0.9527777777777777,
+        "std": 0.08157340626013049
+      },
+      "interaction_probe_noisy_accuracy": {
+        "mean": 0.9149315462549815,
+        "median": 0.9435897435897437,
+        "std": 0.08298310244626941
+      },
+      "latent_absolute_drift": {
+        "mean": 0.18065225265851026,
+        "median": 0.17641500775384655,
+        "std": 0.03139340514501786
+      },
+      "nuisance_clean_recoverability": {
+        "mean": 0.6465349928010861,
+        "median": 0.6018405226072103,
+        "std": 0.18765752187657245
+      },
+      "nuisance_noisy_recoverability": {
+        "mean": 0.6451835372314103,
+        "median": 0.599995805471752,
+        "std": 0.1847682527694325
+      },
+      "relevant_Z_clean_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "relevant_Z_noisy_recoverability": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0
+      },
+      "support_shift": {
+        "mean": 0.03534679606108194,
+        "median": 0.02124686405133705,
+        "std": 0.033442191869388675
+      },
+      "task_probe_clean_accuracy": {
+        "mean": 0.8339844901239415,
+        "median": 0.8486111111111111,
+        "std": 0.15484953800024398
+      },
+      "task_probe_degradation": {
+        "mean": 0.0029368988973910992,
+        "median": 0.0031653165316531395,
+        "std": 0.005674387085301074
+      },
+      "task_probe_noisy_accuracy": {
+        "mean": 0.8310475912265503,
+        "median": 0.8414351851851853,
+        "std": 0.15403678682295427
+      },
+      "task_variable_clean_recoverability": {
+        "mean": 0.8694408122879173,
+        "median": 0.905663244773814,
+        "std": 0.12831795265710474
+      },
+      "task_variable_noisy_recoverability": {
+        "mean": 0.8693862904796384,
+        "median": 0.8993216376709254,
+        "std": 0.1254027832200928
+      }
+    },
+    "L4": {
+      "interaction_clean_uplift": {
+        "mean": 0.10215999495753648,
+        "median": 0.09213421342134215,
+        "std": 0.0925064313382759
+      },
+      "interaction_noisy_uplift": {
+        "mean": 0.09892611736633149,
+        "median": 0.09444444444444444,
+        "std": 0.08717269419656537
+      },
+      "interaction_probe_clean_accuracy": {
+        "mean": 0.9155878594956567,
+        "median": 0.9547008547008548,
+        "std": 0.0897994610302524
+      },
+      "interaction_probe_noisy_accuracy": {
+        "mean": 0.9115514463806837,
+        "median": 0.9435096153846154,
+        "std": 0.0883756980621569
+      },
+      "latent_absolute_drift": {
+        "mean": 0.18175546481121954,
+        "median": 0.1792151113267419,
+        "std": 0.0336737550015233
+      },
+      "nuisance_clean_recoverability": {
+        "mean": 0.6543226009515385,
+        "median": 0.6492325585333752,
+        "std": 0.18091897966729178
+      },
+      "nuisance_noisy_recoverability": {
+        "mean": 0.6499625201060583,
+        "median": 0.6463262818174094,
+        "std": 0.17819857444470893
+      },
+      "relevant_Z_clean_recoverability": {
+        "mean": 0.9944444444444445,
+        "median": 1.0,
+        "std": 0.007856742013183834
+      },
+      "relevant_Z_noisy_recoverability": {
+        "mean": 0.9925925925925926,
+        "median": 1.0,
+        "std": 0.010475656017578444
+      },
+      "support_shift": {
+        "mean": 0.035185134357508904,
+        "median": 0.022372014776384813,
+        "std": 0.0319194341172857
+      },
+      "task_probe_clean_accuracy": {
+        "mean": 0.8134278645381201,
+        "median": 0.8034188034188035,
+        "std": 0.16055726858211494
+      },
+      "task_probe_degradation": {
+        "mean": 0.000802535523767763,
+        "median": 0.0009259259259259411,
+        "std": 0.010889386353485036
+      },
+      "task_probe_noisy_accuracy": {
+        "mean": 0.8126253290143522,
+        "median": 0.8107549857549857,
+        "std": 0.1585716945407899
+      },
+      "task_variable_clean_recoverability": {
+        "mean": 0.8838897365696692,
+        "median": 0.9243352161322327,
+        "std": 0.1160047550027656
+      },
+      "task_variable_noisy_recoverability": {
+        "mean": 0.8808599980931531,
+        "median": 0.9163411465658386,
+        "std": 0.11546198040327375
+      }
+    }
+  },
+  "nonlinear_remaining_clean_accuracy_gap_vs_L0": {
+    "L1": -0.056602316252687745,
+    "L2": -0.03118986341007224,
+    "L3": -0.0549151206243349,
+    "L4": -0.05902242605212893
+  }
+}

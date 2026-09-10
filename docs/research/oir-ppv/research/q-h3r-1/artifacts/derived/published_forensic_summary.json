@@ -1,0 +1,197 @@
+{
+  "access_log_sha256_before": "f4eb053696095c18c2d873107ebf1823b49cfb871b7a24e190a2cb76766d4bbb",
+  "analysis_id": "QH3R1_PUBLISHED_FORENSIC_V1",
+  "candidate_cell_rows": 80,
+  "clean_gap_vs_noise_effect_correlation": {
+    "n": 80,
+    "pearson": -0.4139094659489545,
+    "pearson_ci95": [
+      -0.6009093474621467,
+      -0.19010889872035597
+    ],
+    "spearman": -0.38973842051210417,
+    "spearman_ci95": [
+      -0.5837307030961246,
+      -0.17017977652673802
+    ]
+  },
+  "evidence_mode": "POST_HOC_EXPLORATORY",
+  "h1_h3r": {
+    "compression_vs_E_noise": {
+      "n": 16,
+      "pearson": -0.33686903481253666,
+      "pearson_ci95": [
+        -0.7584850551470338,
+        0.019579657360946672
+      ],
+      "spearman": -0.4088235294117647,
+      "spearman_ci95": [
+        -0.8141068479213308,
+        0.21637485291645606
+      ]
+    },
+    "compression_vs_clean_gap": {
+      "n": 16,
+      "pearson": 0.09847494182710877,
+      "pearson_ci95": [
+        -0.3516895590789795,
+        0.5249063755883905
+      ],
+      "spearman": 0.02647058823529412,
+      "spearman_ci95": [
+        -0.4110612855007474,
+        0.502253987474274
+      ]
+    },
+    "join_key": "learner+environment",
+    "matched": 16
+  },
+  "h2_h3r": {
+    "delta_ood_vs_E_noise": {
+      "n": 12,
+      "pearson": -0.49383650838718374,
+      "pearson_ci95": [
+        -0.8525411411387596,
+        0.08780809857916104
+      ],
+      "spearman": -0.38449466786355974,
+      "spearman_ci95": [
+        -0.7294714329078086,
+        0.5073296799507706
+      ]
+    },
+    "delta_ood_vs_clean_gap": {
+      "n": 12,
+      "pearson": -0.7608530083426798,
+      "pearson_ci95": [
+        -0.9670665365450727,
+        -0.2740620557669834
+      ],
+      "spearman": -0.44798920017130345,
+      "spearman_ci95": [
+        -0.7587219089763918,
+        0.3093845453713466
+      ]
+    },
+    "join_key": "learner+environment",
+    "matched": 12,
+    "unmatched_reason": "H2 and H3R use disjoint seed sets; seed-level joins are forbidden. ENV-2 is inapplicable for H2 primary analysis."
+  },
+  "h3r_cells": 20,
+  "h3r_global_verdict_unchanged": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+  "h3r_raw_tree_sha256_before": "26eeee35501dcf2cbd0471d555b0429080b14956065ecaa547b7d7e0932f9e62",
+  "published_candidate_summary": {
+    "L1": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.2637633497494207,
+        "ci_level": 0.9875,
+        "ci_low": 0.16453963520071554,
+        "estimate": 0.21405169271785124,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.00885684054073677,
+        "ci_level": 0.9875,
+        "ci_low": -0.02689167406658595,
+        "estimate": -0.01778737801832314,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.0028791398303593396,
+        "ENV-2": -0.05531250000000001,
+        "ENV-3": -0.010938374125874117,
+        "ENV-4": -0.0077777777777777776
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    },
+    "L2": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.2442340712810226,
+        "ci_level": 0.9875,
+        "ci_low": 0.11873573939504765,
+        "estimate": 0.17800612564941834,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.008413027987637335,
+        "ci_level": 0.9875,
+        "ci_low": -0.02494456422483766,
+        "estimate": -0.016717837717837716,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.0007215007215007119,
+        "ENV-2": -0.051124999999999976,
+        "ENV-3": -0.0150789627039627,
+        "ENV-4": -0.001388888888888894
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    },
+    "L3": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.26930553153443804,
+        "ci_level": 0.9875,
+        "ci_low": 0.15546477673537507,
+        "estimate": 0.21147926768353598,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.006424215992711126,
+        "ci_level": 0.9875,
+        "ci_low": -0.024944704838373858,
+        "estimate": -0.015782234576060792,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.00037509238728751504,
+        "ENV-2": -0.05037499999999999,
+        "ENV-3": -0.010351252913752917,
+        "ENV-4": -0.002777777777777779
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    },
+    "L4": {
+      "DeltaR_clean_vs_L0": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": 0.25475371183377093,
+        "ci_level": 0.9875,
+        "ci_low": 0.1639426939189706,
+        "estimate": 0.20957522068040363,
+        "quantile_method": "numpy_default_linear"
+      },
+      "E_noise": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 20260909,
+        "ci_high": -0.0042177880604638476,
+        "ci_level": 0.9875,
+        "ci_low": -0.022281753500405857,
+        "estimate": -0.013455910409035415,
+        "quantile_method": "numpy_default_linear"
+      },
+      "environment_mean_E_noise": {
+        "ENV-1": 0.005411255411255422,
+        "ENV-2": -0.051000000000000045,
+        "ENV-3": -0.00851267482517482,
+        "ENV-4": 0.00027777777777778667
+      },
+      "verdict": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+      "worst_case_support_veto_passed": true
+    }
+  }
+}

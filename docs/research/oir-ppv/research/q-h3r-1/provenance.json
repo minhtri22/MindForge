@@ -1,0 +1,323 @@
+{
+  "analysis_id": "Q-H3R.1",
+  "classification": "POST_HOC_AND_FRESH_NON_TEST_EXPLORATORY",
+  "diagnostic_contract": {
+    "decisive_h3r_execution_called": false,
+    "namespace": "QH3R1_DIAGNOSTIC_V1",
+    "noise_delta_train_scale_normalized_linf": 0.1,
+    "noise_replicates": 3,
+    "seeds": [
+      610101,
+      610103,
+      610107
+    ],
+    "splits_accessed": [
+      "train",
+      "val"
+    ],
+    "test_split_accessed": false
+  },
+  "immutable_h3r_source_branch": "oir-ppv-research",
+  "immutable_h3r_source_commit": "e8cf4a958108e048d8d93f8b61bc0c3d63c6bb51",
+  "integrity": {
+    "access_log_sha256_before_after": "f4eb053696095c18c2d873107ebf1823b49cfb871b7a24e190a2cb76766d4bbb",
+    "deterministic_key_outputs": {
+      "artifacts/derived/diagnostic_synthesis.json": "54e9642e106795ece37c2377fe730d0736bc251dc01a68c7b45ca44ec999ddfe",
+      "artifacts/derived/published_forensic_summary.json": "0ca614e0b6f0f01cec1ede20e7d49e69039ca5d01b5a886cbbf8722f3266c723",
+      "artifacts/diagnostics/qh3r1_diagnostic_cells.csv": "a58c92fcb03e547ab46a6d79468cda11e12f641bf3b43c86986e449f9c6fd87a",
+      "artifacts/diagnostics/qh3r1_diagnostic_summary.json": "eaa82b964021d8e8512870934453a5c8bbf7c0f90dddbbede7fb26effc4b1c47"
+    },
+    "h3r_raw_tree_sha256_before_after": "26eeee35501dcf2cbd0471d555b0429080b14956065ecaa547b7d7e0932f9e62",
+    "pytest": "9 passed from repository root and 9 passed from research directory",
+    "python_compile": "PASS"
+  },
+  "products": [
+    {
+      "bytes": 1677,
+      "path": "ANALYSIS_PLAN.md",
+      "sha256": "08affac4678ae6ba2e1e1b831ee47667c5c2e470e159e335d77edfd49eacbe2a"
+    },
+    {
+      "bytes": 11131,
+      "path": "artifacts/derived/analyze_published.py",
+      "sha256": "29d4fdf6d3c7d5f35d10176cd86cb4cb7cd61331980c00f28368a97ec083390d"
+    },
+    {
+      "bytes": 13729,
+      "path": "artifacts/derived/diagnostic_synthesis.json",
+      "sha256": "54e9642e106795ece37c2377fe730d0736bc251dc01a68c7b45ca44ec999ddfe"
+    },
+    {
+      "bytes": 6232,
+      "path": "artifacts/derived/published_forensic_summary.json",
+      "sha256": "0ca614e0b6f0f01cec1ede20e7d49e69039ca5d01b5a886cbbf8722f3266c723"
+    },
+    {
+      "bytes": 4442,
+      "path": "artifacts/derived/summarize_diagnostics.py",
+      "sha256": "072173a13f0166f4344baa90f7dbd7d2c461873151634ec0f5365d9fa2ed2ed7"
+    },
+    {
+      "bytes": 7106,
+      "path": "artifacts/diagnostics/qh3r1_dataset_manifest.json",
+      "sha256": "c89386a8355255245bfee8b3e4c3bf957ba12b52bbb5b46cd7020b81e253fe81"
+    },
+    {
+      "bytes": 21231,
+      "path": "artifacts/diagnostics/qh3r1_diagnostic_cells.csv",
+      "sha256": "a58c92fcb03e547ab46a6d79468cda11e12f641bf3b43c86986e449f9c6fd87a"
+    },
+    {
+      "bytes": 1624,
+      "path": "artifacts/diagnostics/qh3r1_diagnostic_summary.json",
+      "sha256": "eaa82b964021d8e8512870934453a5c8bbf7c0f90dddbbede7fb26effc4b1c47"
+    },
+    {
+      "bytes": 41259,
+      "path": "artifacts/diagnostics/qh3r1_probe_details.json",
+      "sha256": "82e9df9b5e1e0adb34a1b603ad9abf1fac2f2aab5d6e5e72d658cc0463b79a97"
+    },
+    {
+      "bytes": 21285,
+      "path": "artifacts/diagnostics/run_diagnostics.py",
+      "sha256": "39fd5bcefc866c05d088eb2db8de0a009d7a4ac6a56872ff4e3e71025aeb343c"
+    },
+    {
+      "bytes": 2849,
+      "path": "artifacts/diagnostics/test_integrity.py",
+      "sha256": "77866da5f4e38f1cbf059b47f0152eb716ffa5eea554ef3fe79005b03bcb0fa4"
+    },
+    {
+      "bytes": 29514,
+      "path": "artifacts/plots/01_e_noise_by_learner.png",
+      "sha256": "222ebce102eaa3312af1f404c0a462b14ac7215339112e5f525fc489902ffbea"
+    },
+    {
+      "bytes": 24921,
+      "path": "artifacts/plots/02_e_noise_by_environment.png",
+      "sha256": "aaa7e54bd6c2c18f2c8b32dafe692b2139cd6be2c9502f868f9bbe83c4883ab5"
+    },
+    {
+      "bytes": 40176,
+      "path": "artifacts/plots/03_clean_gap_vs_noise.png",
+      "sha256": "c2987c0eeb5351acfe157f0bf1889521aad93516abbbfc0b283f3e075ac7e1b8"
+    },
+    {
+      "bytes": 33644,
+      "path": "artifacts/plots/04_h2_transfer_vs_h3r_noise.png",
+      "sha256": "692a5dc012b6a11466a1ac3a2dad2fa8d4de31a9cc3915fe7cfdc94c80fea9ad"
+    },
+    {
+      "bytes": 42333,
+      "path": "artifacts/plots/05_task_retention_vs_noise_degradation.png",
+      "sha256": "6a3a6c4a0f1ae3fcc352cac1a4470b3e6bb01f1ac43f364eba0a6dcf3aed0bc2"
+    },
+    {
+      "bytes": 42467,
+      "path": "artifacts/plots/06_relevant_z_vs_noise_degradation.png",
+      "sha256": "cfc988c6e2a853eb1d14e89ea04fdc352b3ca230087f756ec73edce58ae60663"
+    },
+    {
+      "bytes": 40253,
+      "path": "artifacts/plots/07_latent_drift_vs_task_degradation.png",
+      "sha256": "25a1d9c7c606d6cc13c10abb899ed6c8e2551ea5ffedd12dc5f052678a320a58"
+    },
+    {
+      "bytes": 42140,
+      "path": "artifacts/plots/08_support_shift_vs_task_degradation.png",
+      "sha256": "964f8974c3da5ab191a700fea8761c01ced2b9cd7a4f13c464874d39d4e8e36c"
+    },
+    {
+      "bytes": 3858,
+      "path": "artifacts/plots/render_plots.py",
+      "sha256": "6dbeb53820967255bf419725a50898788c73e5ea6d40f8bfd4149152789d44ef"
+    },
+    {
+      "bytes": 6522,
+      "path": "artifacts/tables/diagnostic_by_environment.csv",
+      "sha256": "1f3ca623e3d99d02812590ddfc71fae3bcab57941489c1c6570dc431022dc308"
+    },
+    {
+      "bytes": 7691,
+      "path": "artifacts/tables/diagnostic_by_learner.csv",
+      "sha256": "22f0242abfb7b5d8b80916db6ddea6ed37bacabf279734d11571234df4ae1606"
+    },
+    {
+      "bytes": 6543,
+      "path": "artifacts/tables/diagnostic_candidate_contrasts.csv",
+      "sha256": "07850e2a713ceb4ee681fed14a196168242a66e4cde70fe3902927d3626a3cb6"
+    },
+    {
+      "bytes": 2166,
+      "path": "artifacts/tables/h1_h3r_cross_analysis.csv",
+      "sha256": "11b7ae82d8f4fc400e4859c244fe1103260af920c49cf78ca78d10fa7754c278"
+    },
+    {
+      "bytes": 1159,
+      "path": "artifacts/tables/h2_h3r_cross_analysis.csv",
+      "sha256": "bbe3be04b01b4beb9eba800e86defb8da40b37cec60c62c9d6c15f5c11837976"
+    },
+    {
+      "bytes": 832,
+      "path": "artifacts/tables/h3r_by_environment.csv",
+      "sha256": "544872da795304d3ddedac8e0df9ce54094e82d92d29bbb0c467a0f8ea2152ec"
+    },
+    {
+      "bytes": 1078,
+      "path": "artifacts/tables/h3r_by_learner.csv",
+      "sha256": "7a10358c75413b81109c443752b58e85c52af3d9b4647111d2b0be6481c14288"
+    },
+    {
+      "bytes": 3682,
+      "path": "artifacts/tables/h3r_by_learner_environment.csv",
+      "sha256": "41028c42782af826aa3671e09e881ff434c48a5905c0d8cde7a8d698f777f07d"
+    },
+    {
+      "bytes": 1065,
+      "path": "artifacts/tables/h3r_by_seed.csv",
+      "sha256": "a1dcff13ac130de361d319ce7fd3242c72160ad67a11a7eabb0f7e9ced19cda9"
+    },
+    {
+      "bytes": 2240,
+      "path": "artifacts/tables/h3r_candidate_by_learner_environment.csv",
+      "sha256": "a5a49f86e7c6b9ddb5f80f4bd10e992ecb4af623ab39972ef0c00f842e4d15bf"
+    },
+    {
+      "bytes": 9958,
+      "path": "artifacts/tables/h3r_candidate_cells.csv",
+      "sha256": "f593bdfc7462cba29700fc0266946e252affeb4de6adab1dd68e4c2c36334047"
+    },
+    {
+      "bytes": 141,
+      "path": "artifacts/tables/h3r_failure_frequency.csv",
+      "sha256": "f4fce06bb79307e12468aff82b54db593a91783d362e51071a6bf419984c7df2"
+    },
+    {
+      "bytes": 6537,
+      "path": "artifacts/tables/h3r_system_cells.csv",
+      "sha256": "921b63b528e1c897db446b84080c4fe2e0b84fd78f4d7f0e697e04184735bf97"
+    },
+    {
+      "bytes": 833,
+      "path": "CLAIM_BOUNDARY.md",
+      "sha256": "02e17a4b7815e05081b872758025423c39f6069556021de7468cc39cf6119d9d"
+    },
+    {
+      "bytes": 3033,
+      "path": "COMPETING_HYPOTHESES.md",
+      "sha256": "98713e0da32e6705c89299952167fa3df805bcd387306c793b955efbc8e0dee0"
+    },
+    {
+      "bytes": 2477,
+      "path": "FAILURE_TAXONOMY.md",
+      "sha256": "8a713cecf1cbd52f26c7c4771e5676b39177a787c7c1657bfdcbbc054e02ee1d"
+    },
+    {
+      "bytes": 3061,
+      "path": "NEXT_HYPOTHESES.md",
+      "sha256": "aaf76f0468f9e04cc03bf67b3521898fb7d145defe82e7c259bc6d16d64bfa4a"
+    },
+    {
+      "bytes": 1060,
+      "path": "Q_H3R_1_QUESTION.md",
+      "sha256": "0c40802440444dd82e2c7f3cb536756991a4c74dd96405007a25c4b14c0af922"
+    },
+    {
+      "bytes": 2112,
+      "path": "QA_REPORT.md",
+      "sha256": "eccbe44794f3e08651cbd87804239bb3b3596021b5a38c32d038547e8861d6b1"
+    },
+    {
+      "bytes": 5551,
+      "path": "RESULTS.md",
+      "sha256": "037e234487614195e4b59306775087189cdfc3506f3db64120e2b876e860132e"
+    },
+    {
+      "bytes": 3600,
+      "path": "SOURCE_INVENTORY.md",
+      "sha256": "bfdad756221317d992334c22d45405a896129354762f1c1b3cc1ad761a316cab"
+    }
+  ],
+  "provenance_version": 1,
+  "reproduction_commands": [
+    "python q-h3r-1/artifacts/derived/analyze_published.py --source-root <immutable-h3r-source-root> --output-root q-h3r-1/artifacts",
+    "python -W ignore::FutureWarning q-h3r-1/artifacts/diagnostics/run_diagnostics.py --source-root <immutable-h3r-source-root> --output-root q-h3r-1/artifacts",
+    "python q-h3r-1/artifacts/derived/summarize_diagnostics.py --analysis-root q-h3r-1/artifacts",
+    "python q-h3r-1/artifacts/plots/render_plots.py --analysis-root q-h3r-1/artifacts",
+    "pytest -q q-h3r-1/artifacts/diagnostics/test_integrity.py -p no:cacheprovider"
+  ],
+  "runtime": {
+    "numpy": "2.4.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.12",
+    "scikit_learn": "1.8.0"
+  },
+  "source_artifacts": [
+    {
+      "path": "protocols/h3r/H3R_PROTOCOL_v1.1.md",
+      "sha256": "5cdecfe758b9908f0f2199b6e7cd5632e9636b887e141d265fdb9265c107334d"
+    },
+    {
+      "path": "governance/H3R_v1.1_freeze_manifest.json",
+      "sha256": "2b65f0985def1eae4fa07717571c6dfa5c3844cbefe280030f3969f745f62eef"
+    },
+    {
+      "path": "experiments/OIR_PPV/H3R/EXP-H3R-002/h3r_summary.json",
+      "sha256": "896f0761852b1ca6aaa88cef4a70e81a869694833da3903bd0105a639485f33d"
+    },
+    {
+      "path": "experiments/OIR_PPV/H3R/EXP-H3R-002/cell_index.json",
+      "sha256": "ba35bf21717cbb4eaacc6eea56703faf5d9fb897771978eb75a2f0f1a1034b83"
+    },
+    {
+      "path": "QA_REPORT_H3R_v1.1_FINAL_CLOSURE_G7.md",
+      "sha256": "943efc756411f3d9a19d667fd12f4b0fe74733d4f9dce8ddc3beade0db8a171c"
+    },
+    {
+      "path": "QA_REPORT_H3R_v1.1_PM_GOVERNANCE_G8.md",
+      "sha256": "7f8419fa86fe22f501d82e08504241895d4876dba95509a9f0838db28ab4b183"
+    },
+    {
+      "path": "protocols/h3r/h3r_test_access_log_v1.1.md",
+      "sha256": "f4eb053696095c18c2d873107ebf1823b49cfb871b7a24e190a2cb76766d4bbb"
+    },
+    {
+      "path": "protocols/h3r/h3r_test_manifest_v1.1.json",
+      "sha256": "371799bb474f2f425db7acacf63cba3de7ca4876f61cbfa5a88549363d97255d"
+    },
+    {
+      "path": "experiments/OIR_PPV/H3R/EXP-H3R-001/failure.json",
+      "sha256": "0d98c6d2f8a6af24c4a0903f52268343e29efa0fabec20f9ce78abd3015f9c23"
+    },
+    {
+      "path": "governance/H3R_v1.0_DECISIVE_EXECUTION_CLOSURE.md",
+      "sha256": "12d100db0b9e86791175eab567cb9707a66b8f5720d0302d36b6654f7b134af3"
+    },
+    {
+      "path": "experiments/OIR_PPV/H2_Closure/EXP-H2-001/h2_comparison.json",
+      "sha256": "7357777d12f7570aff5792ce5f742def44076cda51c2bb6d6e35edb2fa56aede"
+    },
+    {
+      "path": "experiments/OIR_PPV/H1_Closure/EXP-H1-001/h1_comparison_v2.json",
+      "sha256": "ae3f50ab17823d3f49608535c032a90b373b4742b4e7db9aab1cbb769bfcdb91"
+    },
+    {
+      "path": "ontology/ontology_v1.0.md",
+      "sha256": "ef880cc7c361ec806ac9e6042bdb3321b3b9e1d798a750955fee78f0e087cbc6"
+    },
+    {
+      "path": "formal/formal_spec_v1.0.md",
+      "sha256": "649a020b6859265805dc5c195b76ad3f299382be15b900f1f580c1f21d88ec35"
+    },
+    {
+      "path": "protocols/h3r/H3_TO_H3R_LINEAGE.md",
+      "sha256": "6f48874b2886206d4e970d3f98cb85b3517d1e04248597b867844974e93583c6"
+    },
+    {
+      "path": "governance/claim_registry.md",
+      "sha256": "b1f3db00f489198b95be36581be4f990bb5896d97a420305bb08f2a79f409112"
+    }
+  ],
+  "target_branch_requested": "research/oir-ppv",
+  "target_branch_source_commit": "61be5747915d004bf72be718f9b6c4d401c85ad7"
+}
