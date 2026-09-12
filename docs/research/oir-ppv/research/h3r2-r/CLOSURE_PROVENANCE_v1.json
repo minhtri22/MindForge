@@ -1,0 +1,69 @@
+{
+  "schema": "oir-ppv.h3r2-r.closure-provenance.v1",
+  "closure_status": "PROTOCOL_DEVIATION",
+  "qa_confirmatory_severity": "P0",
+  "branch": "research/h3r2-r-closure",
+  "decisive_evidence_commit": "568b14ca635f3c33b42f9c88073f43015bc35d81",
+  "historical_reconstruction": {
+    "source_commit": "e8cf4a958108e048d8d93f8b61bc0c3d63c6bb51",
+    "matched_train_representation_sha256": 100,
+    "expected_train_representation_sha256": 100,
+    "mismatch_count": 0,
+    "reconstruction_manifest_sha256": "aa0b534db0d5f7220f29e25d6e68e596f45735db8fa55b1a0e73bc0185d75d7c",
+    "freeze_artifact_sha256": "e12af3d089729b3f87d57c5d37faf7c4420e8aefd683f1ecfcd67411e046f4a8"
+  },
+  "prospective_identity": {
+    "protocol_sha256": "f99862725de3831870487ad3a749e47c4c6fb8bf885ad0935d000afbf3ac4175",
+    "runner_contract_sha256": "bfd236cb257077bd53bcf2f1eabfa125ae5e08a449e5db92d2cf325b425f72ad",
+    "runner_sha256": "e938f994edf791578e0a3b7d00eac2cc5998164342074cb4e4da04a52567d8fb",
+    "seed_registry_sha256": "b2c544818aea1cdb2bc9d56f235906f9f5cbaaf82f3be7460a9d7b2a8c33a6f6",
+    "pretest_qa_sha256": "2b277fcaa04b02adcef4e76a103bc67d89e783eba895a29b2e88d278d132778a",
+    "historical_smoke_sha256": "af62660335a999fb13ebd46f806921e3c6fbbf6f8b46ec3c186ec86950aa66b2",
+    "identity_lock_sha256": "9bc5a43e229b54aa6fabb1b7a0a0bc908982f9a5ad75f12cf57441989e945462",
+    "fresh_seed_count": 20,
+    "historical_seed_overlap": 0,
+    "expected_cells": 20,
+    "completed_cells": 20,
+    "state_eval_only": true
+  },
+  "scientific_access": {
+    "before_access_count": 0,
+    "after_access_count": 1,
+    "prospective_labels_or_metrics_accessed": true,
+    "first_consumed_utc": "2026-09-11T23:34:59Z",
+    "run_manifest_utc": "2026-09-11T23:35:01Z",
+    "rerun_count": 0
+  },
+  "decision_integrity": {
+    "pretest_acceptance_thresholds_complete": false,
+    "pretest_statistical_plan_complete": false,
+    "relative_recovery_defined_in_frozen_protocol": false,
+    "retroactive_thresholds_added": false,
+    "post_hoc_descriptive_metrics_used_for_verdict": false,
+    "confirmatory_verdict_permitted": false
+  },
+  "required_provenance_fields": [
+    "source",
+    "config",
+    "seed",
+    "model_state",
+    "dataset_identity",
+    "artifact",
+    "hash"
+  ],
+  "canonical_artifacts": {
+    "source": "historical source commit plus frozen prospective execution commit",
+    "config": "PROSPECTIVE_PROTOCOL_FREEZE_v1.md and PROSPECTIVE_RUNNER_CONTRACT_v1.md",
+    "seed": "PROSPECTIVE_SEED_REGISTRY_v1.json",
+    "model_state": "h3r_reconstruction_v1 frozen L0-L4 states",
+    "dataset_identity": "frozen reconstruction identity and prospective 20-seed x 4-environment execution identity",
+    "artifact": "prospective_execution_v1/H3R2R_PROSPECTIVE_SUMMARY_v1.json and RUN_MANIFEST_v1.json",
+    "hash": "identity hashes recorded above and in RUN_MANIFEST_v1.json"
+  },
+  "preserved_statuses": {
+    "H3R": "FALSIFIED_UNDER_TESTED_CONDITIONS",
+    "Q-H3R.1": "PARTIAL_MECHANISM_DIAGNOSIS",
+    "H4": "NOT_OPENED / DEFERRED_BY_OWNER",
+    "next_state": "REVIEW_BEFORE_H4"
+  }
+}
