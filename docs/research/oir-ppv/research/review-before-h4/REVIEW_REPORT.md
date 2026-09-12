@@ -48,6 +48,8 @@ The prospective run used 20 fresh seeds with five seeds per L1-L4 environment, n
 
 A reporting inconsistency remains in `RESULTS.md`: it describes aggregation as 20 seeds x 4 environments = 80 values, while the canonical summary and run manifest define 20 total cells with five seeds per environment. The per-environment L0 linear values in `RESULTS.md` also disagree with the canonical prospective summary. This is a P1 reporting/provenance defect; it does not authorize modification of consumed evidence.
 
+A second P1 provenance inconsistency exists in `CLOSURE_PROVENANCE_v1.json`. The sealed evidence-access event at Git head `82861e2d406dc48b9dad4501e7d3b5935428d241` records runner SHA-256 `fb70812c9d7d9e0165c4a81ad106a9b13965817c3ef7592dbcf11ab989228d95` and protocol SHA-256 `a40a6737a29f3f1476cec810667074985cdc4e65c103c819c70a9ecb9ce67b26`; direct hashing of those files at that Git head reproduces the access-event values. `CLOSURE_PROVENANCE_v1.json` records different runner/protocol hashes. The one-shot access event, Git head, identity lock, raw artifacts, and run manifest still make the actual execution boundary recoverable, so this is a recoverable provenance defect rather than a reason to rewrite consumed evidence.
+
 ## H3R2-R Scientific Assessment
 
 `CONFIRMATORY_ADJUDICATION = NOT_AVAILABLE`.
@@ -88,7 +90,7 @@ If H3R2 confirmation is pursued later, a new protocol must freeze before evidenc
 
 The reviewed closure materials preserve the required distinctions: representation != mechanism; causal sufficiency != transfer; transfer != generation; generation != counterfactual validity; diagnostic != confirmatory evidence; execution integrity != scientific validity; historical reconstruction != historical proof.
 
-The principal scientific defect is explicitly preserved as `PROTOCOL_DEVIATION`, rather than repaired post hoc. Provenance hardening improves traceability but does not retroactively restore confirmatory validity. The P1 `RESULTS.md` reporting inconsistency should remain documented and must not be resolved by rewriting consumed evidence in this review.
+The principal scientific defect is explicitly preserved as `PROTOCOL_DEVIATION`, rather than repaired post hoc. Provenance hardening improves traceability but does not retroactively restore confirmatory validity. Both P1 findings must remain documented: `RESULTS.md` disagrees with canonical execution evidence, and the closure provenance runner/protocol hashes disagree with the sealed evidence-access identities. Neither defect may be resolved by rewriting consumed evidence in this review.
 
 ## Final QA Verdict
 
@@ -101,5 +103,5 @@ The principal scientific defect is explicitly preserved as `PROTOCOL_DEVIATION`,
 - H4 scientific eligibility: `H4_ELIGIBLE`
 - H4 operational state: `NOT_OPENED / DEFERRED_BY_OWNER`
 - Confirmatory H3R2 before H4: `NOT_REQUIRED`
-- QA findings: `P0=1, P1=1, P2=0`
+- QA findings: `P0=1, P1=2, P2=0`
 - Recommended next state: `REVIEW_COMPLETE__DEFER`

@@ -20,6 +20,16 @@ This is a major reporting/provenance inconsistency. Raw evidence, manifests, and
 
 Severity: **P1**.
 
+### P1-02 — Closure provenance runner/protocol hashes disagree with the sealed evidence-access identity
+
+`prospective_execution_v1/access.json` records evidence access at Git head `82861e2d406dc48b9dad4501e7d3b5935428d241` with runner SHA-256 `fb70812c9d7d9e0165c4a81ad106a9b13965817c3ef7592dbcf11ab989228d95` and protocol SHA-256 `a40a6737a29f3f1476cec810667074985cdc4e65c103c819c70a9ecb9ce67b26`. Direct hashing of those files from that Git head reproduces the access-event values.
+
+`CLOSURE_PROVENANCE_v1.json` records different runner/protocol SHA-256 values. The closure commit does not modify the runner or protocol, so the closure-manifest identities cannot both describe the sealed evidence-access boundary.
+
+This is a major provenance-record inconsistency, but the actual one-shot boundary remains recoverable from `access.json`, its Git head, the identity lock, raw artifacts, and the run manifest. Historical evidence must remain unchanged; the closure provenance file must not be treated as the sole canonical source for runner/protocol identity.
+
+Severity: **P1**.
+
 ## P2
 
 No independent P2 finding was established in this review.
@@ -36,7 +46,7 @@ The current hardened H3R2-R provenance identifies the PLAN-required tuple:
 - artifact
 - hash
 
-It also sufficiently identifies environment, preprocessing, runner, protocol, split identity, and artifact manifest. This traceability improvement does not repair P0-01 or convert H3R2-R into confirmatory evidence.
+It also identifies environment, preprocessing, runner, protocol, split identity, and artifact manifest. Runner/protocol content identity is recoverable from the sealed access event and its Git head, but `CLOSURE_PROVENANCE_v1.json` disagrees with that identity as recorded in P1-02. This traceability does not repair P0-01 or convert H3R2-R into confirmatory evidence.
 
 ## Scientific Distinction Check
 
@@ -54,4 +64,4 @@ The P1 reporting inconsistency is a reliability defect, not permission to reinte
 
 ## Counts
 
-`P0=1 / P1=1 / P2=0`
+`P0=1 / P1=2 / P2=0`
