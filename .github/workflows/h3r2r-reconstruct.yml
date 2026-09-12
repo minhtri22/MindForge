@@ -1,0 +1,75 @@
+name: H3R2-R Reconstruction Freeze
+
+on:
+  push:
+    branches:
+      - research/oir-ppv
+    paths:
+      - .github/workflows/h3r2r-reconstruct.yml
+
+permissions:
+  contents: write
+
+jobs:
+  reconstruct:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/oir-ppv
+          fetch-depth: 0
+          path: current
+
+      - name: Checkout historical source snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: e8cf4a958108e048d8d93f8b61bc0c3d63c6bb51
+          path: historical
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install historical runtime dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.4.4" "scikit-learn==1.8.0" PyYAML torch pandas
+
+      - name: Reconstruct all historical states and verify 100 hashes
+        id: reconstruct
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          python current/docs/research/oir-ppv/research/h3r2-r/reconstruct_historical_states.py `
+            --historical-root historical/docs/research/oir-ppv/research `
+            --output-root current/docs/research/oir-ppv/research/h3r2-r/h3r_reconstruction_v1
+
+      - name: Commit successful reconstruction freeze
+        if: steps.reconstruct.outcome == 'success'
+        shell: pwsh
+        run: |
+          Set-Location current
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/research/oir-ppv/research/h3r2-r/h3r_reconstruction_v1
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "research(oir-ppv): materialize H3R2-R reconstruction freeze"
+            git push origin HEAD:research/oir-ppv
+          }
+
+      - name: Upload reconstruction diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: h3r2r-reconstruction
+          path: current/docs/research/oir-ppv/research/h3r2-r/h3r_reconstruction_v1
+          if-no-files-found: error
+
+      - name: Enforce reconstruction gate
+        if: steps.reconstruct.outcome != 'success'
+        shell: pwsh
+        run: |
+          throw "H3R2-R reconstruction gate failed; prospective execution remains locked."
