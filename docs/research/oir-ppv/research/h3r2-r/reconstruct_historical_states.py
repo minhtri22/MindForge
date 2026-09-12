@@ -4,11 +4,15 @@ import argparse
 import hashlib
 import json
 import pickle
+import platform
 import sys
 from pathlib import Path
 from typing import Any
 
 import numpy as np
+import pandas as pd
+import sklearn
+import torch
 import yaml
 
 SOURCE_COMMIT = "e8cf4a958108e048d8d93f8b61bc0c3d63c6bb51"
@@ -16,6 +20,14 @@ HISTORICAL_SEEDS = (223691, 965182, 537173, 538839, 124586)
 SYSTEM_IDS = ("L0", "L1", "L2", "L3", "L4")
 ENVIRONMENTS = ("ENV-1", "ENV-2", "ENV-3", "ENV-4")
 LOCAL_AUDIT_MANIFEST_SHA256 = "aa0b534db0d5f7220f29e25d6e68e596f45735db8fa55b1a0e73bc0185d75d7c"
+EXPECTED_RUNTIME = {
+    "python": "3.13.12",
+    "torch": "2.12.0+cpu",
+    "numpy": "2.4.4",
+    "scikit_learn": "1.8.0",
+    "pandas": "3.0.2",
+    "pyyaml": "6.0.3",
+}
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -33,6 +45,32 @@ def sha256_array(value: np.ndarray) -> str:
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
+
+
+def runtime_fingerprint() -> dict[str, Any]:
+    return {
+        "python": platform.python_version(),
+        "python_implementation": platform.python_implementation(),
+        "platform": platform.platform(),
+        "machine": platform.machine(),
+        "torch": torch.__version__,
+        "numpy": np.__version__,
+        "scikit_learn": sklearn.__version__,
+        "pandas": pd.__version__,
+        "pyyaml": yaml.__version__,
+        "torch_num_threads": torch.get_num_threads(),
+        "torch_num_interop_threads": torch.get_num_interop_threads(),
+    }
+
+
+def assert_expected_runtime(actual: dict[str, Any]) -> None:
+    mismatches = {
+        key: {"expected": expected, "actual": actual.get(key)}
+        for key, expected in EXPECTED_RUNTIME.items()
+        if actual.get(key) != expected
+    }
+    if mismatches:
+        raise RuntimeError(f"H3R2-R reconstruction runtime drift: {json.dumps(mismatches, sort_keys=True)}")
 
 
 def configure_historical_runtime(historical_root: Path):
@@ -74,6 +112,17 @@ def main() -> int:
     historical_root = args.historical_root.resolve()
     output_root = args.output_root.resolve()
     output_root.mkdir(parents=True, exist_ok=True)
+
+    runtime = runtime_fingerprint()
+    assert_expected_runtime(runtime)
+    write_json(
+        output_root / "RECONSTRUCTION_RUNTIME_v1.json",
+        {
+            "status": "RUNTIME_LOCK_MATCH",
+            "expected": EXPECTED_RUNTIME,
+            "actual": runtime,
+        },
+    )
 
     (
         EnvironmentConfig,
@@ -182,6 +231,8 @@ def main() -> int:
         "status": status,
         "source_commit": SOURCE_COMMIT,
         "local_audit_manifest_sha256": LOCAL_AUDIT_MANIFEST_SHA256,
+        "runtime_lock": EXPECTED_RUNTIME,
+        "runtime_fingerprint": runtime,
         "scope": {"environments": list(ENVIRONMENTS), "historical_state_seeds": list(HISTORICAL_SEEDS), "learners": list(SYSTEM_IDS)},
         "record_count": record_count,
         "exact_hash_matches": exact_matches,
@@ -200,6 +251,7 @@ def main() -> int:
         "mismatch_count": mismatch_count,
         "freeze_manifest_sha256": sha256_path(freeze_path),
         "source_commit": SOURCE_COMMIT,
+        "runtime_lock": EXPECTED_RUNTIME,
     }
     write_json(output_root / "RECONSTRUCTION_RESULTS.json", results)
     print(json.dumps(results, sort_keys=True))
