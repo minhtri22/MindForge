@@ -217,3 +217,11 @@ Every proposed feature must answer:
 4. What is the smallest implementation capable of testing it?
 
 MindForge prefers one complete 500-line experiment over a 5,000-line architecture for experiments not yet proven worth running.
+
+## Research evidence governance
+
+For any experiment that can change a scientific hypothesis state, freeze the complete decision rule before accessing decisive evidence. The freeze must include every metric formula used for verdict, acceptance thresholds or margins, reproducibility criteria, baseline/control rules, validation-to-test tolerances, and the statistical or confidence-interval procedure when applicable.
+
+Every decisive evidence record must preserve, at minimum, these provenance fields: `source`, `config`, `seed`, `model_state`, `dataset_identity`, `artifact`, and `hash`.
+
+If decisive evidence is accessed before the complete decision rule is frozen, preserve the observations but classify the confirmatory run as a protocol deviation. Do not backfill thresholds or derived metric definitions from observed results, and do not rerun consumed decisive evidence under the same evidence identity to manufacture a verdict.
