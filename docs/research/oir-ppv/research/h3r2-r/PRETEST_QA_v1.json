@@ -1,0 +1,172 @@
+{
+  "created_at_utc": "2026-09-12T10:54:00.471424+00:00",
+  "deterministic_prospective_observation_gate": {
+    "cell_count": 20,
+    "double_generation_exact_match": true,
+    "prospective_labels_accessed": false,
+    "status": "PASS"
+  },
+  "frozen_artifact_gate": {
+    "checked_dataset_identities": 20,
+    "checked_model_states": 100,
+    "checked_representations": 100,
+    "status": "PASS"
+  },
+  "git_freeze_gate": {
+    "branch": "research/oir-ppv",
+    "files": [
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/PROSPECTIVE_PROTOCOL_FREEZE_v1.md",
+        "tracked": true
+      },
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/PROSPECTIVE_SEED_REGISTRY_v1.json",
+        "tracked": true
+      },
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/run_h3r2r_prospective.py",
+        "tracked": true
+      },
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/RUNNER_CONTRACT_v1.md",
+        "tracked": true
+      },
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/test_h3r2r_runner.py",
+        "tracked": true
+      },
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/h3r_reconstruction_v1/H3R_RECONSTRUCTION_FREEZE_v1.json",
+        "tracked": true
+      },
+      {
+        "dirty": false,
+        "path": "docs/research/oir-ppv/research/h3r2-r/h3r_reconstruction_v1/RECONSTRUCTION_RESULTS.json",
+        "tracked": true
+      }
+    ],
+    "head": "991f2d190311e73485fa7fa6e300564154759cc7",
+    "status": "PASS"
+  },
+  "identity_lock_path": "docs/research/oir-ppv/research/h3r2-r/PROSPECTIVE_IDENTITY_LOCK_v1.json",
+  "identity_lock_sha256": "780a81fd98f93ca274adc196e59cbaf356fbaaad31a03f3c741e2feb7066e5b0",
+  "prospective_labels_accessed": false,
+  "reconstruction_gate": {
+    "exact_hash_matches": 100,
+    "historical_reproducibility": "ESTABLISHED",
+    "manifest_sha256": "aa0b534db0d5f7220f29e25d6e68e596f45735db8fa55b1a0e73bc0185d75d7c",
+    "mismatch_count": 0,
+    "record_count": 100,
+    "status": "PASS"
+  },
+  "runner_contract_gate": {
+    "checks": {
+      "encoder_fit_route": true,
+      "extractor_extract_route": true,
+      "representation_constructor": true,
+      "table_encoder_fit_route": true,
+      "table_encoder_fit_transform_route": true
+    },
+    "status": "PASS",
+    "transform_path": "table_encoder.transform -> encoder.encode"
+  },
+  "seed_registry_gate": {
+    "derivation_verified": true,
+    "disjoint_from_historical": true,
+    "mapping_count": 20,
+    "status": "PASS",
+    "unique": true
+  },
+  "source_lineage_gate": {
+    "checked_source_files": [
+      {
+        "actual_sha256": "ca9c270646b7cd0c7e353ee0dbeb7adda82d9b2f61dfe61a3b364fbdc14c3e08",
+        "expected_sha256": "ca9c270646b7cd0c7e353ee0dbeb7adda82d9b2f61dfe61a3b364fbdc14c3e08",
+        "passed": true,
+        "path": "environments/base.py"
+      },
+      {
+        "actual_sha256": "2923ab3cd848f725c764ab4c283d887a306221c2c688207f2b408b5ff24e24f0",
+        "expected_sha256": "2923ab3cd848f725c764ab4c283d887a306221c2c688207f2b408b5ff24e24f0",
+        "passed": true,
+        "path": "environments/env1_config.yaml"
+      },
+      {
+        "actual_sha256": "f5d472ff880a26be2741c4dfa42c00a0ce0a625780f0f8b617f5d421edc3d107",
+        "expected_sha256": "f5d472ff880a26be2741c4dfa42c00a0ce0a625780f0f8b617f5d421edc3d107",
+        "passed": true,
+        "path": "environments/env1_generator.py"
+      },
+      {
+        "actual_sha256": "68c753b7972c6194bf8114f0d71711964c4a2f402675a4c6b53dfa53d529b965",
+        "expected_sha256": "68c753b7972c6194bf8114f0d71711964c4a2f402675a4c6b53dfa53d529b965",
+        "passed": true,
+        "path": "environments/env2_config.yaml"
+      },
+      {
+        "actual_sha256": "864e5a5dd181e00996d316a48d6b3b7c7d3b11bdcb1650633b7fe04ea5c7aa41",
+        "expected_sha256": "864e5a5dd181e00996d316a48d6b3b7c7d3b11bdcb1650633b7fe04ea5c7aa41",
+        "passed": true,
+        "path": "environments/env2_generator.py"
+      },
+      {
+        "actual_sha256": "38c668e35cf6a97337aa0f1e679c3249cc1df4a762c5d87bd9fb2cee1e45d953",
+        "expected_sha256": "38c668e35cf6a97337aa0f1e679c3249cc1df4a762c5d87bd9fb2cee1e45d953",
+        "passed": true,
+        "path": "environments/env3_config.yaml"
+      },
+      {
+        "actual_sha256": "c08de3f271310e6ac068450483b4a2f11f51aafdaafb3c7377c36af1fe51396c",
+        "expected_sha256": "c08de3f271310e6ac068450483b4a2f11f51aafdaafb3c7377c36af1fe51396c",
+        "passed": true,
+        "path": "environments/env3_generator.py"
+      },
+      {
+        "actual_sha256": "d4607f8e56b154b2e3267f9d4c4a390e95d26dfc11b1ed4866dbbb9027266716",
+        "expected_sha256": "d4607f8e56b154b2e3267f9d4c4a390e95d26dfc11b1ed4866dbbb9027266716",
+        "passed": true,
+        "path": "environments/env4_config.yaml"
+      },
+      {
+        "actual_sha256": "4503be88c799ffd9b083fcfa69c6fc737f4507c7fccda440f455f27ff1d638a7",
+        "expected_sha256": "4503be88c799ffd9b083fcfa69c6fc737f4507c7fccda440f455f27ff1d638a7",
+        "passed": true,
+        "path": "environments/env4_generator.py"
+      },
+      {
+        "actual_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+        "expected_sha256": "f9dd3438006c6db2c0be555a86c1af0a8eeb96d097a516ef5d549f2880d86656",
+        "passed": true,
+        "path": "experiments/OIR_PPV/Learner_Benchmark/EXP-LRN-001/matrix_manifest.json"
+      },
+      {
+        "actual_sha256": "660d38a3815b2f118236b1532e78fc80a479e656358732da438d5badab5e4f68",
+        "expected_sha256": "660d38a3815b2f118236b1532e78fc80a479e656358732da438d5badab5e4f68",
+        "passed": true,
+        "path": "pipeline/run_h3r_v11.py"
+      },
+      {
+        "actual_sha256": "2cecb43ebb70b989dee002359656e0c4de24d8a15f3fe375281229cbe281cda4",
+        "expected_sha256": "2cecb43ebb70b989dee002359656e0c4de24d8a15f3fe375281229cbe281cda4",
+        "passed": true,
+        "path": "pipeline/run_m3_experiment.py"
+      },
+      {
+        "actual_sha256": "9e2dbba27ef5dd2a0934d9fee96048fe88534093f390e70d641359376fc97f4c",
+        "expected_sha256": "9e2dbba27ef5dd2a0934d9fee96048fe88534093f390e70d641359376fc97f4c",
+        "passed": true,
+        "path": "tests/test_h3r_v11_execution.py"
+      }
+    ],
+    "source_commit_declared": "e8cf4a958108e048d8d93f8b61bc0c3d63c6bb51",
+    "status": "PASS"
+  },
+  "stage": "H3R2-R-PRETEST-QA-v1",
+  "status": "PASS"
+}
