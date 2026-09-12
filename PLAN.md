@@ -218,6 +218,14 @@ Every proposed feature must answer:
 
 MindForge prefers one complete 500-line experiment over a 5,000-line architecture for experiments not yet proven worth running.
 
+## OIR-PPV research planning boundary
+
+The OIR-PPV hypothesis lineage has its own canonical PM control document at:
+
+`docs/research/oir-ppv/research/PLAN.md`
+
+For OIR-PPV hypothesis status, evidence class, gate eligibility, lineage, and next allowed research action, that research-level plan is authoritative. Copies of `PLAN.md` inside reconstruction clones, temporary repositories, replay workspaces, or historical snapshots are non-authoritative snapshots.
+
 ## Research evidence governance
 
 For any experiment that can change a scientific hypothesis state, freeze the complete decision rule before accessing decisive evidence. The freeze must include every metric formula used for verdict, acceptance thresholds or margins, reproducibility criteria, baseline/control rules, validation-to-test tolerances, and the statistical or confidence-interval procedure when applicable.
