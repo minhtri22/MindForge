@@ -1,0 +1,37 @@
+{
+  "registry_version": "H3R2-R-PROSPECTIVE-SEEDS-v1",
+  "status": "FROZEN_BEFORE_TEST_EXECUTION",
+  "derivation": {
+    "method": "sha256-prefix-to-six-digit-seed",
+    "input_template": "H3R2-R|ENV-{environment}|{historical_state_seed}|prospective-v1",
+    "integer_rule": "100000 + (uint64_be(sha256(input)[0:8]) mod 900000)",
+    "collision_rule": "append |{counter} and rehash until seed is unused",
+    "collision_count": 0
+  },
+  "historical_state_seeds": [223691, 965182, 537173, 538839, 124586],
+  "prospective_seed_count": 20,
+  "unique": true,
+  "disjoint_from_historical": true,
+  "mappings": [
+    {"environment": "ENV-1", "historical_state_seed": 223691, "prospective_test_seed": 832813},
+    {"environment": "ENV-1", "historical_state_seed": 965182, "prospective_test_seed": 540108},
+    {"environment": "ENV-1", "historical_state_seed": 537173, "prospective_test_seed": 294923},
+    {"environment": "ENV-1", "historical_state_seed": 538839, "prospective_test_seed": 466156},
+    {"environment": "ENV-1", "historical_state_seed": 124586, "prospective_test_seed": 826519},
+    {"environment": "ENV-2", "historical_state_seed": 223691, "prospective_test_seed": 961056},
+    {"environment": "ENV-2", "historical_state_seed": 965182, "prospective_test_seed": 525313},
+    {"environment": "ENV-2", "historical_state_seed": 537173, "prospective_test_seed": 838765},
+    {"environment": "ENV-2", "historical_state_seed": 538839, "prospective_test_seed": 627195},
+    {"environment": "ENV-2", "historical_state_seed": 124586, "prospective_test_seed": 915879},
+    {"environment": "ENV-3", "historical_state_seed": 223691, "prospective_test_seed": 403559},
+    {"environment": "ENV-3", "historical_state_seed": 965182, "prospective_test_seed": 717966},
+    {"environment": "ENV-3", "historical_state_seed": 537173, "prospective_test_seed": 572388},
+    {"environment": "ENV-3", "historical_state_seed": 538839, "prospective_test_seed": 962656},
+    {"environment": "ENV-3", "historical_state_seed": 124586, "prospective_test_seed": 355408},
+    {"environment": "ENV-4", "historical_state_seed": 223691, "prospective_test_seed": 899071},
+    {"environment": "ENV-4", "historical_state_seed": 965182, "prospective_test_seed": 932749},
+    {"environment": "ENV-4", "historical_state_seed": 537173, "prospective_test_seed": 934258},
+    {"environment": "ENV-4", "historical_state_seed": 538839, "prospective_test_seed": 717135},
+    {"environment": "ENV-4", "historical_state_seed": 124586, "prospective_test_seed": 344851}
+  ]
+}
