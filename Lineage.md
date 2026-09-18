@@ -657,3 +657,89 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence: `experiments/kernel_cl/results/kcl65q_summary.json`.
 - Paper: `docs/research/kernel-continual-learning/kcl65q-paper.md`.
 - Main KCL-6.5 specificity A/B status: **NOT STARTED at qualification closure**.
+
+
+## 2026-09-18 — KCL-6.5 Fresh-Seed Specificity A/B Confirms Retention Effect but Fails Composite No-Plasticity-Cost Gate
+
+- Status: **FAIL**
+- Verdict: `TARGETED_CLARIFICATION_NOT_CONFIRMATORY_ON_FRESH_SEEDS`
+- Important interpretation: protocol-level FAIL is caused by the frozen composite H-S4 paired current-task non-degradation condition. It is **not** a null result for clarification specificity.
+- Prerequisite qualification:
+  - KCL-6.5-Q = **PASS**
+  - verdict `MATCHED_QUERY_CONTROL_QUALIFIED`.
+- Main arms:
+  - E = `TARGETED_CLARIFICATION`
+  - F = `MATCHED_PLACEBO_QUERY`.
+- Fresh confirmatory seeds:
+  - `4343`, `4545`, `4747`, `4949`, `5353`.
+- Query manipulation:
+  - E same-task cue: candidate offsets `4 → 1`.
+  - F current-task placebo cue: candidate offsets `4 → 4`.
+  - query count/timing matched;
+  - payload arity `3`;
+  - cue gradient = zero;
+  - cue persistent storage = zero.
+- Query schedule on every seed:
+  - T2: `0`
+  - T3: `1`
+  - T4: `2`
+  - total: `3`.
+- H-S1 target specificity: **PASS**.
+- H-S2 matched-query null/integrity: **PASS**.
+- H-S3 targeted information improves prior CL: **PASS**.
+  - E final mean prior accuracy: `0.60833`.
+  - F final mean prior accuracy: `0.35278`.
+  - mean E-F gain: `+0.25556` (+25.56 percentage points).
+  - E prior retention > F on all `5/5` fresh seeds.
+  - frozen mean gain threshold: `>=0.10`.
+- Per-seed prior E→F contrast:
+  - 4343: `0.5833 vs 0.3750`, gain `+0.2083`.
+  - 4545: `0.7361 vs 0.3611`, gain `+0.3750`.
+  - 4747: `0.7361 vs 0.4306`, gain `+0.3056`.
+  - 4949: `0.5000 vs 0.3611`, gain `+0.1389`.
+  - 5353: `0.4861 vs 0.2361`, gain `+0.2500`.
+- E exact replay match rate: `1.0` at T2/T3/T4 on every seed.
+- F exact replay match:
+  - T3 range `0.608–0.624`.
+  - T4 range `0.516–0.532`.
+- E avoided an average `214.6` incorrect replay targets/seed relative to F.
+- Mean specificity retention gain/query: `0.08519` (~8.52 percentage points/query on this substrate).
+- H-S5 query/storage integrity: **PASS**.
+  - final E storage `143` bytes;
+  - final F storage `143` bytes;
+  - replay budget unchanged;
+  - fuzzy representation unchanged.
+- Absolute strict E current-task gate:
+  - frozen requirement `E T4 >=0.95` on every seed;
+  - observed minimum `0.95833`;
+  - **PASS 5/5**.
+- H-S4 composite plasticity/non-degradation: **FAIL**.
+  - E T4 mean `0.98333`.
+  - F T4 mean `0.99167`.
+  - mean E-F T4 = `-0.00833` (-0.83 percentage points).
+  - seed `4949`: E `0.95833`, F `1.0`, paired delta `-0.04167`.
+  - other four seeds: E T4 == F T4.
+- Therefore the frozen requirement:
+  - `E_T4 >= F_T4` every seed, and
+  - `mean(E_T4-F_T4) >=0`
+  is violated.
+- Hypothesis matrix:
+  - H-S1 **PASS**
+  - H-S2 **PASS**
+  - H-S3 **PASS**
+  - H-S4 **FAIL**
+  - H-S5 **PASS**.
+- Scientific interpretation: fresh-seed evidence confirms that task-relevant clarification substantially improves prior retention over a matched placebo query, while the stronger claim of zero paired current-task plasticity cost is not confirmed. The observed pattern is consistent with a stability-plasticity tradeoff but KCL-6.5 does not prove that explanation.
+- No gate was removed or relaxed after outcome inspection.
+- Protocol commit: `79c4bd0fac855ef3d4270f7dc9fb2af33b50cb8f`.
+- Protocol SHA-256: `4b9317484934cd03879ddff24f002197d4870db636537f8359fa7647da70253a`.
+- Canonical scientific source commit: `33be09171774d11cad7f69c6bdeb56606fd6915b`.
+- Workflow run: `35352115877`.
+- Focused tests: `12 passed (6 KCL-6.5 + 6 KCL-6.5-Q)`.
+- Artifact ID: `10550201214`.
+- Artifact ZIP SHA-256: `436132461050321438ff2974b52f4377ebe1d2486651952f3a3864ab9620860d`.
+- Workflow conclusion: **failure by scientific FAIL exit code**, not implementation failure.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl65_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl65-paper.md`.
+- KCL-7 status: **NOT STARTED**.
+- Next scientific requirement: isolate H-S4 and test whether the small E-vs-F T4 decrement is a reproducible stability-plasticity tradeoff or finite-seed variation, without changing E/F policies or retroactively altering KCL-6.5.
