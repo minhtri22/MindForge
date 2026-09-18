@@ -102,3 +102,36 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl3-paper.md`.
 - Interpretation: bounded replay has a causal anti-forgetting effect on the frozen KCL substrate without measured plasticity loss. This is not yet evidence of generalized continual-learning capability.
 - Next candidate milestone: KCL-4 minimal replay-boundary characterization under a separately frozen protocol. No alternative architecture or CL mechanism is authorized by KCL-3.
+
+
+## 2026-09-18 — KCL-4 Minimum Effective Replay Boundary Established
+
+- Status: **PASS**
+- Verdict: `MINIMUM_EFFECTIVE_REPLAY_BOUNDARY_6_25_PERCENT`
+- Frozen batch size: `16`.
+- Minimum positive representable replay count: `1` prior-task sample per batch.
+- Tested low dose: `1/16 = 6.25%`.
+- Historical anchors: `0%` untreated KCL-2 baseline and `12.5%` KCL-3 proven replay treatment.
+- Seeds: `101`, `202`, `303`, `707`, `909`.
+- CONTROL A-after-B mean: `0.0250`.
+- 6.25% replay A-after-B mean: `0.5750`.
+- Mean retention gain: `0.5500`; minimum per-seed gain: `0.4583`.
+- CONTROL forgetting mean: `0.9750`.
+- 6.25% replay forgetting mean: `0.4250`.
+- CONTROL B-after-B mean: `1.0`.
+- 6.25% replay B-after-B mean: `0.99167`; minimum: `0.95833`.
+- Mean B accuracy delta: `-0.00833`; the only non-zero measured plasticity cost was seed `101` at `-0.04167`, remaining above the frozen `0.95` B-acquisition gate.
+- All frozen plasticity, per-seed retention, aggregate retention, aggregate forgetting, directional-consistency, paired-state, historical-anchor, and budget-integrity gates: **PASS**.
+- Replay-ratio search performed: **NO**.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `be71a53dfe521729de76ddab83dfc416b8b426f4`.
+- Scientific protocol SHA-256: `c186bd6e3b47b1c02f0b8b6ecbd7f5d96efb71605c5b55dfaba8fe8709740fb0`.
+- Canonical workflow run: `35332116173`.
+- Canonical source commit: `fb3a7466909f108f49d29a0bacf3fc9fbfa55fd4`.
+- Focused tests: `19 passed`.
+- Workflow artifact ID: `10542015732`.
+- Workflow artifact ZIP SHA-256: `d41c7e58c48db87a3a8dc8484b45d4eab3a2159c4ab831c3601285b4ffba3ff3`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl4_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl4-paper.md`.
+- Interpretation: under the frozen batch size of 16, 6.25% is the minimum non-zero representable replay dose and it satisfies the KCL-3 effect contract. The result is substrate-specific and does not establish unseen-pair or scale generalization.
+- KCL-5 status: **NOT STARTED / NOT AUTHORIZED BY THIS CLOSURE**.
