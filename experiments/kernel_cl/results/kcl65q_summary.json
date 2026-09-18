@@ -1,0 +1,77 @@
+{
+  "experiment": "KCL-6.5-Q",
+  "status": "PASS",
+  "verdict": "MATCHED_QUERY_CONTROL_QUALIFIED",
+  "qualification_seed": 5151,
+  "Q1_targeted_identifiability": {
+    "pass": true,
+    "candidate_set": "4->1",
+    "tasks": {
+      "T1_U1_A": {
+        "exact_offset": 1,
+        "reconstruction_exact": true
+      },
+      "T2_U1_B": {
+        "exact_offset": 3,
+        "reconstruction_exact": true
+      },
+      "T3_U3_A": {
+        "exact_offset": 4,
+        "reconstruction_exact": true
+      }
+    }
+  },
+  "Q2_placebo_nonidentifiability": {
+    "pass": true,
+    "opportunities": [
+      "T3_from_T1",
+      "T4_from_T1",
+      "T4_from_T2"
+    ],
+    "candidate_set": "4->4",
+    "payload_arity": 3,
+    "prior_resolver_rejected_all": true
+  },
+  "Q3_equal_query_envelope": {
+    "pass": true,
+    "query_timing_same": true,
+    "payload_arity_same": 3,
+    "query_enters_gradient": false,
+    "query_stored": false,
+    "replay_slots_changed": false,
+    "optimizer_steps_changed": false,
+    "processed_examples_changed": false
+  },
+  "Q4_placebo_operational_null": {
+    "pass": true,
+    "query_schedule": {
+      "after_T2": 0,
+      "after_T3": 1,
+      "after_T4": 2
+    },
+    "replay_observations_equal": true,
+    "post_stage_model_equal": true,
+    "post_stage_optimizer_equal": true
+  },
+  "Q5_no_hidden_cross_task_resolver": {
+    "pass": true,
+    "resolver_same_task_identity_only": true,
+    "cross_task_offset_inference_used": false,
+    "task_id_offset_correlation_used": false,
+    "family_formula_used": false,
+    "historical_raw_observations_used": false
+  },
+  "protocol": "docs/research/kernel-continual-learning/kcl65q-protocol.md",
+  "protocol_sha256": "7e8e6537e6c730aafd7097f4d70b6c80f40b211357904fdd9697a9af0f29136a",
+  "git_commit": "0aeeeafb2df289bb53becc2b19645bd4427657f5",
+  "canonical_workflow": {
+    "run_id": 35351589288,
+    "artifact_id": 10549729971,
+    "artifact_zip_sha256": "635f4fc7677640211531aa2bb21165e0561dc9eb8a2143ecc9c9a219ce625da2",
+    "focused_tests": "6 passed",
+    "conclusion": "success"
+  },
+  "scope": {
+    "main_kcl65_started": false
+  }
+}
