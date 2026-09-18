@@ -1,0 +1,345 @@
+{
+  "aggregates": {
+    "D_T4_accuracy": {
+      "max": 1,
+      "mean": 0.975,
+      "min": 0.9166666865348816,
+      "pstdev": 0.0333333283662816
+    },
+    "D_mean_prior_accuracy": {
+      "max": 0.4166666616996129,
+      "mean": 0.3555555519958337,
+      "min": 0.2916666592160861,
+      "pstdev": 0.04175915861103962
+    },
+    "E_T4_accuracy": {
+      "max": 1,
+      "mean": 0.9833333253860473,
+      "min": 0.9583333134651184,
+      "pstdev": 0.020412424256590882
+    },
+    "E_mean_prior_accuracy": {
+      "max": 0.7777777711550394,
+      "mean": 0.6750000019868214,
+      "min": 0.5138888756434122,
+      "pstdev": 0.09726190037395217
+    },
+    "E_peak_transient_schema_bytes": {
+      "max": 123,
+      "mean": 123,
+      "min": 123,
+      "pstdev": 0
+    },
+    "T4_gain_E_minus_D": {
+      "max": 0.041666626930236816,
+      "mean": 0.008333325386047363,
+      "min": 0,
+      "pstdev": 0.016666650772094727
+    },
+    "exact_replay_errors_avoided": {
+      "max": 232,
+      "mean": 223,
+      "min": 217,
+      "pstdev": 5.8991524815010505
+    },
+    "prior_gain_E_minus_D": {
+      "max": 0.41666666666666663,
+      "mean": 0.31944444999098776,
+      "min": 0.22222221642732615,
+      "pstdev": 0.07243558034350561
+    },
+    "prior_gain_per_query": {
+      "max": 0.13888888888888887,
+      "mean": 0.10648148333032925,
+      "min": 0.07407407214244205,
+      "pstdev": 0.0241451934478352
+    }
+  },
+  "arms": {
+    "D": "FUZZY_GUESS_REPLAY",
+    "E": "FUZZY_ASK_REACTIVATE"
+  },
+  "clarification": {
+    "cue": "one exact key_min observation",
+    "cue_enters_gradient": false,
+    "cue_enters_training_batch": false,
+    "cue_stored_as_raw_episode": false,
+    "expected_queries_by_stage": {
+      "after_T2": 0,
+      "after_T3": 1,
+      "after_T4": 2
+    },
+    "expected_total_queries": 3,
+    "trigger": "first replay of fuzzy task in current stage"
+  },
+  "environment": {
+    "deterministic_algorithms": true,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu"
+  },
+  "experiment": "KCL-6.4",
+  "final_seeds": [
+    3333,
+    3535,
+    3737,
+    3939,
+    4141
+  ],
+  "git_commit": "7fca0762d6f6013e4842c456c981636a98dd48da",
+  "historical_anchor": {
+    "D_T4_aggregate": 0.975,
+    "D_mean_prior_aggregate": 0.352777773886919,
+    "by_seed": {
+      "3333": {
+        "D_T4": 1,
+        "D_mean_prior": 0.4166666616996129
+      },
+      "3535": {
+        "D_T4": 0.9583333134651184,
+        "D_mean_prior": 0.2916666592160861
+      },
+      "3737": {
+        "D_T4": 1,
+        "D_mean_prior": 0.3750000074505806
+      },
+      "3939": {
+        "D_T4": 0.9166666865348816,
+        "D_mean_prior": 0.3194444365799427
+      },
+      "4141": {
+        "D_T4": 1,
+        "D_mean_prior": 0.3611111044883728
+      }
+    },
+    "hypotheses": {
+      "H1_fuzzy_trace_recoverable": true,
+      "H2_useful_CL_trace_and_plasticity": false,
+      "H3_relearning_advantage": true,
+      "H4_storage_below_exact_schema": true
+    },
+    "sha256": "d281a0aa81ca24cf05849582fcc93c2a1692c8b3e9b9827ecfb1957430f62285",
+    "status": "FAIL",
+    "valid": true,
+    "verdict": "FUZZY_DECAY_DESTROYS_USEFUL_CONTINUAL_MEMORY"
+  },
+  "hypotheses": {
+    "D_failure_reproduced": true,
+    "E_strict_CL_pass": true,
+    "paired_D_to_E_improvement_pass": true,
+    "query_integrity_pass": true
+  },
+  "integrity": {
+    "D_metric_consistency_with_KCL63": true,
+    "fuzzy_representation_changed": false,
+    "model_architecture_changed": false,
+    "paired_contrast_valid": true,
+    "replay_budget_changed": false
+  },
+  "memory": {
+    "D_final_bytes": 143,
+    "E_final_bytes": 143,
+    "bucket_width": 4,
+    "decay_schedule_changed": false,
+    "representation_changed_from_D": false
+  },
+  "model_parameter_count": 4880,
+  "per_seed": [
+    {
+      "D_T4": 1,
+      "D_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.64,
+        "after_T4": 0.484
+      },
+      "D_mean_prior": 0.4166666616996129,
+      "D_worst_prior": 0.125,
+      "E_T4": 1,
+      "E_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 1,
+        "after_T4": 1
+      },
+      "E_mean_prior": 0.694444457689921,
+      "E_worst_prior": 0.5,
+      "T4_gain": 0,
+      "exact_replay_errors_avoided": 219,
+      "persistent_storage": {
+        "D_final_bytes": 143,
+        "E_final_bytes": 143,
+        "E_peak_transient_schema_bytes": 123
+      },
+      "prior_gain": 0.2777777959903081,
+      "prior_gain_per_query": 0.09259259866343604,
+      "queries_by_stage": {
+        "after_T2": 0,
+        "after_T3": 1,
+        "after_T4": 2
+      },
+      "seed": 3333,
+      "total_queries": 3
+    },
+    {
+      "D_T4": 0.9583333134651184,
+      "D_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.624,
+        "after_T4": 0.508
+      },
+      "D_mean_prior": 0.2916666592160861,
+      "D_worst_prior": 0.0833333358168602,
+      "E_T4": 0.9583333134651184,
+      "E_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 1,
+        "after_T4": 1
+      },
+      "E_mean_prior": 0.5138888756434122,
+      "E_worst_prior": 0.4166666567325592,
+      "T4_gain": 0,
+      "exact_replay_errors_avoided": 217,
+      "persistent_storage": {
+        "D_final_bytes": 143,
+        "E_final_bytes": 143,
+        "E_peak_transient_schema_bytes": 123
+      },
+      "prior_gain": 0.22222221642732615,
+      "prior_gain_per_query": 0.07407407214244205,
+      "queries_by_stage": {
+        "after_T2": 0,
+        "after_T3": 1,
+        "after_T4": 2
+      },
+      "seed": 3535,
+      "total_queries": 3
+    },
+    {
+      "D_T4": 1,
+      "D_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.62,
+        "after_T4": 0.468
+      },
+      "D_mean_prior": 0.3750000074505806,
+      "D_worst_prior": 0.0833333358168602,
+      "E_T4": 1,
+      "E_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 1,
+        "after_T4": 1
+      },
+      "E_mean_prior": 0.7638888955116272,
+      "E_worst_prior": 0.625,
+      "T4_gain": 0,
+      "exact_replay_errors_avoided": 228,
+      "persistent_storage": {
+        "D_final_bytes": 143,
+        "E_final_bytes": 143,
+        "E_peak_transient_schema_bytes": 123
+      },
+      "prior_gain": 0.3888888880610466,
+      "prior_gain_per_query": 0.1296296293536822,
+      "queries_by_stage": {
+        "after_T2": 0,
+        "after_T3": 1,
+        "after_T4": 2
+      },
+      "seed": 3737,
+      "total_queries": 3
+    },
+    {
+      "D_T4": 0.9166666865348816,
+      "D_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.652,
+        "after_T4": 0.472
+      },
+      "D_mean_prior": 0.3333333271245162,
+      "D_worst_prior": 0.0416666679084301,
+      "E_T4": 0.9583333134651184,
+      "E_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 1,
+        "after_T4": 1
+      },
+      "E_mean_prior": 0.6250000099341074,
+      "E_worst_prior": 0.3333333432674408,
+      "T4_gain": 0.041666626930236816,
+      "exact_replay_errors_avoided": 219,
+      "persistent_storage": {
+        "D_final_bytes": 143,
+        "E_final_bytes": 143,
+        "E_peak_transient_schema_bytes": 123
+      },
+      "prior_gain": 0.29166668280959124,
+      "prior_gain_per_query": 0.09722222760319708,
+      "queries_by_stage": {
+        "after_T2": 0,
+        "after_T3": 1,
+        "after_T4": 2
+      },
+      "seed": 3939,
+      "total_queries": 3
+    },
+    {
+      "D_T4": 1,
+      "D_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.616,
+        "after_T4": 0.456
+      },
+      "D_mean_prior": 0.3611111044883728,
+      "D_worst_prior": 0.125,
+      "E_T4": 1,
+      "E_exact_match_rates": {
+        "after_T2": 1,
+        "after_T3": 1,
+        "after_T4": 1
+      },
+      "E_mean_prior": 0.7777777711550394,
+      "E_worst_prior": 0.5833333134651184,
+      "T4_gain": 0,
+      "exact_replay_errors_avoided": 232,
+      "persistent_storage": {
+        "D_final_bytes": 143,
+        "E_final_bytes": 143,
+        "E_peak_transient_schema_bytes": 123
+      },
+      "prior_gain": 0.41666666666666663,
+      "prior_gain_per_query": 0.13888888888888887,
+      "queries_by_stage": {
+        "after_T2": 0,
+        "after_T3": 1,
+        "after_T4": 2
+      },
+      "seed": 4141,
+      "total_queries": 3
+    }
+  ],
+  "protocol": "docs/research/kernel-continual-learning/kcl64-protocol.md",
+  "protocol_sha256": "6b7790938cf9584af3ecac2d282478a7540739e8a8041e5aa318f7deddb51344",
+  "scope": {
+    "adaptive_query_policy_started": false,
+    "kcl7_started": false,
+    "reasoning_work": false
+  },
+  "status": "PASS",
+  "strict_gate_retained": {
+    "T4_accuracy_min_every_seed": 0.95,
+    "gate_relaxed_from_KCL63": false
+  },
+  "task_order": [
+    "T1_U1_A",
+    "T2_U1_B",
+    "T3_U3_A",
+    "T4_U3_B"
+  ],
+  "verdict": "CLARIFICATION_REACTIVATION_RESCUES_FUZZY_MEMORY_POLICY",
+  "canonical_workflow": {
+    "run_id": 35347461695,
+    "artifact_id": 10547353683,
+    "artifact_zip_sha256": "16e6677441441a0ba50ea843d8a4e3392e594ca71fee6055a01bd534a4b497bf",
+    "focused_tests": "16 passed (8 KCL-6.4 + 8 KCL-6.3)",
+    "conclusion": "success"
+  }
+}
