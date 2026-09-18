@@ -1,0 +1,168 @@
+{
+  "experiment": "KCL-6.1",
+  "status": "NEGATIVE",
+  "verdict": "EXACT_DUPLICATE_WEIGHTING_DOES_NOT_REDUCE_CURRENT_REPLAY_STORAGE",
+  "arms": {
+    "A": "RAW_TASK_OBSERVATION_STORE",
+    "B": "WEIGHTED_EXACT_OBSERVATION_STORE"
+  },
+  "final_seeds": [3333, 3535, 3737, 3939, 4141],
+  "task_order": ["T1_U1_A", "T2_U1_B", "T3_U3_A", "T4_U3_B"],
+  "replay": {
+    "fraction": 0.0625,
+    "current_examples_per_batch": 15,
+    "replay_examples_per_batch": 1,
+    "sampling_by_multiplicity": true,
+    "loss_multiplication_used": false
+  },
+  "repeat_mechanism_validation": {
+    "pass": true,
+    "raw_expanded_count": 60,
+    "weighted_unique_entries": 24,
+    "weighted_total_multiplicity": 60,
+    "canonical_expansion_equal": true,
+    "rank_lookup_equivalent": true,
+    "no_conflict_merge_key_includes_target": true,
+    "entry_compression_ratio": 2.5,
+    "logical_byte_compression_ratio": 2.142857142857143
+  },
+  "current_workload_storage": {
+    "after_T1": {
+      "A_raw_entries": 24,
+      "B_weighted_unique_entries": 24,
+      "A_logical_bytes": 576,
+      "B_logical_bytes": 672,
+      "entry_compression_ratio_A_over_B": 1.0,
+      "byte_compression_ratio_A_over_B": 0.8571428571428571,
+      "duplicate_consolidations": 0
+    },
+    "after_T2": {
+      "A_raw_entries": 48,
+      "B_weighted_unique_entries": 48,
+      "A_logical_bytes": 1152,
+      "B_logical_bytes": 1344,
+      "entry_compression_ratio_A_over_B": 1.0,
+      "byte_compression_ratio_A_over_B": 0.8571428571428571,
+      "duplicate_consolidations": 0
+    },
+    "after_T3": {
+      "A_raw_entries": 72,
+      "B_weighted_unique_entries": 72,
+      "A_logical_bytes": 1728,
+      "B_logical_bytes": 2016,
+      "entry_compression_ratio_A_over_B": 1.0,
+      "byte_compression_ratio_A_over_B": 0.8571428571428571,
+      "duplicate_consolidations": 0
+    },
+    "after_T4": {
+      "A_raw_entries": 96,
+      "B_weighted_unique_entries": 96,
+      "A_logical_bytes": 2304,
+      "B_payload_bytes": 2304,
+      "B_count_metadata_bytes": 384,
+      "B_logical_bytes": 2688,
+      "entry_compression_ratio_A_over_B": 1.0,
+      "byte_compression_ratio_A_over_B": 0.8571428571428571,
+      "duplicate_consolidations": 0,
+      "B_byte_overhead_vs_A": 0.16666666666666666
+    }
+  },
+  "behavioral_aggregates": {
+    "A_final_mean_prior_accuracy": {
+      "mean": 0.6750000019868214,
+      "pstdev": 0.09726190037395217,
+      "min": 0.5138888756434122,
+      "max": 0.7777777711550394
+    },
+    "B_final_mean_prior_accuracy": {
+      "mean": 0.6750000019868214,
+      "pstdev": 0.09726190037395217,
+      "min": 0.5138888756434122,
+      "max": 0.7777777711550394
+    },
+    "delta_mean_prior_B_minus_A": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "A_final_average_accuracy_all_tasks": {
+      "mean": 0.752083332836628,
+      "pstdev": 0.07750448511065822,
+      "min": 0.6249999850988388,
+      "max": 0.8333333283662796
+    },
+    "B_final_average_accuracy_all_tasks": {
+      "mean": 0.752083332836628,
+      "pstdev": 0.07750448511065822,
+      "min": 0.6249999850988388,
+      "max": 0.8333333283662796
+    },
+    "A_final_T4_accuracy": {
+      "mean": 0.9833333253860473,
+      "pstdev": 0.020412424256590882,
+      "min": 0.9583333134651184,
+      "max": 1.0
+    },
+    "B_final_T4_accuracy": {
+      "mean": 0.9833333253860473,
+      "pstdev": 0.020412424256590882,
+      "min": 0.9583333134651184,
+      "max": 1.0
+    }
+  },
+  "per_seed_equivalence": [
+    {"seed":3333,"delta_T1":0.0,"delta_T2":0.0,"delta_T3":0.0,"delta_T4":0.0,"delta_mean_prior":0.0,"post_stage_model_states_equal":true},
+    {"seed":3535,"delta_T1":0.0,"delta_T2":0.0,"delta_T3":0.0,"delta_T4":0.0,"delta_mean_prior":0.0,"post_stage_model_states_equal":true},
+    {"seed":3737,"delta_T1":0.0,"delta_T2":0.0,"delta_T3":0.0,"delta_T4":0.0,"delta_mean_prior":0.0,"post_stage_model_states_equal":true},
+    {"seed":3939,"delta_T1":0.0,"delta_T2":0.0,"delta_T3":0.0,"delta_T4":0.0,"delta_mean_prior":0.0,"post_stage_model_states_equal":true},
+    {"seed":4141,"delta_T1":0.0,"delta_T2":0.0,"delta_T3":0.0,"delta_T4":0.0,"delta_mean_prior":0.0,"post_stage_model_states_equal":true}
+  ],
+  "gates": {
+    "behavior_tolerance": 0.041666666666666664,
+    "T4_accuracy_min": 0.95,
+    "byte_compression_ratio_min": 1.2,
+    "entry_compression_ratio_must_exceed_one": true,
+    "behavioral_equivalence_pass": true,
+    "storage_effect_pass": false
+  },
+  "historical_anchor": {
+    "status": "PASS",
+    "verdict": "FIXED_BUDGET_REPLAY_SURVIVES_FOUR_TASK_HORIZON",
+    "replay_fraction": 0.0625,
+    "task_order": ["T1_U1_A", "T2_U1_B", "T3_U3_A", "T4_U3_B"],
+    "valid": true,
+    "sha256": "8901256e789d425df167aa1a6a1b44265c4611668277edff7960a0a3e003f847"
+  },
+  "integrity": {
+    "historical_anchor_valid": true,
+    "repeat_mechanism_validation_pass": true,
+    "paired_contrast_valid": true,
+    "all_replay_observations_matched": true,
+    "all_post_stage_model_states_equal": true,
+    "model_architecture_changed": false,
+    "semantic_merging_used": false,
+    "prototype_merging_used": false,
+    "rule_inference_used": false
+  },
+  "model_parameter_count": 4880,
+  "protocol": "docs/research/kernel-continual-learning/kcl61-protocol.md",
+  "protocol_sha256": "82f389051597d0b109b16cd859c92f68d05a7d650fe6db44f4c22fbd166fa2f2",
+  "git_commit": "d6033401179a2b6c9fcca1fe7dbf9648becc7465",
+  "canonical_workflow": {
+    "run_id": 35337991901,
+    "artifact_id": 10542469990,
+    "artifact_zip_sha256": "67f3392145032f8cdc74eab976e3c3d43db9bfd9ae44a55f5bd6c5f7327bbcab",
+    "focused_tests": "55 passed"
+  },
+  "scope": {
+    "kcl7_started": false,
+    "semantic_compression_started": false,
+    "challenger_started": false,
+    "reasoning_work": false,
+    "external_api_calls": 0,
+    "pit": false,
+    "oir_ppv": false,
+    "ppf": false
+  }
+}
