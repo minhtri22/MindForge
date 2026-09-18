@@ -923,3 +923,92 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence commit: `d0d92a0ec2deb51472e4dfab069c6da933de75ef`.
 - Paper commit: `2ce53806e386086f736f71ba621646292fef4323`.
 - Next scientific requirement: isolate which component of the seed-9393 T1→T2→T3 sequential trajectory makes T4 acquisition-impaired before reopening KCL-7.
+
+
+## 2026-09-18 — KCL-6.5.3 Sequential Trajectory Mechanism Isolation Finds Joint Model–Optimizer Boundary Interaction
+
+- Status: **PASS**
+- Verdict: `MODEL_OPTIMIZER_INTERACTION_ONLY`
+- Upstream KCL-6.5.2 remains:
+  - status **PASS**
+  - verdict `SEQUENTIAL_TRAJECTORY_ACQUISITION_FAILURE`.
+- Diagnostic seed: `9393`.
+- Frozen T4 acquisition floor: `>=0.95`.
+- Prefix T4 probes, all using the exact same current-only T4 stream:
+  - P0 fresh: `1.0000` — PASS.
+  - P1 after T1: `0.91667` — FAIL.
+  - P2 after T1→T2: `1.0000` — PASS.
+  - P3 after T1→T2→T3: `0.8750` — FAIL.
+- Canonical KCL-6.5.2 reproduction:
+  - P0 `1.0`: exact.
+  - P3 `0.875`: exact.
+- First failing transition:
+  - `j*=1`;
+  - trigger task `T1_U1_A`.
+- Important trajectory pattern:
+  - `PASS → FAIL → PASS → FAIL`.
+  - Future plasticity is non-monotonic; failure is not consistent with simple irreversible capacity exhaustion.
+- Own-task acquisition immediately after each prefix task:
+  - T1 `1.0000`;
+  - T2 `1.0000`;
+  - T3 `1.0000`.
+- Interpretation: a task can be learned perfectly while leaving a joint learning state with degraded future-task plasticity.
+- Zero-step T4 losses:
+  - P0 `13.7647` → eventual PASS.
+  - P1 `11.3559` → FAIL.
+  - P2 `8.6948` → PASS.
+  - P3 `9.7110` → FAIL.
+- Therefore zero-shot T4 quality does not explain T4 trainability.
+- Frozen 2×2 state factor at transition T1:
+  - X00 PRE model + PRE optimizer: `1.0000`.
+  - X10 POST model + PRE optimizer: `1.0000`.
+  - X01 PRE model + POST optimizer: `1.0000`.
+  - X11 POST model + POST optimizer: `0.91667`.
+- State-factor classification:
+  - `MODEL_OPTIMIZER_INTERACTION_ONLY`.
+- Causal interpretation:
+  - post-task model parameters alone are not sufficient for failure;
+  - post-task AdamW state alone is not sufficient for failure;
+  - their paired post-task state is sufficient.
+- Parameter-group localization:
+  - **NOT EXECUTED**, by frozen protocol.
+  - Reason: X10 POST model + PRE optimizer passed, so model state alone is not sufficient and parameter-group causality is not warranted.
+- Descriptive parameter drift at T1:
+  - transformer relative L2 `0.6411`;
+  - shared token/LM relative L2 `0.2167`;
+  - final norm relative L2 `0.1369`;
+  - position embedding relative L2 `0.0715`.
+  - These drift values are not causal because X10 passes.
+- Pre-registered architecture-gap candidate:
+  - `JOINT_MODEL_OPTIMIZER_TASK_BOUNDARY_COORDINATION`.
+- Architectural implication:
+  - the kernel currently carries model parameters and AdamW state passively across task boundaries;
+  - current evidence shows that this joint state can preserve perfect current-task accuracy while damaging future plasticity;
+  - a task-boundary mechanism must explicitly govern the model/optimizer pair rather than treating either in isolation.
+- Candidate component generated from evidence:
+  - **Task-Boundary Joint Plasticity Coordinator**.
+- This candidate is not yet implemented or validated.
+- It should eventually observe:
+  - model-state change;
+  - optimizer-state change;
+  - plasticity-health signal;
+  - and decide whether optimizer/model learning state should be carried, decayed, reset, partitioned, consolidated, or rejected.
+- KCL-6.5.3 does **not** prove that full optimizer reset is correct.
+- Next scientific requirement:
+  - decompose AdamW state at the boundary:
+    - step counter;
+    - first moment `exp_avg`;
+    - second moment `exp_avg_sq`;
+  - A/B frozen boundary policies before implementing the coordinator.
+- Protocol commit: `491540e5201b245f63f6d4763a086ca75711be0f`.
+- Protocol SHA-256: `9719a64876602455b873b9e68cf33be5dc9a441ba49359b247a7461fa75abdb6`.
+- Implementation commit: `e83e5fd04fcdaab9c8f2b591de78c5b1e49e8b59`.
+- Contract-test commit: `96f85e8bbb6c1ff95c06dc36a9d94f03a3ec0f99`.
+- Canonical scientific source: `7ef57cb38059d084fe05a6604a8b00c67c9dadb5`.
+- Canonical workflow run: `35367367265`.
+- Focused tests: `20 passed (10 KCL-6.5.3 + 10 KCL-6.5.2)`.
+- Artifact ID: `10557106353`.
+- Artifact ZIP SHA-256: `1e112e6feadc4884f4e26a7096f2783ee70dd9e11d7a9401ab39a7229c4ddc5a`.
+- Machine-readable evidence commit: `a5c2c252631e5d32ccf6574159c857b04e05a37b`.
+- Paper commit: `4e08cb49d9fdefb72e39638c5855563d96525042`.
+- KCL-7 status: **NOT STARTED**.
