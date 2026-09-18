@@ -1239,3 +1239,24 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence commit: `5f61fc69295027663f75534a1c3acace9613c386`.
 - Paper commit: `3134a5cffb2197138c51bfaa13145785646bed95`.
 - KCL-7 status: **NOT STARTED**.
+
+
+## 2026-09-19 — KCL-6.5.5 Post-Closure Classifier QA Patch / Non-Canonical Auto-Triggered Run
+
+- Classification: **TECHNICAL PROVENANCE NOTE — NOT A NEW SCIENTIFIC RUN**.
+- After canonical KCL-6.5.5 closure, commit `8ec26689d89e201b877dbcd51e505a639826508f` corrected only the terminal policy-classification predicate.
+- The patch aligns code with the already-frozen protocol rule:
+  - retention non-inferiority must be evaluated on the same intervention that claims plasticity improvement;
+  - retention preservation by a different non-improving intervention cannot rescue the improving intervention's retention failure.
+- Scientific metrics, seeds, policies, margins, replay mechanism, and canonical evidence: **UNCHANGED**.
+- No intentional scientific rerun was authorized.
+- Because the workflow triggers on source-file pushes, the QA patch automatically triggered run `35374938930`.
+- This run is explicitly **NON-CANONICAL**.
+- Its outcome must not be inspected, selected, substituted, averaged, or used to update KCL-6.5.5.
+- Canonical KCL-6.5.5 remains:
+  - scientific source `b5edc36d30202ee9b19e9634e328e6eda109f32d`;
+  - workflow run `35374304856`;
+  - artifact `10559323752`;
+  - raw script output `NEGATIVE / NO_BOUNDARY_POLICY_PLASTICITY_ADVANTAGE`;
+  - protocol-adjudicated scientific status **FAIL**;
+  - protocol-adjudicated verdict `BOUNDARY_RESET_PLASTICITY_GAIN_COSTS_RETENTION`.
