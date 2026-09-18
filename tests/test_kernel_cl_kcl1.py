@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import sys
 from pathlib import Path
 
 import torch
@@ -10,6 +11,7 @@ MODULE_PATH = Path("experiments/kernel_cl/kcl1_substrate.py")
 SPEC = importlib.util.spec_from_file_location("kcl1_substrate", MODULE_PATH)
 assert SPEC and SPEC.loader
 kcl1 = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = kcl1
 SPEC.loader.exec_module(kcl1)
 
 
