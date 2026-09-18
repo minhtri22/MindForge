@@ -1260,3 +1260,89 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
   - raw script output `NEGATIVE / NO_BOUNDARY_POLICY_PLASTICITY_ADVANTAGE`;
   - protocol-adjudicated scientific status **FAIL**;
   - protocol-adjudicated verdict `BOUNDARY_RESET_PLASTICITY_GAIN_COSTS_RETENTION`.
+
+
+## 2026-09-19 — KCL-6.5.6 Boundary Health Signal Discovery Finds No Qualifying Single-Scalar Sensor
+
+- Status: **NEGATIVE**
+- Verdict: `NO_DISCOVERY_BOUNDARY_HEALTH_SIGNAL`
+- Scientific purpose:
+  - test whether a non-oracular scalar signal available immediately at a task boundary can predict a `SAFE_RESET_OPPORTUNITY`;
+  - no adaptive controller is implemented.
+- Upstream anchor:
+  - KCL-6.5.5 protocol-adjudicated status **FAIL**;
+  - verdict `BOUNDARY_RESET_PLASTICITY_GAIN_COSTS_RETENTION`.
+- Discovery cohort:
+  - N = `20` seeds;
+  - `60` matched boundary instances;
+  - boundaries after T1/T2/T3.
+- Primary label:
+  - `SAFE_RESET_OPPORTUNITY`;
+  - positive iff reset-all B or carry-step/reset-moments C safely improves next-task plasticity while preserving retention within `1/24` and ending next-task acquisition >=95%.
+- Label distribution:
+  - positive `41`;
+  - negative `19`;
+  - positive prevalence `68.33%`;
+  - carry-all absolute next-task failures `3/60`.
+- Anti-leakage:
+  - feature extraction occurs before next-task binding;
+  - feature extractor receives no future task tensor/name/family/outcome;
+  - counterfactual outcome generation is structurally separate;
+  - all counterfactual integrity checks PASS.
+- Frozen discovery gates:
+  - balanced accuracy >= `0.65`;
+  - sensitivity >= `0.60`;
+  - specificity >= `0.60`;
+  - balanced accuracy >= stage-only baseline + `0.05`.
+- Stage-only baseline:
+  - BA `0.60270`;
+  - sensitivity `0.73171`;
+  - specificity `0.47368`.
+- Candidate results:
+  - H1 `M1_RMS`: BA `0.26380`, sens `0.31707`, spec `0.21053`.
+  - H2 `SQRT_M2_RMS`: BA `0.52567`, sens `0.68293`, spec `0.36842`.
+  - H3 `BIAS_CORRECTED_ADAM_PRESSURE_RMS`: BA `0.34852`, sens `0.17073`, spec `0.52632`.
+  - H4 `TASK_DRIFT_RELATIVE_L2`: BA `0.65533`, sens `0.73171`, spec `0.57895`.
+  - H5 `PRESSURE_TO_DRIFT_RATIO`: BA `0.57125`, sens `0.19512`, spec `0.94737`.
+  - H6 `DRIFT_PRESSURE_COSINE`: BA `0.22529`, sens `0.29268`, spec `0.15789`.
+  - H7 `PRIOR_MEAN_ACCURACY`: BA `0.34082`, sens `0.36585`, spec `0.31579`.
+  - H8 `PRIOR_WORST_ACCURACY`: BA `0.36906`, sens `0.31707`, spec `0.42105`.
+  - H9 `CURRENT_TASK_LOSS`: BA `0.44608`, sens `0.36585`, spec `0.52632`.
+- Strongest candidate:
+  - H4 `TASK_DRIFT_RELATIVE_L2`.
+  - BA `0.65533` — passes BA gate.
+  - sensitivity `0.73171` — passes sensitivity gate.
+  - stage superiority `+0.05263` — passes stage-superiority gate.
+  - specificity `0.57895` — **FAILS** frozen `0.60` specificity gate.
+- Therefore:
+  - no candidate discovery-qualifies;
+  - no rule artifact is frozen;
+  - no confirmatory workflow is authorized.
+- Untouched confirmatory cohort:
+  - `13635,13837,14039,14241,14443,14645,14847,15049,15251,15453,15655,15857,16059,16261,16463,16665,16867,17069,17271,17473`.
+- Scientific interpretation:
+  - simple scalar norms/loss/retention summaries are insufficient as standalone boundary-health sensors;
+  - task-relative parameter drift contains the strongest evidence but yields too many false positives;
+  - causal sufficiency of AdamW moments from KCL-6.5.4 does not imply their global scalar norms are predictive;
+  - the missing state likely depends on relations among model drift, optimizer moment geometry, and retention state.
+- Architectural implication:
+  - do not implement threshold rules such as `if drift > threshold: reset`;
+  - evidence now points toward a richer **Boundary State Representation / Encoder** before a Boundary Policy Controller can be justified.
+- No gate was relaxed after outcome.
+- No post-hoc composite signal was constructed.
+- Protocol commit: `c50c79b5a7b8952033a6847c5519400d36ea344f`.
+- Protocol SHA-256: `484b9be90c0e746af839a7dc4ff184efdf8be1874f14dec73481f272f0bfd55c`.
+- Initial implementation commit: `005485cb877afdfd9343318e96da7f7cbe3eb3e6`.
+- Pre-execution drift-snapshot correction: `7179e09889c9c97bf0d93e0417eb7dee82269e9c`.
+- Contract-test commit: `70fc83e5c965f16d24295a2f6e0a4d64278ec07b`.
+- Canonical discovery source: `abf90a5ccd24659d60c3eda88ec3fa4556184521`.
+- Canonical discovery workflow: `35379614417`.
+- Focused tests: `20 passed (10 KCL-6.5.6 + 10 KCL-6.5.5)`.
+- Artifact ID: `10561158655`.
+- Artifact ZIP SHA-256: `d3e316b62684e26d1a5c10ed164def7ca9d85ae2fbeb4163f443d5bf733930d3`.
+- Machine-readable evidence commit: `6e22e51142ef3eb9982bb9a8ca615a30e22b4e7f`.
+- Paper commit: `6ee2a985854394e64154d1acc4e20a7ae6b14143`.
+- KCL-7 status: **NOT STARTED**.
+- Next scientific requirement:
+  - if continued, pre-register relational/multivariate boundary-state hypotheses;
+  - do not touch the untouched KCL-6.5.6 confirmatory seeds until a new discovery rule is frozen.
