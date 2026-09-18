@@ -1104,3 +1104,138 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper commit: `870e8e77bd23dbbe6cce4efc432399eff4cdf24d`.
 - KCL-7 status: **NOT STARTED**.
 - Next scientific requirement: validate actual task-boundary policies on the full sequential CL stream, comparing carry-all vs reset-all vs carry-step/reset-both-moments, measuring both future-task plasticity and prior-task retention before implementing the coordinator.
+
+
+## 2026-09-19 — KCL-6.5.5 Fixed AdamW Boundary Policies Fail the Joint Plasticity–Retention Contract
+
+- Protocol-adjudicated status: **FAIL**
+- Protocol-adjudicated verdict: `BOUNDARY_RESET_PLASTICITY_GAIN_COSTS_RETENTION`
+- Canonical raw script output preserved:
+  - status `NEGATIVE`
+  - verdict `NO_BOUNDARY_POLICY_PLASTICITY_ADVANTAGE`.
+- Reason for adjudication:
+  - canonical raw metrics are valid;
+  - final implementation decision predicate did not match the frozen protocol for the observed cross-policy split;
+  - C is the only policy with reproducible plasticity improvement, and C itself fails retention non-inferiority;
+  - B preserves retention but does not improve plasticity;
+  - no rerun was performed and no scientific metric was changed.
+- Scientific purpose:
+  - validate fixed AdamW boundary policies on the full four-task CL stream while keeping targeted-clarification reconstructive memory fixed.
+- Arms:
+  - A = `CARRY_ALL`
+  - B = `RESET_ALL`
+  - C = `CARRY_STEP_RESET_MOMENTS`.
+- Memory policy:
+  - unchanged E targeted clarification;
+  - 15 current + 1 exact replay;
+  - 6.25% replay;
+  - T2/T3/T4 query schedule = `0/1/2`;
+  - final memory = `[fuzzy,fuzzy,fuzzy,exact]`;
+  - final logical storage = `143` bytes.
+- Primary fresh cohort:
+  - N = `20`;
+  - seeds `9595,9797,9999,10201,10403,10605,10807,11009,11211,11413,11615,11817,12019,12221,12423,12625,12827,13029,13231,13433`.
+- Diagnostic sentinel:
+  - seed `9393`;
+  - excluded from population inference.
+- Sentinel A canonical reproduction:
+  - A T4 = `0.75`;
+  - A mean prior = `0.50000000497`;
+  - exact reproduction: **PASS**.
+- Sentinel B:
+  - T4 = `1.0`;
+  - mean prior = `0.55556`;
+  - known acquisition anomaly repaired.
+- Sentinel C:
+  - T4 = `0.91667`;
+  - mean prior = `0.43056`;
+  - known anomaly **NOT** repaired.
+- Primary plasticity AUC:
+  - A mean = `0.81594`;
+  - B mean = `0.78198`;
+  - C mean = `0.87688`.
+- B minus A plasticity:
+  - mean `-0.03396`;
+  - 95% CI `[-0.05993,-0.00333]`;
+  - reproducibly worse than A.
+- C minus A plasticity:
+  - mean `+0.06094`;
+  - 95% CI `[+0.03111,+0.09774]`;
+  - reproducible improvement.
+- C minus B plasticity:
+  - mean `+0.09490`;
+  - 95% CI `[+0.07222,+0.12128]`.
+- Final T4 aggregate:
+  - A mean `0.87292`;
+  - B mean `0.92292`;
+  - C mean `0.98333`.
+- Strict all-stage current-task gate pass seeds:
+  - A `17/20`;
+  - B `16/20`;
+  - C `18/20`.
+- A fresh failures:
+  - 9797 T4 `0.04167`;
+  - 9999 T4 `0.04167`;
+  - 12019 T4 `0.375`.
+- B fresh failures:
+  - 9797 T4 `0.625`;
+  - 11009 T4 `0.91667`;
+  - 11615 T4 `0.875`;
+  - 12019 T4 `0.08333`.
+- C fresh failures:
+  - 9797 T4 `0.79167`;
+  - 11615 T4 `0.91667`.
+- Final mean prior retention:
+  - A `0.65000`;
+  - B `0.66111`;
+  - C `0.60486`.
+- B minus A retention:
+  - mean `+0.01111`;
+  - 95% CI `[-0.02014,+0.03889]`;
+  - retention non-inferiority: **PASS**.
+- C minus A retention:
+  - mean `-0.04514`;
+  - 95% CI `[-0.07708,-0.01319]`;
+  - frozen non-inferiority margin `-1/24=-0.04167`;
+  - retention non-inferiority: **FAIL**.
+- C minus B retention:
+  - mean `-0.05625`;
+  - 95% CI `[-0.09097,-0.02292]`.
+- B qualification:
+  - plasticity improvement vs A: **FAIL**
+  - retention non-inferior: **PASS**
+  - strict fresh acquisition: **FAIL**
+  - sentinel repair: **PASS**
+  - qualified: **NO**.
+- C qualification:
+  - plasticity improvement vs A: **PASS**
+  - retention non-inferior: **FAIL**
+  - strict fresh acquisition: **FAIL**
+  - sentinel repair: **FAIL**
+  - qualified: **NO**.
+- Main scientific interpretation:
+  - fixed carry-all leaves catastrophic long-horizon acquisition failures;
+  - reset-all preserves retention and repairs 9393, but slows acquisition and remains non-robust;
+  - carry-step/reset-moments improves acquisition dynamics and mean T4 substantially, but shifts the system too far toward plasticity and loses prior-task retention;
+  - no fixed global boundary policy satisfies the joint plasticity + retention + robustness contract.
+- KCL-6.5.4 isolated O100 success does not generalize to repeatedly applying the same action over a multi-task path.
+- Architectural implication:
+  - fixed optimizer-boundary policy hypothesis is falsified;
+  - evidence now favors an **adaptive task-boundary plasticity/retention controller**;
+  - policy selection must be state-dependent rather than globally hard-coded.
+- Do not implement adaptive coordinator yet.
+- Next scientific requirement:
+  - qualify a non-oracular boundary health signal using only information available at the boundary;
+  - determine whether it predicts when carry vs reset is appropriate before future-task outcome is observed.
+- Protocol commit: `ce17e0bef0932a78d7d38c42f7ad4f153750c5d5`.
+- Protocol SHA-256: `5eff537df64f9d2cbce849a2340904027dd192742d2574dc39b6fb9e8adf581a`.
+- Implementation commit: `72299a5cf06f699390abb96f3d088d3b5c65d516`.
+- Contract-test commit: `bf04cd00824d8437fbd7128ab79a89430ba591f0`.
+- Canonical scientific source: `b5edc36d30202ee9b19e9634e328e6eda109f32d`.
+- Canonical workflow run: `35374304856`.
+- Focused tests: `20 passed (10 KCL-6.5.5 + 10 KCL-6.5.4)`.
+- Artifact ID: `10559323752`.
+- Artifact ZIP SHA-256: `a14c7762f562f518fec3eb119c2ed2cc1a9bd5f2500c3b9dc3dd221331ea5395`.
+- Machine-readable evidence commit: `5f61fc69295027663f75534a1c3acace9613c386`.
+- Paper commit: `3134a5cffb2197138c51bfaa13145785646bed95`.
+- KCL-7 status: **NOT STARTED**.
