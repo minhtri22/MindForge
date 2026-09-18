@@ -1,0 +1,220 @@
+{
+  "aggregates": {
+    "b_accuracy_delta": {"max": 0.0, "mean": 0.0, "min": 0.0, "pstdev": 0.0},
+    "control_a_after_b_accuracy": {"max": 0.0833333358168602, "mean": 0.02500000074505806, "min": 0.0, "pstdev": 0.03333333432674408},
+    "control_b_after_b_accuracy": {"max": 1.0, "mean": 1.0, "min": 1.0, "pstdev": 0.0},
+    "control_forgetting_accuracy": {"max": 1.0, "mean": 0.974999999254942, "min": 0.9166666641831398, "pstdev": 0.03333333432674408},
+    "retention_gain": {"max": 0.9583333134651184, "mean": 0.849999999254942, "min": 0.6666666865348816, "pstdev": 0.1006920395236023},
+    "treatment_a_after_b_accuracy": {"max": 1.0, "mean": 0.875, "min": 0.6666666865348816, "pstdev": 0.1178511231732843},
+    "treatment_b_after_b_accuracy": {"max": 1.0, "mean": 1.0, "min": 1.0, "pstdev": 0.0},
+    "treatment_forgetting_accuracy": {"max": 0.3333333134651184, "mean": 0.125, "min": 0.0, "pstdev": 0.1178511231732843}
+  },
+  "candidate": "C1_TASK_PREFIX_CYCLIC",
+  "config": {
+    "batch_size": 16,
+    "d_model": 16,
+    "dropout": 0.0,
+    "ff_mult": 4,
+    "learning_rate": 0.003,
+    "max_context": 2,
+    "n_heads": 2,
+    "n_layers": 1,
+    "relations": 24,
+    "stage_steps": 250,
+    "vocab_size": 96,
+    "weight_decay": 0.0
+  },
+  "environment": {
+    "deterministic_algorithms": true,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu",
+    "torch_num_threads": 1
+  },
+  "experiment": "KCL-3",
+  "gates": {
+    "directional_improvement_every_seed": true,
+    "retention_gain_mean_min": 0.5,
+    "retention_gain_min_per_seed": 0.3,
+    "treatment_b_accuracy_min_per_seed": 0.95,
+    "treatment_forgetting_mean_max": 0.5
+  },
+  "git_commit": "1f8ddc606895e4401d818dfb1ef2932f62438453",
+  "integrity": {
+    "all_pair_integrity_checks_pass": true,
+    "directional_consistency_gate_pass": true,
+    "expected_seeds_present_exactly_once": true,
+    "mean_retention_gate_pass": true,
+    "mean_treatment_forgetting_gate_pass": true,
+    "model_architecture_changed": false,
+    "per_seed_retention_gate_pass": true,
+    "plasticity_gate_pass": true,
+    "replay_ratio_search_performed": false
+  },
+  "model_parameter_count": 4880,
+  "per_seed": [
+    {
+      "a_after_a": {"accuracy": 1.0, "loss": 0.014543447643518448},
+      "control": {
+        "a_after_b": {"accuracy": 0.0, "loss": 8.434569358825684},
+        "a_replay_examples_per_batch": 0,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.017198210582137108},
+        "b_examples_per_batch": 16,
+        "forgetting_accuracy": 1.0
+      },
+      "effects": {"b_accuracy_delta": 0.0, "forgetting_reduction": 0.9583333134651184, "retention_gain": 0.9583333134651184},
+      "integrity": {
+        "all_metrics_finite": true,
+        "equal_b_stage_batch_size": true,
+        "equal_b_stage_optimizer_steps": true,
+        "post_a_model_state_equal": true,
+        "post_a_optimizer_state_equal": true
+      },
+      "pass": true,
+      "seed": 101,
+      "treatment": {
+        "a_after_b": {"accuracy": 0.9583333134651184, "loss": 0.36782562732696533},
+        "a_replay_examples_per_batch": 2,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.03915878012776375},
+        "b_examples_per_batch": 14,
+        "forgetting_accuracy": 0.04166668653488159,
+        "replay_fraction": 0.125
+      }
+    },
+    {
+      "a_after_a": {"accuracy": 1.0, "loss": 0.015379972755908966},
+      "control": {
+        "a_after_b": {"accuracy": 0.0416666679084301, "loss": 6.4469523429870605},
+        "a_replay_examples_per_batch": 0,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.01886650361120701},
+        "b_examples_per_batch": 16,
+        "forgetting_accuracy": 0.9583333320915699
+      },
+      "effects": {"b_accuracy_delta": 0.0, "forgetting_reduction": 0.8750000186264515, "retention_gain": 0.8750000186264515},
+      "integrity": {
+        "all_metrics_finite": true,
+        "equal_b_stage_batch_size": true,
+        "equal_b_stage_optimizer_steps": true,
+        "post_a_model_state_equal": true,
+        "post_a_optimizer_state_equal": true
+      },
+      "pass": true,
+      "seed": 202,
+      "treatment": {
+        "a_after_b": {"accuracy": 0.9166666865348816, "loss": 0.45350757241249084},
+        "a_replay_examples_per_batch": 2,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.03442314639687538},
+        "b_examples_per_batch": 14,
+        "forgetting_accuracy": 0.08333331346511841,
+        "replay_fraction": 0.125
+      }
+    },
+    {
+      "a_after_a": {"accuracy": 1.0, "loss": 0.021023409441113472},
+      "control": {
+        "a_after_b": {"accuracy": 0.0, "loss": 7.919029235839844},
+        "a_replay_examples_per_batch": 0,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.019081110134720802},
+        "b_examples_per_batch": 16,
+        "forgetting_accuracy": 1.0
+      },
+      "effects": {"b_accuracy_delta": 0.0, "forgetting_reduction": 0.8333333134651184, "retention_gain": 0.8333333134651184},
+      "integrity": {
+        "all_metrics_finite": true,
+        "equal_b_stage_batch_size": true,
+        "equal_b_stage_optimizer_steps": true,
+        "post_a_model_state_equal": true,
+        "post_a_optimizer_state_equal": true
+      },
+      "pass": true,
+      "seed": 303,
+      "treatment": {
+        "a_after_b": {"accuracy": 0.8333333134651184, "loss": 0.5575288534164429},
+        "a_replay_examples_per_batch": 2,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.03959842771291733},
+        "b_examples_per_batch": 14,
+        "forgetting_accuracy": 0.1666666865348816,
+        "replay_fraction": 0.125
+      }
+    },
+    {
+      "a_after_a": {"accuracy": 1.0, "loss": 0.024240514263510704},
+      "control": {
+        "a_after_b": {"accuracy": 0.0833333358168602, "loss": 6.848014831542969},
+        "a_replay_examples_per_batch": 0,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.016668209806084633},
+        "b_examples_per_batch": 16,
+        "forgetting_accuracy": 0.9166666641831398
+      },
+      "effects": {"b_accuracy_delta": 0.0, "forgetting_reduction": 0.9166666641831398, "retention_gain": 0.9166666641831398},
+      "integrity": {
+        "all_metrics_finite": true,
+        "equal_b_stage_batch_size": true,
+        "equal_b_stage_optimizer_steps": true,
+        "post_a_model_state_equal": true,
+        "post_a_optimizer_state_equal": true
+      },
+      "pass": true,
+      "seed": 707,
+      "treatment": {
+        "a_after_b": {"accuracy": 1.0, "loss": 0.27823707461357117},
+        "a_replay_examples_per_batch": 2,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.032404474914073944},
+        "b_examples_per_batch": 14,
+        "forgetting_accuracy": 0.0,
+        "replay_fraction": 0.125
+      }
+    },
+    {
+      "a_after_a": {"accuracy": 1.0, "loss": 0.017859987914562225},
+      "control": {
+        "a_after_b": {"accuracy": 0.0, "loss": 9.076836585998535},
+        "a_replay_examples_per_batch": 0,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.014888045378029346},
+        "b_examples_per_batch": 16,
+        "forgetting_accuracy": 1.0
+      },
+      "effects": {"b_accuracy_delta": 0.0, "forgetting_reduction": 0.6666666865348816, "retention_gain": 0.6666666865348816},
+      "integrity": {
+        "all_metrics_finite": true,
+        "equal_b_stage_batch_size": true,
+        "equal_b_stage_optimizer_steps": true,
+        "post_a_model_state_equal": true,
+        "post_a_optimizer_state_equal": true
+      },
+      "pass": true,
+      "seed": 909,
+      "treatment": {
+        "a_after_b": {"accuracy": 0.6666666865348816, "loss": 0.7695820331573486},
+        "a_replay_examples_per_batch": 2,
+        "b_after_b": {"accuracy": 1.0, "loss": 0.06131884828209877},
+        "b_examples_per_batch": 14,
+        "forgetting_accuracy": 0.3333333134651184,
+        "replay_fraction": 0.125
+      }
+    }
+  ],
+  "protocol": "docs/research/kernel-continual-learning/kcl3-protocol.md",
+  "protocol_sha256": "21b489dfdeb0914bd190c85a5489aa38d2a0e00026ef09ff180e78df6b9fca40",
+  "scope": {
+    "alternative_cl_mechanisms": false,
+    "external_api_calls": 0,
+    "oir_ppv": false,
+    "pit": false,
+    "ppf": false,
+    "reasoning_work": false,
+    "teacher_inference": 0
+  },
+  "seeds": [101, 202, 303, 707, 909],
+  "status": "PASS",
+  "treatment": {
+    "a_replay_examples_per_batch": 2,
+    "b_examples_per_batch": 14,
+    "b_stage_steps": 250,
+    "name": "bounded_replay",
+    "replay_fraction": 0.125,
+    "total_batch_size": 16,
+    "total_examples_per_arm_b_stage": 4000
+  },
+  "verdict": "BOUNDED_REPLAY_CAUSALLY_REDUCES_FORGETTING"
+}
