@@ -743,3 +743,86 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl65-paper.md`.
 - KCL-7 status: **NOT STARTED**.
 - Next scientific requirement: isolate H-S4 and test whether the small E-vs-F T4 decrement is a reproducible stability-plasticity tradeoff or finite-seed variation, without changing E/F policies or retroactively altering KCL-6.5.
+
+
+## 2026-09-18 — KCL-6.5.1 Independent N=20 Tradeoff Confirmation: Retention Specificity Replicates; No Reproducible Paired Tradeoff; Absolute Gate Fails on Seed 9393
+
+- Status: **FAIL**
+- Verdict: `TARGETED_CLARIFICATION_ABSOLUTE_PLASTICITY_UNSTABLE`
+- KCL-6.5 remains unchanged as protocol-level FAIL.
+- Scientific purpose: determine whether KCL-6.5's small E-vs-F T4 decrement is a reproducible stability–plasticity tradeoff or finite-seed variation, while independently replicating the targeted-clarification retention effect.
+- Policies changed from KCL-6.5: **NO**.
+- Primary cohort:
+  - N = `20` fresh seeds;
+  - `5555,5757,5959,6161,6363,6565,6767,6969,7171,7373,7575,7777,7979,8181,8383,8585,8787,8989,9191,9393`.
+- Historical KCL-6.5 seeds were excluded from primary inference.
+- Frozen paired bootstrap:
+  - `20,000` resamples;
+  - RNG seed `651651`;
+  - 95% percentile CI.
+- Practical T4 non-inferiority margin:
+  - `1/24 = 0.0416667`.
+- Retention specificity independently replicated: **PASS**.
+  - `DeltaR = E prior - F prior`.
+  - mean `DeltaR = +0.26528` (+26.53 pp).
+  - median `0.28472`.
+  - min `0.11111`.
+  - max `0.34722`.
+  - bootstrap 95% CI `[0.23403, 0.29375]`.
+  - positive seeds: `20/20`.
+  - frozen replication gate: **PASS**.
+- Plasticity paired contrast:
+  - `DeltaP = E T4 - F T4`.
+  - mean `DeltaP = -0.00833` (-0.83 pp).
+  - median `0`.
+  - min `-0.125`.
+  - max `+0.04167`.
+  - sign counts:
+    - negative `3`;
+    - zero `16`;
+    - positive `1`.
+  - bootstrap 95% CI `[-0.02292, +0.00417]`.
+- Pre-registered plasticity classification:
+  - `NO_REPRODUCIBLE_PLASTICITY_TRADEOFF_WITHIN_MARGIN`.
+  - Interpretation: CI includes zero and remains above the one-item practical boundary `-1/24`.
+- Absolute E plasticity gate:
+  - frozen requirement `E T4 >=0.95` on every seed.
+  - result: **FAIL**.
+  - minimum E T4 = `0.75`.
+- Decisive seed `9393`:
+  - E T4 = `0.75`;
+  - F T4 = `0.875`;
+  - `DeltaP = -0.125`;
+  - `DeltaR = +0.19444`.
+  - Both E and F fall below the historical `0.95` current-task floor on the same seed.
+- Scientific interpretation:
+  - targeted clarification retention benefit is strongly replicated;
+  - the small paired plasticity decrement from KCL-6.5 is **not** independently confirmed as a reproducible directional tradeoff;
+  - the absolute current-task acquisition contract is unstable on seed `9393`;
+  - because F also collapses on seed `9393`, the failure may involve trajectory/substrate acquisition instability rather than an E-specific clarification cost, but KCL-6.5.1 does not prove that cause.
+- Secondary pooled descriptive context only:
+  - N = `25`;
+  - mean pooled `DeltaR = +0.26333`;
+  - mean pooled `DeltaP = -0.00833`.
+- Integrity:
+  - historical anchor valid: **YES**;
+  - paired contract valid: **YES**;
+  - architecture changed: **NO**;
+  - replay/query budgets changed: **NO**;
+  - KCL-7 opened: **NO**.
+- Artifact serialization note:
+  - canonical artifact contains complete JSON followed by literal `\\n` suffix from writer bug;
+  - no rerun was performed;
+  - committed JSON evidence removes only this suffix;
+  - scientific values unchanged.
+- Protocol commit: `5aed0aec5dd7d45fbdce7dbe4a247b663d16da2e`.
+- Protocol SHA-256: `28ecce49bea54f688d0120179ee1932f1d7176df172ade9318742765f6cbeb54`.
+- Canonical scientific source commit: `d75173f661d01e2cc9f2d852445c4852f1a94ae6`.
+- Workflow run: `35353568473`.
+- Focused tests: `15 passed (9 KCL-6.5.1 + 6 KCL-6.5)`.
+- Artifact ID: `10551212217`.
+- Artifact ZIP SHA-256: `e819421c9a82c1adc9c09bf549cef8d5244e1d9add84a0b767b61026b88610a1`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl651_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl651-paper.md`.
+- KCL-7 status: **NOT STARTED**.
+- Next scientific requirement: isolate seed-`9393` T4 acquisition failure under current-only / exact-schema / E / F controls before reopening model-scale transfer.
