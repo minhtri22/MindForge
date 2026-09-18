@@ -2,14 +2,6 @@ name: Kernel CL — KCL-1 substrate qualification
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/kernel-cl
-    paths:
-      - "experiments/kernel_cl/**"
-      - "tests/test_kernel_cl_kcl1.py"
-      - "docs/research/kernel-continual-learning/kcl0-kcl1-protocol.md"
-      - ".github/workflows/kernel-cl-kcl1.yml"
 
 permissions:
   contents: read
@@ -34,7 +26,7 @@ jobs:
       - name: Unit tests
         run: python -m pytest tests/test_kernel_cl_kcl1.py -q
 
-      - name: Frozen one-shot KCL-1 qualification
+      - name: Frozen KCL-1 qualification
         run: |
           PYTHONPATH=. python experiments/kernel_cl/kcl1_substrate.py \
             --output experiments/kernel_cl/results/kcl1_summary.json
