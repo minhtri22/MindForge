@@ -392,8 +392,11 @@ def build_boundary_records(seed: int, config: KCL1Config) -> list[dict[str, Any]
             "integrity": counter["integrity"],
         })
 
-        # Continue only the A reference trajectory.
-        pre_task_model_state = copy.deepcopy(counter["_reference_model"].state_dict())
+        # Continue only the A reference trajectory.  For the next boundary,
+        # the drift baseline must be the model state BEFORE the task that is
+        # about to be learned (the current reference state), not the resulting
+        # post-task model.
+        pre_task_model_state = copy.deepcopy(model.state_dict())
         model = counter["_reference_model"]
         opt = counter["_reference_optimizer"]
         memories = counter["_next_memories"]
