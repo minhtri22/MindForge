@@ -41,3 +41,32 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Interpretation: KCL-1 establishes a scientifically usable untreated-forgetting substrate only. It does **not** establish continual-learning capability.
 - Integrity history: workflow runs `35317190484`, `35317414382`, `35317551678`, and `35317736356` failed before scientific training because of test-loader, dependency-command, or import-path defects. Scientific task definitions, gates, model settings, seeds, and candidate order were unchanged during those fixes.
 - Next: freeze KCL-2 untreated-baseline characterization using final seeds disjoint from KCL-1 qualification seeds.
+
+
+## 2026-09-18 — KCL-2 Untreated Forgetting Baseline Reproduced
+
+- Status: **PASS**
+- Verdict: `UNTREATED_FORGETTING_BASELINE_REPRODUCIBLE`
+- Frozen substrate: `C1_TASK_PREFIX_CYCLIC`
+- Final seeds: `101`, `202`, `303`, `707`, `909`; KCL-1 qualification seeds were not reused.
+- Independent A accuracy mean: `1.0`
+- Independent B accuracy mean: `1.0`
+- B-after-B accuracy mean: `1.0`
+- A-after-B accuracy mean: `0.0250`
+- Absolute forgetting mean: `0.9750`
+- Absolute forgetting range: `0.9167–1.0000`
+- Forgetting population SD: `0.03333`
+- Matched A→A control accuracy mean: `1.0`
+- Control drift: `0.0` for all five seeds.
+- Model architecture changed: **NO**
+- Treatment present: **NO**
+- Scientific protocol SHA-256: `e9fc806a5921757e0d0d6ceb2ccfe1703fc05e20f9f6b36330540f0600573d57`
+- Canonical workflow run: `35318411840`
+- Canonical source commit: `878b4d79a9084d88f0d3c6077fa440d0f9a519b4`
+- Workflow artifact ID: `10535203983`
+- Workflow artifact ZIP SHA-256: `ea4da768c6a5642d26107e215c8e11940e9c1bc768eaf6082fbbaf9d7d2ac963`
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl2_summary.json`
+- Paper: `docs/research/kernel-continual-learning/kcl2-paper.md`
+- Interpretation: the untreated sequential forgetting failure is reproducible outside the KCL-1 qualification seeds; this authorizes a causal mitigation experiment but still does **not** establish continual-learning capability.
+- CI integrity note: two identical post-closure KCL-1 reruns were triggered unintentionally by the original broad workflow path filter; they were not used for candidate selection and KCL-1 was subsequently switched to manual-only dispatch.
+- Next: freeze KCL-3 causal replay-treatment protocol before any replay execution.
