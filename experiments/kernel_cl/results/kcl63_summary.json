@@ -1,0 +1,619 @@
+{
+  "aggregates": {
+    "A_mean_prior_accuracy": {
+      "max": 0.7777777711550394,
+      "mean": 0.6750000019868214,
+      "min": 0.5138888756434122,
+      "pstdev": 0.09726190037395217
+    },
+    "B_mean_prior_accuracy": {
+      "max": 0.7777777711550394,
+      "mean": 0.6750000019868214,
+      "min": 0.5138888756434122,
+      "pstdev": 0.09726190037395217
+    },
+    "C_mean_prior_accuracy": {
+      "max": 0.7777777711550394,
+      "mean": 0.6750000019868214,
+      "min": 0.5138888756434122,
+      "pstdev": 0.09726190037395217
+    },
+    "D_T4_accuracy": {
+      "max": 1,
+      "mean": 0.975,
+      "min": 0.9166666865348816,
+      "pstdev": 0.0333333283662816
+    },
+    "D_exact_replay_match_rate_T3": {
+      "max": 0.652,
+      "mean": 0.6304000000000001,
+      "min": 0.616,
+      "pstdev": 0.013529227620230223
+    },
+    "D_exact_replay_match_rate_T4": {
+      "max": 0.508,
+      "mean": 0.47759999999999997,
+      "min": 0.456,
+      "pstdev": 0.017636326148038877
+    },
+    "D_mean_prior_accuracy": {
+      "max": 0.4166666616996129,
+      "mean": 0.352777773886919,
+      "min": 0.2916666592160861,
+      "pstdev": 0.043567744402817986
+    },
+    "D_relearning_advantage_steps": {
+      "max": 83.33333333333333,
+      "mean": 74,
+      "min": 56.666666666666664,
+      "pstdev": 10.624918300339484
+    }
+  },
+  "arms": {
+    "A": "RAW_EPISODIC",
+    "B": "WEIGHTED_EXACT",
+    "C": "EXACT_RECONSTRUCTIVE_SCHEMA",
+    "D": "FUZZY_RECONSTRUCTIVE_DECAY"
+  },
+  "decay": {
+    "age_after_subsequent_completed_tasks": 1,
+    "exact_offset_retained_after_decay": false,
+    "fuzzy_fields_retained": [
+      "varying_position",
+      "constant_token",
+      "key_min",
+      "output_min",
+      "modulus",
+      "multiplier",
+      "offset_bucket_low"
+    ],
+    "fuzzy_replay_offset_sampling": "uniform_within_bucket",
+    "offset_bucket_width": 4,
+    "support_count_retained_after_decay": false
+  },
+  "environment": {
+    "deterministic_algorithms": true,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu"
+  },
+  "experiment": "KCL-6.3",
+  "final_seeds": [
+    3333,
+    3535,
+    3737,
+    3939,
+    4141
+  ],
+  "gates": {
+    "A_over_D_storage_min": 10,
+    "D_prior_mean_min": 0.35,
+    "D_prior_min_per_seed": 0.25,
+    "D_to_C_retention_ratio_min": 0.5,
+    "D_to_C_storage_ratio_max": 0.9,
+    "T4_accuracy_min": 0.95,
+    "relearning_advantage_mean_min": 20,
+    "relearning_threshold": 0.95
+  },
+  "git_commit": "7639df19352c813a6a78d6514eeb198075751f34",
+  "historical_anchors": {
+    "kcl61_sha256": "b4b2bbd6db9af64b51beaa6d9c480d9cf0db6f57f27861261ae8f34cce29f2d6",
+    "kcl61_valid": true,
+    "kcl62_sha256": "5fee4f90c94d44eb60a0610d3ee7b31cae9a5b032fb2ac240419483567b2281c",
+    "kcl62_valid": true,
+    "valid": true
+  },
+  "hypotheses": {
+    "H1_fuzzy_trace_recoverable": true,
+    "H2_useful_CL_trace_and_plasticity": false,
+    "H3_relearning_advantage": true,
+    "H4_storage_below_exact_schema": true
+  },
+  "integrity": {
+    "expected_final_seeds_exact": true,
+    "final_memory_age_schedule_exact": true,
+    "historical_anchors_valid": true,
+    "model_architecture_changed": false,
+    "raw_episodes_retained_inside_fuzzy_memory": false,
+    "replay_budget_changed": false
+  },
+  "model_parameter_count": 4880,
+  "per_seed": [
+    {
+      "A_mean_prior": 0.694444457689921,
+      "B_mean_prior": 0.694444457689921,
+      "C_mean_prior": 0.694444457689921,
+      "D_T4": 1,
+      "D_all_task_average": 0.5624999962747097,
+      "D_final_memory_states": [
+        "fuzzy",
+        "fuzzy",
+        "fuzzy",
+        "exact"
+      ],
+      "D_mean_prior": 0.4166666616996129,
+      "D_storage_bytes": 143,
+      "D_worst_prior": 0.125,
+      "fuzzy_reconstruction": [
+        {
+          "post_cue": {
+            "cue": [
+              4,
+              10,
+              41
+            ],
+            "exact_offset_restored": 1,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T1_U1_A"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              5,
+              10,
+              43
+            ],
+            "exact_offset_restored": 3,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T2_U1_B"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              8,
+              10,
+              44
+            ],
+            "exact_offset_restored": 4,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T3_U3_A"
+        }
+      ],
+      "relearning": {
+        "mean_advantage_steps": 83.33333333333333,
+        "per_task": [
+          {
+            "D_reencounter_steps_to_95": 60,
+            "NOVEL_steps_to_95": 130,
+            "advantage_steps": 70,
+            "task": "T1_U1_A"
+          },
+          {
+            "D_reencounter_steps_to_95": 30,
+            "NOVEL_steps_to_95": 110,
+            "advantage_steps": 80,
+            "task": "T2_U1_B"
+          },
+          {
+            "D_reencounter_steps_to_95": 0,
+            "NOVEL_steps_to_95": 100,
+            "advantage_steps": 100,
+            "task": "T3_U3_A"
+          }
+        ],
+        "tasks_faster_than_novel": 3
+      },
+      "replay_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.64,
+        "after_T4": 0.484
+      },
+      "seed": 3333
+    },
+    {
+      "A_mean_prior": 0.5138888756434122,
+      "B_mean_prior": 0.5138888756434122,
+      "C_mean_prior": 0.5138888756434122,
+      "D_T4": 0.9583333134651184,
+      "D_all_task_average": 0.45833332277834415,
+      "D_final_memory_states": [
+        "fuzzy",
+        "fuzzy",
+        "fuzzy",
+        "exact"
+      ],
+      "D_mean_prior": 0.2916666592160861,
+      "D_storage_bytes": 143,
+      "D_worst_prior": 0.0833333358168602,
+      "fuzzy_reconstruction": [
+        {
+          "post_cue": {
+            "cue": [
+              4,
+              10,
+              41
+            ],
+            "exact_offset_restored": 1,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T1_U1_A"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              5,
+              10,
+              43
+            ],
+            "exact_offset_restored": 3,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T2_U1_B"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              8,
+              10,
+              44
+            ],
+            "exact_offset_restored": 4,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T3_U3_A"
+        }
+      ],
+      "relearning": {
+        "mean_advantage_steps": 80,
+        "per_task": [
+          {
+            "D_reencounter_steps_to_95": 40,
+            "NOVEL_steps_to_95": 100,
+            "advantage_steps": 60,
+            "task": "T1_U1_A"
+          },
+          {
+            "D_reencounter_steps_to_95": 30,
+            "NOVEL_steps_to_95": 90,
+            "advantage_steps": 60,
+            "task": "T2_U1_B"
+          },
+          {
+            "D_reencounter_steps_to_95": 10,
+            "NOVEL_steps_to_95": 130,
+            "advantage_steps": 120,
+            "task": "T3_U3_A"
+          }
+        ],
+        "tasks_faster_than_novel": 3
+      },
+      "replay_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.624,
+        "after_T4": 0.508
+      },
+      "seed": 3535
+    },
+    {
+      "A_mean_prior": 0.7638888955116272,
+      "B_mean_prior": 0.7638888955116272,
+      "C_mean_prior": 0.7638888955116272,
+      "D_T4": 1,
+      "D_all_task_average": 0.5312500055879354,
+      "D_final_memory_states": [
+        "fuzzy",
+        "fuzzy",
+        "fuzzy",
+        "exact"
+      ],
+      "D_mean_prior": 0.3750000074505806,
+      "D_storage_bytes": 143,
+      "D_worst_prior": 0.0833333358168602,
+      "fuzzy_reconstruction": [
+        {
+          "post_cue": {
+            "cue": [
+              4,
+              10,
+              41
+            ],
+            "exact_offset_restored": 1,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T1_U1_A"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              5,
+              10,
+              43
+            ],
+            "exact_offset_restored": 3,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T2_U1_B"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              8,
+              10,
+              44
+            ],
+            "exact_offset_restored": 4,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T3_U3_A"
+        }
+      ],
+      "relearning": {
+        "mean_advantage_steps": 83.33333333333333,
+        "per_task": [
+          {
+            "D_reencounter_steps_to_95": 30,
+            "NOVEL_steps_to_95": 120,
+            "advantage_steps": 90,
+            "task": "T1_U1_A"
+          },
+          {
+            "D_reencounter_steps_to_95": 20,
+            "NOVEL_steps_to_95": 100,
+            "advantage_steps": 80,
+            "task": "T2_U1_B"
+          },
+          {
+            "D_reencounter_steps_to_95": 10,
+            "NOVEL_steps_to_95": 90,
+            "advantage_steps": 80,
+            "task": "T3_U3_A"
+          }
+        ],
+        "tasks_faster_than_novel": 3
+      },
+      "replay_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.62,
+        "after_T4": 0.468
+      },
+      "seed": 3737
+    },
+    {
+      "A_mean_prior": 0.6250000099341074,
+      "B_mean_prior": 0.6250000099341074,
+      "C_mean_prior": 0.6250000099341074,
+      "D_T4": 0.9166666865348816,
+      "D_all_task_average": 0.4687499990686774,
+      "D_final_memory_states": [
+        "fuzzy",
+        "fuzzy",
+        "fuzzy",
+        "exact"
+      ],
+      "D_mean_prior": 0.3194444365799427,
+      "D_storage_bytes": 143,
+      "D_worst_prior": 0.0416666679084301,
+      "fuzzy_reconstruction": [
+        {
+          "post_cue": {
+            "cue": [
+              4,
+              10,
+              41
+            ],
+            "exact_offset_restored": 1,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T1_U1_A"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              5,
+              10,
+              43
+            ],
+            "exact_offset_restored": 3,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T2_U1_B"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              8,
+              10,
+              44
+            ],
+            "exact_offset_restored": 4,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T3_U3_A"
+        }
+      ],
+      "relearning": {
+        "mean_advantage_steps": 56.666666666666664,
+        "per_task": [
+          {
+            "D_reencounter_steps_to_95": 50,
+            "NOVEL_steps_to_95": 80,
+            "advantage_steps": 30,
+            "task": "T1_U1_A"
+          },
+          {
+            "D_reencounter_steps_to_95": 30,
+            "NOVEL_steps_to_95": 90,
+            "advantage_steps": 60,
+            "task": "T2_U1_B"
+          },
+          {
+            "D_reencounter_steps_to_95": 10,
+            "NOVEL_steps_to_95": 90,
+            "advantage_steps": 80,
+            "task": "T3_U3_A"
+          }
+        ],
+        "tasks_faster_than_novel": 3
+      },
+      "replay_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.652,
+        "after_T4": 0.472
+      },
+      "seed": 3939
+    },
+    {
+      "A_mean_prior": 0.7777777711550394,
+      "B_mean_prior": 0.7777777711550394,
+      "C_mean_prior": 0.7777777711550394,
+      "D_T4": 1,
+      "D_all_task_average": 0.5208333283662796,
+      "D_final_memory_states": [
+        "fuzzy",
+        "fuzzy",
+        "fuzzy",
+        "exact"
+      ],
+      "D_mean_prior": 0.3611111044883728,
+      "D_storage_bytes": 143,
+      "D_worst_prior": 0.125,
+      "fuzzy_reconstruction": [
+        {
+          "post_cue": {
+            "cue": [
+              4,
+              10,
+              41
+            ],
+            "exact_offset_restored": 1,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T1_U1_A"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              5,
+              10,
+              43
+            ],
+            "exact_offset_restored": 3,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T2_U1_B"
+        },
+        {
+          "post_cue": {
+            "cue": [
+              8,
+              10,
+              44
+            ],
+            "exact_offset_restored": 4,
+            "external_cue_count": 1,
+            "pass": true,
+            "reconstruction_accuracy": 1
+          },
+          "pre_cue_reconstruction_accuracy": 0,
+          "task": "T3_U3_A"
+        }
+      ],
+      "relearning": {
+        "mean_advantage_steps": 66.66666666666667,
+        "per_task": [
+          {
+            "D_reencounter_steps_to_95": 40,
+            "NOVEL_steps_to_95": 100,
+            "advantage_steps": 60,
+            "task": "T1_U1_A"
+          },
+          {
+            "D_reencounter_steps_to_95": 30,
+            "NOVEL_steps_to_95": 100,
+            "advantage_steps": 70,
+            "task": "T2_U1_B"
+          },
+          {
+            "D_reencounter_steps_to_95": 10,
+            "NOVEL_steps_to_95": 80,
+            "advantage_steps": 70,
+            "task": "T3_U3_A"
+          }
+        ],
+        "tasks_faster_than_novel": 3
+      },
+      "replay_match_rates": {
+        "after_T2": 1,
+        "after_T3": 0.616,
+        "after_T4": 0.456
+      },
+      "seed": 4141
+    }
+  ],
+  "protocol": "docs/research/kernel-continual-learning/kcl63-protocol.md",
+  "protocol_sha256": "fc37bd6a9759e89e3b0dd1ce79e91cdcf34bfcf808b99a0f0f8bad4dff383996",
+  "scope": {
+    "kcl7_started": false,
+    "reasoning_work": false,
+    "semantic_memory_started": false
+  },
+  "status": "FAIL",
+  "storage": {
+    "A_final_bytes": 2304,
+    "A_over_D_ratio": 16.111888111888113,
+    "B_final_bytes": 2688,
+    "C_final_bytes": 164,
+    "C_over_D_ratio": 1.1468531468531469,
+    "D_final_bytes": 143
+  },
+  "task_order": [
+    "T1_U1_A",
+    "T2_U1_B",
+    "T3_U3_A",
+    "T4_U3_B"
+  ],
+  "verdict": "FUZZY_DECAY_DESTROYS_USEFUL_CONTINUAL_MEMORY",
+  "canonical_workflow": {
+    "run_id": 35345896950,
+    "artifact_id": 10547305207,
+    "artifact_zip_sha256": "dc272a860bdea1ae7982fcc03933a5042aec5c94e6e4199b6638bb281ebb70a6",
+    "focused_tests": "32 passed",
+    "scientific_step": "completed",
+    "workflow_conclusion": "failure_due_to_scientific_FAIL_exit_code_2"
+  }
+}
