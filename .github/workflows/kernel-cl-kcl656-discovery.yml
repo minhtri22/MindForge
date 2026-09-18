@@ -1,0 +1,61 @@
+name: Kernel CL — KCL-6.5.6 boundary health signal discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - experiments/kernel_cl/kcl656_boundary_health_signal.py
+      - tests/test_kernel_cl_kcl656.py
+      - .github/workflows/kernel-cl-kcl656-discovery.yml
+
+permissions:
+  contents: read
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+
+      - name: Focused unit tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl656.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl655.py -q
+
+      - name: Frozen KCL-6.5.6 discovery
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl656_boundary_health_signal.py \
+            --phase discovery \
+            --output experiments/kernel_cl/results/kcl656_discovery.json \
+            --rule-output experiments/kernel_cl/results/kcl656_rule.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload discovery evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl656-discovery-evidence
+          path: |
+            experiments/kernel_cl/results/kcl656_discovery.json
+            experiments/kernel_cl/results/kcl656_rule.json
+          if-no-files-found: warn
+
+      - name: Enforce valid discovery execution
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
