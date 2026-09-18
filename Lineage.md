@@ -606,3 +606,54 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence: `experiments/kernel_cl/results/kcl64_summary.json`.
 - Paper: `docs/research/kernel-continual-learning/kcl64-paper.md`.
 - KCL-7 model-scale transfer status: **NOT STARTED**.
+
+
+## 2026-09-18 — KCL-6.5-Q Matched-Query Control Qualified Before Main Specificity A/B
+
+- Status: **PASS**
+- Verdict: `MATCHED_QUERY_CONTROL_QUALIFIED`
+- Scientific purpose: validate a matched-query placebo control before testing whether KCL-6.4 depends on asking the *right* missing information rather than merely issuing a query.
+- Qualification seed: `5151` (excluded from main KCL-6.5 seeds).
+- Key design finding: on the affine diagnostic substrate, any exact observation from the same fuzzy task can recover the missing offset, so a same-task "irrelevant" exact observation is not a valid placebo.
+- Qualified placebo F:
+  - receives a ground-truth 3-tuple observation from the current task at the same query opportunity;
+  - same payload arity/timing as E;
+  - does not belong to the queried prior fuzzy memory;
+  - cannot update the queried prior schema;
+  - does not enter gradient;
+  - is not stored.
+- Q1 targeted identifiability: **PASS**.
+  - candidate offsets `4 → 1` for T1/T2/T3.
+  - recovered offsets `1/3/4`.
+  - full 24-observation reconstruction exact.
+- Q2 placebo non-identifiability: **PASS**.
+  - candidate offsets `4 → 4` for all T3/T4 query opportunities.
+  - prior-task resolver rejected all placebo cues.
+- Q3 equal query envelope: **PASS**.
+  - timing equal;
+  - payload arity `3`;
+  - replay slots unchanged;
+  - optimizer steps unchanged;
+  - processed examples unchanged;
+  - query gradient/storage = zero.
+- Q4 operational-null qualification: **PASS**.
+  - frozen query schedule `T2=0, T3=1, T4=2`;
+  - D/F replay observations equal;
+  - post-stage model states equal;
+  - post-stage optimizer states equal.
+- Q5 no hidden cross-task resolver: **PASS**.
+  - no cross-task offset inference;
+  - no task-ID/offset correlation;
+  - no task-family formula;
+  - no historical raw observation access.
+- Interpretation: F is qualified as an operational-null matched-query control. The main KCL-6.5 A/B may now test targeted E versus placebo F while matching query timing, payload presence, and query count.
+- Protocol commit: `7911fc005254332af66ca50a83cf1911481dcc5a`.
+- Protocol SHA-256: `7e8e6537e6c730aafd7097f4d70b6c80f40b211357904fdd9697a9af0f29136a`.
+- Canonical source commit: `0aeeeafb2df289bb53becc2b19645bd4427657f5`.
+- Workflow run: `35351589288`.
+- Focused tests: `6 passed`.
+- Artifact ID: `10549729971`.
+- Artifact ZIP SHA-256: `635f4fc7677640211531aa2bb21165e0561dc9eb8a2143ecc9c9a219ce625da2`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl65q_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl65q-paper.md`.
+- Main KCL-6.5 specificity A/B status: **NOT STARTED at qualification closure**.
