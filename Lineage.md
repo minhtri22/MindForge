@@ -1346,3 +1346,95 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Next scientific requirement:
   - if continued, pre-register relational/multivariate boundary-state hypotheses;
   - do not touch the untouched KCL-6.5.6 confirmatory seeds until a new discovery rule is frozen.
+
+
+## 2026-09-19 — KCL-6.5.7 Relational Boundary-State Representation Fails Discovery Qualification
+
+- Status: **NEGATIVE**
+- Verdict: `RELATIONAL_BOUNDARY_STATE_NOT_DISCOVERY_QUALIFIED`
+- Upstream KCL-6.5.6 remains:
+  - status **NEGATIVE**
+  - verdict `NO_DISCOVERY_BOUNDARY_HEALTH_SIGNAL`.
+- Scientific purpose:
+  - test whether a compact multivariate representation of `task-relative drift × optimizer moment geometry × retention state` predicts `SAFE_RESET_OPPORTUNITY` better than stage-only and the strongest scalar H4 drift signal.
+- Representation:
+  - name `RBS-v1`;
+  - six base variables:
+    - D = task-relative drift;
+    - M1 = first-moment RMS;
+    - M2 = sqrt(second-moment) RMS;
+    - P = bias-corrected Adam pressure RMS;
+    - G = drift/pressure cosine;
+    - R = `1 - prior worst accuracy`.
+  - eleven frozen standardized terms:
+    - `zD,zM1,zM2,zP,zG,zR,zD*zP,zD*zR,zP*zR,zG*zR,zM1*zM2`.
+- Classifier:
+  - deterministic L2 logistic regression;
+  - lambda `1.0`;
+  - Newton solver;
+  - scaler/weights/threshold fit separately inside each LOSO-seed fold.
+- Discovery source:
+  - canonical KCL-6.5.6 evidence only;
+  - 20 seeds;
+  - 60 boundary instances;
+  - no counterfactual rerun.
+- RBS-v1 LOSO result:
+  - TP `26`;
+  - TN `5`;
+  - FP `14`;
+  - FN `15`;
+  - balanced accuracy `0.44865`;
+  - sensitivity `0.63415`;
+  - specificity `0.26316`;
+  - accuracy `0.51667`.
+- Frozen discovery gates:
+  - BA >= `0.70`;
+  - sensitivity >= `0.65`;
+  - specificity >= `0.65`;
+  - BA >= best baseline + `0.03`.
+- Baselines:
+  - stage-only BA `0.60270`;
+  - H4 task-relative drift BA `0.65533`.
+- Required BA relative to best baseline:
+  - >= `0.68533`.
+- RBS-v1 fails discovery decisively.
+- Frozen descriptive ablations:
+  - A-DP `[zD,zP,zD*zP]`: BA `0.50128`.
+  - A-DR `[zD,zR,zD*zR]`: BA `0.45058`.
+  - A-MOMENT `[zM1,zM2,zM1*zM2]`: BA `0.49936`.
+  - A-NO-RETENTION: BA `0.53979`.
+- Best ablation remains below H4 scalar.
+- A-NO-RETENTION outperforming full RBS-v1 is descriptive only; protocol forbids post-outcome model replacement.
+- Scientific interpretation:
+  - adding global multivariate interactions does not automatically recover boundary health;
+  - the specific hypothesis that a low-dimensional linear drift × moment × retention representation is sufficient is falsified;
+  - useful boundary state may instead be localized, nonlinear, subspace-specific, or require attribution of retained knowledge to the same parameters/moments being modified.
+- Confirmatory phase:
+  - **NOT AUTHORIZED**;
+  - no `kcl657_rule.json`;
+  - no KCL-6.5.7 confirm workflow;
+  - untouched confirmatory seeds remain untouched:
+    - `13635,13837,14039,14241,14443,14645,14847,15049,15251,15453,15655,15857,16059,16261,16463,16665,16867,17069,17271,17473`.
+- Integrity:
+  - whole-seed holdout: PASS;
+  - fold-local scaler: PASS;
+  - fold-local weights: PASS;
+  - fold-local threshold: PASS;
+  - future outcomes excluded from features: PASS;
+  - confirmatory seeds absent: PASS;
+  - KCL-7 opened: **NO**.
+- Protocol commit: `850453e0798b2f6c2488c6618549aeb52fde5658`.
+- Protocol SHA-256: `50617d793cf129f0dc99b79e29e8e7b6ad165588269a65db5f4006039db76ec3`.
+- Implementation commit: `9f273b418d1eeb38ce3d7d02939991859f5091f4`.
+- Contract-test commit: `a0eb8959e0beb7429a5bcdc787e10d12113a1cbb`.
+- Canonical scientific source: `af3f149364fa1fab48bb728ec33422ae27d56134`.
+- Canonical discovery workflow: `35383442729`.
+- Focused tests: `20 passed (10 KCL-6.5.7 + 10 KCL-6.5.6)`.
+- Artifact ID: `10562674440`.
+- Artifact ZIP SHA-256: `4616dc689c9bad741de46dd33868fbc80d7157e0eb64d72123660fd01cbce2ff`.
+- Machine-readable evidence commit: `10465a9076ae64c1e9501b3f3efbad20bf76d324`.
+- Paper commit: `7e06b075076bc8894435b45569526d6805983178`.
+- Next scientific requirement:
+  - if continued, move from global summary representation to localized structured boundary state;
+  - candidate hypothesis: parameter-group drift × parameter-group moment geometry × protected-retention attribution;
+  - do not touch the untouched confirmatory cohort until a new discovery rule qualifies and is frozen.
