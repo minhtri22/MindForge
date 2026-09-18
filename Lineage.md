@@ -392,3 +392,60 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence: `experiments/kernel_cl/results/kcl61_summary.json`.
 - Paper: `docs/research/kernel-continual-learning/kcl61-paper.md`.
 - KCL-7 model-scale transfer status: **NOT STARTED**.
+
+
+## 2026-09-18 — KCL-6.2 Reconstructive Schema Memory Compresses Replay Without CL Loss
+
+- Status: **PASS**
+- Verdict: `RECONSTRUCTIVE_SCHEMA_COMPRESSES_REPLAY_WITHOUT_CL_LOSS`
+- Scientific purpose: compare three replay-memory representations under the exact same KCL-6.1 workload, seeds and replay compute.
+- Arms:
+  - A = `RAW_EPISODIC`
+  - B = `WEIGHTED_EXACT`
+  - C = `RECONSTRUCTIVE_SCHEMA_PLUS_RESIDUALS`
+- Frozen seeds reused for paired A/B/C comparison: `3333`, `3535`, `3737`, `3939`, `4141`.
+- Frozen task order: `T1_U1_A → T2_U1_B → T3_U3_A → T4_U3_B`.
+- Replay compute: unchanged at `6.25%` (`15 current + 1 replay`, batch size `16`).
+- C schema fitter input: observed `(input0,input1,target)` tuples only.
+- Family names/source mapping formulas used by C fitter: **NO**.
+- C schema rule class: inferred varying input position + affine modular relation with exact residual exceptions.
+- Schema validation:
+  - T1 coverage `1.0`, residuals `0`, exact reconstruction **PASS**.
+  - T2 coverage `1.0`, residuals `0`, exact reconstruction **PASS**.
+  - T3 coverage `1.0`, residuals `0`, exact reconstruction **PASS**.
+  - T4 coverage `1.0`, residuals `0`, exact reconstruction **PASS**.
+- Logical storage at T4:
+  - A raw: `2304` bytes.
+  - B weighted exact: `2688` bytes.
+  - C reconstructive: `164` bytes.
+- Compression:
+  - A/C = `14.0488×`.
+  - B/C = `16.3902×`.
+- C residual exception rate: `0.0`.
+- Final mean prior-task accuracy:
+  - A = `0.6750`.
+  - B = `0.6750`.
+  - C = `0.6750`.
+- Mean C-A prior-task delta: `0.0`.
+- Every final task accuracy delta C-A and C-B across all five seeds: `0.0`.
+- C final T4 accuracy remained `>= 0.95` on every seed.
+- Relearning-trace probe across all four tasks:
+  - reconstructed dataset equals original: **YES**;
+  - learning curves equal: **YES**;
+  - final model states equal: **YES**.
+- H1 exact reconstruction: **PASS**.
+- H2 continual-learning equivalence: **PASS**.
+- H3 meaningful storage reduction: **PASS**.
+- Important limitation: C performs exact structural factorization, not fuzzy/partial memory decay. No information was discarded on this workload.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `47939b37e4e86b641256cc90047426c01f978bca`.
+- Scientific protocol SHA-256: `3a410c65ee4658244b8465efd712720d67b1106494a0a080adb715d926e292ef`.
+- Canonical workflow run: `35340007829`.
+- Canonical scientific source commit: `f24a2b3ac6dc21714d40c6ba6f830bcae9936d0a`.
+- Focused tests: `24 passed`.
+- Workflow artifact ID: `10545125295`.
+- Workflow artifact ZIP SHA-256: `0ac50743de27b677b034478ddd2481965b5334473059c135cea4eced3ed02424`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl62_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl62-paper.md`.
+- KCL-7 model-scale transfer status: **NOT STARTED**.
+- Fuzzy/partial reconstructive decay status: **NOT STARTED**.
