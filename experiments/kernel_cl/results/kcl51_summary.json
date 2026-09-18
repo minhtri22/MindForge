@@ -1,0 +1,152 @@
+{
+  "candidate_order": [
+    "U3_MIXED_POSITION",
+    "U4_DISJOINT_OUTPUT_PREFIX",
+    "U5_AFFINE_PREFIX_ALT"
+  ],
+  "candidate_results": [
+    {
+      "candidate": "U3_MIXED_POSITION",
+      "per_seed": [
+        {
+          "independent_a": {
+            "accuracy": 1.0,
+            "loss": 0.015802297741174698
+          },
+          "independent_b": {
+            "accuracy": 1.0,
+            "loss": 0.02096261829137802
+          },
+          "pass": true,
+          "seed": 1212,
+          "sequential": {
+            "a_after_a": {
+              "accuracy": 1.0,
+              "loss": 0.015034171752631664
+            },
+            "a_after_a2_control": {
+              "accuracy": 1.0,
+              "loss": 0.0049810162745416164
+            },
+            "a_after_b": {
+              "accuracy": 0.2083333283662796,
+              "loss": 3.521591901779175
+            },
+            "b_after_b": {
+              "accuracy": 1.0,
+              "loss": 0.013493657112121582
+            },
+            "control_drift_accuracy": 0.0,
+            "forgetting_accuracy": 0.7916666716337204
+          }
+        },
+        {
+          "independent_a": {
+            "accuracy": 1.0,
+            "loss": 0.026340773329138756
+          },
+          "independent_b": {
+            "accuracy": 1.0,
+            "loss": 0.01606905646622181
+          },
+          "pass": true,
+          "seed": 1414,
+          "sequential": {
+            "a_after_a": {
+              "accuracy": 1.0,
+              "loss": 0.027162527665495872
+            },
+            "a_after_a2_control": {
+              "accuracy": 1.0,
+              "loss": 0.007748113479465246
+            },
+            "a_after_b": {
+              "accuracy": 0.3333333432674408,
+              "loss": 3.689120054244995
+            },
+            "b_after_b": {
+              "accuracy": 1.0,
+              "loss": 0.0214434415102005
+            },
+            "control_drift_accuracy": 0.0,
+            "forgetting_accuracy": 0.6666666567325592
+          }
+        }
+      ],
+      "qualified": true,
+      "seeds": [
+        1212,
+        1414
+      ]
+    }
+  ],
+  "config": {
+    "batch_size": 16,
+    "d_model": 16,
+    "dropout": 0.0,
+    "ff_mult": 4,
+    "learning_rate": 0.003,
+    "max_context": 2,
+    "n_heads": 2,
+    "n_layers": 1,
+    "relations": 24,
+    "stage_steps": 250,
+    "vocab_size": 96,
+    "weight_decay": 0.0
+  },
+  "environment": {
+    "deterministic_algorithms": true,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu",
+    "torch_num_threads": 1
+  },
+  "evaluated_candidates": [
+    "U3_MIXED_POSITION"
+  ],
+  "experiment": "KCL-5.1",
+  "gates": {
+    "control_drift_abs_max": 0.1,
+    "forgetting_min": 0.5,
+    "independent_accuracy_min": 0.95,
+    "sequential_acquisition_min": 0.95
+  },
+  "git_commit": "f35dfe3082b569d4d30be3b6cd0a04491861e724",
+  "historical_anchor": {
+    "kcl5_status": "FAIL",
+    "kcl5_verdict": "UNSEEN_FAMILY_SUBSTRATE_NOT_QUALIFIED",
+    "sha256": "32460ca4a5008004ff8ff0f8d1c3cabef4f8ebf65c52bb30db16a407bf483ac0",
+    "u1_qualified": true,
+    "u2_qualified": false,
+    "valid": true
+  },
+  "integrity": {
+    "candidate_pool_extended_after_outcome": false,
+    "first_pass_selection_rule": true,
+    "historical_anchor_valid": true,
+    "model_architecture_changed": false,
+    "replay_calls": 0,
+    "treatment_runs": 0
+  },
+  "model_parameter_count": 4880,
+  "protocol": "docs/research/kernel-continual-learning/kcl51-protocol.md",
+  "protocol_sha256": "53f93f89a8a2e0c184095becf85d82cf389107a13f5d55d6afae5f5fdab9afbd",
+  "qualification_seeds": [
+    1212,
+    1414
+  ],
+  "scope": {
+    "challenger_started": false,
+    "external_api_calls": 0,
+    "kcl52_started": false,
+    "kcl6_started": false,
+    "oir_ppv": false,
+    "pit": false,
+    "ppf": false,
+    "reasoning_work": false,
+    "replay_executed": false
+  },
+  "selected_candidate": "U3_MIXED_POSITION",
+  "status": "PASS",
+  "verdict": "SECOND_UNSEEN_SUBSTRATE_ESTABLISHED"
+}
