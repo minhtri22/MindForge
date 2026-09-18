@@ -515,3 +515,94 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl63-paper.md`.
 - KCL-7 model-scale transfer status: **NOT STARTED**.
 - Next scientific requirement: causally separate fuzzy memory as dormant/reconstructive trace from fuzzy memory as noisy target-bearing replay, without changing the frozen fuzzy representation.
+
+
+## 2026-09-18 — KCL-6.4 Clarification Reactivation Rescues the Failed Fuzzy Replay Policy
+
+- Status: **PASS**
+- Verdict: `CLARIFICATION_REACTIVATION_RESCUES_FUZZY_MEMORY_POLICY`
+- KCL-6.3 remains permanently recorded as:
+  - status: **FAIL**
+  - verdict: `FUZZY_DECAY_DESTROYS_USEFUL_CONTINUAL_MEMORY`
+  - strict T4 gate was **NOT** relaxed.
+- Scientific purpose: causally separate the fuzzy reconstructive representation from the policy used when fuzzy memory cannot determine a unique replay target.
+- Frozen paired arms:
+  - D = `FUZZY_GUESS_REPLAY` — unchanged KCL-6.3 failure control.
+  - E = `FUZZY_ASK_REACTIVATE` — same representation/decay; ask before uncertain replay.
+- Frozen representation:
+  - bucket width `4`;
+  - exact offset removed after decay;
+  - support count removed after decay;
+  - no raw episodes retained in fuzzy memory.
+- Frozen seeds: `3333`, `3535`, `3737`, `3939`, `4141`.
+- Frozen task order: `T1_U1_A → T2_U1_B → T3_U3_A → T4_U3_B`.
+- Replay budget unchanged: `15 current + 1 replay`, batch size `16`, replay fraction `6.25%`.
+- Clarification trigger:
+  - only when selected replay source is fuzzy;
+  - only first time that source is encountered in the current stage.
+- Clarification cue:
+  - exactly one `key_min` observation;
+  - cue enters training batch: **NO**;
+  - cue receives gradient update: **NO**;
+  - cue stored as raw replay episode: **NO**.
+- Frozen query schedule reproduced on every seed:
+  - T2: `0` queries;
+  - T3: `1` query;
+  - T4: `2` queries;
+  - total: `3` queries/seed.
+- D failure control reproduced: **YES**.
+  - D T4 mean: `0.9750`;
+  - D T4 minimum: `0.91667` on seed `3939`;
+  - D final mean prior accuracy: `0.35556`;
+  - D metrics consistent with committed KCL-6.3 within frozen `1/24` tolerance.
+- E strict CL gate: **PASS**.
+  - E T4 mean: `0.98333`;
+  - E T4 minimum: `0.95833`;
+  - every seed satisfies the unchanged `>=0.95` T4 gate.
+- E prior retention:
+  - final mean prior accuracy: `0.67500`;
+  - D→E mean paired gain: `+0.31944` (+31.94 percentage points);
+  - every seed improves prior retention over D.
+- Per-seed prior mean D→E:
+  - 3333: `0.4167 → 0.6944`;
+  - 3535: `0.2917 → 0.5139`;
+  - 3737: `0.3750 → 0.7639`;
+  - 3939: `0.3333 → 0.6250`;
+  - 4141: `0.3611 → 0.7778`.
+- Seed `3939` decisive plasticity recovery:
+  - D T4: `0.91667`;
+  - E T4: `0.95833`;
+  - strict `0.95` gate restored without relaxation.
+- Replay-target correctness:
+  - E exact replay match rate T2/T3/T4: `1.0 / 1.0 / 1.0` on every seed.
+  - D T3 exact-match range: `0.616–0.652`.
+  - D T4 exact-match range: `0.456–0.508`.
+- Incorrect replay targets avoided by E:
+  - mean: `223` / seed;
+  - min: `217`;
+  - max: `232`.
+- Query efficiency:
+  - mean prior-retention gain/query: `0.10648`;
+  - approximately `+10.65` percentage points final mean-prior accuracy/query on this frozen benchmark.
+- Persistent storage:
+  - D final: `143` bytes;
+  - E final: `143` bytes;
+  - E in-stage fully reactivated prior-schema footprint at T4: `123` bytes before adding the newly learned T4 memory;
+  - final age state remains `[fuzzy, fuzzy, fuzzy, exact]`.
+- Historical exact-schema C final mean prior accuracy: `0.67500`.
+- E final mean prior accuracy: `0.67500`.
+- Interpretation: under the frozen synthetic schema class, fuzzy memory itself is not the failure. The failing policy was converting unresolved fuzzy content into supervised pseudo-targets. A minimal disambiguating cue restores the missing schema field and exact replay, recovering the strict continual-learning contract while retaining fuzzy persistent storage.
+- Limitation: the clarification environment is a controlled synthetic oracle and the missing field/query form is known by the benchmark. This result does not yet establish autonomous natural-language question generation or arbitrary uncertainty discovery.
+- Model architecture changed: **NO**.
+- Fuzzy representation changed from D: **NO**.
+- Replay budget changed: **NO**.
+- Scientific protocol commit: `8490690a77a91259b6a9e0da09b2d7ecc94afc85`.
+- Scientific protocol SHA-256: `6b7790938cf9584af3ecac2d282478a7540739e8a8041e5aa318f7deddb51344`.
+- Canonical workflow run: `35347461695`.
+- Canonical scientific source commit: `7fca0762d6f6013e4842c456c981636a98dd48da`.
+- Focused tests: `16 passed (8 KCL-6.4 + 8 KCL-6.3)`.
+- Workflow artifact ID: `10547353683`.
+- Workflow artifact ZIP SHA-256: `16e6677441441a0ba50ea843d8a4e3392e594ca71fee6055a01bd534a4b497bf`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl64_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl64-paper.md`.
+- KCL-7 model-scale transfer status: **NOT STARTED**.
