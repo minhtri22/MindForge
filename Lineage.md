@@ -176,3 +176,43 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Interpretation: KCL-5 failed at the prerequisite benchmark/substrate qualification stage. The result does not establish replay-generalization failure because treatment evaluation never began.
 - KCL-6 long-horizon status: **BLOCKED / NOT STARTED**.
 - Next scientific requirement: construct and pre-qualify an additional unseen task-pair substrate under a dedicated benchmark-reconstruction milestone, while keeping the 6.25% replay mechanism frozen and untouched.
+
+
+## 2026-09-18 — KCL-5.1 Second Unseen Substrate Established
+
+- Status: **PASS**
+- Verdict: `SECOND_UNSEEN_SUBSTRATE_ESTABLISHED`
+- Historical KCL-5 anchor validated:
+  - U1_AFFINE_PREFIX: qualified.
+  - U2_STRIDE_SUFFIX: not qualified.
+  - KCL-5 verdict: `UNSEEN_FAMILY_SUBSTRATE_NOT_QUALIFIED`.
+- Frozen candidate order:
+  1. `U3_MIXED_POSITION`
+  2. `U4_DISJOINT_OUTPUT_PREFIX`
+  3. `U5_AFFINE_PREFIX_ALT`
+- Qualification seeds: `1212`, `1414`.
+- Selected candidate: `U3_MIXED_POSITION`.
+- First-PASS rule applied: **YES**.
+- U4/U5 executed: **NO**.
+- U3 independent A accuracy: `1.0 / 1.0`.
+- U3 independent B accuracy: `1.0 / 1.0`.
+- U3 A-after-A accuracy: `1.0 / 1.0`.
+- U3 B-after-B untreated accuracy: `1.0 / 1.0`.
+- U3 A-after-B accuracy: `0.2083 / 0.3333`.
+- U3 forgetting: `0.7917 / 0.6667`.
+- U3 matched A→A control drift: `0.0 / 0.0`.
+- Replay calls: `0`.
+- Treatment runs: `0`.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `af7dc5ba0c6adea1de000dabebbd00ce4068be68`.
+- Scientific protocol SHA-256: `53f93f89a8a2e0c184095becf85d82cf389107a13f5d55d6afae5f5fdab9afbd`.
+- Canonical workflow run: `35333969025`.
+- Canonical source commit: `f35dfe3082b569d4d30be3b6cd0a04491861e724`.
+- Focused tests: `32 passed`.
+- Workflow artifact ID: `10542362910`.
+- Workflow artifact ZIP SHA-256: `4c61cecc02f8467d3455fed7301c3958e3efb8427ed0c57f1c1c57d11ab5257c`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl51_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl51-paper.md`.
+- Interpretation: the benchmark layer now contains two independently qualified unseen substrates, U1_AFFINE_PREFIX and U3_MIXED_POSITION, without using replay outcomes for substrate selection.
+- KCL-5.2 replay-generalization status: **NOT STARTED**.
+- KCL-6 long-horizon status: **BLOCKED / NOT STARTED**.
