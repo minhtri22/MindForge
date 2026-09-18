@@ -1012,3 +1012,95 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence commit: `a5c2c252631e5d32ccf6574159c857b04e05a37b`.
 - Paper commit: `4e08cb49d9fdefb72e39638c5855563d96525042`.
 - KCL-7 status: **NOT STARTED**.
+
+
+## 2026-09-18 — KCL-6.5.4 AdamW Boundary-State Decomposition Finds Two Independent Moment Failure Routes
+
+- Status: **PASS**
+- Verdict: `MULTIPLE_SINGLE_COMPONENTS_SUFFICIENT`
+- Upstream KCL-6.5.3 remains:
+  - status **PASS**
+  - verdict `MODEL_OPTIMIZER_INTERACTION_ONLY`.
+- Diagnostic seed: `9393`.
+- Model held fixed across all arms: exact POST-T1 model.
+- T4 stream held fixed: seed `13700`.
+- Frozen T4 acquisition floor: `>=0.95`.
+- AdamW components:
+  - `S = step`
+  - `M = exp_avg`
+  - `V = exp_avg_sq`.
+- POST-T1 optimizer state:
+  - 16 parameter states;
+  - every parameter step = `250`;
+  - moment tensors finite.
+- Reset-baseline integrity:
+  - truly fresh/empty AdamW and manually pre-populated `O000` zero state have identical T4 curve;
+  - final model state equal;
+  - final optimizer state equal.
+- Canonical endpoint reproduction:
+  - `O000 = 1.0000` — reproduces KCL-6.5.3 POST-model + fresh optimizer.
+  - `O111 = 0.91667` — reproduces POST-model + POST optimizer.
+- Full 2^3 factorial:
+  - `O000` none carried: `1.0000` PASS.
+  - `O100` step only: `1.0000` PASS; reaches 95% checkpoint at step 175.
+  - `O010` first moment only: `0.08333` FAIL.
+  - `O001` second moment only: `0.91667` FAIL.
+  - `O110` step + first moment: `0.29167` FAIL.
+  - `O101` step + second moment: `0.91667` FAIL.
+  - `O011` first + second moments: `0.91667` FAIL.
+  - `O111` all carried: `0.91667` FAIL.
+- Minimal sufficient failing sets:
+  - `{exp_avg}`
+  - `{exp_avg_sq}`.
+- Therefore:
+  - first moment history is independently sufficient for failure under the reset-baseline counterfactual;
+  - second moment history is independently sufficient for failure;
+  - step/age alone is not sufficient.
+- Necessity under O111:
+  - step individually necessary: **NO**;
+  - exp_avg individually necessary: **NO**;
+  - exp_avg_sq individually necessary: **NO**.
+- Interpretation of non-necessity:
+  - neither moment is individually necessary because the other moment provides an independent sufficient failure route.
+- First-step T4 update L2:
+  - fresh/O000 `0.2036`
+  - O100 `0.2948`
+  - O001 `0.0982`
+  - O101 `0.1463`
+  - O011 `0.0985`
+  - O111 `0.1467`
+  - O010 `8657.89`
+  - O110 `1599.52`.
+- Mechanistic interpretation:
+  - carrying old first moment while resetting variance creates a catastrophic numerator/preconditioner mismatch;
+  - carrying old second moment independently shrinks effective update magnitude and still misses the acquisition floor;
+  - carrying both moments avoids the catastrophic explosion but still does not recover fresh-optimizer plasticity.
+- Step/age result:
+  - carrying `step=250` while resetting both moments (`O100`) does not reproduce failure;
+  - therefore optimizer age/bias-correction state is not the observed root component in this experiment.
+- Important guardrail:
+  - O010/O110 are causal hybrid counterfactuals, not recommended production policies.
+- Pre-registered architecture-gap candidate:
+  - `ADAPTIVE_COMPONENTWISE_OPTIMIZER_BOUNDARY_COORDINATION`.
+- Architectural implication:
+  - a future Task-Boundary Joint Plasticity Coordinator must expose moment state separately;
+  - a single binary "carry optimizer" / "reset optimizer" control is insufficient;
+  - first and second moments require coordinated boundary governance.
+- Strong candidate generated for later validation:
+  - carry step;
+  - reset `exp_avg`;
+  - reset `exp_avg_sq`.
+- This candidate is **NOT YET VALIDATED** on the multi-task CL workload.
+- Protocol commit: `dea6fbf0fedaaf0679a4aed7e61b51048c8b224b`.
+- Protocol SHA-256: `b42347460823f38ea250022489d34ecbd5b94ea9513feb194d336949acbd9e25`.
+- Implementation commit: `52e01c88c624601a97f414f86fc4c16f73d16737`.
+- Contract-test commit: `4364ddb63fb09619e0f1d9ca24be4e1e7d519768`.
+- Canonical scientific source: `990c000a7ca723bb469dbcc058c4d6c269e7bd82`.
+- Canonical workflow run: `35373053828`.
+- Focused tests: `20 passed (10 KCL-6.5.4 + 10 KCL-6.5.3)`.
+- Artifact ID: `10558109849`.
+- Artifact ZIP SHA-256: `d316c5a9a6cc7ab660a45a126028f981d302f1d85d1a4f06256911cb6c622e03`.
+- Machine-readable evidence commit: `70a625f64140ebc78531b3ec0bdf7dccefc7d16d`.
+- Paper commit: `870e8e77bd23dbbe6cce4efc432399eff4cdf24d`.
+- KCL-7 status: **NOT STARTED**.
+- Next scientific requirement: validate actual task-boundary policies on the full sequential CL stream, comparing carry-all vs reset-all vs carry-step/reset-both-moments, measuring both future-task plasticity and prior-task retention before implementing the coordinator.
