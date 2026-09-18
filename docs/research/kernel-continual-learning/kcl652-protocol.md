@@ -161,6 +161,12 @@ The first 15 current examples at each T4 step must be identical to G2-XR/G3 E cu
 
 The 16th current-only example is sampled from a dedicated frozen generator and is used only to keep batch size 16.
 
+Frozen dedicated generator seed:
+
+```
+seed + 4999
+```
+
 #### G2-XR — exact-history / EXACT replay at T4
 
 From the same exact post-T3 fork:
