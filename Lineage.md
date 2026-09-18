@@ -135,3 +135,44 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl4-paper.md`.
 - Interpretation: under the frozen batch size of 16, 6.25% is the minimum non-zero representable replay dose and it satisfies the KCL-3 effect contract. The result is substrate-specific and does not establish unseen-pair or scale generalization.
 - KCL-5 status: **NOT STARTED / NOT AUTHORIZED BY THIS CLOSURE**.
+
+
+## 2026-09-18 — KCL-5 Unseen Generalization Blocked by Substrate Qualification Failure
+
+- Status: **FAIL**
+- Verdict: `UNSEEN_FAMILY_SUBSTRATE_NOT_QUALIFIED`
+- Frozen replay mechanism: `6.25%` replay (`15 B + 1 A replay`, batch size `16`).
+- Unseen family U1: `U1_AFFINE_PREFIX`.
+  - Qualification seed 606: PASS.
+  - Qualification seed 808: PASS.
+  - Independent A/B learning: `1.0 / 1.0` on both seeds.
+  - Sequential B acquisition: `1.0 / 1.0`.
+  - A forgetting: `0.875 / 0.875`.
+  - Matched A→A drift: `0.0 / 0.0`.
+  - U1 substrate status: **QUALIFIED**.
+- Unseen family U2: `U2_STRIDE_SUFFIX`.
+  - Qualification seed 606: PASS.
+  - Qualification seed 808: **FAIL**.
+  - Independent B learning at seed 808: `1.0`.
+  - Sequential B acquisition at seed 808: `0.875`, below frozen `0.95` gate.
+  - A forgetting at seed 808: `0.8333`.
+  - Matched A→A drift: `0.0`.
+  - U2 substrate status: **NOT QUALIFIED**.
+- Final replay generalization seeds `111, 222, 333, 777, 999` were **not executed** because both unseen families were required to qualify first.
+- Replay mechanism failure demonstrated: **NO**.
+- Generalization claim tested to completion: **NO**.
+- Model architecture changed: **NO**.
+- Replay ratio changed/tuned: **NO**.
+- Family-specific adaptation: **NO**.
+- Scientific protocol commit: `d318b87a066ee122ee294e6001527914c65e3eee`.
+- Scientific protocol SHA-256: `6a1d4e5dbcdc0393d1a1fbf4c71d2e2088ac01a36fc10f1be0996259fcb8baf1`.
+- Canonical workflow run: `35333101201`.
+- Canonical source commit: `83aa689485e8cb6fcf5e3b1382af59ac3bc319ed`.
+- Focused tests: `25 passed`.
+- Workflow artifact ID: `10541668631`.
+- Workflow artifact ZIP SHA-256: `a2f94c38caadd8e4cef489adb0086b8643478f1a9d28340e5da817ea832d8e73`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl5_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl5-paper.md`.
+- Interpretation: KCL-5 failed at the prerequisite benchmark/substrate qualification stage. The result does not establish replay-generalization failure because treatment evaluation never began.
+- KCL-6 long-horizon status: **BLOCKED / NOT STARTED**.
+- Next scientific requirement: construct and pre-qualify an additional unseen task-pair substrate under a dedicated benchmark-reconstruction milestone, while keeping the 6.25% replay mechanism frozen and untouched.
