@@ -264,3 +264,69 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl52-paper.md`.
 - Interpretation: a single frozen replay mechanism now has causal generalization evidence across two independently qualified unseen task-pair structures. The remaining major untested dimension is long-horizon sequential learning beyond two tasks.
 - KCL-6 long-horizon status: **NOT STARTED**.
+
+
+## 2026-09-18 — KCL-6 Fixed-Budget Replay Survives Four-Task Horizon
+
+- Status: **PASS**
+- Verdict: `FIXED_BUDGET_REPLAY_SURVIVES_FOUR_TASK_HORIZON`
+- Frozen task stream:
+  - `T1_U1_A`
+  - `T2_U1_B`
+  - `T3_U3_A`
+  - `T4_U3_B`
+- Fresh final seeds: `2323`, `2525`, `2727`, `2929`, `3131`.
+- Replay remained frozen at `6.25%` total:
+  - `15` current examples
+  - `1` replay example
+  - batch size `16`.
+- Replay allocation: deterministic round-robin across **all** previous tasks.
+- Replay compute budget increased with task count: **NO**.
+- Replay storage increased with task count: **YES**.
+- CONTROL final mean prior-task accuracy: `0.1972`.
+- TREATMENT final mean prior-task accuracy: `0.7167`.
+- Mean retention gain: `0.5194` (+51.94 percentage points).
+- CONTROL final mean prior-task forgetting: `0.8028`.
+- TREATMENT final mean prior-task forgetting: `0.2833`.
+- CONTROL final average accuracy over all four tasks: `0.3979`.
+- TREATMENT final average accuracy over all four tasks: `0.7875`.
+- TREATMENT final T4 accuracy: `1.0` on all five seeds.
+- TREATMENT final worst-prior-task accuracy:
+  - mean `0.5500`
+  - minimum `0.4583`
+  - maximum `0.7083`.
+- Stability final/T2 retention ratio:
+  - mean `1.3220`
+  - minimum `0.8730`
+  - maximum `1.8519`.
+- Every seed passed:
+  - untreated substrate/current-task acquisition gates;
+  - treatment plasticity gates;
+  - directional gain for T1/T2/T3;
+  - final mean-prior retention floor;
+  - worst-prior retention floor;
+  - stability gate;
+  - paired state/budget integrity.
+- Replay stage accounting:
+  - T2: `250` replay draws from T1.
+  - T3: `125 / 125` from T1/T2.
+  - T4: `84 / 83 / 83` from T1/T2/T3.
+- Replay source storage:
+  - T2: `24` prior examples.
+  - T3: `48` prior examples.
+  - T4: `72` prior examples.
+  - after T4: `96` total learned-task examples retained in the synthetic replay store.
+- Scientific interpretation: fixed replay compute per update survives the tested four-task horizon, but replay storage grows linearly with learned tasks. KCL-6 does **not** establish bounded-memory continual learning.
+- Model architecture changed: **NO**.
+- Replay-ratio search: **NO**.
+- Historical KCL-5.2 anchor validated: **YES**.
+- Scientific protocol commit: `cc809c65308ea8e2ea75e0a2dc0474bc211a1e19`.
+- Scientific protocol SHA-256: `9f64ba817a8567dc2c087733e061fe67a8085293e2394d2c1d8192f7127f62bf`.
+- Canonical workflow run: `35335511807`.
+- Canonical source commit: `5e7043ba592f8872f9020fff48a12d06446d8597`.
+- Focused tests: `47 passed`.
+- Workflow artifact ID: `10542492835`.
+- Workflow artifact ZIP SHA-256: `6a3b287828bda57b191ad6d0d46c67591eff3ef7beaa3a798093ccebfc773289`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl6_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl6-paper.md`.
+- KCL-7 model-scale transfer status: **NOT STARTED**.
