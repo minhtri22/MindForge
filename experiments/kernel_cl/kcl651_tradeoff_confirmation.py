@@ -318,7 +318,7 @@ def main() -> int:
     result = run_experiment()
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2, sort_keys=True))
 
     if result["status"] in {"PASS", "NEGATIVE"}:
