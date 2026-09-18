@@ -70,3 +70,35 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Interpretation: the untreated sequential forgetting failure is reproducible outside the KCL-1 qualification seeds; this authorizes a causal mitigation experiment but still does **not** establish continual-learning capability.
 - CI integrity note: two identical post-closure KCL-1 reruns were triggered unintentionally by the original broad workflow path filter; they were not used for candidate selection and KCL-1 was subsequently switched to manual-only dispatch.
 - Next: freeze KCL-3 causal replay-treatment protocol before any replay execution.
+
+
+## 2026-09-18 — KCL-3 Bounded Replay Causally Reduces Forgetting
+
+- Status: **PASS**
+- Verdict: `BOUNDED_REPLAY_CAUSALLY_REDUCES_FORGETTING`
+- Treatment: bounded replay, frozen at `12.5%` of each B-stage batch (`14 B + 2 A replay`, batch size `16`).
+- Seeds: `101`, `202`, `303`, `707`, `909`.
+- CONTROL and TREATMENT were forked from the exact same post-A model and optimizer state for every seed.
+- Equal budget: `250` B-stage optimizer updates and `4,000` processed examples per arm.
+- CONTROL A-after-B mean: `0.0250`.
+- TREATMENT A-after-B mean: `0.8750`.
+- Mean retention gain: `0.8500`; minimum per-seed gain: `0.6667`.
+- CONTROL forgetting mean: `0.9750`.
+- TREATMENT forgetting mean: `0.1250`.
+- CONTROL B-after-B mean: `1.0`.
+- TREATMENT B-after-B mean: `1.0`.
+- B accuracy delta: `0.0` for all five seeds.
+- All frozen plasticity, retention, directional-consistency, aggregate-effect, and integrity gates: **PASS**.
+- Replay-ratio search performed: **NO**.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `088102bb1080f550b3f3bb296abb214d00ef412d`.
+- Scientific protocol SHA-256: `21b489dfdeb0914bd190c85a5489aa38d2a0e00026ef09ff180e78df6b9fca40`.
+- Canonical workflow run: `35330552367`.
+- Canonical source commit: `1f8ddc606895e4401d818dfb1ef2932f62438453`.
+- Focused tests: `13 passed`.
+- Workflow artifact ID: `10541022481`.
+- Workflow artifact ZIP SHA-256: `b2e557583e67745f2b40cd766d4850bb7fcb4eb6812bd86c1c4926fff2bdf7c5`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl3_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl3-paper.md`.
+- Interpretation: bounded replay has a causal anti-forgetting effect on the frozen KCL substrate without measured plasticity loss. This is not yet evidence of generalized continual-learning capability.
+- Next candidate milestone: KCL-4 minimal replay-boundary characterization under a separately frozen protocol. No alternative architecture or CL mechanism is authorized by KCL-3.
