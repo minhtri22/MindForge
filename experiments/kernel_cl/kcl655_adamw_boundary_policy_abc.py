@@ -686,15 +686,21 @@ def run_experiment() -> dict[str, Any]:
         status = "PASS"
         verdict = "B_AND_C_BOUNDARY_POLICIES_VALIDATED"
     else:
-        any_plasticity = (
-            q_b["plasticity_improvement_vs_A"]
-            or q_c["plasticity_improvement_vs_A"]
-        )
-        any_retention_noninferior = (
-            q_b["retention_noninferior_vs_A"]
-            or q_c["retention_noninferior_vs_A"]
-        )
-        if any_plasticity and not any_retention_noninferior:
+        improving_policies = [
+            q for q in (q_b, q_c)
+            if q["plasticity_improvement_vs_A"]
+        ]
+        # Frozen protocol applies retention non-inferiority to the same
+        # intervention that claims a plasticity improvement. A different
+        # policy preserving retention cannot rescue an improving policy
+        # that itself loses retention.
+        if (
+            improving_policies
+            and all(
+                not q["retention_noninferior_vs_A"]
+                for q in improving_policies
+            )
+        ):
             status = "FAIL"
             verdict = "BOUNDARY_RESET_PLASTICITY_GAIN_COSTS_RETENTION"
         else:
