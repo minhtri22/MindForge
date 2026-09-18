@@ -449,3 +449,69 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl62-paper.md`.
 - KCL-7 model-scale transfer status: **NOT STARTED**.
 - Fuzzy/partial reconstructive decay status: **NOT STARTED**.
+
+
+## 2026-09-18 — KCL-6.3 Fuzzy Trace Recoverable but Active Continual Replay Fails
+
+- Status: **FAIL**
+- Verdict: `FUZZY_DECAY_DESTROYS_USEFUL_CONTINUAL_MEMORY`
+- Scientific purpose: extend the KCL-6.2 A/B/C condition with a genuinely lossy arm D and test whether memory can become lower-resolution while retaining a recoverable trace.
+- Arms:
+  - A = `RAW_EPISODIC`
+  - B = `WEIGHTED_EXACT`
+  - C = `EXACT_RECONSTRUCTIVE_SCHEMA`
+  - D = `FUZZY_RECONSTRUCTIVE_DECAY`
+- Frozen paired seeds: `3333`, `3535`, `3737`, `3939`, `4141`.
+- Frozen task order: `T1_U1_A → T2_U1_B → T3_U3_A → T4_U3_B`.
+- Replay compute unchanged: `15 current + 1 replay`, batch size `16`, replay fraction `6.25%`.
+- Frozen D decay:
+  - memory becomes fuzzy after one subsequent task completes;
+  - exact offset `b` removed;
+  - support count removed;
+  - offset replaced by width-`4` bucket;
+  - multiplier/structure/context retained;
+  - fuzzy replay samples an offset uniformly inside the retained bucket.
+- Final D memory states on every seed: `[fuzzy, fuzzy, fuzzy, exact]`.
+- Raw episodes retained inside fuzzy memory: **NO**.
+- H1 — fuzzy trace recoverable: **PASS**.
+  - pre-cue deterministic reconstruction accuracy for final fuzzy T1/T2/T3: `0.0`;
+  - one exact cue at `key_min`: restores exact offset;
+  - post-cue reconstruction accuracy: `1.0` for every prior task/seed.
+- H3 — relearning advantage: **PASS**.
+  - mean D-vs-novel advantage: `74.0` training steps to 95% accuracy;
+  - minimum seed-level mean advantage: `56.67`;
+  - maximum: `83.33`;
+  - every seed: all `3/3` prior tasks relearn faster from D final state than novel acquisition.
+- H4 — storage below exact C: **PASS**.
+  - A final: `2304` bytes;
+  - B final: `2688` bytes;
+  - C final: `164` bytes;
+  - D final: `143` bytes;
+  - A/D = `16.1119×`;
+  - C/D = `1.1469×`.
+- H2 — useful continual trace + plasticity: **FAIL**.
+  - A/B/C final mean prior accuracy: `0.6750`;
+  - D final mean prior accuracy: `0.35278`;
+  - D final mean-prior distribution: min `0.29167`, max `0.41667`;
+  - D final worst-prior accuracy reaches as low as `0.04167` on seed `3939`;
+  - D final T4 mean accuracy: `0.9750`;
+  - D final T4 minimum: `0.91667` on seed `3939`, below frozen `0.95` plasticity gate.
+- D exact replay-match rate:
+  - after T2 mean: `1.0`;
+  - after T3 mean: `0.6304`;
+  - after T4 mean: `0.4776`.
+- Interpretation: fuzzy reconstructive memory exists and is strongly recoverable, but directly using uncertain fuzzy reconstructions as supervised replay targets does not satisfy the frozen CL/plasticity contract. The observed failure is consistent with replay-target noise, but KCL-6.3 does not independently isolate that cause.
+- No bucket-width tuning, age-schedule change, seed change, replay-budget increase, or selective rerun was performed after outcome inspection.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `8f1718f1b0e206c6d134fbf3d451db52777e4800`.
+- Scientific protocol SHA-256: `fc37bd6a9759e89e3b0dd1ce79e91cdcf34bfcf808b99a0f0f8bad4dff383996`.
+- Canonical workflow run: `35345896950`.
+- Canonical scientific source commit: `7639df19352c813a6a78d6514eeb198075751f34`.
+- Focused tests: `32 passed`.
+- Workflow artifact ID: `10547305207`.
+- Workflow artifact ZIP SHA-256: `dc272a860bdea1ae7982fcc03933a5042aec5c94e6e4199b6638bb281ebb70a6`.
+- Workflow conclusion: **failure by scientific FAIL exit code**, not implementation failure.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl63_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl63-paper.md`.
+- KCL-7 model-scale transfer status: **NOT STARTED**.
+- Next scientific requirement: causally separate fuzzy memory as dormant/reconstructive trace from fuzzy memory as noisy target-bearing replay, without changing the frozen fuzzy representation.
