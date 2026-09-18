@@ -330,3 +330,65 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence: `experiments/kernel_cl/results/kcl6_summary.json`.
 - Paper: `docs/research/kernel-continual-learning/kcl6-paper.md`.
 - KCL-7 model-scale transfer status: **NOT STARTED**.
+
+
+## 2026-09-18 — KCL-6.1 Exact Weighted Replay A/B Produces a Negative Storage Result
+
+- Status: **NEGATIVE**
+- Verdict: `EXACT_DUPLICATE_WEIGHTING_DOES_NOT_REDUCE_CURRENT_REPLAY_STORAGE`
+- Scientific purpose: test a weighted exact-consolidation alternative B against the current raw replay store A, without using the experiment as a rescue patch.
+- Arm A: `RAW_TASK_OBSERVATION_STORE`.
+- Arm B: `WEIGHTED_EXACT_OBSERVATION_STORE`, keyed by exact `(input_token_0, input_token_1, target)` with multiplicity count.
+- Frozen seeds: `3333`, `3535`, `3737`, `3939`, `4141`.
+- Frozen long-horizon workload: `T1_U1_A → T2_U1_B → T3_U3_A → T4_U3_B`.
+- Replay compute remained `6.25%`: `15` current + `1` replay item per batch.
+- Loss multiplication used: **NO**.
+- Weighted sampling by multiplicity: **YES**.
+- Exact-repeat mechanism validation:
+  - synthetic repeated multiset raw occurrences: `60`;
+  - weighted unique entries: `24`;
+  - total multiplicity preserved: `60`;
+  - canonical expansion equality: **PASS**;
+  - weighted rank lookup equality: **PASS**;
+  - entry compression on repeated multiset: `2.5×`;
+  - logical byte compression on repeated multiset: `2.143×`.
+- Interpretation of mechanism validation: weighted exact consolidation is correct and lossless when exact repeats exist.
+- Actual KCL-6 workload:
+  - after T1: A `24` entries, B `24` unique, duplicates consolidated `0`;
+  - after T2: A `48`, B `48`, duplicates `0`;
+  - after T3: A `72`, B `72`, duplicates `0`;
+  - after T4: A `96`, B `96`, duplicates `0`.
+- Final entry compression ratio A/B: `1.0×`.
+- Final logical storage:
+  - A: `2304` bytes;
+  - B payload: `2304` bytes;
+  - B count metadata: `384` bytes;
+  - B total: `2688` bytes.
+- Final byte compression ratio A/B: `0.8571×`.
+- B storage overhead vs A: `+16.67%`.
+- Behavioral equivalence:
+  - A final mean prior-task accuracy: `0.6750`;
+  - B final mean prior-task accuracy: `0.6750`;
+  - mean delta B-A: `0.0`;
+  - A final average accuracy all tasks: `0.7521`;
+  - B final average accuracy all tasks: `0.7521`;
+  - A final T4 mean: `0.9833`;
+  - B final T4 mean: `0.9833`.
+- Every seed/task final accuracy delta B-A: `0.0`.
+- All replay observations matched between A and B: **YES**.
+- All post-stage model states equal between A and B: **YES**.
+- Behavioral-equivalence gate: **PASS**.
+- Storage-effect gate: **FAIL**.
+- Scientific interpretation: exact weighted consolidation works when exact duplicates exist, but the current KCL replay-storage growth is caused by accumulation of unique task-conditioned observations, not repeated append of identical replay items.
+- Semantic/prototype/rule compression attempted: **NO**.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `492ba06388f1b89fd16e193b7df00c8432a282bd`.
+- Scientific protocol SHA-256: `82f389051597d0b109b16cd859c92f68d05a7d650fe6db44f4c22fbd166fa2f2`.
+- Canonical workflow run: `35337991901`.
+- Canonical source commit: `d6033401179a2b6c9fcca1fe7dbf9648becc7465`.
+- Focused tests: `55 passed`.
+- Workflow artifact ID: `10542469990`.
+- Workflow artifact ZIP SHA-256: `67f3392145032f8cdc74eab976e3c3d43db9bfd9ae44a55f5bd6c5f7327bbcab`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl61_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl61-paper.md`.
+- KCL-7 model-scale transfer status: **NOT STARTED**.
