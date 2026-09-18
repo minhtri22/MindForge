@@ -36,7 +36,7 @@ jobs:
 
       - name: Frozen one-shot KCL-1 qualification
         run: |
-          python experiments/kernel_cl/kcl1_substrate.py \
+          PYTHONPATH=. python experiments/kernel_cl/kcl1_substrate.py \
             --output experiments/kernel_cl/results/kcl1_summary.json
 
       - name: Upload machine-readable evidence
