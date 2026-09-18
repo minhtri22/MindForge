@@ -1,0 +1,51 @@
+name: Kernel CL — KCL-6.5 clarification specificity E-F
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - experiments/kernel_cl/kcl65_specificity_ab.py
+      - tests/test_kernel_cl_kcl65.py
+      - .github/workflows/kernel-cl-kcl65.yml
+
+permissions:
+  contents: read
+
+jobs:
+  kcl65:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+      - name: Focused unit tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl65.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl65q.py -q
+      - name: Frozen KCL-6.5 E/F A-B
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl65_specificity_ab.py \
+            --output experiments/kernel_cl/results/kcl65_summary.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload machine-readable evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl65-evidence
+          path: experiments/kernel_cl/results/kcl65_summary.json
+          if-no-files-found: error
+      - name: Enforce valid scientific closure
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
