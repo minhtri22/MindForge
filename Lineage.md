@@ -826,3 +826,22 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Paper: `docs/research/kernel-continual-learning/kcl651-paper.md`.
 - KCL-7 status: **NOT STARTED**.
 - Next scientific requirement: isolate seed-`9393` T4 acquisition failure under current-only / exact-schema / E / F controls before reopening model-scale transfer.
+
+
+## 2026-09-18 — KCL-6.5.1 Post-Run Serialization Patch / Non-Canonical Auto-Triggered Workflow
+
+- Classification: **TECHNICAL PROVENANCE NOTE — NOT A NEW SCIENTIFIC RUN**.
+- After canonical KCL-6.5.1 closure, source commit `1f2d1952b8409040b6ea90ee590a3bb89a1d8b2d` corrected only the JSON writer suffix:
+  - before: emitted a literal `\\n` after the JSON object;
+  - after: emits a normal newline.
+- Scientific logic, seeds, policies, gates, bootstrap contract, and all computed values: **UNCHANGED**.
+- No intentional scientific rerun was authorized.
+- Because the KCL-6.5.1 workflow is configured to trigger on source-file pushes, the serialization-only patch automatically triggered workflow run `35354258103`.
+- This auto-triggered run is explicitly **NON-CANONICAL**.
+- Its scientific outcome must not be inspected, selected, averaged, substituted, or used to update any KCL-6.5.1 conclusion.
+- Canonical KCL-6.5.1 remains:
+  - workflow run `35353568473`;
+  - scientific source `d75173f661d01e2cc9f2d852445c4852f1a94ae6`;
+  - artifact `10551212217`;
+  - official status **FAIL**;
+  - verdict `TARGETED_CLARIFICATION_ABSOLUTE_PLASTICITY_UNSTABLE`.
