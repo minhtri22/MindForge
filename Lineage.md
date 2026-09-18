@@ -845,3 +845,81 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
   - artifact `10551212217`;
   - official status **FAIL**;
   - verdict `TARGETED_CLARIFICATION_ABSOLUTE_PLASTICITY_UNSTABLE`.
+
+
+## 2026-09-18 — KCL-6.5.2 Seed-9393 T4 Failure Decomposed to Sequential Trajectory
+
+- Status: **PASS**
+- Verdict: `SEQUENTIAL_TRAJECTORY_ACQUISITION_FAILURE`
+- Purpose: isolate why seed `9393` failed the absolute T4 acquisition floor in KCL-6.5.1.
+- KCL-6.5.1 remains unchanged:
+  - status **FAIL**
+  - verdict `TARGETED_CLARIFICATION_ABSOLUTE_PLASTICITY_UNSTABLE`.
+- Diagnostic seed: `9393`.
+- Frozen T4 floor: `>=0.95`.
+- G0 `FRESH_T4_ONLY`:
+  - final T4 `1.0000`;
+  - max `1.0000`;
+  - first recorded checkpoint >=95%: step `200`;
+  - result: PASS.
+- G1 `SEQUENTIAL_CURRENT_ONLY`:
+  - train `T1→T2→T3→T4` with current-task data only;
+  - final T4 `0.8750`;
+  - max `0.8750`;
+  - never reaches 95%;
+  - result: FAIL.
+- Frozen classification hierarchy therefore stops at:
+  - `SEQUENTIAL_TRAJECTORY_ACQUISITION_FAILURE`.
+- Scientific meaning:
+  - T4 is independently learnable at seed 9393;
+  - prior sequential T1→T2→T3 history alone is sufficient to make T4 miss the acquisition floor;
+  - replay is not necessary for the absolute seed-9393 failure.
+- G2 matched exact post-T3 fork:
+  - G2-NR, replace replay slot with current T4:
+    - final T4 `0.79167`;
+    - max `0.83333`.
+  - G2-XR, exact prior replay:
+    - final T4 `0.75000`;
+    - max `0.79167`.
+  - matched causal delta:
+    - `G2-NR - G2-XR = +0.04167` (one benchmark item).
+  - Interpretation: exact replay during T4 adds an acquisition cost from this already-impaired exact-history state, but it is a secondary aggravating factor rather than the earliest sufficient cause.
+- G3 `E_TARGETED_CLARIFICATION`:
+  - final T4 `0.75000`;
+  - exact replay match rate `1.0`.
+- G4 `F_MATCHED_PLACEBO_FUZZY`:
+  - final T4 `0.87500`;
+  - exact replay match rate `0.50`.
+- Canonical KCL-6.5.1 anomaly reproduced exactly:
+  - E `0.75`;
+  - F `0.875`.
+- G2-XR / G3 equivalence checks: **ALL PASS**.
+  - post-T3 model state equal;
+  - post-T3 optimizer state equal;
+  - T4 replay stream equal;
+  - T4 learning curve equal;
+  - final model state equal;
+  - final optimizer state equal.
+- Therefore, on the current affine substrate, E's ASK/reactivation mechanism introduces no optimization distortion beyond exact reconstructive replay.
+- The seed-9393 E failure is not clarification-policy-specific.
+- G4 fuzzy replay is also not the unique cause because G1 current-only already fails.
+- All metrics finite: **YES**.
+- Architecture changed: **NO**.
+- Replay/query policy changed: **NO**.
+- KCL-7 opened: **NO**.
+- Secondary reporting note:
+  - canonical harness did not emit complete final T1/T2/T3 per-task vectors for G1/G2;
+  - no post-outcome rerun was performed;
+  - primary causal classification is unaffected because all frozen T4 endpoints and equivalence gates were emitted.
+- Final pre-execution protocol commit: `2827a7cba68872b9a70b974962ca9e0ccdf5221e`.
+- Final protocol SHA-256: `02e251bf00df6e57afdd791420153ace1388f20eef967c0b5a3d41872b0d23bd`.
+- Implementation commit: `d2f4d412b9d1e167b3e037c4dcab7806f568f8ca`.
+- Contract-test commit: `197c653d51b3334d6553f5e9c1049963eb9b415a`.
+- Canonical scientific source: `4d2a751df195ba2ba0050b0082b486ac10c5faf4`.
+- Canonical workflow run: `35358191886`.
+- Focused tests: `19 passed (10 KCL-6.5.2 + 9 KCL-6.5.1)`.
+- Artifact ID: `10553270957`.
+- Artifact ZIP SHA-256: `a838583b89b4012052eaed86e359f75060685e187726f3d601638f2f80149018`.
+- Machine-readable evidence commit: `d0d92a0ec2deb51472e4dfab069c6da933de75ef`.
+- Paper commit: `2ce53806e386086f736f71ba621646292fef4323`.
+- Next scientific requirement: isolate which component of the seed-9393 T1→T2→T3 sequential trajectory makes T4 acquisition-impaired before reopening KCL-7.
