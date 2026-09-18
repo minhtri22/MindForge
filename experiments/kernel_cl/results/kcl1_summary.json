@@ -1,0 +1,134 @@
+{
+  "candidate_order": [
+    "C1_TASK_PREFIX_CYCLIC",
+    "C2_TASK_PREFIX_REVERSE",
+    "C3_TASK_PREFIX_BLOCKSWAP"
+  ],
+  "config": {
+    "batch_size": 16,
+    "d_model": 16,
+    "dropout": 0.0,
+    "ff_mult": 4,
+    "learning_rate": 0.003,
+    "max_context": 2,
+    "n_heads": 2,
+    "n_layers": 1,
+    "relations": 24,
+    "stage_steps": 250,
+    "vocab_size": 96,
+    "weight_decay": 0.0
+  },
+  "environment": {
+    "deterministic_algorithms": true,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu",
+    "torch_num_threads": 1
+  },
+  "evaluated_candidates": [
+    "C1_TASK_PREFIX_CYCLIC"
+  ],
+  "experiment": "KCL-1",
+  "gates": {
+    "control_drift_abs_max": 0.1,
+    "forgetting_min": 0.5,
+    "independent_accuracy_min": 0.95,
+    "sequential_acquisition_min": 0.95
+  },
+  "git_commit": "3e8deabf9cb4e0b77db42817978a553baa7a796b",
+  "model_architecture_changed": false,
+  "model_parameter_count": 4880,
+  "protocol": "docs/research/kernel-continual-learning/kcl0-kcl1-protocol.md",
+  "protocol_sha256": "3a4151f2c18a2f7f19f5396a07a61be49e9f5f84f0d2a76cc3484ba68be8087f",
+  "qualification_seeds": [
+    404,
+    505
+  ],
+  "results": [
+    {
+      "candidate": "C1_TASK_PREFIX_CYCLIC",
+      "pass": true,
+      "per_seed": [
+        {
+          "independent_a": {
+            "accuracy": 1.0,
+            "loss": 0.016388705000281334
+          },
+          "independent_b": {
+            "accuracy": 1.0,
+            "loss": 0.020076734945178032
+          },
+          "pass": true,
+          "seed": 404,
+          "sequential": {
+            "a_after_a": {
+              "accuracy": 1.0,
+              "loss": 0.016288993880152702
+            },
+            "a_after_a2_control": {
+              "accuracy": 1.0,
+              "loss": 0.005353668704628944
+            },
+            "a_after_b": {
+              "accuracy": 0.0,
+              "loss": 9.055258750915527
+            },
+            "b_after_b": {
+              "accuracy": 1.0,
+              "loss": 0.012565414421260357
+            },
+            "control_drift_accuracy": 0.0,
+            "forgetting_accuracy": 1.0
+          }
+        },
+        {
+          "independent_a": {
+            "accuracy": 1.0,
+            "loss": 0.01688726432621479
+          },
+          "independent_b": {
+            "accuracy": 1.0,
+            "loss": 0.020850898697972298
+          },
+          "pass": true,
+          "seed": 505,
+          "sequential": {
+            "a_after_a": {
+              "accuracy": 1.0,
+              "loss": 0.017446966841816902
+            },
+            "a_after_a2_control": {
+              "accuracy": 1.0,
+              "loss": 0.005446723196655512
+            },
+            "a_after_b": {
+              "accuracy": 0.0,
+              "loss": 8.008313179016113
+            },
+            "b_after_b": {
+              "accuracy": 1.0,
+              "loss": 0.015919560566544533
+            },
+            "control_drift_accuracy": 0.0,
+            "forgetting_accuracy": 1.0
+          }
+        }
+      ],
+      "seeds": [
+        404,
+        505
+      ]
+    }
+  ],
+  "scope": {
+    "external_api_calls": 0,
+    "oir_ppv": false,
+    "pit": false,
+    "ppf": false,
+    "reasoning_work": false,
+    "teacher_inference": 0
+  },
+  "selected_candidate": "C1_TASK_PREFIX_CYCLIC",
+  "status": "PASS",
+  "verdict": "VALID_FORGETTING_SUBSTRATE_ESTABLISHED"
+}
