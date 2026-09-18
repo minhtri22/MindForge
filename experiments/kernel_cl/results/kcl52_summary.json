@@ -1,0 +1,348 @@
+{
+  "experiment": "KCL-5.2",
+  "status": "PASS",
+  "verdict": "REPLAY_GENERALIZES_ACROSS_UNSEEN_TASK_PAIRS",
+  "families": [
+    "U1_AFFINE_PREFIX",
+    "U3_MIXED_POSITION"
+  ],
+  "final_seeds": [1313, 1515, 1717, 1919, 2121],
+  "replay": {
+    "fraction": 0.0625,
+    "a_replay_examples_per_batch": 1,
+    "b_examples_per_batch": 15,
+    "total_batch_size": 16,
+    "ratio_search_performed": false,
+    "family_specific_adaptation": false
+  },
+  "gates": {
+    "control_b_accuracy_min_per_seed": 0.95,
+    "control_forgetting_min_per_seed": 0.50,
+    "treatment_b_accuracy_min_per_seed": 0.95,
+    "retention_gain_direction_per_seed": "strictly_positive",
+    "retention_gain_mean_min_per_family": 0.30,
+    "relative_forgetting_reduction_mean_min_per_family": 0.50,
+    "treatment_b_accuracy_mean_min_per_family": 0.95
+  },
+  "historical_anchors": {
+    "valid": true,
+    "kcl5_valid": true,
+    "kcl51_valid": true,
+    "u1_qualified": true,
+    "u3_selected": "U3_MIXED_POSITION",
+    "kcl5_sha256": "32460ca4a5008004ff8ff0f8d1c3cabef4f8ebf65c52bb30db16a407bf483ac0",
+    "kcl51_sha256": "58ff172fa9261b0d3bc56ccc47cccbfef59eb3fceb5e2cc3a3bf72b460dfceae"
+  },
+  "family_results": [
+    {
+      "family": "U1_AFFINE_PREFIX",
+      "pass": true,
+      "aggregates": {
+        "control_a_after_b_accuracy": {
+          "mean": 0.11666666865348815,
+          "pstdev": 0.06666666567325592,
+          "min": 0.0833333358168602,
+          "max": 0.25
+        },
+        "treatment_a_after_b_accuracy": {
+          "mean": 0.7583333373069763,
+          "pstdev": 0.1160699063039417,
+          "min": 0.625,
+          "max": 0.9166666865348816
+        },
+        "control_b_after_b_accuracy": {
+          "mean": 1.0,
+          "pstdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "treatment_b_after_b_accuracy": {
+          "mean": 1.0,
+          "pstdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "control_forgetting_accuracy": {
+          "mean": 0.8833333313465118,
+          "pstdev": 0.06666666567325592,
+          "min": 0.75,
+          "max": 0.9166666641831398
+        },
+        "treatment_forgetting_accuracy": {
+          "mean": 0.24166666269302367,
+          "pstdev": 0.1160699063039417,
+          "min": 0.08333331346511841,
+          "max": 0.375
+        },
+        "retention_gain": {
+          "mean": 0.6416666686534882,
+          "pstdev": 0.10069205561723903,
+          "min": 0.5416666641831398,
+          "max": 0.8333333507180214
+        },
+        "relative_forgetting_reduction": {
+          "mean": 0.7303030339975332,
+          "pstdev": 0.12098464019825535,
+          "min": 0.5909090898007401,
+          "max": 0.9090909305190252
+        },
+        "b_accuracy_delta": {
+          "mean": 0.0,
+          "pstdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "gates": {
+        "integrity_pass": true,
+        "per_seed_gate_pass": true,
+        "mean_retention_gain_pass": true,
+        "mean_relative_forgetting_reduction_pass": true,
+        "mean_treatment_b_accuracy_pass": true
+      },
+      "per_seed": [
+        {
+          "seed": 1313,
+          "control_a_after_b": 0.0833333358168602,
+          "treatment_a_after_b": 0.625,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.9166666641831398,
+          "treatment_forgetting": 0.375,
+          "retention_gain": 0.5416666641831398,
+          "relative_forgetting_reduction": 0.5909090898007401,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 1515,
+          "control_a_after_b": 0.0833333358168602,
+          "treatment_a_after_b": 0.6666666865348816,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.9166666641831398,
+          "treatment_forgetting": 0.3333333134651184,
+          "retention_gain": 0.5833333507180214,
+          "relative_forgetting_reduction": 0.6363636570528519,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 1717,
+          "control_a_after_b": 0.25,
+          "treatment_a_after_b": 0.875,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.75,
+          "treatment_forgetting": 0.125,
+          "retention_gain": 0.625,
+          "relative_forgetting_reduction": 0.8333333333333334,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 1919,
+          "control_a_after_b": 0.0833333358168602,
+          "treatment_a_after_b": 0.7083333134651184,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.9166666641831398,
+          "treatment_forgetting": 0.2916666865348816,
+          "retention_gain": 0.6249999776482582,
+          "relative_forgetting_reduction": 0.6818181592817149,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 2121,
+          "control_a_after_b": 0.0833333358168602,
+          "treatment_a_after_b": 0.9166666865348816,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.9166666641831398,
+          "treatment_forgetting": 0.08333331346511841,
+          "retention_gain": 0.8333333507180214,
+          "relative_forgetting_reduction": 0.9090909305190252,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "family": "U3_MIXED_POSITION",
+      "pass": true,
+      "aggregates": {
+        "control_a_after_b_accuracy": {
+          "mean": 0.23333333432674408,
+          "pstdev": 0.1280190978671073,
+          "min": 0.125,
+          "max": 0.4583333432674408
+        },
+        "treatment_a_after_b_accuracy": {
+          "mean": 1.0,
+          "pstdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "control_b_after_b_accuracy": {
+          "mean": 1.0,
+          "pstdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "treatment_b_after_b_accuracy": {
+          "mean": 0.9916666626930237,
+          "pstdev": 0.016666674613952638,
+          "min": 0.9583333134651184,
+          "max": 1.0
+        },
+        "control_forgetting_accuracy": {
+          "mean": 0.7666666656732559,
+          "pstdev": 0.1280190978671073,
+          "min": 0.5416666567325592,
+          "max": 0.875
+        },
+        "treatment_forgetting_accuracy": {
+          "mean": 0.0,
+          "pstdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "retention_gain": {
+          "mean": 0.7666666656732559,
+          "pstdev": 0.1280190978671073,
+          "min": 0.5416666567325592,
+          "max": 0.875
+        },
+        "relative_forgetting_reduction": {
+          "mean": 1.0,
+          "pstdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "b_accuracy_delta": {
+          "mean": -0.008333337306976319,
+          "pstdev": 0.016666674613952638,
+          "min": -0.04166668653488159,
+          "max": 0.0
+        }
+      },
+      "gates": {
+        "integrity_pass": true,
+        "per_seed_gate_pass": true,
+        "mean_retention_gain_pass": true,
+        "mean_relative_forgetting_reduction_pass": true,
+        "mean_treatment_b_accuracy_pass": true
+      },
+      "per_seed": [
+        {
+          "seed": 1313,
+          "control_a_after_b": 0.1666666716337204,
+          "treatment_a_after_b": 1.0,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.8333333283662796,
+          "treatment_forgetting": 0.0,
+          "retention_gain": 0.8333333283662796,
+          "relative_forgetting_reduction": 1.0,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 1515,
+          "control_a_after_b": 0.125,
+          "treatment_a_after_b": 1.0,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.875,
+          "treatment_forgetting": 0.0,
+          "retention_gain": 0.875,
+          "relative_forgetting_reduction": 1.0,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 1717,
+          "control_a_after_b": 0.2916666567325592,
+          "treatment_a_after_b": 1.0,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 0.9583333134651184,
+          "control_forgetting": 0.7083333432674408,
+          "treatment_forgetting": 0.0,
+          "retention_gain": 0.7083333432674408,
+          "relative_forgetting_reduction": 1.0,
+          "b_accuracy_delta": -0.04166668653488159,
+          "pass": true
+        },
+        {
+          "seed": 1919,
+          "control_a_after_b": 0.125,
+          "treatment_a_after_b": 1.0,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.875,
+          "treatment_forgetting": 0.0,
+          "retention_gain": 0.875,
+          "relative_forgetting_reduction": 1.0,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        },
+        {
+          "seed": 2121,
+          "control_a_after_b": 0.4583333432674408,
+          "treatment_a_after_b": 1.0,
+          "control_b_after_b": 1.0,
+          "treatment_b_after_b": 1.0,
+          "control_forgetting": 0.5416666567325592,
+          "treatment_forgetting": 0.0,
+          "retention_gain": 0.5416666567325592,
+          "relative_forgetting_reduction": 1.0,
+          "b_accuracy_delta": 0.0,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "historical_anchors_valid": true,
+    "expected_families_exact": true,
+    "expected_final_seeds_exact": true,
+    "cross_family_rescue_allowed": false,
+    "model_architecture_changed": false,
+    "replay_ratio_search_performed": false,
+    "family_specific_adaptation": false
+  },
+  "config": {
+    "vocab_size": 96,
+    "d_model": 16,
+    "n_heads": 2,
+    "n_layers": 1,
+    "max_context": 2,
+    "ff_mult": 4,
+    "dropout": 0.0,
+    "relations": 24,
+    "batch_size": 16,
+    "stage_steps": 250,
+    "learning_rate": 0.003,
+    "weight_decay": 0.0
+  },
+  "model_parameter_count": 4880,
+  "protocol": "docs/research/kernel-continual-learning/kcl52-protocol.md",
+  "protocol_sha256": "07871d1d545f7e3e5e3abbfdb224cd31896679719cba58f4a9139cb68bcb5aef",
+  "git_commit": "3c11e284e85ae30da1131670cfe7403df5a4663e",
+  "canonical_workflow": {
+    "run_id": 35334635296,
+    "artifact_id": 10542855580,
+    "artifact_zip_sha256": "a8ce7f8d323e0cf711723185b94b4f39b5b921c58395e7d4d2b2930dd1dc8709",
+    "focused_tests": "39 passed"
+  },
+  "scope": {
+    "kcl6_started": false,
+    "challenger_started": false,
+    "reasoning_work": false,
+    "external_api_calls": 0,
+    "pit": false,
+    "oir_ppv": false,
+    "ppf": false
+  }
+}
