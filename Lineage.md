@@ -216,3 +216,51 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Interpretation: the benchmark layer now contains two independently qualified unseen substrates, U1_AFFINE_PREFIX and U3_MIXED_POSITION, without using replay outcomes for substrate selection.
 - KCL-5.2 replay-generalization status: **NOT STARTED**.
 - KCL-6 long-horizon status: **BLOCKED / NOT STARTED**.
+
+
+## 2026-09-18 — KCL-5.2 Frozen Replay Generalizes Across Two Unseen Task Pairs
+
+- Status: **PASS**
+- Verdict: `REPLAY_GENERALIZES_ACROSS_UNSEEN_TASK_PAIRS`
+- Frozen families:
+  - `U1_AFFINE_PREFIX`
+  - `U3_MIXED_POSITION`
+- Final seeds: `1313`, `1515`, `1717`, `1919`, `2121`.
+- Replay mechanism remained frozen at `6.25%` (`15 B + 1 A replay`, batch size `16`).
+- Replay-ratio search: **NO**.
+- Family-specific adaptation: **NO**.
+- Cross-family rescue: **NOT ALLOWED**.
+- U1 results:
+  - CONTROL A-after-B mean: `0.1167`.
+  - TREATMENT A-after-B mean: `0.7583`.
+  - Mean retention gain: `0.6417`.
+  - Mean relative forgetting reduction: `0.7303`.
+  - CONTROL B-after-B mean: `1.0`.
+  - TREATMENT B-after-B mean: `1.0`.
+  - Family verdict: **PASS**.
+- U3 results:
+  - CONTROL A-after-B mean: `0.2333`.
+  - TREATMENT A-after-B mean: `1.0`.
+  - CONTROL forgetting mean: `0.7667`.
+  - TREATMENT forgetting mean: `0.0`.
+  - Mean retention gain: `0.7667`.
+  - Mean relative forgetting reduction: `1.0`.
+  - CONTROL B-after-B mean: `1.0`.
+  - TREATMENT B-after-B mean: `0.9917`.
+  - Minimum TREATMENT B-after-B: `0.9583` on seed `1717`, above frozen `0.95` plasticity gate.
+  - Family verdict: **PASS**.
+- Every final seed in both families satisfied the frozen per-seed generalization gates.
+- Both families independently satisfied all aggregate gates.
+- Historical KCL-5/KCL-5.1 anchors validated before interpretation.
+- Model architecture changed: **NO**.
+- Scientific protocol commit: `635283c5d69f67b516becd2ec99d15ff3eeec2b3`.
+- Scientific protocol SHA-256: `07871d1d545f7e3e5e3abbfdb224cd31896679719cba58f4a9139cb68bcb5aef`.
+- Canonical workflow run: `35334635296`.
+- Canonical source commit: `3c11e284e85ae30da1131670cfe7403df5a4663e`.
+- Focused tests: `39 passed`.
+- Workflow artifact ID: `10542855580`.
+- Workflow artifact ZIP SHA-256: `a8ce7f8d323e0cf711723185b94b4f39b5b921c58395e7d4d2b2930dd1dc8709`.
+- Machine-readable evidence: `experiments/kernel_cl/results/kcl52_summary.json`.
+- Paper: `docs/research/kernel-continual-learning/kcl52-paper.md`.
+- Interpretation: a single frozen replay mechanism now has causal generalization evidence across two independently qualified unseen task-pair structures. The remaining major untested dimension is long-horizon sequential learning beyond two tasks.
+- KCL-6 long-horizon status: **NOT STARTED**.
