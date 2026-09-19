@@ -1936,3 +1936,64 @@ This compact index summarizes the active Kernel Continual Learning chain without
 - Next scientific requirement:
   - candidate `KCL-6.5.9.4 — Action-Target Failure-Mode Decomposition`;
   - decompose why B/C are unsafe inside `A_ONLY` before proposing another predictor/representation.
+
+
+## 2026-09-20 — KCL-6.5.9.4 Action-Target Failure-Mode Decomposition PASS
+
+- Status: **PASS**
+- Verdict: `A_ONLY_CONTAINS_REPLICATED_FAILURE_MODE_HETEROGENEITY`.
+- Trigger:
+  - KCL-6.5.9.3 left `A_ONLY` poorly identified despite strong support;
+  - KCL-6.5.9.4 tested whether `A_ONLY` collapses multiple failure mechanisms.
+- Frozen atomic causes:
+  - `P = PLASTICITY_SHORTFALL`;
+  - `R = RETENTION_MARGIN_VIOLATION`;
+  - `A = STRICT_ACCURACY_FAILURE`.
+- Primary target:
+  - policy-identity-invariant mechanism multiset `MECH{cause_1,cause_2}`;
+  - B↔C role exchange cannot create a new mechanism class.
+- Fresh prospective cohorts:
+  - discovery: 240 seeds / 720 boundaries;
+  - replication: 240 seeds / 720 boundaries;
+  - no overlap with prior/protected cohorts.
+- Discovery:
+  - canonical run `35451702744` — **SUCCESS**;
+  - `A_ONLY = 208` boundaries / 154 unique seeds;
+  - supported modes:
+    - `MECH{P,R}`: 130 / 107 seeds / prevalence 0.6250;
+    - `MECH{P+R,R}`: 42 / 39 / 0.201923;
+    - `MECH{P,P}`: 16 / 16 / 0.076923;
+  - raw JSON SHA-256 `8c169fdc74f4d5eee0adceb93d4505e1012ed4598624639aa94c2ce7ef233d79`;
+  - evidence commit `42f552390f2ef0d6a2177a1ec709235a25fdf4cb`.
+- Replication:
+  - canonical run `35453312400` — **SUCCESS**;
+  - `A_ONLY = 182` boundaries / 144 unique seeds.
+- Stable replication:
+  - `MECH{P,R}`: discovery 0.6250 → replication 0.648352; delta +0.023352; 95% paired whole-seed bootstrap CI [-0.074859, 0.121113] — **STABLE**;
+  - `MECH{P+R,R}`: 0.201923 → 0.192308; delta -0.009615; CI [-0.088505, 0.069187] — **STABLE**;
+  - `MECH{P,P}`: replication count 10 < frozen minimum 12 — **NOT REPLICATION-SUPPORTED**.
+- Primary adjudication:
+  - at least two distinct modes stably replicated — **PASS**.
+- Scientific interpretation:
+  - `A_ONLY` is not a homogeneous target;
+  - at least two reproducible failure mechanisms are collapsed into the broad label;
+  - this may explain the poor broad-target identifiability seen in KCL-6.5.9.2/.3;
+  - predictability of the specific mechanisms is still unproven.
+- Provenance:
+  - protocol commit `92f0a22a3b2f6198d47c7232998f68d880c278dc`;
+  - protocol SHA-256 `12d89ace37d6d95129fa559b492c2005ab6884e75d4b93ac6142c981787f5578`;
+  - implementation commit `da4fd62f5608601f71572b0e7e2b0e5588062530`;
+  - replication workflow source `88d22f318f58b4661ce1ab2400dfd4123996f652`;
+  - replication raw JSON SHA-256 `01af50dcea2a55beb2c61e5bc8207db922239d7f24bf218fa3e90d3405b5ca20`;
+  - replication artifact ID `10587572307`;
+  - replication artifact ZIP SHA-256 `ed08fb0672aeff79927809d1637ccf5c03d99d913206b9483fc53be4369f4f76`;
+  - replication evidence commit `f84009b533dd84b574bd1d5f129f828bd33cbbc6`;
+  - paper commit `2ade8fd0d86a6c1d1a6636e9912c48f4175b0345`.
+- Guardrails:
+  - classifier trained: **NO**;
+  - controller implemented: **NO**;
+  - protected confirmatory cohort: **UNTOUCHED**;
+  - KCL-7: **NOT STARTED**.
+- Next scientific requirement:
+  - `KCL-6.5.9.5 — Mechanism-Specific Target Identifiability`;
+  - prospectively compare the two stable mechanism targets against monolithic `A_ONLY` on a fresh cohort using one fixed pre-boundary predictor contract.
