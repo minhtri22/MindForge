@@ -226,12 +226,18 @@ def extract_localized_features(
     f13 = sum(k[g] * vec[g]["C_DP"] for g in GROUP_ORDER)
     retention_pressure_alignment = sum(k[g] * vec[g]["C_PK"] for g in GROUP_ORDER)
 
-    # Canonical H4 baseline reconstructed from full parameter vectors.
-    full_drift = torch.cat([vec[g]["drift"] for g in GROUP_ORDER])
+    # Canonical H4 baseline reconstructed in the exact named-parameter
+    # concatenation order used by KCL-6.5.6.  Group-order concatenation is
+    # mathematically equivalent but changes floating reduction order.
+    theta_post = torch.cat([
+        param.detach().float().reshape(-1)
+        for _, param in model.named_parameters()
+    ])
     pre_vec = torch.cat([
         pre_task_model_state[name].detach().float().reshape(-1)
         for name, _ in model.named_parameters()
     ])
+    full_drift = theta_post - pre_vec
     h4 = float(torch.linalg.vector_norm(full_drift)) / max(
         float(torch.linalg.vector_norm(pre_vec)), 1e-12
     )
