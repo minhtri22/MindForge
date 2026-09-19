@@ -329,12 +329,29 @@ def build_localized_records(
     records = []
 
     for boundary_index in (1, 2, 3):
+        current_task = observed[-1]
+        canonical_boundary_features = k656.extract_boundary_features(
+            model=model,
+            optimizer=opt,
+            pre_task_model_state=pre_task_model_state,
+            observed_tasks=observed,
+            current_task=current_task,
+            boundary_index=boundary_index,
+        )
         localized = extract_localized_features(
             model=model,
             optimizer=opt,
             pre_task_model_state=pre_task_model_state,
             observed_tasks=observed,
             boundary_index=boundary_index,
+        )
+        # Reuse the exact canonical implementation for the two baseline
+        # features instead of numerically reconstructing them.
+        localized["features"]["BOUNDARY_INDEX"] = float(
+            canonical_boundary_features["BOUNDARY_INDEX"]
+        )
+        localized["features"]["H4_TASK_DRIFT_RELATIVE_L2"] = float(
+            canonical_boundary_features["H4_TASK_DRIFT_RELATIVE_L2"]
         )
 
         next_task = tasks[boundary_index]
