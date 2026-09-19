@@ -1533,3 +1533,97 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Machine-readable evidence commit: `721b4dfabe949e62fd57bc4b288a0be7b9292c13`.
 - Paper commit: `292924ae51c48f2a5539234af481bf0d5bc80410`.
 - KCL-7 status: **NOT STARTED**.
+
+
+## 2026-09-19 — KCL-6.5.9 Boundary Regime Decomposition Finds No Supported Within-Binary Regime Heterogeneity
+
+- Status: **NEGATIVE**
+- Verdict: `NO_SUPPORTED_BOUNDARY_REGIME_HETEROGENEITY`.
+- Upstream:
+  - KCL-6.5.8 status **NEGATIVE**;
+  - verdict `LOCALIZED_RELATIONAL_STATE_NOT_DISCOVERY_QUALIFIED`.
+- Scientific purpose:
+  - test whether the pooled binary `SAFE_RESET_OPPORTUNITY` target hides multiple sufficiently supported A/B/C counterfactual response regimes;
+  - decomposition/characterization only;
+  - no classifier, controller, counterfactual retraining, confirmatory-seed use, or KCL-7 work.
+- Frozen canonical source:
+  - `experiments/kernel_cl/results/kcl658_discovery.json`;
+  - Git blob SHA `0a956a70ddb65d12a413176f84910ce889359973`;
+  - SHA-256 `d580af009b555f774ed0478aef5adbf0c7e5bba4300b2afb3acc32e55b18374f`;
+  - 20 discovery seeds × 3 boundaries = 60 records.
+- Frozen primary taxonomy:
+  - `B_AND_C_SAFE`;
+  - `B_SAFE_ONLY`;
+  - `C_SAFE_ONLY`;
+  - `CARRY_CATASTROPHIC_FAILURE`;
+  - `A_SUFFICIENT`.
+- Frozen support gate:
+  - instance count >= `5`;
+  - unique seed count >= `3`.
+- Binary reconstruction:
+  - 60/60 `SAFE_RESET_OPPORTUNITY` labels reproduced exactly.
+- Primary regime frequencies:
+  - `C_SAFE_ONLY`: 39/60 = 65.00%, 20 unique seeds, **SUPPORTED**, boundary counts 14/16/9.
+  - `A_SUFFICIENT`: 16/60 = 26.67%, 12 unique seeds, **SUPPORTED**, boundary counts 6/4/6.
+  - `CARRY_CATASTROPHIC_FAILURE`: 3/60 = 5.00%, 3 unique seeds, **UNDER-SUPPORTED**, all at boundary 3.
+  - `B_AND_C_SAFE`: 2/60 = 3.33%, 2 unique seeds, **UNDER-SUPPORTED**, both at boundary 3.
+  - `B_SAFE_ONLY`: 0/60.
+- Frozen heterogeneity adjudication:
+  - `SUPPORTED_ACTION_HETEROGENEITY = false`;
+  - `SUPPORTED_NEGATIVE_HETEROGENEITY = false`;
+  - `SUPPORTED_BINARY_HETEROGENEITY = false`.
+- Seed-cluster bootstrap prevalence 95% intervals:
+  - `C_SAFE_ONLY`: [0.55, 0.75];
+  - `A_SUFFICIENT`: [0.1667, 0.3833];
+  - `CARRY_CATASTROPHIC_FAILURE`: [0.00, 0.10];
+  - `B_AND_C_SAFE`: [0.00, 0.0833];
+  - `B_SAFE_ONLY`: [0.00, 0.00].
+- Binary-compression information:
+  - `H(REGIME) = 1.292131 bits`;
+  - `H(SAFE_RESET) = 0.900720 bits`;
+  - `H(REGIME | SAFE_RESET) = 0.391411 bits`.
+- Interpretation of entropy:
+  - the binary target discards some descriptive regime information;
+  - however, the additional regimes carrying that information are under-supported by the preregistered gate;
+  - therefore the result does not authorize a regime-first controller.
+- H4 task-relative drift medians by regime:
+  - `C_SAFE_ONLY = 0.183324`;
+  - `A_SUFFICIENT = 0.170225`;
+  - `CARRY_CATASTROPHIC_FAILURE = 0.169570`;
+  - `B_AND_C_SAFE = 0.154570`.
+- Frozen secondary flag:
+  - `RESET_PLASTICITY_GAIN_RETENTION_COST` observed at 14/60 boundaries.
+- Main scientific interpretation:
+  - the KCL-6.5.8 hypothesis that pooled binary labeling may be the primary cause of prediction failure was plausible but is not supported at the frozen KCL-6.5.9 support level;
+  - only one positive-class regime (`C_SAFE_ONLY`) and one negative-class regime (`A_SUFFICIENT`) have adequate support;
+  - rare alternative regimes exist, but current evidence is insufficient to elevate them into architecture.
+- Guardrail:
+  - do not lower minimum support;
+  - do not merge rare regimes post hoc;
+  - do not train a regime-first controller from these 60 records;
+  - do not use the untouched confirmatory cohort to increase regime support;
+  - do not reopen KCL-7.
+- QA history:
+  - run `35413155095`: 12 focused tests PASS; technical `REVISE` caused by boolean-polarity bug in two absence guardrails; no valid scientific adjudication;
+  - QA artifact `10573544591`;
+  - QA artifact ZIP SHA-256 `db293932f717f42b58b4323f03702cda02d3a81e400f6775f0eb5b886766bc98`.
+- Protocol commit: `fa1f0f0d51e62d3536a59ceafe4d52c3da60373a`.
+- Protocol SHA-256: `c4c15aaf86d470f53fb4e8e0f3474b30856fb529421fd87b23dcb9f3e8b35260`.
+- Initial implementation commit: `c7362fd2fcdad445a29d67c9df65fdfb8a842563`.
+- Contract-test commit: `08865393d36b57cf9eb3d590cb80b7b4aedba32f`.
+- Initial workflow commit: `b41220d1c9cd7501f15925c79149521382934a28`.
+- QA predicate-only fix / canonical scientific source: `83eb3766b7d76ce000c8d4e9d6329f4e48968f49`.
+- Canonical workflow run: `35413205697` — **SUCCESS**.
+- Focused tests: `12 passed`.
+- Canonical artifact ID: `10573824576`.
+- Artifact ZIP SHA-256: `9d3f083916e0341f804cda22c97fbaba00e5304cd42b27cc9eb18a89ed871d72`.
+- Raw result JSON SHA-256: `4f787ea867667d968617580a9cd0ca6ed98ca24926d4b345096ac93cdc089e31`.
+- Machine-readable evidence commit: `aab1d906ce82ebd20fa2042d3c40d9c0f20c80ba`.
+- Paper commit: `b450c36b3b9494d8bb8a7ba1d1a83d26226cd037`.
+- Confirmatory cohort: **UNTOUCHED**.
+- KCL-7 status: **NOT STARTED**.
+- Next scientific requirement:
+  - because rare preregistered regimes were observed but remain under-supported, use a fresh non-confirmatory replication cohort with the **same frozen taxonomy and thresholds**;
+  - candidate milestone: `KCL-6.5.9.1 — Boundary Regime Replication`;
+  - preregister fresh seeds, sample size/support decision, provenance and STOP/PIVOT conditions before execution;
+  - do not train a classifier/controller before replication.
