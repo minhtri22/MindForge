@@ -166,3 +166,15 @@ MODEL TRAINING = NOT AUTHORIZED
 **Next authorized work:** monitor upstream dependency closures and prepare prospective protocol text only when allowed by DEPENDENCY_GATES.md.
 
 **Provenance:** this entry is frozen by the commit sequence that creates the MK-0 document set on branch **research/model_kernel**.
+
+---
+
+## MK0-030 — Research branch renamed to model_core
+
+**Date:** 2026-09-19  
+**Phase / Step:** MK-0 — Governance metadata correction  
+**Change:** The active research branch was renamed logically from **research/model_kernel** to **research/model_core**.  
+**Reason:** Avoid branch-name ambiguity with the frozen MindForge Kernel runtime concept while preserving the existing `model_kernel/` MK-0 document directory and all scientific content unchanged.  
+**Scientific impact:** NONE. No hypothesis, baseline, dependency, gate, model code, dataset, experiment, or result changed.  
+**Historical note:** Earlier lineage entries retain the original branch name because LINEAGE.md is append-only. This entry supersedes those branch-name references for all future work.  
+**Active branch:** **research/model_core**.
