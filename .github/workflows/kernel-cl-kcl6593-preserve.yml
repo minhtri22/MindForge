@@ -1,0 +1,52 @@
+name: Kernel CL — preserve canonical KCL-6.5.9.3 validation evidence
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6593-preserve.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/kernel-cl
+
+      - name: Download canonical validation artifact 10585625788
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api /repos/${{ github.repository }}/actions/artifacts/10585625788/zip > /tmp/kcl6593-validation.zip
+          mkdir -p /tmp/kcl6593-validation
+          unzip -q /tmp/kcl6593-validation.zip -d /tmp/kcl6593-validation
+          test -f /tmp/kcl6593-validation/kcl6593_validation.json
+
+      - name: Verify canonical validation bytes
+        run: |
+          echo "c9e577658f75100240a1ed2a514b64993914604b6eb15e4b3c7b68ef7cdf6a1b  /tmp/kcl6593-validation/kcl6593_validation.json" | sha256sum -c -
+          echo "23d1e73ae6a0505d2f120c51942631787cedf322d528c76841af00471992cffa  /tmp/kcl6593-validation.zip" | sha256sum -c -
+
+      - name: Preserve exact canonical validation evidence
+        run: |
+          mkdir -p experiments/kernel_cl/results
+          cp /tmp/kcl6593-validation/kcl6593_validation.json experiments/kernel_cl/results/kcl6593_validation.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6593_validation.json
+
+          if git diff --cached --quiet; then
+            echo "Canonical validation evidence already preserved."
+            exit 0
+          fi
+
+          git commit -m "evidence(kcl): preserve canonical KCL-6.5.9.3 validation"
+          git push origin HEAD:research/kernel-cl
