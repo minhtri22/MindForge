@@ -1,0 +1,111 @@
+name: Kernel CL — KCL-6.5.9.4 failure-mode replication
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6594-replication.yml
+
+permissions:
+  contents: write
+
+jobs:
+  replication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify frozen discovery authorization and scientific source
+        run: |
+          echo "8c169fdc74f4d5eee0adceb93d4505e1012ed4598624639aa94c2ce7ef233d79  experiments/kernel_cl/results/kcl6594_discovery.json" | sha256sum -c -
+          echo "12d89ace37d6d95129fa559b492c2005ab6884e75d4b93ac6142c981787f5578  docs/research/kernel-continual-learning/kcl6594-protocol.md" | sha256sum -c -
+          echo "fc32f0c103e9b14837a0784daf89873aa96a9726978f4eafc6c067526060f4d9  experiments/kernel_cl/kcl6594_action_target_failure_modes.py" | sha256sum -c -
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6594_discovery.json"))
+          assert d["status"] == "PASS"
+          assert d["verdict"] == "A_ONLY_FAILURE_MODE_DISCOVERY_SUPPORTS_REPLICATION"
+          assert d["replication_authorized"] is True
+          assert d["source_git_commit"] == "4451f86dd1966af062c02c3630d187335d7d47b8"
+          assert d["discovery_supported_modes"] == [
+              "MECH{P+R,R}", "MECH{P,P}", "MECH{P,R}"
+          ]
+          assert d["governance"]["replication_executed"] is False
+          assert d["governance"]["protected_confirmatory_touched"] is False
+          assert d["governance"]["controller_implemented"] is False
+          assert d["governance"]["kcl7_started"] is False
+          PY
+
+      - name: Focused contract tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6594.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6593.py -q
+
+      - name: Assert replication evidence absent before execution
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6594_replication.json
+
+      - name: Frozen independent failure-mode replication
+        id: science
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6594_action_target_failure_modes.py \
+            --phase replication \
+            --discovery experiments/kernel_cl/results/kcl6594_discovery.json \
+            --output experiments/kernel_cl/results/kcl6594_replication.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6594_replication.json
+          sha256sum experiments/kernel_cl/results/kcl6594_replication.json
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6594_replication.json"))
+          print("KCL6594_REPLICATION_STATUS="+str(d.get("status")))
+          print("KCL6594_REPLICATION_VERDICT="+str(d.get("verdict")))
+          print("KCL6594_REPLICATION_A_ONLY_SUPPORT="+json.dumps(d.get("A_ONLY_support",{}),sort_keys=True))
+          print("KCL6594_REPLICATION_MODES="+json.dumps(d.get("mechanism_modes",{}),sort_keys=True))
+          print("KCL6594_REPLICATED_DISCOVERY_MODES="+json.dumps(d.get("replication_of_discovery_modes",{}),sort_keys=True))
+          print("KCL6594_STABLE_MODES="+json.dumps(d.get("stably_replicated_modes",[]),sort_keys=True))
+          print("KCL6594_REPLICATION_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          PY
+
+      - name: Enforce scope guardrails
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6594_rule.json
+          test ! -e experiments/kernel_cl/results/kcl6594_controller.json
+          test ! -e .github/workflows/kernel-cl-kcl6594-controller.yml
+          test ! -e .github/workflows/kernel-cl-kcl7.yml
+
+      - name: Preserve exact replication evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6594_replication.json
+          git commit -m "evidence(kcl): preserve KCL-6.5.9.4 replication"
+          git push origin HEAD:research/kernel-cl
+
+      - name: Upload canonical replication evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6594-failure-mode-replication
+          path: experiments/kernel_cl/results/kcl6594_replication.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.science.outputs.exit_code }}" -eq 0
