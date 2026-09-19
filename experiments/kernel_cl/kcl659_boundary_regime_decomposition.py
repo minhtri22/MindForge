@@ -366,8 +366,8 @@ def run_decomposition() -> dict[str, Any]:
         "taxonomy_collectively_exhaustive": bool(collective),
         "assignment_order_invariant": bool(key_order_invariance),
         "no_model_training_invoked": True,
-        "confirmatory_workflow_created": False,
-        "rule_artifact_created": False,
+        "confirmatory_workflow_absent": True,
+        "rule_artifact_absent": True,
     }
     if not all(integrity.values()):
         return {
