@@ -101,20 +101,35 @@ Required transferable fact: pristine held-out deterministic representation showe
 
 Required transferable fact: decision-relevant TaskState materially improved information-need ranking in the controlled benchmark and survived the specified frozen shifts.
 
-**CQG J3.13 — EXECUTION RESULT REVIEWED; FORMAL UPSTREAM CLOSURE STILL REQUIRED BEFORE MK-1 EXECUTION.**
+**CQG J3.13 — FORMALLY CLOSED.**
 
-The fresh confirmatory GitHub Actions run completed successfully and its frozen result artifact reports `CARDINAL_IDENTIFIABLE_BUT_CURRENT_LEARNER_CONTRACT_INSUFFICIENT`. The audit-only observable contraction reconstructs the cardinal target to numerical precision, while B0, scale-only G1, representation-factor R2, and combined RG all fail the frozen cardinal gate. The frozen support flags for scale geometry, representation insufficiency, and their interaction are false.
+CQG now contains the confirmatory report, finalized provenance, formal-result commit, and append-only lineage evidence for `CARDINAL_IDENTIFIABLE_BUT_CURRENT_LEARNER_CONTRACT_INSUFFICIENT`.
 
 Scientific consequence:
 
 - remove scalar/cardinal repair from the primary MK-1 question;
-- do not add G1/R2/RG merely to repeat J3.13 mechanism discrimination;
-- keep MK-1 focused on structured/typed representation generalization and later decision sufficiency.
+- do not add J3.13 G1/R2/RG merely to repeat its mechanism discrimination;
+- strict observable cardinal nonidentifiability is not an admissible explanation under the tested contract.
 
-Governance consequence:
+**CQG J3.14 — SOFT-TO-EXECUTION, promoted to the current MK-1 workload-minimization gate.**
 
-- conceptual MK-1 protocol drafting may proceed using this narrowing;
-- final MK-1 protocol freeze and training remain blocked until CQG commits its formal J3.13 report/lineage adjudication, or a separate appended governance amendment explicitly accepts the frozen workflow artifact digest as closure evidence.
+J3.14 prospectively distinguishes three explanations left by J3.13 using fresh data:
+
+- H_DATA2X — sample/data limitation;
+- H_CLASS — learner function-class / inductive-bias mismatch on the same R2/asinh representation;
+- H_COMPOSITION — need for an explicit per-hypothesis compositional/contraction basis.
+
+At the latest audit, corrected run `35453882566` is still in progress. Integrity, all fresh train/confirmatory collection jobs, freeze, and the C240 structured arm have completed successfully; other arm fitting remains unfinished.
+
+Scientific consequence for Model Core:
+
+- do not freeze a latent/compositional MK-1 architecture before J3.14 adjudication;
+- if data doubling alone succeeds, avoid inventing extra model structure to solve a sample-size problem;
+- if the function-class arm succeeds, prioritize learner/inductive-bias transfer tests over schema expansion;
+- if only the explicit compositional arm succeeds, an explicit compositional-bias hypothesis becomes justified for a later Model Core study;
+- if none succeeds, do not repeat the same remedies in MK-1 without a new substrate-specific hypothesis.
+
+Conceptual MK-1 protocol work may continue, but final arm selection, preregistration freeze, and training remain blocked until J3.14 formal adjudication is reviewed.
 
 ### Opening rule
 
@@ -137,7 +152,7 @@ Target question:
 - MK-1 must close with a supported representation result.
 - The MK-1 encoder/representation contract must be frozen before MK-2 learner fitting.
 - CQG Q1/Q2 evidence must be re-audited for task/metric transfer design.
-- J3.13 must be closed/reviewed if MK-2 uses value/ranking targets affected by its mechanism findings.
+- J3.13 is closed; J3.14 must also be reviewed if MK-2 design would inherit its function-class/compositional conclusions.
 
 ### Required isolation
 
@@ -260,10 +275,10 @@ NEXUS or ArcLLM may not determine the early model architecture merely because a 
 | Phase | Status after MK-0 | Blocking dependency |
 |---|---|---|
 | MK-0 | COMPLETE / FROZEN | none |
-| MK-1 | NOT OPENED | CQG J3.13 formal upstream closure + prospective MK-1 protocol |
+| MK-1 | NOT OPENED | CQG J3.14 formal adjudication + prospective MK-1 protocol |
 | MK-2 | BLOCKED | MK-1 supported/frozen |
 | MK-3 | BLOCKED / OPTIONAL | MK-2 |
-| MK-4 | BLOCKED | CQG J3.13 + supported Model Kernel decision representation |
+| MK-4 | BLOCKED | CQG J3.13/J3.14 + supported Model Kernel decision representation |
 | MK-5 | BLOCKED | relevant KCL closure + Model Kernel substrate |
 | MK-6 | BLOCKED | relevant OIR-PPV closure |
 | MK-M1 | BLOCKED | ARN R3 confirmatory closure/stop |
