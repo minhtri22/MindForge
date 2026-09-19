@@ -1627,3 +1627,29 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
   - candidate milestone: `KCL-6.5.9.1 — Boundary Regime Replication`;
   - preregister fresh seeds, sample size/support decision, provenance and STOP/PIVOT conditions before execution;
   - do not train a classifier/controller before replication.
+
+
+## 2026-09-19 — Compact Kernel-CL Research Chain Snapshot (Append-Only)
+
+This compact index summarizes the active Kernel Continual Learning chain without replacing any detailed entry above.
+
+- KCL-0/1: establish the tiny-transformer substrate, deterministic task harness, baseline provenance and controlled continual-learning question.
+- KCL-2/3/4: test baseline forgetting, replay behavior and task-boundary effects; evidence moves the investigation toward explicit boundary-state mechanisms.
+- KCL-5/5.1/5.2: test unseen/replay generalization and reconstruct the substrate; preserve only effects that survive controlled replay.
+- KCL-6: long-horizon sequence exposes persistent acquisition/retention trade-offs.
+- KCL-6.1/6.2/6.3/6.4: test weighted replay, reconstructive memory, fuzzy decay and clarification/reactivation; none closes the long-horizon contract.
+- KCL-6.5/6.5q: isolate specificity effects and qualify the failure surface before adding architecture.
+- KCL-6.5.1: confirms the long-horizon plasticity/retention trade-off.
+- KCL-6.5.2: decomposes the T4 failure rather than treating final accuracy as one opaque outcome.
+- KCL-6.5.3: isolates sequential trajectory contribution and freezes parameter-group structure.
+- KCL-6.5.4: shows AdamW optimizer boundary state is causally relevant in an isolated setting.
+- KCL-6.5.5: fixed global optimizer-boundary policies fail the joint plasticity + retention + robustness contract; adaptive control is hypothesized but not implemented.
+- KCL-6.5.6: no single scalar non-oracular boundary-health signal qualifies; H4 task-relative drift is the strongest lead.
+- KCL-6.5.7: global relational multivariate boundary state fails discovery qualification.
+- KCL-6.5.8: localized parameter-group drift × moment × retention attribution also fails; confirmatory cohort remains untouched.
+- KCL-6.5.9: regime decomposition observes rare `B_AND_C_SAFE` and `CARRY_CATASTROPHIC_FAILURE` cases, but neither has preregistered support; verdict `NO_SUPPORTED_BOUNDARY_REGIME_HETEROGENEITY`.
+- Current scientific state:
+  - no boundary classifier/controller is qualified;
+  - no KCL-7 work is authorized;
+  - the protected confirmatory cohort remains untouched;
+  - next authorized question is fresh non-confirmatory replication of the rare frozen KCL-6.5.9 regimes using unchanged taxonomy and thresholds.
