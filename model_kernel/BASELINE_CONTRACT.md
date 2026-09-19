@@ -22,7 +22,7 @@ Authoritative architectural sources:
 - mindforge/config.py
 - mindforge/model.py
 
-At MK-0 creation, the relevant source blobs on research/model_kernel were:
+At MK-0 creation, the relevant source blobs on the Model Core research branch were:
 
 - mindforge/config.py: 91a3f92ea2449a82fb2d03e0442cbf6e72980caf
 - mindforge/model.py: 98b4368c2b594082f0b84cd010e2bcc3548ab3fc
