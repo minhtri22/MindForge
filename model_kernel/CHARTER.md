@@ -2,7 +2,7 @@
 
 Status: **MK-0 GOVERNANCE FREEZE / RESEARCH ONLY**
 
-Branch: **research/model_kernel**
+Branch: **research/model_core**
 
 ## 1. Purpose
 
