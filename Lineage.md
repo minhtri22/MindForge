@@ -1438,3 +1438,98 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
   - if continued, move from global summary representation to localized structured boundary state;
   - candidate hypothesis: parameter-group drift × parameter-group moment geometry × protected-retention attribution;
   - do not touch the untouched confirmatory cohort until a new discovery rule qualifies and is frozen.
+
+
+## 2026-09-19 — KCL-6.5.8 Localized Relational Boundary-State Attribution Fails Discovery Qualification
+
+- Status: **NEGATIVE**
+- Verdict: `LOCALIZED_RELATIONAL_STATE_NOT_DISCOVERY_QUALIFIED`.
+- Upstream:
+  - KCL-6.5.6: `NO_DISCOVERY_BOUNDARY_HEALTH_SIGNAL`.
+  - KCL-6.5.7: `RELATIONAL_BOUNDARY_STATE_NOT_DISCOVERY_QUALIFIED`.
+- Scientific purpose:
+  - test whether `task-relative drift × optimizer moment geometry × retention attribution` becomes predictive when localized across frozen parameter groups rather than globally summarized.
+- Representation:
+  - `LRBS-v1`.
+- Frozen parameter groups:
+  - `G_TOKEN_SHARED`
+  - `G_POSITION`
+  - `G_TRANSFORMER`
+  - `G_FINAL_NORM`.
+- Localized modalities:
+  - normalized task-drift share `d_g`;
+  - normalized bias-corrected Adam-pressure share `p_g`;
+  - normalized retained-task gradient attribution share `k_g`.
+- Primary 13 features:
+  - overlap terms `F1..F4`;
+  - total-variation mismatch terms `F5..F7`;
+  - retention reserve `F8`;
+  - group-identity triple-attribution `F9..F12`;
+  - retention-weighted drift-pressure compatibility `F13`.
+- Discovery cohort:
+  - same 20 KCL-6.5.6 discovery seeds;
+  - 60 boundary instances.
+- Canonical reconstruction:
+  - `60/60` SAFE_RESET_OPPORTUNITY labels reproduced;
+  - A/B/C AUC/final-accuracy/retention outcomes reproduced;
+  - stage and H4 LOSO baselines reproduced exactly;
+  - retention-gradient attribution leaves no parameter gradients before counterfactual training.
+- Baselines:
+  - stage-only BA `0.6026957638`;
+  - H4 task-relative drift BA `0.6553273427`.
+- LRBS-v1:
+  - accuracy `0.3833333333`;
+  - balanced accuracy `0.3369704750`;
+  - sensitivity `0.4634146341`;
+  - specificity `0.2105263158`;
+  - TP `19`, TN `4`, FP `15`, FN `22`.
+- Frozen gates:
+  - BA >= `0.70`;
+  - sensitivity >= `0.65`;
+  - specificity >= `0.65`;
+  - BA >= best baseline + `0.03`.
+- Discovery qualification: **FAIL**.
+- Frozen descriptive ablations:
+  - A-OVERLAP BA `0.3408215661`;
+  - A-MISMATCH BA `0.3388960205`;
+  - A-IDENTITY BA `0.4338896021`;
+  - A-NO-DIRECTION BA `0.3632862644`.
+- Best ablation remains far below H4.
+- Scientific interpretation:
+  - coarse four-group co-localization of drift, Adam pressure and retained-task gradient attribution is insufficient;
+  - the extra localized variables add no generalizable predictive value over H4 drift and materially degrade out-of-seed performance;
+  - this exact localized relational hypothesis is falsified.
+- Guardrail:
+  - do not tune LRBS-v1;
+  - do not select A-IDENTITY post hoc;
+  - do not add more localized features to the same pooled target based on this outcome.
+- Emerging clue:
+  - H4 task-relative drift remains the strongest boundary-health lead across KCL-6.5.6, KCL-6.5.7 and KCL-6.5.8.
+- New architectural concern:
+  - `SAFE_RESET_OPPORTUNITY` may pool distinct causal regimes that do not share one representation.
+- Recommended next scientific question:
+  - decompose B-safe, C-safe, both-safe, A-sufficient, and catastrophic-carry-failure regimes before training another controller.
+  - candidate milestone: `KCL-6.5.9 — Boundary Regime Decomposition`.
+- Confirmatory phase:
+  - **NOT AUTHORIZED**;
+  - no `kcl658_rule.json`;
+  - no confirm workflow;
+  - confirmatory seeds remain untouched.
+- Pre-science QA:
+  - run `35409806577`: focused-test failure; scientific step skipped.
+  - runs `35409971713`, `35409983109`, `35410107951`: reproduction diagnostics; non-canonical.
+  - run `35410280277`: focused-test failure caused by over-constraining per-record H4 float equality; scientific step skipped.
+- Canonical scientific workflow:
+  - run `35412021383`.
+- Protocol commit: `afa2aa87510dc87c5fc781e705ba4077f35c20f8`.
+- Protocol SHA-256: `94adbc88b46cedf9d08629aa8c070b1205bc4c46dc2b00f27f0b671764e4cf8c`.
+- Initial implementation: `58168de3be4d9788316eef9a0f0438e29b704f82`.
+- Initial tests: `edd53b946bee60f4412d4bce72a60626dc1db1e8`.
+- Initial workflow: `63ef1aea9761305ced9285aa45b248badd25f090`.
+- Canonical scientific source: `f5e9ae60e4cd9fdab02309e41b58b6463907888d`.
+- Focused tests: `20 passed (10 KCL-6.5.8 + 10 KCL-6.5.7)`.
+- Artifact ID: `10574064516`.
+- Artifact ZIP SHA-256: `7e90caedb232987b46e8f283eded5c88410c6b57d49e1002a40f345f56b30b3f`.
+- Machine-readable evidence commit: `721b4dfabe949e62fd57bc4b288a0be7b9292c13`.
+- Paper commit: `292924ae51c48f2a5539234af481bf0d5bc80410`.
+- KCL-7 status: **NOT STARTED**.
