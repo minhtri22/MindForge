@@ -1837,3 +1837,102 @@ This compact index summarizes the active Kernel Continual Learning chain without
   - return to representation/target identifiability rather than model-complexity escalation;
   - candidate milestone: `KCL-6.5.9.3 — Boundary Action Identifiability Decomposition`;
   - use a new non-confirmatory cohort and preregister information-set comparisons before execution.
+
+
+## 2026-09-19 — KCL-6.5.9.3 Boundary Action Identifiability Decomposition NEGATIVE / INCONCLUSIVE
+
+- Status: **NEGATIVE**
+- Verdict: `BOUNDARY_ACTION_IDENTIFIABILITY_DECOMPOSITION_INCONCLUSIVE`.
+- Trigger:
+  - KCL-6.5.9.2 preserved four-class SAFE_ACTION_SET-v1 support but failed predictor qualification;
+  - unresolved explanations were pre-boundary representation insufficiency vs future-interaction dependence.
+- Frozen paired information sets using the same class-balanced L2 multinomial logistic family:
+  - `S0 = stage only`;
+  - `S1 = stage + H1–H9 global boundary state`;
+  - `S2 = S1 + frozen LRBS-v1 F1–F13 pre-boundary state`;
+  - `O = S2 + FUTURE-PROBE-v1 zero-step future-task interaction features`.
+- Pre-science QA:
+  - initial protocol commit `c59a54c959407b4857900728eac8a4e6333b02a8`;
+  - explicit seed list was found to contain 140 instead of 150 validation seeds before any science;
+  - corrected from already-frozen `Random(6593)` generator at `ee2bf486dbdeed20d934d63d410176e5a7a593eb`;
+  - final protocol SHA-256 `0878993d53afbdbebad365a2ff8af2790904e7277502dcb8536ea455ccdde0d3`.
+- Fresh cohorts:
+  - train: 300 seeds / 900 boundaries;
+  - validation: 150 seeds / 450 boundaries;
+  - all prior/protected/train-validation overlaps absent.
+- Phase-A support:
+  - `A_ONLY`: 281, 209 unique seeds;
+  - `C_ONLY`: 540, 289 unique seeds;
+  - `B_AND_C_SAFE`: 49, 49 unique seeds;
+  - `B_ONLY`: 30, 30 unique seeds;
+  - all train support gates PASS.
+- Train scientific source: `04cb560a9532e173892fa2e22c7cd3c4612ae2f7`.
+- First train attempt before science:
+  - run `35444505255`;
+  - focused QA failed because the test incorrectly treated already-observed retention-gradient naming as future-outcome leakage;
+  - scientific step did not execute.
+- Canonical train run:
+  - run `35444584655`;
+  - scientific train/freeze step PASS;
+  - post-science evidence push failed non-fast-forward only.
+- Canonical train hashes:
+  - train JSON SHA-256 `d97b8ae97fedfbc31fe5d04772134dcc41dc02b3d26938bb6b8576f6a5ec3aa5`;
+  - rule JSON SHA-256 `ef8ba7bd06c3d749926c671a92d99a875e2fe243787e3b80cf44f2ba411768ac`.
+- Technical recovery:
+  - run `35445995924` replayed exact canonical source;
+  - both train/rule files reproduced byte-identical SHA values before preservation;
+  - recovered evidence commit `885b229de1259f5425d0a4ac08bdeb1a91e78750`;
+  - recovery artifact `10586095267`;
+  - recovery ZIP SHA-256 `ba5d15890aa9997ecbe5a43b64f6385904ea4ec02a0b2b7bd313f370eddd20b6`.
+- Validation support:
+  - `A_ONLY`: 138, 102 unique seeds;
+  - `C_ONLY`: 277, 143 unique seeds;
+  - `B_AND_C_SAFE`: 19, 19 unique seeds;
+  - `B_ONLY`: 16, 16 unique seeds;
+  - all validation support gates PASS.
+- Validation macro recall:
+  - `S0 = 0.45487`;
+  - `S1 = 0.43993`;
+  - `S2 = 0.43000`;
+  - `O  = 0.51347`.
+- Validation macro F1:
+  - `S0 = 0.24490`;
+  - `S1 = 0.30459`;
+  - `S2 = 0.29604`;
+  - `O  = 0.33120`.
+- All four arms fail the frozen base qualification predicate.
+- Paired whole-seed bootstrap:
+  - `D10 = S1-S0 = -0.01494`, 95% CI `[-0.10018, 0.07065]`;
+  - `D21 = S2-S1 = -0.00993`, 95% CI `[-0.07989, 0.06036]`;
+  - `DO2 = O-S2 = +0.08347`, 95% CI `[-0.01100, 0.17835]`.
+- Frozen routes:
+  - Route R — pre-boundary representation gap: **FALSE**;
+  - Route I — future-interaction identifiability gap: **FALSE**;
+  - Route M — mixed information gain: **FALSE**.
+- Persistent structural clue:
+  - `A_ONLY` validation support = 138 instances / 102 unique seeds;
+  - recall remains near zero across S0/S1/S2/O;
+  - the problem is therefore not explained by rare-class scarcity under these information sets.
+- Scientific interpretation:
+  - LRBS-v1 does not rescue pre-boundary identifiability;
+  - FUTURE-PROBE-v1 has a numerical uplift over S2, but it is too small/uncertain for Route I;
+  - neither representation insufficiency nor future-interaction dependence is prospectively identified;
+  - the broad decomposition remains scientifically inconclusive.
+- Canonical validation:
+  - workflow source `25ca7a2ee03b4519e99407a07814411ff62a0f6a`;
+  - run `35447023652` — **SUCCESS**;
+  - tests: `7 passed KCL-6.5.9.3 + 10 passed KCL-6.5.9.2`;
+  - artifact ID `10585625788`;
+  - artifact ZIP SHA-256 `23d1e73ae6a0505d2f120c51942631787cedf322d528c76841af00471992cffa`;
+  - raw validation SHA-256 `c9e577658f75100240a1ed2a514b64993914604b6eb15e4b3c7b68ef7cdf6a1b`;
+  - preservation workflow commit `d558861bbca16a99f58eecc90dd2d771388d210a`;
+  - machine-readable validation evidence commit `46c9e44e62cc1da59358218281b4e41827452fd0`.
+- Paper commit: `c878d0bb0ef952a7afebf6cf89c7efdda2df2915`.
+- Guardrails:
+  - controller: **NOT IMPLEMENTED**;
+  - protected confirmatory cohort: **UNTOUCHED**;
+  - KCL-7: **NOT STARTED**;
+  - no post-hoc nonlinear rescue or validation-seed extension is authorized.
+- Next scientific requirement:
+  - candidate `KCL-6.5.9.4 — Action-Target Failure-Mode Decomposition`;
+  - decompose why B/C are unsafe inside `A_ONLY` before proposing another predictor/representation.
