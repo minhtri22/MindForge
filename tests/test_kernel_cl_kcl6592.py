@@ -84,20 +84,23 @@ def test_metrics_are_multiclass_macro_not_accuracy_proxy() -> None:
 
 
 def test_class_balanced_softmax_fits_deterministic_synthetic_problem() -> None:
+    names = (
+        "H1_M1_RMS",
+        "H2_SQRT_M2_RMS",
+        "H3_BIAS_CORRECTED_ADAM_PRESSURE_RMS",
+        "H4_TASK_DRIFT_RELATIVE_L2",
+    )
     records = []
     for cls_i, cls in enumerate(k6592.CLASS_ORDER):
         for j in range(12):
+            features = {name: 0.0 for name in names}
+            features[names[cls_i]] = 5.0 + j * 0.001
             records.append({
                 "target": cls,
                 "boundary_index": 1 + (j % 3),
-                "features": {
-                    "H4_TASK_DRIFT_RELATIVE_L2": float(cls_i * 5 + j * 0.01),
-                },
+                "features": features,
             })
-    model = k6592.fit_softmax(
-        records,
-        ("H4_TASK_DRIFT_RELATIVE_L2",),
-    )
+    model = k6592.fit_softmax(records, names)
     assert model["solver"]["finite"]
     assert model["solver"]["converged"]
     preds, probs = k6592.predict_model(records, model)
