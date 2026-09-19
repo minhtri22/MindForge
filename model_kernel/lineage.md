@@ -62,3 +62,51 @@ Kết quả chính:
 - `403d091a15b5d6ac4d9443635a7e8939ea1243af`
 
 Trạng thái khoa học: kết quả chạy J3.13 đã đủ để thu hẹp hướng MK-1, nhưng CQG chưa có báo cáo và mục nhật ký chính thức sau chạy. Vì vậy chưa mở MK-1 và chưa cho phép huấn luyện.
+
+
+## 2026-09-19 — Chuyển phụ thuộc từ J3.13 sang J3.14
+
+Đã kiểm tra lại CQG và xác nhận J3.13 đã được đóng chính thức.
+
+Các mã cam kết chính của J3.13:
+
+- báo cáo xác nhận: `008a49f77a99cc7a022412c40f53fa0f32ddb2c9`
+- khóa nguồn gốc: `52c2666df2a24d65b7ed79ef63d93177a941ce70`
+- kết quả chính thức: `5f98364df5951fd31e44dfd2406b44fec00e0094`
+- ghi bằng chứng vào nhật ký: `ce077cd007608df3a98d39f584b9321f998af46d`
+
+J3.14 đã được đăng ký trước để phân biệt ba khả năng còn lại:
+
+- thiếu dữ liệu;
+- lớp hàm hoặc thiên kiến học chưa phù hợp;
+- cần thiên kiến hợp thành rõ ràng.
+
+Mã cam kết đăng ký trước ban đầu: `a0c9898ef236a816f5279057580fb9db61cf83d8`.
+
+Mã băm đăng ký trước hiện hành sau sửa khả thi trước kết quả:
+`d4cc4b504fb1a4e4933d17f4475ec083410c9b7db890262acb839d545847e238`.
+
+Đã ghi nhận sửa lỗi độ chính xác lưu trữ PHI trước khi có kết quả xác nhận. Mã cam kết sửa:
+`6b08dc51841bef0d9cacec68dfb367184d8ca3ba`.
+
+Lần chạy sửa hiện hành:
+`35453882566`.
+
+Tại thời điểm kiểm tra:
+
+- kiểm tra toàn vẹn đã đạt;
+- toàn bộ dữ liệu huấn luyện mới đã thu đủ;
+- toàn bộ dữ liệu xác nhận mới đã thu đủ;
+- nhánh hợp thành C240 đã huấn luyện xong;
+- các nhánh còn lại chưa hoàn tất toàn bộ;
+- chưa có kết luận khoa học J3.14.
+
+Đã cập nhật phụ thuộc của Lõi mô hình để chờ kết luận J3.14 thay vì chờ J3.13.
+
+Các mã cam kết cập nhật:
+
+- `1d99da6b6880fe465839de0aba56bf59dff98ff3`
+- `cb95b3fe1269503adae9a6909e854364a9bd6c32`
+- `fae6f1279048dcdb14dc345f459c1fcde560d81b`
+
+Trạng thái khoa học: MK-1 vẫn chưa mở và chưa cho phép huấn luyện. Kết quả J3.14 có thể trực tiếp loại bớt các phương án về lượng dữ liệu, lớp hàm hoặc cấu trúc hợp thành trước khi khóa thiết kế MK-1.
