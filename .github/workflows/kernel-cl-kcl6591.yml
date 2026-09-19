@@ -1,0 +1,80 @@
+name: Kernel CL — KCL-6.5.9.1 boundary regime replication
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - docs/research/kernel-continual-learning/kcl6591-protocol.md
+      - experiments/kernel_cl/kcl6591_boundary_regime_replication.py
+      - tests/test_kernel_cl_kcl6591.py
+      - .github/workflows/kernel-cl-kcl6591.yml
+
+permissions:
+  contents: read
+
+jobs:
+  replication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Focused contract tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6591.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl659.py -q
+
+      - name: Frozen KCL-6.5.9.1 replication
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6591_boundary_regime_replication.py             --output experiments/kernel_cl/results/kcl6591_replication.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          if [ -f experiments/kernel_cl/results/kcl6591_replication.json ]; then
+            sha256sum experiments/kernel_cl/results/kcl6591_replication.json
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("experiments/kernel_cl/results/kcl6591_replication.json")
+          d = json.loads(p.read_text())
+          print("KCL6591_STATUS=" + str(d.get("status")))
+          print("KCL6591_VERDICT=" + str(d.get("verdict")))
+          print("KCL6591_ROUTES=" + json.dumps(d.get("replication_routes", {}), sort_keys=True))
+          print("KCL6591_SUPPORT=" + json.dumps(d.get("support_table", {}), sort_keys=True))
+          print("KCL6591_BOOTSTRAP=" + json.dumps(d.get("bootstrap_prevalence_95pct", {}), sort_keys=True))
+          print("KCL6591_COMPARE=" + json.dumps(d.get("discovery_to_replication", {}), sort_keys=True))
+          print("KCL6591_SECONDARY=" + json.dumps(d.get("secondary_flag_counts", {}), sort_keys=True))
+          print("KCL6591_INTEGRITY=" + json.dumps(d.get("integrity", {}), sort_keys=True))
+          PY
+          fi
+
+      - name: Enforce scope guardrails
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6591_rule.json
+          test ! -e .github/workflows/kernel-cl-kcl6591-confirm.yml
+
+      - name: Upload replication evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6591-boundary-regime-replication
+          path: experiments/kernel_cl/results/kcl6591_replication.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
