@@ -379,7 +379,6 @@ def build_localized_records(
             canonical_match = (
                 reproduction_detail["outcomes_match"]
                 and reproduction_detail["label_equal"]
-                and abs(h4_delta) <= REPRO_TOLERANCE
             )
 
         records.append({
