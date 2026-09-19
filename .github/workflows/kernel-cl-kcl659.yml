@@ -1,0 +1,78 @@
+name: Kernel CL — KCL-6.5.9 boundary regime decomposition
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - docs/research/kernel-continual-learning/kcl659-protocol.md
+      - experiments/kernel_cl/kcl659_boundary_regime_decomposition.py
+      - tests/test_kernel_cl_kcl659.py
+      - .github/workflows/kernel-cl-kcl659.yml
+
+permissions:
+  contents: read
+
+jobs:
+  decomposition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen test dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest==8.4.2
+
+      - name: Focused contract tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl659.py -q
+
+      - name: Frozen KCL-6.5.9 decomposition
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl659_boundary_regime_decomposition.py \
+            --output experiments/kernel_cl/results/kcl659_decomposition.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          if [ -f experiments/kernel_cl/results/kcl659_decomposition.json ]; then
+            sha256sum experiments/kernel_cl/results/kcl659_decomposition.json
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("experiments/kernel_cl/results/kcl659_decomposition.json")
+          d = json.loads(p.read_text())
+          print("KCL659_STATUS=" + str(d.get("status")))
+          print("KCL659_VERDICT=" + str(d.get("verdict")))
+          print("KCL659_HETEROGENEITY=" + json.dumps(d.get("heterogeneity", {}), sort_keys=True))
+          print("KCL659_SUPPORT_TABLE=" + json.dumps(d.get("support_table", {}), sort_keys=True))
+          print("KCL659_ENTROPY=" + json.dumps(d.get("binary_compression_information", {}), sort_keys=True))
+          print("KCL659_SECONDARY_FLAGS=" + json.dumps(d.get("secondary_flag_counts", {}), sort_keys=True))
+          print("KCL659_INTEGRITY=" + json.dumps(d.get("integrity", {}), sort_keys=True))
+          PY
+          fi
+
+      - name: Enforce scope guardrails
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl659_rule.json
+          test ! -e .github/workflows/kernel-cl-kcl659-confirm.yml
+
+      - name: Upload decomposition evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl659-boundary-regime-decomposition
+          path: experiments/kernel_cl/results/kcl659_decomposition.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
