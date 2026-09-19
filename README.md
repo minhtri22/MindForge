@@ -100,27 +100,29 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 ### Active Kernel Continual Learning research
 
-The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary and boundary-state experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
+The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary, boundary-state, failure-mode and target-identifiability experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9.4:
+As of KCL-6.5.9.5:
 
-- fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract;
-- KCL-6.5.9.1 independently replicated supported positive-class boundary-regime heterogeneity;
-- KCL-6.5.9.2 showed that the four-class `SAFE_ACTION_SET-v1` target is not qualified as predictable from stage + global H1–H9 boundary state;
+- fixed global optimizer-boundary policies still do not satisfy the joint plasticity + retention + robustness contract;
+- KCL-6.5.9.1 independently replicated positive-class boundary-regime heterogeneity;
+- KCL-6.5.9.2 showed that the four-class `SAFE_ACTION_SET-v1` target is not qualified as predictable from stage + global H1-H9 boundary state;
 - KCL-6.5.9.3 showed that neither richer pre-boundary LRBS-v1 state nor a zero-step future-task probe prospectively resolved the broad `A_ONLY` identifiability problem;
-- KCL-6.5.9.4 prospectively decomposed `A_ONLY` into exact policy-failure mechanisms and independently replicated two stable mechanism targets:
-  - `MECH{P,R}` — one unsafe action fails by plasticity shortfall while the other fails by retention-margin violation;
-  - `MECH{P+R,R}` — one unsafe action jointly fails plasticity + retention while the other fails retention;
-- discovery → replication prevalence was stable for those two modes:
-  - `MECH{P,R}`: 0.6250 → 0.6484;
-  - `MECH{P+R,R}`: 0.2019 → 0.1923;
-- `MECH{P,P}` did not satisfy frozen replication support and is not promoted to a stable target;
-- therefore the monolithic `A_ONLY` label is empirically heterogeneous rather than a single reproducible failure mechanism;
-- no adaptive boundary classifier/controller is currently qualified;
-- the protected confirmatory cohort remains untouched;
+- KCL-6.5.9.4 established that `A_ONLY` is structurally heterogeneous and independently replicated two stable mechanism targets:
+  - `MECH{P,R}`;
+  - `MECH{P+R,R}`;
+- KCL-6.5.9.5 then tested whether those two mechanism-specific targets are more identifiable than monolithic `A_ONLY` under the same frozen S2 representation and same class-balanced L2 logistic model family;
+- KCL-6.5.9.5 result: **NEGATIVE — `NO_MECHANISM_SPECIFIC_IDENTIFIABILITY_GAIN`**;
+- validation S2 macro recall:
+  - `A_ONLY = 0.6155` — qualified;
+  - `MECH{P,R} = 0.6863` — qualified, but gain over `A_ONLY` was only `+0.0708`, below the frozen `+0.10` threshold;
+  - `MECH{P+R,R} = 0.5765` — not qualified;
+- richer S2 contributed only marginal macro-recall gain over stage/global-state diagnostics, so target refinement alone does not explain the remaining identifiability gap;
+- no adaptive boundary classifier/controller is qualified;
+- protected confirmatory seeds remain untouched;
 - KCL-7 is **not started**.
 
-The next authorized milestone is **KCL-6.5.9.5 — Mechanism-Specific Target Identifiability**: on a new preregistered non-confirmatory cohort, compare whether the two stable mechanism-specific targets are more identifiable/predictable from pre-boundary information than the original `A_ONLY` target under one fixed apples-to-apples predictor contract.
+The next scientifically admissible direction is **not** a stronger classifier or another target-only split. A new milestone must first preregister a mechanistic representation hypothesis — especially one addressing the unresolved `MECH{P+R,R}` interaction — and compare it against the frozen S2 baseline on an entirely fresh non-confirmatory cohort. Until that hypothesis is frozen, the KCL chain stops at KCL-6.5.9.5.
 
 ## Roadmap
 
