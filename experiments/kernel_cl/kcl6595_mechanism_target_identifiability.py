@@ -30,7 +30,7 @@ from experiments.kernel_cl.kcl1_substrate import (
 from experiments.kernel_cl.kcl6_long_horizon import task_sequence
 from experiments.kernel_cl import kcl63_fuzzy_decay_abcd as k63
 from experiments.kernel_cl import kcl656_boundary_health_signal as k656
-from experiments.kernel_cl import kcl658_localized_relational_state as k658
+from experiments.kernel_cl import kcl658_localized_boundary_state as k658
 from experiments.kernel_cl import kcl659_boundary_regime_decomposition as k659
 from experiments.kernel_cl import kcl6591_boundary_regime_replication as k6591
 from experiments.kernel_cl import kcl6592_regime_predictability as k6592
