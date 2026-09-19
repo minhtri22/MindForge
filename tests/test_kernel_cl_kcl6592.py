@@ -68,15 +68,18 @@ def test_stage_features_are_boundary_time_only() -> None:
 def test_metrics_are_multiclass_macro_not_accuracy_proxy() -> None:
     records = [
         {"target": "A_ONLY"},
+        {"target": "A_ONLY"},
+        {"target": "A_ONLY"},
         {"target": "C_ONLY"},
         {"target": "B_AND_C_SAFE"},
         {"target": "B_ONLY"},
     ]
-    preds = ["A_ONLY", "C_ONLY", "C_ONLY", "B_ONLY"]
-    probs = np.full((4, 4), 0.25, dtype=np.float64)
+    preds = ["A_ONLY"] * len(records)
+    probs = np.full((len(records), 4), 0.25, dtype=np.float64)
     m = k6592.metrics(records, preds, probs)
-    assert m["accuracy"] == 0.75
+    assert m["accuracy"] == 0.5
     assert m["per_class"]["B_AND_C_SAFE"]["recall"] == 0.0
+    assert m["macro_recall"] == 0.25
     assert m["macro_recall"] < m["accuracy"]
 
 

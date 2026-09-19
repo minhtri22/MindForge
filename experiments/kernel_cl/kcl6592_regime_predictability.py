@@ -270,7 +270,15 @@ def fit_softmax(
         and torch.isfinite(w.detach()).all().item()
         and torch.isfinite(b.detach()).all().item()
     )
-    converged = bool(finite and grad_max <= LBFGS_TOL_GRAD)
+    lbfgs_state = opt.state.get(w, {})
+    n_iter = int(lbfgs_state.get("n_iter", LBFGS_MAX_ITER))
+    converged = bool(
+        finite
+        and (
+            grad_max <= LBFGS_TOL_GRAD
+            or n_iter < LBFGS_MAX_ITER
+        )
+    )
 
     return {
         "feature_names": list(feature_names),
@@ -288,6 +296,7 @@ def fit_softmax(
             "tolerance_change": LBFGS_TOL_CHANGE,
             "line_search_fn": "strong_wolfe",
             "closure_calls": closure_calls,
+            "n_iter": n_iter,
             "final_loss": float(final_loss.detach()),
             "final_grad_max": grad_max,
             "finite": bool(finite),
