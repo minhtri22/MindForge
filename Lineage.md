@@ -1720,3 +1720,120 @@ This compact index summarizes the active Kernel Continual Learning chain without
   - predict supported regime identity using only boundary-time information;
   - compare against stage-only and H4 baselines;
   - protected confirmatory cohort remains untouched until a predictor qualifies and is frozen.
+
+
+## 2026-09-19 — KCL-6.5.9.2 Boundary Regime Predictability Qualification NEGATIVE
+
+- Status: **NEGATIVE**
+- Verdict: `BOUNDARY_REGIME_PREDICTOR_NOT_QUALIFIED`.
+- Trigger:
+  - KCL-6.5.9.1 replicated supported positive-class action heterogeneity;
+  - next admissible question was whether action-regime identity is predictable from pre-future boundary-time state.
+- Frozen target:
+  - `SAFE_ACTION_SET-v1`;
+  - classes: `A_ONLY`, `C_ONLY`, `B_AND_C_SAFE`, `B_ONLY`.
+- Fresh non-confirmatory design:
+  - 240 whole-seed training cohort = 720 boundaries;
+  - 120 whole-seed validation cohort = 360 boundaries;
+  - train/validation/protected-confirmatory/prior KCL cohorts disjoint.
+- Frozen predictor:
+  - class-balanced L2 multinomial logistic regression;
+  - train-only standardization and class weights;
+  - `lambda=1.0`;
+  - deterministic LBFGS;
+  - no hyperparameter/feature/threshold search.
+- Frozen boundary-time features:
+  - stage indicators plus global H1–H9 KCL-6.5.6 state;
+  - no future-task outcomes/gradients;
+  - no KCL-6.5.8 localized features.
+- Phase A train support:
+  - `A_ONLY`: 202, 154 unique seeds;
+  - `C_ONLY`: 461, 232 unique seeds;
+  - `B_AND_C_SAFE`: 34, 34 unique seeds;
+  - `B_ONLY`: 23, 23 unique seeds;
+  - all train support gates PASS.
+- Frozen rule:
+  - rule SHA-256 `a243ec57d7e9f28f361597eb0a25da1ec2373f2f06458b9a3c73bd618021b89b`;
+  - training evidence SHA-256 `295bcae868e7989481e38c24eb87b007d8fa1afb98b15854b2fc5d006982d66e`;
+  - validation executed before freeze: **NO**.
+- Validation support:
+  - `A_ONLY`: 115, 83 unique seeds;
+  - `C_ONLY`: 212, 116 unique seeds;
+  - `B_AND_C_SAFE`: 18, 18 unique seeds;
+  - `B_ONLY`: 15, 15 unique seeds;
+  - all validation support gates PASS.
+- RPQ-v1 validation:
+  - accuracy `0.513889`;
+  - macro precision `0.318482`;
+  - macro recall `0.419725`;
+  - macro F1 `0.311669`;
+  - log loss `1.101829`.
+- Per-class recall:
+  - `A_ONLY = 0.0609`;
+  - `C_ONLY = 0.7736`;
+  - `B_AND_C_SAFE = 0.4444`;
+  - `B_ONLY = 0.4000`.
+- Per-class F1:
+  - `A_ONLY = 0.1000`;
+  - `C_ONLY = 0.7540`;
+  - `B_AND_C_SAFE = 0.2388`;
+  - `B_ONLY = 0.1538`.
+- Frozen baselines by macro recall:
+  - `B-H4 = 0.330078`;
+  - `B-STAGE = 0.458726`;
+  - `B-STAGE-H4 = 0.428171`;
+  - RPQ-v1 `0.419725`.
+- Baseline superiority:
+  - required `RPQ >= best baseline + 0.05 = 0.508726`;
+  - observed `0.419725`;
+  - **FAIL**.
+- Whole-seed bootstrap, 20,000 resamples:
+  - macro recall 95% CI `[0.333678, 0.508191]`;
+  - macro F1 95% CI `[0.263788, 0.358430]`;
+  - accuracy 95% CI `[0.4750, 0.5500]`.
+- Failed frozen qualification gates:
+  - `macro_recall`;
+  - `macro_f1`;
+  - `recall:A_ONLY`;
+  - `f1:A_ONLY`;
+  - `recall:B_AND_C_SAFE`;
+  - `f1:B_AND_C_SAFE`;
+  - `recall:B_ONLY`;
+  - `f1:B_ONLY`;
+  - `baseline_superiority`;
+  - `bootstrap_macro_recall_lower`.
+- Scientific interpretation:
+  - class support instability is **not** the explanation;
+  - the four action classes remain supported in both fresh train and validation cohorts;
+  - the frozen global boundary representation does not generalize well enough for multiclass action-regime prediction;
+  - stage-only macro recall exceeds RPQ-v1, so extra H1–H9 variables provide no qualified predictive uplift;
+  - two live explanations remain: representation insufficiency vs pre-boundary target/action non-identifiability.
+- Guardrail:
+  - stop RPQ-v1;
+  - do not tune lambda/model/thresholds;
+  - do not add nonlinear models or localized features post hoc;
+  - do not append validation seeds;
+  - do not implement controller;
+  - do not touch protected confirmatory cohort;
+  - do not open KCL-7.
+- Protocol commit: `6d01ad18028a1eed507c4c5582132cb75e28ed98`.
+- Protocol SHA-256: `ad5dd1de4187a700be603c4af0c3c34e8deb381677457ca00938409a2c87b4f1`.
+- Train/freeze canonical run: `35416050982`.
+- Frozen rule source commit: `9d1db04afde8fb4adf354ca45e1c82ae1c4a676e`.
+- Training artifact ID: `10576042235`.
+- Training artifact ZIP SHA-256: `3f4f14b4056e0a764da7ff8a0218f11e41acba042a67160d879c0120466faee8`.
+- Validation workflow source commit: `ea9dc4d2f3f911c4ef10b45afab17419b66709e5`.
+- Canonical validation run: `35443075722` — **SUCCESS**.
+- Focused tests: `10 passed KCL-6.5.9.2 + 10 passed KCL-6.5.9.1`.
+- Validation artifact ID: `10584905824`.
+- Validation artifact ZIP SHA-256: `1092b57ee27653fe858e764f7c7aa2344cc01c4f6d3917d941c95764fdb6eb19`.
+- Raw validation JSON SHA-256: `f9432d514cc584a0b826759dc203a3186945c80e189f7e61d0a2d90039d03eda`.
+- Validation preservation workflow commit: `1919f88538f3b8f8af7d3a752a9d548c6773a622`.
+- Machine-readable validation evidence commit: `c025d87bec94f623007c4eb6400ad2dce5560ed0`.
+- Paper commit: `8cb00c39372ae8f5cfa8ef38b06c251da084d51c`.
+- Protected confirmatory cohort: **UNTOUCHED**.
+- KCL-7: **NOT STARTED**.
+- Next scientific requirement:
+  - return to representation/target identifiability rather than model-complexity escalation;
+  - candidate milestone: `KCL-6.5.9.3 — Boundary Action Identifiability Decomposition`;
+  - use a new non-confirmatory cohort and preregister information-set comparisons before execution.
