@@ -102,18 +102,19 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary and boundary-state experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9.1:
+As of KCL-6.5.9.2:
 
 - fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract;
-- no single-scalar, global relational, or localized relational boundary-state predictor has qualified;
-- KCL-6.5.9.1 independently replicated supported **positive-class boundary-regime heterogeneity** on 66 fresh non-confirmatory seeds;
-- `C_SAFE_ONLY` and `B_AND_C_SAFE` are both supported, and `B_SAFE_ONLY` emerged as an additional supported finding;
-- `CARRY_CATASTROPHIC_FAILURE` did not replicate with support;
+- KCL-6.5.9.1 independently replicated supported **positive-class boundary-regime heterogeneity**;
+- KCL-6.5.9.2 preserved that four-class action-set support on fresh train and validation cohorts, but the frozen RPQ-v1 predictor **did not qualify**;
+- RPQ-v1 validation macro recall was 0.4197 and macro F1 was 0.3117; it did not beat the frozen stage-only baseline by the preregistered margin;
+- `A_ONLY` was especially poorly identified despite substantial support, so rare-class scarcity alone does not explain the failure;
+- no single-scalar, global relational, localized relational, or current global multiclass boundary-state predictor has qualified;
 - no adaptive boundary classifier/controller is currently qualified;
 - the protected confirmatory cohort remains untouched;
 - KCL-7 is **not started**.
 
-The next authorized question is **KCL-6.5.9.2 — Boundary Regime Predictability Qualification**: test whether supported regime identity can be predicted from boundary-time information on fresh non-confirmatory train/validation data before any controller is implemented. Core architecture changes remain blocked until that predictor itself qualifies and is frozen.
+The next authorized research question returns to **representation vs target identifiability**, rather than increasing classifier complexity. A candidate next milestone is **KCL-6.5.9.3 — Boundary Action Identifiability Decomposition**, using a new preregistered non-confirmatory cohort to test whether richer pre-boundary information materially closes the gap or whether discriminative action information appears only after future-task interaction.
 
 ## Roadmap
 
