@@ -83,6 +83,7 @@ Can MindForge learn a structured, decision-relevant internal representation from
 - PIT provides negative evidence that deterministic semantic representation can hit a pristine-heldout generalization bottleneck.
 - CQG Q1/Q2 provides positive evidence that an explicit decision-relevant TaskState can materially improve ranking/selection and remain useful under specified shifts.
 - CQG J3.12 warns that strong ranking does not imply cardinal calibration.
+- CQG J3.13 fresh execution artifact shows the cardinal target is observable-identifiable, but the frozen learner contract remains insufficient; scale-only, representation-factor-only, and combined interventions do not clear the cardinal gate.
 
 ### Initial scope
 
@@ -194,7 +195,7 @@ Potential questions:
 - Does a representation or target-geometry change improve cardinal fidelity without degrading ranking?
 - Is calibration useful enough to justify threshold/resource interfaces?
 
-This phase waits for final CQG J3.13 adjudication and any directly relevant successor study.
+The J3.13 execution artifact has now been inspected and narrows the mechanism: strict cardinal nonidentifiability is falsified in that setup, while the tested frozen learner contract remains insufficient. MK-4 still waits for CQG to commit the formal J3.13 report/lineage adjudication and for Model Core to establish a supported ranking/decision representation.
 
 A ranking PASS never counts as calibration PASS.
 
@@ -319,9 +320,9 @@ After MK-0:
 
 ~~~
 1. do not train;
-2. monitor/re-audit CQG J3.13;
+2. wait for CQG to commit the formal J3.13 report/lineage adjudication; the execution artifact has already been reviewed;
 3. monitor relevant KCL, OIR-PPV, ARN, and NEXUS closures;
-4. when MK-1 dependencies are satisfied, write a separate prospective MK-1 protocol;
+4. after formal J3.13 closure, write and freeze a separate prospective MK-1 protocol focused on structured/typed representation generalization, not cardinal-value repair;
 5. freeze that protocol before implementation/outcome;
 6. only then authorize model experimentation.
 ~~~
