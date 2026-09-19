@@ -96,7 +96,22 @@ dataset
 → generation
 ```
 
-Continual learning, explicit memory and adaptive/pattern mechanisms are **not current core commitments**. Phase 0 stopped the custom research hypotheses because the bounded experiments did not establish a scientifically usable forgetting/memory-value substrate. Future capabilities may be adopted, ported, adapted or minimally cloned from proven open-source mechanisms after a dedicated research/selection phase.
+Continual learning, explicit memory and adaptive/pattern mechanisms are **not yet core architecture commitments**. They are being investigated in a separate evidence-gated research track on `research/kernel-cl`. Negative results do not automatically terminate the track; they narrow the next admissible hypothesis while keeping unqualified mechanisms out of the stable kernel.
+
+### Active Kernel Continual Learning research
+
+The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary and boundary-state experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
+
+As of KCL-6.5.9:
+
+- fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract;
+- no single-scalar, global relational, or localized relational boundary-state predictor has qualified;
+- KCL-6.5.9 found rare alternative boundary regimes, but not enough preregistered support to justify a regime-first controller;
+- no adaptive boundary classifier/controller is currently qualified;
+- the protected confirmatory cohort remains untouched;
+- KCL-7 is **not started**.
+
+The next authorized question is a fresh non-confirmatory replication of the rare KCL-6.5.9 regimes under the same frozen taxonomy and thresholds. Core architecture changes remain blocked until the research gates support them.
 
 ## Roadmap
 
