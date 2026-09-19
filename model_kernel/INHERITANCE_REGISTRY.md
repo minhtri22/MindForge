@@ -31,7 +31,7 @@ Every entry is a snapshot. Before activating a later Model Kernel phase, the sou
 | CQG H-Q1 | Confirmatory PASS | SUPPORTED_EVIDENCE | Decision-relevant TaskState can materially improve WHAT-to-ask ranking in the controlled benchmark | The exact CQG TaskState is the correct MindForge latent representation | MK-1 / MK-2 |
 | CQG H-Q2 | Confirmatory PASS across five frozen shifts | SUPPORTED_EVIDENCE | Strong evidence that an explicit decision-relevant state can retain utility under specified shifts without retraining | Open-world/general language generalization | MK-2 |
 | CQG J3.12 | Target/validator integrity supported; strong ranking; absolute ECV fidelity FAIL | NEGATIVE_EVIDENCE | Do not equate ranking quality with cardinal-value calibration; retain ordering/cardinal separation as a design constraint | A scalar value/confidence head is justified as first intervention | MK-2 / MK-4 |
-| CQG J3.13 | Preregistered/implemented; fresh-seed outcome not inspected at audit point | PENDING | Prospective mechanism taxonomy: representation insufficiency vs scale geometry vs learner-contract ceiling | Any J3.13 mechanism conclusion | MK-1 final protocol review / MK-4 |
+| CQG J3.13 | Fresh confirmatory workflow completed; frozen result artifact reports `CARDINAL_IDENTIFIABLE_BUT_CURRENT_LEARNER_CONTRACT_INSUFFICIENT`; CQG report/lineage commit still pending | SUPPORTED_EVIDENCE + PENDING | Strict cardinal nonidentifiability is falsified in this tested setup; scale-only, representation-factor-only, and combined arms did not pass the cardinal gate | CQG J3.13 is fully closed upstream, or factorized representation is useless for non-cardinal representation learning | MK-1 design narrowing / MK-4 |
 | CQG H-J1.2 | Confirmatory PASS in controlled benchmark | SUPPORTED_EVIDENCE | Typed/selective control outputs can be learnable from observable primitives under the tested setup | MindForge should immediately embed a CAP/update controller | Later typed-control study |
 | MindForge KCL completed findings | Multiple causal/falsification findings within tiny continual-learning substrate | SUPPORTED_EVIDENCE + NEGATIVE_EVIDENCE | Known optimizer/boundary-state phenomena; failed fixed/coarse strategies; diagnostics and transfer questions | Directly porting a KCL controller/predictor into the model | MK-5 |
 | KCL-6.5.9.2 current frontier | Training/rule artifact PASS; validation incomplete at audit point | PENDING | None beyond protocol awareness | Regime predictor is validated | MK-5 |
@@ -80,8 +80,12 @@ decision-relevant TaskState materially improves ranking/selection
 
 CQG negative evidence:
 strong ranking does not guarantee absolute/cardinal calibration
+
+CQG J3.13 fresh result artifact:
+cardinal value is audit-identifiable from observables, but the frozen learner contract remains insufficient;
+scale-only, factorization-only, and their combined arm do not clear the cardinal gate
 ~~~
 
-Therefore the first model hypothesis should concern **learned decision-state representation**, not memory, continual learning, invariance, sparse execution, or scalar utility calibration.
+Therefore the first model hypothesis should concern **learned decision-state representation**, not memory, continual learning, invariance, sparse execution, or scalar utility calibration. J3.13 also removes any reason to make scalar/cardinal repair, ASINH geometry, or its 558D factorized arm the primary MK-1 intervention.
 
 This registry does not open that experiment. Activation is governed by DEPENDENCY_GATES.md.
