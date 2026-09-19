@@ -1997,3 +1997,78 @@ This compact index summarizes the active Kernel Continual Learning chain without
 - Next scientific requirement:
   - `KCL-6.5.9.5 — Mechanism-Specific Target Identifiability`;
   - prospectively compare the two stable mechanism targets against monolithic `A_ONLY` on a fresh cohort using one fixed pre-boundary predictor contract.
+
+
+## 2026-09-20 — KCL-6.5.9.5 Mechanism-Specific Target Identifiability NEGATIVE
+
+- Status: **NEGATIVE**
+- Verdict: `NO_MECHANISM_SPECIFIC_IDENTIFIABILITY_GAIN`.
+- Trigger:
+  - KCL-6.5.9.4 established that `A_ONLY` contains at least two stable failure mechanisms;
+  - KCL-6.5.9.5 tested whether those mechanism-specific targets are more identifiable than monolithic `A_ONLY` under one fixed predictor contract.
+- Frozen targets:
+  - `Y_A = A_ONLY vs rest`;
+  - `Y_PR = MECH{P,R} vs rest`;
+  - `Y_PRR = MECH{P+R,R} vs rest`.
+- Frozen representation/model:
+  - primary `S2 = stage + H1-H9 + LRBS-v1 F1-F13`;
+  - diagnostic `S0 = stage`, `S1 = stage + H1-H9`;
+  - class-balanced L2 binary logistic regression, deterministic float64 LBFGS;
+  - no future-probe, nonlinear model, feature search, threshold tuning, oversampling, or validation refit.
+- Fresh prospective cohort:
+  - train: 480 seeds / 1440 boundaries;
+  - validation: 240 seeds / 720 boundaries;
+  - train/validation/prior/protected overlap absent.
+- Train/freeze:
+  - canonical run `35457510797` — **SUCCESS**;
+  - all train support gates PASS;
+  - all 9 target × representation solvers converged;
+  - frozen rule `MSTI-v1`;
+  - rule SHA-256 `2e6649a6f32040e56c0ecaac365ee28f593516dd24cff9f2bf3ddd7c87ce0c7b`;
+  - train raw JSON SHA-256 `ef72f9f78aa544fda5aae6220fca9ed7b40438e8e908270587b91298f3b78853`;
+  - evidence commit `e103802b7126fb306882123ba57cef1c9fde7a76`.
+- Validation:
+  - canonical run `35461892375` — **SUCCESS**;
+  - all validation support and integrity gates PASS;
+  - exact frozen rule/source verified before validation;
+  - no validation refit.
+- Primary S2 macro recall:
+  - `Y_A = 0.615474` — **QUALIFIED**;
+  - `Y_PR = 0.686289` — **QUALIFIED**;
+  - `Y_PRR = 0.576520` — **NOT QUALIFIED**.
+- Primary paired gains versus `Y_A`:
+  - `D_PR = +0.070815`, 95% whole-seed bootstrap CI `[+0.033422, +0.109074]`;
+  - frozen point-gain threshold was `+0.10`, therefore `H_PR = FALSE`;
+  - `D_PRR = -0.038955`, CI `[-0.132801, +0.051778]`, therefore `H_PRR = FALSE`.
+- Secondary representation diagnostics:
+  - `Y_A: S2-S0 = +0.003392, S2-S1 = +0.003903`;
+  - `Y_PR: S2-S0 = +0.002086, S2-S1 = +0.009762`;
+  - `Y_PRR: S2-S0 = +0.007934, S2-S1 = +0.004034`;
+  - richer S2 contributes only marginal recall gain over S0/S1.
+- Scientific interpretation:
+  - target heterogeneity from KCL-6.5.9.4 remains valid;
+  - target refinement alone does not resolve identifiability under frozen S2;
+  - `MECH{P,R}` carries real signal but does not reach the preregistered +0.10 gain;
+  - `MECH{P+R,R}` remains unqualified and is the harder unresolved mechanism;
+  - no generic mechanism-specific identifiability gain is supported.
+- Provenance:
+  - protocol commit `27866c98043f9cf8a3d275fe3c4f93156132445c`;
+  - protocol SHA-256 `c1d5a9b4ba26ea1574902ad024c636ed79965f8c98a5711b187b07cac31be326`;
+  - implementation commit `683230a1c48b8ff8b3e52243c77e4c843577cfd4`;
+  - pre-science import repair `3b3d12faf59ed8cb66ca5395ffeeb5754aaba3d6`;
+  - train workflow source `a7a1386602705687626c13fc7a0cab131c08d085`;
+  - validation workflow source `e1e6f55191f81c5d01fc0db2c914dc414846a8c8`;
+  - validation raw JSON SHA-256 `482e1cdab8c17dccc4385a2feab982af2d6bca1074d4eea68b9430903ddf325d`;
+  - validation artifact ID `10590011691`;
+  - validation artifact ZIP SHA-256 `4a7ce2ad3d0c2e0ae32a8b271a56728abcedacf5a74e224bbecfc10fc2b8c996`;
+  - validation evidence commit `c8d7aaa3a48aa5922bb0fa2aa907d726d8256e14`;
+  - paper commit `15a64ce34ff662489178d8813bc17572f176ea75`.
+- Guardrails:
+  - validation refit: **NO**;
+  - controller: **NOT IMPLEMENTED**;
+  - protected confirmatory cohort: **UNTOUCHED**;
+  - KCL-7: **NOT STARTED**;
+  - no post-hoc threshold relaxation or classifier escalation is authorized.
+- Next scientific requirement:
+  - stop target-only decomposition and classifier escalation;
+  - formulate a new mechanistic representation hypothesis, especially for `MECH{P+R,R}`, freeze it prospectively, and compare against the frozen S2 baseline on a fresh cohort before any controller study.
