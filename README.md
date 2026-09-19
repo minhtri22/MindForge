@@ -102,19 +102,21 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary and boundary-state experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9.2:
+As of KCL-6.5.9.3:
 
 - fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract;
 - KCL-6.5.9.1 independently replicated supported **positive-class boundary-regime heterogeneity**;
-- KCL-6.5.9.2 preserved that four-class action-set support on fresh train and validation cohorts, but the frozen RPQ-v1 predictor **did not qualify**;
-- RPQ-v1 validation macro recall was 0.4197 and macro F1 was 0.3117; it did not beat the frozen stage-only baseline by the preregistered margin;
-- `A_ONLY` was especially poorly identified despite substantial support, so rare-class scarcity alone does not explain the failure;
-- no single-scalar, global relational, localized relational, or current global multiclass boundary-state predictor has qualified;
+- KCL-6.5.9.2 showed that the replicated four-class action target is not qualified as predictable from stage + global H1–H9 boundary state;
+- KCL-6.5.9.3 compared nested information sets with one fixed low-capacity classifier family: stage-only (S0), global pre-boundary state (S1), global + frozen LRBS-v1 localized state (S2), and an oracle zero-step future-task probe (O);
+- S2 did **not** improve S1: macro-recall delta = -0.0099 with paired 95% CI [-0.0799, 0.0604];
+- O improved S2 numerically by +0.0835 macro recall, but the paired 95% CI [-0.0110, 0.1783] crossed zero and the frozen future-interaction gate was not met;
+- all S0/S1/S2/O arms remained unqualified, so neither a pre-boundary representation gap nor a future-interaction identifiability gap was prospectively established;
+- `A_ONLY` remains especially poorly identified despite substantial support, shifting the next scientific question toward **target/failure-mode structure** rather than classifier complexity;
 - no adaptive boundary classifier/controller is currently qualified;
 - the protected confirmatory cohort remains untouched;
 - KCL-7 is **not started**.
 
-The next authorized research question returns to **representation vs target identifiability**, rather than increasing classifier complexity. A candidate next milestone is **KCL-6.5.9.3 — Boundary Action Identifiability Decomposition**, using a new preregistered non-confirmatory cohort to test whether richer pre-boundary information materially closes the gap or whether discriminative action information appears only after future-task interaction.
+The next authorized research direction is to decompose the internal failure modes of the `A_ONLY` target before proposing another representation or controller. A candidate milestone is **KCL-6.5.9.4 — Action-Target Failure-Mode Decomposition**: determine whether B/C are unsafe because of plasticity failure, retention-margin violation, strict current-task failure, or stable combinations of these causes on fresh non-confirmatory data.
 
 ## Roadmap
 
