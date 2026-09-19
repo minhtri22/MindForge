@@ -30,7 +30,7 @@ def test_all_seven_per_policy_cause_codes() -> None:
             "STRICT_ACCURACY_FAILURE",
         ): "P+R+A",
     }
-    assert {k6594.cause_code(k): v for k, v in expected.items()} == expected
+    assert all(k6594.cause_code(k) == v for k, v in expected.items())
 
 
 def test_failure_reasons_are_exact_predicate_complements() -> None:
