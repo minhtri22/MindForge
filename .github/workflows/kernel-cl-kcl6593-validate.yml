@@ -1,0 +1,102 @@
+name: Kernel CL — KCL-6.5.9.3 identifiability validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6593-validate.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify frozen Phase-A artifacts and scientific source
+        run: |
+          echo "d97b8ae97fedfbc31fe5d04772134dcc41dc02b3d26938bb6b8576f6a5ec3aa5  experiments/kernel_cl/results/kcl6593_train.json" | sha256sum -c -
+          echo "ef8ba7bd06c3d749926c671a92d99a875e2fe243787e3b80cf44f2ba411768ac  experiments/kernel_cl/results/kcl6593_rule.json" | sha256sum -c -
+          echo "0878993d53afbdbebad365a2ff8af2790904e7277502dcb8536ea455ccdde0d3  docs/research/kernel-continual-learning/kcl6593-protocol.md" | sha256sum -c -
+          echo "92dc4e4850eecaee962be3a328779cbec4567f9eafca6e5ec98af699cb059b0e  experiments/kernel_cl/kcl6593_action_identifiability.py" | sha256sum -c -
+          python - <<'PY'
+          import json
+          r=json.load(open("experiments/kernel_cl/results/kcl6593_rule.json"))
+          assert r["status"] == "FROZEN_FROM_TRAIN_ONLY"
+          assert r["source_git_commit"] == "04cb560a9532e173892fa2e22c7cd3c4612ae2f7"
+          assert r["training_evidence_sha256"] == "d97b8ae97fedfbc31fe5d04772134dcc41dc02b3d26938bb6b8576f6a5ec3aa5"
+          assert r["governance"]["validation_executed_before_freeze"] is False
+          assert r["governance"]["protected_confirmatory_touched"] is False
+          assert r["governance"]["controller_implemented"] is False
+          assert r["governance"]["kcl7_started"] is False
+          assert len(r["train_seeds"]) == 300
+          assert len(r["validation_seeds"]) == 150
+          PY
+
+      - name: Focused contract tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6593.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6592.py -q
+
+      - name: Assert validation evidence absent before execution
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6593_validation.json
+
+      - name: Frozen paired identifiability validation
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6593_action_identifiability.py \
+            --phase validate \
+            --rule experiments/kernel_cl/results/kcl6593_rule.json \
+            --output experiments/kernel_cl/results/kcl6593_validation.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6593_validation.json
+          sha256sum experiments/kernel_cl/results/kcl6593_validation.json
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6593_validation.json"))
+          print("KCL6593_STATUS="+str(d.get("status")))
+          print("KCL6593_VERDICT="+str(d.get("verdict")))
+          print("KCL6593_SUPPORT="+json.dumps(d.get("support",{}),sort_keys=True))
+          print("KCL6593_METRICS="+json.dumps(d.get("metrics",{}),sort_keys=True))
+          print("KCL6593_BOOTSTRAP="+json.dumps(d.get("bootstrap_95pct",{}),sort_keys=True))
+          print("KCL6593_ADJUDICATION="+json.dumps(d.get("adjudication",{}),sort_keys=True))
+          print("KCL6593_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          print("KCL6593_RULE="+json.dumps(d.get("rule",{}),sort_keys=True))
+          PY
+
+      - name: Enforce scope guardrails
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6593_controller.json
+          test ! -e .github/workflows/kernel-cl-kcl6593-controller.yml
+          test ! -e .github/workflows/kernel-cl-kcl7.yml
+
+      - name: Upload canonical validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6593-identifiability-validation
+          path: experiments/kernel_cl/results/kcl6593_validation.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
