@@ -1653,3 +1653,70 @@ This compact index summarizes the active Kernel Continual Learning chain without
   - no KCL-7 work is authorized;
   - the protected confirmatory cohort remains untouched;
   - next authorized question is fresh non-confirmatory replication of the rare frozen KCL-6.5.9 regimes using unchanged taxonomy and thresholds.
+
+
+## 2026-09-19 — KCL-6.5.9.1 Fresh Boundary-Regime Replication PASS
+
+- Status: **PASS**
+- Verdict: `SUPPORTED_BOUNDARY_REGIME_HETEROGENEITY_REPLICATED`.
+- Trigger:
+  - KCL-6.5.9 observed rare `B_AND_C_SAFE` and `CARRY_CATASTROPHIC_FAILURE` regimes but neither met preregistered support;
+  - only authorized next step was fresh non-confirmatory replication under unchanged taxonomy/thresholds.
+- Frozen replication design:
+  - 66 fresh seeds;
+  - 198 boundary instances;
+  - discovery and protected confirmatory seeds excluded;
+  - unchanged support rule: count >= 5 and unique seeds >= 3.
+- Sample-size planning:
+  - based on KCL-6.5.9 seed-level rates 2/20 and 3/20;
+  - `P[X>=5 | n=66,p=.10] ≈ 0.8019`;
+  - `P[X>=5 | n=66,p=.15] ≈ 0.9774`;
+  - planning only, not adjudication evidence.
+- Canonical replication support:
+  - `C_SAFE_ONLY`: 134/198 = 67.68%, 65 unique seeds, **SUPPORTED**.
+  - `A_SUFFICIENT`: 49/198 = 24.75%, 40 unique seeds, **SUPPORTED**.
+  - `B_AND_C_SAFE`: 9/198 = 4.55%, 9 unique seeds, **SUPPORTED**, all at boundary 3.
+  - `B_SAFE_ONLY`: 5/198 = 2.53%, 5 unique seeds, **SUPPORTED**, all at boundary 3; unexpected supported finding.
+  - `CARRY_CATASTROPHIC_FAILURE`: 1/198 = 0.51%, 1 unique seed, **NOT SUPPORTED**.
+- Frozen primary routes:
+  - `H_REP_ACTION = true`;
+  - `H_REP_NEGATIVE = false`;
+  - `PRIMARY_REPLICATION = true`.
+- Scientific interpretation:
+  - KCL-6.5.9's positive-class heterogeneity was support-limited rather than absent;
+  - fresh data independently supports at least `C_SAFE_ONLY` and `B_AND_C_SAFE`;
+  - `B_SAFE_ONLY` additionally emerges as a supported positive action regime;
+  - catastrophic-carry failure does not replicate as a stable supported negative subregime.
+- Architectural implication:
+  - stop treating `SAFE_RESET_OPPORTUNITY` as sufficient for action-selection research;
+  - next question may ask which supported positive action regime applies at the boundary;
+  - no controller is qualified yet.
+- Integrity:
+  - 66/66 fresh unique seeds;
+  - 198/198 expected boundary records;
+  - all A/B/C counterfactual integrity checks PASS;
+  - no discovery-seed overlap;
+  - no confirmatory-seed overlap;
+  - confirmatory cohort untouched;
+  - classifier trained: **NO**;
+  - controller implemented: **NO**;
+  - KCL-7 started: **NO**.
+- Protocol commit: `a719585694232d1f9af71fb2ff9c4debbe42270f`.
+- Protocol SHA-256: `07579d30c661131bd3f7cca385d08a1bfaee5ea7e176546ed75c4dbc4c674b65`.
+- Implementation commit: `15553985b7f5c8b961b6509ef05d2424a223c0aa`.
+- Contract-test commit: `ed640fca267c0b76116d4828ab755ffbedef665d`.
+- Canonical scientific source/workflow commit: `5db5c3082cb4105d4a5f490423a9be04ebee4884`.
+- Canonical workflow run: `35413920993` — **SUCCESS**.
+- Focused tests: `10 passed KCL-6.5.9.1 + 12 passed KCL-6.5.9`.
+- Canonical artifact ID: `10574927587`.
+- Artifact ZIP SHA-256: `3271b13a875488f400cf41fba42d8d51489d9a471df0ee5173c59ceae2c57a75`.
+- Raw replication JSON SHA-256: `f76565028bf7eece05a676d8ff643160e00d91fb14583e0af5fe5ebff6d38295`.
+- Preservation workflow commit: `6f156d2f38da99ed93fd1131199698843e904bda`.
+- Machine-readable evidence commit: `eedf0d98eaca4f2661986a7fdab9fddab610c248`.
+- Paper commit: `b18f4b96f5e7388197400505949a3a8d1dabd0d1`.
+- Next scientific requirement:
+  - candidate `KCL-6.5.9.2 — Boundary Regime Predictability Qualification`;
+  - freeze a fresh non-confirmatory train/validation design before execution;
+  - predict supported regime identity using only boundary-time information;
+  - compare against stage-only and H4 baselines;
+  - protected confirmatory cohort remains untouched until a predictor qualifies and is frozen.
