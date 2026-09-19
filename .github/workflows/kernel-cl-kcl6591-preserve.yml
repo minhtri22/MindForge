@@ -1,0 +1,51 @@
+name: Kernel CL — preserve canonical KCL-6.5.9.1 evidence
+
+on:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6591-preserve.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/kernel-cl
+
+      - name: Download canonical artifact 10574927587
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api /repos/${{ github.repository }}/actions/artifacts/10574927587/zip > /tmp/kcl6591.zip
+          mkdir -p /tmp/kcl6591
+          unzip -q /tmp/kcl6591.zip -d /tmp/kcl6591
+          test -f /tmp/kcl6591/kcl6591_replication.json
+
+      - name: Verify canonical bytes
+        run: |
+          echo "f76565028bf7eece05a676d8ff643160e00d91fb14583e0af5fe5ebff6d38295  /tmp/kcl6591/kcl6591_replication.json" | sha256sum -c -
+          echo "3271b13a875488f400cf41fba42d8d51489d9a471df0ee5173c59ceae2c57a75  /tmp/kcl6591.zip" | sha256sum -c -
+
+      - name: Preserve exact machine-readable evidence
+        run: |
+          mkdir -p experiments/kernel_cl/results
+          cp /tmp/kcl6591/kcl6591_replication.json experiments/kernel_cl/results/kcl6591_replication.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6591_replication.json
+
+          if git diff --cached --quiet; then
+            echo "Canonical evidence already preserved."
+            exit 0
+          fi
+
+          git commit -m "evidence(kcl): preserve canonical KCL-6.5.9.1 replication"
+          git push origin HEAD:research/kernel-cl
