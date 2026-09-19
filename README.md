@@ -102,16 +102,18 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary and boundary-state experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9:
+As of KCL-6.5.9.1:
 
 - fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract;
 - no single-scalar, global relational, or localized relational boundary-state predictor has qualified;
-- KCL-6.5.9 found rare alternative boundary regimes, but not enough preregistered support to justify a regime-first controller;
+- KCL-6.5.9.1 independently replicated supported **positive-class boundary-regime heterogeneity** on 66 fresh non-confirmatory seeds;
+- `C_SAFE_ONLY` and `B_AND_C_SAFE` are both supported, and `B_SAFE_ONLY` emerged as an additional supported finding;
+- `CARRY_CATASTROPHIC_FAILURE` did not replicate with support;
 - no adaptive boundary classifier/controller is currently qualified;
 - the protected confirmatory cohort remains untouched;
 - KCL-7 is **not started**.
 
-The next authorized question is a fresh non-confirmatory replication of the rare KCL-6.5.9 regimes under the same frozen taxonomy and thresholds. Core architecture changes remain blocked until the research gates support them.
+The next authorized question is **KCL-6.5.9.2 — Boundary Regime Predictability Qualification**: test whether supported regime identity can be predicted from boundary-time information on fresh non-confirmatory train/validation data before any controller is implemented. Core architecture changes remain blocked until that predictor itself qualifies and is frozen.
 
 ## Roadmap
 
