@@ -1,0 +1,61 @@
+name: Kernel CL — KCL-6.5.8 localized relational-state discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - experiments/kernel_cl/kcl658_localized_boundary_state.py
+      - tests/test_kernel_cl_kcl658.py
+      - .github/workflows/kernel-cl-kcl658-discovery.yml
+
+permissions:
+  contents: read
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Focused unit tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl658.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl657.py -q
+
+      - name: Frozen KCL-6.5.8 LRBS-v1 discovery
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl658_localized_boundary_state.py \
+            --phase discovery \
+            --output experiments/kernel_cl/results/kcl658_discovery.json \
+            --rule-output experiments/kernel_cl/results/kcl658_rule.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload discovery evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl658-discovery-evidence
+          path: |
+            experiments/kernel_cl/results/kcl658_discovery.json
+            experiments/kernel_cl/results/kcl658_rule.json
+          if-no-files-found: warn
+
+      - name: Enforce valid discovery execution
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
