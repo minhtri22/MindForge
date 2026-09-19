@@ -68,7 +68,15 @@ def test_one_seed_reproduces_canonical_boundaries() -> None:
         k658.DISCOVERY_SEEDS[0], cfg, src["by_key"]
     )
     assert len(rows) == 3
-    assert all(r["integrity"]["canonical_reproduction"] for r in rows)
+    assert all(
+        r["integrity"]["canonical_reproduction"] for r in rows
+    ), [
+        {
+            "boundary": r["boundary_index"],
+            "detail": r["integrity"]["canonical_reproduction_detail"],
+        }
+        for r in rows
+    ]
     assert all(r["integrity"]["gradients_cleared_before_counterfactual"] for r in rows)
 
 
