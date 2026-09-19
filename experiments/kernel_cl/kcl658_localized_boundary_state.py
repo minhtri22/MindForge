@@ -273,10 +273,12 @@ def extract_localized_features(
     return {"features": features, "details": details}
 
 
-def _outcomes_match(
+def _outcome_reproduction_detail(
     new: dict[str, Any],
     canonical: dict[str, Any],
-) -> bool:
+) -> dict[str, Any]:
+    deltas: dict[str, float] = {}
+    ok = True
     for policy in (
         "A_CARRY_ALL",
         "B_RESET_ALL",
@@ -285,11 +287,17 @@ def _outcomes_match(
         a = new["outcomes"][policy]
         b = canonical["counterfactual_outcomes"][policy]
         for key in ("auc", "final_accuracy", "retention"):
-            if abs(float(a[key]) - float(b[key])) > REPRO_TOLERANCE:
-                return False
-    return bool(new["SAFE_RESET_OPPORTUNITY"]) == bool(
+            delta = float(a[key]) - float(b[key])
+            deltas[f"{policy}.{key}"] = delta
+            ok = ok and abs(delta) <= REPRO_TOLERANCE
+    label_equal = bool(new["SAFE_RESET_OPPORTUNITY"]) == bool(
         canonical["labels"]["SAFE_RESET_OPPORTUNITY"]
     )
+    return {
+        "outcomes_match": ok,
+        "label_equal": label_equal,
+        "deltas": deltas,
+    }
 
 
 def build_localized_records(
@@ -336,16 +344,19 @@ def build_localized_records(
         )
 
         canonical_match = True
+        reproduction_detail = None
         if canonical_by_key is not None:
             canonical = canonical_by_key[(seed, boundary_index)]
-            canonical_match = _outcomes_match(counter, canonical)
-            # H4 must also reproduce canonical feature.
-            canonical_match = canonical_match and (
-                abs(
-                    localized["features"]["H4_TASK_DRIFT_RELATIVE_L2"]
-                    - float(canonical["features"]["H4_TASK_DRIFT_RELATIVE_L2"])
-                )
-                <= REPRO_TOLERANCE
+            reproduction_detail = _outcome_reproduction_detail(counter, canonical)
+            h4_delta = (
+                localized["features"]["H4_TASK_DRIFT_RELATIVE_L2"]
+                - float(canonical["features"]["H4_TASK_DRIFT_RELATIVE_L2"])
+            )
+            reproduction_detail["H4_delta"] = h4_delta
+            canonical_match = (
+                reproduction_detail["outcomes_match"]
+                and reproduction_detail["label_equal"]
+                and abs(h4_delta) <= REPRO_TOLERANCE
             )
 
         records.append({
@@ -363,6 +374,7 @@ def build_localized_records(
             "integrity": {
                 **counter["integrity"],
                 "canonical_reproduction": canonical_match,
+                "canonical_reproduction_detail": reproduction_detail,
                 "gradients_cleared_before_counterfactual": all(
                     p.grad is None for p in model.parameters()
                 ),
