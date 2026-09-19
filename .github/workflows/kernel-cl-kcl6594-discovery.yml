@@ -1,0 +1,83 @@
+name: Kernel CL — KCL-6.5.9.4 failure-mode discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6594-discovery.yml
+
+permissions:
+  contents: write
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Focused contract tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6594.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6593.py -q
+
+      - name: Assert replication is still closed
+        run: |
+          test ! -e .github/workflows/kernel-cl-kcl6594-replication.yml
+          test ! -e experiments/kernel_cl/results/kcl6594_replication.json
+
+      - name: Frozen failure-mode discovery
+        id: science
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6594_action_target_failure_modes.py \
+            --phase discovery \
+            --output experiments/kernel_cl/results/kcl6594_discovery.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6594_discovery.json
+          sha256sum experiments/kernel_cl/results/kcl6594_discovery.json
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6594_discovery.json"))
+          print("KCL6594_DISCOVERY_STATUS="+str(d.get("status")))
+          print("KCL6594_DISCOVERY_VERDICT="+str(d.get("verdict")))
+          print("KCL6594_A_ONLY_SUPPORT="+json.dumps(d.get("A_ONLY_support",{}),sort_keys=True))
+          print("KCL6594_SUPPORTED_MODES="+json.dumps(d.get("discovery_supported_modes",[]),sort_keys=True))
+          print("KCL6594_REPLICATION_AUTHORIZED="+str(d.get("replication_authorized")))
+          print("KCL6594_MODE_TABLE="+json.dumps(d.get("mechanism_modes",{}),sort_keys=True))
+          print("KCL6594_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          PY
+
+      - name: Preserve exact discovery evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6594_discovery.json
+          git commit -m "evidence(kcl): preserve KCL-6.5.9.4 discovery"
+          git push origin HEAD:research/kernel-cl
+
+      - name: Upload discovery evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6594-failure-mode-discovery
+          path: experiments/kernel_cl/results/kcl6594_discovery.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.science.outputs.exit_code }}" -eq 0
