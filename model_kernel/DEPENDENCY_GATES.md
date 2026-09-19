@@ -101,20 +101,26 @@ Required transferable fact: pristine held-out deterministic representation showe
 
 Required transferable fact: decision-relevant TaskState materially improved information-need ranking in the controlled benchmark and survived the specified frozen shifts.
 
-**CQG J3.13 — SOFT-TO-EXECUTION, promoted to an execution gate for workload minimization.**
+**CQG J3.13 — EXECUTION RESULT REVIEWED; FORMAL UPSTREAM CLOSURE STILL REQUIRED BEFORE MK-1 EXECUTION.**
 
-Reason: J3.13 directly discriminates representation insufficiency, target-scale geometry, and learner-contract explanations for ranking/cardinal separation. Its outcome can remove unnecessary MK-1 representation arms or prevent MK-1 from being misdesigned around a cardinal-value problem.
+The fresh confirmatory GitHub Actions run completed successfully and its frozen result artifact reports `CARDINAL_IDENTIFIABLE_BUT_CURRENT_LEARNER_CONTRACT_INSUFFICIENT`. The audit-only observable contraction reconstructs the cardinal target to numerical precision, while B0, scale-only G1, representation-factor R2, and combined RG all fail the frozen cardinal gate. The frozen support flags for scale geometry, representation insufficiency, and their interaction are false.
 
-Policy:
+Scientific consequence:
 
-- conceptual MK-1 protocol work may occur;
-- final MK-1 architecture arm set and confirmatory execution remain blocked until the latest J3.13 adjudication is reviewed, unless an explicit appended governance amendment demonstrates scientific independence.
+- remove scalar/cardinal repair from the primary MK-1 question;
+- do not add G1/R2/RG merely to repeat J3.13 mechanism discrimination;
+- keep MK-1 focused on structured/typed representation generalization and later decision sufficiency.
+
+Governance consequence:
+
+- conceptual MK-1 protocol drafting may proceed using this narrowing;
+- final MK-1 protocol freeze and training remain blocked until CQG commits its formal J3.13 report/lineage adjudication, or a separate appended governance amendment explicitly accepts the frozen workflow artifact digest as closure evidence.
 
 ### Opening rule
 
 MK-1 may be formally opened only after:
 
-1. J3.13 re-audit;
+1. J3.13 formal upstream report/lineage closure after the already-reviewed execution result;
 2. a frozen MK-1 protocol;
 3. B0 reconstruction;
 4. clean fresh data/seed split;
@@ -254,7 +260,7 @@ NEXUS or ArcLLM may not determine the early model architecture merely because a 
 | Phase | Status after MK-0 | Blocking dependency |
 |---|---|---|
 | MK-0 | COMPLETE / FROZEN | none |
-| MK-1 | NOT OPENED | CQG J3.13 re-audit + prospective MK-1 protocol |
+| MK-1 | NOT OPENED | CQG J3.13 formal upstream closure + prospective MK-1 protocol |
 | MK-2 | BLOCKED | MK-1 supported/frozen |
 | MK-3 | BLOCKED / OPTIONAL | MK-2 |
 | MK-4 | BLOCKED | CQG J3.13 + supported Model Kernel decision representation |
