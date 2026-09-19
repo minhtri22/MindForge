@@ -83,7 +83,7 @@ Can MindForge learn a structured, decision-relevant internal representation from
 - PIT provides negative evidence that deterministic semantic representation can hit a pristine-heldout generalization bottleneck.
 - CQG Q1/Q2 provides positive evidence that an explicit decision-relevant TaskState can materially improve ranking/selection and remain useful under specified shifts.
 - CQG J3.12 warns that strong ranking does not imply cardinal calibration.
-- CQG J3.13 fresh execution artifact shows the cardinal target is observable-identifiable, but the frozen learner contract remains insufficient; scale-only, representation-factor-only, and combined interventions do not clear the cardinal gate.
+- CQG J3.13 is formally closed: the cardinal target is observable-identifiable, but the frozen learner contract remains insufficient; scale-only, representation-factor-only, and combined interventions do not clear the cardinal gate.\n- CQG J3.14 is now prospectively testing whether the remaining failure is caused by data quantity, generic learner function class, or missing explicit compositional bias. Its outcome is intentionally awaited before final MK-1 arm selection.
 
 ### Initial scope
 
@@ -195,7 +195,7 @@ Potential questions:
 - Does a representation or target-geometry change improve cardinal fidelity without degrading ranking?
 - Is calibration useful enough to justify threshold/resource interfaces?
 
-The J3.13 execution artifact has now been inspected and narrows the mechanism: strict cardinal nonidentifiability is falsified in that setup, while the tested frozen learner contract remains insufficient. MK-4 still waits for CQG to commit the formal J3.13 report/lineage adjudication and for Model Core to establish a supported ranking/decision representation.
+J3.13 is formally closed and narrows the mechanism: strict cardinal nonidentifiability is falsified in that setup, while the tested frozen learner contract remains insufficient. J3.14 is the current upstream mechanism-qualification study for data quantity versus learner class versus explicit compositional bias. MK-4 waits for J3.14 adjudication and for Model Core to establish a supported ranking/decision representation.
 
 A ranking PASS never counts as calibration PASS.
 
