@@ -29,13 +29,22 @@ def test_probe_contract_has_no_counterfactual_outcome_inputs() -> None:
     forbidden = (
         "AUC",
         "FINAL_ACCURACY",
-        "RETENTION",
         "SAFE_B",
         "SAFE_C",
         "BEST_SAFE_ACTION",
     )
     for name in k6593.PROBE_FEATURES:
         assert not any(token in name for token in forbidden)
+    assert k6593.PROBE_FEATURES == (
+        "P1_NEXT_TASK_LOSS",
+        "P2_NEXT_GRAD_NORM",
+        "P3_NEXT_GRAD_DRIFT_COSINE",
+        "P4_NEXT_GRAD_PRESSURE_COSINE",
+        "P5_NEXT_GRAD_RETENTION_COSINE",
+        "P6_NEXT_GRAD_DRIFT_SHARE_OVERLAP",
+        "P7_NEXT_GRAD_PRESSURE_SHARE_OVERLAP",
+        "P8_NEXT_GRAD_RETENTION_SHARE_OVERLAP",
+    )
 
 
 def _metric(mr: float, mf1: float, class_recall: float, class_f1: float):
