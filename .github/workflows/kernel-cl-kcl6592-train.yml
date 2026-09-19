@@ -1,0 +1,107 @@
+name: Kernel CL — KCL-6.5.9.2 regime predictor train/freeze
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - docs/research/kernel-continual-learning/kcl6592-protocol.md
+      - experiments/kernel_cl/kcl6592_regime_predictability.py
+      - tests/test_kernel_cl_kcl6592.py
+      - .github/workflows/kernel-cl-kcl6592-train.yml
+
+permissions:
+  contents: write
+
+jobs:
+  train-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/kernel-cl
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Focused contract tests
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6592.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6591.py -q
+
+      - name: Assert validation phase is still closed
+        run: |
+          test ! -e .github/workflows/kernel-cl-kcl6592-validate.yml
+          test ! -e experiments/kernel_cl/results/kcl6592_validation.json
+
+      - name: Frozen training and rule fit
+        id: scientific
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6592_regime_predictability.py             --phase train             --output experiments/kernel_cl/results/kcl6592_train.json             --rule experiments/kernel_cl/results/kcl6592_rule.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6592_train.json
+          sha256sum experiments/kernel_cl/results/kcl6592_train.json
+          if [ -f experiments/kernel_cl/results/kcl6592_rule.json ]; then
+            sha256sum experiments/kernel_cl/results/kcl6592_rule.json
+          fi
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("experiments/kernel_cl/results/kcl6592_train.json")
+          d=json.loads(p.read_text())
+          print("KCL6592_TRAIN_STATUS="+str(d.get("status")))
+          print("KCL6592_TRAIN_VERDICT="+str(d.get("verdict")))
+          print("KCL6592_TRAIN_SUPPORT="+json.dumps(d.get("support",{}),sort_keys=True))
+          print("KCL6592_TRAIN_METRICS="+json.dumps(d.get("train_metrics",{}),sort_keys=True))
+          print("KCL6592_TRAIN_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          PY
+
+      - name: Preserve exact train evidence and frozen rule in git
+        if: steps.scientific.outputs.exit_code == '0'
+        run: |
+          status=$(python - <<'PY'
+          import json
+          print(json.load(open("experiments/kernel_cl/results/kcl6592_train.json"))["status"])
+          PY
+          )
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add experiments/kernel_cl/results/kcl6592_train.json
+          if [ "$status" = "PASS" ]; then
+            test -f experiments/kernel_cl/results/kcl6592_rule.json
+            git add experiments/kernel_cl/results/kcl6592_rule.json
+          else
+            test ! -e experiments/kernel_cl/results/kcl6592_rule.json
+          fi
+
+          git commit -m "evidence(kcl): preserve KCL-6.5.9.2 train freeze"
+          git push origin HEAD:research/kernel-cl
+
+      - name: Upload training evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6592-train-freeze
+          path: |
+            experiments/kernel_cl/results/kcl6592_train.json
+            experiments/kernel_cl/results/kcl6592_rule.json
+          if-no-files-found: warn
+
+      - name: Enforce valid execution
+        run: test "${{ steps.scientific.outputs.exit_code }}" -eq 0
