@@ -47,13 +47,11 @@ ACO-1 implementation and zero-science preflight are now **PASS / CLOSED**.
 
 Canonical QA: `ACO1_PREFLIGHT_QA.md`.
 
-ACO-1 Execution Lock is now **independently verified PASS**.
+ACO-1 execution attempt 1 exposed a **pre-seed technical runner/lock schema mismatch**. No fresh seed or scientific outcome was generated.
 
-Canonical lock: `ACO1_EXECUTION_LOCK.json`.
+The previous lock is archived as superseded because the minimal runner fix changes scientific source identity.
 
-Canonical verification: `ACO1_EXECUTION_LOCK_VERIFICATION.md`.
-
-The next scientific step may execute the frozen 40-seed ACO-1 collection under that exact lock, followed by exactly one adjudication only after complete collection.
+Current authorization returns to **zero-science preflight only**. A new lock must be created and independently verified after preflight PASS before fresh collection may resume.
 
 Not authorized:
 

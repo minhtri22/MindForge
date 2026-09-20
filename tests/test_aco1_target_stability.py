@@ -117,3 +117,18 @@ def test_preflight_is_zero_science(monkeypatch, tmp_path: Path) -> None:
     assert x["scientific_outcome_generated"] is False
     assert x["checks"]["fresh_result_absent"]
     assert x["checks"]["execution_lock_absent"]
+
+
+def test_execution_lock_guard_accepts_canonical_nested_schema(tmp_path: Path) -> None:
+    lock = {
+        "program": "ACO-1",
+        "authorized": True,
+        "seed_manifest": {"sha256": aco1.SEED_MANIFEST_SHA256},
+        "protocol": {"sha256": aco1.sha256_file(aco1.PROTOCOL)},
+    }
+    aco1._validate_execution_lock(lock)
+
+
+def test_execution_lock_guard_rejects_missing_nested_hashes() -> None:
+    with pytest.raises(RuntimeError, match="execution lock invalid"):
+        aco1._validate_execution_lock({"program": "ACO-1", "authorized": True})

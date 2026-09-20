@@ -141,3 +141,21 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Execution workflow: `.github/workflows/aco1-locked-execute.yml`.
 - ACO-2/controller/KCL-7/protected KCL cohort: **CLOSED / UNAUTHORIZED**.
 - Result at this lineage entry: **NOT YET OBSERVED**.
+
+---
+
+## 2026-09-20 — ACO-1 Fresh Execution Attempt 1 Technical Failure Before Seed 1
+
+- Workflow run: `35511036353`.
+- Pre-science immutable-lock gate: **PASS**.
+- Collection process: **FAILED BEFORE FIRST FRESH SEED**.
+- Failure: runner lock guard expected top-level `seed_manifest_sha256` / `protocol_sha256`; canonical verified lock uses nested `seed_manifest.sha256` / `protocol.sha256`.
+- Fresh seed entered `build_boundary_records()`: **NO**.
+- Collection artifact: **NONE**.
+- Scientific metrics inspected: **NO**.
+- Adjudicator called: **NO**.
+- Formal result: **NONE**.
+- Classification: **TECHNICAL_INTERFACE_FAILURE**.
+- Governance action: lock v1 invalidated because correcting the runner changes scientific source; active lock archived/superseded and execution workflow removed.
+- Scientific protocol/thresholds/40-seed manifest: **UNCHANGED**.
+- Next: rerun full zero-science preflight on the minimal schema-compatibility fix before creating any new lock.

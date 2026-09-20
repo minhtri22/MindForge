@@ -426,13 +426,25 @@ def preflight() -> dict[str, Any]:
 
 
 def _validate_execution_lock(lock: dict[str, Any]) -> None:
+    """Validate the canonical nested execution-lock schema.
+
+    ACO1-EXECUTION-LOCK-v1 stores protocol/seed hashes in nested objects.
+    This guard intentionally accepts only that canonical representation; it
+    does not relax or alter any scientific value.
+    """
+    observed = {
+        "program": lock.get("program"),
+        "authorized": lock.get("authorized"),
+        "seed_manifest_sha256": lock.get("seed_manifest", {}).get("sha256"),
+        "protocol_sha256": lock.get("protocol", {}).get("sha256"),
+    }
     expected = {
         "program": "ACO-1",
         "authorized": True,
         "seed_manifest_sha256": SEED_MANIFEST_SHA256,
         "protocol_sha256": sha256_file(PROTOCOL),
     }
-    mismatch = {k: (v, lock.get(k)) for k, v in expected.items() if lock.get(k) != v}
+    mismatch = {k: (v, observed.get(k)) for k, v in expected.items() if observed.get(k) != v}
     if mismatch:
         raise RuntimeError(f"ACO-1 execution lock invalid: {mismatch}")
 
