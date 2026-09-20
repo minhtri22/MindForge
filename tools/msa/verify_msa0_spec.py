@@ -60,8 +60,9 @@ def verify() -> dict:
                   "changing model capacity","inventing new task mappings"]
     )
     checks["saturation_valid"] = (
-        "CURRENT_SUBSTRATE_ENDPOINT_SATURATED" in corpus
-        and "valid conclusion" in text["SUBSTRATE_DIFFICULTY_CONTRACT.md"]
+        "CURRENT_SUBSTRATE_ENDPOINT_SATURATED" in text["SUBSTRATE_DIFFICULTY_CONTRACT.md"]
+        and "is a valid" in text["SUBSTRATE_DIFFICULTY_CONTRACT.md"]
+        and "conclusion" in text["SUBSTRATE_DIFFICULTY_CONTRACT.md"]
     )
     checks["adaptive_difficulty_forbidden"] = (
         "Prohibited adaptive difficulty search" in text["SUBSTRATE_DIFFICULTY_CONTRACT.md"]

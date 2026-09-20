@@ -55,3 +55,15 @@ Existing entries must never be rewritten or silently removed.
 - Scientific execution attempted: **NO**.
 - Contract changes: **NONE**.
 - QA-only change: assertion now prints only false predicates so the exact verifier mismatch can be identified without altering scientific specification.
+
+---
+
+## 2026-09-20 — MSA-0 QA Saturation Predicate Newline Fix
+
+- Diagnostic workflow: `35520136747`.
+- Exact false predicate: `saturation_valid`.
+- Frozen contract already states `CURRENT_SUBSTRATE_ENDPOINT_SATURATED` is a valid conclusion.
+- Failure cause: verifier searched the contiguous string `valid conclusion`, while Markdown line wrapping inserted a newline.
+- Scientific contract changes: **NONE**.
+- Verifier-only recovery: semantic token checks within the same frozen document.
+- Scientific execution / seed generation / difficulty mutation / predictor fitting: **NONE**.
