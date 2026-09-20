@@ -2072,3 +2072,72 @@ This compact index summarizes the active Kernel Continual Learning chain without
 - Next scientific requirement:
   - stop target-only decomposition and classifier escalation;
   - formulate a new mechanistic representation hypothesis, especially for `MECH{P+R,R}`, freeze it prospectively, and compare against the frozen S2 baseline on a fresh cohort before any controller study.
+
+
+## 2026-09-20 — KCL-6.5.9.6 Mechanistic Representation Qualification NEGATIVE
+
+- Status: **NEGATIVE**
+- Verdict: `MRIG_V1_DOES_NOT_QUALIFY_MECH_PRR_REPRESENTATION`.
+- Trigger:
+  - KCL-6.5.9.5 showed that mechanism-specific target refinement alone did not resolve identifiability;
+  - KCL-6.5.9.6 tested a new static mechanistic representation instead of escalating classifier capacity.
+- Frozen primary target:
+  - `Y_PRR = MECH{P+R,R} vs rest`.
+- Frozen comparison:
+  - `S2 = stage + H1-H9 + LRBS-v1 F1-F13`;
+  - `S3 = S2 + MRIG-v1 M1-M10`;
+  - same class-balanced L2 logistic model family.
+- MRIG-v1:
+  - exact clone-only virtual AdamW response under A/B/C;
+  - current/observed-task gradients only;
+  - B/C-exchange-symmetric predictor-visible features;
+  - no future-task input.
+- Fresh prospective cohort:
+  - train: 480 seeds / 1440 boundaries;
+  - validation: 240 seeds / 720 boundaries.
+- Train/freeze:
+  - run `35478292166` — **SUCCESS**;
+  - primary Y_PRR support: 90 POS / 85 unique seeds;
+  - all integrity gates PASS;
+  - all 6 solvers converged;
+  - frozen rule `MRIG-Q-v1`;
+  - rule SHA-256 `ebd6d2d02b7263fd4a58bf52507a50f639b3211c4a3e133fa798b57c9e8ba296`;
+  - train evidence commit `74c606154bf3681c1a9d34ee7156ca5940bb08db`.
+- Validation:
+  - run `35483474452` — **SUCCESS**;
+  - primary Y_PRR support: 36 POS / 32 unique seeds;
+  - all integrity gates PASS.
+- Primary result:
+  - S2 macro recall = `0.584064`, **NOT QUALIFIED**;
+  - S3 macro recall = `0.557749`, **NOT QUALIFIED**;
+  - `D_MRIG = -0.026316`;
+  - 20k paired whole-seed bootstrap 95% CI `[-0.068479,+0.004373]`;
+  - frozen PASS gate required S3 qualified, point gain >= +0.10, CI lower > +0.03;
+  - route therefore **FALSE**.
+- Secondary diagnostics:
+  - `Y_A: S3-S2 = +0.003358`;
+  - `Y_PR: S3-S2 = +0.018333`;
+  - `Y_PRR: S3-S2 = -0.026316`;
+  - `M9_MAX_JOINT_BADNESS = 0` for all train and validation records.
+- Scientific interpretation:
+  - static observed-task reset-response geometry does not resolve the unresolved `MECH{P+R,R}` representation gap;
+  - the result argues against further static MRIG feature engineering or classifier escalation;
+  - the next admissible hypothesis class is temporal/multi-boundary transition geometry.
+- Provenance:
+  - protocol commit `8d725d398944b8fd84a708f1129c18e4101766c7`;
+  - protocol SHA-256 `e6acbb980f8d8bbc8fac222e15fdda933f1b50a539f03695b387dcdafdc8abda`;
+  - implementation `5e8a2689c65b77d5a8467ac416326873241dab2c`;
+  - tests `7cb61e9442a78977f8794c552bd54e5f00636cb8`;
+  - validation raw JSON SHA-256 `6bf4b59281f78cbea6244b36a493b182a3fcbeb2ed2428842a93eb4952123183`;
+  - validation artifact ID `10597037043`;
+  - validation artifact ZIP SHA-256 `fda04308beb0e04d7a70abe0ed2934b03aa0876d806b56463a8a8c20ca9b8744`;
+  - validation evidence commit `cb2e0cf7e8969d998f4bcd1393e74a721a579f58`;
+  - paper commit `f76bae01522db809d9870681b531a18c238e3c99`.
+- Guardrails:
+  - validation refit: **NO**;
+  - controller: **NOT IMPLEMENTED**;
+  - protected confirmatory cohort: **UNTOUCHED**;
+  - KCL-7: **NOT STARTED**.
+- Next scientific requirement:
+  - `KCL-6.5.9.7 — Temporal Mechanistic Representation Qualification`;
+  - test whether historically available transition geometry across completed boundaries predicts `MECH{P+R,R}` better than the static S3 representation on a fresh cohort.
