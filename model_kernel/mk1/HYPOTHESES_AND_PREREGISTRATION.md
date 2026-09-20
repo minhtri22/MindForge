@@ -1,6 +1,6 @@
 # MK-1 — Learned Structured Decision-State Representation v0.1
 
-Status: **PREREGISTERED / ZERO-SCIENCE QA PASS / IMPLEMENTATION NOT AUTHORIZED**
+Status: **PREREGISTERED / AMENDMENT 001 FROZEN / AMENDMENT QA PENDING / IMPLEMENTATION NOT AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -82,9 +82,11 @@ No KCL predictor/controller is imported.
 
 A learned structured representation M1-Z can satisfy prospectively frozen absolute semantic-representation gates on pristine confirmatory data.
 
-### H1b — factorized structure adds value over matched direct learning
+### H1b — structured intermediate supervision adds value over direct canonical learning
 
-Under matched neural substrate, parameters, data, seeds, and compute, M1-Z improves the balanced representation score over B0-DIRECT by the frozen paired threshold.
+Under matched neural substrate, parameters, current-input exposure, seeds, and compute, canonical state `R(M1-Z)` improves over direct `B0-DIRECT(C)` by the frozen canonical-state paired threshold.
+
+The contrast is structured Z supervision plus deterministic recomposition versus direct C supervision. It is not monolithic-versus-split module layout.
 
 ### H1c — learned representation exceeds the frozen deterministic route
 
@@ -97,9 +99,9 @@ These hypotheses are adjudicated sequentially. H1b/H1c cannot rescue H1a failure
 Exactly three routes:
 
 ```
-B0-DIRECT  — matched learned direct/monolithic representation
+B0-DIRECT  — exact B0 body -> direct canonical state C
 D-PIT      — frozen deterministic PIT-v3 representation
-M1-Z       — learned structured/factorized Z1-Z4 representation
+M1-Z       — exact B0 body -> Z1-Z4 -> frozen R(Z) -> canonical state C
 ```
 
 No fourth latent arm is authorized.
@@ -110,7 +112,7 @@ Detailed contract:
 
 blob:
 
-`dec5747a7bf11857bcddcda25f3f431ced9f3156`
+`82517e3cb4d03b0cdc6fb6c99a289ad935372623`
 
 ## 5. Frozen target ontology
 
@@ -129,7 +131,7 @@ Target contract:
 
 blob:
 
-`90849d77dbcd9fabdbd67b735ba9296a3d0756a5`
+`65b152f54b7f2bb7ea45e97a433443e0956a7d11`
 
 ## 6. Target stability prerequisite
 
@@ -176,7 +178,7 @@ Schema:
 
 blob:
 
-`cb9ad4a9e546b086502f56f9151809eb7f3b0fc4`
+`045cafa9a8cc6bc9b207da9915f47f982152fbaa`
 
 ## 9. Data and pristine-confirmatory contract
 
@@ -196,22 +198,26 @@ Exact split/evaluation contract:
 
 blob:
 
-`9b07e5ade54054c5717bd54e3417c88bff9dff39`
+`85a943462f7a11c14ea8c20a8466a660facfdc75`
 
 ## 10. Neural matching contract
 
 B0-DIRECT and M1-Z must match:
 
-- B0 body;
-- initialization family;
-- tokenizer/context;
-- train/validation samples;
+- exact B0 body and final-token post-LayerNorm pooling;
+- one saved paired B0 initialization state per seed;
+- one TRAIN-only frozen tokenizer artifact;
+- train/validation scenes and tokenized sequences;
 - five paired training seeds `71001..71005`;
-- optimizer family;
-- training steps;
-- effective batch;
-- processed training tokens within 1%;
-- trainable parameter count within 1%.
+- optimizer family and schedule;
+- training steps and effective batch;
+- processed input tokens within 1%.
+
+Frozen trainable totals:
+
+- B0-DIRECT = `10,350,114`;
+- M1-Z = `10,361,670`;
+- difference ~= `0.112%`, inside the 1% gate.
 
 No failed seed replacement is allowed.
 
@@ -221,21 +227,22 @@ D-PIT remains an unmatched deterministic comparator and cannot support compute-e
 
 The authoritative thresholds are frozen in DATA_SPLIT_AND_EVALUATION.md.
 
-M1-Z absolute PASS requires, among other gates:
+M1-Z H1a absolute PASS requires, among other gates:
 
 - Z1 micro precision >= 0.95;
 - Z1 micro recall >= 0.95;
 - Z1 macro F1 >= 0.90;
 - Z3 scope-relation accuracy >= 0.95;
-- Z4 edge precision >= 0.95;
-- Z4 edge recall >= 0.90;
-- recomposed canonical-state field accuracy >= 0.95;
+- Z4 pooled precision >= 0.95;
+- Z4 pooled recall >= 0.90;
+- recomposed C canonical-state field accuracy >= 0.95;
 - invariance-cluster consistency >= 0.95;
-- no supported primary class recall < 0.80.
+- no supported primary Z1/Z4 class recall < 0.80;
+- each supported continuous Z2 scalar mean nAE <= 0.05 and p95 nAE <= 0.10.
 
-M1-Z vs B0-DIRECT:
+H1b compares only canonical C:
 
-- balanced-score improvement >= +0.03;
+- `Delta_C >= +0.03`;
 - paired whole-scene bootstrap 95% lower bound > 0.
 
 M1-Z vs D-PIT on common fields:
@@ -253,10 +260,12 @@ Sequentially:
 1. data/split integrity;
 2. target stability;
 3. observable identifiability;
-4. B0 reconstruction and arm matching;
-5. M1-Z absolute gates;
-6. M1-Z vs B0-DIRECT;
-7. M1-Z vs D-PIT.
+4. tokenizer contract;
+5. B0 reconstruction;
+6. implementation/matching integrity;
+7. M1-Z H1a absolute gates;
+8. H1b canonical-state paired comparison;
+9. H1c D-PIT common-field comparison.
 
 Possible terminal verdicts:
 
@@ -305,23 +314,56 @@ A valid MK-1 execution must archive:
 14. formal adjudication JSON;
 15. append-only lineage entry.
 
-## 15. Current authorization state
 
-This preregistration is frozen and has passed zero-science QA.
+## 15. Pre-outcome Amendment 001 and B0 gate
 
-QA evidence:
+B0 reconstruction formally passed before implementation:
 
-- ZERO_SCIENCE_QA.md blob: `60d1b054fc474dfbd18cc3fd6b14ea01dea2729e`;
-- QA commit: `e2331e2b1c9462d5067718f5cfbf5b46cb96ce9d`.
+- B0 reconstruction document blob: `070efdd36d32760dfffc71c60ae27b0825321298`;
+- canonical workflow run: `35526336632`;
+- execution head: `6f54872d0825f07a3394747576c537ca447c999b`;
+- parameter count: `10,339,200`;
+- historical checkpoint restore: PASS;
+- deterministic zero-science eval/generation replay: PASS.
 
-It authorizes only B0 reconstruction and implementation-lock planning.
+The subsequent matching-feasibility review found the original H1b formulation potentially algebraically non-identifying and returned:
 
-It does not authorize:
+`MATCHING_FEASIBILITY_REVISE`
 
-- MK-1 model-code changes;
-- data materialization;
-- training;
-- workflow execution;
-- scientific outcome inspection.
+Review blob:
 
-The next gate is exact B0 reconstruction and implementation lock under the frozen specification. Scientific data materialization and training remain blocked until that gate passes.
+`981942426e2933579e733e347bafd78cbbc1284d`
+
+Before any MK-1 implementation or scientific data, Amendment 001 was frozen:
+
+- amendment blob: `0ec12864118e1b95d579318edab0dc8c00552656`;
+- amendment commit: `4d8e9a8e9e22e17ee35270991e027526600296bf`.
+
+Amendment 001 supersedes conflicting v0.1 clauses and freezes:
+
+- B0-DIRECT -> C directly;
+- M1-Z -> 70-dimensional Z -> deterministic R -> C;
+- 34-dimensional direct C layout;
+- exact Z1/Z2/Z3/Z4 layouts and loss families;
+- final-token post-LayerNorm pooling;
+- exact parameter totals;
+- TRAIN-only tokenizer procedure;
+- H1b on canonical C only.
+
+The original ZERO_SCIENCE_QA.md remains historical evidence for the pre-amendment package and does not by itself validate Amendment 001.
+
+## 16. Current authorization state
+
+Current state:
+
+```
+B0_RECONSTRUCTION                PASS
+MATCHING_FEASIBILITY_V0_1        REVISE
+PREREGISTRATION_AMENDMENT_001    FROZEN
+AMENDMENT_ZERO_SCIENCE_QA        PENDING
+IMPLEMENTATION_LOCK              BLOCKED
+SCIENTIFIC_DATA_MATERIALIZATION  BLOCKED
+TRAINING                         BLOCKED
+```
+
+The only admissible next step is `ZERO_SCIENCE_QA_AMENDMENT_001`.
