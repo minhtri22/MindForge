@@ -1,6 +1,6 @@
 # MK-1 — Learned Structured Decision-State Representation v0.1
 
-Status: **PREREGISTERED / AMENDMENT 001 QA PASS / AMENDMENT 002 QA PENDING / IMPLEMENTATION NOT AUTHORIZED**
+Status: **PREREGISTERED / AMENDMENTS 001-002 QA PASS / IMPLEMENTATION LOCK NEXT**
 
 Date: **2026-09-21**
 
@@ -361,8 +361,8 @@ B0_RECONSTRUCTION                PASS
 MATCHING_FEASIBILITY_V0_1        REVISE
 PREREGISTRATION_AMENDMENT_001    FROZEN
 AMENDMENT_001_ZERO_SCIENCE_QA    PASS
-AMENDMENT_002_ZERO_SCIENCE_QA    PENDING
-IMPLEMENTATION_LOCK              BLOCKED
+AMENDMENT_002_ZERO_SCIENCE_QA    PASS
+IMPLEMENTATION_LOCK              NEXT GATE
 SCIENTIFIC_DATA_MATERIALIZATION  BLOCKED
 TRAINING                         BLOCKED
 ```
@@ -379,4 +379,9 @@ A subsequent historical-artifact feasibility audit froze Amendment 002:
 
 Amendment 002 changes only tokenizer cardinality admission: the tokenizer is still trained from TRAIN only with requested 16,384 vocabulary, while actual corpus-dependent vocabulary may be between 258 and 16,384. The B0 model vocabulary remains exactly 16,384 and no artificial tokens may pad the tokenizer.
 
-Current next gate is `ZERO_SCIENCE_QA_AMENDMENT_002`.
+Amendment 002 QA evidence:
+
+- QA blob: `4e01488fea59087507dd08a442dfec95bead9fbf`;
+- QA commit: `bbc92b10029022d86b96c9379fe651ea20e710e5`.
+
+The complete preregistration now permits only `MK1_IMPLEMENTATION_LOCK`. Scientific data materialization and training remain blocked.
