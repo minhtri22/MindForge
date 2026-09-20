@@ -47,3 +47,17 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Thresholds/gates changed: **NO**.
 - Outcome information used: **NO**.
 - Interpretation: technical/provenance correction before execution, not a scientific protocol relaxation.
+
+---
+
+## 2026-09-20 — ACO-1 Pre-Implementation Protocol Clarification
+
+- Scientific execution before clarification: **NONE**.
+- Added diagnostic reference-accuracy margin `m_A_acc = A.final_accuracy - 0.95` because the frozen plasticity-repair predicate depends on whether A is below the same strict-current threshold.
+- Added frozen whole-seed bootstrap RNG seed: `71001`.
+- A/B/C policies changed: **NO**.
+- Threshold values changed: **NO**.
+- Near-margin bands changed: **NO**.
+- Materiality gates changed: **NO**.
+- Fresh cohort changed: **NO**.
+- Purpose: remove implementation ambiguity before source code exists; no outcome-conditioned revision.

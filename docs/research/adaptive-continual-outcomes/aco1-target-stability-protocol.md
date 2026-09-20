@@ -109,11 +109,14 @@ m_ret(P) = retention_delta_vs_A + 1/24
 m_acc(P) = P.final_accuracy - 0.95
 ```
 
-When `A.final_accuracy < 0.95`, also record the repair margin:
+Because the repair branch depends on both the reference A accuracy and the intervention accuracy, also record:
 
 ```text
+m_A_acc     = A.final_accuracy - 0.95
 m_repair(P) = P.final_accuracy - 0.95
 ```
+
+`m_A_acc` is diagnostic only; it ensures that sensitivity to the frozen strict-accuracy threshold is not hidden when A itself lies near 0.95.
 
 The exact hard predicate remains unchanged.
 
@@ -157,6 +160,12 @@ For canonical `Y_PRR` boundaries:
    `min(|m_j| / epsilon_j)`.
 
 Use whole-seed bootstrap, 10,000 resamples, 95% percentile intervals.
+
+Frozen bootstrap RNG seed:
+
+```text
+71001
+```
 
 Seeds are the resampling unit; individual boundaries are not independently resampled.
 
