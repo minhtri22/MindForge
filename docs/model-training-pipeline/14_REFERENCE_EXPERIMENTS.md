@@ -21,7 +21,7 @@ Reference source identity: enwiki 20260301 pages-articles-multistream dump. Acqu
 
 ## R2 — Code CPT qualification
 
-Reference ingestion path: CodeSearchNet v2 Python artifact from the documented S3 path. This is suitable to exercise adapter/provenance plumbing, but release training is forbidden until repository/file license enrichment satisfies deny-unknown policy. Secret scanning required.
+Reference ingestion path: codeparrot/codeparrot-clean pinned at revision 35a59fb025bc0a102f7d96eac09d145b896d487b. It exposes repo/path/license/hash metadata and is suitable for development adapter/provenance plumbing. Release training is forbidden until exact repository-revision provenance and license policy requirements are satisfied. Secret scanning required.
 
 ## R3 — Mixed real study
 

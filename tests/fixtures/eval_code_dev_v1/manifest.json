@@ -1,0 +1,10 @@
+{
+  "fixture_set_id": "tests/fixtures/eval_code_dev_v1",
+  "fixture_set_version": "1",
+  "freshness_class": "development",
+  "purpose": "development-only heldout code-loss plumbing fixture",
+  "tasks": [
+    {"id":"code-heldout-1","type":"causal_lm_loss","language":"python","code":"def square(x):\n    return x * x\n"},
+    {"id":"code-heldout-2","type":"causal_lm_loss","language":"python","code":"def is_even(x):\n    return x % 2 == 0\n"}
+  ]
+}

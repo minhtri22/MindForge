@@ -1,5 +1,5 @@
 experiment:
-  id: codesearchnet-python-cpt-dev
+  id: codeparrot-python-cpt-dev
   mode: development
   seed_sets:
     development: [43]
@@ -15,11 +15,13 @@ model:
   profile: profiles/qwen2.5-0.5b-instruct-r0.yaml
 
 datasets:
-  codesearchnet_python_v2:
-    adapter: codesearchnet_v2
-    snapshot: codesearchnet-v2-python
-    uri: https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip
-    upstream_project: github/CodeSearchNet
+  codeparrot_clean_python:
+    adapter: huggingface_dataset
+    snapshot: 35a59fb025bc0a102f7d96eac09d145b896d487b
+    dataset_id: codeparrot/codeparrot-clean
+    revision: 35a59fb025bc0a102f7d96eac09d145b896d487b
+    split: train
+    provenance_columns: [repo_name, path, license, hash]
     license_policy: deny_unknown_for_release
     release_eligible_without_license_enrichment: false
     secret_scan: required
@@ -29,7 +31,7 @@ phases:
   - id: code_cpt
     type: cpt
     parent_ref: model
-    datasets: [codesearchnet_python_v2]
+    datasets: [codeparrot_clean_python]
     token_stream:
       add_bos: false
       add_eos: true
@@ -58,7 +60,7 @@ baselines:
     revision: 7ae557604adf67be50417f59c2c2f167def9a775
 
 evaluation:
-  fixture_set: eval/code_dev_v1
+  fixture_set: tests/fixtures/eval_code_dev_v1
   metrics:
     - metric_id: heldout_code_loss_delta
       metric_version: "1"
