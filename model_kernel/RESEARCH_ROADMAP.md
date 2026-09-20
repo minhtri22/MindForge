@@ -76,50 +76,66 @@ No model is trained in MK-0.
 
 ### Question
 
-Can MindForge learn a structured, decision-relevant internal representation from **current** observation/context that generalizes better than deterministic/direct representation baselines?
+Can MindForge learn a structured, decision-relevant internal representation from **current** raw observation/context that generalizes beyond deterministic and matched direct learned baselines?
 
-### Initial motivation
+### Upstream narrowing now closed for MK-1
 
-- PIT provides negative evidence that deterministic semantic representation can hit a pristine-heldout generalization bottleneck.
-- CQG Q1/Q2 provides positive evidence that an explicit decision-relevant TaskState can materially improve ranking/selection and remain useful under specified shifts.
-- CQG J3.12 warns that strong ranking does not imply cardinal calibration.
-- CQG J3.13 is formally closed: the cardinal target is observable-identifiable, but the frozen learner contract remains insufficient; scale-only, representation-factor-only, and combined interventions do not clear the cardinal gate.\n- CQG J3.14 is now prospectively testing whether the remaining failure is caused by data quantity, generic learner function class, or missing explicit compositional bias. Its outcome is intentionally awaited before final MK-1 arm selection.
+- PIT-19 provides pristine negative evidence against further blind deterministic rule accumulation.
+- CQG Q1/Q2 supports the usefulness of explicit decision-relevant state in its controlled substrate.
+- CQG J3.12/J3.13 separates strong ranking from poor generic cardinal fidelity and rules out strict observable nonidentifiability in that tested setup.
+- CQG J3.14 rejects data-doubling and generic function-class rescue under its frozen gates.
+- CQG J3.15 shows the structured arm's raw-Spearman failure is a near-tie/numerical pathology, not material-order failure.
+- CQG J3.16 formally supports structured observable ECV on a fresh cohort.
+- KCL-6.5.9.x formally converged: real structural heterogeneity does not guarantee predictability from current observables, hard labels can hide mechanisms, and repeated representation rescue without a new uncertainty must stop.
 
-### Initial scope
+CQG J3.17+ resource-controller studies and KCL post-convergence pivots are downstream/separate and do not block MK-1 representation specification.
 
-Memory-free.
+### Frozen MK-1 v0.1 scope
 
-Candidate primary intervention:
+MK-1 is memory-free and representation-only.
+
+The preregistered target is:
 
 ~~~
-current input
+current raw input
     |
     v
-B0 Transformer
+shared B0 Transformer
     |
-    v
-learned structured decision-state
+    +--> Z1 semantic primitives
+    +--> Z2 normalized arguments
+    +--> Z3 scope state
+    +--> Z4 support/composition relations
 ~~~
 
-The exact state schema, supervision, parameter matching, and baseline set are **not frozen in MK-0**.
+Final action labels, scalar utility, memory, continual-learning control, resource control, invariance objectives, sparse routing, and runtime optimization are excluded.
 
-### Candidate comparisons
+### Frozen comparison set
 
-To be prospectively selected after dependency re-audit:
+Exactly:
 
-- direct/raw B0 representation;
-- deterministic PIT-style representation;
-- learned structured/typed representation.
+- B0-DIRECT — matched learned monolithic/direct representation;
+- D-PIT — frozen deterministic PIT-v3 comparator;
+- M1-Z — learned structured/factorized representation.
 
-A latent+typed arm is not automatically required. It should be added only if upstream evidence or MK-1 results justify it prospectively.
+No latent rescue arm is authorized in MK-1 v0.1.
 
-### Primary result type
+### Preconditions before implementation/training
 
-Representation generalization, not final end-to-end task success.
+- target ontology frozen;
+- target-margin/stability audit contract frozen;
+- observable-identifiability contract frozen;
+- structured/factorized Z schema frozen;
+- baseline/capacity/compute matching frozen;
+- fresh/pristine split and falsification rules frozen;
+- zero-science QA PASS;
+- exact B0 reconstruction PASS.
 
 ### Stop logic
 
-A clean MK-1 failure should prevent automatic progression to MK-2 unless the failure itself supports a new preregistered representation hypothesis.
+A valid MK-1 failure is not followed by automatic feature/history/capacity expansion. A new attempt requires a new preregistered scientific uncertainty.
+
+A full MK-1 PASS authorizes only designing MK-2 Decision Sufficiency. It does not authorize a controller.
 
 ## 5. MK-2 — Decision Sufficiency
 
