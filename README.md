@@ -100,26 +100,35 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 ### Active Kernel Continual Learning research
 
-The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary, boundary-state, failure-mode, target-identifiability, static mechanistic and temporal mechanistic representation experiments. The append-only chain is in [Lineage.md](Lineage.md) and [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
+The active **KCL-6.5.9.x representation / identifiability sequence is now CLOSED**. The append-only evidence chain is preserved in [Lineage.md](Lineage.md) and [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9.7:
+What the sequence established:
 
 - fixed global optimizer-boundary policies do not jointly satisfy plasticity + retention + robustness;
-- broad action-regime prediction from stage/global/localized pre-boundary state is not qualified;
-- `A_ONLY` contains independently replicated mechanism heterogeneity, including `MECH{P,R}` and `MECH{P+R,R}`;
-- mechanism-specific target decomposition alone does not solve identifiability;
-- KCL-6.5.9.6 MRIG-v1 static reset-response geometry was NEGATIVE for `MECH{P+R,R}`;
-- KCL-6.5.9.7 TRIG-v1 one-transition temporal geometry was also NEGATIVE:
-  - S3 validation macro recall = `0.5459`;
-  - S4 validation macro recall = `0.5141`;
-  - `D_TRIG = -0.03185`, 95% paired whole-seed CI `[-0.0940,+0.0336]`;
-- zero-step future-task interaction remains the only tested information class with prior positive numerical uplift, though it did not qualify on the earlier broad action target;
-- a separate reverse-synthesis backlog is preserved at [kcl659x-reverse-synthesis-backlog.md](docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md) and is explicitly deferred until after the active chain closes;
-- no adaptive boundary controller is qualified;
-- protected confirmatory seeds remain untouched;
-- KCL-7 is **not started**.
+- boundary action suitability is heterogeneous rather than governed by one global reset rule;
+- broad pre-boundary action-regime prediction is not qualified under the tested stage/global/localized representations;
+- `A_ONLY` contains independently replicated failure-mode heterogeneity, including stable `MECH{P,R}` and `MECH{P+R,R}`;
+- mechanism-specific hard-target decomposition alone does not resolve identifiability;
+- KCL-6.5.9.6 MRIG-v1 static reset-response geometry is NEGATIVE for `MECH{P+R,R}`;
+- KCL-6.5.9.7 TRIG-v1 one-transition temporal geometry is NEGATIVE;
+- KCL-6.5.9.8 exact zero-step `FUTURE-PROBE-v1 P1-P8` is also NEGATIVE on `MECH{P+R,R}`:
+  - S2 validation macro recall = `0.4515`;
+  - FUT validation macro recall = `0.4390`;
+  - `D_FUTURE = -0.01252`;
+  - paired whole-seed 95% CI = `[-0.02129,-0.00375]`;
+  - neither arm qualifies.
 
-The next active milestone is **KCL-6.5.9.8 — Mechanism-Specific Future-Interaction Qualification**. It must reuse the pre-existing FUTURE-PROBE-v1 P1-P8 exactly, compare a pre-boundary S2 baseline against S2 + zero-step future-task interaction on a fresh cohort, use a strict future-information gain gate, and act as the terminal discriminator for the current KCL-6.5.9.x sequence. If it is NEGATIVE, the sequence closes into formal convergence review rather than adding more representation variants.
+The frozen KCL-6.5.9.8 terminal rule therefore applies:
+
+```
+ACTIVE KCL-6.5.9.x = CLOSED
+DO NOT OPEN KCL-6.5.9.9 AS FEATURE RESCUE
+NEXT = FORMAL CONVERGENCE REVIEW
+```
+
+A reverse-angle synthesis has been preserved separately at [kcl659x-reverse-synthesis-backlog.md](docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md). It contains possible post-review programs such as continuous potential-outcome modeling, policy-conditioned factorization, target-margin audit, and conditional future-task × action-response geometry. **None of these backlog items is currently authorized or executed.**
+
+No adaptive boundary controller is qualified. The protected confirmatory cohort remains untouched. **KCL-7 is not started.**
 
 ## Roadmap
 
