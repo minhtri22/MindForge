@@ -33,7 +33,8 @@
         "id": {"type": "string", "minLength": 1},
         "revision": {"type": "string", "minLength": 1},
         "require_resolved_sha": {"const": true},
-        "allow_remote_code": {"type": "boolean", "default": false}
+        "allow_remote_code": {"type": "boolean", "default": false},
+        "profile": {"type": "string", "minLength": 1}
       }
     },
     "datasets": {
@@ -262,7 +263,8 @@
         "matched_to": {"type": "string"},
         "seeds": {"type": "array", "items": {"type": "integer"}, "uniqueItems": true},
         "token_budget": {"type": "integer", "minimum": 1},
-        "resource_class": {"type": "string"}
+        "resource_class": {"type": "string"},
+        "control_run_id": {"type": "string", "minLength": 1}
       },
       "allOf": [
         {
@@ -278,8 +280,12 @@
           "then": {"required": ["artifact_id"]}
         },
         {
+          "if": {"properties": {"source": {"const": "control_run"}}, "required": ["source"]},
+          "then": {"required": ["control_run_id"]}
+        },
+        {
           "if": {"properties": {"role": {"const": "matched_control"}}, "required": ["role"]},
-          "then": {"required": ["parent_baseline", "intervention", "matched_to", "seeds", "token_budget", "resource_class"]}
+          "then": {"required": ["parent_baseline", "intervention", "matched_to", "seeds", "token_budget", "resource_class", "control_run_id"]}
         }
       ]
     }

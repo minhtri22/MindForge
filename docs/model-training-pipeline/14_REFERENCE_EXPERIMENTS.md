@@ -13,7 +13,7 @@ Canonical model:
 - HF -> F16 GGUF -> Q4_K_M -> llama.cpp -> Ollama
 - evidence bundle.
 
-Config: examples/end_to_end_small.yaml.
+Config: examples/end_to_end_small.yaml. Model/serializer profile: profiles/qwen2.5-0.5b-instruct-r0.yaml.
 
 ## R1 — Wikipedia CPT qualification
 

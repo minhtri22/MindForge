@@ -6,8 +6,10 @@
   "additionalProperties": false,
   "required": [
     "run_id", "run_class", "software_git_sha", "frozen_config_hash",
-    "data_manifest_hash", "resolved_model_revision", "phases", "freshness_registry",
-    "metrics", "toolchain", "resource_contract", "retry_policy"
+    "data_manifest_hash", "model_profile_hash", "baseline_registry_hash",
+    "evaluation_contract_hash", "inference_contract_hash",
+    "resolved_model_revision", "phases", "freshness_registry",
+    "toolchain", "resource_contract", "retry_policy"
   ],
   "properties": {
     "run_id": {"type": "string", "minLength": 1},
@@ -15,23 +17,33 @@
     "software_git_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "frozen_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "data_manifest_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "resolved_model_revision": {"type": "string", "minLength": 7},
+    "model_profile_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "baseline_registry_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evaluation_contract_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "inference_contract_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "resolved_model_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "phases": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["phase_id", "parent_artifact_hash", "stop", "checkpoint_selection"],
+        "additionalProperties": false,
+        "required": [
+          "phase_id", "parent_artifact_hash", "phase_config_hash",
+          "token_stream_hash", "checkpoint_selection_hash"
+        ],
         "properties": {
-          "phase_id": {"type": "string"},
-          "parent_artifact_hash": {"type": "string"},
-          "stop": {"type": "object"},
-          "checkpoint_selection": {"type": "object"}
+          "phase_id": {"type": "string", "minLength": 1},
+          "parent_artifact_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "phase_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "token_stream_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "checkpoint_selection_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
         }
       }
     },
     "freshness_registry": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["seed_ids", "split_ids", "fixture_set_ids"],
       "properties": {
         "seed_ids": {"type": "array", "items": {"type": "integer"}, "uniqueItems": true},
@@ -39,9 +51,9 @@
         "fixture_set_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
       }
     },
-    "metrics": {"type": "array", "items": {"type": "object"}},
     "toolchain": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["trainer", "llama_cpp", "ollama"],
       "properties": {
         "trainer": {"type": "object"},
@@ -51,19 +63,21 @@
     },
     "resource_contract": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["backend", "device_class", "resolved_precision"],
       "properties": {
-        "backend": {"type": "string"},
-        "device_class": {"type": "string"},
+        "backend": {"type": "string", "minLength": 1},
+        "device_class": {"type": "string", "minLength": 1},
         "resolved_precision": {"enum": ["fp32", "fp16", "bf16"]}
       }
     },
     "retry_policy": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["infra_retry", "invalid_run_repair", "scientific_retry"],
       "properties": {
-        "infra_retry": {"type": "string"},
-        "invalid_run_repair": {"type": "string"},
+        "infra_retry": {"type": "string", "minLength": 1},
+        "invalid_run_repair": {"type": "string", "minLength": 1},
         "scientific_retry": {"const": "forbidden_without_new_contract"}
       }
     }

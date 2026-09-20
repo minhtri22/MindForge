@@ -1,0 +1,26 @@
+profile_id: qwen2.5-0.5b-instruct-r0-v1
+model_id: Qwen/Qwen2.5-0.5B-Instruct
+revision: 7ae557604adf67be50417f59c2c2f167def9a775
+architecture: qwen2
+role: smoke_reference
+license: apache-2.0
+
+chat_template_source:
+  kind: tokenizer_asset
+  artifact: tokenizer_config.json
+  hash_at_prepare: true
+
+training_serializer:
+  id: qwen_chat_tagged_reasoning
+  version: "1"
+  loss_mask: assistant_only
+
+reasoning:
+  native_training_channel: false
+  tagged_serializer:
+    enabled: true
+    start_tag: "<think>"
+    end_tag: "</think>"
+    answer_start_tag: "<answer>"
+    answer_end_tag: "</answer>"
+    reserved_marker_policy: reject_sample

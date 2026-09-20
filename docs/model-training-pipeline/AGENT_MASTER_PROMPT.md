@@ -1,6 +1,6 @@
 # Master Prompt for Local Coding Agent
 
-Implement Evidence-Governed Model Training Pipeline only after reading README, 00..21, schemas, examples and QA checklist.
+Implement Evidence-Governed Model Training Pipeline only after reading README, 00..22, schemas, profiles, examples and QA checklist.
 
 ## Path ownership
 

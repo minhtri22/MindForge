@@ -17,6 +17,7 @@ Nếu tài liệu tóm tắt mâu thuẫn với contract/schema dưới đây, c
 - 19_GATE_MATRIX_INFERENCE_CONTRACT.md
 - 20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md
 - 21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md
+- 22_REFERENCE_MODEL_PROFILE.md
 - schemas/experiment_config.schema.json
 - schemas/execution_contract.schema.json
 - schemas/data_manifest.schema.json
@@ -24,6 +25,8 @@ Nếu tài liệu tóm tắt mâu thuẫn với contract/schema dưới đây, c
 - schemas/checkpoint_manifest.schema.json
 - schemas/run_manifest.schema.json
 - schemas/reasoning_response.schema.json
+- schemas/model_profile.schema.json
+- profiles/qwen2.5-0.5b-instruct-r0.yaml
 
 Không được tạo vocabulary/config field mới ngoài schema mà không sửa schema + QA.
 
@@ -48,7 +51,7 @@ Scientific baseline là exact parent artifact; matched-control bắt buộc khi 
 
 ## 6. Read order
 
-Đọc 00..14, sau đó 15..21, schemas/examples và cuối cùng AGENT_MASTER_PROMPT.md. QA_REMEDIATION_CHECKLIST.md là audit index.
+Đọc 00..14, sau đó 15..22, schemas/profiles/examples và cuối cùng AGENT_MASTER_PROMPT.md. QA_REMEDIATION_CHECKLIST.md là audit index.
 
 ## 7. Spec lock
 

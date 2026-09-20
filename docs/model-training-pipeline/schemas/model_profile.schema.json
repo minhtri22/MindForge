@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model_profile.schema.json",
+  "title": "ModelProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id", "model_id", "revision", "architecture", "role",
+    "chat_template_source", "training_serializer", "reasoning", "license"
+  ],
+  "properties": {
+    "profile_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "architecture": {"type": "string", "minLength": 1},
+    "role": {"enum": ["smoke_reference", "experiment_model"]},
+    "license": {"type": "string", "minLength": 1},
+    "chat_template_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "artifact", "hash_at_prepare"],
+      "properties": {
+        "kind": {"const": "tokenizer_asset"},
+        "artifact": {"type": "string", "minLength": 1},
+        "hash_at_prepare": {"const": true}
+      }
+    },
+    "training_serializer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "loss_mask"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "loss_mask": {"enum": ["assistant_only", "all_tokens"]}
+      }
+    },
+    "reasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_training_channel", "tagged_serializer"],
+      "properties": {
+        "native_training_channel": {"type": "boolean"},
+        "tagged_serializer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "start_tag", "end_tag", "answer_start_tag", "answer_end_tag", "reserved_marker_policy"],
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "start_tag": {"type": "string", "minLength": 1},
+            "end_tag": {"type": "string", "minLength": 1},
+            "answer_start_tag": {"type": "string", "minLength": 1},
+            "answer_end_tag": {"type": "string", "minLength": 1},
+            "reserved_marker_policy": {"enum": ["reject_sample", "escape_v1"]}
+          }
+        }
+      }
+    }
+  }
+}

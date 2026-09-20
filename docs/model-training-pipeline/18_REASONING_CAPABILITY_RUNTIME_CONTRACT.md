@@ -135,3 +135,7 @@ Không yêu cầu exact reasoning string hoặc exact generated text.
 ## 9. Safety/semantics
 
 Output rationale là `model_generated_rationale`; không tuyên bố là faithful hidden computation. UI/API có thể hide rationale mà vẫn giữ final answer.
+
+## 10. R0 binding
+
+The R0 Qwen tagged path is not left to implementation guesswork. It is bound by `22_REFERENCE_MODEL_PROFILE.md` and `profiles/qwen2.5-0.5b-instruct-r0.yaml`. The adapter must hash the pinned tokenizer/chat-template asset at prepare time and use the declared serializer/reserved-marker policy.
