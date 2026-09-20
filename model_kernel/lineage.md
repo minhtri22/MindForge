@@ -208,3 +208,12 @@ Trạng thái khoa học:
 - chưa cho phép huấn luyện.
 
 Cổng kế tiếp là dựng lại chính xác B0, khóa ánh xạ cài đặt và kiểm tra trước khi dùng dữ liệu mới.
+
+
+## 2026-09-21 — Đính chính câu mở đầu mục trước
+
+Câu mở đầu của mục ngay trước được hiểu là:
+
+Đã mở MK-1 chỉ ở mức đặc tả và đăng ký trước; chưa sửa mã mô hình, chưa tạo dữ liệu khoa học và chưa huấn luyện.
+
+Đính chính này chỉ sửa lỗi gõ chữ, không thay đổi nội dung khoa học, trạng thái hay cổng thực hiện.
