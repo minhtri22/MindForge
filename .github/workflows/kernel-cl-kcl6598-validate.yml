@@ -1,0 +1,121 @@
+name: Kernel CL — KCL-6.5.9.8 future-interaction validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6598-validate.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify frozen train/rule/source contract
+        run: |
+          echo "294c311cf61745d937b9ce5e3611c8faf362c9d2e127120c8970c0a21d62c38e  experiments/kernel_cl/results/kcl6598_train.json" | sha256sum -c -
+          echo "bdb6bc92fe5021f7d94ce9c59f467ef65a51615cbaaf23c84f3ff2de1fa9f591  experiments/kernel_cl/results/kcl6598_rule.json" | sha256sum -c -
+          echo "2f7d4a6d9a6c8b62d6455c7ede233517521372282260ef355a386b53f8807f3c  docs/research/kernel-continual-learning/kcl6598-protocol.md" | sha256sum -c -
+          echo "f485e81e575192af5eee7eb2839ee2406f08ad03691f2c01d57e9610e30caca7  experiments/kernel_cl/kcl6598_future_interaction.py" | sha256sum -c -
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6598_train.json"))
+          r=json.load(open("experiments/kernel_cl/results/kcl6598_rule.json"))
+          assert d["status"] == "PASS"
+          assert d["verdict"] == "FUTURE_INTERACTION_MODELS_TRAINED_AND_READY_TO_FREEZE"
+          assert d["rule"]["sha256"] == "bdb6bc92fe5021f7d94ce9c59f467ef65a51615cbaaf23c84f3ff2de1fa9f591"
+          assert d["governance"]["validation_executed"] is False
+          assert d["governance"]["reverse_backlog_executed"] is False
+          assert d["governance"]["protected_confirmatory_touched"] is False
+          assert d["governance"]["controller_implemented"] is False
+          assert d["governance"]["kcl7_started"] is False
+          assert r["rule"] == "FUTURE-Q-v1"
+          assert r["source_git_commit"] == "d7fb0ce16f550cc17618b2c1d498f8c76d21b2b9"
+          assert r["validation_executed_before_freeze"] is False
+          assert r["reverse_backlog_executed"] is False
+          assert r["protected_confirmatory_touched"] is False
+          assert r["controller_implemented"] is False
+          assert r["kcl7_started"] is False
+          PY
+
+      - name: Focused pre-validation contracts
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6598.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6593.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6595.py -q
+
+      - name: Assert validation evidence and backlog execution absent
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6598_validation.json
+          test ! -e experiments/kernel_cl/results/kcl659x_reverse_backlog_execution.json
+
+      - name: Frozen FUTURE-PROBE validation
+        id: science
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6598_future_interaction.py \
+            --phase validate \
+            --rule experiments/kernel_cl/results/kcl6598_rule.json \
+            --output experiments/kernel_cl/results/kcl6598_validation.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6598_validation.json
+          sha256sum experiments/kernel_cl/results/kcl6598_validation.json
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6598_validation.json"))
+          print("KCL6598_VALIDATION_STATUS="+str(d.get("status")))
+          print("KCL6598_VALIDATION_VERDICT="+str(d.get("verdict")))
+          print("KCL6598_VALIDATION_SUPPORT="+json.dumps(d.get("support",{}),sort_keys=True))
+          print("KCL6598_VALIDATION_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          print("KCL6598_PRIMARY="+json.dumps(d.get("primary",{}),sort_keys=True))
+          print("KCL6598_BOOTSTRAP_DELTAS="+json.dumps(d.get("bootstrap",{}).get("deltas",{}),sort_keys=True))
+          print("KCL6598_METRICS="+json.dumps(d.get("metrics",{}),sort_keys=True))
+          print("KCL6598_SECONDARY="+json.dumps(d.get("secondary_diagnostics",{}),sort_keys=True))
+          print("KCL6598_PROBE_SUMMARY="+json.dumps(d.get("probe_feature_summary",{}),sort_keys=True))
+          PY
+
+      - name: Enforce scope guardrails
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6598_controller.json
+          test ! -e .github/workflows/kernel-cl-kcl6598-controller.yml
+          test ! -e experiments/kernel_cl/results/kcl659x_reverse_backlog_execution.json
+          test ! -e .github/workflows/kernel-cl-kcl7.yml
+
+      - name: Preserve exact validation evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6598_validation.json
+          git commit -m "evidence(kcl): preserve KCL-6.5.9.8 validation"
+          git push origin HEAD:research/kernel-cl
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6598-future-interaction-validation
+          path: experiments/kernel_cl/results/kcl6598_validation.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.science.outputs.exit_code }}" -eq 0
