@@ -1,8 +1,12 @@
 # MK-1 Target Stability / Margin Audit v0.1
 
-Status: **FROZEN SPECIFICATION / NOT EXECUTED**
+Status: **FROZEN / CONSISTENCY-EXTENDED UNDER AMENDMENT 001 / NOT EXECUTED**
 
 Date: **2026-09-21**
+
+Original pre-extension blob:
+
+`9cfe8ad74a821b09135366c010ece962787a4ab9`
 
 ## 1. Purpose
 
@@ -60,8 +64,8 @@ The support-count rules are checked after data materialization and before model 
 ## 6. Failure consequences
 
 - If (1)-(5) fail: **TARGET_CONTRACT_INVALID**. Training is forbidden.
-- If (7) fails: **HARD_TARGET_UNSTABLE**. The hard label cannot be a primary MK-1 endpoint; use the generating quantity or redesign prospectively.
-- If (6) fails: **TARGET_SUPPORT_INSUFFICIENT**. Data materialization may be expanded only under a pre-outcome amendment that preserves the seed/split-generation rule.
+- If (6) fails: **HARD_TARGET_UNSTABLE**. The hard label cannot be a primary MK-1 endpoint; use the generating quantity or redesign prospectively.
+- If (7) fails: **TARGET_SUPPORT_INSUFFICIENT**. Data materialization may be expanded only under a pre-outcome amendment that preserves the seed/split-generation rule.
 
 No model result may rescue a failed target-stability audit.
 
