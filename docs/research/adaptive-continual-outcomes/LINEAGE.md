@@ -159,3 +159,22 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Governance action: lock v1 invalidated because correcting the runner changes scientific source; active lock archived/superseded and execution workflow removed.
 - Scientific protocol/thresholds/40-seed manifest: **UNCHANGED**.
 - Next: rerun full zero-science preflight on the minimal schema-compatibility fix before creating any new lock.
+
+---
+
+## 2026-09-20 — ACO-1 Recovery Zero-Science Preflight PASS and Lock v2 Frozen
+
+- Technical-failure recovery source commit: `bd83799177839cef8948c96211abf2d7fc2f4dc4`.
+- Corrected runner Git blob: `0fbafee7cfcaa2fbe6059faeead3835e74197bd5`.
+- Change scope: canonical nested execution-lock schema adapter only.
+- Recovery preflight workflow run: `35511160065`.
+- Focused tests: **12/12 PASS**.
+- Preflight JSON SHA-256: `32e6d0c4633b228184e4d7b987928ef184f0c5aa19c9c5c9b74d6dcc42a9bc66`.
+- Preflight artifact ID: `10605132304`.
+- Artifact ZIP SHA-256: `4589c4e21bc52e59543fe0c01a9984d8061ebce1a21ee3524aed991fe0f746cf`.
+- Protocol SHA-256: unchanged `a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb`.
+- Seed-manifest SHA-256: unchanged `9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91`.
+- Fresh seed execution during recovery preflight: **NO**.
+- Scientific outcome generated: **NO**.
+- New lock schema: `ACO1-EXECUTION-LOCK-v2`.
+- Lock v2 independent verification: **REQUIRED / PENDING**.

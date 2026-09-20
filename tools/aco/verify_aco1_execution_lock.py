@@ -17,12 +17,12 @@ from pathlib import Path
 from typing import Any
 
 LOCK_PATH = Path("docs/research/adaptive-continual-outcomes/ACO1_EXECUTION_LOCK.json")
-EXPECTED_SCHEMA = "ACO1-EXECUTION-LOCK-v1"
+EXPECTED_SCHEMA = "ACO1-EXECUTION-LOCK-v2"
 EXPECTED_PROGRAM = "ACO-1"
 EXPECTED_RUNNER = Path("experiments/aco/aco1_target_stability.py")
 EXPECTED_PROTOCOL = Path("docs/research/adaptive-continual-outcomes/aco1-target-stability-protocol.md")
-EXPECTED_IMPLEMENTATION_COMMIT = "e4e8f27b164ca938e6efa910bfb1ec2fc056f1a2"
-EXPECTED_RUNNER_BLOB = "117bd3f16d576bf6f683d83747b6c1723a7ae471"
+EXPECTED_IMPLEMENTATION_COMMIT = "bd83799177839cef8948c96211abf2d7fc2f4dc4"
+EXPECTED_RUNNER_BLOB = "0fbafee7cfcaa2fbe6059faeead3835e74197bd5"
 EXPECTED_PROTOCOL_SHA256 = "a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb"
 EXPECTED_SEED_SHA256 = "9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91"
 EXPECTED_COLLECTION = "experiments/aco/results/aco1_fresh_records.json"

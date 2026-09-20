@@ -9,7 +9,7 @@ from tools.aco import verify_aco1_execution_lock as v
 
 def test_lock_is_valid_json_and_frozen_schema() -> None:
     d=json.loads(v.LOCK_PATH.read_text(encoding="utf-8"))
-    assert d["schema"] == "ACO1-EXECUTION-LOCK-v1"
+    assert d["schema"] == "ACO1-EXECUTION-LOCK-v2"
     assert d["program"] == "ACO-1"
     assert d["status"] == "LOCKED_PENDING_INDEPENDENT_VERIFICATION"
     assert d["independent_verification"]["required"] is True
