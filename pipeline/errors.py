@@ -57,3 +57,19 @@ class EvaluationEvidenceError(GovernanceError):
 
 class AdjudicationTerminalError(GovernanceError):
     code = "ADJUDICATION_TERMINAL"
+
+
+class ReasoningLayerError(PipelineError):
+    code = "REASONING_LAYER_ERROR"
+
+
+class ReasoningSerializationError(ReasoningLayerError):
+    code = "REASONING_SERIALIZATION_ERROR"
+
+
+class ReasoningParseError(ReasoningLayerError):
+    code = "REASONING_PARSE_ERROR"
+
+
+class UnsupportedReasoningMode(ReasoningLayerError):
+    code = "UNSUPPORTED_REASONING_MODE"

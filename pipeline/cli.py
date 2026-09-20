@@ -41,7 +41,12 @@ def build_parser() -> argparse.ArgumentParser:
     m3.add_argument("--runs-root", default="runs")
     m3.add_argument("--json", action="store_true", dest="as_json")
 
-    status = sub.add_parser("status", help="read the latest M0/M1/M2/M3 qualification result")
+    m4 = sub.add_parser("reasoning-qualify", help="M4 reasoning serializer/parser qualification")
+    _common_config_args(m4)
+    m4.add_argument("--runs-root", default="runs")
+    m4.add_argument("--json", action="store_true", dest="as_json")
+
+    status = sub.add_parser("status", help="read the latest M0/M1/M2/M3/M4 qualification result")
     status.add_argument("run_dir")
 
     return parser
@@ -116,9 +121,23 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"evaluation_contract_hash={result.evaluation_contract_hash}")
             return 0
 
+        if args.command == "reasoning-qualify":
+            from .m4 import run_m4_qualification
+
+            result = run_m4_qualification(args.config, args.workspace, args.runs_root)
+            if args.as_json:
+                print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+            else:
+                print(f"PASS: M4 {result.run_dir}")
+                print(f"gates={result.gates_passed}/{result.gates_total}")
+                print(f"capability_hash={result.capability_hash}")
+                print(f"qualification_hash={result.qualification_hash}")
+            return 0
+
         if args.command == "status":
             run_dir = Path(args.run_dir)
             candidates = [
+                run_dir / "m4_result.json",
                 run_dir / "m3/m3_result.json",
                 run_dir / "m2/m2_result.json",
                 run_dir / "m1/m1_result.json",

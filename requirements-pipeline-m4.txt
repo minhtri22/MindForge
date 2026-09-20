@@ -1,0 +1,5 @@
+-r requirements-pipeline-m3.txt
+# M4 requires the exact pinned tokenizer/chat template, not model weights.
+transformers==5.17.0
+huggingface-hub==1.32.0
+tokenizers==0.23.2

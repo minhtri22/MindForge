@@ -17,6 +17,7 @@ from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 from .canonical import sha256_file, sha256_object
 from .errors import DataIntegrityError
 from .models import ExperimentConfig, PhaseSpec
+from .reasoning import serialize_reasoning_sample
 
 M2_TRAINABLE_PARAMETER = "model.norm.weight"
 M2_STEPS_PER_PHASE = 2
@@ -155,7 +156,7 @@ def load_phase_batches(
         records = _read_jsonl(path)
         if len(records) < M2_STEPS_PER_PHASE:
             raise DataIntegrityError(f"phase {phase.id}: insufficient reasoning fixture records")
-        return [_reasoning_batch(tokenizer, record) for record in records[:M2_STEPS_PER_PHASE]]
+        return [_reasoning_batch(tokenizer, record, repo_root) for record in records[:M2_STEPS_PER_PHASE]]
 
     raise DataIntegrityError(f"phase {phase.id}: unsupported M2 phase type {phase.type}")
 
@@ -264,44 +265,27 @@ def _cpt_batch(tokenizer: Any, text: str) -> dict[str, torch.Tensor]:
     }
 
 
-def _reasoning_batch(tokenizer: Any, record: dict[str, Any]) -> dict[str, torch.Tensor]:
-    messages = record.get("messages")
-    reasoning = record.get("reasoning")
-    answer = record.get("answer")
-    if not isinstance(messages, list) or not isinstance(reasoning, str) or not isinstance(answer, str):
-        raise DataIntegrityError("invalid reasoning fixture record")
-    reserved = ("<think>", "</think>", "<answer>", "</answer>")
-    if any(tag in reasoning or tag in answer for tag in reserved):
-        raise DataIntegrityError("reasoning fixture contains reserved R0 delimiter")
-    assistant_content = f"<think>{reasoning}</think>\n<answer>{answer}</answer>"
-    prompt_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    full_messages = [*messages, {"role": "assistant", "content": assistant_content}]
-    full_text = tokenizer.apply_chat_template(full_messages, tokenize=False, add_generation_prompt=False)
+def _reasoning_batch(tokenizer: Any, record: dict[str, Any], repo_root: Path) -> dict[str, torch.Tensor]:
+    import yaml
 
-    prompt_ids = tokenizer(
-        prompt_text,
-        add_special_tokens=False,
-        truncation=True,
-        max_length=M2_MAX_LENGTH,
-    )["input_ids"]
-    full = tokenizer(
-        full_text,
-        return_tensors="pt",
-        add_special_tokens=False,
-        truncation=True,
+    profile_path = (
+        repo_root
+        / "docs/model-training-pipeline/profiles/qwen2.5-0.5b-instruct-r0.yaml"
+    )
+    profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
+    if not isinstance(profile, dict):
+        raise DataIntegrityError("R0 reasoning model profile must be an object")
+    serialized = serialize_reasoning_sample(
+        tokenizer,
+        profile,
+        record,
         max_length=M2_MAX_LENGTH,
     )
-    full_ids_list = full["input_ids"][0].tolist()
-    prefix_len = min(len(prompt_ids), len(full_ids_list))
-    if full_ids_list[:prefix_len] != prompt_ids[:prefix_len]:
-        raise DataIntegrityError("Qwen chat prompt is not a prefix of reasoning SFT serialization")
-    labels = full["input_ids"].clone()
-    labels[:, :prefix_len] = -100
-    if int((labels != -100).sum().item()) <= 0:
-        raise DataIntegrityError("reasoning SFT batch has zero supervised tokens")
+    input_ids = torch.tensor([list(serialized.input_ids)], dtype=torch.long)
+    labels = torch.tensor([list(serialized.labels)], dtype=torch.long)
     return {
-        "input_ids": full["input_ids"],
-        "attention_mask": full.get("attention_mask", torch.ones_like(full["input_ids"])),
+        "input_ids": input_ids,
+        "attention_mask": torch.ones_like(input_ids),
         "labels": labels,
     }
 
