@@ -6,9 +6,7 @@ Date: **2026-09-21**
 
 Parent Model Core HEAD:
 
-`fdde37fee616da60596b14bd7b5a74b93eae87da`
-
-The later preregistration-only commits through Amendment 002 QA are also required ancestors of any valid implementation.
+`1f7dfbb353b68617e1522cd3ee47bb0ca83d950f`
 
 ## 1. Authorization boundary
 
@@ -36,7 +34,7 @@ The implementation must conform exactly to the current blobs:
 - TARGET_STABILITY_AUDIT.md — `e4dfd62eb4aeb14595d03e299a753ac6711d9547`;
 - OBSERVABLE_IDENTIFIABILITY_CONTRACT.md — `53e37771fd3244df7f4c461305963afc7ff12221`;
 - STRUCTURED_Z_SCHEMA.md — `045cafa9a8cc6bc9b207da9915f47f982152fbaa`;
-- BASELINES_AND_MATCHING.md — Amendment-002-updated version;
+- BASELINES_AND_MATCHING.md — `4bca66437bbfe91b45a7762a61d213982f99da3f`;
 - DATA_SPLIT_AND_EVALUATION.md — `5192a273e36911d5c9598f2de19884b71525c083`;
 - B0_RECONSTRUCTION.md — `173dd942fd703755dd253d785ca5f3993cbd5c38`.
 
