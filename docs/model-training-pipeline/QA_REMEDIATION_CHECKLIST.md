@@ -1,85 +1,77 @@
 # QA Remediation Checklist — Evidence-Governed Model Training Pipeline
 
-> Branch: `docs/evidence-model-training-pipeline`
+> Branch: docs/evidence-model-training-pipeline
 >
-> Baseline reviewed commit: `48c6cb3adca69d44142ad231e555f2cf77d652b1`
+> Baseline reviewed commit: 48c6cb3adca69d44142ad231e555f2cf77d652b1
 >
-> Rule: this file is created **before remediation**. Every finding starts as `TODO`. During remediation, each item must be updated with a concrete repository ref proving the fix. No finding may be marked `DONE` from prose alone.
-
-## Severity legend
-
-- `BLOCKER`: must be resolved before implementation lock / M1-M2.
-- `HIGH`: must be resolved before confirmatory/release execution.
-- `MEDIUM/LOW`: may remain only with explicit documented rationale.
+> Pre-remediation checklist commit: c8c5f6196127d04da08f40030017c667ada95b66
+>
+> Main remediation commit: 3048a781bad312d4be0abde112fae1ad2bc7913f
+>
+> Concrete-fixture completion commit: cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5
 
 ## BLOCKER findings
 
-| ID | Status | Finding | Required remediation | Proof ref |
+| ID | Status | Finding | Remediation | Proof ref |
 |---|---|---|---|---|
-| B-01 | TODO | Config dialects conflict (`data` vs `datasets`, GGUF keys, reasoning keys). | One canonical ExperimentConfig schema; all examples conform. | — |
-| B-02 | TODO | AC-01 example contains placeholders and cannot PASS. | Pin a real tiny reference model/revision and real fixtures. | — |
-| B-03 | TODO | Missing machine schemas for experiment, execution contract, data manifest, evaluation. | Add JSON Schemas and validation rules. | — |
-| B-04 | TODO | One-level run state machine cannot represent CPT → SFT → reasoning SFT phases. | Define RunState + PhaseState, parent artifacts, terminal states. | — |
-| B-05 | TODO | Checkpoint selection is not phase-scoped. | Bind selection rule to phase_id, metric, direction, tie-breaker. | — |
-| B-06 | TODO | Checkpoint schema is weaker than resume/provenance prose. | Schema optimizer/scheduler/RNG/sampler/token-position state. | — |
-| B-07 | TODO | Packing/shuffle/sampling semantics undefined. | Freeze TokenStreamContract including BOS/EOS, packing, truncation, sampling. | — |
-| B-08 | TODO | Streaming/multi-worker resume token position undefined. | Persist shard/document/sample/sequence/shuffle-buffer/worker RNG state. | — |
-| B-09 | TODO | Required gate matrix does not exist. | Add run-class × gate matrix for smoke/development/calibration/confirmatory/release. | — |
-| B-10 | TODO | Deterministic parity conflicts with Modelfile temperature=0.7/top_p=0.9. | Add frozen inference-generation contract and derive runtime configs from it. | — |
-| B-11 | TODO | Reasoning response schema conflicts with reasoning-off/hidden modes. | Define visible/hidden/off/unsupported semantics and nullable/omitted fields. | — |
-| B-12 | TODO | Training reasoning serialization is conflated with runtime reasoning extraction. | Separate model serializer, runtime parser, normalized API. | — |
-| B-13 | TODO | Non-empty reasoning is required by AC but schema allows empty string. | Enforce minLength / parser status / mode constraints. | — |
-| B-14 | TODO | Evidence ZIP/checksum design can become circular. | Define payload manifest, ZIP creation order, external ZIP checksum. | — |
-| B-15 | TODO | Code evaluation lacks execution sandbox contract. | Define no-network sandbox, quotas, timeout, temp/read-only FS policy. | — |
-| B-16 | TODO | No workspace/run locking or atomic state-write contract. | Define exclusive locks, atomic writes, fsync/rename and crash recovery. | — |
-| B-17 | TODO | Baseline/comparator contract is missing. | Add smoke reference, exact parent baseline, matched control, optional external anchor; define metric comparator fields. | — |
+| B-01 | DONE | Config dialects conflict | Canonical schema + examples | [schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/experiment_config.schema.json) [examples](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/end_to_end_small.yaml) |
+| B-02 | DONE | AC-01 example had placeholders | Pinned real smoke model + concrete fixtures | [example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/end_to_end_small.yaml) [fixtures](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/tests/fixtures/data/reasoning_mini.jsonl) |
+| B-03 | DONE | Missing machine schemas | Experiment/execution/data/evaluation schemas added | [schemas](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/execution_contract.schema.json) |
+| B-04 | DONE | One-level state machine | RunState + PhaseState defined | [state contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) [run schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/run_manifest.schema.json) |
+| B-05 | DONE | Checkpoint selection not phase-scoped | phase_id/metric/direction/tie-breaker required | [config schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/experiment_config.schema.json) |
+| B-06 | DONE | Checkpoint schema weaker than resume prose | Recoverable state schema expanded | [checkpoint schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/checkpoint_manifest.schema.json) |
+| B-07 | DONE | Packing/shuffle/sampling undefined | TokenStreamContract defined | [data contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) |
+| B-08 | DONE | Streaming/multi-worker resume undefined | ResumeCursor defined | [resume contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) |
+| B-09 | DONE | Required gate matrix absent | Run-class gate matrix added | [gate matrix](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) |
+| B-10 | DONE | Parity vs Modelfile sampling conflict | Frozen inference contract + generated Modelfile parameters | [inference contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) [template](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/templates/Modelfile.template) |
+| B-11 | DONE | Reasoning off/hidden schema conflict | Mode semantics + conditional schema | [reasoning contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/18_REASONING_CAPABILITY_RUNTIME_CONTRACT.md) [schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/reasoning_response.schema.json) |
+| B-12 | DONE | Training serializer conflated with runtime parser | Three-layer model defined | [reasoning contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/18_REASONING_CAPABILITY_RUNTIME_CONTRACT.md) |
+| B-13 | DONE | Empty reasoning could schema-PASS | Visible mode requires minLength 1 | [reasoning schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/reasoning_response.schema.json) |
+| B-14 | DONE | Circular evidence checksum risk | Payload -> ZIP -> external checksum order defined | [evidence contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md) |
+| B-15 | DONE | Code-eval sandbox absent | No-network/quotas/temp FS sandbox contract | [sandbox contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) |
+| B-16 | DONE | No run locking/atomic state contract | Exclusive lock + atomic writes/checkpoint protocol | [concurrency contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md) |
+| B-17 | DONE | Baseline/comparator contract absent | Smoke/parent/matched-control/external-anchor defined | [baseline contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/15_BASELINE_COMPARATOR_CONTRACT.md) |
 
 ## HIGH findings
 
-| ID | Status | Finding | Required remediation | Proof ref |
-|---|---|---|---|---|
-| H-01 | TODO | Wikipedia snapshot identity is underspecified. | Pin edition/language/dump type/URI/checksum/tooling. | — |
-| H-02 | TODO | Public-code reference corpus is unspecified. | Choose/pin at least one concrete reference path or fixture manifest. | — |
-| H-03 | TODO | Code-license granularity is too weak. | Define release policy for repo/file license provenance and unknown-license behavior. | — |
-| H-04 | TODO | No secret/credential scanning for code corpora. | Add secret scanner/quarantine/report contract. | — |
-| H-05 | TODO | No PII handling policy for public text. | Add PII scan/filter/quarantine/report policy. | — |
-| H-06 | TODO | Near-dedup algorithm is not frozen. | Pin algorithm, normalization, signature parameters and threshold. | — |
-| H-07 | TODO | Contamination detector parameters are undefined. | Pin normalization/window/hash/match threshold and action policy. | — |
-| H-08 | TODO | Freshness protection guards seeds but not fresh data/splits. | Add freshness registry for seeds, split IDs and fixture IDs. | — |
-| H-09 | TODO | Regression baseline is undefined. | Every metric gate must name baseline/comparator. | — |
-| H-10 | TODO | Catastrophic-forgetting suite is undefined. | Define protected-capability suite and aggregation. | — |
-| H-11 | TODO | Matched comparator is not first-class in config. | Add comparator/control objects and matched budget/seed rules. | — |
-| H-12 | TODO | Optimizer/scheduler reset vs carry across phases is undefined. | Add explicit phase transition policy. | — |
-| H-13 | TODO | epochs/max_steps/max_tokens precedence undefined. | Define one stop policy and precedence/validation. | — |
-| H-14 | TODO | Warmup unit undefined. | Require unit = steps/tokens/ratio with resolved count. | — |
-| H-15 | TODO | `precision: auto` is not reproducible after lock. | Resolve auto before lock and persist exact dtype policy. | — |
-| H-16 | TODO | Device/backend resolution not frozen. | Persist backend/device class/kernel determinism policy. | — |
-| H-17 | TODO | LoRA/merged/canonical artifact semantics unclear. | Define adapter artifact, merged artifact and promotion/export rules. | — |
-| H-18 | TODO | Split GGUF artifacts are not modeled. | Add shard-set manifest and Ollama wildcard packaging support. | — |
-| H-19 | TODO | llama.cpp compatibility inspection is too open-ended. | Define pinned converter capability inspection evidence. | — |
-| H-20 | TODO | “High-fidelity GGUF” dtype semantics conflict. | Define preserve-source/explicit F16/BF16 policy. | — |
-| H-21 | TODO | Runtime adapter may mutate host by installing tools. | Locate-only by default; installation requires explicit action/policy. | — |
-| H-22 | TODO | Ephemeral Ollama model collision/cleanup semantics undefined. | Namespaced ephemeral names; ownership marker; safe cleanup. | — |
-| H-23 | TODO | Disk threshold/space estimation undefined. | Add preflight estimator and minimum headroom formula/policy. | — |
-| H-24 | TODO | Checkpoint atomic-write protocol undefined. | Temp-write → verify → fsync → atomic rename + completeness marker. | — |
-| H-25 | TODO | Hash-chained lineage lacks external seal. | Seal final head hash in evidence manifest/commit/signature. | — |
-| H-26 | TODO | LLM-judge reproducibility contract absent. | Pin judge model/revision/prompt/generation and retain raw response. | — |
-| H-27 | TODO | Reasoning non-empty metric is too weak. | Add task/verifier-aware rationale checks; keep non-empty as format gate only. | — |
-| H-28 | TODO | Instruction replay ratio/budget after CPT undefined. | Freeze replay source, budget, mixture and stop rule. | — |
-| H-29 | TODO | AC-04 “minimal equivalent” is a loophole. | Remove loophole or precisely define permitted equivalent evidence. | — |
-| H-30 | TODO | Unsupported-architecture fixture can become supported upstream. | Use deterministic synthetic unsupported fixture/adapter. | — |
-| H-31 | TODO | Local agent has no path ownership/do-not-touch contract inside MindForge. | Restrict writes to pipeline-owned paths unless explicitly approved. | — |
-| H-32 | TODO | Software-development lineage and training-run lineage are conflated. | Define two distinct lineages and cross-reference rule. | — |
+| ID | Status | Finding | Proof ref |
+|---|---|---|---|
+| H-01 | DONE | Wikipedia identity underspecified | [data contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) [pinned example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/train_wikipedia_cpt.yaml) |
+| H-02 | DONE | Public code corpus unspecified | [CodeSearchNet example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
+| H-03 | DONE | Code license granularity weak | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) [code example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
+| H-04 | DONE | No code secret scan | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) |
+| H-05 | DONE | No PII policy | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) |
+| H-06 | DONE | Near-dedup algorithm not frozen | [data contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) |
+| H-07 | DONE | Contamination params undefined | [data contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) |
+| H-08 | DONE | Freshness only guarded seeds | [freshness registry](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) |
+| H-09 | DONE | Regression baseline undefined | [baseline contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/15_BASELINE_COMPARATOR_CONTRACT.md) [evaluation schema](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/schemas/evaluation_contract.schema.json) |
+| H-10 | DONE | Catastrophic-forgetting suite undefined | [protected suite](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/15_BASELINE_COMPARATOR_CONTRACT.md) |
+| H-11 | DONE | Matched comparator not first-class | [baseline contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/15_BASELINE_COMPARATOR_CONTRACT.md) |
+| H-12 | DONE | Optimizer/scheduler phase carry undefined | [phase transition](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) |
+| H-13 | DONE | Stop-rule precedence undefined | [stop rule](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) |
+| H-14 | DONE | Warmup unit undefined | [warmup contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) |
+| H-15 | DONE | precision:auto not lock-safe | [config lifecycle](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) |
+| H-16 | DONE | Device/backend not frozen | [resource resolution](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) |
+| H-17 | DONE | LoRA/merged artifact semantics unclear | [artifact semantics](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) |
+| H-18 | DONE | Split GGUF not modeled | [GGUF shard contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) |
+| H-19 | DONE | llama.cpp inspection too open | [capability evidence](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) |
+| H-20 | DONE | High-fidelity dtype conflict | [dtype policy](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) |
+| H-21 | DONE | Runtime adapter could mutate host | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) |
+| H-22 | DONE | Ollama ephemeral collision/cleanup undefined | [Ollama safety](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) |
+| H-23 | DONE | Disk threshold undefined | [resource preflight](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md) |
+| H-24 | DONE | Checkpoint atomic writes undefined | [atomic checkpoint protocol](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md) |
+| H-25 | DONE | Lineage lacked external seal | [external seal](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md) |
+| H-26 | DONE | LLM judge contract absent | [judge contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/18_REASONING_CAPABILITY_RUNTIME_CONTRACT.md) |
+| H-27 | DONE | Reasoning non-empty too weak | [reasoning metrics](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/18_REASONING_CAPABILITY_RUNTIME_CONTRACT.md) |
+| H-28 | DONE | Instruction replay budget undefined | [training phase contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/04_TRAINING_PIPELINE.md) |
+| H-29 | DONE | AC-04 minimal-equivalent loophole | [AC-04](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/11_ACCEPTANCE_CRITERIA.md) |
+| H-30 | DONE | Unsupported arch fixture unstable | [test plan](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/10_TEST_PLAN.md) [fixture](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/tests/fixtures/model/unsupported_config.json) |
+| H-31 | DONE | Agent path ownership absent | [agent prompt](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/AGENT_MASTER_PROMPT.md) |
+| H-32 | DONE | Development/run lineages conflated | [lineage contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md) |
 
 ## Completion criteria
 
-Remediation is complete only when:
-
-1. all BLOCKER rows are `DONE` with concrete refs;
-2. all HIGH rows are `DONE` or explicitly `DEFERRED` with rationale and non-release restriction;
-3. examples validate against schemas;
-4. one canonical config vocabulary remains;
-5. run/phase state transitions are machine-defined;
-6. baseline/comparator semantics are machine-defined;
-7. a second QA pass reports no unresolved BLOCKER;
-8. `SHA256SUMS` is regenerated after the final documentation state.
+- All 17 BLOCKER findings have implementation-readable proof refs.
+- All 32 HIGH findings have proof refs.
+- QA round 2 must independently verify these claims; DONE here is remediation status, not self-certifying final QA.
+- SHA256SUMS must be regenerated after QA round 2 and any QA-driven patch.
