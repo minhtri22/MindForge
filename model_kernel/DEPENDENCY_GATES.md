@@ -137,9 +137,9 @@ These KCL constraints do not block MK-1; they constrain its preregistration.
 
 ### Opening rule
 
-MK-1 specification/preregistration may be formally opened because the direct upstream representation dependencies are now sufficiently adjudicated.
+MK-1 specification/preregistration is now formally frozen and has passed zero-science QA because the direct upstream representation dependencies are sufficiently adjudicated.
 
-Before **implementation or training**, MK-1 must still satisfy:
+Before **data materialization, model implementation, or training**, MK-1 must still satisfy:
 
 1. a frozen target ontology;
 2. target-margin / stability audit specification;
@@ -287,7 +287,7 @@ NEXUS or ArcLLM may not determine the early model architecture merely because a 
 | Phase | Status after MK-0 | Blocking dependency |
 |---|---|---|
 | MK-0 | COMPLETE / FROZEN | none |
-| MK-1 | SPECIFICATION / PREREGISTRATION OPEN | protocol freeze + zero-science QA + B0 reconstruction before implementation/training |
+| MK-1 | PREREGISTERED / ZERO-SCIENCE QA PASS | B0 reconstruction + implementation lock + zero-fresh preflight before data materialization/training |
 | MK-2 | BLOCKED | MK-1 supported/frozen |
 | MK-3 | BLOCKED / OPTIONAL | MK-2 |
 | MK-4 | BLOCKED | CQG J3.13/J3.14 + supported Model Kernel decision representation |
