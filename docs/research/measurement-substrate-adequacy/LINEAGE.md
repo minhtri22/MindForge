@@ -46,3 +46,12 @@ Existing entries must never be rewritten or silently removed.
 - Classification: **TECHNICAL_QA_STRING_PREDICATE_FAILURE**.
 - Recovery: change verifier predicate only to match the frozen wording.
 - Research question, endpoint candidates, substrate difficulty contract, freshness exclusions, falsification gates and roadmap: **UNCHANGED**.
+
+---
+
+## 2026-09-20 — MSA-0 QA Diagnostic Instrumentation
+
+- Prior retries still failed only at aggregate specification assertion.
+- Scientific execution attempted: **NO**.
+- Contract changes: **NONE**.
+- QA-only change: assertion now prints only false predicates so the exact verifier mismatch can be identified without altering scientific specification.

@@ -2,7 +2,7 @@ from tools.msa.verify_msa0_spec import verify
 
 def test_msa0_specification_passes() -> None:
     r=verify()
-    assert r["status"]=="PASS", r
+    assert r["status"]=="PASS", {k:v for k,v in r["checks"].items() if not v}
     assert r["verdict"]=="MSA0_ZERO_SCIENCE_SPEC_QA_PASS"
 
 def test_msa0_is_zero_science() -> None:
