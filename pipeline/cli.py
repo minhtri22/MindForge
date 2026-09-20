@@ -36,7 +36,12 @@ def build_parser() -> argparse.ArgumentParser:
     m2.add_argument("--runs-root", default="runs")
     m2.add_argument("--json", action="store_true", dest="as_json")
 
-    status = sub.add_parser("status", help="read the latest M0/M1/M2 qualification result")
+    m3 = sub.add_parser("governance-qualify", help="M3 execution-lock/evaluation governance qualification")
+    _common_config_args(m3)
+    m3.add_argument("--runs-root", default="runs")
+    m3.add_argument("--json", action="store_true", dest="as_json")
+
+    status = sub.add_parser("status", help="read the latest M0/M1/M2/M3 qualification result")
     status.add_argument("run_dir")
 
     return parser
@@ -84,7 +89,6 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         if args.command == "trainer-qualify":
-            # Lazy import preserves the zero-ML-dependency M0/M1 boundary.
             from .m2 import run_m2_qualification
 
             result = run_m2_qualification(args.config, args.workspace, args.runs_root)
@@ -98,9 +102,24 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"adjudication_hash={result.adjudication_hash}")
             return 0
 
+        if args.command == "governance-qualify":
+            from .m3 import run_m3_qualification
+
+            result = run_m3_qualification(args.config, args.workspace, args.runs_root)
+            if args.as_json:
+                print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+            else:
+                print(f"PASS: M3 {result.run_id}")
+                print(f"run_dir={result.run_dir}")
+                print(f"pass_verdict={result.pass_verdict}")
+                print(f"fail_verdict={result.fail_verdict}")
+                print(f"evaluation_contract_hash={result.evaluation_contract_hash}")
+            return 0
+
         if args.command == "status":
             run_dir = Path(args.run_dir)
             candidates = [
+                run_dir / "m3/m3_result.json",
                 run_dir / "m2/m2_result.json",
                 run_dir / "m1/m1_result.json",
                 run_dir / "preflight_result.json",

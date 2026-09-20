@@ -41,3 +41,19 @@ class DataIntegrityError(DataPlaneError):
 
 class DataPolicyError(DataPlaneError):
     code = "DATA_POLICY_ERROR"
+
+
+class GovernanceError(PipelineError):
+    code = "GOVERNANCE_ERROR"
+
+
+class ExecutionLockViolation(GovernanceError):
+    code = "EXECUTION_LOCK_VIOLATION"
+
+
+class EvaluationEvidenceError(GovernanceError):
+    code = "EVALUATION_EVIDENCE_ERROR"
+
+
+class AdjudicationTerminalError(GovernanceError):
+    code = "ADJUDICATION_TERMINAL"
