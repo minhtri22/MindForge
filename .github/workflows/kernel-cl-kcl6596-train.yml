@@ -1,0 +1,100 @@
+name: Kernel CL — KCL-6.5.9.6 MRIG train/freeze
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6596-train.yml
+      - docs/research/kernel-continual-learning/kcl6596-protocol.md
+      - experiments/kernel_cl/kcl6596_mechanistic_representation.py
+      - tests/test_kernel_cl_kcl6596.py
+
+permissions:
+  contents: write
+
+jobs:
+  train-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Focused pre-science contracts
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6596.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6595.py -q
+
+      - name: Assert validation remains closed
+        run: |
+          test ! -e .github/workflows/kernel-cl-kcl6596-validate.yml
+          test ! -e experiments/kernel_cl/results/kcl6596_validation.json
+          test ! -e experiments/kernel_cl/results/kcl6596_rule.json
+
+      - name: Frozen MRIG train and rule freeze
+        id: science
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6596_mechanistic_representation.py \
+            --phase train \
+            --output experiments/kernel_cl/results/kcl6596_train.json \
+            --rule experiments/kernel_cl/results/kcl6596_rule.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6596_train.json
+          sha256sum experiments/kernel_cl/results/kcl6596_train.json
+          if test -f experiments/kernel_cl/results/kcl6596_rule.json; then
+            sha256sum experiments/kernel_cl/results/kcl6596_rule.json
+          fi
+          sha256sum docs/research/kernel-continual-learning/kcl6596-protocol.md
+          sha256sum experiments/kernel_cl/kcl6596_mechanistic_representation.py
+
+          python - <<'PY'
+          import json, pathlib
+          d=json.load(open("experiments/kernel_cl/results/kcl6596_train.json"))
+          print("KCL6596_TRAIN_STATUS="+str(d.get("status")))
+          print("KCL6596_TRAIN_VERDICT="+str(d.get("verdict")))
+          print("KCL6596_TRAIN_SUPPORT="+json.dumps(d.get("support",{}),sort_keys=True))
+          print("KCL6596_TRAIN_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          print("KCL6596_TRAIN_RULE="+json.dumps(d.get("rule",{}),sort_keys=True))
+          print("KCL6596_TRAIN_METRICS="+json.dumps(d.get("train_metrics_descriptive",{}),sort_keys=True))
+          print("KCL6596_MRIG_SUMMARY="+json.dumps(d.get("mrig_feature_summary",{}),sort_keys=True))
+          print("KCL6596_RULE_EXISTS="+str(pathlib.Path("experiments/kernel_cl/results/kcl6596_rule.json").exists()))
+          PY
+
+      - name: Preserve exact train/freeze evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6596_train.json
+          if test -f experiments/kernel_cl/results/kcl6596_rule.json; then
+            git add experiments/kernel_cl/results/kcl6596_rule.json
+          fi
+          git commit -m "evidence(kcl): preserve KCL-6.5.9.6 train freeze"
+          git push origin HEAD:research/kernel-cl
+
+      - name: Upload train/freeze evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6596-mrig-train-freeze
+          path: |
+            experiments/kernel_cl/results/kcl6596_train.json
+            experiments/kernel_cl/results/kcl6596_rule.json
+          if-no-files-found: warn
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.science.outputs.exit_code }}" -eq 0
