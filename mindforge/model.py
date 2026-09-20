@@ -38,7 +38,8 @@ class TransformerLM(nn.Module):
     def vocab_size(self) -> int:
         return self.config.vocab_size
 
-    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+    def hidden_states(self, tokens: torch.Tensor) -> torch.Tensor:
+        """Return post-final-LayerNorm hidden states without changing B0 semantics."""
         if tokens.ndim != 2:
             raise ValueError("tokens must have shape [batch, context]")
         _, context = tokens.shape
@@ -53,7 +54,10 @@ class TransformerLM(nn.Module):
         mask = torch.triu(torch.ones(context, context, dtype=torch.bool, device=tokens.device), diagonal=1)
         for layer in self.layers:
             hidden = layer(hidden, src_mask=mask, is_causal=True)
-        return self.lm_head(self.norm(hidden))
+        return self.norm(hidden)
+
+    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+        return self.lm_head(self.hidden_states(tokens))
 
 
 def create_model(config: ModelConfig) -> TransformerLM:
