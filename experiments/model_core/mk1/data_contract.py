@@ -39,6 +39,8 @@ class CanonicalScene:
     split: str
     assertion: str
     evidence: str
+    applicability_boundary: str
+    revision_trigger: str
     gold_z: dict[str, Any]
     gold_c: dict[str, Any]
 
@@ -49,6 +51,8 @@ class SurfaceRecord:
     split: str
     renderer_family: str
     input_text: str
+    pit_evidence: dict[str, Any]
+    pit_teaching_signal: dict[str, Any]
     gold_z: dict[str, Any]
     gold_c: dict[str, Any]
 
@@ -212,11 +216,21 @@ def _support_sentences(gold_z: dict[str, Any]) -> list[str]:
 
 def render_surface(scene: CanonicalScene, family: str) -> str:
     if family == RENDERER_TRAIN_A:
-        return f"Assertion: {scene.assertion}\nEvidence: {scene.evidence}"
+        return (
+            f"Assertion: {scene.assertion}\nEvidence: {scene.evidence}\n"
+            f"Boundary: {scene.applicability_boundary}\nRevision: {scene.revision_trigger}"
+        )
     if family == RENDERER_TRAIN_B:
-        return f"Current statement — {scene.assertion} Observed record — {scene.evidence}"
+        return (
+            f"Current statement — {scene.assertion} Observed record — {scene.evidence} "
+            f"Use boundary — {scene.applicability_boundary} Reconsideration rule — {scene.revision_trigger}"
+        )
     if family == RENDERER_HELDOUT_C:
-        return f"Proposition under review: {scene.assertion}\nAvailable observation: {scene.evidence}"
+        return (
+            f"Proposition under review: {scene.assertion}\nAvailable observation: {scene.evidence}\n"
+            f"Extent of applicability: {scene.applicability_boundary}\n"
+            f"Condition for revision: {scene.revision_trigger}"
+        )
     raise ValueError(f"unknown renderer family: {family}")
 
 
@@ -229,7 +243,18 @@ def build_scene_from_index(index: int, *, scene_id: str, split: str) -> Canonica
     support = " ".join(_support_sentences(gold_z))
     assertion = f"This proposition applies at {asserted} scope. {semantic}"
     evidence_text = f"The current observation is limited to {evidence_scope} scope. {support}"
-    scene = CanonicalScene(scene_id, split, assertion, evidence_text, gold_z, gold_c)
+    applicability_boundary = f"Apply the proposition only at {asserted} scope."
+    revision_trigger = "Reconsider it only after materially new current evidence appears."
+    scene = CanonicalScene(
+        scene_id,
+        split,
+        assertion,
+        evidence_text,
+        applicability_boundary,
+        revision_trigger,
+        gold_z,
+        gold_c,
+    )
     if not canonical_equal(scene.gold_c, recompose_gold_z(scene.gold_z)):
         raise AssertionError("gold C must equal R(gold Z)")
     return scene
@@ -261,6 +286,12 @@ def surfaces_for_scene(scene: CanonicalScene) -> list[SurfaceRecord]:
             split=scene.split,
             renderer_family=family,
             input_text=render_surface(scene, family),
+            pit_evidence={"observations": [scene.evidence]},
+            pit_teaching_signal={
+                "inference": scene.assertion,
+                "applicability_boundary": scene.applicability_boundary,
+                "revision_trigger": scene.revision_trigger,
+            },
             gold_z=scene.gold_z,
             gold_c=scene.gold_c,
         )
