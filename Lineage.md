@@ -2141,3 +2141,69 @@ This compact index summarizes the active Kernel Continual Learning chain without
 - Next scientific requirement:
   - `KCL-6.5.9.7 — Temporal Mechanistic Representation Qualification`;
   - test whether historically available transition geometry across completed boundaries predicts `MECH{P+R,R}` better than the static S3 representation on a fresh cohort.
+
+
+## 2026-09-20 — KCL-6.5.9.7 Temporal Mechanistic Representation Qualification NEGATIVE
+
+- Status: **NEGATIVE**
+- Verdict: `TRIG_V1_DOES_NOT_QUALIFY_TEMPORAL_MECH_PRR_REPRESENTATION`.
+- Trigger:
+  - KCL-6.5.9.6 rejected static observed-task reset-response MRIG-v1;
+  - KCL-6.5.9.7 tested one-transition historically observable temporal geometry.
+- Frozen primary target:
+  - `Y_PRR = MECH{P+R,R} vs rest`.
+- Frozen comparison:
+  - `S3 = S2 + MRIG-v1`;
+  - `S4 = S3 + TRIG-v1 Q1-Q12`;
+  - same class-balanced L2 logistic family.
+- Fresh cohort:
+  - train: 720 seeds / 1440 eligible boundary-2/3 records;
+  - validation: 360 seeds / 720 eligible records.
+- Train/freeze:
+  - run `35485104181` — **SUCCESS**;
+  - Y_PRR support: 82 POS / 80 unique seeds;
+  - all train integrity gates PASS;
+  - all 6 solvers converged;
+  - frozen rule `TRIG-Q-v1`;
+  - rule SHA-256 `a1895894e34437dae889e2dbf8290b2f67f431acfbee018c5fc59dc43f4664f1`;
+  - evidence commit `8f92c3a5801ca926b5705757a746db90681b76e8`.
+- Validation:
+  - run `35492509575` — **SUCCESS**;
+  - Y_PRR support: 45 POS / 43 unique seeds;
+  - all validation integrity gates PASS.
+- Primary:
+  - S3 macro recall `0.545926`, not qualified;
+  - S4 macro recall `0.514074`, not qualified;
+  - `D_TRIG = -0.031852`;
+  - 20k paired whole-seed bootstrap 95% CI `[-0.094023,+0.033593]`;
+  - route PASS = false.
+- Secondary:
+  - `Y_A: S4-S3 = -0.010385`;
+  - `Y_PR: S4-S3 = -0.011738`;
+  - `Y_PRR: S4-S3 = -0.031852`;
+  - descriptive boundary-specific direction differed, but no subgroup modeling is authorized.
+- Interpretation:
+  - one-transition temporal reset/interference history does not generalize as a useful Y_PRR representation;
+  - the only remaining information class with prior positive numerical evidence is zero-step future-task interaction.
+- Provenance:
+  - protocol `3adac50c75a2692dc32203b86de10f036fc2968d`;
+  - implementation `26bd82763475aa0879ad421a253d338e211f36fd`;
+  - tests `ec92819097136eb9c97de87cdd8b2c2e3fe681e5`;
+  - validation workflow `101edf8cf3283fc289aa4e5aecf431262fc8ce5a`;
+  - validation raw SHA-256 `a11c18a7324e46ea7d17f16b1820cf2b2da53b9f95c10d1fd029f8bbbbfe0d83`;
+  - artifact ID `10599622888`;
+  - artifact ZIP SHA-256 `e676724add55f624d654934ed9f34a109ebdf9ee19ed74ec09de9b89f3fcbeee`;
+  - evidence commit `7061b47055e53a758bb5b2468504dddf86590088`;
+  - paper commit `46f32b0ff9a4828ef5de26686f867be58005f57e`.
+- Reverse-synthesis backlog:
+  - preserved separately at `docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md`;
+  - commit `3bc3a2c99373459c9bb30fe61eaae2dd7e4b5d64`;
+  - explicitly deferred until after KCL-6.5.9.8 + convergence review.
+- Guardrails:
+  - controller: **NOT IMPLEMENTED**;
+  - protected confirmatory cohort: **UNTOUCHED**;
+  - KCL-7: **NOT STARTED**.
+- Next scientific requirement:
+  - `KCL-6.5.9.8 — Mechanism-Specific Future-Interaction Qualification`;
+  - reuse exact pre-existing FUTURE-PROBE-v1 P1-P8 on a fresh cohort;
+  - treat .8 as terminal discriminator for the active 6.5.9.x sequence.
