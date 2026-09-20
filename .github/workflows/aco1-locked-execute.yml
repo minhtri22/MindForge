@@ -1,0 +1,193 @@
+name: ACO — ACO-1 locked fresh execution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/adaptive-continual-outcomes
+    paths:
+      - .github/workflows/aco1-locked-execute.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aco1-locked-fresh-execution
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/adaptive-continual-outcomes
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked dependencies
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce immutable verified lock before science
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(sha256sum docs/research/adaptive-continual-outcomes/ACO1_EXECUTION_LOCK.json | awk '{print $1}')" = "3a5e832c59b9099a3772e80c1cf8fd89d39f6dd45cf127a13ced2253ebc46457"
+          test "$(sha256sum docs/research/adaptive-continual-outcomes/aco1-target-stability-protocol.md | awk '{print $1}')" = "a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb"
+          test "$(git hash-object experiments/aco/aco1_target_stability.py)" = "117bd3f16d576bf6f683d83747b6c1723a7ae471"
+          grep -q "ACO1_EXECUTION_LOCK_VERIFICATION_PASS" docs/research/adaptive-continual-outcomes/ACO1_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "7bfda7f789e387d5e19a36e29d67e2558a440b2b91564ad05f5819d65f99010e" docs/research/adaptive-continual-outcomes/ACO1_EXECUTION_LOCK_VERIFICATION.md
+          test ! -e experiments/aco/results/aco1_fresh_records.json
+          test ! -e experiments/aco/results/FORMAL_RESULT.json
+          python - <<'PY'
+          import json, platform
+          from importlib.metadata import version
+          import torch
+          d=json.load(open("docs/research/adaptive-continual-outcomes/ACO1_EXECUTION_LOCK.json", encoding="utf-8"))
+          assert d["seed_manifest"]["sha256"] == "9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91"
+          assert len(d["seed_manifest"]["seeds"]) == 40
+          assert len(set(d["seed_manifest"]["seeds"])) == 40
+          assert set(d["seed_manifest"]["seeds"]).isdisjoint(d["protected_kcl_cohort"]["seeds"])
+          assert platform.machine() == "x86_64"
+          assert platform.python_version() == "3.12.14"
+          assert version("pip") == "26.2.1"
+          assert version("numpy") == "2.3.3"
+          assert version("pytest") == "8.4.2"
+          assert torch.__version__ == "2.10.0+cpu"
+          print("ACO1_LOCKED_EXECUTION_GATE=PASS")
+          PY
+
+      - name: Collect frozen 40-seed cohort
+        id: collect
+        run: |
+          mkdir -p experiments/aco/results artifacts
+          PYTHONPATH=. python experiments/aco/aco1_target_stability.py --phase collect --output experiments/aco/results/aco1_fresh_records.json
+
+      - name: Integrity-only collection validation
+        shell: bash
+        run: |
+          python - <<'PY'
+          import collections, hashlib, json
+          p="experiments/aco/results/aco1_fresh_records.json"
+          d=json.load(open(p, encoding="utf-8"))
+          rows=d["records"]
+          assert d["experiment"] == "ACO-1"
+          assert d["phase"] == "FRESH_COLLECTION"
+          assert len(rows) == 120
+          seeds=[714845,799297,471852,671302,797856,525370,494800,333039,618491,662800,265044,434671,501990,723350,393434,774787,806053,890854,613906,707487,415555,641958,505262,776960,428051,767077,464825,448672,416287,770416,596609,359597,454064,431281,705347,294795,641624,345481,326782,242385]
+          protected={13635,13837,14039,14241,14443,14645,14847,15049,15251,15453,15655,15857,16059,16261,16463,16665,16867,17069,17271,17473}
+          counts=collections.Counter(int(r["seed"]) for r in rows)
+          assert set(counts) == set(seeds)
+          assert all(counts[s] == 3 for s in seeds)
+          assert all({int(r["boundary_index"]) for r in rows if int(r["seed"]) == s} == {1,2,3} for s in seeds)
+          assert all(bool(r["integrity"]["valid"]) for r in rows)
+          assert set(seeds).isdisjoint(protected)
+          assert d["integrity"]["expected_records"] == 120
+          assert d["integrity"]["actual_records"] == 120
+          assert d["integrity"]["all_source_integrity_valid"] is True
+          assert d["integrity"]["protected_seed_overlap"] == []
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          out={
+            "schema":"ACO1-COLLECTION-INTEGRITY-v1",
+            "status":"PASS",
+            "record_count":120,
+            "seed_count":40,
+            "records_per_seed":3,
+            "boundaries_per_seed":[1,2,3],
+            "all_source_integrity_valid":True,
+            "protected_overlap":[],
+            "collection_sha256":sha,
+            "scientific_metrics_inspected":False
+          }
+          open("artifacts/aco1_collection_integrity.json","w",encoding="utf-8").write(json.dumps(out,indent=2,sort_keys=True)+"\n")
+          print("ACO1_COLLECTION_INTEGRITY=PASS")
+          print("ACO1_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Preserve complete collection before adjudication
+        uses: actions/upload-artifact@v4
+        with:
+          name: aco1-complete-collection-before-adjudication
+          path: |
+            experiments/aco/results/aco1_fresh_records.json
+            artifacts/aco1_collection_integrity.json
+          if-no-files-found: error
+
+      - name: Run exactly one one-shot adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e experiments/aco/results/FORMAL_RESULT.json
+          test ! -e artifacts/ACO1_ADJUDICATOR_CALLED
+          touch artifacts/ACO1_ADJUDICATOR_CALLED
+          PYTHONPATH=. python experiments/aco/aco1_target_stability.py --phase adjudicate --input experiments/aco/results/aco1_fresh_records.json --output experiments/aco/results/FORMAL_RESULT.json
+          test -s experiments/aco/results/FORMAL_RESULT.json
+
+      - name: Validate and reveal formal result only after adjudication
+        id: formal
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          cp="experiments/aco/results/aco1_fresh_records.json"
+          rp="experiments/aco/results/FORMAL_RESULT.json"
+          ip="artifacts/aco1_collection_integrity.json"
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          rsha=hashlib.sha256(open(rp,"rb").read()).hexdigest()
+          d=json.load(open(rp, encoding="utf-8"))
+          integ=json.load(open(ip, encoding="utf-8"))
+          assert d["experiment"] == "ACO-1"
+          assert d["phase"] == "ONE_SHOT_ADJUDICATION"
+          assert d["source_records_sha256"] == csha
+          assert integ["collection_sha256"] == csha
+          a=d["adjudication"]
+          assert a["status"] in {"PASS","NEGATIVE","INCONCLUSIVE","STOP"}
+          evidence={
+            "schema":"ACO1-EXECUTION-EVIDENCE-v1",
+            "lock_sha256":"3a5e832c59b9099a3772e80c1cf8fd89d39f6dd45cf127a13ced2253ebc46457",
+            "protocol_sha256":"a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb",
+            "seed_manifest_sha256":"9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91",
+            "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+            "workflow_head_sha":os.environ["GITHUB_SHA"],
+            "collection_sha256":csha,
+            "formal_result_sha256":rsha,
+            "collection_integrity":"PASS",
+            "one_shot_adjudication":True,
+            "scientific_status":a["status"],
+            "scientific_verdict":a["verdict"]
+          }
+          open("artifacts/ACO1_EXECUTION_EVIDENCE.json","w",encoding="utf-8").write(json.dumps(evidence,indent=2,sort_keys=True)+"\n")
+          print("ACO1_FORMAL_STATUS="+a["status"])
+          print("ACO1_FORMAL_VERDICT="+a["verdict"])
+          print("ACO1_COLLECTION_SHA256="+csha)
+          print("ACO1_FORMAL_RESULT_SHA256="+rsha)
+          print("ACO1_FORMAL_ADJUDICATION="+json.dumps(a,sort_keys=True))
+          PY
+
+      - name: Upload complete execution evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: aco1-locked-execution-evidence
+          path: |
+            experiments/aco/results/aco1_fresh_records.json
+            experiments/aco/results/FORMAL_RESULT.json
+            artifacts/aco1_collection_integrity.json
+            artifacts/ACO1_EXECUTION_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve canonical scientific evidence in branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/aco/results/aco1_fresh_records.json \
+                  experiments/aco/results/FORMAL_RESULT.json
+          git commit -m "evidence(aco): preserve locked ACO-1 fresh execution"
+          git push origin HEAD:research/adaptive-continual-outcomes

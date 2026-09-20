@@ -125,3 +125,19 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - The immutable lock JSON is not rewritten after verification; verified state is represented by the exact lock hash plus the verification evidence above.
 - ACO-1 40-seed collection is now **eligible for the next separately executed scientific step** under this exact lock.
 - ACO-2/controller/KCL-7/protected KCL cohort remain **CLOSED / UNAUTHORIZED**.
+
+---
+
+## 2026-09-20 — ACO-1 Locked Fresh Execution Opened
+
+- Prerequisite: `ACO1_EXECUTION_LOCK_VERIFICATION_PASS` from workflow run `35510792383`.
+- Immutable lock SHA-256: `3a5e832c59b9099a3772e80c1cf8fd89d39f6dd45cf127a13ced2253ebc46457`.
+- Authorized scientific action: exactly one 40-seed × 3-boundary fresh collection under the verified lock.
+- Expected complete records: `120`.
+- Intermediate scientific metric inspection: **PROHIBITED**.
+- Collection validation before adjudication: integrity/record-count/seed/boundary/protected-overlap only.
+- Complete collection must be preserved before adjudication.
+- Adjudication: exactly one call on the complete preserved input.
+- Execution workflow: `.github/workflows/aco1-locked-execute.yml`.
+- ACO-2/controller/KCL-7/protected KCL cohort: **CLOSED / UNAUTHORIZED**.
+- Result at this lineage entry: **NOT YET OBSERVED**.
