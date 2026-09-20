@@ -1,6 +1,6 @@
 # MK-1 — Learned Structured Decision-State Representation v0.1
 
-Status: **FROZEN PREREGISTRATION CANDIDATE / ZERO-SCIENCE QA PENDING**
+Status: **PREREGISTERED / ZERO-SCIENCE QA PASS / IMPLEMENTATION NOT AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -307,7 +307,14 @@ A valid MK-1 execution must archive:
 
 ## 15. Current authorization state
 
-This preregistration candidate authorizes **documentation and zero-science QA only**.
+This preregistration is frozen and has passed zero-science QA.
+
+QA evidence:
+
+- ZERO_SCIENCE_QA.md blob: `60d1b054fc474dfbd18cc3fd6b14ea01dea2729e`;
+- QA commit: `e2331e2b1c9462d5067718f5cfbf5b46cb96ce9d`.
+
+It authorizes only B0 reconstruction and implementation-lock planning.
 
 It does not authorize:
 
@@ -317,4 +324,4 @@ It does not authorize:
 - workflow execution;
 - scientific outcome inspection.
 
-After zero-science QA PASS, the next gate is exact B0 reconstruction / implementation planning under the frozen specification.
+The next gate is exact B0 reconstruction and implementation lock under the frozen specification. Scientific data materialization and training remain blocked until that gate passes.
