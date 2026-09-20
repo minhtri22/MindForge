@@ -1,0 +1,2 @@
+{"id":"code-1","language":"python","code":"def add(a, b):\n    return a + b\n","source":"synthetic_fixture","license":"CC0-1.0"}
+{"id":"code-2","language":"python","code":"def binary_search(xs, target):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo < len(xs) and xs[lo] == target\n","source":"synthetic_fixture","license":"CC0-1.0"}
