@@ -153,3 +153,29 @@ silently removed.
 - Fresh scientific seed execution: **NO**.
 - Scientific outcome generation: **NO**.
 - Initial verifier workflow, if it fails from this defect, is **NON-CANONICAL TECHNICAL QA**.
+
+---
+
+## 2026-09-20 — CPRM-1 Independent Execution-Lock Verification Closed PASS
+
+- Canonical verifier workflow: `35517842681`.
+- Independent tests: **4/4 PASS**.
+- Exact verified lock SHA-256: `26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274`.
+- Verdict: `CPRM1_EXECUTION_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256: `fa88ea8e1a6fc37f18be445c7b84a1ce755b1aa2c8ea38a92c8bcd9b64f4c3c1`.
+- Artifact ID: `10607531332`.
+- Artifact ZIP SHA-256: `47dbf246f25a0406cb0f418bf7e56e60b493e32d088d6f8989213136746e8c9c`.
+- Protocol/source blobs unchanged: **PASS**.
+- 60-seed manifest exact: **PASS**.
+- Runtime/dependencies exact: **PASS**.
+- Historical/protected/spent collision audit: **PASS / ZERO COLLISIONS**.
+- Support/geometry gates frozen: **PASS**.
+- Retry policy frozen: **PASS**.
+- Fresh execution workflow during verification: **ABSENT**.
+- Fresh collection: **ABSENT**.
+- Formal result: **ABSENT**.
+- Fresh scientific seed execution during verification: **NO**.
+- Scientific outcome generated: **NO**.
+- Model fitting performed: **NO**.
+- CPRM-1 fresh collection is now **ELIGIBLE TO OPEN under exact verified lock**, but has not started.
+- CPRM-2/controller/KCL-7 remain **CLOSED**.

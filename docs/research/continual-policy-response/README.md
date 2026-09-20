@@ -100,3 +100,23 @@ Canonical closure: `CPRM1_PREFLIGHT_QA.md`.
 
 Next admissible step: independent execution-lock verification. No fresh seed may
 be executed before that verification closes PASS.
+
+
+## CPRM-1 independent lock verification
+
+Independent execution-lock verification is now **PASS / CLOSED**.
+
+Canonical verification: `CPRM1_EXECUTION_LOCK_VERIFICATION.md`.
+
+```text
+Execution Lock SHA-256
+26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274
+
+CPRM1_EXECUTION_LOCK_VERIFICATION_PASS
+```
+
+No fresh CPRM-1 seed was executed during verification.
+
+The frozen 60-seed / 180-boundary CPRM-1 collection is now eligible to be
+opened under the exact verified lock. No execution workflow has yet been
+created, and CPRM-2/predictor training remains closed.
