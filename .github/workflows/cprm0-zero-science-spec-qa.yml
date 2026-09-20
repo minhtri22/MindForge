@@ -1,0 +1,57 @@
+name: CPRM — CPRM-0 zero-science specification QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-policy-response
+    paths:
+      - docs/research/continual-policy-response/**
+      - tools/cprm/**
+      - tests/test_cprm0_spec.py
+      - .github/workflows/cprm0-zero-science-spec-qa.yml
+
+permissions:
+  contents: read
+
+jobs:
+  spec-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Run CPRM-0 specification tests
+        run: PYTHONPATH=. python -m pytest tests/test_cprm0_spec.py -q
+
+      - name: Run zero-science specification verifier
+        run: PYTHONPATH=. python tools/cprm/verify_cprm0_spec.py
+
+      - name: Enforce zero-science result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/cprm0_spec_qa.json", encoding="utf-8"))
+          assert d["status"] == "PASS", d
+          assert d["verdict"] == "CPRM0_ZERO_SCIENCE_SPEC_QA_PASS", d
+          assert d["scientific_execution_attempted"] is False, d
+          assert d["fresh_scientific_seed_consumed"] is False, d
+          assert d["model_fitting_performed"] is False, d
+          assert d["checks"]["no_cprm_execution_workflow"], d
+          assert d["checks"]["no_cprm_scientific_artifacts"], d
+          print("CPRM0_ZERO_SCIENCE_SPEC_QA=PASS")
+          PY
+          sha256sum artifacts/cprm0_spec_qa.json
+
+      - name: Upload CPRM-0 QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cprm0-zero-science-spec-qa
+          path: artifacts/cprm0_spec_qa.json
+          if-no-files-found: error
