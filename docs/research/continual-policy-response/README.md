@@ -75,3 +75,28 @@ KCL-7
 protected KCL cohort use
 ACO-1 spent-data reuse for learning
 ```
+
+
+## CPRM-1 status
+
+CPRM-1 has been preregistered and its zero-science preflight is closed PASS.
+
+```text
+Protocol               FROZEN
+60-seed manifest        FROZEN
+Measurement contract   FROZEN
+Population contract    FROZEN
+Geometry gates         FROZEN
+One-shot adjudicator   IMPLEMENTED / SYNTHETIC-TESTED
+Execution Lock v1      FROZEN
+Zero-science preflight PASS
+
+Fresh CPRM-1 science   NOT AUTHORIZED YET
+CPRM-2                 CLOSED
+Controller             CLOSED
+```
+
+Canonical closure: `CPRM1_PREFLIGHT_QA.md`.
+
+Next admissible step: independent execution-lock verification. No fresh seed may
+be executed before that verification closes PASS.

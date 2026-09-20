@@ -107,3 +107,25 @@ silently removed.
 - Fresh scientific execution remains **BLOCKED** until both zero-science preflight and later independent lock verification PASS.
 - No execution workflow exists.
 - No fresh CPRM-1 scientific outcome exists.
+
+---
+
+## 2026-09-20 — CPRM-1 Zero-Science Preflight Closed PASS
+
+- Canonical workflow run: `35517327267`.
+- Focused synthetic/contract tests: **5/5 PASS**.
+- Verdict: `CPRM1_ZERO_SCIENCE_PREFLIGHT_PASS`.
+- Protocol SHA-256: `2663cb2b28f73e02bbac19c537e16632f978d2d754488932924bf37e7c8ea084`.
+- Execution-lock SHA-256: `26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274`.
+- Preflight JSON SHA-256: `0ef730573e70397bd45edc2b99ccc5b35d6f723e3e0156342189c40875a24f8f`.
+- Artifact ID: `10606759798`.
+- Artifact ZIP SHA-256: `7fceeb3b178ab6feddbf49b18c9f374998f9b4eff38c9cfa57662559bc194fd2`.
+- Fresh manifest collision audit: **PASS**.
+- Historical probe seed: `9595`; exact deterministic repeat: **PASS**.
+- Fresh CPRM-1 seed execution attempted: **NO**.
+- Scientific outcome generated: **NO**.
+- Model fitting performed: **NO**.
+- Fresh collection artifact: **NONE**.
+- Formal result: **NONE**.
+- Fresh execution remains blocked pending independent execution-lock verification.
+- CPRM-2/controller/KCL-7: **CLOSED**.

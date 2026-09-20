@@ -1,15 +1,9 @@
 name: CPRM — CPRM-0 zero-science specification QA
 
+# CPRM-0 is formally closed. Keep this historical QA workflow manual-only;
+# later CPRM milestone files are intentionally outside its frozen diff scope.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/continual-policy-response
-    paths:
-      - docs/research/continual-policy-response/**
-      - tools/cprm/**
-      - tests/test_cprm0_spec.py
-      - .github/workflows/cprm0-zero-science-spec-qa.yml
 
 permissions:
   contents: read
