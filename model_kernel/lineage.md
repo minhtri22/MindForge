@@ -110,3 +110,52 @@ Các mã cam kết cập nhật:
 - `fae6f1279048dcdb14dc345f459c1fcde560d81b`
 
 Trạng thái khoa học: MK-1 vẫn chưa mở và chưa cho phép huấn luyện. Kết quả J3.14 có thể trực tiếp loại bớt các phương án về lượng dữ liệu, lớp hàm hoặc cấu trúc hợp thành trước khi khóa thiết kế MK-1.
+
+
+## 2026-09-21 — Cập nhật phụ thuộc CQG và KCL trước MK-1
+
+Đã rà soát lại hai nguồn phụ thuộc trực tiếp cho nghiên cứu biểu diễn.
+
+CQG đã đóng chuỗi biểu diễn đến J3.16. Kết quả chính:
+
+- J3.14: các biện pháp tăng dữ liệu và đổi lớp học tổng quát không đủ theo cổng đã khóa;
+- J3.15: lỗi tương quan thứ hạng của nhánh cấu trúc là bệnh lý số học gần hòa, không phải đảo thứ tự có ý nghĩa;
+- J3.16: biểu diễn quan sát có cấu trúc được xác nhận trên tập mới.
+
+Các mốc CQG dùng để đối chiếu:
+
+- J3.15 báo cáo: `110e93ef94e0e4ab6bb03221a6c52a387f9994d6`
+- J3.15 bằng chứng chính thức: `4f4407a6bc7832c3b093963758e46e18e8f37004`
+- J3.16 báo cáo: `314e08ce9385022b08ccaba887d4a6d6149a54e3`
+- J3.16 kết quả chính thức: `edbc04aa09ab9493fed296a34826d3cf13600d94`
+- J3.16 bằng chứng chính thức: `181758a70bac6477a88ee463cc8bc9c88e5a4c27`
+
+KCL đã đóng chuỗi 6.5.9.x bằng đánh giá hội tụ chính thức tại nhánh `research/kernel-cl`, đầu nhánh:
+
+`a9159ae8f17693453e7b6378c92deb5effc4a56f`
+
+Mã băm nội dung đánh giá hội tụ:
+
+`a0cba485b5f59c8c60ae5806cb24e394edee4bef`
+
+Kết luận được kế thừa ở mức ràng buộc thiết kế:
+
+- kiểm tra độ ổn định của mục tiêu trước khi học;
+- kiểm tra khả năng nhận dạng từ dữ liệu quan sát trước khi dự đoán;
+- giữ các thành phần cơ chế riêng trước khi gộp;
+- không đồng nhất biểu diễn với điều khiển;
+- không mở chuỗi cứu hộ vô hạn sau một kết quả âm sạch.
+
+Đã cập nhật quản trị Lõi mô hình bằng các mã cam kết:
+
+- `3c1a346b16db4ee8bc39f18fa2e79e495f0dcc6f`
+- `83a011698f00c617dc72088aebdf6b1403ad43d4`
+- `ae3a9abed6f1015cec896c050704e4106f56ace0`
+
+Trạng thái khoa học sau bước này:
+
+- MK-0 vẫn đóng;
+- MK-1 được phép mở ở mức đặc tả và đăng ký trước;
+- chưa cho phép sửa mã mô hình;
+- chưa cho phép tạo dữ liệu thực nghiệm;
+- chưa cho phép huấn luyện.
