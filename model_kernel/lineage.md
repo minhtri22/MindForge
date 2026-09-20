@@ -259,3 +259,31 @@ Tài liệu đóng cổng:
 `c96f6962504bba5fa3ffe5d3f0efb260fa19ca1f`
 
 Trạng thái khoa học: dựng lại B0 đạt. Chưa tạo dữ liệu MK-1 và chưa huấn luyện. Cổng tiếp theo là kiểm tra khả thi cân bằng B0-DIRECT với M1-Z.
+
+
+## 2026-09-21 — Kiểm tra khả thi cân bằng B0-DIRECT và M1-Z
+
+Đã kiểm tra khả năng tạo so sánh công bằng giữa B0-DIRECT và M1-Z sau khi dựng lại B0 đạt.
+
+Kết quả:
+
+`MATCHING_FEASIBILITY_REVISE`
+
+Phần khả thi:
+
+- cân bằng số tham số là khả thi về mặt đại số;
+- với cùng trạng thái ẩn rộng 320, tổng số tham số của một đầu ra tuyến tính gộp và nhiều đầu ra tuyến tính tách nhóm bằng nhau nếu tổng số chiều đầu ra bằng nhau.
+
+Ba vấn đề chặn cài đặt được phát hiện trước mọi dữ liệu khoa học:
+
+1. nếu B0-DIRECT và M1-Z cùng dự đoán đúng một vector mục tiêu bằng các phép chiếu tuyến tính tương đương, H1b không còn là một can thiệp khoa học có thể nhận dạng;
+2. Z2 chưa khóa đầy đủ các ô giá trị, mặt nạ và chuẩn hóa;
+3. Z4 chưa khóa cách tạo nút quan hệ mà không dùng nhãn vàng.
+
+Ngoài ra, tokenizer và mảng token Phase-2 lịch sử không nằm trong cây Git hiện tại; điều này không làm B0 thất bại nhưng phải được xử lý rõ trước huấn luyện.
+
+Tài liệu rà soát:
+
+`6f802ea2592de68e784a7419970116fb72652d9b`
+
+Trạng thái: khóa cài đặt MK-1 bị chặn cho tới khi sửa đăng ký trước bằng một phụ lục trước kết quả. Chưa tạo dữ liệu khoa học và chưa cài đặt M1-Z.
