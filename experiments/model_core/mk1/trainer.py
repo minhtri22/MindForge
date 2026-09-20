@@ -244,15 +244,24 @@ def train_arm(
     if start_step == 0 and metrics_path.exists():
         raise FileExistsError("refusing to overwrite an existing scientific run")
 
+    processed_input_tokens = 0
+    if start_step:
+        with metrics_path.open("r", encoding="utf-8") as existing:
+            historical = [json.loads(line) for line in existing if line.strip()]
+        if historical:
+            processed_input_tokens = int(historical[-1].get("processed_input_tokens", 0))
+
     for step in range(start_step, TRAINING_LOCK.steps):
         model.train()
         optimizer.zero_grad(set_to_none=True)
         accumulated = 0.0
         sample_ids: list[str] = []
+        step_input_tokens = 0
         for _micro in range(TRAINING_LOCK.accumulation):
             record = train_rows[next(schedule)]
             sample_ids.append(f"{record['scene_id']}:{record['renderer_family']}")
             x = encoded_input(tokenizer, record["input_text"], spec.device)
+            step_input_tokens += int(x.numel())
             z_target, c_target = target_tensors(record, spec.device)
             logits = model(x)
             loss, _ = direct_loss(logits, c_target) if arm == "direct" else m1z_loss(logits, z_target)
@@ -265,12 +274,15 @@ def train_arm(
             group["lr"] = lr
         optimizer.step()
         completed = step + 1
+        processed_input_tokens += step_input_tokens
 
         row: dict[str, Any] = {
             "step": completed,
             "train_loss": accumulated,
             "learning_rate": lr,
             "sample_ids": sample_ids,
+            "step_input_tokens": step_input_tokens,
+            "processed_input_tokens": processed_input_tokens,
             "validation_balanced_score": None,
         }
         if completed % TRAINING_LOCK.validation_interval == 0:
@@ -320,6 +332,7 @@ def train_arm(
         "tokenizer_sha256": tokenizer_sha,
         "paired_init_sha256": paired_sha,
         "parameter_count": expected,
+        "processed_input_tokens": processed_input_tokens,
     }
     (run_path / "run.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return result
