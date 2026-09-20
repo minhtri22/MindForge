@@ -159,3 +159,52 @@ Trạng thái khoa học sau bước này:
 - chưa cho phép sửa mã mô hình;
 - chưa cho phép tạo dữ liệu thực nghiệm;
 - chưa cho phép huấn luyện.
+
+
+## 2026-09-21 — Khóa đặc tả và đăng ký trước MK-1
+
+Đã mở MK-1 ở mức đặc tả và đăng ký trước בלבד; chưa sửa mã mô hình, chưa tạo dữ liệu khoa học và chưa huấn luyện.
+
+Đã khóa các tài liệu:
+
+- bản thể mục tiêu: `cea1d38707e65fbf48cfcab738d0804ffedba088`
+- kiểm tra độ ổn định và biên mục tiêu: `ab724f00ac5afe689629038482b38e78e3e9161c`
+- hợp đồng khả năng nhận dạng từ dữ liệu quan sát: `5bc835dd26442a7c7b264ecffc8b9fa5c9f7f790`
+- cấu trúc Z phân rã: `b6888922e8577be8e8463dd8838a2114c4d2d791`
+- đường cơ sở và cân bằng tài nguyên: `72c309cc9a326772788e82f853b5da68e828b819`
+- chia tập, đánh giá và điều kiện bác bỏ: `4abe33d448dff09a13027fcd23ee89882ed7d8cc`
+- ứng viên đăng ký trước ban đầu: `c3822b4f7c7dfa5fc6e0e9b514014873162f8814`
+
+Kiểm tra không-khoa-học phát hiện hai vấn đề trước khi chạy thực nghiệm:
+
+- trạng thái J3.14 cũ và ký tự xuống dòng bị ghi sai trong lộ trình;
+- công thức đánh giá Z2 còn để hở một bậc tự do cho giai đoạn cài đặt.
+
+Đã sửa trước mọi dữ liệu và kết quả khoa học:
+
+- sửa lộ trình: `d89a7a4ec49edaf006fc589e18c5e88729c2757b`
+- khóa công thức chuẩn hóa và cổng Z2: `75dcb4771c2535a57ebaf5432a43a23672ee1dab`
+- gắn lại mã băm tài liệu đánh giá vào đăng ký trước: `4395a3ab87acfd4a68ef103c3a28d7d7cc223abc`
+
+Kiểm tra không-khoa-học đạt. Mã cam kết:
+
+`e2331e2b1c9462d5067718f5cfbf5b46cb96ce9d`
+
+Đăng ký trước sau kiểm tra được khóa tại:
+
+`90594c5ec25dc203573d4194dab55ef71381a831`
+
+Đã cập nhật cổng phụ thuộc và lộ trình:
+
+- `bd96016d1ece0f9811212b2eac4caa4dde5c36ad`
+- `c09f12d783fbc663e0b2fc0416eaa256cbc68781`
+
+Trạng thái khoa học:
+
+- MK-1 đã đăng ký trước;
+- kiểm tra không-khoa-học đã đạt;
+- chưa cho phép tạo dữ liệu khoa học;
+- chưa cho phép cài đặt nhánh mô hình MK-1;
+- chưa cho phép huấn luyện.
+
+Cổng kế tiếp là dựng lại chính xác B0, khóa ánh xạ cài đặt và kiểm tra trước khi dùng dữ liệu mới.
