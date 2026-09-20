@@ -72,7 +72,7 @@ No model is trained in MK-0.
 
 ## 4. MK-1 — Learned Decision-State Representation
 
-**Status:** SPECIFICATION / PREREGISTRATION OPEN; IMPLEMENTATION AND TRAINING NOT AUTHORIZED.
+**Status:** PREREGISTERED / ZERO-SCIENCE QA PASS; IMPLEMENTATION AND TRAINING NOT AUTHORIZED.
 
 ### Question
 
@@ -122,14 +122,21 @@ No latent rescue arm is authorized in MK-1 v0.1.
 
 ### Preconditions before implementation/training
 
+Already satisfied:
+
 - target ontology frozen;
 - target-margin/stability audit contract frozen;
 - observable-identifiability contract frozen;
 - structured/factorized Z schema frozen;
 - baseline/capacity/compute matching frozen;
 - fresh/pristine split and falsification rules frozen;
-- zero-science QA PASS;
-- exact B0 reconstruction PASS.
+- zero-science QA PASS.
+
+Still required:
+
+- exact B0 reconstruction PASS;
+- implementation lock binding code/data structures to the frozen specification;
+- zero-fresh preflight PASS.
 
 ### Stop logic
 
@@ -332,22 +339,18 @@ Do not replace these with vague progress labels.
 
 ## 14. Immediate next action
 
-After the CQG J3.16 and KCL-6.5.9.x re-audits:
+MK-1 preregistration is frozen and zero-science QA has passed.
+
+Next:
 
 ~~~
-1. keep model training disabled;
-2. open MK-1 specification/preregistration only;
-3. freeze target ontology;
-4. define target-margin/stability audit before outcome;
-5. define observable-identifiability contract for every Z field;
-6. freeze structured/factorized Z schema;
-7. freeze B0 / deterministic-PIT / learned-Z comparisons;
-8. freeze capacity/compute matching and fresh/pristine split;
-9. freeze metrics, falsification and STOP rules;
-10. run zero-science QA;
-11. only after QA PASS and B0 reconstruction may implementation begin.
+1. do not materialize scientific data;
+2. do not train;
+3. reconstruct exact B0 source/config/runtime/checkpoint state;
+4. prove B0-DIRECT and M1-Z can satisfy the frozen parameter/compute matching contract;
+5. freeze the implementation mapping and exact hashes;
+6. run zero-fresh implementation preflight;
+7. only after all of the above PASS may fresh data materialization and training be authorized.
 ~~~
 
-CQG J3.17+ resource-controller work, KCL post-convergence pivots, ARN memory work, OIR invariance work, and NEXUS runtime work do not block MK-1 representation specification. They remain separate dependency lines for later phases.
-
-MK-1 specification opening authorizes documentation only. It does not authorize model code changes, data generation, training, or scientific outcome inspection.
+CQG J3.17+ resource-controller work, KCL post-convergence pivots, ARN memory work, OIR invariance work, and NEXUS runtime work remain separate later-phase dependencies and do not block this preflight sequence.
