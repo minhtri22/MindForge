@@ -1,10 +1,14 @@
 # MK-1 Implementation Lock Manifest v0.1
 
-Status: **PASS / IMPLEMENTATION HASH LOCKED / ZERO-FRESH AUTHORIZED**
+Status: **PENDING FINAL TRIGGER-REBIND REVIEW / ZERO-FRESH NOT YET TRIGGERED**
 
 Date: **2026-09-21**
 
-Implementation source HEAD before this manifest:
+Final implementation source HEAD before trigger-rebind manifest update:
+
+`97e3a5dbe2b324ba23e798345db96aba1df47ed8`
+
+Earlier manual-only implementation source HEAD:
 
 `4df8742a552345c49c8f651b4d545cbd11591d67`
 
@@ -48,7 +52,7 @@ The pre-manifest H1c clarification froze an exact PIT-v3 common-field mapping an
 | `experiments/model_core/mk1/metrics.py` | `1cef3437ec47e6278ea0c18e9a021d99dc2f919d` | `ceeabec8c7819acd4472c35437c1abe09588e9da4d94da9fe8e5786dfa6cf737` |
 | `experiments/model_core/mk1/preflight.py` | `28114012ab87bef76e8e0b236eb87d37da8d352d` | `868a3205c20d54fd123522d5076cad9ecc51d0a06ed213c679706271717cd3ee` |
 | `tests/test_model_core_mk1_preflight.py` | `02b79405bd27ebbe5081fe426a793615713cb8b6` | `db5f45a816413e2d8c278ad8685da5880e9ab5c3a39a530a6a82feff57c0c534` |
-| `.github/workflows/mk1-zero-fresh-preflight.yml` | `82048174ed43911f6a291f7c87a6bb86a70d6007` | `ce6566beb8aea3e9d0cca8fd976d0d1e0c50266ec49f1a7084e4418e1d103289` |
+| `.github/workflows/mk1-zero-fresh-preflight.yml` | `3f0082f91e06eab0e1eec7ff69813fabbd3c1937` | `7b4b7f14e89dbb884004318ce92ecb46a657f2934f56bf4cab0253f9dee146c6` |
 
 ## 4. Frozen unchanged runtime dependencies
 
@@ -127,9 +131,24 @@ No result from those runs was used to tune:
 
 The workflow was changed to manual-only at:
 
-`4df8742a552345c49c8f651b4d545cbd11591d67`
+`4df8742a552345c49c8f651b4d545cbd11591d67`.
 
-Canonical zero-fresh execution is forbidden until this manifest receives independent static PASS.
+Because the available GitHub connector exposes no workflow-dispatch write action, a post-manifest one-shot trigger was then added at:
+
+`97e3a5dbe2b324ba23e798345db96aba1df47ed8`.
+
+That trigger can fire only when this exact path is created/changed:
+
+`model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md`
+
+and the job itself requires both:
+
+- `IMPLEMENTATION_LOCK_MANIFEST_PASS` in this manifest;
+- `TRIGGER_CANONICAL_ZERO_FRESH_v0.1` in the trigger file.
+
+The trigger file does not yet exist at this rebind stage.
+
+Canonical zero-fresh execution remains forbidden until the trigger-rebound manifest receives independent static PASS.
 
 ## 8. Manifest review gates
 
@@ -140,7 +159,7 @@ Independent static review must prove:
 3. all section-4 dependency bindings still match;
 4. no implementation path outside the allowlist changed;
 5. no scientific data file was created;
-6. workflow is manual-only;
+6. workflow is either manual-dispatch or the exact one-shot trigger path above, with manifest/trigger guards;
 7. no scientific run/seed/result is needed to establish the review.
 
 Only then may status become:
@@ -179,3 +198,19 @@ This authorizes exactly one next gate:
 `CANONICAL_ZERO_FRESH_PREFLIGHT`
 
 It still does not authorize scientific data materialization or training.
+
+
+## 10. Trigger-rebind requirement
+
+The original static PASS remains valid for every implementation/runtime file except the workflow binding, which was intentionally changed only to permit a controlled post-manifest trigger through the available connector.
+
+Before creating the trigger file, independent review must prove:
+
+1. the new workflow blob is `3f0082f91e06eab0e1eec7ff69813fabbd3c1937`;
+2. its SHA-256 is `7b4b7f14e89dbb884004318ce92ecb46a657f2934f56bf4cab0253f9dee146c6`;
+3. it watches only `model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md` for push execution;
+4. it checks manifest PASS and exact trigger marker before tests;
+5. all other section-3 implementation hashes remain unchanged;
+6. the manifest update itself changes no implementation code.
+
+Only after these checks may this manifest return to `IMPLEMENTATION_LOCK_MANIFEST_PASS`.
