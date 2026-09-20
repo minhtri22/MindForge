@@ -1,6 +1,6 @@
 # MSA — Measurement / Substrate Adequacy
 
-Status: **MSA-0 SPECIFICATION FOUNDATION — PENDING ZERO-SCIENCE QA**
+Status: **MSA-0 PASS / CLOSED — SCIENTIFIC EXECUTION NOT YET AUTHORIZED**
 
 Branch: `research/measurement-substrate-adequacy`
 
@@ -24,3 +24,17 @@ Authorized now: MSA-0 documentation, consistency checks, zero-science QA.
 Not authorized: fresh MSA seeds, scientific collection, task/substrate
 difficulty changes, training-budget changes, predictor fitting, controller
 implementation, or MSA-1 execution.
+
+
+## MSA-0 QA closure
+
+Canonical QA: `MSA0_SPEC_QA.md`.
+
+```text
+MSA0_ZERO_SCIENCE_SPEC_QA_PASS
+```
+
+Authorized next: design and preregistration of MSA-1 only.
+
+Still forbidden: fresh MSA execution, difficulty mutation, predictor fitting,
+controller work, and reuse of protected/spent evidence.

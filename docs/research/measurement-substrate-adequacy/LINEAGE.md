@@ -67,3 +67,24 @@ Existing entries must never be rewritten or silently removed.
 - Scientific contract changes: **NONE**.
 - Verifier-only recovery: semantic token checks within the same frozen document.
 - Scientific execution / seed generation / difficulty mutation / predictor fitting: **NONE**.
+
+---
+
+## 2026-09-20 — MSA-0 Zero-Science Specification QA Closed PASS
+
+- Canonical workflow run: `35520209506`.
+- Tests: **3/3 PASS**.
+- Verdict: `MSA0_ZERO_SCIENCE_SPEC_QA_PASS`.
+- QA JSON SHA-256: `6996c313435b0886c5c8357633f7e6d492a0ab5cbdc3bcbc138e7253535c66e7`.
+- Artifact ID: `10607299773`.
+- Artifact ZIP SHA-256: `e00366bee0fdfc5114ddc6bf73a00b53ac38f96db9a4f6d3c506b5e391de19ce`.
+- Scientific execution attempted: **NO**.
+- Fresh MSA scientific seed generated: **NO**.
+- Difficulty mutation performed: **NO**.
+- Predictor fitting performed: **NO**.
+- MSA scientific runner/artifact: **NONE**.
+- Fresh MSA seed manifest: **NONE**.
+- MSA execution workflow: **NONE**.
+- MSA-0: **PASS / CLOSED**.
+- MSA-1 scientific execution: **NOT AUTHORIZED**.
+- Next admissible action: design and preregister MSA-1 Current-Substrate Endpoint Adequacy Qualification only.
