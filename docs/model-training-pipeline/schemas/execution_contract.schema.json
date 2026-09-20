@@ -13,7 +13,7 @@
   ],
   "properties": {
     "run_id": {"type": "string", "minLength": 1},
-    "run_class": {"enum": ["calibration", "confirmatory", "release"]},
+    "run_class": {"enum": ["smoke", "development", "calibration", "confirmatory", "release"]},
     "software_git_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "frozen_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "data_manifest_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
@@ -30,14 +30,15 @@
         "additionalProperties": false,
         "required": [
           "phase_id", "parent_artifact_hash", "phase_config_hash",
-          "token_stream_hash", "checkpoint_selection_hash"
+          "token_stream_hash", "checkpoint_selection_hash", "phase_resource_hash"
         ],
         "properties": {
           "phase_id": {"type": "string", "minLength": 1},
           "parent_artifact_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "phase_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "token_stream_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-          "checkpoint_selection_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          "checkpoint_selection_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "phase_resource_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
         }
       }
     },
@@ -64,11 +65,12 @@
     "resource_contract": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["backend", "device_class", "resolved_precision"],
+      "required": ["backend", "device_class", "device_count", "world_size"],
       "properties": {
         "backend": {"type": "string", "minLength": 1},
         "device_class": {"type": "string", "minLength": 1},
-        "resolved_precision": {"enum": ["fp32", "fp16", "bf16"]}
+        "device_count": {"type": "integer", "minimum": 1},
+        "world_size": {"type": "integer", "minimum": 1}
       }
     },
     "retry_policy": {

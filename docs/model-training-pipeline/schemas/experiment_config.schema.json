@@ -27,7 +27,7 @@
     "model": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["source", "id", "revision", "require_resolved_sha"],
+      "required": ["source", "id", "revision", "require_resolved_sha", "profile"],
       "properties": {
         "source": {"enum": ["huggingface", "local_hf"]},
         "id": {"type": "string", "minLength": 1},
