@@ -179,3 +179,22 @@ silently removed.
 - Model fitting performed: **NO**.
 - CPRM-1 fresh collection is now **ELIGIBLE TO OPEN under exact verified lock**, but has not started.
 - CPRM-2/controller/KCL-7 remain **CLOSED**.
+
+---
+
+## 2026-09-20 — CPRM-1 Locked Fresh Scientific Execution Opened
+
+- Verified execution lock SHA-256: `26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274`.
+- Independent verification: `CPRM1_EXECUTION_LOCK_VERIFICATION_PASS`, workflow `35517842681`.
+- Authorized action: exactly one frozen 60-seed CPRM-1 collection.
+- Expected population: `60 seeds × 3 boundaries = 180 boundaries`.
+- Expected policy-response vectors: `540`.
+- Reliability repeats: exactly first 6 preregistered fresh seeds.
+- Pre-adjudication validation: **integrity/support/reliability only**.
+- Response/contrast geometry inspection before adjudication: **PROHIBITED**.
+- Complete raw collection must be preserved both as artifact and branch evidence before adjudication.
+- Adjudication: exactly one valid one-shot call on the preserved complete input.
+- Technical collection retry: only before complete valid collection; same seed + same lock; no seed substitution.
+- Complete valid collection rerun: **PROHIBITED**.
+- CPRM-2/predictor/controller: **CLOSED** pending canonical CPRM-1 verdict.
+- Scientific result at this lineage entry: **NOT YET OBSERVED**.

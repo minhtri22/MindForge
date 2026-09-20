@@ -1,0 +1,270 @@
+name: CPRM — CPRM-1 locked fresh execution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-policy-response
+    paths:
+      - .github/workflows/cprm1-locked-execute.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cprm1-locked-fresh-execution
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/continual-policy-response
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked dependencies
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce verified immutable lock before fresh science
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(sha256sum docs/research/continual-policy-response/CPRM1_EXECUTION_LOCK.json | awk '{print $1}')" = "26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274"
+          test "$(git hash-object docs/research/continual-policy-response/cprm1-response-support-protocol.md)" = "f61aabc5605400faea30e5d2af4349a2b32c792f"
+          test "$(git hash-object experiments/cprm/cprm1_response_support.py)" = "18774a9349adeb4a0e5d66ce46416564640f41aa"
+          test "$(git hash-object tests/test_cprm1_response_support.py)" = "dd54c5aaba63cf0fa649b5db445aec476e2a3847"
+          grep -q "CPRM1_EXECUTION_LOCK_VERIFICATION_PASS" docs/research/continual-policy-response/CPRM1_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274" docs/research/continual-policy-response/CPRM1_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "fa88ea8e1a6fc37f18be445c7b84a1ce755b1aa2c8ea38a92c8bcd9b64f4c3c1" docs/research/continual-policy-response/CPRM1_EXECUTION_LOCK_VERIFICATION.md
+          test ! -e experiments/cprm/results/cprm1_fresh_responses.json
+          test ! -e experiments/cprm/results/FORMAL_RESULT.json
+          python - <<'PY'
+          import json, platform
+          from importlib.metadata import version
+          import torch
+          p="docs/research/continual-policy-response/CPRM1_EXECUTION_LOCK.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert d["schema"] == "CPRM1-EXECUTION-LOCK-v1"
+          assert d["seed_manifest"]["count"] == 60
+          assert len(d["seed_manifest"]["seeds"]) == 60
+          assert len(set(d["seed_manifest"]["seeds"])) == 60
+          assert d["seed_manifest"]["sha256"] == "d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3"
+          assert d["population"]["expected_boundaries"] == 180
+          assert d["population"]["expected_response_vectors"] == 540
+          assert platform.machine() == "x86_64"
+          assert platform.python_version() == "3.12.14"
+          assert version("pip") == "26.2.1"
+          assert version("numpy") == "2.3.3"
+          assert version("pytest") == "8.4.2"
+          assert torch.__version__ == "2.10.0+cpu"
+          print("CPRM1_LOCKED_EXECUTION_GATE=PASS")
+          PY
+
+      - name: Collect frozen 60-seed cohort exactly once
+        id: collect
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiments/cprm/results artifacts
+          PYTHONPATH=. python experiments/cprm/cprm1_response_support.py \
+            --phase collect \
+            --output experiments/cprm/results/cprm1_fresh_responses.json
+          test -s experiments/cprm/results/cprm1_fresh_responses.json
+
+      - name: Integrity and support validation only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import collections, hashlib, json, math
+          p="experiments/cprm/results/cprm1_fresh_responses.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert d["schema"] == "CPRM1-FRESH-COLLECTION-v1"
+          assert d["program"] == "CPRM-1"
+          assert d["phase"] == "FRESH_COLLECTION"
+          assert d["protocol_sha256"] == "2663cb2b28f73e02bbac19c537e16632f978d2d754488932924bf37e7c8ea084"
+          assert d["seed_manifest_sha256"] == "d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3"
+
+          expected=[814887,863137,944290,493874,333929,674723,629896,563470,452971,659444,563718,222175,332624,957861,506630,735777,693319,612663,330455,271971,396729,463395,650240,394015,596743,717212,700981,787278,430901,538687,927431,885588,748598,724163,573227,689490,439438,774009,639141,850216,427422,235913,355296,574310,665271,791304,909129,757353,834226,280648,906973,523942,480884,388898,404202,430651,508646,398464,915507,458769]
+          policies={"A_CARRY_ALL","B_RESET_ALL","C_CARRY_STEP_RESET_MOMENTS"}
+          components={"plasticity_auc","final_current_accuracy","prior_task_retention","worst_prior_accuracy"}
+          rows=d["records"]
+          assert len(rows) == 180
+
+          per_seed=collections.Counter(int(r["seed"]) for r in rows)
+          per_stage=collections.Counter(int(r["boundary_index"]) for r in rows)
+          assert set(per_seed) == set(expected)
+          assert all(per_seed[s] == 3 for s in expected)
+          assert per_stage == {1:60,2:60,3:60}
+
+          response_vectors=0
+          for r in rows:
+              stage=int(r["boundary_index"])
+              assert stage in {1,2,3}
+              assert bool(r["integrity"]["valid"])
+              assert bool(r["integrity"]["fork_models_equal"])
+              assert bool(r["integrity"]["boundary_model_unchanged"])
+              assert bool(r["integrity"]["exact_replay_match"])
+              assert set(r["responses"]) == policies
+              for policy in policies:
+                  payload=r["responses"][policy]
+                  assert set(payload["response"]) == components
+                  prior=[float(x) for x in payload["prior_task_accuracies"]]
+                  assert len(prior) == stage
+                  vals={k:float(v) for k,v in payload["response"].items()}
+                  assert all(math.isfinite(v) and 0.0 <= v <= 1.0 for v in vals.values())
+                  mean_prior=vals["prior_task_retention"]
+                  worst_prior=vals["worst_prior_accuracy"]
+                  assert worst_prior <= mean_prior + 1e-12
+                  assert abs(mean_prior - sum(prior)/len(prior)) <= 1e-12
+                  assert abs(worst_prior - min(prior)) <= 1e-12
+                  if stage == 1:
+                      assert abs(mean_prior - worst_prior) <= 1e-12
+                  response_vectors += 1
+          assert response_vectors == 540
+
+          rel=d["reliability_checks"]
+          assert len(rel) == 6
+          assert [int(x["seed"]) for x in rel] == expected[:6]
+          assert all(bool(x["exact"]) for x in rel)
+          assert all(float(x["max_abs_diff"]) == 0.0 for x in rel)
+          assert all(bool(x["same_structure"]) for x in rel)
+
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          out={
+            "schema":"CPRM1-COLLECTION-INTEGRITY-v1",
+            "status":"PASS",
+            "seed_count":60,
+            "boundary_count":180,
+            "response_vector_count":540,
+            "per_stage":{"1":60,"2":60,"3":60},
+            "reliability_repeat_count":6,
+            "reliability_exact":True,
+            "collection_sha256":sha,
+            "scientific_geometry_inspected":False,
+            "contrast_geometry_inspected":False,
+          }
+          open("artifacts/cprm1_collection_integrity.json","w",encoding="utf-8").write(
+              json.dumps(out,indent=2,sort_keys=True)+"\n"
+          )
+          print("CPRM1_COLLECTION_INTEGRITY=PASS")
+          print("CPRM1_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Preserve complete collection artifact before adjudication
+        uses: actions/upload-artifact@v4
+        with:
+          name: cprm1-complete-collection-before-adjudication
+          path: |
+            experiments/cprm/results/cprm1_fresh_responses.json
+            artifacts/cprm1_collection_integrity.json
+          if-no-files-found: error
+
+      - name: Preserve complete collection in branch before adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/cprm/results/cprm1_fresh_responses.json
+          git commit -m "evidence(cprm): preserve CPRM-1 complete collection"
+          git push origin HEAD:research/continual-policy-response
+
+      - name: Run exactly one one-shot adjudicator
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e experiments/cprm/results/FORMAL_RESULT.json
+          test ! -e artifacts/CPRM1_ADJUDICATOR_CALLED
+          touch artifacts/CPRM1_ADJUDICATOR_CALLED
+          PYTHONPATH=. python experiments/cprm/cprm1_response_support.py \
+            --phase adjudicate \
+            --input experiments/cprm/results/cprm1_fresh_responses.json \
+            --output experiments/cprm/results/FORMAL_RESULT.json
+          test -s experiments/cprm/results/FORMAL_RESULT.json
+
+      - name: Validate and reveal formal result only after adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          cp="experiments/cprm/results/cprm1_fresh_responses.json"
+          rp="experiments/cprm/results/FORMAL_RESULT.json"
+          ip="artifacts/cprm1_collection_integrity.json"
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          rsha=hashlib.sha256(open(rp,"rb").read()).hexdigest()
+          d=json.load(open(rp, encoding="utf-8"))
+          integ=json.load(open(ip, encoding="utf-8"))
+          assert d["schema"] == "CPRM1-FORMAL-RESULT-v1"
+          assert d["program"] == "CPRM-1"
+          assert d["phase"] == "ONE_SHOT_ADJUDICATION"
+          assert d["protocol_sha256"] == "2663cb2b28f73e02bbac19c537e16632f978d2d754488932924bf37e7c8ea084"
+          assert d["source_records_sha256"] == csha
+          assert integ["collection_sha256"] == csha
+          a=d["adjudication"]
+          assert a["status"] in {"PASS","NEGATIVE","STOP"}
+          assert a["verdict"] in {
+              "PASS_RESPONSE_SUPPORT",
+              "NEGATIVE_RESPONSE_GEOMETRY_NOT_QUALIFIED",
+              "STOP_INTEGRITY_OR_SUPPORT",
+          }
+          ev={
+            "schema":"CPRM1-EXECUTION-EVIDENCE-v1",
+            "lock_sha256":"26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274",
+            "protocol_sha256":"2663cb2b28f73e02bbac19c537e16632f978d2d754488932924bf37e7c8ea084",
+            "seed_manifest_sha256":"d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3",
+            "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+            "workflow_head_sha":os.environ["GITHUB_SHA"],
+            "collection_sha256":csha,
+            "formal_result_sha256":rsha,
+            "collection_integrity":"PASS",
+            "one_shot_adjudication":True,
+            "scientific_status":a["status"],
+            "scientific_verdict":a["verdict"],
+          }
+          open("artifacts/CPRM1_EXECUTION_EVIDENCE.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+          print("CPRM1_FORMAL_STATUS="+a["status"])
+          print("CPRM1_FORMAL_VERDICT="+a["verdict"])
+          print("CPRM1_COLLECTION_SHA256="+csha)
+          print("CPRM1_FORMAL_RESULT_SHA256="+rsha)
+          if "response_geometry" in a:
+              print("CPRM1_RESPONSE_COMPONENT_QUALIFICATION="+json.dumps({
+                  k:v["qualified"] for k,v in a["response_geometry"]["components"].items()
+              },sort_keys=True))
+          if "contrast_geometry" in a:
+              print("CPRM1_CONTRAST_FAMILY_QUALIFICATION="+json.dumps({
+                  k:v["qualified"] for k,v in a["contrast_geometry"]["families"].items()
+              },sort_keys=True))
+          PY
+
+      - name: Upload complete execution evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cprm1-locked-execution-evidence
+          path: |
+            experiments/cprm/results/cprm1_fresh_responses.json
+            experiments/cprm/results/FORMAL_RESULT.json
+            artifacts/cprm1_collection_integrity.json
+            artifacts/CPRM1_EXECUTION_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve formal result in branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add experiments/cprm/results/FORMAL_RESULT.json
+          git commit -m "evidence(cprm): preserve CPRM-1 formal result"
+          git push origin HEAD:research/continual-policy-response
