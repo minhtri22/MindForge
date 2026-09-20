@@ -1,0 +1,188 @@
+name: MK1 B0 Reconstruction
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - ".github/workflows/mk1-b0-reconstruction.yml"
+      - "mindforge/**"
+      - "tests/test_mks_model_kernel.py"
+      - "model_kernel/mk1/**"
+  workflow_dispatch:
+
+jobs:
+  b0-reconstruction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.5.2 pytest==9.1.1 tokenizers==0.21.4
+          python -m pip install torch==2.12.1 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Focused MKS compatibility tests
+        run: |
+          pytest -q tests/test_mks_model_kernel.py
+
+      - name: Reconstruct B0 and replay checkpoint compatibility
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import platform
+          from pathlib import Path
+
+          import numpy as np
+          import torch
+          from tokenizers import Tokenizer
+          from tokenizers.models import WordLevel
+          from tokenizers.pre_tokenizers import Whitespace
+
+          from mindforge.checkpoint import load_checkpoint, read_checkpoint
+          from mindforge.config import ModelConfig
+          from mindforge.evaluate import evaluate_tokens
+          from mindforge.generate import generate
+          from mindforge.model import create_model, parameter_count
+          from mindforge.model_contract import TokenModel
+
+          def sha256(path: str) -> str:
+              h = hashlib.sha256()
+              with open(path, "rb") as f:
+                  for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                      h.update(chunk)
+              return h.hexdigest()
+
+          source_paths = [
+              "mindforge/config.py",
+              "mindforge/model.py",
+              "mindforge/model_contract.py",
+              "mindforge/checkpoint.py",
+              "mindforge/evaluate.py",
+              "mindforge/generate.py",
+              "tests/test_mks_model_kernel.py",
+          ]
+          source_sha256 = {p: sha256(p) for p in source_paths}
+
+          cfg = ModelConfig()
+          fresh_model = create_model(cfg)
+          count = parameter_count(fresh_model)
+          assert count == 10_339_200
+          assert isinstance(fresh_model, TokenModel)
+          assert fresh_model.context_limit == 512
+          assert fresh_model.vocab_size == 16_384
+
+          checkpoint = "runs/phase2-lr-sweep-v1/baseline/seed-101/checkpoint-step-200.pt"
+          checkpoint_sha = sha256(checkpoint)
+          checkpoint_bytes = Path(checkpoint).stat().st_size
+          assert checkpoint_sha == "6561fa2b354b317cf173faaa5a5cc236a4584cb047df3afdb2871dabae01778e"
+          assert checkpoint_bytes == 62_115_779
+
+          payload = read_checkpoint(checkpoint)
+          assert payload["format_version"] == 1
+          assert payload["step"] == 200
+          assert ModelConfig(**payload["model_config"]) == cfg
+          assert payload["tokenizer_fingerprint"] == "66a81f01511a62896089e8e2a510c95dad61b567cec12f0dbc5752529b11fb3e"
+          assert payload["dataset_fingerprint"] == "6fbf6b28c072c6fccb5385992d457ddaee7c63b3a54ae9c5bc93a346d54d5bee"
+
+          model, optimizer, restored = load_checkpoint(
+              checkpoint,
+              device="cpu",
+              dtype=torch.float32,
+              model_config=cfg,
+              restore_rng=False,
+          )
+          assert parameter_count(model) == 10_339_200
+          assert restored["step"] == 200
+          assert len(optimizer.param_groups) > 0
+
+          vocab = {f"tok{i}": i for i in range(cfg.vocab_size)}
+          tokenizer = Tokenizer(WordLevel(vocab=vocab, unk_token="tok0"))
+          tokenizer.pre_tokenizer = Whitespace()
+
+          tokens = (np.arange(65, dtype=np.int64) * 17 + 3) % cfg.vocab_size
+          e1 = evaluate_tokens(model, tokens, tokenizer, device="cpu", max_windows=4)
+          e2 = evaluate_tokens(model, tokens, tokenizer, device="cpu", max_windows=4)
+          eval_delta = {
+              "cross_entropy": abs(e1["cross_entropy"] - e2["cross_entropy"]),
+              "bits_per_byte": abs(e1["bits_per_byte"] - e2["bits_per_byte"]),
+          }
+          assert max(eval_delta.values()) <= 1e-6
+
+          g1 = generate(
+              model, tokenizer, "tok1 tok2 tok3",
+              device="cpu", max_new_tokens=4, temperature=0.0, seed=42,
+          )
+          g2 = generate(
+              model, tokenizer, "tok1 tok2 tok3",
+              device="cpu", max_new_tokens=4, temperature=0.0, seed=42,
+          )
+          assert g1["token_ids"] == g2["token_ids"]
+          assert g1["text"] == g2["text"]
+
+          out = {
+              "schema": "MK1-B0-RECONSTRUCTION-v0.1",
+              "status": "PASS",
+              "git_sha": "${{ github.sha }}",
+              "runtime": {
+                  "python": platform.python_version(),
+                  "torch": torch.__version__,
+                  "numpy": np.__version__,
+                  "platform": platform.platform(),
+                  "device": "cpu",
+                  "dtype": "float32",
+              },
+              "source_sha256": source_sha256,
+              "model_config": {
+                  "vocab_size": cfg.vocab_size,
+                  "d_model": cfg.d_model,
+                  "n_heads": cfg.n_heads,
+                  "n_layers": cfg.n_layers,
+                  "max_context": cfg.max_context,
+                  "ff_mult": cfg.ff_mult,
+                  "dropout": cfg.dropout,
+              },
+              "parameter_count": count,
+              "runtime_contract": {
+                  "TokenModel": True,
+                  "context_limit": fresh_model.context_limit,
+                  "vocab_size_metadata": fresh_model.vocab_size,
+              },
+              "checkpoint": {
+                  "path": checkpoint,
+                  "sha256": checkpoint_sha,
+                  "bytes": checkpoint_bytes,
+                  "format_version": payload["format_version"],
+                  "step": payload["step"],
+                  "tokenizer_fingerprint": payload["tokenizer_fingerprint"],
+                  "dataset_fingerprint": payload["dataset_fingerprint"],
+                  "model_restore": "PASS",
+                  "optimizer_restore": "PASS",
+              },
+              "compatibility_fixture": {
+                  "kind": "synthetic-token zero-science fixture",
+                  "historical_phase2_tokenizer_data_present": False,
+                  "evaluation_repeat_delta": eval_delta,
+                  "generation_token_exact": True,
+                  "generation_text_exact": True,
+              },
+          }
+          Path("mk1_b0_reconstruction_result.json").write_text(
+              json.dumps(out, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(out, indent=2))
+          PY
+
+      - name: Upload reconstruction evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-b0-reconstruction
+          path: mk1_b0_reconstruction_result.json
+          if-no-files-found: error
