@@ -111,35 +111,47 @@ Scientific consequence:
 - do not add J3.13 G1/R2/RG merely to repeat its mechanism discrimination;
 - strict observable cardinal nonidentifiability is not an admissible explanation under the tested contract.
 
-**CQG J3.14 — SOFT-TO-EXECUTION, promoted to the current MK-1 workload-minimization gate.**
+**CQG J3.14→J3.16 — CLOSED FOR MK-1 REPRESENTATION DEPENDENCY.**
 
-J3.14 prospectively distinguishes three explanations left by J3.13 using fresh data:
+J3.14 did not qualify data doubling or generic learner-class rescue. Its structured C240 arm reconstructed cardinal value essentially exactly but failed the frozen raw-Spearman gate. J3.15 prospectively showed that this raw-Spearman failure was a numerical/near-tie pathology with zero material-order inversions. J3.16 then independently validated the structured observable ECV chain on fresh data and formally concluded `STRUCTURED_OBSERVABLE_ECV_SUPPORTED`.
 
-- H_DATA2X — sample/data limitation;
-- H_CLASS — learner function-class / inductive-bias mismatch on the same R2/asinh representation;
-- H_COMPOSITION — need for an explicit per-hypothesis compositional/contraction basis.
+Transfer boundary:
 
-At the latest audit, corrected run `35453882566` is still in progress. Integrity, all fresh train/confirmatory collection jobs, freeze, and the C240 structured arm have completed successfully; other arm fitting remains unfinished.
+- Model Core may inherit the design lesson that explicit structured/factorized observables can make a difficult downstream mapping simple and stable;
+- Model Core may not copy the 48-D PHI schema or treat CQG structure as evidence that raw-language representation formation is solved;
+- CQG J3.17 and later resource-controller studies are downstream of representation formation and do not block MK-1.
 
-Scientific consequence for Model Core:
+**KCL-6.5.9.x — FORMAL CONVERGENCE REVIEW CLOSED; DESIGN CONSTRAINTS TRANSFERRED.**
 
-- do not freeze a latent/compositional MK-1 architecture before J3.14 adjudication;
-- if data doubling alone succeeds, avoid inventing extra model structure to solve a sample-size problem;
-- if the function-class arm succeeds, prioritize learner/inductive-bias transfer tests over schema expansion;
-- if only the explicit compositional arm succeeds, an explicit compositional-bias hypothesis becomes justified for a later Model Core study;
-- if none succeeds, do not repeat the same remedies in MK-1 without a new substrate-specific hypothesis.
+KCL established replicated boundary/action heterogeneity but failed to qualify the hard operational predictor across global, localized, mechanism-specific, static-intervention, temporal, and exact zero-step future-probe representation families. The formal review closed the active 6.5.9.x sequence and forbids another feature/representation rescue inside the same formulation.
 
-Conceptual MK-1 protocol work may continue, but final arm selection, preregistration freeze, and training remain blocked until J3.14 formal adjudication is reviewed.
+Transferable MK-1 constraints:
+
+1. **TARGET_STABILITY_BEFORE_LEARNING** — audit whether hard targets are brittle projections of continuous margins/quantities.
+2. **OBSERVABLE_IDENTIFIABILITY_BEFORE_PREDICTION** — every target field must be derivable from information available at the intended inference boundary; future/counterfactual truth cannot leak into primary supervision semantics.
+3. **FACTORIZE_BEFORE_RECOMBINATION** — preserve mechanism/policy identity before aggregation when aggregation can hide heterogeneous causes.
+4. **REPRESENTATION_IS_NOT_CONTROL** — a structured state PASS does not authorize an action/controller.
+5. **NO_UNBOUNDED_RESCUE_CHAIN** — after a clean formulation-level negative, a new experiment must isolate a genuinely new uncertainty rather than add features/capacity post hoc.
+
+These KCL constraints do not block MK-1; they constrain its preregistration.
 
 ### Opening rule
 
-MK-1 may be formally opened only after:
+MK-1 specification/preregistration may be formally opened because the direct upstream representation dependencies are now sufficiently adjudicated.
 
-1. J3.13 formal upstream report/lineage closure after the already-reviewed execution result;
-2. a frozen MK-1 protocol;
-3. B0 reconstruction;
-4. clean fresh data/seed split;
-5. no memory mechanism included.
+Before **implementation or training**, MK-1 must still satisfy:
+
+1. a frozen target ontology;
+2. target-margin / stability audit specification;
+3. observable-identifiability contract for every structured target field;
+4. frozen structured/factorized Z schema;
+5. frozen B0 / deterministic-PIT / learned-Z comparison contract;
+6. capacity/compute matching contract;
+7. clean development / validation / pristine-confirmatory split;
+8. frozen metrics, practical-effect thresholds, falsification and STOP rules;
+9. zero-science QA PASS;
+10. B0 reconstruction PASS;
+11. no memory, continual-learning, resource-controller, invariance, or sparse-runtime mechanism included.
 
 ## 4. MK-2 — Decision Sufficiency
 
@@ -275,11 +287,11 @@ NEXUS or ArcLLM may not determine the early model architecture merely because a 
 | Phase | Status after MK-0 | Blocking dependency |
 |---|---|---|
 | MK-0 | COMPLETE / FROZEN | none |
-| MK-1 | NOT OPENED | CQG J3.14 formal adjudication + prospective MK-1 protocol |
+| MK-1 | SPECIFICATION / PREREGISTRATION OPEN | protocol freeze + zero-science QA + B0 reconstruction before implementation/training |
 | MK-2 | BLOCKED | MK-1 supported/frozen |
 | MK-3 | BLOCKED / OPTIONAL | MK-2 |
 | MK-4 | BLOCKED | CQG J3.13/J3.14 + supported Model Kernel decision representation |
-| MK-5 | BLOCKED | relevant KCL closure + Model Kernel substrate |
+| MK-5 | BLOCKED | KCL 6.5.9.x closure satisfied; still requires a supported/frozen Model Core representation and fresh substrate requalification |
 | MK-6 | BLOCKED | relevant OIR-PPV closure |
 | MK-M1 | BLOCKED | ARN R3 confirmatory closure/stop |
 | MK-7 | BLOCKED | model conditional-work evidence + NEXUS/runtime closure |
