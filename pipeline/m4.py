@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.metadata
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -116,6 +117,12 @@ def run_m4_qualification(
     ]
     tokenizer_snapshot_hash = sha256_object(files)
     capability = capability_from_profile(profile)
+    environment_versions = {
+        "transformers": importlib.metadata.version("transformers"),
+        "huggingface-hub": importlib.metadata.version("huggingface-hub"),
+        "tokenizers": importlib.metadata.version("tokenizers"),
+        "jinja2": importlib.metadata.version("jinja2"),
+    }
 
     records = _read_jsonl(repo_root / "tests/fixtures/data/reasoning_mini.jsonl")
     serialization = []
@@ -252,6 +259,12 @@ def run_m4_qualification(
         "exact_pinned_tokenizer": snapshot.name == config.model.revision and len(files) > 0,
         "profile_capability_compiled": capability.supported
         and capability.training_format == "qwen_chat_tagged_reasoning@1",
+        "pinned_reasoning_dependencies": environment_versions == {
+            "transformers": "5.17.0",
+            "huggingface-hub": "1.32.0",
+            "tokenizers": "0.23.2",
+            "jinja2": "3.1.6",
+        },
         "assistant_only_serializer": len(serialization) == len(records)
         and all(item["prompt_token_count"] > 0 and item["supervised_token_count"] > 0 for item in serialization),
         "visible_semantics": len(visible) == len(records)
@@ -278,6 +291,7 @@ def run_m4_qualification(
         "tokenizer_snapshot_hash": tokenizer_snapshot_hash,
         "chat_template_hash": sha256_object(getattr(tokenizer, "chat_template", None)),
         "capability": capability.to_dict(),
+        "environment_versions": environment_versions,
         "capability_hash": capability.sha256,
         "serialization": serialization,
         "visible_responses": visible,
