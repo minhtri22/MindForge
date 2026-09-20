@@ -69,3 +69,26 @@ silently removed.
 - CPRM-0: **PASS / CLOSED**.
 - CPRM-1 scientific execution: **NOT AUTHORIZED**.
 - Next admissible action: design and preregister CPRM-1 Fresh Response Support & Geometry Qualification protocol only.
+
+---
+
+## 2026-09-20 — CPRM-1 Protocol Preregistered Before Scientific Execution
+
+- Milestone: `CPRM-1 — Fresh Response Support & Geometry Qualification`.
+- Predictor training: **FORBIDDEN / NONE**.
+- Controller: **CLOSED**.
+- Primary population: exactly `60 fresh seeds × 3 boundaries = 180 boundaries`.
+- Policy responses: exactly `540`.
+- Primary response vector: plasticity AUC, final current accuracy, mean prior retention, worst prior accuracy.
+- Hard labels used for eligibility/adjudication: **NO**.
+- Fresh seed manifest count: `60`.
+- Seed manifest SHA-256: `d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3`.
+- ACO-1 spent cohort reuse: **FORBIDDEN**.
+- Protected KCL cohort use: **FORBIDDEN**.
+- Reliability repeats: first six fresh seeds, exact deterministic repeat required.
+- Support gate: complete `60/60` seeds and `180/180` boundaries only.
+- Response non-degeneracy contract: frozen before outcomes.
+- B-A/C-A contrast-support contract: frozen before outcomes.
+- One-shot adjudicator: synthetic-only implementation authorized.
+- Scientific fresh collection: **LOCKED / NOT AUTHORIZED**.
+- Next: bind exact implementation/protocol/runtime in `CPRM1_EXECUTION_LOCK.json`, then run zero-science preflight only.
