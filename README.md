@@ -100,29 +100,28 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 ### Active Kernel Continual Learning research
 
-The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary, boundary-state, failure-mode and target-identifiability experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
+The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary, boundary-state, failure-mode, target-identifiability and mechanistic-representation experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9.5:
+As of KCL-6.5.9.6:
 
-- fixed global optimizer-boundary policies still do not satisfy the joint plasticity + retention + robustness contract;
+- fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract across all boundaries;
 - KCL-6.5.9.1 independently replicated positive-class boundary-regime heterogeneity;
-- KCL-6.5.9.2 showed that the four-class `SAFE_ACTION_SET-v1` target is not qualified as predictable from stage + global H1-H9 boundary state;
-- KCL-6.5.9.3 showed that neither richer pre-boundary LRBS-v1 state nor a zero-step future-task probe prospectively resolved the broad `A_ONLY` identifiability problem;
-- KCL-6.5.9.4 established that `A_ONLY` is structurally heterogeneous and independently replicated two stable mechanism targets:
-  - `MECH{P,R}`;
-  - `MECH{P+R,R}`;
-- KCL-6.5.9.5 then tested whether those two mechanism-specific targets are more identifiable than monolithic `A_ONLY` under the same frozen S2 representation and same class-balanced L2 logistic model family;
-- KCL-6.5.9.5 result: **NEGATIVE — `NO_MECHANISM_SPECIFIC_IDENTIFIABILITY_GAIN`**;
-- validation S2 macro recall:
-  - `A_ONLY = 0.6155` — qualified;
-  - `MECH{P,R} = 0.6863` — qualified, but gain over `A_ONLY` was only `+0.0708`, below the frozen `+0.10` threshold;
-  - `MECH{P+R,R} = 0.5765` — not qualified;
-- richer S2 contributed only marginal macro-recall gain over stage/global-state diagnostics, so target refinement alone does not explain the remaining identifiability gap;
-- no adaptive boundary classifier/controller is qualified;
+- KCL-6.5.9.2 showed that the four-class `SAFE_ACTION_SET-v1` target is not qualified as predictable from stage + global H1-H9 state;
+- KCL-6.5.9.3 showed that richer LRBS-v1 state and a diagnostic zero-step future probe did not resolve broad `A_ONLY` identifiability;
+- KCL-6.5.9.4 established that `A_ONLY` is structurally heterogeneous and replicated two stable mechanisms: `MECH{P,R}` and `MECH{P+R,R}`;
+- KCL-6.5.9.5 showed that mechanism-specific target decomposition alone does not produce the preregistered identifiability gain under frozen S2;
+- KCL-6.5.9.6 introduced MRIG-v1, an exact clone-only static reset-response representation using only observed-task gradients;
+- KCL-6.5.9.6 result: **NEGATIVE — `MRIG_V1_DOES_NOT_QUALIFY_MECH_PRR_REPRESENTATION`**;
+- on fresh validation for `MECH{P+R,R}`:
+  - S2 macro recall = `0.5841`, not qualified;
+  - S3 = S2 + MRIG-v1 macro recall = `0.5577`, not qualified;
+  - `D_MRIG = -0.0263`, 95% paired whole-seed CI `[-0.0685,+0.0044]`;
+- static observed-task reset-response geometry therefore does not resolve the remaining `MECH{P+R,R}` observability gap;
+- no adaptive boundary controller is qualified;
 - protected confirmatory seeds remain untouched;
 - KCL-7 is **not started**.
 
-The next scientifically admissible direction is **not** a stronger classifier or another target-only split. A new milestone must first preregister a mechanistic representation hypothesis — especially one addressing the unresolved `MECH{P+R,R}` interaction — and compare it against the frozen S2 baseline on an entirely fresh non-confirmatory cohort. Until that hypothesis is frozen, the KCL chain stops at KCL-6.5.9.5.
+The next authorized milestone is **KCL-6.5.9.7 — Temporal Mechanistic Representation Qualification**: test whether historically available transition geometry across completed task boundaries contains predictive information absent from a static S3 snapshot. The comparison must remain prospective, use a fresh non-confirmatory cohort, preserve the frozen low-capacity classifier family, and keep controller/KCL-7 closed.
 
 ## Roadmap
 
