@@ -2286,3 +2286,67 @@ This compact index summarizes the active Kernel Continual Learning chain without
   - open `KCL-6.5.9.x Formal Convergence Review`;
   - synthesize positive structural findings, falsified hypotheses, unresolved questions, and STOP/PIVOT criteria;
   - no new scientific execution until the review itself decides what, if anything, merits a separately preregistered post-convergence program.
+
+
+## 2026-09-20 — KCL-6.5.9.x Formal Convergence Review CLOSED
+
+- Review status: **CLOSED**.
+- Overall verdict:
+  - `DIAGNOSTIC_CONVERGENCE_ACHIEVED`;
+  - `NO_QUALIFIED_BOUNDARY_CONTROLLER`;
+  - `ACTIVE_KCL_6_5_9_X_STOP`;
+  - `PIVOT_ONLY_VIA_NEW_PREREGISTERED_RESEARCH_PROGRAM`.
+- Scope:
+  - synthesis/adjudication only;
+  - no new cohort executed;
+  - reverse-synthesis backlog used as input only;
+  - protected confirmatory seeds untouched;
+  - KCL-7 not started.
+- Converged positive structural findings:
+  - fixed global A/B/C policy is insufficient for the joint plasticity + retention + robustness contract;
+  - positive boundary-action regime heterogeneity is replicated;
+  - `A_ONLY` contains replicated mechanism heterogeneity;
+  - stable mechanisms include `MECH{P,R}` and `MECH{P+R,R}`;
+  - `MECH{P+R,R}` is the persistent hard unresolved target under the tested predictor families.
+- Converged negative findings for the current formulation:
+  - global boundary representation does not qualify action-regime prediction;
+  - LRBS-v1 S2 does not close the broad identifiability gap;
+  - mechanism-specific hard-target decomposition alone is insufficient;
+  - MRIG-v1 static intervention-response geometry is insufficient;
+  - TRIG-v1 one-transition temporal geometry is insufficient;
+  - exact FUTURE-PROBE-v1 P1-P8 is insufficient for Y_PRR.
+- Terminal KCL-6.5.9.8 evidence:
+  - S2 Y_PRR macro recall `0.451525`;
+  - FUT Y_PRR macro recall `0.439006`;
+  - `D_FUTURE = -0.012518`;
+  - 95% paired whole-seed CI `[-0.021292,-0.003748]`;
+  - validation run `35503887230`;
+  - validation evidence commit `6b1b70ed5b017cab5d3e6cda86f38379e90ddf3b`.
+- Convergence classification:
+  - structural convergence: **PASS**;
+  - predictive convergence: **NEGATIVE / STOP FOR CURRENT FORMULATION**;
+  - operational convergence: **NOT REACHED**.
+- Active-chain governance:
+  - `KCL-6.5.9.x = STOP`;
+  - `KCL-6.5.9.9` forbidden as feature/representation rescue;
+  - protected confirmatory cohort remains closed;
+  - boundary controller remains not qualified;
+  - KCL-7 remains closed/not authorized.
+- Reverse-synthesis backlog adjudication:
+  - BL-1 continuous potential-outcome modeling: **RETAIN / HIGH PRIORITY**;
+  - BL-2 policy-conditioned factorization: **RETAIN / HIGH PRIORITY**;
+  - BL-4 target-margin / label-stability audit: **RETAIN / HIGH PRIORITY DIAGNOSTIC**;
+  - BL-3 future-task × action-response geometry: **DROP / STOP UNDER CURRENT PREMISE** because KCL-6.5.9.8 produced a negative paired interval;
+  - BL-5 parameter-group interaction representation: **DEFER / CONDITIONAL**;
+  - BL-6 stage-conditional modeling: **DEFER / DIAGNOSTIC ONLY**.
+- Preferred future program ordering if separately authorized:
+  - target-margin / label-stability qualification;
+  - continuous policy-specific potential-outcome predictability;
+  - policy-conditioned B/C factorization and recombination;
+  - only after successful independent qualification may a controller study become admissible.
+- Review artifact:
+  - `docs/research/kernel-continual-learning/kcl659x-convergence-review.md`;
+  - commit `6246b422dcaeb9d5b1c2ff8f0c4a89c778a11d2e`.
+- Important boundary:
+  - this review does **not** authorize any backlog execution;
+  - any future pivot must be a separately named/preregistered program with fresh evidence and its own STOP gate.
