@@ -32,9 +32,9 @@ Every entry is a snapshot. Before activating a later Model Kernel phase, the sou
 | CQG H-Q2 | Confirmatory PASS across five frozen shifts | SUPPORTED_EVIDENCE | Strong evidence that an explicit decision-relevant state can retain utility under specified shifts without retraining | Open-world/general language generalization | MK-2 |
 | CQG J3.12 | Target/validator integrity supported; strong ranking; absolute ECV fidelity FAIL | NEGATIVE_EVIDENCE | Do not equate ranking quality with cardinal-value calibration; retain ordering/cardinal separation as a design constraint | A scalar value/confidence head is justified as first intervention | MK-2 / MK-4 |
 | CQG J3.13 | FORMALLY CLOSED: `CARDINAL_IDENTIFIABLE_BUT_CURRENT_LEARNER_CONTRACT_INSUFFICIENT`; report `008a49f7...`, formal-result commit `5f98364d...`, lineage evidence `ce077cd0...` | SUPPORTED_EVIDENCE | Strict cardinal nonidentifiability is falsified in this tested setup; scale-only, representation-factor-only, and combined ExtraTrees arms did not pass the cardinal gate | Factorized representation is useless for non-cardinal representation learning, or the J3.13 learner failure transfers directly to MindForge | MK-1 design narrowing / MK-4 |
-| CQG J3.14 | PREREGISTERED / IN EXECUTION at audit time; corrected run `35453882566` uses fresh train `1020000..1020239` and confirmatory `1021000..1021239` | PENDING | Will discriminate whether J3.13 cardinal failure is primarily data-limited, function-class/inductive-bias limited, or rescued by explicit compositional basis | Any J3.14 mechanism conclusion before formal adjudication | MK-1 final design narrowing / MK-4 |\n| CQG H-J1.2 | Confirmatory PASS in controlled benchmark | SUPPORTED_EVIDENCE | Typed/selective control outputs can be learnable from observable primitives under the tested setup | MindForge should immediately embed a CAP/update controller | Later typed-control study |
-| MindForge KCL completed findings | Multiple causal/falsification findings within tiny continual-learning substrate | SUPPORTED_EVIDENCE + NEGATIVE_EVIDENCE | Known optimizer/boundary-state phenomena; failed fixed/coarse strategies; diagnostics and transfer questions | Directly porting a KCL controller/predictor into the model | MK-5 |
-| KCL-6.5.9.2 current frontier | Training/rule artifact PASS; validation incomplete at audit point | PENDING | None beyond protocol awareness | Regime predictor is validated | MK-5 |
+| CQG J3.14→J3.16 | J3.14 formal verdict `CURRENT_TESTED_REMEDIES_INSUFFICIENT`; J3.15 supports numerical/near-tie pathology in raw Spearman; J3.16 formally closes `STRUCTURED_OBSERVABLE_ECV_SUPPORTED` | SUPPORTED_EVIDENCE + NEGATIVE_EVIDENCE | Structured/factorized observable decomposition can support near-exact cardinal reconstruction and selection utility in the CQG substrate; raw Spearman near ties must not be over-interpreted | Exact CQG PHI schema transfers to MindForge, or structured state is automatically learnable from raw language/context | MK-1 design constraints / MK-2 / MK-4 |
+| MindForge KCL-6.5.9.x convergence | Formal convergence review CLOSED at branch HEAD `a9159ae8...`: diagnostic convergence achieved, no qualified boundary controller, active 6.5.9.x STOP | SUPPORTED_EVIDENCE + NEGATIVE_EVIDENCE | Fixed global policies are insufficient; action/failure regimes are real; useful structure need not be predictable from current observables; current hard-target representation rescue family is closed | Any KCL predictor/controller transfers to Model Core, or all future/temporal/nonlinear representations are useless | MK-1 design constraints / MK-5 |
+| KCL post-convergence pivots | BL-1 continuous potential outcomes, BL-2 policy-conditioned factorization, BL-4 target-margin audit retained as future programs but not executed | PENDING | Design questions only: audit target stability, prefer generating quantities over brittle hard labels when justified, preserve policy/mechanism identity before recombination | These pivots are already validated mechanisms or must block MK-1 | MK-1 protocol design / future MK-5 |
 | MindForge OIR-PPV | Mixed closed findings plus open/deferred frontier; strong provenance/falsification machinery | HARNESS_ASSET + PENDING | Invariance/counterfactual methodology; candidate hypotheses; provenance discipline | Invariant loss/head is an established model mechanism | MK-6 |
 | PPF L1/L2 | Foundation/semantic work with frozen findings in its own scope | HARNESS_ASSET | Semantic/event contracts, ontology/ground-truth structure where applicable | PPF semantics belong in Kernel or learned weights by default | MK-1 evaluation assets |
 | Track-A | Controlled benchmark/capability research with its own closure rules | HARNESS_ASSET | Later capability evaluation and adversarial task discipline | Benchmark success proves architectural mechanism | MK-3+ |
@@ -81,11 +81,25 @@ decision-relevant TaskState materially improves ranking/selection
 CQG negative evidence:
 strong ranking does not guarantee absolute/cardinal calibration
 
-CQG J3.13 fresh result artifact:
-cardinal value is audit-identifiable from observables, but the frozen learner contract remains insufficient;
-scale-only, factorization-only, and their combined arm do not clear the cardinal gate
+CQG J3.13→J3.16:
+generic cardinal remedies fail, but a prospectively validated structured observable
+decomposition supports near-exact cardinal reconstruction, material-order preservation,
+selection utility, and an exact-SE stochastic bridge in the CQG substrate.
+
+KCL-6.5.9.x convergence:
+replicated structural heterogeneity does not imply predictability from current observables;
+hard derived labels can hide mechanism heterogeneity; repeated representation rescue without
+a new target/objective uncertainty must STOP.
 ~~~
 
-Therefore the first model hypothesis should concern **learned decision-state representation**, not memory, continual learning, invariance, sparse execution, or scalar utility calibration. J3.13 removes any reason to make scalar/cardinal repair, ASINH geometry, or its 558D factorized ExtraTrees arm the primary MK-1 intervention. J3.14 is now the relevant pending CQG dependency because its data-vs-function-class-vs-compositional-bias adjudication may eliminate additional MK-1 architecture arms before Model Core spends training compute.
+Therefore the first Model Core hypothesis should concern **learned structured decision-state formation from raw/current input**, while keeping representation formation separate from decision sufficiency.
 
-This registry does not open that experiment. Activation is governed by DEPENDENCY_GATES.md.
+The inherited design constraints are now explicit:
+
+- audit target stability/margins before blaming representation learning;
+- every structured target must have an observable-identifiability contract;
+- factorize mechanism-relevant quantities before premature recombination when scientifically justified;
+- do not treat CQG PHI or any KCL feature/controller as transferable architecture;
+- if the formulation fails cleanly, do not open an unbounded feature/history/capacity rescue chain without a new preregistered uncertainty.
+
+These constraints authorize MK-1 **specification/preregistration work only**. Activation and execution remain governed by DEPENDENCY_GATES.md.
