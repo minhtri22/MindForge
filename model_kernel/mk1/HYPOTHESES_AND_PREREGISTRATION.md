@@ -196,7 +196,7 @@ Exact split/evaluation contract:
 
 blob:
 
-`6a7092c112bbf6d6600ccfd8e3b32c81bab35e36`
+`9b07e5ade54054c5717bd54e3417c88bff9dff39`
 
 ## 10. Neural matching contract
 
