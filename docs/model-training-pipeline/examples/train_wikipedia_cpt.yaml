@@ -1,0 +1,16 @@
+experiment:
+  id: wikipedia-cpt
+  mode: development
+model:
+  id: "<supported-base-model>"
+  revision: "<pin>"
+phase:
+  type: cpt
+data:
+  adapter: wikipedia
+  snapshot: "<explicit-snapshot>"
+  split_seed: 42
+training:
+  max_tokens: 100000000
+  learning_rate: 0.000005
+  checkpoint_every_tokens: 10000000

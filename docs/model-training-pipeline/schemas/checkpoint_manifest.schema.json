@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CheckpointManifest",
+  "type": "object",
+  "required": [
+    "run_id",
+    "step",
+    "weights",
+    "config_hash",
+    "data_manifest_hash",
+    "parent_model_hash"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "step": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "weights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ]
+      }
+    },
+    "config_hash": {
+      "type": "string"
+    },
+    "data_manifest_hash": {
+      "type": "string"
+    },
+    "parent_model_hash": {
+      "type": "string"
+    }
+  }
+}

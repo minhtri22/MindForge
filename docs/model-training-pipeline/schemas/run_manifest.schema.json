@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RunManifest",
+  "type": "object",
+  "required": [
+    "run_id",
+    "state",
+    "config_hash",
+    "data_manifest_hash",
+    "git_commit"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "DRAFT",
+        "DATA_PREPARED",
+        "PREFLIGHT_PASS",
+        "EXECUTION_LOCKED",
+        "TRAINING",
+        "TRAINED",
+        "EVALUATED",
+        "ADJUDICATED_PASS",
+        "ADJUDICATED_FAIL",
+        "INVALID",
+        "EXPORTED",
+        "RUNTIME_VERIFIED",
+        "PROMOTED"
+      ]
+    },
+    "config_hash": {
+      "type": "string"
+    },
+    "data_manifest_hash": {
+      "type": "string"
+    },
+    "git_commit": {
+      "type": "string"
+    }
+  }
+}

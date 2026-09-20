@@ -1,0 +1,62 @@
+experiment:
+  id: e2e-small
+  mode: development
+  seed_sets:
+    development: [11]
+    calibration: [101]
+    fresh_confirmatory: [10001]
+
+model:
+  source: huggingface
+  id: "<choose-supported-tiny-reasoning-or-instruct-model>"
+  revision: "<pin>"
+  allow_remote_code: false
+
+phases:
+  - id: domain_cpt
+    type: cpt
+    datasets: [wiki_mini, code_mini]
+    max_steps: 20
+  - id: reasoning_sft
+    type: reasoning_sft
+    datasets: [reasoning_mini]
+    max_steps: 20
+
+data:
+  wiki_mini:
+    adapter: public_text
+    snapshot: "<pin>"
+  code_mini:
+    adapter: public_code
+    snapshot: "<pin>"
+  reasoning_mini:
+    adapter: jsonl_reasoning
+    path: "tests/fixtures/reasoning.jsonl"
+
+training:
+  precision: auto
+  sequence_length: 1024
+  learning_rate: 0.00001
+  checkpoint_every_steps: 10
+  save_optimizer_state: true
+
+evaluation:
+  fixture_set: tests/fixtures/eval_v1
+  checkpoint_selection:
+    rule: min_validation_loss
+
+reasoning:
+  required: true
+  preferred_transport: native
+  fallback: tagged
+  tags:
+    start: "<think>"
+    end: "</think>"
+
+export:
+  hf: true
+  gguf:
+    high_fidelity: f16
+    quantize: [q4_k_m]
+  verify_llama_cpp: true
+  verify_ollama: true

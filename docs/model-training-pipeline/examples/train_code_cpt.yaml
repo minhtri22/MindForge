@@ -1,0 +1,16 @@
+experiment:
+  id: code-cpt
+  mode: development
+model:
+  id: "<supported-base-model>"
+  revision: "<pin>"
+phase:
+  type: cpt
+data:
+  adapter: public_code
+  snapshot: "<explicit-snapshot>"
+  license_policy: deny_unknown
+  contamination_fixture_set: eval/code_v1
+training:
+  max_tokens: 100000000
+  learning_rate: 0.000005

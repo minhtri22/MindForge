@@ -1,0 +1,16 @@
+experiment:
+  id: reasoning-sft
+  mode: development
+phase:
+  type: reasoning_sft
+reasoning:
+  transport: auto
+  fallback_tags:
+    start: "<think>"
+    end: "</think>"
+loss:
+  reasoning_weight: 1.0
+  answer_weight: 1.0
+evaluation:
+  require_nonempty_reasoning: true
+  require_parseable_answer: true

@@ -1,0 +1,7 @@
+FROM {{GGUF_PATH}}
+
+# Template/system parameters must be generated from the canonical model/chat template.
+# Do not invent a different prompt format here.
+
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
