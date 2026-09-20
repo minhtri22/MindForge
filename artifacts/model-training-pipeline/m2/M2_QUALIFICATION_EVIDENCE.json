@@ -1,0 +1,50 @@
+{
+  "schema": "mindforge-model-pipeline-m2-qualification-evidence-v1",
+  "repository": "minhtri22/MindForge",
+  "branch": "docs/evidence-model-training-pipeline",
+  "initial_implementation_commit": "8f0601555f62bfc34aa7f9fcc997897a286e97a8",
+  "qualified_implementation_commit": "ca8e880d64aac081ddd659396241ee4798a7bc81",
+  "technical_invalid_predecessor": {
+    "classification": "M2_TECHNICAL_INVALID_CLI_SYNTAX_BEFORE_MODEL_EXECUTION",
+    "scientific_execution_consumed": false
+  },
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "model_type": "qwen2"
+  },
+  "runs": {
+    "m0_regression": 35517842979,
+    "m1_regression": 35517842971,
+    "m2_real_model": 35517842972
+  },
+  "verdict": "PASS",
+  "tests": {
+    "m0": {
+      "passed": 15
+    },
+    "m1": {
+      "passed": 15
+    },
+    "m2_checkpoint": {
+      "passed": 4
+    }
+  },
+  "result": {
+    "run_id": "e2e-small-cd9bfabe9280",
+    "phases": 2,
+    "exact_resume_phases": 2,
+    "model_weights_loaded": true,
+    "training_backend_initialized": true,
+    "public_bulk_download_started": false,
+    "canonical_directory_hash": "6edb0d843984e611580f895131c12ba5d0f47dfee0ab2050e45de1e3bc6b5684",
+    "fresh_reload_probe_hash": "c280e7e2ec3cbf24328b4b150d081555f3a19e72134aba0a008dbe0041f0f1dc",
+    "adjudication_hash": "b03383abf459d8a71e66f8396562bc3c3d384d83a3d3b02f74e8ddce288fd29b"
+  },
+  "boundary": {
+    "fixture_scale_only": true,
+    "fresh_confirmatory_data_accessed": false,
+    "bulk_wikipedia_or_codeparrot_training": false,
+    "m3_executed": false
+  }
+}
