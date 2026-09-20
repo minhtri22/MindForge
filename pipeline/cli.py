@@ -31,7 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     m1.add_argument("--runs-root", default="runs")
     m1.add_argument("--json", action="store_true", dest="as_json")
 
-    status = sub.add_parser("status", help="read an M0/M1 qualification result")
+    m2 = sub.add_parser("trainer-qualify", help="M2 real-model trainer/checkpoint qualification")\n    _common_config_args(m2)\n    m2.add_argument("--runs-root", default="runs")\n    m2.add_argument("--json", action="store_true", dest="as_json")\n\n    status = sub.add_parser("status", help="read the latest M0/M1/M2 qualification result")
     status.add_argument("run_dir")
 
     return parser
