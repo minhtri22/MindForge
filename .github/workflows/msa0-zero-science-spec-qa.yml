@@ -1,0 +1,55 @@
+name: MSA — MSA-0 zero-science specification QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/measurement-substrate-adequacy
+    paths:
+      - docs/research/measurement-substrate-adequacy/**
+      - tools/msa/**
+      - tests/test_msa0_spec.py
+      - .github/workflows/msa0-zero-science-spec-qa.yml
+
+permissions:
+  contents: read
+
+jobs:
+  spec-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - name: Install QA-only dependency
+        run: python -m pip install pytest==8.4.2
+      - name: Run MSA-0 specification tests
+        run: PYTHONPATH=. python -m pytest tests/test_msa0_spec.py -q
+      - name: Run MSA-0 zero-science verifier
+        run: PYTHONPATH=. python tools/msa/verify_msa0_spec.py
+      - name: Enforce zero-science result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/msa0_spec_qa.json",encoding="utf-8"))
+          assert d["status"]=="PASS", d
+          assert d["verdict"]=="MSA0_ZERO_SCIENCE_SPEC_QA_PASS", d
+          assert d["scientific_execution_attempted"] is False, d
+          assert d["fresh_scientific_seed_generated"] is False, d
+          assert d["difficulty_mutation_performed"] is False, d
+          assert d["predictor_fitting_performed"] is False, d
+          assert d["checks"]["no_msa_execution_workflow"], d
+          assert d["checks"]["no_fresh_msa_seed_manifest"], d
+          print("MSA0_ZERO_SCIENCE_SPEC_QA=PASS")
+          PY
+          sha256sum artifacts/msa0_spec_qa.json
+      - name: Upload MSA-0 QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: msa0-zero-science-spec-qa
+          path: artifacts/msa0_spec_qa.json
+          if-no-files-found: error
