@@ -100,35 +100,69 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 ### Active Kernel Continual Learning research
 
-The active **KCL-6.5.9.x representation / identifiability sequence is now CLOSED**. The append-only evidence chain is preserved in [Lineage.md](Lineage.md) and [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
+The **KCL-6.5.9.x active sequence is CLOSED** and its **Formal Convergence Review is complete**.
 
-What the sequence established:
+Canonical review:
+
+- [KCL-6.5.9.x Formal Convergence Review](docs/research/kernel-continual-learning/kcl659x-convergence-review.md)
+- append-only decision history: [Lineage.md](Lineage.md)
+- reverse-angle input backlog: [kcl659x-reverse-synthesis-backlog.md](docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md)
+
+Formal convergence verdict:
+
+```
+DIAGNOSTIC_CONVERGENCE_ACHIEVED
+NO_QUALIFIED_BOUNDARY_CONTROLLER
+ACTIVE_KCL_6_5_9_X_STOP
+PIVOT_ONLY_VIA_NEW_PREREGISTERED_RESEARCH_PROGRAM
+```
+
+What has converged:
 
 - fixed global optimizer-boundary policies do not jointly satisfy plasticity + retention + robustness;
-- boundary action suitability is heterogeneous rather than governed by one global reset rule;
-- broad pre-boundary action-regime prediction is not qualified under the tested stage/global/localized representations;
-- `A_ONLY` contains independently replicated failure-mode heterogeneity, including stable `MECH{P,R}` and `MECH{P+R,R}`;
-- mechanism-specific hard-target decomposition alone does not resolve identifiability;
-- KCL-6.5.9.6 MRIG-v1 static reset-response geometry is NEGATIVE for `MECH{P+R,R}`;
-- KCL-6.5.9.7 TRIG-v1 one-transition temporal geometry is NEGATIVE;
-- KCL-6.5.9.8 exact zero-step `FUTURE-PROBE-v1 P1-P8` is also NEGATIVE on `MECH{P+R,R}`:
-  - S2 validation macro recall = `0.4515`;
-  - FUT validation macro recall = `0.4390`;
-  - `D_FUTURE = -0.01252`;
-  - paired whole-seed 95% CI = `[-0.02129,-0.00375]`;
-  - neither arm qualifies.
+- positive boundary-action regime heterogeneity is independently replicated;
+- `A_ONLY` contains replicated failure-mode heterogeneity;
+- stable mechanisms include `MECH{P,R}` and `MECH{P+R,R}`;
+- the hard `MECH{P+R,R}` target remains unqualified under every tested active representation/information family:
+  - global/static boundary state;
+  - localized S2/LRBS-v1;
+  - mechanism-specific hard-target refinement;
+  - MRIG-v1 static intervention-response geometry;
+  - TRIG-v1 one-transition temporal geometry;
+  - exact FUTURE-PROBE-v1 P1-P8 zero-step future-task interaction.
 
-The frozen KCL-6.5.9.8 terminal rule therefore applies:
+Terminal KCL-6.5.9.8 validation:
 
 ```
-ACTIVE KCL-6.5.9.x = CLOSED
-DO NOT OPEN KCL-6.5.9.9 AS FEATURE RESCUE
-NEXT = FORMAL CONVERGENCE REVIEW
+S2 Y_PRR macro recall  = 0.451525
+FUT Y_PRR macro recall = 0.439006
+
+D_FUTURE = -0.012518
+95% paired whole-seed CI = [-0.021292,-0.003748]
 ```
 
-A reverse-angle synthesis has been preserved separately at [kcl659x-reverse-synthesis-backlog.md](docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md). It contains possible post-review programs such as continuous potential-outcome modeling, policy-conditioned factorization, target-margin audit, and conditional future-task × action-response geometry. **None of these backlog items is currently authorized or executed.**
+Therefore the active sequence is stopped. **KCL-6.5.9.9 must not be opened as another feature/representation rescue.**
 
-No adaptive boundary controller is qualified. The protected confirmatory cohort remains untouched. **KCL-7 is not started.**
+The Formal Convergence Review distinguishes:
+
+```
+STRUCTURAL CONVERGENCE = PASS
+PREDICTIVE CONVERGENCE = NEGATIVE / STOP FOR CURRENT FORMULATION
+OPERATIONAL CONVERGENCE = NOT REACHED
+```
+
+The reverse-synthesis backlog remains **unexecuted**. Review triage retains only genuinely different post-convergence pivots:
+
+- continuous policy-specific potential-outcome modeling — retained/high priority;
+- policy-conditioned B/C factorization — retained/high priority;
+- target-margin / label-stability audit — retained/high-priority diagnostic;
+- future-task × action-response geometry — dropped under the current premise after KCL-6.5.9.8;
+- parameter-group interaction representation — deferred/conditional;
+- stage-conditional modeling — deferred/diagnostic only.
+
+None of these is authorized merely by being listed. Any future pivot must be a separately named, preregistered program with a fresh cohort and its own STOP gate.
+
+No adaptive boundary controller is qualified. The protected confirmatory cohort remains untouched. **KCL-7 is not started and remains unauthorized.**
 
 ## Roadmap
 
