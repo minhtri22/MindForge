@@ -1,0 +1,116 @@
+name: Kernel CL — KCL-6.5.9.6 MRIG validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/kernel-cl
+    paths:
+      - .github/workflows/kernel-cl-kcl6596-validate.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify frozen train/rule/source contract
+        run: |
+          echo "f4f3805072ebe67c71076741df9f79e525537c2d6855353a204b1d5f99f352f0  experiments/kernel_cl/results/kcl6596_train.json" | sha256sum -c -
+          echo "ebd6d2d02b7263fd4a58bf52507a50f639b3211c4a3e133fa798b57c9e8ba296  experiments/kernel_cl/results/kcl6596_rule.json" | sha256sum -c -
+          echo "e6acbb980f8d8bbc8fac222e15fdda933f1b50a539f03695b387dcdafdc8abda  docs/research/kernel-continual-learning/kcl6596-protocol.md" | sha256sum -c -
+          echo "fa8ee92b3acff529df5db0a4fbe16a3b6a231e8b289261ded0724b933212a79a  experiments/kernel_cl/kcl6596_mechanistic_representation.py" | sha256sum -c -
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6596_train.json"))
+          r=json.load(open("experiments/kernel_cl/results/kcl6596_rule.json"))
+          assert d["status"] == "PASS"
+          assert d["verdict"] == "MRIG_V1_MODELS_TRAINED_AND_READY_TO_FREEZE"
+          assert d["rule"]["sha256"] == "ebd6d2d02b7263fd4a58bf52507a50f639b3211c4a3e133fa798b57c9e8ba296"
+          assert d["governance"]["validation_executed"] is False
+          assert d["governance"]["protected_confirmatory_touched"] is False
+          assert d["governance"]["controller_implemented"] is False
+          assert d["governance"]["kcl7_started"] is False
+          assert r["rule"] == "MRIG-Q-v1"
+          assert r["source_git_commit"] == "2bda6e3ac56fbc18340c9db43c9220fde6227748"
+          assert r["validation_executed_before_freeze"] is False
+          assert r["protected_confirmatory_touched"] is False
+          assert r["controller_implemented"] is False
+          assert r["kcl7_started"] is False
+          PY
+
+      - name: Focused pre-validation contracts
+        run: |
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6596.py -q
+          PYTHONPATH=. python -m pytest tests/test_kernel_cl_kcl6595.py -q
+
+      - name: Assert validation evidence absent
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6596_validation.json
+
+      - name: Frozen MRIG validation
+        id: science
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python experiments/kernel_cl/kcl6596_mechanistic_representation.py \
+            --phase validate \
+            --rule experiments/kernel_cl/results/kcl6596_rule.json \
+            --output experiments/kernel_cl/results/kcl6596_validation.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+
+          test -f experiments/kernel_cl/results/kcl6596_validation.json
+          sha256sum experiments/kernel_cl/results/kcl6596_validation.json
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/kernel_cl/results/kcl6596_validation.json"))
+          print("KCL6596_VALIDATION_STATUS="+str(d.get("status")))
+          print("KCL6596_VALIDATION_VERDICT="+str(d.get("verdict")))
+          print("KCL6596_VALIDATION_SUPPORT="+json.dumps(d.get("support",{}),sort_keys=True))
+          print("KCL6596_VALIDATION_INTEGRITY="+json.dumps(d.get("integrity",{}),sort_keys=True))
+          print("KCL6596_PRIMARY="+json.dumps(d.get("primary",{}),sort_keys=True))
+          print("KCL6596_BOOTSTRAP_DELTAS="+json.dumps(d.get("bootstrap",{}).get("deltas",{}),sort_keys=True))
+          print("KCL6596_METRICS="+json.dumps(d.get("metrics",{}),sort_keys=True))
+          print("KCL6596_SECONDARY="+json.dumps(d.get("secondary_diagnostics",{}),sort_keys=True))
+          print("KCL6596_MRIG_SUMMARY="+json.dumps(d.get("mrig_feature_summary",{}),sort_keys=True))
+          PY
+
+      - name: Enforce scope guardrails
+        run: |
+          test ! -e experiments/kernel_cl/results/kcl6596_controller.json
+          test ! -e .github/workflows/kernel-cl-kcl6596-controller.yml
+          test ! -e .github/workflows/kernel-cl-kcl7.yml
+
+      - name: Preserve exact validation evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/kernel_cl/results/kcl6596_validation.json
+          git commit -m "evidence(kcl): preserve KCL-6.5.9.6 validation"
+          git push origin HEAD:research/kernel-cl
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kcl6596-mrig-validation
+          path: experiments/kernel_cl/results/kcl6596_validation.json
+          if-no-files-found: error
+
+      - name: Enforce valid scientific execution
+        run: test "${{ steps.science.outputs.exit_code }}" -eq 0
