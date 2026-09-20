@@ -53,6 +53,13 @@ CONFIRMATORY_SCENE_RANGE = range(7_104_000, 7_104_600)
 SCIENTIFIC_TRAINING_SEEDS = (71001, 71002, 71003, 71004, 71005)
 H1B_BOOTSTRAP_SEED = 71101
 H1B_BOOTSTRAP_RESAMPLES = 10_000
+H1C_BOOTSTRAP_SEED = 71102
+H1C_BOOTSTRAP_RESAMPLES = 10_000
+PIT_V3_RUNTIME_SHA256 = "b09e284cfd8316140d202e43be216e7fb4ff1743ed4e4900589fb5a0bb5ca1e9"
+PIT_COMMON_Z4_FIELDS = (
+    "conflict_present", "supersession_supported", "scope_supported",
+    "temporal_rule_supported", "fallback_policy_supported", "operational_signal_supported",
+)
 RENDERER_TRAIN_A = "A"
 RENDERER_TRAIN_B = "B"
 RENDERER_HELDOUT_C = "C"
