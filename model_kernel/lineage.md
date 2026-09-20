@@ -217,3 +217,45 @@ Câu mở đầu của mục ngay trước được hiểu là:
 Đã mở MK-1 chỉ ở mức đặc tả và đăng ký trước; chưa sửa mã mô hình, chưa tạo dữ liệu khoa học và chưa huấn luyện.
 
 Đính chính này chỉ sửa lỗi gõ chữ, không thay đổi nội dung khoa học, trạng thái hay cổng thực hiện.
+
+
+## 2026-09-21 — Dựng lại B0 trên nhánh Lõi mô hình
+
+Đã chạy cổng dựng lại B0 trên nhánh `research/model_core`.
+
+Lần chạy đầu:
+
+- số lần chạy: `35526242084`
+- mã cam kết: `015780ae7f2bf786b92dc18e62938a3beeb7258d`
+- trạng thái: không hợp lệ do môi trường kiểm thử không nhận đường dẫn gói cục bộ;
+- không tạo kết quả dựng lại B0 và không tạo bằng chứng khoa học.
+
+Đã sửa duy nhất đường dẫn nhập gói cục bộ tại:
+
+`6f54872d0825f07a3394747576c537ca447c999b`
+
+Lần chạy hợp lệ:
+
+- số lần chạy: `35526336632`
+- trạng thái: đạt;
+- gói bằng chứng: `10609797460`
+- mã băm gói bằng chứng: `e2a87f0871c8b8c6a55493f8b186221d0dd41705aac4eb70be1bf2a5e82ca632`
+
+Kết quả chính:
+
+- cấu hình B0 khớp hợp đồng đã khóa;
+- số tham số: `10,339,200`;
+- hợp đồng chạy TokenModel: đạt;
+- checkpoint lịch sử có mã băm `6561fa2b354b317cf173faaa5a5cc236a4584cb047df3afdb2871dabae01778e`;
+- khôi phục model: đạt;
+- khôi phục optimizer: đạt;
+- sai lệch lặp đánh giá: `0.0`;
+- sinh tham lam lặp lại chính xác: đạt.
+
+Giới hạn: tokenizer và dữ liệu token Phase-2 lịch sử không nằm trong cây Git hiện tại, vì vậy lần chạy này không tuyên bố tái tạo lại chỉ số Phase-2 lịch sử. Phần đánh giá và sinh chỉ kiểm tra tính quyết định hiện tại bằng dữ liệu giả lập không-khoa-học.
+
+Tài liệu đóng cổng:
+
+`c96f6962504bba5fa3ffe5d3f0efb260fa19ca1f`
+
+Trạng thái khoa học: dựng lại B0 đạt. Chưa tạo dữ liệu MK-1 và chưa huấn luyện. Cổng tiếp theo là kiểm tra khả thi cân bằng B0-DIRECT với M1-Z.
