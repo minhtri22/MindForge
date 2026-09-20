@@ -67,8 +67,19 @@ Evaluate separately by target family and pooled across eligible fields:
 
 ### Z2 normalized arguments
 - exact accuracy for categorical comparator/unit fields;
-- normalized absolute error for continuous fields;
+- symmetric per-record normalized absolute error for continuous fields:
+  `nAE = |prediction-gold| / max(|gold|, 1 canonical unit)`;
 - relation/order accuracy.
+
+For a continuous field, define its score as:
+`continuous_score = 1 - min(mean_nAE, 1)`.
+
+The Z2 eligible-field score is the unweighted mean of:
+- categorical exact accuracy;
+- continuous_score when continuous fields are present;
+- relation/order accuracy when relation/order fields are present.
+
+Missing field types are omitted rather than imputed.
 
 ### Z3 scope
 - evidence-scope accuracy;
@@ -98,9 +109,12 @@ M1-Z absolute PASS requires all:
 7. recomposed canonical-state field accuracy >= 0.95;
 8. invariance-cluster consistency >= 0.95;
 9. no supported primary class has recall < 0.80;
-10. all target-stability and observable-identifiability gates PASS.
+10. all target-stability and observable-identifiability gates PASS;
+11. for every supported primary continuous Z2 field:
+    - mean nAE <= 0.05;
+    - 95th percentile nAE <= 0.10.
 
-For continuous Z2 fields, a normalized error gate is frozen per field at implementation lock from the gold-unit scale definition, before model training. No validation-optimal thresholding is allowed.
+The nAE definition above is frozen now. No field-specific validation-optimal scaling or thresholding is allowed.
 
 ## 8. Paired comparison: M1-Z vs B0-DIRECT
 
