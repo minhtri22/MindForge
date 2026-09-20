@@ -1,0 +1,158 @@
+{
+  "schema": "ACO1-EXECUTION-LOCK-v1",
+  "program": "ACO-1",
+  "status": "LOCKED_PENDING_INDEPENDENT_VERIFICATION",
+  "authorized": true,
+  "authorization_condition": "Fresh ACO-1 execution is prohibited until the independent lock-verification workflow closes ACO1_EXECUTION_LOCK_VERIFICATION_PASS on this exact lock.",
+  "implementation": {
+    "commit": "e4e8f27b164ca938e6efa910bfb1ec2fc056f1a2",
+    "runner_path": "experiments/aco/aco1_target_stability.py",
+    "runner_git_blob_sha": "117bd3f16d576bf6f683d83747b6c1723a7ae471",
+    "post_implementation_scientific_source_changes_allowed": false
+  },
+  "protocol": {
+    "path": "docs/research/adaptive-continual-outcomes/aco1-target-stability-protocol.md",
+    "sha256": "a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb",
+    "git_blob_sha": "3d2435ae82edb4e257f7a316950ed55b01d21690"
+  },
+  "seed_manifest": {
+    "count": 40,
+    "sha256": "9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91",
+    "seeds": [
+      714845,
+      799297,
+      471852,
+      671302,
+      797856,
+      525370,
+      494800,
+      333039,
+      618491,
+      662800,
+      265044,
+      434671,
+      501990,
+      723350,
+      393434,
+      774787,
+      806053,
+      890854,
+      613906,
+      707487,
+      415555,
+      641958,
+      505262,
+      776960,
+      428051,
+      767077,
+      464825,
+      448672,
+      416287,
+      770416,
+      596609,
+      359597,
+      454064,
+      431281,
+      705347,
+      294795,
+      641624,
+      345481,
+      326782,
+      242385
+    ]
+  },
+  "protected_kcl_cohort": {
+    "prohibited": true,
+    "seeds": [
+      13635,
+      13837,
+      14039,
+      14241,
+      14443,
+      14645,
+      14847,
+      15049,
+      15251,
+      15453,
+      15655,
+      15857,
+      16059,
+      16261,
+      16463,
+      16665,
+      16867,
+      17069,
+      17271,
+      17473
+    ]
+  },
+  "runtime": {
+    "execution_platform": "GitHub-hosted ubuntu-24.04",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "pip": "26.2.1",
+    "numpy": "2.3.3",
+    "pytest": "8.4.2",
+    "torch": "2.10.0+cpu",
+    "torch_index_url": "https://download.pytorch.org/whl/cpu",
+    "device": "CPU",
+    "deterministic_algorithms": true,
+    "torch_num_threads": 1
+  },
+  "install_commands": [
+    "python -m pip install pip==26.2.1",
+    "python -m pip install numpy==2.3.3 pytest==8.4.2",
+    "python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu"
+  ],
+  "execution": {
+    "collection_command": "PYTHONPATH=. python experiments/aco/aco1_target_stability.py --phase collect --output experiments/aco/results/aco1_fresh_records.json",
+    "collection_output": "experiments/aco/results/aco1_fresh_records.json",
+    "expected_records": 120,
+    "adjudication_command": "PYTHONPATH=. python experiments/aco/aco1_target_stability.py --phase adjudicate --input experiments/aco/results/aco1_fresh_records.json --output experiments/aco/results/FORMAL_RESULT.json",
+    "formal_result_output": "experiments/aco/results/FORMAL_RESULT.json",
+    "one_shot_adjudication": true,
+    "adjudication_requires_complete_collection": true,
+    "no_scientific_metric_inspection_between_collection_and_adjudication": true
+  },
+  "technical_failure_retry_policy": {
+    "collection": {
+      "retry_allowed_only_if": [
+        "process exits non-zero",
+        "complete collection output is absent",
+        "output JSON is unreadable",
+        "record count is not exactly 120",
+        "integrity validation fails before scientific adjudication"
+      ],
+      "retry_must_use_exact_same_lock": true,
+      "outcome_inspection_before_retry": false,
+      "scientific_threshold_or_source_change_before_retry": false,
+      "complete_valid_collection_must_not_be_rerun": true
+    },
+    "adjudication": {
+      "exactly_one_valid_adjudication": true,
+      "technical_retry_allowed_only_if_valid_formal_result_absent": true,
+      "retry_must_use_exact_same_input_and_lock": true,
+      "outcome_inspection_before_retry": false,
+      "valid_formal_result_must_not_be_rerun": true
+    },
+    "any_source_protocol_seed_or_dependency_change_invalidates_lock": true,
+    "invalidated_lock_requires_return_to_zero_science_preflight": true
+  },
+  "preflight_anchor": {
+    "implementation_commit": "e4e8f27b164ca938e6efa910bfb1ec2fc056f1a2",
+    "workflow_run_id": 35510372687,
+    "focused_tests": "10/10 PASS",
+    "preflight_json_sha256": "75b3b5351376246fe7efd97192633f84cf1305b42189f1bb6e363a1fade4a8b3",
+    "artifact_id": 10605275966,
+    "artifact_zip_sha256": "f4f5825f652825bd76239d0b42bbaf08f17304f0bfcb058d9fdf771855ef8bbd"
+  },
+  "independent_verification": {
+    "required": true,
+    "verifier_path": "tools/aco/verify_aco1_execution_lock.py",
+    "workflow_path": ".github/workflows/aco1-execution-lock-verify.yml",
+    "verification_output": "artifacts/aco1_execution_lock_verification.json",
+    "fresh_seed_execution_during_verification": false,
+    "scientific_outcome_generation_during_verification": false,
+    "execution_workflow_must_remain_absent": true
+  }
+}

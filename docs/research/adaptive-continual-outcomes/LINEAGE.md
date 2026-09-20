@@ -81,3 +81,23 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Execution lock: **ABSENT**.
 - Controller: **CLOSED / NOT AUTHORIZED**.
 - Next: create and independently verify ACO-1 execution lock; only then may the frozen 40-seed cohort execute.
+
+---
+
+## 2026-09-20 — ACO-1 Execution Lock Created, Verification Pending
+
+- Scientific execution before lock creation: **NONE**.
+- Lock schema: `ACO1-EXECUTION-LOCK-v1`.
+- Scientific implementation bound to commit: `e4e8f27b164ca938e6efa910bfb1ec2fc056f1a2`.
+- Runner Git blob bound: `117bd3f16d576bf6f683d83747b6c1723a7ae471`.
+- Protocol SHA-256 bound: `a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb`.
+- 40-seed manifest SHA-256 bound: `9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91`.
+- Runtime locked to GitHub-hosted `ubuntu-24.04`, x86_64, Python `3.12.14`, pip `26.2.1`, NumPy `2.3.3`, pytest `8.4.2`, PyTorch `2.10.0+cpu`.
+- Collection command and one-shot adjudication command frozen.
+- Collection output: `experiments/aco/results/aco1_fresh_records.json`.
+- Formal result output: `experiments/aco/results/FORMAL_RESULT.json`.
+- Technical retry policy frozen: no outcome inspection before technical retry; no rerun after a complete valid collection; exactly one valid adjudication; any scientific source/protocol/seed/dependency change invalidates the lock and returns to zero-science preflight.
+- Protected KCL confirmatory cohort explicitly prohibited.
+- Independent lock verification: **REQUIRED / PENDING**.
+- ACO-1 fresh execution: **STILL PROHIBITED**.
+- Execution workflow: **ABSENT BY DESIGN** until independent verification closes PASS.
