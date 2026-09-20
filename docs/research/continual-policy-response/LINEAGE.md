@@ -129,3 +129,15 @@ silently removed.
 - Formal result: **NONE**.
 - Fresh execution remains blocked pending independent execution-lock verification.
 - CPRM-2/controller/KCL-7: **CLOSED**.
+
+---
+
+## 2026-09-20 — CPRM-1 Independent Execution-Lock Verification Opened
+
+- Exact lock SHA-256 to verify: `26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274`.
+- Verification method: static independent verifier; CPRM-1 scientific runner is **NOT imported or called**.
+- Required checks: protocol/source blobs, exact seed manifest, exact runtime, historical/protected/spent disjointness, support/geometry gates, retry policy, absence of collection/result, absence of fresh execution workflow.
+- Fresh CPRM-1 seed execution during verification: **PROHIBITED**.
+- Scientific outcome generation during verification: **PROHIBITED**.
+- Model fitting during verification: **PROHIBITED**.
+- Verification result at this entry: **PENDING**.

@@ -1,0 +1,69 @@
+name: CPRM — CPRM-1 execution-lock verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-policy-response
+    paths:
+      - tools/cprm/verify_cprm1_execution_lock.py
+      - tests/test_cprm1_execution_lock.py
+      - .github/workflows/cprm1-execution-lock-verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Independent verifier tests
+        run: PYTHONPATH=. python -m pytest tests/test_cprm1_execution_lock.py -q
+
+      - name: Run independent static verification
+        run: |
+          mkdir -p artifacts
+          PYTHONPATH=. python tools/cprm/verify_cprm1_execution_lock.py
+
+      - name: Enforce verification result
+        run: |
+          python - <<'PY'
+          import json
+          p="artifacts/cprm1_execution_lock_verification.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert d["status"] == "PASS", d
+          assert d["verdict"] == "CPRM1_EXECUTION_LOCK_VERIFICATION_PASS", d
+          assert d["lock_sha256"] == "26c539a3be74f151e69863bc267268b1257e2715f707a436d44a45910d8af274", d
+          assert d["fresh_seed_execution_attempted"] is False, d
+          assert d["scientific_outcome_generated"] is False, d
+          assert d["model_fitting_performed"] is False, d
+          assert d["checks"]["fresh_execution_workflow_absent"], d
+          assert d["checks"]["fresh_collection_absent"], d
+          assert d["checks"]["formal_result_absent"], d
+          assert not any(d["collisions"].values()), d
+          print("CPRM1_EXECUTION_LOCK_VERIFICATION=PASS")
+          PY
+          sha256sum artifacts/cprm1_execution_lock_verification.json
+          sha256sum docs/research/continual-policy-response/CPRM1_EXECUTION_LOCK.json
+
+      - name: Upload verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cprm1-execution-lock-verification
+          path: artifacts/cprm1_execution_lock_verification.json
+          if-no-files-found: error
