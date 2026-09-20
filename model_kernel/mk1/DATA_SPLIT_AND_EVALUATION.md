@@ -47,6 +47,12 @@ Primary classes must satisfy TARGET_STABILITY_AUDIT.md support gates.
 
 ## 5. Pristine integrity
 
+Before any neural training, target/data integrity additionally requires:
+
+- gold C == frozen R(gold Z) for 100% of scenes;
+- all C fields pass the same observable-identifiability audit as Z;
+- target-stability support/margin gates PASS on the materialized pre-confirmatory contract.
+
 Before confirmatory inference:
 
 - raw-text duplicate count against TRAIN/VALIDATION = 0;
