@@ -148,7 +148,7 @@ Contract:
 
 blob:
 
-`9cfe8ad74a821b09135366c010ece962787a4ab9`
+`e4dfd62eb4aeb14595d03e299a753ac6711d9547`
 
 ## 7. Observable-identifiability prerequisite
 
@@ -162,7 +162,7 @@ Contract:
 
 blob:
 
-`2d5b5f92a8787c244dc13f1b4d1111054d30ee71`
+`53e37771fd3244df7f4c461305963afc7ff12221`
 
 ## 8. Frozen structured representation schema
 
@@ -198,7 +198,7 @@ Exact split/evaluation contract:
 
 blob:
 
-`85a943462f7a11c14ea8c20a8466a660facfdc75`
+`5192a273e36911d5c9598f2de19884b71525c083`
 
 ## 10. Neural matching contract
 
