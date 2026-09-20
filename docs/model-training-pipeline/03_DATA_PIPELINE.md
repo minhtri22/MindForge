@@ -12,7 +12,7 @@ Không latest sau prepare. Wikipedia identity gồm project/language/dump date/a
 
 Concrete references:
 - examples/train_wikipedia_cpt.yaml: enwiki 20260301.
-- examples/train_code_cpt.yaml: CodeSearchNet v2 Python, non-release-eligible tới khi license enrichment hoàn thành.
+- examples/train_code_cpt.yaml: codeparrot/codeparrot-clean tại revision 35a59fb025bc0a102f7d96eac09d145b896d487b; development-only cho tới khi exact repository revision + license provenance được enrich.
 
 ## 3. Security/privacy/license
 
