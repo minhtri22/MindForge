@@ -20,13 +20,28 @@ datasets:
     path: tests/fixtures/data/reasoning_mini.jsonl
     freshness_class: development
 
+token_stream:
+  add_bos: false
+  add_eos: true
+  separator_policy: eos
+  sequence_length: 512
+  truncation: right
+  packing:
+    enabled: false
+    cross_document: false
+    remainder_policy: pad
+  sampling:
+    mode: without_replacement
+    shuffle_algorithm: buffered_v1
+    shuffle_buffer_size: 64
+    seed: 21
+  workers: 0
+
 phases:
   - id: reasoning_sft
     type: reasoning_sft
     datasets: [reasoning_mini]
-    stop:
-      kind: max_steps
-      value: 20
+    stop: {kind: max_steps, value: 20}
     optimizer_transition: reset
     scheduler_transition: reset
     training:
@@ -51,6 +66,17 @@ evaluation:
     metric_id: validation_loss
     direction: min
     tie_breaker: earliest_step
+  metrics:
+    - metric_id: answer_accuracy
+      metric_version: "1"
+      target_artifact: final
+      baseline_id: parent
+      comparison_type: absolute_value
+      operator: ">="
+      threshold: 0.5
+      aggregation: {unit: fixture, method: mean}
+      required: true
+      missing_data_policy: fail
   inference:
     max_new_tokens: 128
     temperature: 0.0

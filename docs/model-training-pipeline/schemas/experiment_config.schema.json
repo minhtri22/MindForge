@@ -4,7 +4,10 @@
   "title": "ExperimentConfig",
   "type": "object",
   "additionalProperties": false,
-  "required": ["experiment", "model", "phases", "datasets", "evaluation", "reasoning", "export"],
+  "required": [
+    "experiment", "model", "datasets", "token_stream", "phases",
+    "baselines", "evaluation", "reasoning", "export"
+  ],
   "properties": {
     "experiment": {
       "type": "object",
@@ -41,6 +44,7 @@
       "minProperties": 1,
       "additionalProperties": {"$ref": "#/$defs/dataset"}
     },
+    "token_stream": {"$ref": "#/$defs/tokenStream"},
     "phases": {
       "type": "array",
       "minItems": 1,
@@ -48,15 +52,21 @@
     },
     "baselines": {
       "type": "array",
+      "minItems": 1,
       "items": {"$ref": "#/$defs/baseline"}
     },
     "evaluation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["fixture_set", "checkpoint_selection", "inference"],
+      "required": ["fixture_set", "checkpoint_selection", "metrics", "inference"],
       "properties": {
         "fixture_set": {"type": "string", "minLength": 1},
         "checkpoint_selection": {"$ref": "#/$defs/checkpointSelection"},
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/metric"}
+        },
         "inference": {"$ref": "#/$defs/inference"}
       }
     },
@@ -106,18 +116,57 @@
   "$defs": {
     "dataset": {
       "type": "object",
-      "additionalProperties": true,
-      "required": ["adapter", "snapshot"],
+      "required": ["adapter", "snapshot", "freshness_class"],
       "properties": {
         "adapter": {"type": "string", "minLength": 1},
         "snapshot": {"type": "string", "minLength": 1},
         "freshness_class": {"enum": ["development", "calibration", "fresh_confirmatory"]}
       }
     },
+    "tokenStream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "add_bos", "add_eos", "separator_policy", "sequence_length",
+        "truncation", "packing", "sampling", "workers"
+      ],
+      "properties": {
+        "add_bos": {"type": "boolean"},
+        "add_eos": {"type": "boolean"},
+        "separator_policy": {"enum": ["none", "eos"]},
+        "sequence_length": {"type": "integer", "minimum": 64},
+        "truncation": {"enum": ["left", "right", "error"]},
+        "packing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "cross_document", "remainder_policy"],
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "cross_document": {"type": "boolean"},
+            "remainder_policy": {"enum": ["carry", "drop", "pad"]}
+          }
+        },
+        "sampling": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "shuffle_algorithm", "shuffle_buffer_size", "seed"],
+          "properties": {
+            "mode": {"enum": ["without_replacement", "with_replacement"]},
+            "shuffle_algorithm": {"type": "string", "minLength": 1},
+            "shuffle_buffer_size": {"type": "integer", "minimum": 1},
+            "seed": {"type": "integer"}
+          }
+        },
+        "workers": {"type": "integer", "minimum": 0}
+      }
+    },
     "phase": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "type", "datasets", "stop", "optimizer_transition", "scheduler_transition"],
+      "required": [
+        "id", "type", "datasets", "stop", "optimizer_transition",
+        "scheduler_transition", "training"
+      ],
       "properties": {
         "id": {"type": "string", "minLength": 1},
         "type": {"enum": ["cpt", "sft", "reasoning_sft", "lora_sft"]},
@@ -143,7 +192,10 @@
     "training": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["precision", "sequence_length", "learning_rate", "warmup", "checkpoint_every_steps"],
+      "required": [
+        "precision", "sequence_length", "learning_rate",
+        "warmup", "checkpoint_every_steps", "save_optimizer_state"
+      ],
       "properties": {
         "precision": {"enum": ["auto", "fp32", "fp16", "bf16"]},
         "sequence_length": {"type": "integer", "minimum": 64},
@@ -173,6 +225,35 @@
         "tie_breaker": {"enum": ["earliest_step", "latest_step", "lowest_artifact_hash"]}
       }
     },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric_id", "metric_version", "target_artifact", "baseline_id",
+        "comparison_type", "operator", "threshold", "aggregation",
+        "required", "missing_data_policy"
+      ],
+      "properties": {
+        "metric_id": {"type": "string", "minLength": 1},
+        "metric_version": {"type": "string", "minLength": 1},
+        "target_artifact": {"type": "string", "minLength": 1},
+        "baseline_id": {"type": "string", "minLength": 1},
+        "comparison_type": {"enum": ["absolute_value", "absolute_delta", "relative_delta", "ratio", "distribution_test"]},
+        "operator": {"enum": [">", ">=", "<", "<=", "=="]},
+        "threshold": {"type": "number"},
+        "aggregation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["unit", "method"],
+          "properties": {
+            "unit": {"type": "string", "minLength": 1},
+            "method": {"type": "string", "minLength": 1}
+          }
+        },
+        "required": {"type": "boolean"},
+        "missing_data_policy": {"enum": ["fail", "invalid", "ignore_optional"]}
+      }
+    },
     "inference": {
       "type": "object",
       "additionalProperties": false,
@@ -196,8 +277,20 @@
         "role": {"enum": ["smoke_reference", "parent_baseline", "matched_control", "external_anchor"]},
         "artifact_id": {"type": "string"},
         "model_id": {"type": "string"},
-        "revision": {"type": "string"}
-      }
+        "revision": {"type": "string"},
+        "parent_baseline": {"type": "string"},
+        "intervention": {"type": "string"},
+        "matched_to": {"type": "string"},
+        "seeds": {"type": "array", "items": {"type": "integer"}, "uniqueItems": true},
+        "token_budget": {"type": "integer", "minimum": 1},
+        "resource_class": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"role": {"const": "matched_control"}}, "required": ["role"]},
+          "then": {"required": ["parent_baseline", "intervention", "matched_to", "seeds", "token_budget", "resource_class"]}
+        }
+      ]
     }
   }
 }

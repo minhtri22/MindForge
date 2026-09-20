@@ -2,137 +2,44 @@
 
 ## 1. Two lineages
 
-Never conflate:
+Software-development lineage tracks Git commits/tests/review. Training-run lineage tracks data lock, execution lock, phases, checkpoints, eval/export/runtime/promotion. Run provenance cross-references exact software SHA.
 
-### Software-development lineage
-Tracks implementation milestones:
-- Git commit SHA;
-- tests;
-- changed paths;
-- review/QA result.
+## 2. Hash chain and seal
 
-Stored in repository docs or Git history.
+Every run event has sequence, timestamp, type, payload hash, previous hash and event hash. Final chain head is sealed with frozen config, data manifest, adjudication and artifact inventory hashes.
 
-### Training-run lineage
-Tracks experimental/runtime events for one run:
-- data freeze;
-- execution lock;
-- phase transitions;
-- checkpoints;
-- evaluation;
-- export/runtime verification;
-- promotion.
-
-Stored under `runs/<run_id>/lineage.jsonl`.
-
-Cross-reference: run provenance records the exact software Git SHA.
-
-## 2. Append-only hash chain
-
-Every run lineage event has:
-- monotonic sequence number;
-- UTC timestamp;
-- event type;
-- payload hash;
-- previous_event_hash;
-- event_hash.
-
-Chain head is sealed in final evidence manifest. Rewriting the chain changes the sealed head.
-
-## 3. External seal
-
-At adjudication/bundle:
-```json
-{
-  "run_id":"...",
-  "lineage_head_hash":"...",
-  "frozen_config_hash":"...",
-  "data_manifest_hash":"...",
-  "adjudication_hash":"...",
-  "artifact_inventory_hash":"..."
-}
-```
-
-This manifest is hashed and recorded in:
-- external `evidence.zip.sha256`;
-- release/promotion record;
-- optionally Git commit/signature for long-term anchoring.
-
-Hash chain alone is not considered tamper-proof without this seal.
-
-## 4. Evidence bundle order — no circular hash
+## 3. Bundle order — no circular hash
 
 Canonical order:
 
-1. finalize run payload files;
-2. generate `evidence/PAYLOAD_SHA256SUMS` covering payload files **excluding** ZIP and external ZIP checksum;
+1. finalize evidence payload files;
+2. create evidence/PAYLOAD_SHA256SUMS over payload files excluding ZIP/external bundle metadata;
 3. verify payload manifest;
-4. create `evidence.zip` from the finalized evidence payload;
-5. compute `evidence.zip.sha256` **outside** the ZIP;
-6. write bundle manifest referencing both payload-manifest hash and ZIP hash.
+4. create evidence.zip from finalized payload;
+5. compute evidence.zip.sha256 outside the ZIP;
+6. create external bundle_manifest.json outside the ZIP referencing payload-manifest hash and ZIP hash;
+7. hash bundle_manifest.json for release/promotion record.
 
-Never include a checksum that claims to hash the file containing itself.
+No file is allowed to claim a checksum over itself.
 
-## 5. Workspace/run locks
+## 4. One writer per run
 
-One writer per run.
+Mutating a run requires exclusive lock with process/host/acquisition/software identity and stale-lock policy. A second writer is rejected.
 
-Before mutating `runs/<run_id>` acquire exclusive run lock with:
-- owner PID/process identity;
-- host;
-- acquisition time;
-- software SHA;
-- stale-lock recovery rules.
+## 5. Atomic metadata
 
-Read-only status/eval inspection may use shared/read semantics only when files are finalized.
+Write temp in same filesystem, flush/fsync where supported, parse/hash verify, atomic replace, directory fsync where supported. Lineage append is locked and verifies previous head.
 
-Two processes must never train/resume/write checkpoint for same run concurrently.
+## 6. Atomic checkpoint
 
-## 6. Atomic metadata writes
+WRITING -> VERIFIED -> COMMITTED.
 
-For JSON/YAML/JSONL state:
-- write temp file in same filesystem;
-- flush/fsync where supported;
-- verify parse/hash;
-- atomic rename/replace;
-- directory fsync where supported.
+Write under .partial, fsync, generate hashes, reload/validate, create CHECKPOINT_COMPLETE.json, atomic rename, then append lineage. Partial checkpoint is never resumable/canonical.
 
-Lineage append uses a locked append protocol and verifies previous head.
+## 7. Crash recovery
 
-## 7. Atomic checkpoint commit protocol
+Detect stale lock/partial writes, recover last COMMITTED state, append recovery event. If exact scientific state cannot be proven, mark INVALID/new run rather than guess.
 
-Checkpoint state:
+## 8. Specification checksum
 
-```text
-WRITING -> VERIFIED -> COMMITTED
-```
-
-Protocol:
-1. write to `.partial/<checkpoint_id>`;
-2. write all weights/state;
-3. fsync;
-4. generate SHA256 manifest;
-5. reload/validate required files;
-6. create `CHECKPOINT_COMPLETE.json`;
-7. atomic rename to final checkpoint directory;
-8. append `CHECKPOINT_WRITTEN` lineage event.
-
-Checkpoint without completeness marker is not resumable/canonical and is cleaned/quarantined according to recovery policy.
-
-## 8. Crash recovery
-
-At startup:
-- detect stale writer lock;
-- inspect partial writes;
-- never promote a partial checkpoint;
-- recover last committed state;
-- append recovery event;
-- if scientific state cannot be proven, mark run INVALID rather than guessing.
-
-## 9. Evidence references
-
-Every PASS/FAIL reason should point to stable relative artifact path + SHA-256. Reports are indexes over evidence, not source of truth.
-
-## 10. SHA256SUMS for specification repository
-
-Documentation-package `SHA256SUMS` is regenerated only after final remediation/QA docs settle. A mismatch is a QA FAIL.
+Documentation SHA256SUMS is regenerated only after QA-driven patches settle. Mismatch is QA FAIL.

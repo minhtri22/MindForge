@@ -24,13 +24,28 @@ datasets:
     secret_scan: required
     freshness_class: development
 
+token_stream:
+  add_bos: false
+  add_eos: true
+  separator_policy: eos
+  sequence_length: 2048
+  truncation: right
+  packing:
+    enabled: true
+    cross_document: true
+    remainder_policy: carry
+  sampling:
+    mode: without_replacement
+    shuffle_algorithm: buffered_v1
+    shuffle_buffer_size: 10000
+    seed: 43
+  workers: 4
+
 phases:
   - id: code_cpt
     type: cpt
     datasets: [codesearchnet_python_v2]
-    stop:
-      kind: max_tokens
-      value: 100000000
+    stop: {kind: max_tokens, value: 100000000}
     optimizer_transition: reset
     scheduler_transition: reset
     training:
@@ -55,6 +70,17 @@ evaluation:
     metric_id: validation_loss
     direction: min
     tie_breaker: earliest_step
+  metrics:
+    - metric_id: heldout_code_loss_delta
+      metric_version: "1"
+      target_artifact: phase:code_cpt
+      baseline_id: parent
+      comparison_type: absolute_delta
+      operator: "<="
+      threshold: 0.0
+      aggregation: {unit: token, method: mean}
+      required: true
+      missing_data_policy: fail
   inference:
     max_new_tokens: 128
     temperature: 0.0

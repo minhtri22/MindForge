@@ -2,172 +2,52 @@
 
 ## 1. Single source of truth
 
-`schemas/experiment_config.schema.json` là vocabulary canonical duy nhất. Examples và CLI phải validate schema trước side effect.
+schemas/experiment_config.schema.json is the canonical authoring vocabulary. It requires datasets, token_stream, phases with training config, baselines, evaluation metrics/inference, reasoning and export.
 
-Canonical vocabulary:
+Before any side effect: parse -> schema validate -> resolve refs/device/precision/datasets/tools -> semantic validate -> canonical serialize -> hash -> freeze.
 
-- phase data key: `datasets` (không dùng `data` bên trong phase);
-- GGUF high-fidelity key: `export.gguf.high_fidelity`;
-- reasoning key: `reasoning.mode`, `reasoning.transport_preference`, `reasoning.fallback_transport`;
-- stop rule: đúng **một** trong `max_steps|max_tokens|max_epochs`;
-- warmup: object có `unit` + `value`;
-- precision: unresolved `auto` chỉ hợp lệ ở DRAFT/PREFLIGHT; execution lock phải có `resolved_precision`.
+Confirmatory/release cannot lock unresolved refs, placeholders, main/latest or precision auto. Smoke/development may author mutable refs only if resolver freezes an immutable SHA before train.
 
-YAML include/profile chỉ là authoring convenience. Trước hash/lock phải expand thành canonical normalized JSON-equivalent rồi ghi `frozen/run_config.yaml`.
+## 2. Run classes
 
-## 2. Config lifecycle
+smoke, development, calibration, confirmatory, release.
 
-```text
-AUTHOR CONFIG
-  -> parse
-  -> schema validate
-  -> resolve includes/profiles
-  -> resolve model revision
-  -> resolve device/backend/precision
-  -> resolve dataset snapshots
-  -> resolve tool versions
-  -> semantic validation
-  -> canonical serialization
-  -> hash
-  -> FROZEN CONFIG
-```
+Fresh seed/split/fixture resources are forbidden before locked confirmatory access.
 
-Confirmatory/release không cho lock nếu còn placeholder, unresolved ref, `auto`, `latest`, hoặc `main`.
+## 3. Run state machine
 
-Smoke/development được phép author bằng mutable source ref, nhưng source ref phải được resolve SHA và frozen **trước train**.
+DRAFT -> PREPARED -> PREFLIGHT_PASS -> EXECUTION_LOCKED -> RUNNING -> EVALUATED -> ADJUDICATED_PASS/ADJUDICATED_FAIL/INVALID -> EXPORTED -> RUNTIME_VERIFIED -> REPRO_VERIFIED -> PROMOTED.
 
-## 3. Run classes
+Any required export/runtime/repro gate failure after scientific adjudication transitions to QUALIFICATION_FAIL. INVALID is reserved for evidence/execution invalidity rather than a valid negative scientific result.
 
-- `smoke`: plumbing, không claim quality.
-- `development`: sửa code/tune; fresh registry bị cấm.
-- `calibration`: dùng calibration evidence để khóa thresholds/hyperparameters.
-- `confirmatory`: execution locked, fresh evidence one-shot.
-- `release`: confirmatory-qualified artifact + runtime/security/license/repro gates.
+Smoke may terminate at RUNTIME_VERIFIED and cannot PROMOTE.
 
-## 4. Run state machine
+## 4. Phase state machine
 
-Canonical RunState:
+PLANNED -> INPUT_READY -> TRAINING -> TRAINED -> CHECKPOINT_SELECTED -> PHASE_EVALUATED -> PHASE_PASS/PHASE_FAIL/PHASE_INVALID.
 
-```text
-DRAFT
- -> PREPARED
- -> PREFLIGHT_PASS
- -> EXECUTION_LOCKED
- -> RUNNING
- -> EVALUATED
- -> ADJUDICATED_PASS | ADJUDICATED_FAIL | INVALID
- -> EXPORTED
- -> RUNTIME_VERIFIED
- -> REPRO_VERIFIED
- -> PROMOTED
-```
+Phase manifest stores exact parent, datasets/fingerprints, stop rule, transition policy, checkpoint-selection rule, selected hash, metrics and child artifact.
 
-Không phải run nào cũng đi đến PROMOTED; smoke có thể kết thúc `RUNTIME_VERIFIED`.
+## 5. Phase transition
 
-Transition chỉ hợp lệ khi gate matrix cho run class cho phép. `INVALID` là terminal đối với scientific evidence; repair tạo `run_id` mới với `supersedes_run_id`.
+Default CPT -> SFT/reasoning: carry weights; reset optimizer/scheduler/scaler/sampler; derive phase RNG from frozen phase seed. Carry requires explicit contract + compatibility proof.
 
-## 5. Phase state machine
+## 6. Stop rule
 
-Mỗi phase có độc lập:
+Exactly one stop object: max_steps, max_tokens or max_epochs. No implicit precedence.
 
-```text
-PLANNED
- -> INPUT_READY
- -> TRAINING
- -> TRAINED
- -> CHECKPOINT_SELECTED
- -> PHASE_EVALUATED
- -> PHASE_PASS | PHASE_FAIL | PHASE_INVALID
-```
+## 7. Warmup
 
-Run không được sang phase kế nếu phase hiện tại yêu cầu `PHASE_PASS` nhưng chưa PASS.
+Warmup always includes unit + value; resolved count/unit is frozen before lock.
 
-Mỗi phase manifest bắt buộc có:
+## 8. Precision/device
 
-- `phase_id`, `phase_type`;
-- exact parent artifact/hash;
-- dataset IDs + frozen fingerprints;
-- stop rule;
-- optimizer/scheduler transition policy;
-- checkpoint-selection rule;
-- selected checkpoint hash;
-- phase metric outputs;
-- child artifact ID.
+Before lock freeze framework/backend, device class/count, resolved precision, mixed-precision/scaler policy, determinism flags and known nondeterministic kernels.
 
-## 6. Phase transition policy
+## 9. PEFT identity
 
-Mặc định giữa CPT -> SFT/reasoning SFT:
+base_artifact, adapter_artifact, merged_hf_artifact, canonical_training_artifact and canonical_export_artifact are distinct identities. Standalone GGUF release uses merged artifact unless pinned runtime path explicitly supports adapter mode.
 
-- model weights: carry;
-- optimizer: reset;
-- scheduler: reset;
-- AMP scaler: reset;
-- dataloader/sampler: new;
-- RNG: derive from phase seed according to frozen policy.
+## 10. Dirty code
 
-Carry optimizer/scheduler chỉ hợp lệ khi explicit:
-
-```yaml
-transition:
-  optimizer: carry
-  scheduler: carry
-  rationale: "..."
-```
-
-và backend chứng minh state compatibility.
-
-## 7. Stop-rule semantics
-
-Exactly one stop rule:
-
-```yaml
-stop:
-  kind: max_tokens
-  value: 5000000
-```
-
-Không cho đồng thời epochs + steps + tokens. Nếu author config dùng convenience fields, resolver phải biến thành một canonical stop object hoặc FAIL ambiguity.
-
-## 8. Warmup semantics
-
-```yaml
-warmup:
-  unit: ratio   # ratio | steps | tokens
-  value: 0.03
-  resolved_value: 150000
-  resolved_unit: tokens
-```
-
-`resolved_*` bắt buộc trước execution lock.
-
-## 9. Precision/device resolution
-
-Trước lock phải frozen:
-
-- framework/backend;
-- device class;
-- resolved precision (fp32/fp16/bf16/...);
-- mixed-precision/scaler policy;
-- deterministic flags;
-- known nondeterministic kernels;
-- device-count and world-size.
-
-Run chuyển machine sau lock chỉ được tiếp tục nếu execution contract cho phép resource-class equivalence; nếu không -> INVALID/new run.
-
-## 10. Artifact semantics for LoRA/PEFT
-
-`adapter_checkpoint` không phải canonical standalone model.
-
-Pipeline định nghĩa:
-
-1. `base_artifact`;
-2. `adapter_artifact`;
-3. `merged_hf_artifact` nếu export standalone;
-4. `canonical_training_artifact`;
-5. `canonical_export_artifact`.
-
-GGUF/Ollama standalone release phải dùng merged artifact trừ khi pinned runtime path hỗ trợ adapter và execution contract explicitly chọn đường đó.
-
-## 11. Dirty code/worktree
-
-Confirmatory/release lock yêu cầu exact source commit và `dirty=false`. Development có thể dirty nhưng phải record patch hash và không được promote artifact đó như confirmatory evidence.
+Confirmatory/release requires exact source SHA and dirty=false. Development dirty state records patch hash and is not promotable as confirmatory evidence.
