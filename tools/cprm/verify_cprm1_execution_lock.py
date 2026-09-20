@@ -297,20 +297,37 @@ def verify() -> dict[str, Any]:
     checks["fresh_execution_workflow_absent"] = not execution_hits
 
     # Static anti-execution guarantees for this verifier itself.
-    verifier_source = Path(__file__).read_text(encoding="utf-8")
-    checks["verifier_does_not_import_runner"] = (
-        "import experiments.cprm.cprm1_response_support" not in verifier_source
-        and "from experiments.cprm" not in verifier_source
-    )
-    checks["verifier_does_not_call_scientific_phases"] = all(
-        token not in verifier_source
-        for token in [
-            "--phase collect",
-            "--phase adjudicate",
-            "build_response_records(",
-            "collect_fresh(",
-            "adjudicate_records(",
-        ]
+    self_tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    runner_import = False
+    scientific_call = False
+    subprocess_science = False
+    forbidden_calls = {"build_response_records", "collect_fresh", "adjudicate_records"}
+    for node in ast.walk(self_tree):
+        if isinstance(node, ast.Import):
+            runner_import = runner_import or any(
+                alias.name.startswith("experiments.cprm") for alias in node.names
+            )
+        elif isinstance(node, ast.ImportFrom):
+            runner_import = runner_import or (
+                isinstance(node.module, str) and node.module.startswith("experiments.cprm")
+            )
+        elif isinstance(node, ast.Call):
+            fn = node.func
+            name = fn.id if isinstance(fn, ast.Name) else (
+                fn.attr if isinstance(fn, ast.Attribute) else None
+            )
+            if name in forbidden_calls:
+                scientific_call = True
+            if name in {"check_output", "call", "run", "Popen"}:
+                literals = [
+                    x.value for x in ast.walk(node)
+                    if isinstance(x, ast.Constant) and isinstance(x.value, str)
+                ]
+                if any("cprm1_response_support.py" in s for s in literals):
+                    subprocess_science = True
+    checks["verifier_does_not_import_runner"] = not runner_import
+    checks["verifier_does_not_call_scientific_phases"] = (
+        not scientific_call and not subprocess_science
     )
 
     ok = all(checks.values())

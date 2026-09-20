@@ -141,3 +141,15 @@ silently removed.
 - Scientific outcome generation during verification: **PROHIBITED**.
 - Model fitting during verification: **PROHIBITED**.
 - Verification result at this entry: **PENDING**.
+
+---
+
+## 2026-09-20 — CPRM-1 Verifier Self-Audit Technical Patch
+
+- Initial verifier commit: `d58d072bd537626f090a177e9ad37202431f9c86`.
+- Technical issue detected before accepting any verification result: raw-source self-check searched for forbidden literal strings that also appeared inside the verifier's own deny-list.
+- Scientific lock/protocol/runner/seed/gates changed: **NO**.
+- Patch scope: verifier self-audit only; replaced raw substring check with AST import/call inspection.
+- Fresh scientific seed execution: **NO**.
+- Scientific outcome generation: **NO**.
+- Initial verifier workflow, if it fails from this defect, is **NON-CANONICAL TECHNICAL QA**.
