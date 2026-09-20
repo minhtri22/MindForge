@@ -9,6 +9,8 @@
 > Main remediation commit: 3048a781bad312d4be0abde112fae1ad2bc7913f
 >
 > Concrete-fixture completion commit: cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5
+>
+> QA round-2 candidate state: 886d47d69c70faffbb1281b39666130f4236f435
 
 ## BLOCKER findings
 
@@ -37,7 +39,7 @@
 | ID | Status | Finding | Proof ref |
 |---|---|---|---|
 | H-01 | DONE | Wikipedia identity underspecified | [data contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md) [pinned example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/train_wikipedia_cpt.yaml) |
-| H-02 | DONE | Public code corpus unspecified | [CodeSearchNet example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
+| H-02 | DONE | Public code corpus unspecified | [live pinned code-corpus example](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
 | H-03 | DONE | Code license granularity weak | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) [code example](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
 | H-04 | DONE | No code secret scan | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) |
 | H-05 | DONE | No PII policy | [security contract](https://github.com/minhtri22/MindForge/blob/cd2b13b7c7467bd6b6e8253a5b2f827f94a0bbe5/docs/model-training-pipeline/20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md) |
@@ -75,3 +77,27 @@
 - All 32 HIGH findings have proof refs.
 - QA round 2 must independently verify these claims; DONE here is remediation status, not self-certifying final QA.
 - SHA256SUMS must be regenerated after QA round 2 and any QA-driven patch.
+
+
+## QA round-2 defects discovered during independent re-review
+
+| ID | Status | Defect found in round 2 | Proof ref |
+|---|---|---|---|
+| Q2-01 | DONE | Canonical schema still allowed missing baselines/training and did not bind full metric/token-stream contracts tightly enough. | [schema](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/schemas/experiment_config.schema.json) |
+| Q2-02 | DONE | Evidence bundle order left final bundle manifest location ambiguous. | [evidence contract](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md) |
+| Q2-03 | DONE | Token stream and checkpoint selection needed to be phase-scoped, with explicit parent graph. | [state contract](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/16_CANONICAL_CONFIG_STATE_MACHINE.md) [example](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/examples/end_to_end_small.yaml) |
+| Q2-04 | DONE | R0 reasoning serializer/chat-template behavior was underspecified. | [reference profile](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/22_REFERENCE_MODEL_PROFILE.md) [machine profile](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/profiles/qwen2.5-0.5b-instruct-r0.yaml) |
+| Q2-05 | DONE | Execution lock was not fully hash-bound to model profile, baselines, evaluator/inference and phase resource identity. | [execution schema](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/schemas/execution_contract.schema.json) |
+| Q2-06 | DONE | CodeSearchNet S3 reference is dead/403 and would break implementation. | [replacement config](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
+| Q2-07 | DONE | Wikipedia/code development configs referenced evaluation fixture paths that did not exist. | [Wikipedia fixture](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/tests/fixtures/eval_wikipedia_dev_v1/manifest.json) [code fixture](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/tests/fixtures/eval_code_dev_v1/manifest.json) |
+| Q2-08 | DONE | Unquoted YAML value `off` can become boolean false under YAML 1.1/PyYAML. | [Wikipedia example](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/examples/train_wikipedia_cpt.yaml) [code example](https://github.com/minhtri22/MindForge/blob/886d47d69c70faffbb1281b39666130f4236f435/docs/model-training-pipeline/examples/train_code_cpt.yaml) |
+
+## Round-2 verification summary
+
+- 8/8 JSON Schema files parsed successfully.
+- 4/4 shipped ExperimentConfig YAML examples validated against `experiment_config.schema.json` using PyYAML + JSON Schema.
+- R0 model profile validated against `model_profile.schema.json`.
+- Phase parent graphs and metric baseline references resolve in all four examples.
+- Stale-reference scan found no remaining CodeSearchNet reference outside historical QA context, no hardcoded temperature 0.7, no placeholder model pins, no global evaluation-level checkpoint selection, and no unquoted `mode: off`.
+- External source check: pinned Qwen revision exists; enwiki 20260301 dump is complete; replacement CodeParrot dataset revision is live.
+- Final mechanical closure requirement: regenerate and verify `SHA256SUMS` after this checklist and `QA_ROUND2_REPORT.md` are committed.
