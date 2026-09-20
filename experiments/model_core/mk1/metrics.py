@@ -344,3 +344,66 @@ def h1c_whole_scene_bootstrap(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "rng_seed": H1C_BOOTSTRAP_SEED,
         "scenes": len(scene_ids),
     }
+
+
+def h1a_representation_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Compute the frozen H1a metric bundle from aligned per-surface predictions."""
+    if not rows:
+        raise ValueError("H1a rows cannot be empty")
+    z1_gold = np.asarray([row["gold_z"]["z1"] for row in rows], dtype=np.int8)
+    z1_pred = np.asarray([row["pred_z"]["z1"] for row in rows], dtype=np.int8)
+    z4_gold = np.asarray([row["gold_z"]["z4"] for row in rows], dtype=np.int8)
+    z4_pred = np.asarray([row["pred_z"]["z4"] for row in rows], dtype=np.int8)
+
+    scalar_metrics: dict[str, dict[str, float | int]] = {}
+    scalar_names = ("numeric_value", "ordinal_index", "duration_seconds", "period_seconds")
+    for index, name in enumerate(scalar_names):
+        gold_values = []
+        pred_values = []
+        for row in rows:
+            if bool(row["gold_z"]["z2_scalar_mask"][index]):
+                gold_values.append(float(row["gold_z"]["z2_scalars"][index]))
+                pred_values.append(float(row["pred_z"]["z2_scalars"][index]))
+        if gold_values:
+            errors = normalized_absolute_error(
+                np.asarray(pred_values, dtype=np.float64),
+                np.asarray(gold_values, dtype=np.float64),
+            )
+            scalar_metrics[name] = {
+                "count": len(gold_values),
+                "mean_nAE": float(np.mean(errors)),
+                "p95_nAE": float(np.percentile(errors, 95.0)),
+            }
+        else:
+            scalar_metrics[name] = {"count": 0, "mean_nAE": float("nan"), "p95_nAE": float("nan")}
+
+    gold_c = [row["gold_c"] for row in rows]
+    pred_c = [row["pred_c"] for row in rows]
+    return {
+        "z1": z1_metrics(z1_gold, z1_pred),
+        "z2": {
+            "comparator_accuracy": float(np.mean([
+                int(row["gold_z"]["z2_comparator"]) == int(row["pred_z"]["z2_comparator"]) for row in rows
+            ])),
+            "temporal_precision_accuracy": float(np.mean([
+                int(row["gold_z"]["z2_temporal_precision"]) == int(row["pred_z"]["z2_temporal_precision"]) for row in rows
+            ])),
+            "scalars": scalar_metrics,
+        },
+        "z3": {
+            "evidence_scope_accuracy": float(np.mean([
+                int(row["gold_z"]["z3_evidence_scope"]) == int(row["pred_z"]["z3_evidence_scope"]) for row in rows
+            ])),
+            "asserted_scope_accuracy": float(np.mean([
+                int(row["gold_z"]["z3_asserted_scope"]) == int(row["pred_z"]["z3_asserted_scope"]) for row in rows
+            ])),
+            "scope_relation_accuracy": float(np.mean([
+                int(row["gold_z"]["z3_scope_relation"]) == int(row["pred_z"]["z3_scope_relation"]) for row in rows
+            ])),
+        },
+        "z4": z4_metrics(z4_gold, z4_pred),
+        "canonical": canonical_metrics(gold_c, pred_c),
+        "invariance_cluster_consistency": invariance_cluster_consistency(
+            (str(row["scene_id"]), row["pred_c"]) for row in rows
+        ),
+    }
