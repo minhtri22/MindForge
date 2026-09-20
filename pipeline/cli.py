@@ -10,6 +10,7 @@ from pathlib import Path
 from .errors import PipelineError
 from .loader import load_experiment_config, load_model_profile
 from .preflight import run_preflight
+from .m1 import run_m1_qualification
 from .semantic import validate_semantics
 
 
@@ -25,7 +26,12 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.add_argument("--runs-root", default="runs")
     preflight.add_argument("--json", action="store_true", dest="as_json")
 
-    status = sub.add_parser("status", help="read an M0 preflight result")
+    m1 = sub.add_parser("data-qualify", help="M1 zero-training data-plane qualification")
+    _common_config_args(m1)
+    m1.add_argument("--runs-root", default="runs")
+    m1.add_argument("--json", action="store_true", dest="as_json")
+
+    status = sub.add_parser("status", help="read an M0/M1 qualification result")
     status.add_argument("run_dir")
 
     return parser
@@ -58,6 +64,16 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"run_dir={result.run_dir}")
                 print(f"config_hash={result.config_hash}")
                 print(f"preflight_contract_hash={result.preflight_contract_hash}")
+            return 0
+        if args.command == "data-qualify":
+            result = run_m1_qualification(args.config, args.workspace, args.runs_root)
+            if args.as_json:
+                print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+            else:
+                print(f"PASS: M1 {result.run_id}")
+                print(f"run_dir={result.run_dir}")
+                print(f"data_manifest_hash={result.data_manifest_hash}")
+                print(f"resume_exact={result.resume_exact}")
             return 0
         if args.command == "status":
             path = Path(args.run_dir) / "preflight_result.json"

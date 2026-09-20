@@ -29,3 +29,15 @@ class StateTransitionError(PipelineError):
 
 class PreflightIOError(PipelineError):
     code = "PREFLIGHT_IO_ERROR"
+
+
+class DataPlaneError(PipelineError):
+    code = "DATA_PLANE_ERROR"
+
+
+class DataIntegrityError(DataPlaneError):
+    code = "DATA_INTEGRITY_ERROR"
+
+
+class DataPolicyError(DataPlaneError):
+    code = "DATA_POLICY_ERROR"
