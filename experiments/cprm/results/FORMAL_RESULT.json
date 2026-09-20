@@ -1,0 +1,747 @@
+{
+  "adjudication": {
+    "contrast_geometry": {
+      "all_families_qualified": true,
+      "families": {
+        "B_RESET_ALL": {
+          "components": {
+            "final_current_accuracy": {
+              "direction_supported": false,
+              "magnitude_supported": false,
+              "magnitude_supported_stages": 0,
+              "negative_rate": 0.016666666666666666,
+              "negative_stages": [],
+              "positive_rate": 0.03888888888888889,
+              "positive_stages": [
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 0.016666666666666666,
+                  "p10": 0.0,
+                  "p90": 0.0,
+                  "qualified": false,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.0,
+                  "unique_count": 2
+                },
+                "stage2": {
+                  "nonzero_rate": 0.016666666666666666,
+                  "p10": 0.0,
+                  "p90": 0.0,
+                  "qualified": false,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.0,
+                  "unique_count": 2
+                },
+                "stage3": {
+                  "nonzero_rate": 0.13333333333333333,
+                  "p10": 0.0,
+                  "p90": 0.04166668653488159,
+                  "qualified": false,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.04166668653488159,
+                  "unique_count": 8
+                }
+              }
+            },
+            "plasticity_auc": {
+              "direction_supported": false,
+              "magnitude_supported": true,
+              "magnitude_supported_stages": 3,
+              "negative_rate": 0.85,
+              "negative_stages": [
+                1,
+                2,
+                3
+              ],
+              "positive_rate": 0.1388888888888889,
+              "positive_stages": [
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 1.0,
+                  "p10": -0.08791666775941843,
+                  "p90": -0.0454166626930237,
+                  "qualified": true,
+                  "resolution": 0.0020833333333333333,
+                  "robust_span": 0.04250000506639474,
+                  "unique_count": 50
+                },
+                "stage2": {
+                  "nonzero_rate": 1.0,
+                  "p10": -0.07916666150093082,
+                  "p90": -0.024583328664302868,
+                  "qualified": true,
+                  "resolution": 0.0020833333333333333,
+                  "robust_span": 0.05458333283662796,
+                  "unique_count": 51
+                },
+                "stage3": {
+                  "nonzero_rate": 0.9666666666666667,
+                  "p10": -0.03416666999459264,
+                  "p90": 0.03499999776482593,
+                  "qualified": true,
+                  "resolution": 0.0020833333333333333,
+                  "robust_span": 0.06916666775941857,
+                  "unique_count": 58
+                }
+              }
+            },
+            "prior_task_retention": {
+              "direction_supported": true,
+              "magnitude_supported": true,
+              "magnitude_supported_stages": 3,
+              "negative_rate": 0.2833333333333333,
+              "negative_stages": [
+                1,
+                2,
+                3
+              ],
+              "positive_rate": 0.45,
+              "positive_stages": [
+                1,
+                2,
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 0.6333333333333333,
+                  "p10": -0.1291666656732559,
+                  "p90": 0.08750003278255468,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.2166666984558106,
+                  "unique_count": 21
+                },
+                "stage2": {
+                  "nonzero_rate": 0.7333333333333333,
+                  "p10": -0.04375001713633537,
+                  "p90": 0.10416664350777864,
+                  "qualified": true,
+                  "resolution": 0.020833333333333332,
+                  "robust_span": 0.14791666064411402,
+                  "unique_count": 32
+                },
+                "stage3": {
+                  "nonzero_rate": 0.8333333333333334,
+                  "p10": -0.02916667759418487,
+                  "p90": 0.08333332439263658,
+                  "qualified": true,
+                  "resolution": 0.013888888888888888,
+                  "robust_span": 0.11250000198682145,
+                  "unique_count": 43
+                }
+              }
+            },
+            "worst_prior_accuracy": {
+              "direction_supported": true,
+              "magnitude_supported": true,
+              "magnitude_supported_stages": 3,
+              "negative_rate": 0.24444444444444444,
+              "negative_stages": [
+                1,
+                2,
+                3
+              ],
+              "positive_rate": 0.35555555555555557,
+              "positive_stages": [
+                1,
+                2,
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 0.6333333333333333,
+                  "p10": -0.1291666656732559,
+                  "p90": 0.08750003278255468,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.2166666984558106,
+                  "unique_count": 21
+                },
+                "stage2": {
+                  "nonzero_rate": 0.4666666666666667,
+                  "p10": -0.0833333432674408,
+                  "p90": 0.12499997019767761,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.2083333134651184,
+                  "unique_count": 18
+                },
+                "stage3": {
+                  "nonzero_rate": 0.7,
+                  "p10": -0.0875000089406967,
+                  "p90": 0.125,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.2125000089406967,
+                  "unique_count": 19
+                }
+              }
+            }
+          },
+          "direction_supported_components": 2,
+          "magnitude_supported_components": 3,
+          "qualified": true
+        },
+        "C_CARRY_STEP_RESET_MOMENTS": {
+          "components": {
+            "final_current_accuracy": {
+              "direction_supported": false,
+              "magnitude_supported": false,
+              "magnitude_supported_stages": 0,
+              "negative_rate": 0.005555555555555556,
+              "negative_stages": [],
+              "positive_rate": 0.03888888888888889,
+              "positive_stages": [
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 0.0,
+                  "p10": 0.0,
+                  "p90": 0.0,
+                  "qualified": false,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.0,
+                  "unique_count": 1
+                },
+                "stage2": {
+                  "nonzero_rate": 0.0,
+                  "p10": 0.0,
+                  "p90": 0.0,
+                  "qualified": false,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.0,
+                  "unique_count": 1
+                },
+                "stage3": {
+                  "nonzero_rate": 0.13333333333333333,
+                  "p10": 0.0,
+                  "p90": 0.04166668653488159,
+                  "qualified": false,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.04166668653488159,
+                  "unique_count": 8
+                }
+              }
+            },
+            "plasticity_auc": {
+              "direction_supported": false,
+              "magnitude_supported": true,
+              "magnitude_supported_stages": 3,
+              "negative_rate": 0.005555555555555556,
+              "negative_stages": [],
+              "positive_rate": 0.9888888888888889,
+              "positive_stages": [
+                1,
+                2,
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 1.0,
+                  "p10": 0.016249994337558773,
+                  "p90": 0.04583332836627952,
+                  "qualified": true,
+                  "resolution": 0.0020833333333333333,
+                  "robust_span": 0.029583334028720747,
+                  "unique_count": 46
+                },
+                "stage2": {
+                  "nonzero_rate": 1.0,
+                  "p10": 0.02875000506639485,
+                  "p90": 0.0837499992549419,
+                  "qualified": true,
+                  "resolution": 0.0020833333333333333,
+                  "robust_span": 0.054999994188547056,
+                  "unique_count": 49
+                },
+                "stage3": {
+                  "nonzero_rate": 0.9833333333333333,
+                  "p10": 0.03749999999999998,
+                  "p90": 0.18375000350177287,
+                  "qualified": true,
+                  "resolution": 0.0020833333333333333,
+                  "robust_span": 0.1462500035017729,
+                  "unique_count": 57
+                }
+              }
+            },
+            "prior_task_retention": {
+              "direction_supported": true,
+              "magnitude_supported": true,
+              "magnitude_supported_stages": 3,
+              "negative_rate": 0.3333333333333333,
+              "negative_stages": [
+                1,
+                2,
+                3
+              ],
+              "positive_rate": 0.4111111111111111,
+              "positive_stages": [
+                1,
+                2,
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 0.6166666666666667,
+                  "p10": -0.04166662991046906,
+                  "p90": 0.1666666328907013,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.20833326280117037,
+                  "unique_count": 19
+                },
+                "stage2": {
+                  "nonzero_rate": 0.8,
+                  "p10": -0.08333332985639572,
+                  "p90": 0.08541668802499774,
+                  "qualified": true,
+                  "resolution": 0.020833333333333332,
+                  "robust_span": 0.16875001788139346,
+                  "unique_count": 38
+                },
+                "stage3": {
+                  "nonzero_rate": 0.8166666666666667,
+                  "p10": -0.09722222884496047,
+                  "p90": 0.05694445172945657,
+                  "qualified": true,
+                  "resolution": 0.013888888888888888,
+                  "robust_span": 0.15416668057441704,
+                  "unique_count": 50
+                }
+              }
+            },
+            "worst_prior_accuracy": {
+              "direction_supported": true,
+              "magnitude_supported": true,
+              "magnitude_supported_stages": 3,
+              "negative_rate": 0.16111111111111112,
+              "negative_stages": [
+                1,
+                2,
+                3
+              ],
+              "positive_rate": 0.49444444444444446,
+              "positive_stages": [
+                1,
+                2,
+                3
+              ],
+              "stage_cells": {
+                "stage1": {
+                  "nonzero_rate": 0.6166666666666667,
+                  "p10": -0.04166662991046906,
+                  "p90": 0.1666666328907013,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.20833326280117037,
+                  "unique_count": 19
+                },
+                "stage2": {
+                  "nonzero_rate": 0.7,
+                  "p10": -0.125,
+                  "p90": 0.1666666731238365,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.29166667312383654,
+                  "unique_count": 25
+                },
+                "stage3": {
+                  "nonzero_rate": 0.65,
+                  "p10": -0.125,
+                  "p90": 0.1666666865348816,
+                  "qualified": true,
+                  "resolution": 0.041666666666666664,
+                  "robust_span": 0.2916666865348816,
+                  "unique_count": 24
+                }
+              }
+            }
+          },
+          "direction_supported_components": 2,
+          "magnitude_supported_components": 3,
+          "qualified": true
+        }
+      }
+    },
+    "reliability_ok": true,
+    "response_geometry": {
+      "all_components_qualified": false,
+      "components": {
+        "final_current_accuracy": {
+          "cells": {
+            "A_CARRY_ALL|stage1": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 1
+            },
+            "A_CARRY_ALL|stage2": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 1
+            },
+            "A_CARRY_ALL|stage3": {
+              "p10": 0.9166666865348816,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.08333331346511841,
+              "unique_count": 8
+            },
+            "B_RESET_ALL|stage1": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 2
+            },
+            "B_RESET_ALL|stage2": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 2
+            },
+            "B_RESET_ALL|stage3": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 4
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage1": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 1
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage2": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 1
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage3": {
+              "p10": 1.0,
+              "p90": 1.0,
+              "qualified": false,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.0,
+              "unique_count": 3
+            }
+          },
+          "qualified": false,
+          "qualified_cells": 0,
+          "qualified_policies": [],
+          "qualified_stages": []
+        },
+        "plasticity_auc": {
+          "cells": {
+            "A_CARRY_ALL|stage1": {
+              "p10": 0.8454166688770055,
+              "p90": 0.9045833330601454,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.05916666418313987,
+              "unique_count": 40
+            },
+            "A_CARRY_ALL|stage2": {
+              "p10": 0.8037500020861625,
+              "p90": 0.8883333337306977,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.08458333164453513,
+              "unique_count": 46
+            },
+            "A_CARRY_ALL|stage3": {
+              "p10": 0.5704166626743973,
+              "p90": 0.8612499951943754,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.2908333325199781,
+              "unique_count": 59
+            },
+            "B_RESET_ALL|stage1": {
+              "p10": 0.7724999997019768,
+              "p90": 0.8499999982863664,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.0774999985843896,
+              "unique_count": 51
+            },
+            "B_RESET_ALL|stage2": {
+              "p10": 0.7579166663438082,
+              "p90": 0.8385416640900075,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.08062499774619936,
+              "unique_count": 56
+            },
+            "B_RESET_ALL|stage3": {
+              "p10": 0.6204166634753348,
+              "p90": 0.8362500014528632,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.21583333797752846,
+              "unique_count": 57
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage1": {
+              "p10": 0.8833333351463079,
+              "p90": 0.929166666790843,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.04583333164453518,
+              "unique_count": 29
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage2": {
+              "p10": 0.8874999997019768,
+              "p90": 0.9291666686534882,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.04166666895151139,
+              "unique_count": 27
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage3": {
+              "p10": 0.7891666674241424,
+              "p90": 0.9108333369717002,
+              "qualified": true,
+              "resolution": 0.0020833333333333333,
+              "robust_span": 0.12166666954755778,
+              "unique_count": 53
+            }
+          },
+          "qualified": true,
+          "qualified_cells": 9,
+          "qualified_policies": [
+            "A_CARRY_ALL",
+            "B_RESET_ALL",
+            "C_CARRY_STEP_RESET_MOMENTS"
+          ],
+          "qualified_stages": [
+            1,
+            2,
+            3
+          ]
+        },
+        "prior_task_retention": {
+          "cells": {
+            "A_CARRY_ALL|stage1": {
+              "p10": 0.4124999910593033,
+              "p90": 0.8333333134651184,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.4208333224058151,
+              "unique_count": 17
+            },
+            "A_CARRY_ALL|stage2": {
+              "p10": 0.3104166587814689,
+              "p90": 0.6062499910593033,
+              "qualified": true,
+              "resolution": 0.020833333333333332,
+              "robust_span": 0.2958333322778344,
+              "unique_count": 37
+            },
+            "A_CARRY_ALL|stage3": {
+              "p10": 0.5277777791023255,
+              "p90": 0.7375000009934107,
+              "qualified": true,
+              "resolution": 0.013888888888888888,
+              "robust_span": 0.20972222189108525,
+              "unique_count": 43
+            },
+            "B_RESET_ALL|stage1": {
+              "p10": 0.4124999910593033,
+              "p90": 0.7916666865348816,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.3791666954755783,
+              "unique_count": 17
+            },
+            "B_RESET_ALL|stage2": {
+              "p10": 0.3124999925494194,
+              "p90": 0.6270833313465118,
+              "qualified": true,
+              "resolution": 0.020833333333333332,
+              "robust_span": 0.31458333879709244,
+              "unique_count": 40
+            },
+            "B_RESET_ALL|stage3": {
+              "p10": 0.5416666746139527,
+              "p90": 0.7513889074325563,
+              "qualified": true,
+              "resolution": 0.013888888888888888,
+              "robust_span": 0.20972223281860358,
+              "unique_count": 45
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage1": {
+              "p10": 0.4583333432674408,
+              "p90": 0.8374999821186067,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.37916663885116586,
+              "unique_count": 16
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage2": {
+              "p10": 0.3125,
+              "p90": 0.625,
+              "qualified": true,
+              "resolution": 0.020833333333333332,
+              "robust_span": 0.3125,
+              "unique_count": 35
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage3": {
+              "p10": 0.48611111342906954,
+              "p90": 0.6958333452542622,
+              "qualified": true,
+              "resolution": 0.013888888888888888,
+              "robust_span": 0.20972223182519267,
+              "unique_count": 42
+            }
+          },
+          "qualified": true,
+          "qualified_cells": 9,
+          "qualified_policies": [
+            "A_CARRY_ALL",
+            "B_RESET_ALL",
+            "C_CARRY_STEP_RESET_MOMENTS"
+          ],
+          "qualified_stages": [
+            1,
+            2,
+            3
+          ]
+        },
+        "worst_prior_accuracy": {
+          "cells": {
+            "A_CARRY_ALL|stage1": {
+              "p10": 0.4124999910593033,
+              "p90": 0.8333333134651184,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.4208333224058151,
+              "unique_count": 17
+            },
+            "A_CARRY_ALL|stage2": {
+              "p10": 0.16250000447034837,
+              "p90": 0.5041666686534882,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.34166666418313985,
+              "unique_count": 16
+            },
+            "A_CARRY_ALL|stage3": {
+              "p10": 0.2916666567325592,
+              "p90": 0.625,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.3333333432674408,
+              "unique_count": 11
+            },
+            "B_RESET_ALL|stage1": {
+              "p10": 0.4124999910593033,
+              "p90": 0.7916666865348816,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.3791666954755783,
+              "unique_count": 17
+            },
+            "B_RESET_ALL|stage2": {
+              "p10": 0.1666666716337204,
+              "p90": 0.5833333134651184,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.416666641831398,
+              "unique_count": 15
+            },
+            "B_RESET_ALL|stage3": {
+              "p10": 0.3333333432674408,
+              "p90": 0.6291666686534882,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.29583332538604745,
+              "unique_count": 13
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage1": {
+              "p10": 0.4583333432674408,
+              "p90": 0.8374999821186067,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.37916663885116586,
+              "unique_count": 16
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage2": {
+              "p10": 0.2041666626930237,
+              "p90": 0.5083333313465119,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.30416666865348824,
+              "unique_count": 14
+            },
+            "C_CARRY_STEP_RESET_MOMENTS|stage3": {
+              "p10": 0.375,
+              "p90": 0.625,
+              "qualified": true,
+              "resolution": 0.041666666666666664,
+              "robust_span": 0.25,
+              "unique_count": 10
+            }
+          },
+          "qualified": true,
+          "qualified_cells": 9,
+          "qualified_policies": [
+            "A_CARRY_ALL",
+            "B_RESET_ALL",
+            "C_CARRY_STEP_RESET_MOMENTS"
+          ],
+          "qualified_stages": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    "status": "NEGATIVE",
+    "support_integrity": {
+      "checks": {
+        "all_row_integrity": true,
+        "records_exact": true,
+        "seed_count_exact": true,
+        "seed_set_exact": true,
+        "stage_counts_exact": true,
+        "three_boundaries_per_seed": true
+      },
+      "per_stage": {
+        "1": 60,
+        "2": 60,
+        "3": 60
+      },
+      "valid": true
+    },
+    "verdict": "NEGATIVE_RESPONSE_GEOMETRY_NOT_QUALIFIED"
+  },
+  "git_commit": "cda98d319753cdeaaa748cdef124b13be202a2e6",
+  "phase": "ONE_SHOT_ADJUDICATION",
+  "program": "CPRM-1",
+  "protocol_sha256": "2663cb2b28f73e02bbac19c537e16632f978d2d754488932924bf37e7c8ea084",
+  "schema": "CPRM1-FORMAL-RESULT-v1",
+  "source_records_sha256": "d3c3b70f3ab1c412c18477bf69d12d3bc8cdbd56130515fa64d70c377fb808af"
+}
