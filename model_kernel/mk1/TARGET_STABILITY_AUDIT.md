@@ -20,7 +20,7 @@ All variants of the same semantic scene belong to one split only.
 
 ## 3. Categorical-target stability
 
-For categorical Z1/Z3/Z4 fields, require all:
+For categorical Z1/Z3/Z4 fields and every categorical/binary canonical C field, require all:
 
 - deterministic derivation from the canonical gold object;
 - 100% repeatability under serialization/order changes of the gold object;
@@ -47,19 +47,20 @@ If a hard label is derived from a continuous quantity, the audit must identify w
 
 Target stability PASS requires:
 
-1. zero target fields using forbidden future/counterfactual information;
-2. 100% deterministic gold re-derivation on an independent implementation check;
-3. 100% split-local invariance for declared semantics-preserving variants;
-4. every threshold-derived hard target retains its generating continuous quantity;
-5. no primary target family has more than 20% of records inside the frozen 5% margin band unless that family is modeled/evaluated continuously rather than as a primary hard classification target;
-6. no target class required for primary adjudication has fewer than 100 training examples or 40 pristine-confirmatory examples.
+1. zero Z or C target fields using forbidden future/counterfactual information;
+2. stored/derived gold C equals the frozen deterministic recomposition R(gold Z) for 100% of scenes;
+3. 100% deterministic gold re-derivation on an independent implementation check;
+4. 100% split-local invariance for declared semantics-preserving variants;
+5. every threshold-derived hard target retains its generating continuous quantity;
+6. no primary target family has more than 20% of records inside the frozen 5% margin band unless that family is modeled/evaluated continuously rather than as a primary hard classification target;
+7. no target class required for primary adjudication has fewer than 100 training examples or 40 pristine-confirmatory examples.
 
 The support-count rules are checked after data materialization and before model training.
 
 ## 6. Failure consequences
 
-- If (1)-(4) fail: **TARGET_CONTRACT_INVALID**. Training is forbidden.
-- If (5) fails: **HARD_TARGET_UNSTABLE**. The hard label cannot be a primary MK-1 endpoint; use the generating quantity or redesign prospectively.
+- If (1)-(5) fail: **TARGET_CONTRACT_INVALID**. Training is forbidden.
+- If (7) fails: **HARD_TARGET_UNSTABLE**. The hard label cannot be a primary MK-1 endpoint; use the generating quantity or redesign prospectively.
 - If (6) fails: **TARGET_SUPPORT_INSUFFICIENT**. Data materialization may be expanded only under a pre-outcome amendment that preserves the seed/split-generation rule.
 
 No model result may rescue a failed target-stability audit.
