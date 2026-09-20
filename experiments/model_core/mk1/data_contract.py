@@ -147,38 +147,76 @@ def build_gold_z(index: int) -> dict[str, Any]:
     }
 
 
-def _active_names(z1: list[int]) -> list[str]:
-    return [name for name, value in zip(Z1_LABELS, z1) if value]
+def _semantic_sentences(gold_z: dict[str, Any]) -> list[str]:
+    z1 = {name: bool(value) for name, value in zip(Z1_LABELS, gold_z["z1"])}
+    phrases = {
+        "CONFLICT_EXISTS": "Two current statements cannot both be true.",
+        "EXPLICIT_SUPERSESSION": "A later statement explicitly replaces an earlier statement.",
+        "IMPLICIT_SELECTION": "The present context favors one alternative without an explicit replacement marker.",
+        "CORRECTION": "A later statement corrects an earlier claim.",
+        "CONTEXT_SPLIT": "Different contexts carry different versions of the claim.",
+        "EXCEPTS": "The rule contains a specific exception.",
+        "EXACT_THRESHOLD": "The rule uses an exact numeric cutoff.",
+        "LOWER_BOUND_THRESHOLD": "The rule applies from a stated minimum upward.",
+        "UPPER_BOUND_THRESHOLD": "The rule applies only up to a stated maximum.",
+        "ORDINAL_TRIGGER": "The rule activates at a stated ordinal position.",
+        "VAGUE_COUNT_POLICY": "The rule refers to an imprecise amount rather than a fixed count.",
+        "EXACT_DURATION": "A precise duration is stated.",
+        "APPROX_DURATION": "An approximate duration is stated.",
+        "PERIODIC_RULE": "The rule repeats at a regular interval.",
+        "EXPIRY_RULE": "The rule expires after a stated duration.",
+        "RECENCY_RELATION": "The relative recency of statements matters.",
+        "FALLBACK_IF_UNKNOWN": "When the value is unknown, a fallback is specified.",
+        "FALLBACK_IF_CONFLICT": "When statements conflict, a fallback is specified.",
+        "FALLBACK_IF_UNAVAILABLE": "When the required source is unavailable, a fallback is specified.",
+        "ABSTAINS": "The statement explicitly withholds a definite conclusion.",
+        "REQUESTS_CLARIFICATION": "The statement asks for clarification before proceeding.",
+        "LOW_CONFIDENCE": "The statement explicitly expresses low confidence.",
+        "PRESERVES_CONFLICT": "The statement keeps the disagreement unresolved.",
+        "OPERATIONAL_SIGNAL": "The observation includes a directly actionable current signal.",
+    }
+    sentences = [phrases[name] for name in phrases if z1.get(name, False)]
+    comparator = COMPARATORS[gold_z["z2_comparator"]]
+    scalar_values = gold_z["z2_scalars"]
+    scalar_mask = gold_z["z2_scalar_mask"]
+    if scalar_mask[0]:
+        wording = {
+            "EXACT": "The numeric cutoff is exactly",
+            "LOWER_BOUND": "The numeric cutoff is at least",
+            "UPPER_BOUND": "The numeric cutoff is at most",
+        }[comparator]
+        sentences.append(f"{wording} {scalar_values[0]:g}.")
+    if scalar_mask[1]:
+        sentences.append(f"The ordinal trigger is position {int(scalar_values[1])}.")
+    if scalar_mask[2]:
+        precision = TEMPORAL_PRECISIONS[gold_z["z2_temporal_precision"]]
+        prefix = "approximately " if precision == "APPROX" else ""
+        sentences.append(f"The stated duration is {prefix}{scalar_values[2]:g} seconds.")
+    if scalar_mask[3]:
+        sentences.append(f"The recurring interval is {scalar_values[3]:g} seconds.")
+    return sentences
 
 
-def _semantic_summary(gold_z: dict[str, Any]) -> str:
-    labels = ", ".join(name.lower().replace("_", " ") for name in _active_names(gold_z["z1"]))
-    scalars = []
-    for name, value, present in zip(
-        ("numeric value", "ordinal index", "duration seconds", "period seconds"),
-        gold_z["z2_scalars"],
-        gold_z["z2_scalar_mask"],
-    ):
-        if present:
-            scalars.append(f"{name}={value:g}")
-    scalar_text = "; ".join(scalars) if scalars else "no explicit scalar"
-    support_names = (
-        "conflict", "supersession", "scope", "numeric value", "temporal rule", "fallback policy", "operational signal"
-    )
-    support_text = ", ".join(
-        f"{name}:{'supported' if value else 'unsupported'}" for name, value in zip(support_names, gold_z["z4"])
-    )
-    return f"semantic clauses [{labels}]; arguments [{scalar_text}]; support [{support_text}]"
+def _support_sentences(gold_z: dict[str, Any]) -> list[str]:
+    values = [bool(v) for v in gold_z["z4"]]
+    return [
+        "The evidence itself contains an explicit contradiction." if values[0] else "The evidence itself contains no explicit contradiction.",
+        "The evidence establishes the claimed replacement relation." if values[1] else "The evidence does not establish a replacement relation.",
+        "The evidence is sufficient for the claimed scope." if values[2] else "The evidence does not justify the claimed scope.",
+        "The evidence directly supports the stated numeric quantity." if values[3] else "The evidence does not directly support a numeric quantity.",
+        "The evidence directly supports the stated timing rule." if values[4] else "The evidence does not directly support a timing rule.",
+        "The evidence directly supports the stated fallback behavior." if values[5] else "The evidence does not directly support a fallback behavior.",
+        "The evidence directly supports the actionable signal." if values[6] else "The evidence does not directly support an actionable signal.",
+    ]
 
 
 def render_surface(scene: CanonicalScene, family: str) -> str:
-    summary = _semantic_summary(scene.gold_z)
     if family == RENDERER_TRAIN_A:
-        return f"Assertion: {scene.assertion}\nEvidence: {scene.evidence}\nCurrent semantic record: {summary}."
+        return f"Assertion: {scene.assertion}\nEvidence: {scene.evidence}"
     if family == RENDERER_TRAIN_B:
-        return f"Current statement — {scene.assertion}. Observed evidence — {scene.evidence}. Recorded meaning — {summary}."
+        return f"Current statement — {scene.assertion} Observed record — {scene.evidence}"
     if family == RENDERER_HELDOUT_C:
-        return f"Proposition under review: {scene.assertion}\nAvailable observation: {scene.evidence}\nMeaning encoded by the present record: {summary}."
+        return f"Proposition under review: {scene.assertion}\nAvailable observation: {scene.evidence}"
     raise ValueError(f"unknown renderer family: {family}")
 
 
@@ -186,9 +224,11 @@ def build_scene_from_index(index: int, *, scene_id: str, split: str) -> Canonica
     gold_z = build_gold_z(index)
     gold_c = recompose_gold_z(gold_z)
     asserted = SCOPES[gold_z["z3_asserted_scope"]].lower()
-    evidence = SCOPES[gold_z["z3_evidence_scope"]].lower()
-    assertion = f"The current proposition is scoped to {asserted} context and carries the listed semantic clauses."
-    evidence_text = f"The current observable evidence is scoped to {evidence} context and contains only the listed support state."
+    evidence_scope = SCOPES[gold_z["z3_evidence_scope"]].lower()
+    semantic = " ".join(_semantic_sentences(gold_z))
+    support = " ".join(_support_sentences(gold_z))
+    assertion = f"This proposition applies at {asserted} scope. {semantic}"
+    evidence_text = f"The current observation is limited to {evidence_scope} scope. {support}"
     scene = CanonicalScene(scene_id, split, assertion, evidence_text, gold_z, gold_c)
     if not canonical_equal(scene.gold_c, recompose_gold_z(scene.gold_z)):
         raise AssertionError("gold C must equal R(gold Z)")
