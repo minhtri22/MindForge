@@ -1,8 +1,12 @@
 # MK-1 Observable Identifiability Contract v0.1
 
-Status: **FROZEN SPECIFICATION / NOT EXECUTED**
+Status: **FROZEN / CONSISTENCY-EXTENDED UNDER AMENDMENT 001 / NOT EXECUTED**
 
 Date: **2026-09-21**
+
+Original pre-extension blob:
+
+`2d5b5f92a8787c244dc13f1b4d1111054d30ee71`
 
 ## 1. Purpose
 
@@ -61,15 +65,16 @@ Before training, construct a target-only audit that verifies:
 
 ## 5. Ambiguity handling
 
-If the observable input genuinely underdetermines a field, the dataset must encode one of:
+Amendment 001 freezes exact output vocabularies and does not contain dynamic UNKNOWN/AMBIGUOUS classes.
 
-- UNKNOWN;
-- AMBIGUOUS;
-- SET-VALUED admissible target;
+Therefore, if the serialized current input genuinely underdetermines any primary Z or C field:
 
-or remove that field from primary adjudication.
+- the scene is **not admissible** to the primary MK-1 cohort;
+- it must be recorded in a pre-training exclusion ledger with the underdetermined field and reason;
+- it cannot be relabeled to a convenient point class;
+- it cannot be moved selectively between TRAIN/VALIDATION/PRISTINE after observing model behavior.
 
-The protocol forbids forcing a single gold class when the frozen observable information does not identify one.
+The renderer/generator may avoid producing such scenes prospectively, but the zero-fresh preflight must prove the exclusion logic without inspecting any scientific model outcome.
 
 ## 6. Admission gate
 
@@ -78,7 +83,8 @@ The contract passes only if:
 - 100% of primary Z and C target fields have complete field contracts;
 - zero forbidden-information violations exist;
 - zero primary samples require hidden/future information for gold reconstruction;
-- all known underdetermined cases are explicitly represented as ambiguity rather than silently assigned a point label;
+- zero admitted primary scenes contain an underdetermined Z or C target;
+- every excluded underdetermined scene is recorded before training and never silently point-labeled;
 - gold C == R(gold Z) for 100% of admitted scenes.
 
 Failure verdict:
