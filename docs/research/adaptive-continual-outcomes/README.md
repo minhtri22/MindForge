@@ -37,6 +37,9 @@ The first scientific milestone is **ACO-1 Target-Stability Qualification**. No c
 - `ROADMAP.md` — finite research sequence.
 - `aco1-target-stability-protocol.md` — frozen first diagnostic protocol.
 - `LINEAGE.md` — append-only execution/decision history.
+- `ACO1_PREFLIGHT_QA.md` — zero-science implementation qualification.
+- `ACO1_EXECUTION_LOCK.json` — immutable machine-readable execution contract.
+- `ACO1_EXECUTION_LOCK_VERIFICATION.md` — independent lock-verification closure.
 
 ## Current authorization
 
@@ -44,12 +47,18 @@ ACO-1 implementation and zero-science preflight are now **PASS / CLOSED**.
 
 Canonical QA: `ACO1_PREFLIGHT_QA.md`.
 
-Current next authorization is limited to creating and verifying the ACO-1 execution lock.
+ACO-1 Execution Lock is now **independently verified PASS**.
 
-Not authorized yet:
+Canonical lock: `ACO1_EXECUTION_LOCK.json`.
+
+Canonical verification: `ACO1_EXECUTION_LOCK_VERIFICATION.md`.
+
+The next scientific step may execute the frozen 40-seed ACO-1 collection under that exact lock, followed by exactly one adjudication only after complete collection.
+
+Not authorized:
 
 ```text
-fresh ACO-1 scientific execution before execution-lock verification
+any ACO-1 execution that changes the verified lock
 ACO-2 outcome-model fitting
 controller implementation
 KCL-7

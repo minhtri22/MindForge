@@ -101,3 +101,27 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Independent lock verification: **REQUIRED / PENDING**.
 - ACO-1 fresh execution: **STILL PROHIBITED**.
 - Execution workflow: **ABSENT BY DESIGN** until independent verification closes PASS.
+
+---
+
+## 2026-09-20 — ACO-1 Execution Lock Independently Verified PASS
+
+- Lock commit: `8b33b9373b4a45ea5df38f1f9e9f9d1e2f05560c`.
+- Lock SHA-256: `3a5e832c59b9099a3772e80c1cf8fd89d39f6dd45cf127a13ced2253ebc46457`.
+- Verification workflow run: `35510792383`.
+- Verifier tests: **5/5 PASS**.
+- Verification verdict: `ACO1_EXECUTION_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256: `7bfda7f789e387d5e19a36e29d67e2558a440b2b91564ad05f5819d65f99010e`.
+- Verification artifact ID: `10605740452`.
+- Artifact ZIP SHA-256: `76c7d8ff21c298b614af4501c16b5a865fbf53a5a7c9930e19e538410773c853`.
+- Runner Git blob at implementation and verification HEAD: `117bd3f16d576bf6f683d83747b6c1723a7ae471` — identical.
+- Exact runtime verified: x86_64; Python `3.12.14`; pip `26.2.1`; NumPy `2.3.3`; pytest `8.4.2`; PyTorch `2.10.0+cpu`.
+- Fresh/protected overlap: **0**.
+- Fresh collection artifact present: **NO**.
+- Formal result present: **NO**.
+- Fresh execution workflow present: **NO**.
+- Fresh seed execution attempted during verification: **NO**.
+- Scientific outcome generated: **NO**.
+- The immutable lock JSON is not rewritten after verification; verified state is represented by the exact lock hash plus the verification evidence above.
+- ACO-1 40-seed collection is now **eligible for the next separately executed scientific step** under this exact lock.
+- ACO-2/controller/KCL-7/protected KCL cohort remain **CLOSED / UNAUTHORIZED**.
