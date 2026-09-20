@@ -19,3 +19,18 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Protected KCL confirmatory cohort: **UNTOUCHED / FORBIDDEN FOR ACO EXPLORATION**.
 - Scientific execution performed in this entry: **NONE**.
 - Next: implement ACO-1 runner + deterministic one-shot adjudicator + zero-science preflight; do not execute the fresh 40-seed cohort until all integrity gates pass.
+
+---
+
+## 2026-09-20 — ACO Initialization Zero-Science QA
+
+- QA scope: branch/document integrity only; **no scientific outcome generated**.
+- Compared against parent closure: `a9159ae8f17693453e7b6378c92deb5effc4a56f`.
+- Initialization docs commit: `e5a394defccf84cc913c787f4c901d1b3fb84f88`.
+- Lineage-opening commit: `6495062dd56da3a6a8ced9e40a678e740b0337bf`.
+- Diff audit: exactly 9 files added under `docs/research/adaptive-continual-outcomes/`; no source, workflow, experiment result, or controller artifact added.
+- ACO-1 seed collision audit against historical numeric seed records in root `Lineage.md`: **PASS — 0 collisions**.
+- ACO-1 collision audit against protected KCL confirmatory cohort: **PASS — 0 collisions**.
+- Protected KCL cohort consumption: **NO**.
+- ACO-1 fresh execution authorization: **NO — remains blocked pending implementation + full zero-science preflight**.
+- Next scientifically valid step: implement only the frozen ACO-1 measurement runner, identity tests, seed-manifest validator, and one-shot adjudicator; then run zero-science preflight before any fresh cohort execution.
