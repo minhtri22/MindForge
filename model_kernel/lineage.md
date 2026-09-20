@@ -330,3 +330,32 @@ Trạng thái:
 - chưa huấn luyện.
 
 Cổng tiếp theo là khóa cài đặt MK-1.
+
+
+## 2026-09-21 — Khóa cách xử lý bộ tách từ trước cài đặt
+
+Kiểm tra lịch sử xác nhận checkpoint Phase-2 còn tồn tại nhưng bộ tách từ và mảng token gốc không có trong cây Git hiện tại cũng như tại đúng mã cam kết huấn luyện `159b5b793af1c18edcc3ebec5a4bd1fca5af0ea5`.
+
+Vì vậy checkpoint lịch sử chỉ được dùng làm bằng chứng tương thích, không dùng làm khởi tạo khoa học với một bộ tách từ mới.
+
+Đã khóa phụ lục thứ hai tại:
+
+`f78e6bff990d1d0ef1956ff5a0c3054d95e958bf`
+
+Quy tắc mới:
+
+- bộ tách từ chỉ học từ bề mặt của tập huấn luyện;
+- cả hai nhánh dùng đúng một artifact;
+- kích thước thực tế được phép từ 258 đến 16.384;
+- kích thước từ vựng của B0 vẫn cố định 16.384;
+- không được thêm token giả chỉ để lấp đủ kích thước.
+
+Kiểm tra không-khoa-học của phụ lục đạt tại:
+
+`bbc92b10029022d86b96c9379fe651ea20e710e5`
+
+Đăng ký trước chính được cập nhật tại:
+
+`1f7dfbb353b68617e1522cd3ee47bb0ca83d950f`
+
+Trạng thái: đăng ký trước đã qua toàn bộ kiểm tra; chưa tạo dữ liệu khoa học, chưa huấn luyện. Cổng kế tiếp là khóa cài đặt.
