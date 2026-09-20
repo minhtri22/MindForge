@@ -92,3 +92,18 @@ silently removed.
 - One-shot adjudicator: synthetic-only implementation authorized.
 - Scientific fresh collection: **LOCKED / NOT AUTHORIZED**.
 - Next: bind exact implementation/protocol/runtime in `CPRM1_EXECUTION_LOCK.json`, then run zero-science preflight only.
+
+---
+
+## 2026-09-20 — CPRM-1 Execution Lock v1 Frozen
+
+- Implementation commit: `e955c4962846cda8cac633c4c9fd49b40a901750`.
+- Protocol Git blob: `f61aabc5605400faea30e5d2af4349a2b32c792f`.
+- Runner Git blob: `18774a9349adeb4a0e5d66ce46416564640f41aa`.
+- Synthetic test Git blob: `dd54c5aaba63cf0fa649b5db445aec476e2a3847`.
+- Zero-science workflow Git blob: `20968ba824194c6530b6a393d8aa5848b4fed79a`.
+- Fresh manifest SHA-256: `d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3`.
+- Runtime pinned: Python 3.12.14 / NumPy 2.3.3 / pytest 8.4.2 / PyTorch 2.10.0+cpu.
+- Fresh scientific execution remains **BLOCKED** until both zero-science preflight and later independent lock verification PASS.
+- No execution workflow exists.
+- No fresh CPRM-1 scientific outcome exists.
