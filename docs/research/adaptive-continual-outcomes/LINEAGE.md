@@ -178,3 +178,19 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Scientific outcome generated: **NO**.
 - New lock schema: `ACO1-EXECUTION-LOCK-v2`.
 - Lock v2 independent verification: **REQUIRED / PENDING**.
+
+---
+
+## 2026-09-20 — ACO-1 Execution Lock v2 Verified; Fresh Retry Opened
+
+- Lock v2 commit: `ce5df9b2410951e6fbda427176e165910d770285`.
+- Lock v2 SHA-256: `2104913295e85b66e8ef8f7bb66d7a182869d334ea2a6b2e0766f99e83787db8`.
+- Independent verification run: `35511306898`.
+- Verifier tests: **5/5 PASS**.
+- Verification JSON SHA-256: `bb373c04874a0c7dbca1f311c146ace41de1cd1699cb5e78f05a4814565145e4`.
+- Verification artifact ID: `10605571130`.
+- Verification artifact ZIP SHA-256: `62d185f4cb3edc6a98d7ecf41a7a2b8fcf80341202e4d7789da2304a2fed9861`.
+- Verdict: `ACO1_EXECUTION_LOCK_VERIFICATION_PASS`.
+- Fresh retry authorization basis: attempt 1 failed before seed 1 and created no collection.
+- Retry must use exactly lock v2; intermediate scientific metric inspection remains prohibited.
+- Exactly one adjudication after complete 120-record integrity PASS remains mandatory.
