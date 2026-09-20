@@ -1,0 +1,49 @@
+{
+  "schema": "mindforge-model-pipeline-m3-qualification-evidence-v1",
+  "repository": "minhtri22/MindForge",
+  "branch": "docs/evidence-model-training-pipeline",
+  "qualified_implementation_commit": "2400e63af01368c362b9125bc622681b3817037c",
+  "runs": {
+    "m0": 35518953978,
+    "m1": 35518953984,
+    "m2_real_model": 35518953995,
+    "m3_governance": 35518954060
+  },
+  "verdict": "PASS",
+  "regressions": {
+    "m0": "PASS",
+    "m1": "PASS",
+    "m2_real_model": "PASS"
+  },
+  "tests": {
+    "m0": 15,
+    "m1": 15,
+    "m3": 10
+  },
+  "result": {
+    "run_id": "m3-governance-fixture-d82970e3ffeb",
+    "gates_passed": 15,
+    "gates_total": 15,
+    "pass_verdict": "PASS",
+    "fail_verdict": "FAIL",
+    "evaluation_contract_hash": "b0c2322420a9a88e812e549654b717cf41194076547479f61fdd1ce70c92b7c9",
+    "pass_execution_lock_hash": "f7735a15042b66e9ce5a1b69bbdf3e4dfe708bf4d1b429635e9869482315654c",
+    "pass_adjudication_hash": "b3437871ad964482b4d99f779b719ba995fc3b8fef80f28bd3bbb1a40ff7b55e",
+    "fail_adjudication_hash": "e21ea8413c0fa8663f393f98769415132f8ce405e8b97f9e66cd8a1319ca891e",
+    "training_started": false,
+    "public_bulk_download_started": false
+  },
+  "adversarial_gates": {
+    "threshold_mutation_blocked": true,
+    "seed_replacement_blocked": true,
+    "matched_control_mutation_blocked": true,
+    "retry_until_pass_blocked": true,
+    "fresh_resource_access_blocked": true
+  },
+  "boundary": {
+    "fresh_confirmatory_data_accessed": false,
+    "scientific_model_improvement_claimed": false,
+    "bulk_wikipedia_or_codeparrot_training": false,
+    "m4_executed": false
+  }
+}
