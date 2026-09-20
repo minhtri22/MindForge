@@ -2207,3 +2207,82 @@ This compact index summarizes the active Kernel Continual Learning chain without
   - `KCL-6.5.9.8 — Mechanism-Specific Future-Interaction Qualification`;
   - reuse exact pre-existing FUTURE-PROBE-v1 P1-P8 on a fresh cohort;
   - treat .8 as terminal discriminator for the active 6.5.9.x sequence.
+
+
+## 2026-09-20 — KCL-6.5.9.8 Mechanism-Specific Future-Interaction Qualification NEGATIVE / TERMINAL CLOSE
+
+- Status: **NEGATIVE**
+- Verdict: `FUTURE_INTERACTION_DOES_NOT_QUALIFY_MECH_PRR`.
+- Role in chain:
+  - terminal information-class discriminator for the active `KCL-6.5.9.x` sequence;
+  - exact pre-existing `FUTURE-PROBE-v1 P1-P8` reused without feature redesign.
+- Trigger:
+  - KCL-6.5.9.7 rejected one-transition temporal TRIG-v1;
+  - KCL-6.5.9.3 had previously shown the only notable positive numerical information increment from future-task interaction on the broad action target, but without qualification.
+- Frozen primary target:
+  - `Y_PRR = MECH{P+R,R} vs rest`.
+- Frozen comparison:
+  - `S2 = stage + H1-H9 + LRBS-v1 F1-F13`;
+  - `FUT = S2 + exact FUTURE-PROBE-v1 P1-P8`;
+  - same class-balanced L2 binary logistic family;
+  - no MRIG/TRIG features included.
+- Fresh cohort:
+  - train: 480 seeds / 1440 boundary records;
+  - validation: 240 seeds / 720 boundary records;
+  - prior/protected/train-validation overlap absent.
+- Train/freeze:
+  - canonical run `35496161778` — **SUCCESS**;
+  - Y_PRR train support: 98 POS / 91 unique seeds;
+  - all train integrity gates PASS;
+  - all 6 target × arm solvers converged;
+  - frozen rule `FUTURE-Q-v1`;
+  - rule SHA-256 `bdb6bc92fe5021f7d94ce9c59f467ef65a51615cbaaf23c84f3ff2de1fa9f591`;
+  - train JSON SHA-256 `294c311cf61745d937b9ce5e3611c8faf362c9d2e127120c8970c0a21d62c38e`;
+  - train artifact ID `10601467715`;
+  - train artifact ZIP SHA-256 `5d9e6abe82fc7477009751ca4d2ad11033ee63a3fe7889b3dc3f55b63d4ac502`;
+  - evidence commit `5b9faa3d4c343353a77c3b8d34c2dcdec7bd4e23`.
+- Validation:
+  - workflow source `08205554b7ced662e9dbfd5ab05baa99b7d3590a`;
+  - canonical run `35503887230` — **SUCCESS**;
+  - Y_PRR validation support: 41 POS / 40 unique seeds;
+  - all validation integrity gates PASS.
+- Primary validation:
+  - S2 macro recall = `0.451525`, **NOT QUALIFIED**;
+  - FUT macro recall = `0.439006`, **NOT QUALIFIED**;
+  - `D_FUTURE = -0.012518`;
+  - paired whole-seed 95% CI `[-0.021292,-0.003748]`;
+  - entire paired interval is below zero;
+  - frozen PASS gate required FUT qualified, point gain >= `+0.15`, CI lower > `+0.05`;
+  - route therefore **FALSE**.
+- Secondary:
+  - `Y_A: FUT-S2 = +0.017367`, CI `[-0.002763,+0.036923]`;
+  - `Y_PR: FUT-S2 = -0.000367`, CI `[-0.022555,+0.020364]`;
+  - no secondary result rescues the primary hypothesis.
+- Scientific interpretation:
+  - exact zero-step future-task interaction P1-P8 does not materially identify the replicated hard `MECH{P+R,R}` target;
+  - the prior broad-target numerical uplift from KCL-6.5.9.3 does not transfer to this mechanism-specific target;
+  - this is a narrow rejection of the tested future-probe contract, not a claim that every possible future interaction or every alternative target formulation is impossible.
+- Sequence implication:
+  - active `KCL-6.5.9.x` representation/information rescue sequence is **CLOSED**;
+  - do **not** create KCL-6.5.9.9 as another feature rescue;
+  - next phase is **formal convergence review**.
+- Provenance:
+  - protocol SHA-256 `2f7d4a6d9a6c8b62d6455c7ede233517521372282260ef355a386b53f8807f3c`;
+  - script SHA-256 `f485e81e575192af5eee7eb2839ee2406f08ad03691f2c01d57e9610e30caca7`;
+  - validation JSON SHA-256 `6c58b41b3a0f2ec50bf0676ba1f4f03a64a75d43aa62cb88c64faec7e23b640f`;
+  - validation artifact ID `10602739405`;
+  - validation artifact ZIP SHA-256 `70a8d5dee71a368c151a1b7f20a9e6f7019810fa10a64177a5bf403827ad3573`;
+  - validation evidence commit `6b1b70ed5b017cab5d3e6cda86f38379e90ddf3b`;
+  - paper commit `9fc0e5465b313af395afd5958541306cd26ec6cf`.
+- Reverse-synthesis backlog:
+  - remains input-only at `docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md`;
+  - **NOT EXECUTED**.
+- Guardrails:
+  - validation refit: **NO**;
+  - controller: **NOT IMPLEMENTED**;
+  - protected confirmatory cohort: **UNTOUCHED**;
+  - KCL-7: **NOT STARTED**.
+- Next scientific requirement:
+  - open `KCL-6.5.9.x Formal Convergence Review`;
+  - synthesize positive structural findings, falsified hypotheses, unresolved questions, and STOP/PIVOT criteria;
+  - no new scientific execution until the review itself decides what, if anything, merits a separately preregistered post-convergence program.
