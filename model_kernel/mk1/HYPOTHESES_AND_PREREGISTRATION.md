@@ -319,7 +319,7 @@ A valid MK-1 execution must archive:
 
 B0 reconstruction formally passed before implementation:
 
-- B0 reconstruction document blob: `070efdd36d32760dfffc71c60ae27b0825321298`;
+- B0 reconstruction document blob: `173dd942fd703755dd253d785ca5f3993cbd5c38`;
 - canonical workflow run: `35526336632`;
 - execution head: `6f54872d0825f07a3394747576c537ca447c999b`;
 - parameter count: `10,339,200`;
