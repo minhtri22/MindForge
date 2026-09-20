@@ -1,161 +1,47 @@
 # 17 — Data, Token Stream & Resume Contract
 
-## 1. Dataset identity
+## 1. Source identity
 
-Mỗi dataset source phải resolve thành immutable `DatasetSourceIdentity`.
+Each source resolves immutable identity. Wikipedia includes project/language/dump date/artifact/URI/upstream checksum/local SHA-256/parser version. Code keeps repository/revision/path/language/license evidence/content hash when source supports it. Unknown license defaults deny for release.
 
-### Wikipedia
+## 2. Privacy/secret hygiene
 
-Bắt buộc:
+Public text has pinned PII policy. Code has pinned secret scanner/ruleset. Raw sensitive values are not copied into evidence.
 
-- project/edition (ví dụ enwiki);
-- language;
-- dump date;
-- dump artifact type;
-- exact source URI;
-- upstream checksum nếu có;
-- downloaded file SHA-256;
-- decompressor/parser name + version/hash.
+## 3. Normalization/dedup/contamination
 
-`snapshot: latest` bị cấm sau prepare.
+Transforms are versioned/hashed. Exact dedup uses canonical bytes hash. Near-dedup freezes algorithm/tokenizer/ngram/signature/threshold/representative rule. Contamination freezes fixture hash, normalization, window/hash/threshold/action.
 
-### Code
+## 4. Split/freshness
 
-Reference adapter phải có manifest cụ thể. Production/release corpus bắt buộc giữ repository/file provenance ở mức nguồn hỗ trợ:
+Split identity is deterministic from algorithm version, seed and document identity. Freshness registry protects seed IDs, split IDs and fixture-set IDs.
 
-- repository URL/id;
-- source revision;
-- relative path;
-- detected language;
-- license evidence;
-- content hash.
+## 5. Phase-scoped TokenStreamContract
 
-Unknown license mặc định `deny` cho release.
+Every training phase freezes its own stream contract:
 
-## 2. Privacy and secret hygiene
+- tokenizer hash after resolution;
+- BOS/EOS/separator policy;
+- sequence length/truncation;
+- packing and cross-document behavior;
+- sampling/shuffle/buffer/seed;
+- worker count;
+- mixture sampler if multiple datasets.
 
-Trước tokenization:
+Reasoning/chat SFT may forbid cross-document packing even when CPT enables it.
 
-- public text chạy PII policy: `report|quarantine|redact|deny` theo configured detector/version;
-- code chạy secret/credential scanner pinned version/ruleset;
-- hits phải vào quarantine report với content hash và reason;
-- raw secrets/PII không được chép vào logs/evidence; evidence chỉ giữ hash/metadata cần audit.
+Data manifest stores token_streams keyed by phase_id and a stream_hash for each.
 
-## 3. Normalization contract
+## 6. ResumeCursor
 
-Mỗi transform có version/hash và parameters. Text Unicode normalization phải khai báo form. Code không được normalize whitespace/indentation trừ rule explicit.
+Checkpoint persists dataset/shard, document/token offset, packed sequence index, consumed tokens, sampler cycle, shuffle buffer, global/per-worker RNG, mixture state and gradient-accumulation micro-step.
 
-Document identity được tính **sau canonical source extraction nhưng trước destructive filters**, và transform lineage nối input -> output hash.
+Backend unable to restore exact logical stream must declare best_effort; no silent downgrade.
 
-## 4. Exact and near dedup
+## 7. Token accounting
 
-Exact dedup: SHA-256 canonical document bytes.
+consumed_tokens counts post-tokenization input tokens; effective_loss_tokens is separate after loss masking. Budget gates use frozen counter semantics.
 
-Near-dedup phải freeze:
+## 8. Fingerprint
 
-```yaml
-near_dedup:
-  algorithm: minhash_lsh
-  tokenizer: unicode_word_v1
-  ngram_size: 5
-  num_perm: 128
-  bands: 32
-  similarity_threshold: 0.85
-  representative_rule: lowest_document_id
-```
-
-Các giá trị trên chỉ là reference defaults cho smoke; real execution contract có thể khác nhưng phải đầy đủ. Thay bất kỳ parameter nào -> data fingerprint mới.
-
-## 5. Contamination contract
-
-Detector phải freeze:
-
-- fixture set ID/hash;
-- text normalization;
-- tokenization;
-- n-gram/window size;
-- hash algorithm;
-- match threshold;
-- handling action `remove|quarantine|fail`.
-
-Fresh fixtures có `freshness_class` và không được inspect ở development/calibration.
-
-## 6. Split identity and freshness registry
-
-Split được quyết định bằng `split_seed + document_identity + algorithm_version`.
-
-Manifest lưu exact IDs/hashes.
-
-Freshness registry quản lý ba loại tài nguyên:
-
-- seed IDs;
-- split IDs;
-- fixture-set IDs.
-
-CLI guard kiểm cả ba; không chỉ seed. Access event được append vào lineage.
-
-## 7. TokenStreamContract
-
-Trước training phải freeze:
-
-```yaml
-token_stream:
-  tokenizer_hash: ...
-  add_bos: false
-  add_eos: true
-  separator_policy: eos
-  sequence_length: 2048
-  truncation: right
-  packing:
-    enabled: true
-    cross_document: true
-    remainder_policy: carry
-  sampling:
-    mode: without_replacement
-    shuffle_algorithm: buffered_v1
-    shuffle_buffer_size: 10000
-    seed: 123
-  workers: 4
-```
-
-Nếu `cross_document=true`, loss masking/document boundary behavior phải explicit.
-
-Mixture sampling freeze theo target token fraction + sampling algorithm. Report actual token fraction/deviation.
-
-## 8. ResumeCursor
-
-Recoverable checkpoint phải giữ đủ trạng thái để replay chính xác stream logical:
-
-- dataset/shard id;
-- document identity/index;
-- token offset trong document nếu cần;
-- packed sequence index;
-- consumed effective tokens;
-- sampler epoch/cycle;
-- shuffle algorithm + buffer contents/IDs;
-- global sampler RNG;
-- per-worker RNG/state;
-- mixture sampler state;
-- gradient accumulation micro-step.
-
-Backend nào không thể restore chính xác phải khai `resume_fidelity=best_effort`; confirmatory run chỉ được dùng nếu execution contract cho phép và tolerance/restart policy đã freeze.
-
-## 9. Token counting
-
-`consumed_tokens` là tokens contributing to model input after tokenization/packing, không phải raw character count. `effective_loss_tokens` được report riêng sau loss mask.
-
-Token budget gate dùng canonical counter đã freeze.
-
-## 10. Data fingerprint
-
-Data manifest hash bao phủ:
-
-- source identities;
-- transform versions/parameters;
-- quarantine decisions;
-- dedup/contamination config;
-- exact split membership;
-- tokenizer hash;
-- TokenStreamContract excluding transient cache paths.
-
-Cache path/mtime không được tham gia identity.
+Data identity covers immutable sources, transform/quarantine decisions, dedup/contamination, exact splits, tokenizer identity and every phase stream hash; transient paths/mtime are excluded.

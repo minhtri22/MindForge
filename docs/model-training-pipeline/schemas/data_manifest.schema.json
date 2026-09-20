@@ -4,7 +4,7 @@
   "title": "DataManifest",
   "type": "object",
   "additionalProperties": false,
-  "required": ["manifest_version", "sources", "transforms", "splits", "token_stream", "freshness_registry", "manifest_hash"],
+  "required": ["manifest_version", "sources", "transforms", "splits", "token_streams", "freshness_registry", "manifest_hash"],
   "properties": {
     "manifest_version": {"type": "string"},
     "sources": {
@@ -26,14 +26,20 @@
     },
     "transforms": {"type": "array", "items": {"type": "object"}},
     "splits": {"type": "array", "items": {"type": "object"}},
-    "token_stream": {
+    "token_streams": {
       "type": "object",
-      "required": ["tokenizer_hash", "sequence_length", "packing", "sampling"],
-      "properties": {
-        "tokenizer_hash": {"type": "string"},
-        "sequence_length": {"type": "integer", "minimum": 1},
-        "packing": {"type": "object"},
-        "sampling": {"type": "object"}
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["phase_id", "tokenizer_hash", "sequence_length", "packing", "sampling", "stream_hash"],
+        "properties": {
+          "phase_id": {"type": "string"},
+          "tokenizer_hash": {"type": "string"},
+          "sequence_length": {"type": "integer", "minimum": 1},
+          "packing": {"type": "object"},
+          "sampling": {"type": "object"},
+          "stream_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
       }
     },
     "freshness_registry": {

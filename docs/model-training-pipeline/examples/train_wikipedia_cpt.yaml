@@ -25,33 +25,26 @@ datasets:
     checksum_source_uri: https://dumps.wikimedia.org/enwiki/20260301/enwiki-20260301-sha1sums.txt
     freshness_class: development
 
-token_stream:
-  add_bos: false
-  add_eos: true
-  separator_policy: eos
-  sequence_length: 2048
-  truncation: right
-  packing:
-    enabled: true
-    cross_document: true
-    remainder_policy: carry
-  sampling:
-    mode: without_replacement
-    shuffle_algorithm: buffered_v1
-    shuffle_buffer_size: 10000
-    seed: 42
-  workers: 4
-
 phases:
   - id: wikipedia_cpt
     type: cpt
+    parent_ref: model
     datasets: [wikipedia_en_20260301]
+    token_stream:
+      add_bos: false
+      add_eos: true
+      separator_policy: eos
+      sequence_length: 2048
+      truncation: right
+      packing: {enabled: true, cross_document: true, remainder_policy: carry}
+      sampling: {mode: without_replacement, shuffle_algorithm: buffered_v1, shuffle_buffer_size: 10000, seed: 42}
+      workers: 4
     stop: {kind: max_tokens, value: 100000000}
     optimizer_transition: reset
     scheduler_transition: reset
+    checkpoint_selection: {rule: metric_best, metric_id: validation_loss, direction: min, tie_breaker: earliest_step}
     training:
       precision: auto
-      sequence_length: 2048
       learning_rate: 0.000005
       warmup: {unit: ratio, value: 0.03}
       checkpoint_every_steps: 500
@@ -60,17 +53,12 @@ phases:
 baselines:
   - id: parent
     role: parent_baseline
+    source: model_revision
     model_id: Qwen/Qwen2.5-0.5B-Instruct
     revision: 7ae557604adf67be50417f59c2c2f167def9a775
 
 evaluation:
   fixture_set: eval/wikipedia_dev_v1
-  checkpoint_selection:
-    phase_id: wikipedia_cpt
-    rule: metric_best
-    metric_id: validation_loss
-    direction: min
-    tie_breaker: earliest_step
   metrics:
     - metric_id: heldout_loss_delta
       metric_version: "1"

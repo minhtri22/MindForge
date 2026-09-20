@@ -2,36 +2,43 @@
 
 ## 1. Modes
 
-cpt, sft, reasoning_sft, lora_sft. Pretrain-from-scratch là future scope.
+cpt, sft, reasoning_sft, lora_sft.
 
-## 2. Standard chain
+## 2. Phase graph
 
-Exact parent baseline -> CPT -> instruction replay/SFT -> reasoning SFT -> fresh evaluation -> export/runtime verification.
+Each phase explicitly names parent_ref. A downstream phase cannot start until its parent phase has selected and COMMITTED its canonical checkpoint by that phase's frozen checkpoint-selection rule.
 
-Mỗi phase có state/evaluation riêng và parent/child artifact hashes.
+Standard example:
+model -> domain_cpt -> instruction_sft -> reasoning_sft.
 
-## 3. Phase config
+## 3. Per-phase contract
 
-Freeze datasets, exactly one stop rule, resolved precision/device, sequence length, batch/grad accumulation, LR/optimizer, scheduler/warmup unit, weight decay/clipping, seeds, checkpoint cadence, loss masks/weights, resource limits và optimizer/scheduler reset-or-carry.
+Every phase owns:
+- parent_ref;
+- datasets;
+- phase-scoped TokenStreamContract;
+- one stop rule;
+- resolved precision/device;
+- LR/optimizer/scheduler/warmup;
+- phase seed/dataloader seed;
+- checkpoint cadence;
+- checkpoint selection;
+- loss mask/weights;
+- resource limits;
+- optimizer/scheduler reset-or-carry.
 
-Canonical stop/state semantics ở 16_CANONICAL_CONFIG_STATE_MACHINE.md.
+## 4. CPT -> replay
 
-## 4. Instruction replay
+Instruction replay is a declared phase, not informal rescue. Source, budget/mixture, stream semantics and thresholds freeze before execution. Earlier phase verdict remains historical evidence.
 
-Replay không phải rescue tùy ý. Source, mixture/token budget, stop rule và thresholds phải freeze trước phase. CPT phase FAIL vẫn được ghi dù later replay recovery.
+## 5. Checkpoint/resume
 
-## 5. Reproducibility
+Exact resume restores phase stream/sampler state and gradient-accumulation micro-step. Partial/uncommitted checkpoints are never parents.
 
-Record backend/device/precision/deterministic flags/nondeterministic ops. precision:auto phải resolve trước lock.
+## 6. PEFT
 
-## 6. Checkpoint/resume
+Adapter, merged HF and export artifacts remain separately identified. Standalone GGUF uses merged artifact unless pinned target explicitly supports adapter mode.
 
-Dùng checkpoint schema + atomic protocol. Confirmatory exact-resume không được silently downgrade thành best-effort.
+## 7. Health policy
 
-## 7. PEFT
-
-Adapter artifact, merged HF artifact và canonical export artifact là identities khác nhau. Standalone GGUF release dùng merged artifact trừ khi pinned runtime path explicit support adapter mode.
-
-## 8. Health monitors
-
-Policy freeze cho NaN/Inf, tokenizer mismatch, gradient failure, zero effective loss tokens, disk insufficiency và checkpoint verify fail. Không auto đổi LR/batch/seed trong confirmatory.
+NaN/Inf, data/tokenizer mismatch, zero effective loss tokens, resource exhaustion and checkpoint verification failure follow frozen FAIL/INVALID policy; no auto scientific rescue.

@@ -20,33 +20,26 @@ datasets:
     path: tests/fixtures/data/reasoning_mini.jsonl
     freshness_class: development
 
-token_stream:
-  add_bos: false
-  add_eos: true
-  separator_policy: eos
-  sequence_length: 512
-  truncation: right
-  packing:
-    enabled: false
-    cross_document: false
-    remainder_policy: pad
-  sampling:
-    mode: without_replacement
-    shuffle_algorithm: buffered_v1
-    shuffle_buffer_size: 64
-    seed: 21
-  workers: 0
-
 phases:
   - id: reasoning_sft
     type: reasoning_sft
+    parent_ref: model
     datasets: [reasoning_mini]
+    token_stream:
+      add_bos: false
+      add_eos: true
+      separator_policy: eos
+      sequence_length: 512
+      truncation: right
+      packing: {enabled: false, cross_document: false, remainder_policy: pad}
+      sampling: {mode: without_replacement, shuffle_algorithm: buffered_v1, shuffle_buffer_size: 64, seed: 21}
+      workers: 0
     stop: {kind: max_steps, value: 20}
     optimizer_transition: reset
     scheduler_transition: reset
+    checkpoint_selection: {rule: metric_best, metric_id: validation_loss, direction: min, tie_breaker: earliest_step}
     training:
       precision: fp32
-      sequence_length: 512
       learning_rate: 0.00001
       warmup: {unit: steps, value: 1}
       checkpoint_every_steps: 10
@@ -55,21 +48,16 @@ phases:
 baselines:
   - id: parent
     role: parent_baseline
+    source: model_revision
     model_id: Qwen/Qwen2.5-0.5B-Instruct
     revision: 7ae557604adf67be50417f59c2c2f167def9a775
 
 evaluation:
   fixture_set: tests/fixtures/eval_v1
-  checkpoint_selection:
-    phase_id: reasoning_sft
-    rule: metric_best
-    metric_id: validation_loss
-    direction: min
-    tie_breaker: earliest_step
   metrics:
     - metric_id: answer_accuracy
       metric_version: "1"
-      target_artifact: final
+      target_artifact: phase:reasoning_sft
       baseline_id: parent
       comparison_type: absolute_value
       operator: ">="
