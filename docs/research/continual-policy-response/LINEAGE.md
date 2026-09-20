@@ -48,3 +48,24 @@ silently removed.
 - Classification: **TECHNICAL_QA_ENVIRONMENT_FAILURE**.
 - Recovery allowed: install pinned QA-only dependency `pytest==8.4.2` and rerun the unchanged specification verifier.
 - CPRM research object, target contract, population contract, baseline family, gates and roadmap: **UNCHANGED**.
+
+---
+
+## 2026-09-20 — CPRM-0 Zero-Science Specification QA Closed PASS
+
+- CPRM-0 foundation commit: `a1d70d41a0a12ebb4fafbcbac0c059b0e502d40c`.
+- QA environment repair commit: `341a13ee3da8b268ad31aad20d73a482666fe7dc`.
+- Canonical QA workflow run: `35516092647`.
+- Tests: **3/3 PASS**.
+- Verdict: `CPRM0_ZERO_SCIENCE_SPEC_QA_PASS`.
+- QA JSON SHA-256: `bcf7fa6b0b967bff932d3a7ae087f4fe450edc14d9aabc404ff42242eed62140`.
+- Artifact ID: `10606658496`.
+- Artifact ZIP SHA-256: `d4e3ecabd6ece4e9c0c2e0db7de5b846e5d453a3b0237e8a322f122f1c0e01c1`.
+- Scientific execution attempted: **NO**.
+- Fresh scientific seed consumed: **NO**.
+- Model fitting performed: **NO**.
+- CPRM execution workflow present: **NO**.
+- CPRM scientific artifact present: **NO**.
+- CPRM-0: **PASS / CLOSED**.
+- CPRM-1 scientific execution: **NOT AUTHORIZED**.
+- Next admissible action: design and preregister CPRM-1 Fresh Response Support & Geometry Qualification protocol only.

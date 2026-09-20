@@ -1,6 +1,6 @@
 # Continual Policy Response Modeling (CPRM)
 
-Status: **CPRM-0 SPECIFICATION FOUNDATION — PENDING ZERO-SCIENCE QA**
+Status: **CPRM-0 PASS / CLOSED — SCIENTIFIC EXECUTION NOT YET AUTHORIZED**
 
 Branch: `research/continual-policy-response`
 
@@ -51,28 +51,27 @@ CPRM-0 contains specification/governance only.
 
 ## Current authorization
 
-Authorized:
+CPRM-0 zero-science specification QA is **PASS / CLOSED**.
+
+Canonical QA: `CPRM0_SPEC_QA.md`.
+
+Authorized next:
 
 ```text
-CPRM-0 documentation
-specification validation
-zero-science QA
+design + preregistration of CPRM-1 protocol
+CPRM-1 zero-science implementation/preflight work only after protocol freeze
 ```
 
-Not authorized:
+Still not authorized:
 
 ```text
-fresh scientific seeds
+fresh scientific seed execution
 scientific data collection
-model fitting
+response-model fitting
 feature selection from outcomes
-hyperparameter tuning
-CPRM-1 execution
+hyperparameter tuning from fresh outcomes
 controller implementation
 KCL-7
 protected KCL cohort use
 ACO-1 spent-data reuse for learning
 ```
-
-CPRM-1 protocol design becomes admissible only after CPRM-0 zero-science QA
-closes PASS.
