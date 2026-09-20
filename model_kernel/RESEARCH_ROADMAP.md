@@ -72,7 +72,7 @@ No model is trained in MK-0.
 
 ## 4. MK-1 — Learned Decision-State Representation
 
-**Status:** NOT OPENED.
+**Status:** SPECIFICATION / PREREGISTRATION OPEN; IMPLEMENTATION AND TRAINING NOT AUTHORIZED.
 
 ### Question
 
@@ -316,15 +316,22 @@ Do not replace these with vague progress labels.
 
 ## 14. Immediate next action
 
-After MK-0:
+After the CQG J3.16 and KCL-6.5.9.x re-audits:
 
 ~~~
-1. do not train;
-2. wait for CQG to commit the formal J3.13 report/lineage adjudication; the execution artifact has already been reviewed;
-3. monitor relevant KCL, OIR-PPV, ARN, and NEXUS closures;
-4. after formal J3.13 closure, write and freeze a separate prospective MK-1 protocol focused on structured/typed representation generalization, not cardinal-value repair;
-5. freeze that protocol before implementation/outcome;
-6. only then authorize model experimentation.
+1. keep model training disabled;
+2. open MK-1 specification/preregistration only;
+3. freeze target ontology;
+4. define target-margin/stability audit before outcome;
+5. define observable-identifiability contract for every Z field;
+6. freeze structured/factorized Z schema;
+7. freeze B0 / deterministic-PIT / learned-Z comparisons;
+8. freeze capacity/compute matching and fresh/pristine split;
+9. freeze metrics, falsification and STOP rules;
+10. run zero-science QA;
+11. only after QA PASS and B0 reconstruction may implementation begin.
 ~~~
 
-MK-0 itself authorizes no further repository changes beyond governance maintenance and append-only lineage updates required to record dependency changes.
+CQG J3.17+ resource-controller work, KCL post-convergence pivots, ARN memory work, OIR invariance work, and NEXUS runtime work do not block MK-1 representation specification. They remain separate dependency lines for later phases.
+
+MK-1 specification opening authorizes documentation only. It does not authorize model code changes, data generation, training, or scientific outcome inspection.
