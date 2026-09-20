@@ -1,6 +1,6 @@
 # MK-1 — Learned Structured Decision-State Representation v0.1
 
-Status: **PREREGISTERED / AMENDMENT 001 QA PASS / IMPLEMENTATION NOT AUTHORIZED**
+Status: **PREREGISTERED / AMENDMENT 001 QA PASS / AMENDMENT 002 QA PENDING / IMPLEMENTATION NOT AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -112,7 +112,7 @@ Detailed contract:
 
 blob:
 
-`82517e3cb4d03b0cdc6fb6c99a289ad935372623`
+`4bca66437bbfe91b45a7762a61d213982f99da3f`
 
 ## 5. Frozen target ontology
 
@@ -360,15 +360,23 @@ Current state:
 B0_RECONSTRUCTION                PASS
 MATCHING_FEASIBILITY_V0_1        REVISE
 PREREGISTRATION_AMENDMENT_001    FROZEN
-AMENDMENT_ZERO_SCIENCE_QA        PASS
-IMPLEMENTATION_LOCK              NEXT GATE
+AMENDMENT_001_ZERO_SCIENCE_QA    PASS
+AMENDMENT_002_ZERO_SCIENCE_QA    PENDING
+IMPLEMENTATION_LOCK              BLOCKED
 SCIENTIFIC_DATA_MATERIALIZATION  BLOCKED
 TRAINING                         BLOCKED
 ```
 
-Amendment QA evidence:
+Amendment 001 QA evidence:
 
 - QA blob: `dd67636b08afea8b38d491e3081e8b60c054270e`;
 - QA commit: `238d9f7c9f7d242eb7bff455fd0f46b13eb4cf43`.
 
-The only admissible next step is `MK1_IMPLEMENTATION_LOCK`.
+A subsequent historical-artifact feasibility audit froze Amendment 002:
+
+- amendment blob: `1a7015cab1df40eb9467b42b1b9992e30a18d911`;
+- amendment commit: `f78e6bff990d1d0ef1956ff5a0c3054d95e958bf`.
+
+Amendment 002 changes only tokenizer cardinality admission: the tokenizer is still trained from TRAIN only with requested 16,384 vocabulary, while actual corpus-dependent vocabulary may be between 258 and 16,384. The B0 model vocabulary remains exactly 16,384 and no artificial tokens may pad the tokenizer.
+
+Current next gate is `ZERO_SCIENCE_QA_AMENDMENT_002`.
