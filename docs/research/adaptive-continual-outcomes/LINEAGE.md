@@ -194,3 +194,27 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Fresh retry authorization basis: attempt 1 failed before seed 1 and created no collection.
 - Retry must use exactly lock v2; intermediate scientific metric inspection remains prohibited.
 - Exactly one adjudication after complete 120-record integrity PASS remains mandatory.
+
+---
+
+## 2026-09-20 — ACO-1 Fresh Execution Closed STOP
+
+- Execution workflow run: `35511418837`.
+- Verified lock v2 SHA-256: `2104913295e85b66e8ef8f7bb66d7a182869d334ea2a6b2e0766f99e83787db8`.
+- Fresh collection: **120/120 records COMPLETE**.
+- Collection integrity: **PASS**.
+- Protected KCL overlap: **0**.
+- Collection SHA-256: `b7ab6f5e0a6896f37f77112c3a0ef0c5597a940516a2947ecd2bbd410307e340`.
+- Complete collection preserved before adjudication: artifact `10606116496`, ZIP SHA-256 `25959db42a26440f2d1f29602ff0aba28f4fafa690f1a16ea00d70e0654b449d`.
+- Intermediate scientific metric inspection: **NO**.
+- One-shot adjudicator calls: **1**.
+- Formal-result SHA-256: `60da9b69c903b93253e72ccc074f6af1edd1285a7db15d11afbaa94348723f9b`.
+- Canonical evidence commit: `2f82881fdc3bde203f7df04b17389ea362612d87`.
+- Formal support result: `primary_count=12`, stages `[1,2,3]`, integrity `PASS`, support `FAIL`.
+- Scientific status: `STOP`.
+- Scientific verdict: `TARGET_STABILITY_SUPPORT_INSUFFICIENT`.
+- No additional ACO-1 seeds are permitted after outcome inspection.
+- Frozen roadmap STOP condition “fresh support is insufficient under frozen design” is met.
+- Active ACO program: **STOPPED**.
+- ACO-2/controller/KCL-7: **NOT AUTHORIZED**.
+- Next admissible action: formal convergence review only; no new scientific execution.

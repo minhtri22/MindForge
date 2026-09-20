@@ -1,6 +1,6 @@
 # Adaptive Continual Outcome Modeling (ACO)
 
-Status: **NEW PREREGISTERED RESEARCH PROGRAM — NO SCIENTIFIC EXECUTION YET**
+Status: **PROGRAM STOPPED AFTER ACO-1 SUPPORT GATE**
 
 Branch: `research/adaptive-continual-outcomes`
 
@@ -41,24 +41,37 @@ The first scientific milestone is **ACO-1 Target-Stability Qualification**. No c
 - `ACO1_EXECUTION_LOCK.json` — immutable machine-readable execution contract.
 - `ACO1_EXECUTION_LOCK_VERIFICATION.md` — independent lock-verification closure.
 
-## Current authorization
+## Current status
 
-ACO-1 implementation and zero-science preflight are now **PASS / CLOSED**.
+ACO-1 completed its locked fresh execution and one-shot adjudication.
 
-Canonical QA: `ACO1_PREFLIGHT_QA.md`.
+Canonical result:
 
-ACO-1 execution attempt 1 exposed a **pre-seed technical runner/lock schema mismatch**. No fresh seed or scientific outcome was generated.
+```text
+STOP
+TARGET_STABILITY_SUPPORT_INSUFFICIENT
+```
 
-The previous lock is archived as superseded because the minimal runner fix changes scientific source identity.
+The frozen support gate required at least 30 canonical Y_PRR boundaries across at least two stages; the adjudicator found 12 across all three stages.
 
-Current authorization returns to **zero-science preflight only**. A new lock must be created and independently verified after preflight PASS before fresh collection may resume.
+Canonical closure: `ACO1_FORMAL_CLOSURE.md`.
+
+The finite roadmap's insufficient-support STOP condition is therefore active.
+
+Authorized now:
+
+```text
+formal convergence review only
+documentation / provenance closure
+```
 
 Not authorized:
 
 ```text
-any ACO-1 execution that changes the verified lock
+additional ACO-1 seeds
+ACO-1 threshold/support relaxation
 ACO-2 outcome-model fitting
 controller implementation
 KCL-7
-consumption of the protected KCL confirmatory cohort
+protected KCL confirmatory cohort use
 ```
