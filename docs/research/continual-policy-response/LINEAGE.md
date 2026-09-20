@@ -198,3 +198,44 @@ silently removed.
 - Complete valid collection rerun: **PROHIBITED**.
 - CPRM-2/predictor/controller: **CLOSED** pending canonical CPRM-1 verdict.
 - Scientific result at this lineage entry: **NOT YET OBSERVED**.
+
+---
+
+## 2026-09-20 — CPRM-1 Fresh Execution Closed NEGATIVE
+
+- Execution workflow: `35518986215`.
+- Fresh seeds: **60/60 COMPLETE**.
+- Boundaries: **180/180 COMPLETE**.
+- Response vectors: **540**.
+- Reliability repeats: **6/6 EXACT PASS**.
+- Integrity/support: **PASS**.
+- Collection SHA-256: `d3c3b70f3ab1c412c18477bf69d12d3bc8cdbd56130515fa64d70c377fb808af`.
+- Collection evidence commit: `cda98d319753cdeaaa748cdef124b13be202a2e6`.
+- Collection artifact ID: `10607618079`.
+- Collection artifact ZIP SHA-256: `11bebada98a228bd4a5a25ae45fd7bfd92df93f346d98e66bc5ed0bfc62b8fd5`.
+- Intermediate response/contrast geometry inspection: **NO**.
+- One-shot adjudicator calls: **1**.
+- Formal result SHA-256: `fb3e27b7b63e7057c11958bddedefd783fb0f15339d25027377349a9fca1ac07`.
+- Formal result evidence commit: `7f2dbb70c896ea5fb115f1eb12cebadfc9e4268e`.
+- Complete execution artifact ID: `10607937544`.
+- Complete execution artifact ZIP SHA-256: `b8e1b9e7e6799f4c51506e76f974c773d7a9487b40d37db2152eaf9b529e57ab`.
+- Formal status: **NEGATIVE**.
+- Formal verdict: `NEGATIVE_RESPONSE_GEOMETRY_NOT_QUALIFIED`.
+- Qualified response components: plasticity AUC, prior-task retention, worst-prior accuracy.
+- Non-qualified response component: final current-task accuracy.
+- Qualified contrast families: **B-A and C-A**.
+- CPRM-2: **NOT AUTHORIZED**.
+
+---
+
+## 2026-09-20 — CPRM Formal Convergence Review Closed
+
+- In-family three-component rescue: **REJECTED**.
+- Geometry-gate relaxation: **REJECTED**.
+- Same-cohort target redesign: **REJECTED**.
+- CPRM program as formulated: **TERMINATED**.
+- Selected next direction: **RETURN UPSTREAM TO MEASUREMENT / SUBSTRATE ADEQUACY**.
+- CPRM-1 60-seed cohort: **HISTORICAL / SPENT**.
+- New scientific execution authorized: **NONE**.
+- Predictor/controller/KCL-7: **CLOSED**.
+- Protected KCL cohort: **UNTOUCHED**.

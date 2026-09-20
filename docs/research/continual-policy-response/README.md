@@ -120,3 +120,38 @@ No fresh CPRM-1 seed was executed during verification.
 The frozen 60-seed / 180-boundary CPRM-1 collection is now eligible to be
 opened under the exact verified lock. No execution workflow has yet been
 created, and CPRM-2/predictor training remains closed.
+
+
+## CPRM final convergence status
+
+CPRM-1 completed its frozen scientific execution and returned:
+
+```text
+NEGATIVE
+NEGATIVE_RESPONSE_GEOMETRY_NOT_QUALIFIED
+```
+
+Support, integrity and deterministic reliability passed. Three response
+components and both B-A/C-A contrast families qualified, but
+`final_current_accuracy` did not qualify in any policy×stage cell; the frozen
+joint four-component contract therefore failed.
+
+Canonical closure: `CPRM1_FORMAL_CLOSURE.md`.
+
+Canonical convergence review: `CPRM_FORMAL_CONVERGENCE_REVIEW.md`.
+
+Final governance state:
+
+```text
+CPRM PROGRAM                TERMINATED AS FORMULATED
+CPRM-2                      NOT AUTHORIZED
+predictor training          CLOSED
+controller                  CLOSED
+
+next direction:
+new upstream measurement/substrate adequacy program
+specification only
+```
+
+The CPRM-1 cohort is historical/spent and may not be reused to redesign the
+target or tune the next study.
