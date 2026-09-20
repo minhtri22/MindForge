@@ -8,7 +8,18 @@ from typing import Any, Iterable
 import numpy as np
 import torch
 
-from .contracts import C_SLICES, H1B_BOOTSTRAP_RESAMPLES, H1B_BOOTSTRAP_SEED, Z1_LABELS, Z4_FIELDS
+from .contracts import (
+    C_SLICES,
+    H1B_BOOTSTRAP_RESAMPLES,
+    H1B_BOOTSTRAP_SEED,
+    H1C_BOOTSTRAP_RESAMPLES,
+    H1C_BOOTSTRAP_SEED,
+    PIT_COMMON_Z4_FIELDS,
+    SCOPES,
+    SCOPE_RELATIONS,
+    Z1_LABELS,
+    Z4_FIELDS,
+)
 
 
 def decode_direct_logits(logits: torch.Tensor) -> dict[str, torch.Tensor]:
@@ -185,3 +196,151 @@ def relative_error_reduction(error_model: float, error_baseline: float) -> float
     if error_baseline <= 0:
         raise ValueError("baseline error must be positive for relative error reduction")
     return (error_baseline - error_model) / error_baseline
+
+
+def pit_v3_common_view(result: dict[str, Any]) -> dict[str, Any]:
+    """Project an unchanged PIT-v3 result onto the frozen exact common-field set."""
+    primitives = result["primitives"]
+    types = {
+        str(item["type"])
+        for item in primitives["evidence_primitives"] + primitives["teaching_signal_primitives"]
+    }
+    facts = result["facts"]
+    ev = facts["evidence_state"]
+    ts = facts["teaching_signal_state"]
+    support = facts["support_relations"]
+    z1 = [int(name in types) for name in Z1_LABELS]
+    z4 = {
+        "conflict_present": int(bool(ev["has_conflict"])),
+        "supersession_supported": int(bool(support["supersession_supported"])),
+        "scope_supported": int(bool(support["scope_supported"])),
+        "temporal_rule_supported": int(bool(support["temporal_rule_supported"])),
+        "fallback_policy_supported": int(bool(support["fallback_policy_supported"])),
+        "operational_signal_supported": int(bool(support["operational_signals_supported"])),
+    }
+    c1 = [
+        int(bool(ev["has_conflict"])),
+        int(bool(ts["resolves_conflict"])),
+        int(bool(ts["asserts_numeric_threshold"])),
+        int(bool(ts["asserts_temporal_rule"])),
+        int(bool(ts["asserts_fallback_policy"])),
+        int(bool(ts["abstains"])),
+        int(bool(ts["requests_clarification"])),
+        int(bool(ts["operational_signals"])),
+    ]
+    return {
+        "z1": z1,
+        "z3_evidence_scope": SCOPES.index(str(ev["scope_level"]).upper()),
+        "z3_asserted_scope": SCOPES.index(str(ts["asserted_scope"]).upper()),
+        "z3_scope_relation": SCOPE_RELATIONS.index(str(support["scope_relation"]).upper()),
+        "z4_common": z4,
+        "c1": c1,
+    }
+
+
+def _common_field_errors(
+    gold_z: dict[str, Any],
+    gold_c: dict[str, Any],
+    predicted_z: dict[str, Any],
+    predicted_c: dict[str, Any],
+    *,
+    pit: bool = False,
+) -> tuple[int, int]:
+    errors = 0
+    fields = 0
+    for gold, pred in zip(gold_z["z1"], predicted_z["z1"]):
+        errors += int(int(gold) != int(pred))
+        fields += 1
+    for key in ("z3_evidence_scope", "z3_asserted_scope", "z3_scope_relation"):
+        errors += int(int(gold_z[key]) != int(predicted_z[key]))
+        fields += 1
+    z4_index = {name: i for i, name in enumerate(Z4_FIELDS)}
+    if pit:
+        z4_pred = predicted_z["z4_common"]
+        for name in PIT_COMMON_Z4_FIELDS:
+            errors += int(int(gold_z["z4"][z4_index[name]]) != int(z4_pred[name]))
+            fields += 1
+    else:
+        for name in PIT_COMMON_Z4_FIELDS:
+            errors += int(int(gold_z["z4"][z4_index[name]]) != int(predicted_z["z4"][z4_index[name]]))
+            fields += 1
+    for gold, pred in zip(gold_c["c1"], predicted_c["c1"]):
+        errors += int(int(gold) != int(pred))
+        fields += 1
+    return errors, fields
+
+
+def h1c_common_field_summary(rows: list[dict[str, Any]]) -> dict[str, float]:
+    """Rows contain gold_z, gold_c, m1z_z, m1z_c, and pit_result."""
+    if not rows:
+        raise ValueError("H1c rows cannot be empty")
+    m1_errors = pit_errors = total_fields = 0
+    m1_z1_gold: list[list[int]] = []
+    m1_z1_pred: list[list[int]] = []
+    pit_z1_pred: list[list[int]] = []
+    for row in rows:
+        pit_view = pit_v3_common_view(row["pit_result"])
+        m1e, fields = _common_field_errors(row["gold_z"], row["gold_c"], row["m1z_z"], row["m1z_c"])
+        pite, pit_fields = _common_field_errors(
+            row["gold_z"],
+            row["gold_c"],
+            pit_view,
+            {"c1": pit_view["c1"]},
+            pit=True,
+        )
+        if pit_fields != fields:
+            raise AssertionError("H1c common-field counts diverged")
+        m1_errors += m1e
+        pit_errors += pite
+        total_fields += fields
+        m1_z1_gold.append([int(v) for v in row["gold_z"]["z1"]])
+        m1_z1_pred.append([int(v) for v in row["m1z_z"]["z1"]])
+        pit_z1_pred.append([int(v) for v in pit_view["z1"]])
+
+    m1_error = m1_errors / total_fields
+    pit_error = pit_errors / total_fields
+    reduction = relative_error_reduction(m1_error, pit_error)
+    gold = np.asarray(m1_z1_gold, dtype=np.int8)
+    m1_pred = np.asarray(m1_z1_pred, dtype=np.int8)
+    pit_pred = np.asarray(pit_z1_pred, dtype=np.int8)
+    m1_precision = binary_micro_prf(gold, m1_pred)[0]
+    pit_precision = binary_micro_prf(gold, pit_pred)[0]
+    return {
+        "m1z_error_rate": float(m1_error),
+        "pit_error_rate": float(pit_error),
+        "relative_error_reduction": float(reduction),
+        "m1z_primitive_precision": float(m1_precision),
+        "pit_primitive_precision": float(pit_precision),
+        "primitive_precision_delta": float(m1_precision - pit_precision),
+        "common_fields_per_scene": float(total_fields / len(rows)),
+    }
+
+
+def h1c_whole_scene_bootstrap(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    if not rows:
+        raise ValueError("H1c bootstrap rows cannot be empty")
+    by_scene = {str(row["scene_id"]): row for row in rows}
+    if len(by_scene) != len(rows):
+        raise ValueError("H1c rows must contain exactly one record per canonical scene")
+    scene_ids = sorted(by_scene)
+    point = h1c_common_field_summary(rows)
+    rng = np.random.default_rng(H1C_BOOTSTRAP_SEED)
+    draws: list[float] = []
+    for _ in range(H1C_BOOTSTRAP_RESAMPLES):
+        sampled = [by_scene[scene_ids[j]] for j in rng.integers(0, len(scene_ids), size=len(scene_ids))]
+        try:
+            draws.append(h1c_common_field_summary(sampled)["relative_error_reduction"])
+        except ValueError:
+            continue
+    if not draws:
+        raise ValueError("H1c bootstrap undefined because PIT error is zero in every resample")
+    values = np.asarray(draws, dtype=np.float64)
+    return {
+        **point,
+        "lower_95": float(np.percentile(values, 2.5)),
+        "upper_95": float(np.percentile(values, 97.5)),
+        "resamples_requested": H1C_BOOTSTRAP_RESAMPLES,
+        "resamples_defined": len(draws),
+        "rng_seed": H1C_BOOTSTRAP_SEED,
+        "scenes": len(scene_ids),
+    }
