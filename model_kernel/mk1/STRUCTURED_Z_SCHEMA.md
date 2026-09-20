@@ -1,123 +1,234 @@
 # MK-1 Structured / Factorized Z Schema v0.1
 
-Status: **FROZEN SPECIFICATION / NO IMPLEMENTATION**
+Status: **FROZEN / AMENDED BY PREREGISTRATION_AMENDMENT_001 / NO IMPLEMENTATION**
 
 Date: **2026-09-21**
 
-## 1. Design principle
+Original frozen blob before Amendment 001:
 
-The primary MK-1 intervention is:
+`cb9ad4a9e546b086502f56f9151809eb7f3b0fc4`
+
+## 1. Primary intervention
 
 ```
 raw current input
-    |
-    v
-shared B0 Transformer body
-    |
-    +--> Z1 semantic primitives
-    +--> Z2 normalized arguments
-    +--> Z3 scope state
-    +--> Z4 support/composition relations
+        |
+        v
+exact B0 Transformer body
+        |
+        v
+final non-padding hidden state after final LayerNorm
+        |
+        +--------------------+
+        |                    |
+     B0-DIRECT             M1-Z
+        |                    |
+        v                    v
+ direct canonical C      Z1/Z2/Z3/Z4
+                             |
+                             v
+                       frozen R(Z)
+                             |
+                             v
+                         canonical C
 ```
 
-The representation is factorized before recombination.
+The intervention is structured intermediate supervision and deterministic recomposition.
 
-There is no scalar utility head, memory head, continual-learning head, resource-controller head, invariant head, or sparse-routing head in MK-1.
+There is no memory head, controller head, scalar utility head, continual-learning head, invariant head, sparse-routing head, learned pooling, CLS token, or extra encoder block.
 
-## 2. Shared encoder
+## 2. Shared encoder and pooling
 
-The learned-Z arm uses the compact B0 Transformer defined in BASELINE_CONTRACT.md as the encoder substrate.
+Both neural arms use the exact default B0 Transformer body.
 
-The architecture of the shared Transformer body is unchanged in MK-1.
+Pooling is the final hidden state of the final non-padding input token **after** the B0 final LayerNorm.
 
-Only representation readout heads and the prospectively frozen representation-training objective may differ from the direct learned baseline.
+Implementation must expose this hidden state without changing B0 language-model logits.
 
-## 3. Typed factors
+Required zero-fresh parity:
 
-### Z1 head — primitives
+- same B0 weights;
+- same token tensor;
+- float32 CPU;
+- pre-MK-1 logits and refactored logits exactly equal.
 
-Multi-label typed prediction over the frozen TARGET_ONTOLOGY.md primitive vocabulary.
+No learned pooling is allowed.
 
-Loss family: binary cross entropy over declared primitive labels.
+## 3. M1-Z output layout
 
-### Z2 head — normalized arguments
+Hidden width:
 
-Typed argument slots.
+`d = 320`
 
-Depending on field type:
+### Z1
 
-- categorical comparator/unit: cross entropy;
-- explicit numeric/duration scalar: normalized regression;
-- ordered relation: categorical relation prediction.
+32 binary logits, exact vocabulary from TARGET_ONTOLOGY.md.
 
-No scalar is used when the source text does not explicitly identify the quantity.
+Loss:
 
-### Z3 head — scope
+`L_Z1 = BCEWithLogits(mean over 32 labels)`
 
-Separate predictions for:
+### Z2
 
-- evidence scope;
-- asserted scope;
-- scope relation.
+11 raw outputs:
 
-Do not predict only the final relation if the two generating scope factors are available.
+- comparator: 4 logits;
+- temporal precision: 3 logits;
+- numeric_value: 1 scalar;
+- ordinal_index: 1 scalar;
+- duration_seconds: 1 scalar;
+- period_seconds: 1 scalar.
 
-### Z4 head — relation graph
+Scalar masks are gold-derived presence masks.
 
-Predict typed pairwise relation edges among frozen candidate atomic facts.
+For each present scalar:
 
-Primary edge types:
+`e = (prediction - gold) / max(abs(gold), 1 canonical unit)`
 
-- conflicts;
-- supports;
-- supersedes;
-- excepts;
-- scope_support;
-- value_support.
+`L_scalar = SmoothL1(e, 0, beta=1.0)`
 
-Candidate-node construction must be frozen before training and cannot use gold relation labels at inference time.
+Z2 loss is the unweighted mean of active components:
 
-## 4. Deterministic recomposer
+- comparator CE;
+- temporal-precision CE;
+- each scalar loss with at least one present target in the evaluated batch/unit.
 
-A frozen deterministic recomposer may derive:
+### Z3
 
-- canonical semantic attributes;
-- conflict state;
-- normalized support state;
-- composition consistency.
+20 logits:
 
-It may not derive or emit the final policy decision for MK-1 adjudication.
+- evidence scope: 8;
+- asserted scope: 8;
+- scope relation: 4.
 
-The recomposer exists only to test whether individually learned factors compose consistently.
+`L_Z3` is the unweighted mean of the three categorical cross-entropies.
 
-## 5. No latent rescue arm
+### Z4
 
-MK-1 v0.1 contains no additional free latent bottleneck arm.
+7 binary logits for the fixed relation/support register.
 
-Reason:
+`L_Z4 = BCEWithLogits(mean over seven fields)`
 
-- CQG supports explicit structured decomposition in its own substrate;
-- KCL shows repeated representation expansion without a new uncertainty can become rescue;
-- adding a latent arm now would introduce another causal variable without a demonstrated need.
+### Total
 
-A latent arm requires a new preregistered hypothesis after MK-1 v0.1 outcome or a pre-execution governance amendment justified by new upstream evidence.
+`D_Z = 32 + 11 + 20 + 7 = 70`
 
-## 6. Representation outputs retained for evaluation
+`L_M1Z = 0.25 * (L_Z1 + L_Z2 + L_Z3 + L_Z4)`
 
-For every sample, archive:
+Family weights cannot be validation-tuned.
 
-- per-field logits/scores;
-- thresholded typed outputs;
-- normalized argument predictions;
-- relation-edge scores;
-- recomposed canonical state;
-- model/checkpoint hash;
-- input/sample ID.
+## 4. B0-DIRECT output layout
+
+B0-DIRECT predicts C directly with exactly 34 raw outputs:
+
+- C1 semantic booleans: 8 logits;
+- C2 evidence scope: 8 logits;
+- C3 asserted scope: 8 logits;
+- C4 scope relation: 4 logits;
+- C5 support register: 6 logits.
+
+`D_C = 34`
+
+Loss:
+
+`L_DIRECT` is the unweighted mean of:
+
+- C1 BCE;
+- C2 CE;
+- C3 CE;
+- C4 CE;
+- C5 BCE.
+
+B0-DIRECT receives no Z target and no auxiliary Z loss.
+
+## 5. Frozen decoding rules
+
+Binary field:
+
+- predicted true iff logit >= 0;
+- equivalent sigmoid threshold = 0.5.
+
+Categorical field:
+
+- deterministic argmax over the frozen class order;
+- ties resolve to the lowest frozen class index.
+
+Continuous Z2 field:
+
+- raw scalar output, no validation-derived clipping or calibration.
+
+These rules are identical in validation and confirmatory evaluation.
+
+## 6. Frozen deterministic recomposer R
+
+R has no learned parameters and never sees gold at inference.
+
+Required mapping:
+
+- C1.evidence_has_conflict <- Z4.conflict_present;
+- C1.asserts_numeric_threshold <- OR(EXACT_THRESHOLD, LOWER_BOUND_THRESHOLD, UPPER_BOUND_THRESHOLD);
+- C1.asserts_temporal_rule <- OR(EXACT_DURATION, APPROX_DURATION, PERIODIC_RULE, EXPIRY_RULE);
+- C1.asserts_fallback_policy <- OR(FALLBACK_IF_UNKNOWN, FALLBACK_IF_CONFLICT, FALLBACK_IF_UNAVAILABLE);
+- C1.abstains <- Z1.ABSTAINS;
+- C1.requests_clarification <- Z1.REQUESTS_CLARIFICATION;
+- C1.has_operational_signal <- Z1.OPERATIONAL_SIGNAL;
+- C1.resolves_conflict <- Z4.conflict_present AND OR(EXPLICIT_SUPERSESSION, IMPLICIT_SELECTION, CORRECTION);
+- C2 <- Z3 evidence-scope argmax;
+- C3 <- Z3 asserted-scope argmax;
+- C4 <- Z3 scope-relation argmax;
+- C5 <- Z4 fields 2..7.
+
+R emits no ACCEPT/FLAG/BLOCK action.
+
+## 7. Parameter counts
+
+M1-Z readout:
+
+`(320 + 1) * 70 = 22,470`
+
+Total:
+
+`10,339,200 + 22,470 = 10,361,670`
+
+B0-DIRECT readout:
+
+`(320 + 1) * 34 = 10,914`
+
+Total:
+
+`10,339,200 + 10,914 = 10,350,114`
+
+Difference:
+
+`11,556`
+
+Relative difference versus larger arm:
+
+approximately `0.112%`
+
+Frozen maximum:
+
+`1.0%`
+
+Parameter matching is feasible without a padding layer.
+
+## 8. Outputs retained for evaluation
+
+For every evaluated sample archive:
+
+- sample and canonical-scene IDs;
+- input length;
+- Z logits/scalars for M1-Z;
+- decoded Z;
+- recomposed C for M1-Z;
+- C logits and decoded C for B0-DIRECT;
+- checkpoint hash;
+- tokenizer hash.
 
 No confirmatory prediction may be overwritten or selectively rerun.
 
-## 7. Claim boundary
+## 9. No latent rescue arm
 
-A PASS supports only the frozen Z schema and the tested B0-scale model.
+MK-1 v0.1 contains no free latent bottleneck arm.
 
-It does not establish a universal ontology or controller architecture.
+Any later latent arm requires a new scientific uncertainty and new preregistration.
