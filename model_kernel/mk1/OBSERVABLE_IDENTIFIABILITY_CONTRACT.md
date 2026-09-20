@@ -31,12 +31,12 @@ Forbidden:
 
 ## 3. Field contract
 
-Every field in Z must be registered with:
+Every primary field in Z and every direct canonical target field in C must be registered with:
 
 | Contract item | Required |
 |---|---|
 | field name | yes |
-| target family | Z1/Z2/Z3/Z4 |
+| target family | Z1/Z2/Z3/Z4/C1/C2/C3/C4/C5 |
 | observable source span or source object | yes |
 | derivation rule | yes |
 | whether target is categorical/continuous/relational | yes |
@@ -56,7 +56,8 @@ Before training, construct a target-only audit that verifies:
 2. removing forbidden future/counterfactual metadata leaves the gold target unchanged;
 3. target construction can be rerun from the frozen current-input gold object;
 4. no field is generated from the final downstream action;
-5. no class depends on a distinction absent from the serialized current input.
+5. no class depends on a distinction absent from the serialized current input;
+6. gold canonical C is reconstructed by the frozen R from gold Z with exact 100% identity.
 
 ## 5. Ambiguity handling
 
@@ -74,10 +75,11 @@ The protocol forbids forcing a single gold class when the frozen observable info
 
 The contract passes only if:
 
-- 100% of primary target fields have complete field contracts;
+- 100% of primary Z and C target fields have complete field contracts;
 - zero forbidden-information violations exist;
 - zero primary samples require hidden/future information for gold reconstruction;
-- all known underdetermined cases are explicitly represented as ambiguity rather than silently assigned a point label.
+- all known underdetermined cases are explicitly represented as ambiguity rather than silently assigned a point label;
+- gold C == R(gold Z) for 100% of admitted scenes.
 
 Failure verdict:
 
