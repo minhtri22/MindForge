@@ -1,16 +1,6 @@
 name: MK1 Zero-Fresh Preflight
 
 on:
-  push:
-    branches:
-      - research/model_core
-    paths:
-      - ".github/workflows/mk1-zero-fresh-preflight.yml"
-      - "mindforge/model.py"
-      - "experiments/model_core/mk1/**"
-      - "tests/test_model_core_mk1_preflight.py"
-      - "tests/test_mks_model_kernel.py"
-      - "model_kernel/mk1/IMPLEMENTATION_LOCK_MANIFEST.md"
   workflow_dispatch:
 
 jobs:
