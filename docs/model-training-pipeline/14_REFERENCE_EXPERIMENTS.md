@@ -1,75 +1,34 @@
 # 14 — Reference Experiments
 
-## R0 — End-to-end micro smoke
+## R0 — End-to-end smoke
 
-Mục tiêu: chứng minh plumbing, không chứng minh quality.
+Purpose: plumbing only, not quality claim.
 
-- supported tiny decoder model;
-- vài nghìn dòng public/synthetic text+code;
-- vài trăm reasoning SFT examples;
-- 10–100 training steps;
-- HF save;
-- GGUF convert;
-- llama.cpp infer;
-- Ollama infer;
-- reasoning contract.
+Canonical model:
+- Qwen/Qwen2.5-0.5B-Instruct
+- exact revision 7ae557604adf67be50417f59c2c2f167def9a775
+- local tracked fixture text/code/reasoning datasets
+- domain_cpt + reasoning_sft both required
+- save/kill/resume
+- HF -> F16 GGUF -> Q4_K_M -> llama.cpp -> Ollama
+- evidence bundle.
+
+Config: examples/end_to_end_small.yaml.
 
 ## R1 — Wikipedia CPT qualification
 
-Mục tiêu: CPT không phá chat/reasoning vượt threshold.
-
-1. base evaluation;
-2. fixed Wikipedia snapshot subset;
-3. CPT token budget freeze;
-4. evaluate held-out text + instruction + reasoning;
-5. adjudicate catastrophic forgetting;
-6. export only if PASS.
+Reference source identity: enwiki 20260301 pages-articles-multistream dump. Acquire verifies published checksum then computes local SHA-256. Run evaluates exact parent before CPT and protected capabilities after CPT.
 
 ## R2 — Code CPT qualification
 
-1. code corpus with license metadata;
-2. contamination scan against code eval fixtures;
-3. CPT;
-4. held-out loss + syntax/unit test benchmark;
-5. instruction/reasoning regression checks;
-6. export.
+Reference ingestion path: CodeSearchNet v2 Python artifact from the documented S3 path. This is suitable to exercise adapter/provenance plumbing, but release training is forbidden until repository/file license enrichment satisfies deny-unknown policy. Secret scanning required.
 
-## R3 — Mixed Wikipedia + code + reasoning SFT
+## R3 — Mixed real study
 
-Đây là reference gần với mục tiêu người dùng:
+Exact parent instruct/reasoning model -> CPT Wikipedia+code mixture -> frozen instruction replay -> reasoning SFT -> fresh confirmatory evaluation -> HF canonical -> high-fidelity/quantized GGUF -> llama.cpp/Ollama -> sealed evidence.
 
-```text
-Base reasoning/instruct model
- -> CPT mixture: Wikipedia + code
- -> SFT/replay: chat instruction
- -> Reasoning SFT
- -> fresh eval
- -> HF canonical
- -> F16 GGUF
- -> Q4_K_M GGUF
- -> llama.cpp
- -> Ollama
- -> evidence bundle
-```
+R3 must define exact parent baseline, phase deltas, protected capability suite, and matched control when making method-improvement claims.
 
-### Expected user-facing demo
+## Expected user-facing response
 
-Prompt:
-
-```text
-Một hàm Python đang có độ phức tạp O(n^2). Hãy đề xuất cách giảm xuống O(n log n) nếu có thể và giải thích lý do.
-```
-
-Normalized API response:
-
-```json
-{
-  "reasoning": "...các bước phân tích được model sinh ra...",
-  "answer": "...kết luận cuối...",
-  "runtime": "ollama",
-  "model_artifact": "...",
-  "reasoning_kind": "model_generated_rationale"
-}
-```
-
-Acceptance không chấm reasoning theo độ dài; chấm task correctness, consistency và parseability.
+Normalized API returns answer, visible rationale only when requested/supported, reasoning_kind=model_generated_rationale, transport/parser/runtime/artifact metadata. It never claims rationale is faithful hidden computation.

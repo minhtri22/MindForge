@@ -1,85 +1,41 @@
-# 12 — Implementation Plan for Local Agent
+# 12 — Implementation Plan
 
-## Milestone M0 — Skeleton + contracts
-- package layout;
-- typed config models;
-- run state machine;
-- schemas;
-- hashing/lineage;
-- CLI skeleton;
-- tests.
+## M0 — Contract compiler
+Typed config models, JSON Schemas, canonical resolver/hash, RunState + PhaseState, baseline/comparator types, lineage split, CLI skeleton.
 
-**Exit:** config resolve/hash + run creation + state transitions PASS.
+Exit: all examples schema-validate; state transition negative tests PASS.
 
-## M1 — Data plane
-- local files;
-- Wikipedia-style public text adapter;
-- public code adapter interface;
-- normalization/filter/dedup/split/tokenize;
-- data manifest/fingerprint;
-- license policy.
+## M1 — Data/token-stream plane
+Source identity, public/fixture adapters, license/privacy/secret checks, normalize/filter/dedup/contamination/split/tokenize/pack, freshness registry, TokenStreamContract, data manifest.
 
-**Exit:** deterministic micro dataset output + contamination fixture PASS.
+Exit: deterministic fixture manifest + resume cursor simulation PASS.
 
-## M2 — Trainer backend
-- one PyTorch/HF-compatible backend;
-- CPT;
-- SFT/reasoning SFT;
-- checkpoint/resume;
-- metrics logging.
+## M2 — Trainer/checkpoint backend
+One HF/PyTorch path, CPT + SFT/reasoning SFT, phase transitions, atomic checkpoint writer, exact resume, metrics.
 
-**Exit:** tiny model micro-run save/resume/reload PASS.
+Exit: pinned tiny reference two-phase save/kill/resume/reload PASS.
 
-## M3 — Governance
-- preflight;
-- execution lock;
-- fresh-seed guard;
-- adjudicator;
-- evidence report.
+## M3 — Governance/evaluation
+Execution lock, baseline/matched-control, evaluation contracts, adjudicator, phase/final verdict history.
 
-**Exit:** intentional FAIL cannot auto-rescue.
+Exit: intentional FAIL cannot rescue; fresh resources guarded.
 
-## M4 — Reasoning contract
-- native field adapter interface;
-- tag-based fallback parser;
-- data formatter;
-- reasoning tests.
+## M4 — Reasoning layers
+Model-specific serializer, capability model, runtime parser abstraction, normalized API.
 
-**Exit:** API returns `{reasoning, answer}`.
+Exit: visible/hidden/off semantics tests PASS.
 
-## M5 — llama.cpp export
-- version/commit lock;
-- converter invocation;
-- GGUF verify;
-- quantize;
-- llama runtime fixtures.
-
-**Exit:** tiny trained model runs in llama.cpp.
+## M5 — llama.cpp
+Pinned build/converter capability evidence, high-fidelity GGUF, shard-aware quantization, frozen inference runtime fixtures.
 
 ## M6 — Ollama
-- Modelfile generation;
-- create/import;
-- API/runtime test;
-- thinking/reasoning extraction;
-- cleanup.
+Generated Modelfile, safe ephemeral namespace, capability/think mapping, cleanup, parity.
 
-**Exit:** tiny trained model runs through Ollama and passes reasoning contract.
+## M7 — Security/evidence
+Sandbox, PII/secret/license gates, run locks, evidence seal, bundle ordering, external ZIP checksum.
 
-## M7 — Full E2E reference
-- Wikipedia mini snapshot;
-- code mini corpus;
-- reasoning SFT mini set;
-- end-to-end command;
-- evidence ZIP.
+## M8 — Full E2E + hardening
+AC-01..AC-18, Windows bootstrap, failure injection, reproducibility replay, docs.
 
-**Exit:** AC-01..AC-14 PASS.
-
-## M8 — Hardening
-- Windows PowerShell installer/bootstrap;
-- structured logs;
-- failure injection;
-- docs;
-- reproducibility replay.
-
-## Implementation rule
-Không merge milestone kế tiếp nếu exit gate milestone hiện tại chưa PASS. Commit SHA phải được ghi vào `LINEAGE.md` hoặc machine lineage sau mỗi milestone.
+## Rule
+Do not enter next milestone unless current exit gate PASS. Software-development Git lineage is separate from training-run lineage.

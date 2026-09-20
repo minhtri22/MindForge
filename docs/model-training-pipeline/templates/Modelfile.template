@@ -1,7 +1,18 @@
 FROM {{GGUF_PATH}}
 
-# Template/system parameters must be generated from the canonical model/chat template.
-# Do not invent a different prompt format here.
+# GENERATED FILE. Inference parameters come only from frozen
+# InferenceGenerationContract; do not add runtime defaults by hand.
+PARAMETER temperature {{TEMPERATURE}}
+PARAMETER top_p {{TOP_P}}
+PARAMETER top_k {{TOP_K}}
+PARAMETER seed {{SEED}}
+PARAMETER num_ctx {{CONTEXT_LENGTH}}
+PARAMETER num_predict {{MAX_NEW_TOKENS}}
 
-PARAMETER temperature 0.7
-PARAMETER top_p 0.9
+{{#STOP_PARAMETERS}}
+PARAMETER stop "{{.}}"
+{{/STOP_PARAMETERS}}
+
+{{#TEMPLATE}}
+TEMPLATE """{{TEMPLATE}}"""
+{{/TEMPLATE}}

@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experiment_config.schema.json",
+  "title": "ExperimentConfig",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["experiment", "model", "phases", "datasets", "evaluation", "reasoning", "export"],
+  "properties": {
+    "experiment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mode"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "mode": {"enum": ["smoke", "development", "calibration", "confirmatory", "release"]},
+        "seed_sets": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "development": {"type": "array", "items": {"type": "integer"}, "uniqueItems": true},
+            "calibration": {"type": "array", "items": {"type": "integer"}, "uniqueItems": true},
+            "fresh_confirmatory": {"type": "array", "items": {"type": "integer"}, "uniqueItems": true}
+          }
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "id", "revision", "require_resolved_sha"],
+      "properties": {
+        "source": {"enum": ["huggingface", "local_hf"]},
+        "id": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "minLength": 1},
+        "require_resolved_sha": {"const": true},
+        "allow_remote_code": {"type": "boolean", "default": false}
+      }
+    },
+    "datasets": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/dataset"}
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/phase"}
+    },
+    "baselines": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/baseline"}
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixture_set", "checkpoint_selection", "inference"],
+      "properties": {
+        "fixture_set": {"type": "string", "minLength": 1},
+        "checkpoint_selection": {"$ref": "#/$defs/checkpointSelection"},
+        "inference": {"$ref": "#/$defs/inference"}
+      }
+    },
+    "reasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "transport_preference", "fallback_transport"],
+      "properties": {
+        "mode": {"enum": ["visible", "hidden", "off"]},
+        "transport_preference": {"enum": ["native_runtime_field", "tagged_text"]},
+        "fallback_transport": {"enum": ["none", "tagged_text"]},
+        "tags": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": {"type": "string", "minLength": 1},
+            "end": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hf", "gguf", "verify_llama_cpp", "verify_ollama"],
+      "properties": {
+        "hf": {"type": "boolean"},
+        "gguf": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["high_fidelity", "quantize"],
+          "properties": {
+            "high_fidelity": {"enum": ["preserve_source", "f16", "bf16"]},
+            "quantize": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            }
+          }
+        },
+        "verify_llama_cpp": {"type": "boolean"},
+        "verify_ollama": {"type": "boolean"}
+      }
+    }
+  },
+  "$defs": {
+    "dataset": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["adapter", "snapshot"],
+      "properties": {
+        "adapter": {"type": "string", "minLength": 1},
+        "snapshot": {"type": "string", "minLength": 1},
+        "freshness_class": {"enum": ["development", "calibration", "fresh_confirmatory"]}
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "datasets", "stop", "optimizer_transition", "scheduler_transition"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"enum": ["cpt", "sft", "reasoning_sft", "lora_sft"]},
+        "datasets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "stop": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value"],
+          "properties": {
+            "kind": {"enum": ["max_steps", "max_tokens", "max_epochs"]},
+            "value": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "optimizer_transition": {"enum": ["reset", "carry"]},
+        "scheduler_transition": {"enum": ["reset", "carry"]},
+        "training": {"$ref": "#/$defs/training"}
+      }
+    },
+    "training": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["precision", "sequence_length", "learning_rate", "warmup", "checkpoint_every_steps"],
+      "properties": {
+        "precision": {"enum": ["auto", "fp32", "fp16", "bf16"]},
+        "sequence_length": {"type": "integer", "minimum": 64},
+        "learning_rate": {"type": "number", "exclusiveMinimum": 0},
+        "warmup": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["unit", "value"],
+          "properties": {
+            "unit": {"enum": ["ratio", "steps", "tokens"]},
+            "value": {"type": "number", "minimum": 0}
+          }
+        },
+        "checkpoint_every_steps": {"type": "integer", "minimum": 1},
+        "save_optimizer_state": {"type": "boolean"}
+      }
+    },
+    "checkpointSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase_id", "rule", "metric_id", "direction", "tie_breaker"],
+      "properties": {
+        "phase_id": {"type": "string", "minLength": 1},
+        "rule": {"enum": ["fixed_step", "metric_best", "last_checkpoint", "early_stopping"]},
+        "metric_id": {"type": ["string", "null"]},
+        "direction": {"enum": ["min", "max", "none"]},
+        "tie_breaker": {"enum": ["earliest_step", "latest_step", "lowest_artifact_hash"]}
+      }
+    },
+    "inference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_new_tokens", "temperature", "top_p", "top_k", "seed", "context_length", "stream"],
+      "properties": {
+        "max_new_tokens": {"type": "integer", "minimum": 1},
+        "temperature": {"type": "number", "minimum": 0},
+        "top_p": {"type": "number", "minimum": 0, "maximum": 1},
+        "top_k": {"type": "integer", "minimum": 0},
+        "seed": {"type": "integer"},
+        "context_length": {"type": "integer", "minimum": 64},
+        "stream": {"type": "boolean"}
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["smoke_reference", "parent_baseline", "matched_control", "external_anchor"]},
+        "artifact_id": {"type": "string"},
+        "model_id": {"type": "string"},
+        "revision": {"type": "string"}
+      }
+    }
+  }
+}

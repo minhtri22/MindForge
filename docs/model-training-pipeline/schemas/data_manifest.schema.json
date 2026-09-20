@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "data_manifest.schema.json",
+  "title": "DataManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifest_version", "sources", "transforms", "splits", "token_stream", "freshness_registry", "manifest_hash"],
+  "properties": {
+    "manifest_version": {"type": "string"},
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source_id", "adapter", "snapshot", "content_sha256", "license_policy"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "adapter": {"type": "string"},
+          "snapshot": {"type": "string"},
+          "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "license_policy": {"type": "string"},
+          "privacy_policy": {"type": "string"},
+          "secret_scan_policy": {"type": "string"}
+        }
+      }
+    },
+    "transforms": {"type": "array", "items": {"type": "object"}},
+    "splits": {"type": "array", "items": {"type": "object"}},
+    "token_stream": {
+      "type": "object",
+      "required": ["tokenizer_hash", "sequence_length", "packing", "sampling"],
+      "properties": {
+        "tokenizer_hash": {"type": "string"},
+        "sequence_length": {"type": "integer", "minimum": 1},
+        "packing": {"type": "object"},
+        "sampling": {"type": "object"}
+      }
+    },
+    "freshness_registry": {
+      "type": "object",
+      "required": ["split_ids", "fixture_set_ids"]
+    },
+    "manifest_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

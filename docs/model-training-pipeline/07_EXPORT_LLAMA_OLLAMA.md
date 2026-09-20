@@ -1,119 +1,46 @@
 # 07 — Export to llama.cpp / Ollama
 
-## 1. Nguyên tắc
+Canonical runtime/export semantics: 19_GATE_MATRIX_INFERENCE_CONTRACT.md.
 
-Export là một phase có gate riêng, không phải bước copy file.
+## 1. Pinning
 
-## 2. Pin llama.cpp
+llama_cpp.lock.json pins commit SHA, source URL, build flags and converter path/hash. ollama.lock.json pins exact Ollama version.
 
-`llama_cpp.lock.json` phải chứa commit SHA, source URL, build flags và converter path. Pipeline phải gọi converter từ source đã pin.
+## 2. Preflight
 
-### Preflight trước training
+Before production training, evidence must show pinned converter/model capability inspection, tokenizer/chat-template compatibility and runtime target support. Registry-only support is insufficient for release.
 
-- chạy converter capability inspection (hoặc registry tương đương);
-- xác nhận architecture được nhận diện;
-- xác nhận tokenizer/chat template support;
-- ghi compatibility report.
-
-## 3. HF → GGUF
+## 3. HF -> GGUF
 
 Canonical path:
+HF/Safetensors -> high-fidelity GGUF -> llama.cpp load/infer -> required quantized targets.
 
-```text
-canonical HF/Safetensors
-   -> convert_hf_to_gguf.py
-   -> F16/BF16 (high-fidelity GGUF)
-   -> llama.cpp load test
-   -> optional quantization targets
-```
-
-Không quantize trước khi high-fidelity GGUF load test PASS.
+High-fidelity dtype policy is exactly one of preserve_source, f16, bf16 and resolved dtype is recorded.
 
 ## 4. Quantization
 
-Targets do config freeze, ví dụ:
+Each required quantized artifact has its own load/infer/quality gate. Q4 cannot inherit F16 PASS.
 
-```yaml
-export:
-  gguf:
-    base: f16
-    quantize:
-      - q8_0
-      - q4_k_m
-```
+## 5. Artifact topology
 
-Mỗi quantized artifact phải eval riêng. Không suy ra Q4 PASS từ F16 PASS.
+GGUF may be single_file or shard_set. Shard manifest stores ordered filenames/hashes and aggregate hash.
 
-## 5. llama.cpp runtime verification
+## 6. llama.cpp verification
 
-Bắt buộc:
+Use frozen InferenceGenerationContract for prompt/generation semantics, reasoning modes and context. Capture build/version, latency/tokens and parser behavior.
 
-- model load;
-- tokenizer/chat template smoke;
-- deterministic fixture (temperature=0 khi hợp lệ);
-- reasoning on/off fixture;
-- context length basic test;
-- latency/token stats;
-- crash-free multi-turn chat fixture.
+## 7. Ollama packaging
 
-Nếu reasoning-capable template được dùng, verify parser/`reasoning_content` path hoặc tag parser đã freeze.
-
-## 6. Ollama packaging
-
-Pipeline sinh `Modelfile` từ artifact verified. Hai đường:
-
-### GGUF-preferred
-
-```text
-FROM ./model-q4_k_m.gguf
-```
-
-### Safetensors direct
-Chỉ dùng nếu architecture/import path được preflight support và đã test. GGUF vẫn là artifact portability bắt buộc của MVP.
-
-## 7. Ollama verification
-
-- `ollama create <ephemeral-test-name>`;
-- `ollama run` hoặc API chat/generate;
-- reasoning enabled nếu supported;
-- verify separate `thinking` field nếu native;
-- verify final content;
-- capture version and response metadata;
-- cleanup ephemeral model sau test nếu config yêu cầu.
+Generated Modelfile derives all inference parameters from frozen contract. Do not hardcode independent temperature/top_p. Ephemeral model naming/cleanup follows 19 contract.
 
 ## 8. Runtime parity
 
-Pipeline phải chạy cùng fixture trên:
+Run same fixture + normalized generation contract across HF, high-fidelity GGUF, required quantized GGUF and Ollama. Compare task metrics/format/capability, not exact text.
 
-```text
-HF canonical
-GGUF high-fidelity / llama.cpp
-GGUF quantized / llama.cpp
-Ollama packaged artifact
-```
+## 9. Tool installation
 
-Adjudicator so sánh task metrics, not exact text. Threshold regression freeze trước export.
+Runtime locate is read-only. Installation/update is explicit according to 20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md.
 
-## 9. Failure categories
+## 10. Failure codes
 
-- `EXPORT_UNSUPPORTED_ARCH`
-- `EXPORT_TOKENIZER_MISMATCH`
-- `GGUF_LOAD_FAIL`
-- `GGUF_QUALITY_REGRESSION`
-- `OLLAMA_CREATE_FAIL`
-- `OLLAMA_RUNTIME_FAIL`
-- `REASONING_PARSE_FAIL`
-- `RUNTIME_PARITY_FAIL`
-
-## 10. Current external compatibility references
-
-Local agent phải đọc/kiểm tra version pin hiện tại trước implement:
-
-- llama.cpp converter: https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py
-- llama.cpp model docs: https://github.com/ggml-org/llama.cpp/blob/master/docs/models.md
-- llama.cpp CLI reasoning options: https://github.com/ggml-org/llama.cpp/blob/master/tools/cli/README.md
-- Ollama import: https://github.com/ollama/ollama/blob/main/docs/import.mdx
-- Ollama Modelfile: https://github.com/ollama/ollama/blob/main/docs/modelfile.mdx
-- Ollama thinking: https://github.com/ollama/ollama/blob/main/docs/capabilities/thinking.mdx
-
-Không hardcode assumptions từ tài liệu này nếu upstream version pin khác.
+EXPORT_UNSUPPORTED_ARCH, EXPORT_TOKENIZER_MISMATCH, GGUF_LOAD_FAIL, GGUF_QUALITY_REGRESSION, OLLAMA_CREATE_FAIL, OLLAMA_RUNTIME_FAIL, REASONING_PARSE_FAIL, RUNTIME_PARITY_FAIL.

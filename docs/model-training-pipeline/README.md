@@ -1,104 +1,55 @@
-# Evidence-Governed Model Training Pipeline — Bộ yêu cầu triển khai
+# Evidence-Governed Model Training Pipeline — Specification
 
 ## 1. Mục tiêu
 
-Xây dựng một phần mềm pipeline có thể nhận **base model hoặc kiến trúc được hỗ trợ**, các **dataset công khai** (ví dụ Wikipedia, corpus lập trình), chạy quá trình chuẩn bị dữ liệu → training → evaluation → checkpointing → adjudication → export, và tạo ra một artifact cuối có thể:
+Xây dựng pipeline biến một exact base model + public/local datasets + frozen execution contract thành canonical HF/Safetensors checkpoint, auditable evidence, GGUF, llama.cpp/Ollama runnable artifacts và normalized answer/reasoning API.
 
-1. chạy trực tiếp ở Hugging Face-compatible runtime để đối chiếu;
-2. convert sang **GGUF**;
-3. load và chạy bằng **llama.cpp**;
-4. import/create và chạy bằng **Ollama**;
-5. khi được yêu cầu, trả ra **reasoning trace/rationale** tách biệt với final answer theo contract của pipeline;
-6. đi kèm đầy đủ provenance, hashes, config, metrics, lineage và evidence để tái lập.
+Pipeline không dùng train loss đơn lẻ làm verdict. PASS/FAIL phải dựa vào frozen gate + baseline/comparator contract.
 
-Pipeline không được đánh đồng `train loss giảm` với `model đạt yêu cầu`. Checkpoint chỉ được promote nếu toàn bộ gate đã định trước PASS.
+## 2. Canonical contracts
 
-## 2. Kết quả người dùng phải nhận được sau một run hợp lệ
+Nếu tài liệu tóm tắt mâu thuẫn với contract/schema dưới đây, contract/schema thắng:
 
-```text
-runs/<run_id>/
-├── frozen/
-│   ├── run_config.yaml
-│   ├── environment.lock.json
-│   ├── git.lock.json
-│   ├── data_manifest.json
-│   └── execution_contract.json
-├── data/
-│   ├── fingerprints.json
-│   └── sample_audit.jsonl
-├── checkpoints/
-│   ├── step-*/
-│   └── canonical/
-├── eval/
-│   ├── hf/
-│   ├── llama_cpp/
-│   ├── ollama/
-│   └── adjudication.json
-├── export/
-│   ├── hf/
-│   ├── model-f16.gguf
-│   ├── model-q8_0.gguf            # nếu cấu hình
-│   ├── model-q4_k_m.gguf          # nếu cấu hình
-│   ├── Modelfile
-│   └── runtime_manifest.json
-├── evidence/
-│   ├── report.md
-│   ├── metrics.json
-│   ├── failures.jsonl
-│   ├── SHA256SUMS
-│   └── evidence.zip
-└── lineage.jsonl
-```
+- 15_BASELINE_COMPARATOR_CONTRACT.md
+- 16_CANONICAL_CONFIG_STATE_MACHINE.md
+- 17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md
+- 18_REASONING_CAPABILITY_RUNTIME_CONTRACT.md
+- 19_GATE_MATRIX_INFERENCE_CONTRACT.md
+- 20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md
+- 21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md
+- schemas/experiment_config.schema.json
+- schemas/execution_contract.schema.json
+- schemas/data_manifest.schema.json
+- schemas/evaluation_contract.schema.json
+- schemas/checkpoint_manifest.schema.json
+- schemas/run_manifest.schema.json
+- schemas/reasoning_response.schema.json
 
-Một run chỉ có trạng thái `PROMOTED` khi `adjudication.json` nói PASS và tất cả artifact bắt buộc tồn tại + khớp hash.
+Không được tạo vocabulary/config field mới ngoài schema mà không sửa schema + QA.
 
-## 3. Phạm vi phiên bản đầu (MVP)
+## 3. Artifact layout
 
-MVP phải hỗ trợ:
+runs/<run_id>/ chứa frozen config/contracts, per-phase manifests/checkpoints/eval, canonical checkpoint, runtime eval, export artifacts, evidence payload, external evidence.zip.sha256 và lineage.jsonl.
 
-- Causal decoder-only LLM.
-- Continued pretraining (CPT) trên raw text/code.
-- Supervised fine-tuning (SFT) cho instruction/chat.
-- Reasoning SFT với output tách `reasoning` và `answer`.
-- Full fine-tune **hoặc** PEFT/LoRA (ít nhất một đường phải chạy end-to-end; thiết kế không được khóa kiến trúc vào một framework duy nhất).
-- Hugging Face/Safetensors làm canonical training artifact.
-- GGUF export bằng llama.cpp converter đã pin commit.
-- llama.cpp smoke/eval thật.
-- Ollama create/import + chat smoke/eval thật.
-- Resume từ checkpoint bảo toàn optimizer/scheduler/RNG khi mode training yêu cầu.
-- Evidence/governance/hashing bắt buộc.
+## 4. MVP scope
 
-Không thuộc MVP: distributed multi-node, RLHF online, multimodal, Mixture-of-Experts custom architecture, serving cluster, UI web đầy đủ.
+Required: decoder-only causal LLM; CPT; instruction/reasoning SFT; một PEFT hoặc full-finetune end-to-end path; exact checkpoint/resume; HF reload; GGUF convert/quantize; llama.cpp + Ollama verification; baseline/comparator evaluation; security/license/privacy checks; evidence sealing.
 
-## 4. Nguyên tắc bất biến
+Not MVP: multi-node, online RLHF, multimodal, custom MoE, serving cluster/UI.
 
-1. **Freeze before fresh evidence.** Mọi metric, threshold, seed, split, checkpoint-selection rule và export rule phải freeze trước fresh run.
-2. **No silent mutation.** Config/data/code thay đổi phải làm run mới hoặc invalid run cũ.
-3. **Checkpoint != evidence.** Một checkpoint đẹp không thay thế được kết quả đa-seed/matched baseline khi claim yêu cầu thống kê.
-4. **Runtime validation is mandatory.** GGUF tạo được nhưng không chạy llama.cpp/Ollama = FAIL export gate.
-5. **Reasoning is an output contract, not proof of causality.** Rationale mà model sinh ra có thể là post-hoc; phần mềm phải gọi đúng tên và không tuyên bố đây là bằng chứng chắc chắn về cơ chế nội tại.
-6. **Architecture compatibility first.** Không train hàng giờ rồi mới phát hiện llama.cpp/Ollama không hỗ trợ kiến trúc/tokenizer.
-7. **License provenance is first-class.** Mỗi shard/document phải truy được nguồn/license theo mức khả thi của nguồn dữ liệu.
+## 5. Canonical smoke model
 
-## 5. Thứ tự đọc cho local agent
+R0 plumbing reference:
+- Qwen/Qwen2.5-0.5B-Instruct
+- pinned revision: 7ae557604adf67be50417f59c2c2f167def9a775
+- role: smoke_reference, not scientific quality baseline.
 
-Local agent phải đọc lần lượt:
+Scientific baseline là exact parent artifact; matched-control bắt buộc khi claim so sánh phương pháp.
 
-1. `00_PRODUCT_REQUIREMENTS.md`
-2. `01_SCIENTIFIC_GOVERNANCE.md`
-3. `02_SYSTEM_ARCHITECTURE.md`
-4. `03_DATA_PIPELINE.md`
-5. `04_TRAINING_PIPELINE.md`
-6. `05_REASONING_OUTPUT_CONTRACT.md`
-7. `06_CHECKPOINT_PROVENANCE.md`
-8. `07_EXPORT_LLAMA_OLLAMA.md`
-9. `08_EVALUATION_GATES.md`
-10. `09_CLI_CONFIG_API.md`
-11. `10_TEST_PLAN.md`
-12. `11_ACCEPTANCE_CRITERIA.md`
-13. `12_IMPLEMENTATION_PLAN.md`
-14. `13_SECURITY_LICENSE_REPRODUCIBILITY.md`
-15. `14_REFERENCE_EXPERIMENTS.md`
-16. `AGENT_MASTER_PROMPT.md`
+## 6. Read order
 
-Không được bỏ qua gate để “cho demo chạy được”.
+Đọc 00..14, sau đó 15..21, schemas/examples và cuối cùng AGENT_MASTER_PROMPT.md. QA_REMEDIATION_CHECKLIST.md là audit index.
+
+## 7. Spec lock
+
+Không gọi spec LOCKED cho tới khi QA vòng 2 có zero unresolved BLOCKER, examples validate schema, checklist có proof refs và SHA256SUMS đã regenerate.

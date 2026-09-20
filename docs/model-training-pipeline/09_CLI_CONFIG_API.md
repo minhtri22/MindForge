@@ -1,8 +1,13 @@
 # 09 — CLI, Config & API
 
-## 1. CLI surface
+## 1. Canonical config
 
-```text
+schemas/experiment_config.schema.json is the only authoring vocabulary. 16_CANONICAL_CONFIG_STATE_MACHINE.md defines resolution/lock semantics.
+
+CLI rejects unknown fields by default for locked runs.
+
+## 2. CLI
+
 pipeline init <workspace>
 pipeline doctor
 pipeline model inspect <model-spec>
@@ -17,77 +22,20 @@ pipeline adjudicate <run-id>
 pipeline export <run-id>
 pipeline verify-runtime <run-id> --runtime llama.cpp
 pipeline verify-runtime <run-id> --runtime ollama
-pipeline chat --model run:<id> --reasoning on
+pipeline chat --model run:<id> --reasoning visible|hidden|off
 pipeline bundle <run-id>
 pipeline status <run-id>
-```
 
-## 2. Config inheritance
+Host-mutating runtime installation is a separate explicit command/policy, never implicit in preflight/train.
 
-Cho phép YAML includes/profiles nhưng sau resolve phải ghi một `frozen/run_config.yaml` fully expanded. Hash tính trên expanded canonical form.
+## 3. Config resolution
 
-## 3. Example top-level config
-
-```yaml
-experiment:
-  id: wiki-code-reasoning-v1
-  mode: confirmatory
-
-model:
-  source: huggingface
-  id: <supported-base-model>
-  revision: <commit-or-tag-resolved-to-hash>
-
-phases:
-  - id: cpt
-    type: cpt
-    data: [wikipedia, code]
-  - id: reasoning_sft
-    type: reasoning_sft
-    data: [reasoning]
-
-evaluation:
-  fixture_set: eval/v1
-  thresholds_file: thresholds/v1.yaml
-
-export:
-  hf: true
-  gguf:
-    base: f16
-    quantize: [q8_0, q4_k_m]
-  llama_cpp: true
-  ollama: true
-```
+Includes/profiles expand, refs/device/precision/tool versions resolve, then canonical normalized config is written and hashed. Confirmatory/release cannot lock unresolved main/latest/auto/placeholders.
 
 ## 4. Programmatic API
 
-```python
-from pipeline import Pipeline
+Methods return typed results with state transition, evidence refs and error codes.
 
-p = Pipeline(workspace="...")
-run = p.prepare("experiment.yaml")
-p.preflight(run)
-p.lock(run)
-p.train(run)
-p.evaluate(run)
-p.adjudicate(run)
-p.export(run)
-p.verify_runtime(run, "llama.cpp")
-p.verify_runtime(run, "ollama")
-```
+## 5. Failure model
 
-Mọi method trả typed result, không chỉ print.
-
-## 5. Error model
-
-Mỗi failure có:
-
-```json
-{
-  "code": "GGUF_LOAD_FAIL",
-  "stage": "runtime_verification",
-  "message": "...",
-  "recoverability": "infra_retry|new_run|required_fix",
-  "evidence_refs": []
-}
-```
+Every failure records code, stage, message, recoverability, evidence refs and whether verdict is FAIL or INVALID. No exception path may silently mutate scientific config.

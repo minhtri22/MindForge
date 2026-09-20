@@ -1,67 +1,37 @@
 # 01 — Scientific Governance
 
-## 1. Tách development và confirmatory
+## 1. Evidence classes
 
-Mỗi experiment config phải phân loại seed/split:
+development dùng sửa/tune; calibration dùng khóa thresholds/hyperparameters; fresh_confirmatory chỉ dùng sau execution lock.
 
-- `development`: dùng để sửa code/tune.
-- `calibration`: dùng khóa threshold/hyperparameter trước execution lock.
-- `fresh_confirmatory`: chỉ được chạm sau `EXECUTION_LOCKED`.
+Freshness registry bảo vệ seed IDs, split IDs và fixture-set IDs. Development/calibration không được inspect fresh resources.
 
-CLI phải chặn dùng seed thuộc `fresh_confirmatory` khi lock chưa PASS.
+## 2. Execution lock
 
-## 2. Execution contract
+Execution contract phải validate schemas/execution_contract.schema.json và freeze software SHA, exact model revision, data hash, phases, token stream, baseline/comparator, seed/split/fixture registry, metrics, checkpoint selection, resource/device/precision, toolchain, retry policy và export/inference contract.
 
-Trước training confirmatory, tạo `execution_contract.json` chứa:
+Mutation sau lock tạo run mới.
 
-- claim/hypothesis id;
-- model/base SHA hoặc artifact hash;
-- exact dataset fingerprints + split hashes;
-- trainer config hash;
-- seed list;
-- max steps/tokens;
-- optimizer/scheduler;
-- checkpoint-selection rule;
-- evaluation metrics;
-- thresholds;
-- failure policy;
-- allowed retry policy;
-- llama.cpp commit SHA;
-- Ollama version expectation;
-- expected export formats.
+## 3. Retry
 
-Contract immutable sau lock. Nếu thay đổi -> run mới.
+INFRA_RETRY chỉ resume exact committed checkpoint. INVALID_RUN_REPAIR làm run cũ terminal INVALID và tạo run mới có supersedes_run_id. SCIENTIFIC_RETRY bị cấm nếu chưa có execution contract mới.
 
-## 3. Retry policy
+## 4. Checkpoint selection
 
-Phân biệt:
+Selection phải phase-scoped: phase_id, rule, metric_id, direction, tie-breaker. Không chọn checkpoint/seed sau khi nhìn fresh result.
 
-- `INFRA_RETRY`: process crash, disk full, runner lost. Cho phép nếu training state được resume đúng và config hash không đổi.
-- `INVALID_RUN_REPAIR`: bug làm evidence vô hiệu; phải record invalidation và mở run mới/repair theo policy.
-- `SCIENTIFIC_RETRY`: không được tự động chạy seed mới chỉ vì metric FAIL.
+## 5. Baselines
 
-## 4. Checkpoint-selection rule
+Canonical semantics ở 15_BASELINE_COMPARATOR_CONTRACT.md. Mọi quality metric phải name baseline/comparator. Exact parent checkpoint là scientific baseline mặc định; smoke_reference không thay parent/matched control.
 
-Phải freeze một trong các kiểu:
+## 6. Multi-seed
 
-- fixed step;
-- min validation loss;
-- max frozen metric;
-- early stopping với exact patience/min_delta;
-- last checkpoint.
+Claim A > B cần matched control cùng parent, matched seeds, same data/eval split và matched budget theo frozen claim.
 
-Cấm chọn checkpoint/seed sau khi nhìn fresh result mà không có rule định trước.
+## 7. Phase verdict
 
-## 5. Multi-seed evidence
+Phase FAIL vẫn giữ lịch sử ngay cả khi phase sau recover final quality.
 
-Nếu claim là “phương pháp A tốt hơn B”, pipeline phải hỗ trợ matched seed/budget và report distribution. Deployment checkpoint có thể là một artifact duy nhất nhưng không được dùng artifact đó thay cho claim-level evidence.
+## 8. Adjudicator
 
-## 6. Adjudicator
-
-Adjudicator phải:
-
-- deterministic với cùng input evidence;
-- đọc threshold từ frozen contract;
-- xuất `PASS | FAIL | INVALID` + reasons;
-- không tự sửa threshold;
-- không tự mở training mới.
+Deterministic trên fixed evidence; đọc frozen metric contracts; xuất PASS/FAIL/INVALID; không edit threshold; không launch training; REQUIRED gate SKIPPED không phải PASS.

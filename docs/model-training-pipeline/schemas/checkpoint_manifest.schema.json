@@ -1,41 +1,85 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "checkpoint_manifest.schema.json",
   "title": "CheckpointManifest",
   "type": "object",
+  "additionalProperties": false,
   "required": [
-    "run_id",
-    "step",
-    "weights",
-    "config_hash",
-    "data_manifest_hash",
-    "parent_model_hash"
+    "run_id", "phase_id", "checkpoint_id", "step", "consumed_tokens",
+    "weights", "optimizer_state", "scheduler_state", "rng_state",
+    "sampler_state", "gradient_accumulation_state", "config_hash",
+    "data_manifest_hash", "parent_artifact_hash", "status"
   ],
   "properties": {
-    "run_id": {
-      "type": "string"
-    },
-    "step": {
-      "type": "integer",
-      "minimum": 0
-    },
+    "run_id": {"type": "string", "minLength": 1},
+    "phase_id": {"type": "string", "minLength": 1},
+    "checkpoint_id": {"type": "string", "minLength": 1},
+    "step": {"type": "integer", "minimum": 0},
+    "consumed_tokens": {"type": "integer", "minimum": 0},
     "weights": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
-        "required": [
-          "path",
-          "sha256"
-        ]
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
       }
     },
-    "config_hash": {
-      "type": "string"
+    "optimizer_state": {"$ref": "#/$defs/stateArtifact"},
+    "scheduler_state": {"$ref": "#/$defs/stateArtifact"},
+    "amp_scaler_state": {"anyOf": [{"$ref": "#/$defs/stateArtifact"}, {"type": "null"}]},
+    "rng_state": {
+      "type": "object",
+      "required": ["python", "numpy", "framework_cpu"],
+      "properties": {
+        "python": {"$ref": "#/$defs/stateArtifact"},
+        "numpy": {"$ref": "#/$defs/stateArtifact"},
+        "framework_cpu": {"$ref": "#/$defs/stateArtifact"},
+        "framework_device": {"type": "array", "items": {"$ref": "#/$defs/stateArtifact"}}
+      }
     },
-    "data_manifest_hash": {
-      "type": "string"
+    "sampler_state": {
+      "type": "object",
+      "required": [
+        "resume_fidelity", "dataset_or_shard_id", "document_index",
+        "packed_sequence_index", "shuffle_state", "worker_states", "mixture_state"
+      ],
+      "properties": {
+        "resume_fidelity": {"enum": ["exact", "best_effort"]},
+        "dataset_or_shard_id": {"type": "string"},
+        "document_index": {"type": "integer", "minimum": 0},
+        "token_offset": {"type": "integer", "minimum": 0},
+        "packed_sequence_index": {"type": "integer", "minimum": 0},
+        "shuffle_state": {"type": "object"},
+        "worker_states": {"type": "array", "items": {"type": "object"}},
+        "mixture_state": {"type": "object"}
+      }
     },
-    "parent_model_hash": {
-      "type": "string"
+    "gradient_accumulation_state": {
+      "type": "object",
+      "required": ["micro_step"],
+      "properties": {
+        "micro_step": {"type": "integer", "minimum": 0}
+      }
+    },
+    "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "data_manifest_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "parent_artifact_hash": {"type": "string", "minLength": 1},
+    "status": {"enum": ["WRITING", "VERIFIED", "COMMITTED"]}
+  },
+  "$defs": {
+    "stateArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
     }
   }
 }

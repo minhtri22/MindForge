@@ -1,16 +1,79 @@
 experiment:
-  id: code-cpt
+  id: codesearchnet-python-cpt-dev
   mode: development
+  seed_sets:
+    development: [43]
+    calibration: []
+    fresh_confirmatory: []
+
 model:
-  id: "<supported-base-model>"
-  revision: "<pin>"
-phase:
-  type: cpt
-data:
-  adapter: public_code
-  snapshot: "<explicit-snapshot>"
-  license_policy: deny_unknown
-  contamination_fixture_set: eval/code_v1
-training:
-  max_tokens: 100000000
-  learning_rate: 0.000005
+  source: huggingface
+  id: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  require_resolved_sha: true
+  allow_remote_code: false
+
+datasets:
+  codesearchnet_python_v2:
+    adapter: codesearchnet_v2
+    snapshot: codesearchnet-v2-python
+    uri: https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip
+    upstream_project: github/CodeSearchNet
+    license_policy: deny_unknown_for_release
+    release_eligible_without_license_enrichment: false
+    secret_scan: required
+    freshness_class: development
+
+phases:
+  - id: code_cpt
+    type: cpt
+    datasets: [codesearchnet_python_v2]
+    stop:
+      kind: max_tokens
+      value: 100000000
+    optimizer_transition: reset
+    scheduler_transition: reset
+    training:
+      precision: auto
+      sequence_length: 2048
+      learning_rate: 0.000005
+      warmup: {unit: ratio, value: 0.03}
+      checkpoint_every_steps: 500
+      save_optimizer_state: true
+
+baselines:
+  - id: parent
+    role: parent_baseline
+    model_id: Qwen/Qwen2.5-0.5B-Instruct
+    revision: 7ae557604adf67be50417f59c2c2f167def9a775
+
+evaluation:
+  fixture_set: eval/code_dev_v1
+  checkpoint_selection:
+    phase_id: code_cpt
+    rule: metric_best
+    metric_id: validation_loss
+    direction: min
+    tie_breaker: earliest_step
+  inference:
+    max_new_tokens: 128
+    temperature: 0.0
+    top_p: 1.0
+    top_k: 0
+    seed: 42
+    context_length: 2048
+    stream: false
+
+reasoning:
+  mode: off
+  transport_preference: tagged_text
+  fallback_transport: none
+  tags: {start: "<think>", end: "</think>"}
+
+export:
+  hf: true
+  gguf:
+    high_fidelity: f16
+    quantize: [q4_k_m]
+  verify_llama_cpp: false
+  verify_ollama: false

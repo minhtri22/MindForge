@@ -1,43 +1,25 @@
 # 13 — Security, License, Reproducibility
 
-## 1. Secrets
+Canonical security contract: 20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md.
+Canonical evidence/concurrency: 21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md.
 
-- HF tokens, Git tokens, private credentials chỉ lấy từ env/keyring.
-- Redact logs/evidence.
-- Config được bundle không chứa secrets.
+## 1. Secrets
+Credentials only via env/keyring; redact logs/evidence; final bundle secret scan required.
 
 ## 2. Remote code
+Denied by default. Allow only immutable pinned source + reviewed allowlist + restricted execution evidence.
 
-Model/dataset nào yêu cầu `trust_remote_code` phải bị deny mặc định. Chỉ enable bằng explicit allowlist + source revision pin + code review record.
+## 3. Dataset
+Text has license + privacy policy. Code release data requires provenance/license policy and secret scan; unknown license defaults deny.
 
-## 3. Dataset licenses
+## 4. Model rights
+Record upstream license/restrictions; pipeline never infers redistribution rights.
 
-Mỗi data source có license declaration. Với mixed code datasets, unknown license phải được xử lý theo policy `deny|quarantine|allow_with_record`, mặc định `deny` cho release artifact.
+## 5. Generated code
+Unit/function benchmarks execute only under sandbox with no-network, no inherited secrets, quotas, timeout and restricted filesystem. If required isolation unavailable, release benchmark is BLOCKED.
 
-## 4. Model license
+## 6. Supply chain
+Pin package/tool/model/data identities and checksums when authoritative source provides them.
 
-Base model license phải được copy/reference trong release manifest. Pipeline không tự tuyên bố quyền redistribute nếu upstream không cho phép.
-
-## 5. Supply-chain
-
-- pin Python packages;
-- record wheels/package hashes khi possible;
-- pin llama.cpp commit;
-- record Ollama exact version;
-- checksum downloaded model/data artifacts.
-
-## 6. Reproducibility bundle
-
-Evidence phải đủ để một machine tương thích biết:
-
-- code SHA nào;
-- dependency versions nào;
-- model revision nào;
-- data snapshot nào;
-- preprocess transforms nào;
-- config nào;
-- seed nào;
-- training resource class nào;
-- export tool version nào.
-
-Không bắt buộc exact bitwise equality trên mọi GPU/backend; reproducibility contract phải nêu rõ mức kỳ vọng.
+## 7. Reproducibility
+Bundle identifies software SHA, dependency/tool versions, exact model/data, transform/token-stream contract, seeds, resource class, export/runtime versions and declared determinism/tolerance.

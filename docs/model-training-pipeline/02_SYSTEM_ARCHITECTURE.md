@@ -1,127 +1,27 @@
 # 02 — System Architecture
 
-## 1. Kiến trúc module
+## 1. Modules
 
-```text
-pipeline/
-├── cli/
-├── config/
-├── registry/
-│   ├── models.py
-│   ├── datasets.py
-│   └── runtimes.py
-├── data/
-│   ├── acquire.py
-│   ├── license.py
-│   ├── normalize.py
-│   ├── dedup.py
-│   ├── contamination.py
-│   ├── split.py
-│   └── tokenize.py
-├── training/
-│   ├── backends/
-│   ├── checkpoint.py
-│   ├── resume.py
-│   └── callbacks.py
-├── reasoning/
-│   ├── format.py
-│   ├── parser.py
-│   └── validators.py
-├── eval/
-│   ├── hf.py
-│   ├── tasks.py
-│   ├── parity.py
-│   └── adjudicator.py
-├── export/
-│   ├── hf.py
-│   ├── gguf.py
-│   ├── quantize.py
-│   ├── modelfile.py
-│   └── ollama.py
-├── provenance/
-│   ├── hashing.py
-│   ├── environment.py
-│   └── lineage.py
-├── runtime/
-│   ├── llama_cpp.py
-│   └── ollama.py
-└── evidence/
-    ├── report.py
-    └── bundle.py
-```
+Pipeline gồm cli, config, registry, data, training, reasoning, eval, export, provenance, runtime, security và evidence modules.
 
-## 2. Adapter interfaces
+## 2. Typed adapter contracts
 
-### ModelAdapter
+ModelAdapter phải cung cấp immutable identity/revision, compatibility report, train load/save, tokenizer/chat-template hash, structured ReasoningCapability và model-specific training serializer.
 
-```python
-class ModelAdapter(Protocol):
-    def validate_compatibility(self) -> CompatibilityReport: ...
-    def load_for_train(self, cfg): ...
-    def save_hf(self, out_dir): ...
-    def chat_template(self) -> str | None: ...
-    def reasoning_capability(self) -> str: ...
-```
+DatasetAdapter phải cung cấp immutable source identity, license/privacy/secret policy, document stream/identity, transform manifest, fingerprint và freshness class.
 
-### DatasetAdapter
+TrainingBackend phải cung cấp resolved device/precision/determinism, phase train, declared resume fidelity, atomic checkpoint writer và metrics.
 
-```python
-class DatasetAdapter(Protocol):
-    def resolve_snapshot(self, spec): ...
-    def license_manifest(self): ...
-    def stream_documents(self): ...
-    def fingerprint(self): ...
-```
-
-### TrainingBackend
-
-```python
-class TrainingBackend(Protocol):
-    def preflight(self, cfg): ...
-    def train(self, run_ctx): ...
-    def resume(self, checkpoint, run_ctx): ...
-```
-
-### RuntimeAdapter
-
-```python
-class RuntimeAdapter(Protocol):
-    def install_or_locate(self): ...
-    def load(self, model_artifact): ...
-    def infer(self, messages, *, reasoning): ...
-    def unload(self): ...
-```
+RuntimeAdapter tách locate read-only khỏi explicit installation; cung cấp load/infer/unload, capability resolution, runtime-specific reasoning parser và translation từ frozen InferenceGenerationContract.
 
 ## 3. Storage
 
-MVP dùng filesystem + JSON/JSONL/YAML. Không yêu cầu database. Mọi state quan trọng phải có thể audit chỉ từ `runs/<run_id>`.
+Critical state phải reconstruct được từ runs/<run_id> không cần private DB. Cache ngoài được phép nhưng không là sole evidence.
 
-## 4. Dependency pinning
+## 4. Tool locks
 
-Tạo:
-
-```text
-locks/
-├── python.lock
-├── trainer.lock.json
-├── llama_cpp.lock.json
-└── ollama.lock.json
-```
-
-Không gọi trực tiếp `main/latest` trong confirmatory run. Resolve commit/version trước rồi freeze.
+Confirmatory/release pin exact trainer, llama.cpp commit/build và Ollama version.
 
 ## 5. Compatibility matrix
 
-Trước training, pipeline phải tạo matrix:
-
-| Check | Required |
-|---|---|
-| HF model loads | PASS |
-| Tokenizer round-trip | PASS |
-| Chat template valid | PASS for SFT/chat |
-| llama.cpp architecture supported | PASS |
-| GGUF converter recognizes architecture | PASS |
-| Ollama import path supported | PASS or approved GGUF path |
-| reasoning parser/template available | PASS for reasoning target |
-
-Không PASS matrix -> không cho train production run.
+Trước production training phải PASS HF model/tokenizer, tokenizer round-trip, chat template khi needed, pinned llama.cpp support, GGUF path, Ollama path, reasoning serializer/parser khi required, sandbox capability cho code benchmarks và disk/resource preflight.

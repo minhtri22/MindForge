@@ -1,48 +1,36 @@
-# Master Prompt cho Local Coding Agent
+# Master Prompt for Local Coding Agent
 
-Bạn đang triển khai **Evidence-Governed Model Training Pipeline**.
+Implement Evidence-Governed Model Training Pipeline only after reading README, 00..21, schemas, examples and QA checklist.
 
-## Nhiệm vụ
+## Path ownership
 
-Đọc toàn bộ tài liệu trong bundle theo thứ tự README chỉ định, sau đó xây phần mềm production-oriented MVP thỏa `11_ACCEPTANCE_CRITERIA.md`.
+Default writable scope:
+- docs/model-training-pipeline/
+- pipeline/ (new subsystem when implementation starts)
+- tests specifically belonging to this pipeline
+- pipeline-owned workflow/config files explicitly documented by milestone.
 
-## Quy tắc làm việc
+Do NOT modify docs/research/oir-ppv/, existing MindForge research artifacts, historical evidence, or unrelated workflows unless user explicitly approves that exact change.
 
-1. Không tự đơn giản hóa các gate governance chỉ để demo PASS.
-2. Không train production/fresh run trước khi compatibility + zero-training preflight PASS.
-3. Không hardcode một model ID; dùng registry/adapter và một model nhỏ chỉ cho test.
-4. Không giả định mọi Hugging Face model convert được sang GGUF. Phải preflight compatibility với llama.cpp version pin.
-5. Không coi “convert file thành công” là runtime success; phải load/infer bằng llama.cpp và Ollama thật.
-6. Reasoning API phải trả `reasoning` tách `answer`. Ưu tiên native runtime thinking/reasoning field; fallback tag parser phải được ghi rõ.
-7. Không tuyên bố model-generated rationale là faithful hidden chain-of-thought.
-8. Không dùng `latest/main` cho confirmatory execution; resolve version/commit rồi freeze.
-9. Mọi run phải tạo hashes, lineage và evidence.
-10. Mọi milestone phải có test + exit gate trước khi sang milestone sau.
+## Rules
 
-## Cách báo cáo sau mỗi milestone
+1. Canonical schemas/contracts override summaries.
+2. No production/fresh training before compatibility + zero-training preflight.
+3. Use pinned Qwen2.5-0.5B-Instruct only as smoke reference; do not use it as scientific baseline unless it is also the exact experiment parent.
+4. Every scientific metric names baseline/comparator.
+5. No fresh seed/split/fixture access before locked confirmatory contract.
+6. No silent runtime/tool install/update.
+7. No generated-code execution outside sandbox.
+8. No checkpoint without atomic COMMITTED marker.
+9. No reasoning claim from prompt-only behavior.
+10. No automatic rescue/tuning after fresh FAIL.
+11. Software Git lineage and training-run lineage remain separate.
+12. Every milestone has machine tests and evidence.
 
-```text
-MILESTONE: Mx
-STATUS: PASS | FAIL | BLOCKED
-GIT_SHA: ...
-TESTS: passed/failed
-ARTIFACTS: ...
-EVIDENCE: ...
-BLOCKERS: ...
-NEXT_SCIENTIFIC_STEP: ...
-```
+## Milestone report
 
-## Không được làm
-
-- tự đổi threshold sau khi xem fresh results;
-- tự thêm fresh seeds để cứu FAIL;
-- bỏ qua license/data provenance;
-- merge adapter vào sai base model;
-- thay tokenizer mà không rerun compatibility gates;
-- xóa checkpoint/evidence trước bundle verification;
-- báo “Ollama compatible” khi chưa chạy Ollama;
-- báo “reasoning supported” chỉ vì prompt yêu cầu giải thích.
+Report milestone, status, Git SHA, tests, artifacts, evidence, blockers and next scientific step.
 
 ## Definition of Done
 
-Chỉ DONE khi AC-01..AC-14 đều có machine-verifiable evidence. Nếu một AC chưa thể thực hiện do upstream/runtime/hardware, báo `BLOCKED`, nêu chính xác AC và evidence; không đánh dấu PASS giả.
+Only DONE when AC-01..AC-18 have machine-verifiable evidence. If upstream/runtime/hardware blocks a required AC, report BLOCKED; never synthesize PASS.

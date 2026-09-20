@@ -1,43 +1,47 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run_manifest.schema.json",
   "title": "RunManifest",
   "type": "object",
+  "additionalProperties": false,
   "required": [
-    "run_id",
-    "state",
-    "config_hash",
-    "data_manifest_hash",
-    "git_commit"
+    "run_id", "run_class", "state", "config_hash", "data_manifest_hash",
+    "git_commit", "phases", "lineage_head_hash"
   ],
   "properties": {
-    "run_id": {
-      "type": "string"
-    },
+    "run_id": {"type": "string", "minLength": 1},
+    "run_class": {"enum": ["smoke", "development", "calibration", "confirmatory", "release"]},
     "state": {
       "enum": [
-        "DRAFT",
-        "DATA_PREPARED",
-        "PREFLIGHT_PASS",
-        "EXECUTION_LOCKED",
-        "TRAINING",
-        "TRAINED",
-        "EVALUATED",
-        "ADJUDICATED_PASS",
-        "ADJUDICATED_FAIL",
-        "INVALID",
-        "EXPORTED",
-        "RUNTIME_VERIFIED",
-        "PROMOTED"
+        "DRAFT", "PREPARED", "PREFLIGHT_PASS", "EXECUTION_LOCKED", "RUNNING",
+        "EVALUATED", "ADJUDICATED_PASS", "ADJUDICATED_FAIL", "INVALID",
+        "EXPORTED", "RUNTIME_VERIFIED", "REPRO_VERIFIED", "PROMOTED"
       ]
     },
-    "config_hash": {
-      "type": "string"
+    "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "data_manifest_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "supersedes_run_id": {"type": ["string", "null"]},
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["phase_id", "state", "parent_artifact_hash"],
+        "properties": {
+          "phase_id": {"type": "string"},
+          "state": {
+            "enum": [
+              "PLANNED", "INPUT_READY", "TRAINING", "TRAINED",
+              "CHECKPOINT_SELECTED", "PHASE_EVALUATED",
+              "PHASE_PASS", "PHASE_FAIL", "PHASE_INVALID"
+            ]
+          },
+          "parent_artifact_hash": {"type": "string"},
+          "selected_checkpoint_hash": {"type": ["string", "null"]}
+        }
+      }
     },
-    "data_manifest_hash": {
-      "type": "string"
-    },
-    "git_commit": {
-      "type": "string"
-    }
+    "lineage_head_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
   }
 }

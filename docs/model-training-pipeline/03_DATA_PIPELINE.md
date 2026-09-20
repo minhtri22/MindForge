@@ -1,117 +1,35 @@
 # 03 — Data Pipeline
 
-## 1. Dataset spec
+Canonical semantics ở 17_DATA_TOKEN_STREAM_RESUME_CONTRACT.md.
 
-Mỗi source khai báo tối thiểu:
+## 1. Stages
 
-```yaml
-id: wikipedia_en
-kind: text
-source_type: dump
-uri: ...
-snapshot: 2026-xx-xx
-license: ...
-weight: 0.70
-```
+ACQUIRE -> VERIFY -> LICENSE/PRIVACY/SECRET -> NORMALIZE -> FILTER -> EXACT/NEAR DEDUP -> CONTAMINATION -> SPLIT -> TOKENIZE/PACK -> FINGERPRINT -> FREEZE.
 
-Không cho `snapshot: latest` trong execution-locked run.
+## 2. Source identity
 
-## 2. Required stages
+Không latest sau prepare. Wikipedia identity gồm project/language/dump date/artifact/URI/checksum/tool versions. Code identity giữ repo/file/revision/license evidence theo adapter capability.
 
-```text
-ACQUIRE -> VERIFY -> LICENSE -> NORMALIZE -> FILTER -> DEDUP
--> CONTAMINATION CHECK -> SPLIT -> TOKENIZE -> FINGERPRINT -> FREEZE
-```
+Concrete references:
+- examples/train_wikipedia_cpt.yaml: enwiki 20260301.
+- examples/train_code_cpt.yaml: CodeSearchNet v2 Python, non-release-eligible tới khi license enrichment hoàn thành.
 
-### Acquire
-- download resumable;
-- checksum upstream artifact nếu có;
-- cache theo content hash.
+## 3. Security/privacy/license
 
-### Verify
-- file readable;
-- schema expected;
-- counts and sizes recorded.
+Unknown code license default deny for release; PII policy required cho public text; secret scanner required cho code; raw secrets/PII không đi vào evidence.
 
-### License
-- source-level license bắt buộc;
-- code corpus ưu tiên metadata per-file/repository;
-- unknown/disallowed licenses được quarantine hoặc fail theo policy.
+## 4. Dedup/contamination
 
-### Normalize text
-- Unicode normalization cấu hình rõ;
-- loại control chars không hợp lệ;
-- không làm thay đổi code indentation ngoài rule cho phép;
-- giữ document boundaries.
+Algorithm/version/normalization/parameters phải freeze. Near-dedup và contamination không được chỉ ghi configurable.
 
-### Filter
-Text: min/max length, language filter nếu bật, markup cleanup.
-Code: binary/generated/minified/vendor mirror detection theo config.
+## 5. Split/freshness
 
-### Dedup
-- exact hash dedup bắt buộc;
-- near-dedup configurable;
-- report số document/token loại bỏ.
+Exact split identities lưu manifest. Freshness registry bảo vệ seeds, splits và fixture sets.
 
-### Contamination
-- eval fixtures phải có hashes/n-gram signatures;
-- scan train corpus trước freeze;
-- policy: remove/quarantine/fail.
+## 6. Token stream/resume
 
-### Split
-- deterministic bởi seed + document identity;
-- split manifest lưu IDs/hashes, không chỉ percentages.
+Training dùng frozen TokenStreamContract. Resume giữ shard/document/token/packed-sequence, shuffle buffer, worker RNG, mixture state và gradient-accumulation micro-step.
 
-### Tokenize
-- dùng tokenizer canonical của base model trừ khi experiment explicitly thay tokenizer;
-- mọi tokenizer change phải coi là architecture-level change và rerun compatibility/export preflight.
+## 7. Reasoning data
 
-## 3. Data lineage
-
-Mỗi processed shard phải ghi:
-
-```json
-{
-  "source_id": "...",
-  "source_snapshot": "...",
-  "input_hash": "...",
-  "transform_version": "...",
-  "output_hash": "...",
-  "document_count": 0,
-  "token_count": 0,
-  "license_summary": {}
-}
-```
-
-## 4. Dataset mixture
-
-Mixture phải freeze bằng token budget, không chỉ số document.
-
-Ví dụ:
-
-```yaml
-mixture:
-  - source: wikipedia
-    target_token_fraction: 0.60
-  - source: code
-    target_token_fraction: 0.40
-```
-
-Report actual achieved fraction và deviation.
-
-## 5. Dữ liệu reasoning
-
-Raw Wikipedia/code không đủ để dạy chat reasoning. Reasoning SFT dataset phải normalize về schema:
-
-```json
-{
-  "messages": [...],
-  "reasoning": "...",
-  "answer": "...",
-  "source": "...",
-  "license": "...",
-  "verifier": {"type": "...", "result": "..."}
-}
-```
-
-Ưu tiên rationale có final answer kiểm chứng được (math/code/unit tests/factual citation target). Không gắn nhãn rationale là “faithful internal reasoning”; chỉ là supervised reasoning trace.
+Dataset giữ semantic fields messages/reasoning/answer/provenance/verifier. ModelAdapter serializer map sang tokens; data layer không giả định mọi model dùng think tags.

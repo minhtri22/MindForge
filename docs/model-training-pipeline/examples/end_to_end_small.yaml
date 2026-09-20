@@ -1,54 +1,103 @@
 experiment:
   id: e2e-small
-  mode: development
+  mode: smoke
   seed_sets:
     development: [11]
-    calibration: [101]
-    fresh_confirmatory: [10001]
+    calibration: []
+    fresh_confirmatory: []
 
 model:
   source: huggingface
-  id: "<choose-supported-tiny-reasoning-or-instruct-model>"
-  revision: "<pin>"
+  id: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  require_resolved_sha: true
   allow_remote_code: false
+
+datasets:
+  wiki_mini:
+    adapter: fixture_text
+    snapshot: fixtures-v1
+    path: tests/fixtures/data/wiki_mini.jsonl
+    freshness_class: development
+  code_mini:
+    adapter: fixture_code
+    snapshot: fixtures-v1
+    path: tests/fixtures/data/code_mini.jsonl
+    freshness_class: development
+  reasoning_mini:
+    adapter: fixture_reasoning
+    snapshot: fixtures-v1
+    path: tests/fixtures/data/reasoning_mini.jsonl
+    freshness_class: development
 
 phases:
   - id: domain_cpt
     type: cpt
     datasets: [wiki_mini, code_mini]
-    max_steps: 20
+    stop:
+      kind: max_steps
+      value: 20
+    optimizer_transition: reset
+    scheduler_transition: reset
+    training:
+      precision: fp32
+      sequence_length: 512
+      learning_rate: 0.00001
+      warmup:
+        unit: steps
+        value: 1
+      checkpoint_every_steps: 10
+      save_optimizer_state: true
+
   - id: reasoning_sft
     type: reasoning_sft
     datasets: [reasoning_mini]
-    max_steps: 20
+    stop:
+      kind: max_steps
+      value: 20
+    optimizer_transition: reset
+    scheduler_transition: reset
+    training:
+      precision: fp32
+      sequence_length: 512
+      learning_rate: 0.00001
+      warmup:
+        unit: steps
+        value: 1
+      checkpoint_every_steps: 10
+      save_optimizer_state: true
 
-data:
-  wiki_mini:
-    adapter: public_text
-    snapshot: "<pin>"
-  code_mini:
-    adapter: public_code
-    snapshot: "<pin>"
-  reasoning_mini:
-    adapter: jsonl_reasoning
-    path: "tests/fixtures/reasoning.jsonl"
-
-training:
-  precision: auto
-  sequence_length: 1024
-  learning_rate: 0.00001
-  checkpoint_every_steps: 10
-  save_optimizer_state: true
+baselines:
+  - id: smoke_reference
+    role: smoke_reference
+    model_id: Qwen/Qwen2.5-0.5B-Instruct
+    revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  - id: parent
+    role: parent_baseline
+    model_id: Qwen/Qwen2.5-0.5B-Instruct
+    revision: 7ae557604adf67be50417f59c2c2f167def9a775
 
 evaluation:
   fixture_set: tests/fixtures/eval_v1
   checkpoint_selection:
-    rule: min_validation_loss
+    phase_id: reasoning_sft
+    rule: metric_best
+    metric_id: validation_loss
+    direction: min
+    tie_breaker: earliest_step
+  inference:
+    max_new_tokens: 128
+    temperature: 0.0
+    top_p: 1.0
+    top_k: 0
+    seed: 42
+    context_length: 2048
+    stream: false
 
 reasoning:
-  required: true
-  preferred_transport: native
-  fallback: tagged
+  mode: visible
+  transport_preference: tagged_text
+  fallback_transport: none
   tags:
     start: "<think>"
     end: "</think>"

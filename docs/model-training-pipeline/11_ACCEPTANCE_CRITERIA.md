@@ -1,56 +1,58 @@
 # 11 — Acceptance Criteria
 
-Local agent chỉ được coi implementation hoàn tất MVP khi demo end-to-end đáp ứng tất cả AC sau.
+MVP DONE requires machine-verifiable evidence for all required AC.
 
-## AC-01 — One-command preflight
-
-```text
+## AC-01 — One-command smoke preflight
 pipeline preflight -c examples/end_to_end_small.yaml
-```
+must validate schema and pinned Qwen2.5-0.5B-Instruct revision 7ae557604adf67be50417f59c2c2f167def9a775 plus local fixture manifests.
 
-PASS và sinh compatibility + environment + data reports.
+## AC-02 — Public data adapters
+At least one Wikimedia dump adapter and one concrete public code adapter exist. Reference configs are train_wikipedia_cpt.yaml and train_code_cpt.yaml. Code reference is non-release-eligible until license enrichment proves policy.
 
-## AC-02 — Public data path
-Có ít nhất một adapter text public (Wikipedia-style) và một adapter code public, snapshot/fingerprint reproducible.
+## AC-03 — Exact train/resume
+Training writes >1 checkpoint; kill/restart resumes committed logical stream state and parent lineage correctly.
 
-## AC-03 — Train/resume
-Training chạy >1 checkpoint, kill/restart test resume PASS và lineage thể hiện parent checkpoint đúng.
+## AC-04 — Real two-phase reference
+R0 performs both domain_cpt and reasoning_sft phases. No “minimal equivalent” substitution.
 
-## AC-04 — CPT + reasoning SFT
-Reference run phải thực hiện ít nhất hai phases hoặc một minimal equivalent demonstrating raw-domain training + reasoning/chat behavior.
+## AC-05 — Canonical HF
+Reload in fresh process with exact tokenizer/template/hash identity.
 
-## AC-05 — Canonical Safetensors
-Artifact HF canonical reload được trong fresh process và output đúng chat template.
-
-## AC-06 — GGUF
-High-fidelity GGUF tạo được từ canonical checkpoint và llama.cpp load/infer PASS.
+## AC-06 — High-fidelity GGUF
+Convert from canonical HF using pinned llama.cpp and load/infer PASS.
 
 ## AC-07 — Quantized GGUF
-Ít nhất một quantized target (khuyến nghị Q4_K_M cho demo) load/infer PASS; quality regression nằm trong frozen smoke threshold.
+At least one required quantized target load/infer PASS and frozen smoke regression gate PASS.
 
 ## AC-08 — Ollama
-`ollama create` từ generated Modelfile PASS và chat request trả final answer.
+Generated Modelfile creates namespaced ephemeral model; chat PASS; cleanup only owned artifact.
 
-## AC-09 — Reasoning
-Với fixture reasoning-enabled, wrapper/API trả:
-
-```json
-{"reasoning":"...non-empty...","answer":"...non-empty..."}
-```
-
-và raw runtime path được evidence ghi rõ là native thinking hay tag-based fallback.
+## AC-09 — Reasoning semantics
+Visible mode on reasoning fixture returns non-empty rationale + answer when capability supports it; hidden/off obey normalized contract; raw transport/parser evidence retained.
 
 ## AC-10 — Cross-runtime parity
-Cùng fixture set chạy HF, llama.cpp và Ollama; adjudicator PASS theo threshold freeze.
+Same frozen inference fixture/parameters across HF, llama.cpp and Ollama; metric parity gate PASS.
 
 ## AC-11 — Evidence
-`evidence.zip` tự đủ để audit run: config, hashes, metrics, logs summary, versions, export manifests, adjudication.
+Payload hashes, chain seal, evidence.zip and external evidence.zip.sha256 verify with no circular checksum.
 
-## AC-12 — No fresh-seed leakage
-Test chứng minh fresh seed bị CLI từ chối trước execution lock.
+## AC-12 — Freshness guard
+CLI blocks fresh seeds, split IDs and fixture-set IDs before locked confirmatory access.
 
 ## AC-13 — Unsupported architecture fail-fast
-Cho một model fixture unsupported; pipeline phải FAIL ở compatibility gate trước training.
+Synthetic unsupported fixture fails compatibility before training.
 
 ## AC-14 — No silent rescue
-Khi quality gate FAIL, command kết thúc FAIL và không tự đổi LR, threshold, seed hoặc rerun training.
+Quality FAIL cannot auto-change LR/threshold/seed/data/retry.
+
+## AC-15 — Baseline/comparator
+Metrics name exact parent baseline; a matched-control fixture proves comparator machinery and budget/seed matching.
+
+## AC-16 — Concurrency/atomicity
+Second writer for same run is rejected; partial checkpoint is not resumable/canonical after injected crash.
+
+## AC-17 — Security sandbox
+Generated-code escape fixture cannot access network, host secrets or writable repo; timeout/resource quotas enforced.
+
+## AC-18 — Spec/schema consistency
+All shipped examples validate canonical schemas and documentation QA reports zero unresolved BLOCKER.

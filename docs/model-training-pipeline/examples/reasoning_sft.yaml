@@ -1,16 +1,75 @@
 experiment:
-  id: reasoning-sft
+  id: reasoning-sft-dev
   mode: development
-phase:
-  type: reasoning_sft
-reasoning:
-  transport: auto
-  fallback_tags:
-    start: "<think>"
-    end: "</think>"
-loss:
-  reasoning_weight: 1.0
-  answer_weight: 1.0
+  seed_sets:
+    development: [21]
+    calibration: []
+    fresh_confirmatory: []
+
+model:
+  source: huggingface
+  id: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  require_resolved_sha: true
+  allow_remote_code: false
+
+datasets:
+  reasoning_mini:
+    adapter: fixture_reasoning
+    snapshot: fixtures-v1
+    path: tests/fixtures/data/reasoning_mini.jsonl
+    freshness_class: development
+
+phases:
+  - id: reasoning_sft
+    type: reasoning_sft
+    datasets: [reasoning_mini]
+    stop:
+      kind: max_steps
+      value: 20
+    optimizer_transition: reset
+    scheduler_transition: reset
+    training:
+      precision: fp32
+      sequence_length: 512
+      learning_rate: 0.00001
+      warmup: {unit: steps, value: 1}
+      checkpoint_every_steps: 10
+      save_optimizer_state: true
+
+baselines:
+  - id: parent
+    role: parent_baseline
+    model_id: Qwen/Qwen2.5-0.5B-Instruct
+    revision: 7ae557604adf67be50417f59c2c2f167def9a775
+
 evaluation:
-  require_nonempty_reasoning: true
-  require_parseable_answer: true
+  fixture_set: tests/fixtures/eval_v1
+  checkpoint_selection:
+    phase_id: reasoning_sft
+    rule: metric_best
+    metric_id: validation_loss
+    direction: min
+    tie_breaker: earliest_step
+  inference:
+    max_new_tokens: 128
+    temperature: 0.0
+    top_p: 1.0
+    top_k: 0
+    seed: 42
+    context_length: 2048
+    stream: false
+
+reasoning:
+  mode: visible
+  transport_preference: tagged_text
+  fallback_transport: none
+  tags: {start: "<think>", end: "</think>"}
+
+export:
+  hf: true
+  gguf:
+    high_fidelity: f16
+    quantize: [q4_k_m]
+  verify_llama_cpp: true
+  verify_ollama: true

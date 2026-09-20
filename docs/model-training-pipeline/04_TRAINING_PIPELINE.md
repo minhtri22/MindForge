@@ -1,102 +1,37 @@
 # 04 — Training Pipeline
 
-## 1. Training modes
+## 1. Modes
 
-### `cpt`
-Causal LM continued pretraining trên raw token stream.
+cpt, sft, reasoning_sft, lora_sft. Pretrain-from-scratch là future scope.
 
-### `sft`
-Instruction/chat fine-tuning, bảo toàn chat template.
+## 2. Standard chain
 
-### `reasoning_sft`
-SFT với target gồm reasoning trace và final answer tách biệt.
+Exact parent baseline -> CPT -> instruction replay/SFT -> reasoning SFT -> fresh evaluation -> export/runtime verification.
 
-### `lora_sft`
-Adapter path. Export phải ghi rõ base model identity. Nếu Ollama adapter import không phù hợp với quantization/training path, pipeline phải merge thành full Safetensors trước GGUF export.
+Mỗi phase có state/evaluation riêng và parent/child artifact hashes.
 
-### `pretrain_from_scratch`
-Thiết kế interface cho tương lai, nhưng không phải acceptance requirement MVP.
+## 3. Phase config
 
-## 2. Khuyến nghị workflow chuẩn
+Freeze datasets, exactly one stop rule, resolved precision/device, sequence length, batch/grad accumulation, LR/optimizer, scheduler/warmup unit, weight decay/clipping, seeds, checkpoint cadence, loss masks/weights, resource limits và optimizer/scheduler reset-or-carry.
 
-```text
-reasoning-capable/instruct base
-        ↓
-CPT Wikipedia + code (nếu cần domain knowledge)
-        ↓
-Instruction replay / SFT
-        ↓
-Reasoning SFT
-        ↓
-Fresh evaluation
-        ↓
-Export
-```
+Canonical stop/state semantics ở 16_CANONICAL_CONFIG_STATE_MACHINE.md.
 
-Lý do: CPT raw corpus có thể làm suy giảm instruction-following/reasoning style; pipeline bắt buộc đo catastrophic forgetting trước và sau mỗi phase.
+## 4. Instruction replay
 
-## 3. Trainer config bắt buộc
+Replay không phải rescue tùy ý. Source, mixture/token budget, stop rule và thresholds phải freeze trước phase. CPT phase FAIL vẫn được ghi dù later replay recovery.
 
-- model/base artifact ID + hash;
-- precision;
-- sequence length;
-- batch size + gradient accumulation;
-- learning rate;
-- optimizer;
-- scheduler + warmup;
-- weight decay;
-- gradient clipping;
-- epochs/max steps/max tokens;
-- seed;
-- dataloader seed;
-- save/eval cadence;
-- activation checkpointing;
-- mixed precision policy;
-- PEFT config nếu có;
-- loss mask rules cho chat/reasoning;
-- max wall-clock/resource limits.
+## 5. Reproducibility
 
-## 4. Determinism
+Record backend/device/precision/deterministic flags/nondeterministic ops. precision:auto phải resolve trước lock.
 
-Pipeline phải phân loại run:
+## 6. Checkpoint/resume
 
-- `strict_deterministic` nếu backend/hardware cho phép;
-- `best_effort_reproducible` nếu kernel không deterministic.
+Dùng checkpoint schema + atomic protocol. Confirmatory exact-resume không được silently downgrade thành best-effort.
 
-Phải record flags, library versions, GPU driver/backend và các known nondeterministic ops.
+## 7. PEFT
 
-## 5. Loss masking
+Adapter artifact, merged HF artifact và canonical export artifact là identities khác nhau. Standalone GGUF release dùng merged artifact trừ khi pinned runtime path explicit support adapter mode.
 
-SFT chat phải support mask user/system tokens, chỉ tính loss trên assistant target theo config.
+## 8. Health monitors
 
-Reasoning SFT phải support separate weights:
-
-```yaml
-loss:
-  answer_weight: 1.0
-  reasoning_weight: 1.0
-```
-
-Không hardcode reasoning dài hơn = tốt hơn.
-
-## 6. Checkpoint cadence
-
-Checkpoint phải có hai lớp:
-
-- recoverable training checkpoints;
-- canonical selected checkpoint.
-
-Garbage collection chỉ được xóa recoverable checkpoints sau khi canonical + evidence bundle đã verify.
-
-## 7. Health monitors
-
-Fail-fast configurable khi:
-
-- NaN/Inf loss/grad;
-- tokenizer/data mismatch;
-- exploding grad sustained;
-- zero effective tokens;
-- disk budget below threshold;
-- checkpoint hash/write verification fails.
-
-Không tự thay LR/batch để cứu run confirmatory.
+Policy freeze cho NaN/Inf, tokenizer mismatch, gradient failure, zero effective loss tokens, disk insufficiency và checkpoint verify fail. Không auto đổi LR/batch/seed trong confirmatory.

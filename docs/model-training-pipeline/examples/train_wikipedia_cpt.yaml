@@ -1,16 +1,80 @@
 experiment:
-  id: wikipedia-cpt
+  id: wikipedia-cpt-dev
   mode: development
+  seed_sets:
+    development: [42]
+    calibration: []
+    fresh_confirmatory: []
+
 model:
-  id: "<supported-base-model>"
-  revision: "<pin>"
-phase:
-  type: cpt
-data:
-  adapter: wikipedia
-  snapshot: "<explicit-snapshot>"
-  split_seed: 42
-training:
-  max_tokens: 100000000
-  learning_rate: 0.000005
-  checkpoint_every_tokens: 10000000
+  source: huggingface
+  id: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  require_resolved_sha: true
+  allow_remote_code: false
+
+datasets:
+  wikipedia_en_20260301:
+    adapter: wikimedia_dump
+    snapshot: enwiki-20260301-pages-articles-multistream
+    project: enwiki
+    language: en
+    dump_date: "20260301"
+    artifact_type: pages-articles-multistream.xml.bz2
+    uri: https://dumps.wikimedia.org/enwiki/20260301/enwiki-20260301-pages-articles-multistream.xml.bz2
+    checksum_source_uri: https://dumps.wikimedia.org/enwiki/20260301/enwiki-20260301-sha1sums.txt
+    freshness_class: development
+
+phases:
+  - id: wikipedia_cpt
+    type: cpt
+    datasets: [wikipedia_en_20260301]
+    stop:
+      kind: max_tokens
+      value: 100000000
+    optimizer_transition: reset
+    scheduler_transition: reset
+    training:
+      precision: auto
+      sequence_length: 2048
+      learning_rate: 0.000005
+      warmup: {unit: ratio, value: 0.03}
+      checkpoint_every_steps: 500
+      save_optimizer_state: true
+
+baselines:
+  - id: parent
+    role: parent_baseline
+    model_id: Qwen/Qwen2.5-0.5B-Instruct
+    revision: 7ae557604adf67be50417f59c2c2f167def9a775
+
+evaluation:
+  fixture_set: eval/wikipedia_dev_v1
+  checkpoint_selection:
+    phase_id: wikipedia_cpt
+    rule: metric_best
+    metric_id: validation_loss
+    direction: min
+    tie_breaker: earliest_step
+  inference:
+    max_new_tokens: 128
+    temperature: 0.0
+    top_p: 1.0
+    top_k: 0
+    seed: 42
+    context_length: 2048
+    stream: false
+
+reasoning:
+  mode: off
+  transport_preference: tagged_text
+  fallback_transport: none
+  tags: {start: "<think>", end: "</think>"}
+
+export:
+  hf: true
+  gguf:
+    high_fidelity: f16
+    quantize: [q4_k_m]
+  verify_llama_cpp: false
+  verify_ollama: false

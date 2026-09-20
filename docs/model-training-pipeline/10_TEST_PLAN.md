@@ -1,56 +1,44 @@
 # 10 — Test Plan
 
-## A. Unit tests
+## A. Schema/config tests
 
-- canonical config hash stable;
-- file/directory SHA256;
-- split determinism;
-- dataset manifest validation;
-- reasoning parser native/tagged;
-- checkpoint manifest schema;
-- lineage hash chaining;
-- adjudicator threshold boundaries;
-- Modelfile generation.
+- every example validates experiment_config schema;
+- unknown config vocabulary rejected;
+- execution/data/evaluation/checkpoint/run/reasoning schemas have valid positive + negative fixtures;
+- confirmatory lock rejects unresolved refs/auto precision.
 
-## B. Integration tests
+## B. Unit
 
-1. Tiny tokenizer/data -> 2 training steps -> save -> resume -> 2 steps.
-2. Save HF canonical -> reload -> generate.
-3. HF -> GGUF small supported model -> llama.cpp load.
-4. GGUF -> Ollama create -> API inference.
-5. Reasoning output parsed identically by wrappers.
+Canonical hashes, split determinism, freshness guard for seed/split/fixture, near-dedup/contamination parameter identity, reasoning parser modes, checkpoint selection tie-breaks, lineage chain/seal, Modelfile derivation.
 
-## C. Failure injection
+## C. Integration
 
-- corrupt shard;
-- wrong checksum;
-- disk full simulation;
-- killed training process then resume;
-- wrong base model for adapter;
-- unsupported architecture;
-- tokenizer mismatch;
-- malformed `<think>` tags;
-- Ollama unavailable;
-- llama.cpp converter/version mismatch;
-- metric just below threshold.
+1. Qwen2.5-0.5B-Instruct pinned reference loads.
+2. fixture data -> 2+ steps -> atomic checkpoint -> kill -> exact resume.
+3. phase parent/child lineage.
+4. HF canonical reload.
+5. HF -> GGUF -> llama.cpp.
+6. GGUF -> Ollama.
+7. visible/hidden/off reasoning semantics where capability permits.
+8. same InferenceGenerationContract across runtimes.
+9. evidence payload -> ZIP -> external ZIP checksum.
 
-## D. Reproducibility test
+## D. Failure injection
 
-Reference micro-run fixed seed/data/model must produce:
-- same config/data hashes;
-- same selected checkpoint step;
-- metrics within declared deterministic/tolerance contract;
-- same artifact inventory.
+Corrupt shard/checksum, disk budget fail, process kill during checkpoint, stale lock, concurrent writer, wrong adapter base, synthetic unsupported architecture, tokenizer mismatch, malformed reasoning tags, missing sandbox/network isolation, Ollama unavailable, converter mismatch, required metric below threshold, secret detector hit.
 
-## E. Windows-specific
+## E. Reproducibility
 
-- PowerShell paths with spaces;
-- long path handling;
-- executable discovery `.exe`;
-- subprocess quoting;
-- symlink absence fallback;
-- resume after terminal interruption.
+Micro-run must preserve config/data hashes, selected step, logical consumed-token cursor, artifact inventory and metric tolerance according to declared determinism class.
 
-## F. Acceptance test fixture
+## F. Security
 
-Repo phải có `tests/e2e/tiny_reasoning_model/` hoặc một supported tiny base model downloaded by script, cùng public/synthetic mini datasets để CI/local chạy end-to-end mà không cần hàng giờ training.
+Generated-code fixture attempts network/file/child-process escape and must be blocked by sandbox. Evidence redaction fixture injects fake token and confirms bundle does not leak it.
+
+## G. Windows
+
+Paths with spaces/Unicode, long-path handling, subprocess quoting, executable discovery, no-symlink fallback, atomic replace behavior, Job Object/process-tree kill, resume after interruption.
+
+## H. Unsupported architecture fixture
+
+Use deterministic synthetic/fake model config type that ModelAdapter registry intentionally marks unsupported; do not depend on an upstream architecture remaining unsupported forever.

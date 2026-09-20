@@ -1,27 +1,32 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reasoning_response.schema.json",
   "title": "ReasoningResponse",
   "type": "object",
+  "additionalProperties": false,
   "required": [
-    "reasoning",
-    "answer",
-    "reasoning_kind"
+    "answer", "reasoning", "reasoning_kind", "reasoning_mode",
+    "reasoning_present", "transport", "parser_status", "runtime", "model_artifact"
   ],
   "properties": {
-    "reasoning": {
-      "type": "string"
+    "answer": {"type": "string", "minLength": 1},
+    "reasoning": {"type": ["string", "null"]},
+    "reasoning_kind": {"const": "model_generated_rationale"},
+    "reasoning_mode": {"enum": ["visible", "hidden", "off"]},
+    "reasoning_present": {"type": ["boolean", "null"]},
+    "transport": {"enum": ["native_runtime_field", "tagged_text", "none"]},
+    "parser_status": {"enum": ["ok", "not_applicable", "malformed", "unsupported"]},
+    "runtime": {"type": "string", "minLength": 1},
+    "model_artifact": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"reasoning_mode": {"const": "visible"}, "parser_status": {"const": "ok"}}},
+      "then": {"properties": {"reasoning": {"type": "string", "minLength": 1}}}
     },
-    "answer": {
-      "type": "string"
-    },
-    "reasoning_kind": {
-      "const": "model_generated_rationale"
-    },
-    "runtime": {
-      "type": "string"
-    },
-    "model_artifact": {
-      "type": "string"
+    {
+      "if": {"properties": {"reasoning_mode": {"enum": ["hidden", "off"]}}},
+      "then": {"properties": {"reasoning": {"type": "null"}}}
     }
-  }
+  ]
 }
