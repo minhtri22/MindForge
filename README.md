@@ -100,28 +100,26 @@ Continual learning, explicit memory and adaptive/pattern mechanisms are **not ye
 
 ### Active Kernel Continual Learning research
 
-The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary, boundary-state, failure-mode, target-identifiability and mechanistic-representation experiments. The current chain is documented append-only in [Lineage.md](Lineage.md) and under [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
+The Kernel-CL track has progressed through controlled baseline, replay, long-horizon, optimizer-boundary, boundary-state, failure-mode, target-identifiability, static mechanistic and temporal mechanistic representation experiments. The append-only chain is in [Lineage.md](Lineage.md) and [docs/research/kernel-continual-learning/](docs/research/kernel-continual-learning/).
 
-As of KCL-6.5.9.6:
+As of KCL-6.5.9.7:
 
-- fixed global optimizer-boundary policies do not satisfy the joint plasticity + retention + robustness contract across all boundaries;
-- KCL-6.5.9.1 independently replicated positive-class boundary-regime heterogeneity;
-- KCL-6.5.9.2 showed that the four-class `SAFE_ACTION_SET-v1` target is not qualified as predictable from stage + global H1-H9 state;
-- KCL-6.5.9.3 showed that richer LRBS-v1 state and a diagnostic zero-step future probe did not resolve broad `A_ONLY` identifiability;
-- KCL-6.5.9.4 established that `A_ONLY` is structurally heterogeneous and replicated two stable mechanisms: `MECH{P,R}` and `MECH{P+R,R}`;
-- KCL-6.5.9.5 showed that mechanism-specific target decomposition alone does not produce the preregistered identifiability gain under frozen S2;
-- KCL-6.5.9.6 introduced MRIG-v1, an exact clone-only static reset-response representation using only observed-task gradients;
-- KCL-6.5.9.6 result: **NEGATIVE — `MRIG_V1_DOES_NOT_QUALIFY_MECH_PRR_REPRESENTATION`**;
-- on fresh validation for `MECH{P+R,R}`:
-  - S2 macro recall = `0.5841`, not qualified;
-  - S3 = S2 + MRIG-v1 macro recall = `0.5577`, not qualified;
-  - `D_MRIG = -0.0263`, 95% paired whole-seed CI `[-0.0685,+0.0044]`;
-- static observed-task reset-response geometry therefore does not resolve the remaining `MECH{P+R,R}` observability gap;
+- fixed global optimizer-boundary policies do not jointly satisfy plasticity + retention + robustness;
+- broad action-regime prediction from stage/global/localized pre-boundary state is not qualified;
+- `A_ONLY` contains independently replicated mechanism heterogeneity, including `MECH{P,R}` and `MECH{P+R,R}`;
+- mechanism-specific target decomposition alone does not solve identifiability;
+- KCL-6.5.9.6 MRIG-v1 static reset-response geometry was NEGATIVE for `MECH{P+R,R}`;
+- KCL-6.5.9.7 TRIG-v1 one-transition temporal geometry was also NEGATIVE:
+  - S3 validation macro recall = `0.5459`;
+  - S4 validation macro recall = `0.5141`;
+  - `D_TRIG = -0.03185`, 95% paired whole-seed CI `[-0.0940,+0.0336]`;
+- zero-step future-task interaction remains the only tested information class with prior positive numerical uplift, though it did not qualify on the earlier broad action target;
+- a separate reverse-synthesis backlog is preserved at [kcl659x-reverse-synthesis-backlog.md](docs/research/kernel-continual-learning/kcl659x-reverse-synthesis-backlog.md) and is explicitly deferred until after the active chain closes;
 - no adaptive boundary controller is qualified;
 - protected confirmatory seeds remain untouched;
 - KCL-7 is **not started**.
 
-The next authorized milestone is **KCL-6.5.9.7 — Temporal Mechanistic Representation Qualification**: test whether historically available transition geometry across completed task boundaries contains predictive information absent from a static S3 snapshot. The comparison must remain prospective, use a fresh non-confirmatory cohort, preserve the frozen low-capacity classifier family, and keep controller/KCL-7 closed.
+The next active milestone is **KCL-6.5.9.8 — Mechanism-Specific Future-Interaction Qualification**. It must reuse the pre-existing FUTURE-PROBE-v1 P1-P8 exactly, compare a pre-boundary S2 baseline against S2 + zero-step future-task interaction on a fresh cohort, use a strict future-information gain gate, and act as the terminal discriminator for the current KCL-6.5.9.x sequence. If it is NEGATIVE, the sequence closes into formal convergence review rather than adding more representation variants.
 
 ## Roadmap
 
