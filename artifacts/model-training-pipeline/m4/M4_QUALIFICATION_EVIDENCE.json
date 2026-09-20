@@ -1,0 +1,63 @@
+{
+  "schema": "mindforge-model-pipeline-m4-qualification-evidence-v1",
+  "repository": "minhtri22/MindForge",
+  "branch": "docs/evidence-model-training-pipeline",
+  "lineage": {
+    "m3_evidence_parent": "c2b0f4e691adf0e46c6ebf76c86eca292d584a9d",
+    "initial_m4_candidate": "f328587bafcb5f41ffb6f06cc92e91bc6bf5ea98",
+    "dependency_repair": "85fa1d6ad45941c5a5c77ff426f1ecc943105943",
+    "qualified_implementation_commit": "a6066acc7da6123d156744ae0555a4c682bc313d"
+  },
+  "technical_invalid_predecessor": {
+    "classification": "M4_TECHNICAL_INVALID_MISSING_JINJA2_BEFORE_REASONING_SERIALIZATION",
+    "scientific_reasoning_execution_consumed": false
+  },
+  "runs": {
+    "m0": 35521742088,
+    "m1": 35521742085,
+    "m2_real_model": 35521742065,
+    "m3": 35521742099,
+    "m4": 35521742077
+  },
+  "verdict": "PASS",
+  "tests": {
+    "m0": 15,
+    "m1": 15,
+    "m2_checkpoint": 4,
+    "m3": 10,
+    "m4": 15
+  },
+  "result": {
+    "gates_passed": 13,
+    "gates_total": 13,
+    "serialized_samples": 2,
+    "visible_pass": 2,
+    "hidden_pass": 2,
+    "malformed_rejections": 7,
+    "r0_off_semantics": "EXPLICIT_UNSUPPORTED_NO_DEGRADATION",
+    "capability_hash": "748a4c391291e48c8572b12020b33457771052a0079aa5ae33f12bcc09f3aa8c",
+    "tokenizer_snapshot_hash": "cddbecc432af46e4fcddc7611d940b7d4d41667810bbe0324e0885238c8e1e6d",
+    "qualification_hash": "068e19b95dd1fd0336600b0e6777abc8921af625b73c6ae04df7ae1d405cfce7",
+    "model_weights_loaded": false,
+    "training_started": false
+  },
+  "environment_versions": {
+    "transformers": "5.17.0",
+    "huggingface-hub": "1.32.0",
+    "tokenizers": "0.23.2",
+    "jinja2": "3.1.6"
+  },
+  "m2_regression": {
+    "status": "PASS",
+    "exact_resume_phases": 2,
+    "canonical_directory_hash": "6edb0d843984e611580f895131c12ba5d0f47dfee0ab2050e45de1e3bc6b5684",
+    "public_bulk_download_started": false
+  },
+  "boundary": {
+    "public_bulk_training": false,
+    "fresh_confirmatory_access": false,
+    "llama_cpp_qualified": false,
+    "ollama_qualified": false,
+    "m5_executed": false
+  }
+}
