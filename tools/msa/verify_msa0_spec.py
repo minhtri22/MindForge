@@ -48,7 +48,7 @@ def verify() -> dict:
     checks["pre_cprm_loss_provenance"] = (
         "KCL-1" in text["EVIDENCE_INHERITANCE.md"]
         and "cross-entropy loss" in text["EVIDENCE_INHERITANCE.md"]
-        and "before ACO/CPRM" in text["EVIDENCE_INHERITANCE.md"]
+        and "predates ACO/CPRM" in text["EVIDENCE_INHERITANCE.md"]
     )
     checks["msa1_unchanged"] = (
         "MSA-1 must use the current canonical KCL-compatible substrate **unchanged**"

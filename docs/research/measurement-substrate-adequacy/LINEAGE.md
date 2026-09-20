@@ -32,3 +32,17 @@ Existing entries must never be rewritten or silently removed.
 - ACO-1 and CPRM-1 cohorts: **SPENT / EXCLUDED**.
 - Finite roadmap: MSA-0 → MSA-1 → conditional MSA-2 → MSA-3 → MSA-4.
 - MSA-0 state: **PENDING ZERO-SCIENCE QA**.
+
+---
+
+## 2026-09-20 — MSA-0 QA Attempt 1 Technical Predicate Mismatch
+
+- Workflow run: `35519949524`.
+- Scientific execution attempted: **NO**.
+- Fresh MSA seed generated: **NO**.
+- Difficulty mutation performed: **NO**.
+- Predictor fitting performed: **NO**.
+- Failure cause: verifier required literal phrase `before ACO/CPRM` while the frozen evidence document states the equivalent provenance phrase `predates ACO/CPRM`.
+- Classification: **TECHNICAL_QA_STRING_PREDICATE_FAILURE**.
+- Recovery: change verifier predicate only to match the frozen wording.
+- Research question, endpoint candidates, substrate difficulty contract, freshness exclusions, falsification gates and roadmap: **UNCHANGED**.
