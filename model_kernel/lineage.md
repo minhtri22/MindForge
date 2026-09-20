@@ -359,3 +359,98 @@ Kiểm tra không-khoa-học của phụ lục đạt tại:
 `1f7dfbb353b68617e1522cd3ee47bb0ca83d950f`
 
 Trạng thái: đăng ký trước đã qua toàn bộ kiểm tra; chưa tạo dữ liệu khoa học, chưa huấn luyện. Cổng kế tiếp là khóa cài đặt.
+
+
+## 2026-09-21 — Khóa cài đặt và ZERO-FRESH PREFLIGHT của MK-1
+
+Sau khi B0 và hai phụ lục đăng ký trước đã qua kiểm tra, đã hoàn tất cài đặt MK-1 trong đúng phạm vi đã khóa.
+
+Các phần chính đã được cài đặt:
+
+- tách trạng thái ẩn B0 nhưng giữ nguyên đường sinh logits;
+- B0-DIRECT: đầu ra C 34 chiều;
+- M1-Z: đầu ra Z 70 chiều;
+- loss theo từng họ Z;
+- bộ ghép xác định R(Z) -> C;
+- hợp đồng dữ liệu/cảnh xác định;
+- lịch lấy mẫu ghép cặp;
+- trainer 5.000 bước đã khóa nhưng chưa chạy khoa học;
+- bộ metric H1a/H1b/H1c;
+- H1c chỉ dùng các trường PIT-v3 có tương ứng ngữ nghĩa chính xác;
+- preflight chỉ dùng fixture giả lập.
+
+Trong tự rà soát trước manifest đã phát hiện và sửa một leakage implementation: renderer ban đầu in gần như tên target ra văn bản. Leakage được loại bỏ tại:
+
+`4b24d07e33714c48b4b022f3849f03572b563ac3`
+
+Không có dữ liệu khoa học nào được tạo trước hoặc trong sửa đổi này.
+
+Khóa cài đặt cuối được bind bằng manifest Git blob/SHA-256. Manifest PASS cuối trước trigger tại:
+
+`9f68e1e9175c48731d59b41bdd09294789ed1f9a`
+
+Do connector không có hành động workflow_dispatch, đã dùng một trigger một-lần chỉ theo đúng path:
+
+`model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md`
+
+Workflow được bind lại, kiểm tra hash lại, và chỉ cho chạy khi manifest có `IMPLEMENTATION_LOCK_MANIFEST_PASS` cùng marker trigger chính xác.
+
+Các run tự động xảy ra trước manifest:
+
+- `35528445838`
+- `35528568383`
+- `35528581759`
+- `35528608614`
+- `35528655281`
+- `35528657593`
+
+đều bị loại khỏi evidence bất kể conclusion.
+
+Canonical ZERO-FRESH run duy nhất được adjudicate:
+
+- run: `35529006429`
+- head: `22d8c7cf813f114a3573adad5a358e4a926fb0d9`
+- tests: `14 passed in 2.73s`
+- artifact id: `10610537857`
+- artifact ZIP SHA-256: `2ca801ce739f4aa16ac267c0ab8acee5c915dc5058050e435d0542e4bf952708`
+
+Kết quả preflight:
+
+- B0 parameters = `10,339,200`: đạt;
+- hidden-state exact-logit parity: đạt;
+- B0-DIRECT parameters = `10,350,114`: đạt;
+- M1-Z parameters = `10,361,670`: đạt;
+- chênh lệch tham số = `0.001115264238293634` (~0,111526%): đạt ngưỡng <=1%;
+- tensor slices: đạt;
+- zero readout initialization: đạt;
+- recomposer identities: đạt;
+- `gold_fixture_C == R(gold_fixture_Z)`: đạt;
+- direct synthetic loss finite: đạt;
+- M1-Z synthetic loss finite: đạt;
+- paired synthetic schedule: đạt;
+- synthetic tokenizer contract: đạt;
+- scientific namespace touched: false;
+- scientific seed touched: false;
+- scientific data created: false.
+
+Formal verdict:
+
+`ZERO_FRESH_PREFLIGHT_PASS`
+
+Tài liệu đóng cổng:
+
+- commit: `463475128574ee1738267eca4436fc8613fe9e18`
+- blob: `b9acbce69bebe8a812ba558140a089cd315846b1`
+
+Ý nghĩa khoa học: cổng này chỉ chứng minh implementation và plumbing phù hợp với hợp đồng đã khóa. Nó không cung cấp bằng chứng rằng Z học được, M1-Z tốt hơn B0-DIRECT, hay tốt hơn D-PIT.
+
+Trạng thái sau cổng:
+
+- B0 reconstruction: PASS;
+- implementation lock manifest: PASS;
+- canonical zero-fresh preflight: PASS;
+- dữ liệu khoa học: chưa materialize;
+- tokenizer khoa học: chưa fit;
+- scientific training: chưa chạy.
+
+Cổng kế tiếp đúng khoa học là materialize các namespace đã đăng ký chỉ để chạy các audit trước huấn luyện: split/integrity, target stability/margin, observable identifiability, coverage/support, renderer isolation, TRAIN-only tokenizer freeze và input-length contract. Huấn luyện vẫn bị chặn cho đến khi toàn bộ các cổng này đạt.
