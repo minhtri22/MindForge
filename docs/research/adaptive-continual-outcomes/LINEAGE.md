@@ -34,3 +34,16 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Protected KCL cohort consumption: **NO**.
 - ACO-1 fresh execution authorization: **NO — remains blocked pending implementation + full zero-science preflight**.
 - Next scientifically valid step: implement only the frozen ACO-1 measurement runner, identity tests, seed-manifest validator, and one-shot adjudicator; then run zero-science preflight before any fresh cohort execution.
+
+---
+
+## 2026-09-20 — ACO-1 Seed-Provenance Correction Before Execution
+
+- Trigger: implementation preflight found that the sentence claiming deterministic generation from `SHA256("ACO1|i")` was not reproducible from the already-frozen 40-value seed list.
+- Scientific execution before correction: **NONE**.
+- Resolution: retain the exact 40 pre-registered seed values unchanged; remove the unsupported generation claim; freeze the explicit manifest as the source of truth.
+- Frozen seed-manifest SHA-256 over the comma-joined decimal sequence: `9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91`.
+- Seed values changed: **NO**.
+- Thresholds/gates changed: **NO**.
+- Outcome information used: **NO**.
+- Interpretation: technical/provenance correction before execution, not a scientific protocol relaxation.

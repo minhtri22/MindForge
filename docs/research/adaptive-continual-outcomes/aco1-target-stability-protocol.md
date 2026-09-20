@@ -69,9 +69,15 @@ ACO-1 uses exactly 40 fresh seeds:
 294795,641624,345481,326782,242385
 ```
 
-These seeds were deterministically generated from `SHA256("ACO1|i")` and frozen in this protocol.
+The 40 values above are the canonical frozen seed manifest. Their provenance is the explicit committed list itself; no unverifiable seed-generation claim is used.
 
-Preflight must reject execution if any seed collides with any historical KCL scientific seed or protected KCL cohort.
+Frozen manifest SHA-256 over the exact comma-joined decimal sequence (no spaces/newline):
+
+```text
+9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91
+```
+
+Preflight must recompute this hash and reject execution if it differs, or if any seed collides with any historical KCL scientific seed or protected KCL cohort.
 
 The protected KCL cohort is never substituted.
 
