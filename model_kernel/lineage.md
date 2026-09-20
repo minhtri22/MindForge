@@ -287,3 +287,46 @@ Tài liệu rà soát:
 `6f802ea2592de68e784a7419970116fb72652d9b`
 
 Trạng thái: khóa cài đặt MK-1 bị chặn cho tới khi sửa đăng ký trước bằng một phụ lục trước kết quả. Chưa tạo dữ liệu khoa học và chưa cài đặt M1-Z.
+
+
+## 2026-09-21 — Sửa đăng ký trước và kiểm tra lại MK-1
+
+Rà soát khả năng cân bằng phát hiện thiết kế so sánh ban đầu có thể tương đương về mặt hàm, nên chưa được phép cài đặt.
+
+Đã khóa phụ lục sửa trước mọi dữ liệu và kết quả:
+
+`4d8e9a8e9e22e17ee35270991e027526600296bf`
+
+Phụ lục khóa lại:
+
+- nhánh trực tiếp học trạng thái chuẩn C;
+- nhánh có cấu trúc học Z rồi ghép xác định về C;
+- Z có 70 đầu ra cố định;
+- C có 34 đầu ra cố định;
+- chênh lệch số tham số hai nhánh khoảng 0,112%;
+- bộ tách từ chỉ được học từ tập huấn luyện sau khi dữ liệu được phép tạo.
+
+Trong kiểm tra tài liệu tiếp theo đã phát hiện và sửa trước kết quả:
+
+- sai mã băm tham chiếu tài liệu dựng lại B0: `1d07b6deb9c531d8fa439be8debc972353141628`;
+- mở rộng kiểm tra độ ổn định và khả năng nhận dạng sang C: `1c69881687d0764e589f57c4fa44c3bee68a4fdb`, `f34554a3530125ced88cedcb04e737f5f4c5fb92`, `599b4ed777c50239db3ae34c75163be4fad5f007`;
+- sửa ánh xạ cổng độ ổn định: `b0e97fbd6fe0c87bfc050e6fd37601511011e158`;
+- khóa cách xử lý trường hợp không thể nhận dạng duy nhất: `1f03e3855b4f77a07c6f375c50a782d0c485a00b`.
+
+Kiểm tra không-khoa-học cho phụ lục đạt tại:
+
+`238d9f7c9f7d242eb7bff455fd0f46b13eb4cf43`
+
+Đăng ký trước chính được cập nhật trạng thái đạt tại:
+
+`9be308126c9914d59adc8b1e46c6781b4a52568c`
+
+Trạng thái:
+
+- phụ lục đăng ký trước: đạt kiểm tra;
+- dựng lại B0: đạt;
+- chưa cài đặt mô hình MK-1;
+- chưa tạo dữ liệu khoa học;
+- chưa huấn luyện.
+
+Cổng tiếp theo là khóa cài đặt MK-1.
