@@ -1,0 +1,40 @@
+name: Model Pipeline M0 Contract QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - docs/evidence-model-training-pipeline
+    paths:
+      - 'pipeline/**'
+      - 'tests/test_model_pipeline_m0.py'
+      - 'requirements-pipeline-m0.txt'
+      - 'docs/model-training-pipeline/**'
+      - '.github/workflows/model-pipeline-m0.yml'
+  pull_request:
+    paths:
+      - 'pipeline/**'
+      - 'tests/test_model_pipeline_m0.py'
+      - 'requirements-pipeline-m0.txt'
+      - 'docs/model-training-pipeline/**'
+
+jobs:
+  m0-zero-training:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install M0 dependencies
+        run: python -m pip install -r requirements-pipeline-m0.txt
+      - name: M0 unit and integration tests
+        run: python -m pytest -q tests/test_model_pipeline_m0.py
+      - name: Zero-training reference preflight
+        run: |
+          python -m pipeline preflight \
+            -c docs/model-training-pipeline/examples/end_to_end_small.yaml \
+            --workspace . \
+            --runs-root .m0-runs \
+            --json
