@@ -40,18 +40,16 @@ The first scientific milestone is **ACO-1 Target-Stability Qualification**. No c
 
 ## Current authorization
 
-Authorized now:
+ACO-1 implementation and zero-science preflight are now **PASS / CLOSED**.
+
+Canonical QA: `ACO1_PREFLIGHT_QA.md`.
+
+Current next authorization is limited to creating and verifying the ACO-1 execution lock.
+
+Not authorized yet:
 
 ```text
-documentation
-protocol implementation
-tests / zero-science preflight
-```
-
-Not authorized now:
-
-```text
-fresh ACO-1 scientific execution
+fresh ACO-1 scientific execution before execution-lock verification
 ACO-2 outcome-model fitting
 controller implementation
 KCL-7

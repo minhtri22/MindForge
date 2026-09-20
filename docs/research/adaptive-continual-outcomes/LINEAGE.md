@@ -61,3 +61,23 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Materiality gates changed: **NO**.
 - Fresh cohort changed: **NO**.
 - Purpose: remove implementation ambiguity before source code exists; no outcome-conditioned revision.
+
+---
+
+## 2026-09-20 — ACO-1 Zero-Science Preflight Closed PASS
+
+- Implementation commit: `e4e8f27b164ca938e6efa910bfb1ec2fc056f1a2`.
+- Workflow run: `35510372687`.
+- Focused tests: **10/10 PASS**.
+- Protocol SHA-256: `a4615220a5fbe492e268bb23048ac6ec86fbb167f89eaa666141200ea16644eb`.
+- Seed-manifest SHA-256: `9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91`.
+- Historical matched-fork probe: seed `9595`, 3/3 boundary records integrity-valid, no ACO-1 fresh seed used.
+- Preflight JSON SHA-256: `75b3b5351376246fe7efd97192633f84cf1305b42189f1bb6e363a1fade4a8b3`.
+- Workflow artifact ID: `10605275966`.
+- Artifact ZIP SHA-256: `f4f5825f652825bd76239d0b42bbaf08f17304f0bfcb058d9fdf771855ef8bbd`.
+- Verdict: `ACO1_ZERO_SCIENCE_PREFLIGHT_PASS`.
+- Fresh scientific execution: **NOT PERFORMED**.
+- Scientific result: **NONE**.
+- Execution lock: **ABSENT**.
+- Controller: **CLOSED / NOT AUTHORIZED**.
+- Next: create and independently verify ACO-1 execution lock; only then may the frozen 40-seed cohort execute.
