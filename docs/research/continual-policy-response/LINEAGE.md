@@ -33,3 +33,18 @@ silently removed.
 - Finite roadmap frozen: CPRM-0 → CPRM-1 → CPRM-2 → conditional CPRM-3 → CPRM-4 → CPRM-5.
 - CPRM-0 state: **PENDING ZERO-SCIENCE SPECIFICATION QA**.
 - Scientific execution authorization: **NONE**.
+
+---
+
+## 2026-09-20 — CPRM-0 QA Attempt 1 Technical Failure
+
+- Workflow run: `35516022578`.
+- Failure point: QA test runner startup.
+- Cause: `pytest` was not installed in the clean GitHub Actions Python environment.
+- Specification assertion reached: **NO**.
+- Scientific execution attempted: **NO**.
+- Fresh scientific seed consumed: **NO**.
+- Model fitting performed: **NO**.
+- Classification: **TECHNICAL_QA_ENVIRONMENT_FAILURE**.
+- Recovery allowed: install pinned QA-only dependency `pytest==8.4.2` and rerun the unchanged specification verifier.
+- CPRM research object, target contract, population contract, baseline family, gates and roadmap: **UNCHANGED**.
