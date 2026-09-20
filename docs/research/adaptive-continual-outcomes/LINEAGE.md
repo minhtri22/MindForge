@@ -218,3 +218,26 @@ This file is **append-only**. Existing entries must never be rewritten, reordere
 - Active ACO program: **STOPPED**.
 - ACO-2/controller/KCL-7: **NOT AUTHORIZED**.
 - Next admissible action: formal convergence review only; no new scientific execution.
+
+---
+
+## 2026-09-20 — ACO Formal Convergence Review Closed
+
+- Review type: evidence/governance synthesis only; no new scientific execution.
+- Trigger: `ACO-1 STOP — TARGET_STABILITY_SUPPORT_INSUFFICIENT`.
+- Canonical support fact used: `12` Y_PRR boundaries across stages `[1,2,3]` versus frozen minimum `30`.
+- ACO program decision: **TERMINATED**.
+- ACO-2: **FORBIDDEN / NOT AUTHORIZED**.
+- Additional ACO-1 seeds: **FORBIDDEN**.
+- Threshold/support relaxation: **FORBIDDEN**.
+- Option 1 (terminate both ACO and all continuous-response inquiry): **REJECTED as overbroad**.
+- Option 2 (retain continuous-response question in a new research program): **SELECTED**.
+- Option 3 (immediate return to a different upstream CL question): **NOT SELECTED as next step**.
+- Scientific basis for Option 2: KCL independently established heterogeneous policy-specific plasticity/retention effects and fixed-policy insufficiency; ACO-1 did not test continuous-response predictability.
+- ACO-1 40-seed/120-boundary dataset disposition: **HISTORICAL / SPENT**; forbidden for future program fitting, feature/target/hyperparameter selection, validation or replication.
+- Protected KCL cohort: **UNTOUCHED / CLOSED**.
+- Controller: **CLOSED**.
+- KCL-7: **CLOSED**.
+- Working new-program name: **Continual Policy Response Modeling (CPRM)**.
+- New scientific execution authorized by this review: **NONE**.
+- Next: create a separate CPRM branch/program and perform CPRM-0 specification/origin freeze only.

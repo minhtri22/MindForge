@@ -1,6 +1,6 @@
 # ACO Formal Convergence Review Trigger
 
-Status: **TRIGGERED / REVIEW NOT YET EXECUTED**
+Status: **REVIEW EXECUTED / CLOSED**
 
 Triggering evidence:
 
@@ -47,3 +47,23 @@ The review must decide whether:
 3. evidence should instead return to a different upstream continual-learning question.
 
 This document authorizes review only, not new scientific execution.
+
+
+## Closure
+
+The triggered review has been completed in:
+
+```text
+ACO_FORMAL_CONVERGENCE_REVIEW.md
+```
+
+Decision:
+
+```text
+ACO terminated.
+Option 2 selected for future governance:
+continuous-response question may reopen only as a separately named new
+research program (working name CPRM).
+```
+
+No new scientific execution was performed during the review.

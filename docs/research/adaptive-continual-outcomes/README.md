@@ -1,6 +1,6 @@
 # Adaptive Continual Outcome Modeling (ACO)
 
-Status: **PROGRAM STOPPED AFTER ACO-1 SUPPORT GATE**
+Status: **FORMALLY CONVERGED / PROGRAM TERMINATED**
 
 Branch: `research/adaptive-continual-outcomes`
 
@@ -41,37 +41,41 @@ The first scientific milestone is **ACO-1 Target-Stability Qualification**. No c
 - `ACO1_EXECUTION_LOCK.json` — immutable machine-readable execution contract.
 - `ACO1_EXECUTION_LOCK_VERIFICATION.md` — independent lock-verification closure.
 
-## Current status
+## Final program status
 
-ACO-1 completed its locked fresh execution and one-shot adjudication.
+ACO is formally closed.
 
-Canonical result:
+Canonical convergence review: `ACO_FORMAL_CONVERGENCE_REVIEW.md`.
 
-```text
-STOP
-TARGET_STABILITY_SUPPORT_INSUFFICIENT
-```
-
-The frozen support gate required at least 30 canonical Y_PRR boundaries across at least two stages; the adjudicator found 12 across all three stages.
-
-Canonical closure: `ACO1_FORMAL_CLOSURE.md`.
-
-The finite roadmap's insufficient-support STOP condition is therefore active.
-
-Authorized now:
+Final decision:
 
 ```text
-formal convergence review only
-documentation / provenance closure
+ACO PROGRAM = TERMINATED
+ACO-2       = NOT AUTHORIZED
+
+NEXT DIRECTION = OPTION 2
+retain continuous-response question only in a NEW research program
+
+working name = Continual Policy Response Modeling (CPRM)
 ```
 
-Not authorized:
+The 40 ACO-1 seeds / 120 boundaries are historical/spent evidence and may not
+be used to fit, tune, validate or replicate the next program.
+
+Authorized after ACO closure:
+
+```text
+new-program governance/specification work only
+no scientific execution yet
+```
+
+Still closed:
 
 ```text
 additional ACO-1 seeds
-ACO-1 threshold/support relaxation
-ACO-2 outcome-model fitting
+ACO-2
+hard-label rescue
 controller implementation
 KCL-7
-protected KCL confirmatory cohort use
+protected KCL confirmatory cohort
 ```
