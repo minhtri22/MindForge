@@ -1,6 +1,6 @@
 # MK-1 Baselines and Capacity / Compute Matching v0.1
 
-Status: **FROZEN / AMENDED BY PREREGISTRATION_AMENDMENT_001 / NO TRAINING**
+Status: **FROZEN / AMENDED BY AMENDMENTS 001-002 / NO TRAINING**
 
 Date: **2026-09-21**
 
@@ -155,11 +155,20 @@ Before neural training, after TRAIN surfaces are materialized and integrity-audi
 - use the exact same tokenizer for all arms and all seeds;
 - VALIDATION and PRISTINE_CONFIRMATORY surfaces never participate in tokenizer fitting.
 
-If actual vocab size != 16,384:
+Let `V_actual = tokenizer.get_vocab_size()`.
 
-`TOKENIZER_CONTRACT_FAIL`
+Required:
 
-and neural training is forbidden.
+- `258 <= V_actual <= 16,384`;
+- every encoded token ID < 16,384;
+- both frozen special tokens exist;
+- tokenizer metadata matches BPE + NFC + ByteLevel.
+
+The B0 model vocabulary remains 16,384. Unused embedding rows are allowed and shared identically by both arms.
+
+Artificial/reserved tokens may not be added merely to force exact tokenizer cardinality.
+
+This clause is superseded by PREREGISTRATION_AMENDMENT_002.md.
 
 ## 8. Checkpoint-selection rule
 
