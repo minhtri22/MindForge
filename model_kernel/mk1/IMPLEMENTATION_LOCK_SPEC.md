@@ -376,6 +376,44 @@ H1c implementation may materialize/copy that exact historical runtime later, but
 
 The common-field mapping must be frozen in code before scientific model outcomes are inspected.
 
+## 17A. Frozen H1c common-field mapping
+
+Before any scientific model outcome, H1c uses only exact semantic correspondences with frozen PIT-v3.
+
+Common fields:
+
+- all 32 Z1 primitive types, using the union of PIT evidence and teaching-signal primitive `type` values;
+- Z3 evidence scope;
+- Z3 asserted scope;
+- Z3 scope relation;
+- Z4 `conflict_present` from PIT evidence conflict state;
+- Z4 `supersession_supported`;
+- Z4 `scope_supported`;
+- Z4 `temporal_rule_supported`;
+- Z4 `fallback_policy_supported`;
+- Z4 `operational_signal_supported`;
+- all eight canonical C1 booleans.
+
+Excluded from H1c common fields:
+
+- Z2;
+- Z4 `numeric_value_supported`, because PIT-v3 exposes `numeric_threshold_supported`, which is not semantically identical for ordinal/vague-count cases;
+- C2/C3/C4/C5 when they duplicate already-counted Z3/Z4 fields in the pooled error.
+
+Pooled H1c representation error is the total binary/categorical field-error rate across this fixed common set.
+
+Primitive precision degradation is computed on the 32 Z1 primitive types only.
+
+H1c whole-scene paired bootstrap:
+
+- 10,000 resamples;
+- RNG seed `71102`;
+- unit = canonical scene;
+- recompute relative pooled-error reduction in every resample;
+- report percentile 2.5% / 97.5%.
+
+The neural raw input and D-PIT structured input must be generated from the same canonical scene text. D-PIT may receive its historical `evidence` / `teaching_signal` object shape, but it may not receive semantic information absent from the neural serialization.
+
 ## 18. Zero-fresh preflight
 
 Preflight must use only synthetic fixture scenes/text and non-scientific fixture RNG seeds.
