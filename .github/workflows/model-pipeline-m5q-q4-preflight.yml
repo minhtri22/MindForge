@@ -1,0 +1,59 @@
+name: Model Pipeline M5Q Q4 Zero-Science Preflight
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/model-pipeline-m5-quantization-qualification
+    paths:
+      - 'pipeline/m5q_q4.py'
+      - 'tools/m5q_q4_qualification.py'
+      - 'tools/m5q_q4_preflight.py'
+      - 'tests/test_model_pipeline_m5q_q4.py'
+      - 'artifacts/model-training-pipeline/m5_quantization/Q4_K_M_IMPLEMENTATION_LOCK.json'
+      - 'artifacts/model-training-pipeline/m5_quantization/Q4_K_M_IMPLEMENTATION_AUTHORIZATION.json'
+      - '.github/workflows/model-pipeline-m5q-q4-preflight.yml'
+
+jobs:
+  q4-zero-science-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen M5 test dependencies
+        run: python -m pip install -r requirements-pipeline-m5.txt
+
+      - name: Q4 implementation zero-outcome unit and contract tests
+        run: |
+          python -m pytest -q tests/test_model_pipeline_m5.py
+          python -m pytest -q tests/test_model_pipeline_m5q_q8.py
+          python -m pytest -q tests/test_model_pipeline_m5q_q4.py
+
+      - name: Zero-science locked provenance preflight
+        run: |
+          set -o pipefail
+          if [ -f artifacts/model-training-pipeline/m5_quantization/Q4_K_M_IMPLEMENTATION_LOCK.json ]; then
+            python -m tools.m5q_q4_preflight --workspace . --json | tee q4-zero-science-preflight.json
+          else
+            echo "Q4 implementation lock not committed yet; zero-outcome tests only."
+          fi
+
+      - name: Prove no scientific execution
+        run: |
+          test ! -e .m5q-q4-runs
+          test ! -e model-q4_k_m.gguf
+          echo "quantization_executed=false"
+          echo "q4_scientific_execution_executed=false"
+          echo "m6_authorized=false"
+
+      - name: Upload zero-science preflight evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m5q-q4-zero-science-preflight
+          path: q4-zero-science-preflight.json
+          if-no-files-found: ignore
