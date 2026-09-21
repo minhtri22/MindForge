@@ -252,7 +252,7 @@ def save_full_canonical(
     # Model/config serialization remains the already-qualified M2 path.
     model.save_pretrained(output_dir, safe_serialization=True, max_shard_size="1GB")
 
-    # M5.1 proved tokenizer.save_pretrained() mutates the canonical tokenizer
+    # M5.1 proved tokenizer reserialization mutates the canonical tokenizer
     # representation incompatibly with the pinned llama.cpp converter. Preserve
     # exact tokenizer source assets instead of reconstructing/serializing them.
     tokenizer_manifest = copy_pinned_tokenizer_assets(source_snapshot, output_dir)
