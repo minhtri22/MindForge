@@ -1,0 +1,144 @@
+name: MK1 Training Input Bundle
+
+permissions:
+  contents: read
+  actions: read
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - "model_kernel/mk1/TRAINING_BUNDLE_TRIGGER_v0.1.md"
+
+jobs:
+  build-training-bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify bundle authorization
+        run: |
+          grep -q 'TRAINING_BUNDLE_CONSTRUCTION_LOCK_PASS' model_kernel/mk1/TRAINING_BUNDLE_CONSTRUCTION_LOCK.md
+          grep -q 'TRIGGER_TRAINING_INPUT_BUNDLE_v0.1' model_kernel/mk1/TRAINING_BUNDLE_TRIGGER_v0.1.md
+
+      - name: Verify upstream artifact metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10619711251 --jq '.digest')" = "sha256:b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997"
+          test "$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10622602143 --jq '.digest')" = "sha256:3dc96112fb76f84df9cbd983c046af9b9a98f20b51abbe24c5ea67b15da405c6"
+          test "$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10626846126 --jq '.digest')" = "sha256:01579c6643003aab615dfd9c530f5c1a0868250072f7e922e8aa90968af88ff3"
+
+      - name: Download frozen materialization artifact
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10619711251
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35553551910
+          path: source_materialization
+          digest-mismatch: error
+
+      - name: Download frozen tokenizer artifact
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10622602143
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35562370974
+          path: source_tokenizer
+          digest-mismatch: error
+
+      - name: Download frozen paired-init and schedule artifact
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10626846126
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35572770344
+          path: source_pretraining
+          digest-mismatch: error
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Construct immutable training-only bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir training_bundle_v0_1
+          cp source_materialization/mk1_materialized_v0_1/train.jsonl training_bundle_v0_1/train.jsonl
+          cp source_materialization/mk1_materialized_v0_1/validation.jsonl training_bundle_v0_1/validation.jsonl
+          cp source_tokenizer/mk1_tokenizer_freeze_v0_1/mk1-tokenizer.json training_bundle_v0_1/mk1-tokenizer.json
+          for seed in 71001 71002 71003 71004 71005; do
+            cp "source_pretraining/mk1_pretraining_audit_v0_1/paired_init_seed_${seed}.pt" "training_bundle_v0_1/paired_init_seed_${seed}.pt"
+            cp "source_pretraining/mk1_pretraining_audit_v0_1/schedule_seed_${seed}.jsonl" "training_bundle_v0_1/schedule_seed_${seed}.jsonl"
+          done
+
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          root = Path("training_bundle_v0_1")
+          expected = {
+              "train.jsonl": "5bf1b1b5a193ce46baee9aee97e7e03a1e8c2f66bee8216c30cf518a6fb1468a",
+              "validation.jsonl": "8c1eed22186d43b3311c7bbb63edfce7ba13880a11c528529bc411b9062a1495",
+              "mk1-tokenizer.json": "e91c26992c5eafbb33ca1f6c0d2f40b8c79361dc57c95d0a265123ca70974829",
+              "paired_init_seed_71001.pt": "b74b7ab8a67a11c076a94f9df5325a616231acdb99639c3a94424d65382dd8e8",
+              "paired_init_seed_71002.pt": "7b2dcc6ab1cd377fedc6a0eb32809719fcac911cfb4cbd235684f9b4f10b621e",
+              "paired_init_seed_71003.pt": "774ad2e2e5f0dddac8bfd67ee04537854309c983043314c82d5841e7a82ca860",
+              "paired_init_seed_71004.pt": "25a96874e33828d9e9dd5de85a98a12028632d138c40c6f3a70760e0ff0b3d32",
+              "paired_init_seed_71005.pt": "76c427debc7e68012fe5be6b5bf409c8ac49fff9bc2346e6b022befdf37c3730",
+              "schedule_seed_71001.jsonl": "18262d3bec5fde01ebdb43bac7afb8142c32dd2aecff8245800435202270eaac",
+              "schedule_seed_71002.jsonl": "8de8516dd6802106d4cf7fe36745a8636e888d9c5c711d76c7870fc2582f64b3",
+              "schedule_seed_71003.jsonl": "3e5eb4ba3dbb297ce2176361544773db54ca8a1c3e3ddb89aa1367049bd18077",
+              "schedule_seed_71004.jsonl": "e4839585f54ad14f02bd8c029d3461b6cb25063f044408cc5eeee08a8d064c5e",
+              "schedule_seed_71005.jsonl": "52b5ce49529db34761d093cc8aa5c0a04ae19e6224e5d80e8bcf998f8dc435d9",
+          }
+          def sha(path):
+              h=hashlib.sha256()
+              with path.open("rb") as f:
+                  for chunk in iter(lambda:f.read(1024*1024),b""):
+                      h.update(chunk)
+              return h.hexdigest()
+          observed={}
+          for name,digest in expected.items():
+              p=root/name
+              if not p.is_file():
+                  raise SystemExit(f"missing {name}")
+              got=sha(p)
+              if got != digest:
+                  raise SystemExit(f"hash mismatch {name}: {got}")
+              observed[name]={"sha256":got,"bytes":p.stat().st_size}
+          actual={p.name for p in root.iterdir() if p.is_file()}
+          if actual != set(expected):
+              raise SystemExit(f"unexpected file set before manifest: {sorted(actual-set(expected))}")
+          manifest={
+              "schema":"MK1-TRAINING-BUNDLE-v0.1",
+              "source_artifacts":{
+                  "materialization":{"run_id":35553551910,"artifact_id":10619711251,"digest":"sha256:b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997"},
+                  "tokenizer":{"run_id":35562370974,"artifact_id":10622602143,"digest":"sha256:3dc96112fb76f84df9cbd983c046af9b9a98f20b51abbe24c5ea67b15da405c6"},
+                  "paired_init_schedule":{"run_id":35572770344,"artifact_id":10626846126,"digest":"sha256:01579c6643003aab615dfd9c530f5c1a0868250072f7e922e8aa90968af88ff3"}
+              },
+              "files":observed,
+              "scientific_training_executed":False
+          }
+          (root/"TRAINING_BUNDLE_MANIFEST.json").write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+          final={p.name for p in root.iterdir() if p.is_file()}
+          if final != set(expected)|{"TRAINING_BUNDLE_MANIFEST.json"}:
+              raise SystemExit("final bundle file set mismatch")
+          print(json.dumps(manifest,indent=2,sort_keys=True))
+          PY
+
+      - name: Upload immutable training-only bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-training-input-bundle-v0-1
+          path: training_bundle_v0_1/
+          if-no-files-found: error
+          compression-level: 1
