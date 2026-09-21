@@ -1,0 +1,68 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q8-zero-science-preflight-evidence-v1",
+  "program": "M5Q",
+  "target": "q8_0",
+  "verdict": "PASS",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "scientific_implementation_commit": "68bbd071ba78f6325748159703a90232d69e4ade",
+  "implementation_lock_commit": "5c0935d37dae50811bcf3ea646b9ef4df99d6ced",
+  "helper_repair_commit": "9245fa530aba38f6a9c5b36550ec9ee7209f7f77",
+  "invalid_preflight": {
+    "run_id": 35624467187,
+    "job_id": 106415285615,
+    "artifact_id": 10651021689,
+    "classification": "INVALID_ZERO_SCIENCE_PREFLIGHT_HELPER",
+    "scientific_execution_consumed": false
+  },
+  "authoritative_preflight": {
+    "run_id": 35624821038,
+    "job_id": 106416489333,
+    "conclusion": "success",
+    "artifact_id": 10651022297,
+    "artifact_name": "m5q-q8-zero-science-preflight",
+    "artifact_zip_sha256": "f823a1041853a12e6513a63326e20d684ec455e4e817ce3c756b4f91d83e65a9"
+  },
+  "tests": {
+    "existing_m5": {
+      "passed": 12,
+      "failed": 0
+    },
+    "q8_contract": {
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "preflight_result": {
+    "status": "PASS",
+    "all_locked_blobs_match": true,
+    "q8_target_literal_present": true,
+    "q8_target_key_present": true,
+    "no_q4_quantizer_literal_in_q8_module": true,
+    "no_general_m5_target_loop": true,
+    "q4_hard_false_in_result": true,
+    "m6_hard_false_in_result": true,
+    "m6_auto_open_hard_false": true,
+    "runner_calls_q8_only_entrypoint": true,
+    "preflight_does_not_import_q8_runtime": true
+  },
+  "execution_boundary": {
+    "quantization_executed": false,
+    "q8_scientific_execution_executed": false,
+    "q4_executed": false,
+    "q4_execution_authorized": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "parent": {
+    "m5_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_artifact_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b"
+  },
+  "state_after_preflight": {
+    "q8_0": "READY_FOR_ONE_SHOT_EXECUTION",
+    "q4_k_m": "CLOSED_NOT_EXECUTED",
+    "m6": "CLOSED_NOT_AUTHORIZED",
+    "next_valid_action": "Q8_0_ONE_SHOT_SCIENTIFIC_EXECUTION"
+  }
+}

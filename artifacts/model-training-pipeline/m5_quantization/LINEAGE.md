@@ -110,3 +110,45 @@ The scientific Q8_0 implementation commit remains exactly:
 
 No model/config/fixture/inference/quantizer target/parity rule changed.
 No quantization executed. Q4 and M6 remain closed.
+
+
+## 2026-09-21 — Q8_0 zero-science preflight PASS
+
+Authoritative requalification after the bounded helper repair:
+
+```text
+run: 35624821038
+job: 106416489333
+conclusion: success
+artifact: 10651022297
+artifact zip sha256:
+f823a1041853a12e6513a63326e20d684ec455e4e817ce3c756b4f91d83e65a9
+```
+
+The emitted zero-science result is `PASS`.
+
+All locked scientific/helper dependency blobs matched their expected Git blob
+identities. Static checks proved that the Q8 implementation is target-specific,
+does not enter the general M5 target loop, hard-codes Q4 as unexecuted, hard
+blocks M6 and automatic M6 opening, and keeps the preflight itself detached from
+the Q8 runtime implementation.
+
+Regression evidence remained:
+
+```text
+existing M5 tests: 12/12 PASS
+Q8_0 contract tests: 8/8 PASS
+```
+
+Execution boundary at preflight closure:
+
+```text
+quantization_executed: false
+Q8_0 scientific execution: NOT RUN
+Q4_K_M: NOT RUN / NOT AUTHORIZED
+M6: CLOSED / NOT AUTHORIZED
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+Q8_0 is now `READY_FOR_ONE_SHOT_EXECUTION`. This lineage entry does not execute
+or adjudicate Q8_0.
