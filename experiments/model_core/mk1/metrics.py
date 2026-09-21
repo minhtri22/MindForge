@@ -232,7 +232,11 @@ def pit_v3_common_view(result: dict[str, Any]) -> dict[str, Any]:
         "z1": z1,
         "z3_evidence_scope": SCOPES.index(str(ev["scope_level"]).upper()),
         "z3_asserted_scope": SCOPES.index(str(ts["asserted_scope"]).upper()),
-        "z3_scope_relation": SCOPE_RELATIONS.index(str(support["scope_relation"]).upper()),
+        "z3_scope_relation": (
+            SCOPE_RELATIONS.index(str(support["scope_relation"]).upper())
+            if str(support["scope_relation"]).upper() in SCOPE_RELATIONS
+            else None
+        ),
         "z4_common": z4,
         "c1": c1,
     }
@@ -251,8 +255,20 @@ def _common_field_errors(
     for gold, pred in zip(gold_z["z1"], predicted_z["z1"]):
         errors += int(int(gold) != int(pred))
         fields += 1
-    for key in ("z3_evidence_scope", "z3_asserted_scope", "z3_scope_relation"):
+    for key in ("z3_evidence_scope", "z3_asserted_scope"):
         errors += int(int(gold_z[key]) != int(predicted_z[key]))
+        fields += 1
+    contextual = SCOPES.index("CONTEXTUAL")
+    include_scope_relation = (
+        int(gold_z["z3_evidence_scope"]) != contextual
+        and int(gold_z["z3_asserted_scope"]) != contextual
+    )
+    if include_scope_relation:
+        predicted_relation = predicted_z.get("z3_scope_relation")
+        errors += int(
+            predicted_relation is None
+            or int(gold_z["z3_scope_relation"]) != int(predicted_relation)
+        )
         fields += 1
     z4_index = {name: i for i, name in enumerate(Z4_FIELDS)}
     if pit:
@@ -313,6 +329,11 @@ def h1c_common_field_summary(rows: list[dict[str, Any]]) -> dict[str, float]:
         "pit_primitive_precision": float(pit_precision),
         "primitive_precision_delta": float(m1_precision - pit_precision),
         "common_fields_per_scene": float(total_fields / len(rows)),
+        "scope_relation_coverage": float(np.mean([
+            int(row["gold_z"]["z3_evidence_scope"]) != SCOPES.index("CONTEXTUAL")
+            and int(row["gold_z"]["z3_asserted_scope"]) != SCOPES.index("CONTEXTUAL")
+            for row in rows
+        ])),
     }
 
 
