@@ -1,6 +1,6 @@
 # MK-1 Tokenizer Freeze Implementation Lock v0.1
 
-Status: **PENDING INDEPENDENT STATIC REVIEW / SCIENTIFIC TOKENIZER FIT NOT AUTHORIZED**
+Status: **PASS / TOKENIZER FREEZE IMPLEMENTATION HASH LOCKED / ONE SCIENTIFIC FIT AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -10,7 +10,7 @@ Source HEAD before this lock:
 
 Candidate state:
 
-`TOKENIZER_FREEZE_IMPLEMENTATION_LOCK_PENDING_REVIEW`
+`TOKENIZER_FREEZE_IMPLEMENTATION_LOCK_PASS`
 
 ## 1. Bound specification and evidence
 
@@ -131,3 +131,24 @@ Only then may status become:
 `TOKENIZER_FREEZE_IMPLEMENTATION_LOCK_PASS`
 
 and exactly one scientific tokenizer-fit run may be triggered.
+
+
+## 9. Independent review closure
+
+Independent review after candidate-lock creation established:
+
+- candidate-lock commit changed only this lock document;
+- tokenizer trigger did not exist during review;
+- workflow blob remained `fc7b5c310a6e6b37fa45e84ca0eddc044f8d778b`;
+- runner blob remained `ac9456d80935133cae27ebe91fed886479d8501b`;
+- workflow references the tokenizer trigger path exactly for push watch and authorization guard;
+- runner source orders TRAIN-only fit -> tokenizer JSON save -> tokenizer SHA freeze -> metadata validation -> post-freeze VALIDATION/PRISTINE parsing;
+- unchanged Git blobs preserve the previously computed SHA-256 bindings for spec, workflow, runner, tokenizer source and data-audit closure.
+
+Formal verdict:
+
+`TOKENIZER_FREEZE_IMPLEMENTATION_LOCK_PASS`
+
+Exactly one canonical tokenizer-freeze execution is now authorized.
+
+Scientific model initialization and training remain forbidden.
