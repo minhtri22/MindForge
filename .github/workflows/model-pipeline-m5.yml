@@ -1,0 +1,121 @@
+name: Model Pipeline M5 llama.cpp QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - docs/evidence-model-training-pipeline
+    paths:
+      - 'pipeline/**'
+      - 'tests/test_model_pipeline_m0.py'
+      - 'tests/test_model_pipeline_m1.py'
+      - 'tests/test_model_pipeline_m2_unit.py'
+      - 'tests/test_model_pipeline_m3.py'
+      - 'tests/test_model_pipeline_m4.py'
+      - 'tests/test_model_pipeline_m5.py'
+      - 'requirements-pipeline-m5.txt'
+      - 'docs/model-training-pipeline/**'
+      - '.github/workflows/model-pipeline-m5.yml'
+  pull_request:
+    paths:
+      - 'pipeline/**'
+      - 'tests/test_model_pipeline_m5.py'
+      - 'requirements-pipeline-m5.txt'
+      - 'docs/model-training-pipeline/**'
+
+jobs:
+  m5-llama-cpp:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install M5 pipeline dependencies
+        run: python -m pip install -r requirements-pipeline-m5.txt
+
+      - name: M0 regression
+        run: python -m pytest -q tests/test_model_pipeline_m0.py
+      - name: M1 regression
+        run: python -m pytest -q tests/test_model_pipeline_m1.py
+      - name: M2 checkpoint regression
+        run: python -m pytest -q tests/test_model_pipeline_m2_unit.py
+      - name: M3 governance regression
+        run: python -m pytest -q tests/test_model_pipeline_m3.py
+      - name: M4 reasoning regression
+        run: python -m pytest -q tests/test_model_pipeline_m4.py
+      - name: M5 unit tests
+        run: python -m pytest -q tests/test_model_pipeline_m5.py
+
+      - name: Checkout exact pinned llama.cpp source
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(pathlib.Path("docs/model-training-pipeline/runtime/llama_cpp.lock.json").read_text())
+          root = pathlib.Path(".m5-tools")
+          source = root / "llama.cpp"
+          root.mkdir(exist_ok=True)
+          subprocess.run(["git", "init", str(source)], check=True)
+          subprocess.run(["git", "-C", str(source), "remote", "add", "origin", lock["source_url"]], check=True)
+          subprocess.run(["git", "-C", str(source), "fetch", "--depth", "1", "origin", lock["commit_sha"]], check=True)
+          subprocess.run(["git", "-C", str(source), "checkout", "--detach", "FETCH_HEAD"], check=True)
+          actual = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
+          if actual != lock["commit_sha"]:
+              raise SystemExit(f"llama.cpp SHA mismatch: {actual}")
+          print(actual)
+          PY
+
+      - name: Create isolated converter environment
+        run: |
+          python -m venv --system-site-packages .m5-tools/convert-venv
+          .m5-tools/convert-venv/bin/python -m pip install             -r .m5-tools/llama.cpp/requirements/requirements-convert_legacy_llama.txt
+
+      - name: Build llama.cpp from lock and emit build manifest
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(pathlib.Path("docs/model-training-pipeline/runtime/llama_cpp.lock.json").read_text())
+          source = pathlib.Path(".m5-tools/llama.cpp").resolve()
+          build = source / "build"
+          configure = ["cmake", "-S", str(source), "-B", str(build), *lock["build"]["flags"]]
+          subprocess.run(configure, check=True)
+          compile_cmd = [
+              "cmake", "--build", str(build),
+              "--target", *lock["build"]["targets"],
+              "-j2",
+          ]
+          subprocess.run(compile_cmd, check=True)
+          commit = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
+          manifest = {
+              "schema": "mindforge-llama-cpp-build-v1",
+              "source_commit": commit,
+              "flags": lock["build"]["flags"],
+              "targets": lock["build"]["targets"],
+              "configure_command": configure,
+              "build_command": compile_cmd,
+          }
+          pathlib.Path(".m5-tools/build_manifest.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+      - name: M5 high-fidelity then quantized runtime qualification
+        run: |
+          python -m pipeline runtime-qualify             -c docs/model-training-pipeline/examples/end_to_end_small.yaml             --workspace .             --runs-root .m5-runs             --llama-source .m5-tools/llama.cpp             --llama-cli .m5-tools/llama.cpp/build/bin/llama-cli             --llama-quantize .m5-tools/llama.cpp/build/bin/llama-quantize             --converter-python .m5-tools/convert-venv/bin/python             --build-manifest .m5-tools/build_manifest.json             --json
+
+      - name: Disk after M5
+        if: always()
+        run: df -h

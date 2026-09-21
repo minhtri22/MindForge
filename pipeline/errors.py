@@ -73,3 +73,19 @@ class ReasoningParseError(ReasoningLayerError):
 
 class UnsupportedReasoningMode(ReasoningLayerError):
     code = "UNSUPPORTED_REASONING_MODE"
+
+
+class RuntimeQualificationError(PipelineError):
+    code = "RUNTIME_QUALIFICATION_ERROR"
+
+
+class LlamaCppLockError(RuntimeQualificationError):
+    code = "LLAMA_CPP_LOCK_ERROR"
+
+
+class LlamaCppConversionError(RuntimeQualificationError):
+    code = "LLAMA_CPP_CONVERSION_ERROR"
+
+
+class RuntimeParityError(RuntimeQualificationError):
+    code = "RUNTIME_PARITY_ERROR"

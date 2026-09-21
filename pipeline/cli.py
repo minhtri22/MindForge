@@ -46,7 +46,17 @@ def build_parser() -> argparse.ArgumentParser:
     m4.add_argument("--runs-root", default="runs")
     m4.add_argument("--json", action="store_true", dest="as_json")
 
-    status = sub.add_parser("status", help="read the latest M0/M1/M2/M3/M4 qualification result")
+    m5 = sub.add_parser("runtime-qualify", help="M5 llama.cpp export/runtime qualification")
+    _common_config_args(m5)
+    m5.add_argument("--runs-root", default="runs")
+    m5.add_argument("--llama-source", required=True)
+    m5.add_argument("--llama-cli", required=True)
+    m5.add_argument("--llama-quantize", required=True)
+    m5.add_argument("--converter-python", required=True)
+    m5.add_argument("--build-manifest", required=True)
+    m5.add_argument("--json", action="store_true", dest="as_json")
+
+    status = sub.add_parser("status", help="read the latest M0/M1/M2/M3/M4/M5 qualification result")
     status.add_argument("run_dir")
 
     return parser
@@ -134,9 +144,33 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"qualification_hash={result.qualification_hash}")
             return 0
 
+        if args.command == "runtime-qualify":
+            from .m5 import run_m5_qualification
+
+            result = run_m5_qualification(
+                args.config,
+                args.workspace,
+                args.runs_root,
+                llama_source=args.llama_source,
+                llama_cli=args.llama_cli,
+                llama_quantize=args.llama_quantize,
+                converter_python=args.converter_python,
+                build_manifest=args.build_manifest,
+            )
+            if args.as_json:
+                print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+            else:
+                print(f"PASS: M5 {result.run_id}")
+                print(f"run_dir={result.run_dir}")
+                print(f"high_fidelity={result.high_fidelity_dtype}")
+                print(f"quantized_passed={result.quantized_passed}/{len(result.quantized_targets)}")
+                print(f"adjudication_hash={result.adjudication_hash}")
+            return 0
+
         if args.command == "status":
             run_dir = Path(args.run_dir)
             candidates = [
+                run_dir / "m5/m5_result.json",
                 run_dir / "m4_result.json",
                 run_dir / "m3/m3_result.json",
                 run_dir / "m2/m2_result.json",

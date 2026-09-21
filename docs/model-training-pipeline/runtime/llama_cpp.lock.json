@@ -1,0 +1,30 @@
+{
+  "schema": "mindforge-llama-cpp-lock-v1",
+  "source_url": "https://github.com/ggml-org/llama.cpp.git",
+  "commit_sha": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+  "converter": {
+    "path": "convert_hf_to_gguf.py",
+    "git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "required_supported_architecture": "Qwen2ForCausalLM"
+  },
+  "build": {
+    "generator": "cmake",
+    "flags": [
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DGGML_NATIVE=OFF",
+      "-DGGML_OPENMP=OFF",
+      "-DLLAMA_CURL=OFF",
+      "-DLLAMA_BUILD_SERVER=OFF",
+      "-DLLAMA_BUILD_TESTS=OFF",
+      "-DLLAMA_BUILD_EXAMPLES=OFF",
+      "-DLLAMA_BUILD_UI=OFF",
+      "-DBUILD_SHARED_LIBS=OFF"
+    ],
+    "targets": [
+      "llama-cli",
+      "llama-quantize"
+    ]
+  },
+  "high_fidelity_policy": "f16",
+  "quantization_policy": "after_high_fidelity_pass_only"
+}
