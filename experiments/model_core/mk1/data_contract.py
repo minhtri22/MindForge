@@ -1,6 +1,7 @@
 """Deterministic MK-1 canonical-scene and surface contract.
 
-This module defines later scientific materialization but does not execute it.
+Scientific materialization remains externally gated. Fixture/projection QA may use
+non-scientific ordinals without invoking any reserved scientific scene ID.
 """
 
 from __future__ import annotations
@@ -31,6 +32,21 @@ from .contracts import (
 from .recompose import canonical_equal, recompose_gold_z
 
 _Z1_INDEX = {name: i for i, name in enumerate(Z1_LABELS)}
+_SCOPE_INDEX = {name: i for i, name in enumerate(SCOPES)}
+
+_RELATION_MODIFIERS = (
+    "EXPLICIT_SUPERSESSION",
+    "IMPLICIT_SELECTION",
+    "CORRECTION",
+    "CONTEXT_SPLIT",
+    "EXCEPTS",
+    None,
+)
+
+_QUANTIFIER_SLOTS = tuple(QUANTIFIER_LABELS) + (None,)
+_TEMPORAL_SLOTS = tuple(TEMPORAL_LABELS) + (None,)
+_FALLBACK_SLOTS = tuple(FALLBACK_LABELS) + (None,)
+_UNCERTAINTY_SLOTS = tuple(UNCERTAINTY_LABELS) + (None,)
 
 
 @dataclass(frozen=True)
@@ -67,13 +83,17 @@ def split_for_scientific_scene_id(scene_id: int) -> str:
     raise ValueError("scene id is outside the frozen scientific namespaces")
 
 
-def _choice_or_none(values: tuple[str, ...], code: int) -> str | None:
-    slot = code % (len(values) + 1)
-    return values[slot] if slot < len(values) else None
+def scientific_ordinal(scene_id: int) -> int:
+    split = split_for_scientific_scene_id(scene_id)
+    if split == "TRAIN":
+        return scene_id - TRAIN_SCENE_RANGE.start
+    if split == "VALIDATION":
+        return 2_000 + (scene_id - VALIDATION_SCENE_RANGE.start)
+    return 2_400 + (scene_id - CONFIRMATORY_SCENE_RANGE.start)
 
 
 def _scope_relation(evidence_scope: int, asserted_scope: int) -> int:
-    contextual = SCOPES.index("CONTEXTUAL")
+    contextual = _SCOPE_INDEX["CONTEXTUAL"]
     if (evidence_scope == contextual) != (asserted_scope == contextual):
         return SCOPE_RELATIONS.index("INCOMPARABLE")
     if evidence_scope == asserted_scope:
@@ -83,22 +103,71 @@ def _scope_relation(evidence_scope: int, asserted_scope: int) -> int:
     return SCOPE_RELATIONS.index("BROADER")
 
 
-def build_gold_z(index: int) -> dict[str, Any]:
-    if index < 0:
-        raise ValueError("scene index must be non-negative")
+def _scope_pair(ordinal: int) -> tuple[int, int]:
+    mode = ordinal % 4
+    k = ordinal // 4
+    contextual = _SCOPE_INDEX["CONTEXTUAL"]
+    if mode == 0:
+        scope = k % 8
+        return scope, scope
+    if mode == 1:
+        evidence_scope = 1 + (k % 6)
+        return evidence_scope, evidence_scope - 1
+    if mode == 2:
+        evidence_scope = k % 6
+        return evidence_scope, evidence_scope + 1
+    if k % 2 == 0:
+        return contextual, (k // 2) % 7
+    return (k // 2) % 7, contextual
 
-    relation = _choice_or_none(RELATION_LABELS, index)
-    quantifier = _choice_or_none(QUANTIFIER_LABELS, index * 3 + 1)
-    temporal = _choice_or_none(TEMPORAL_LABELS, index * 5 + 2)
-    fallback = _choice_or_none(FALLBACK_LABELS, index * 7 + 3)
-    uncertainty = _choice_or_none(UNCERTAINTY_LABELS, index * 11 + 4)
 
-    evidence_scope = (index * 3 + 1) % len(SCOPES)
-    asserted_scope = (index * 5 + 2) % len(SCOPES)
+def _scope_supported(evidence_scope: int, asserted_scope: int) -> bool:
+    contextual = _SCOPE_INDEX["CONTEXTUAL"]
+    if asserted_scope == contextual:
+        return True
+    if evidence_scope == contextual:
+        return asserted_scope in {
+            _SCOPE_INDEX["OBSERVATION"],
+            _SCOPE_INDEX["TURN"],
+            _SCOPE_INDEX["SESSION"],
+            contextual,
+        }
+    return asserted_scope <= evidence_scope
+
+
+def _support_bit(ordinal: int, salt: int) -> bool:
+    return ((ordinal + 3 * salt) % 4) < 2
+
+
+def scalar_permutation_value(ordinal: int) -> float:
+    if ordinal < 0:
+        raise ValueError("ordinal must be non-negative")
+    return float(((7_919 * ordinal + 1_237) % 10_007) + 1)
+
+
+def build_gold_z(ordinal: int) -> dict[str, Any]:
+    if ordinal < 0:
+        raise ValueError("scene ordinal must be non-negative")
+
+    conflict_present = ordinal % 2 == 0
+    relation_modifier = _RELATION_MODIFIERS[(ordinal // 2) % len(_RELATION_MODIFIERS)]
+    quantifier = _QUANTIFIER_SLOTS[ordinal % len(_QUANTIFIER_SLOTS)]
+    temporal = _TEMPORAL_SLOTS[(ordinal + 2) % len(_TEMPORAL_SLOTS)]
+    fallback = _FALLBACK_SLOTS[(ordinal + 1) % len(_FALLBACK_SLOTS)]
+    uncertainty = _UNCERTAINTY_SLOTS[(ordinal + 2) % len(_UNCERTAINTY_SLOTS)]
+
+    evidence_scope, asserted_scope = _scope_pair(ordinal)
     scope_relation = _scope_relation(evidence_scope, asserted_scope)
-    claim_operational = index % 2 == 0
+    claim_operational = (ordinal // 2) % 2 == 0
 
-    z1_names = [name for name in (relation, quantifier, temporal, fallback, uncertainty) if name]
+    z1_names: list[str] = []
+    if conflict_present:
+        z1_names.append("CONFLICT_EXISTS")
+    if relation_modifier is not None:
+        z1_names.append(relation_modifier)
+    for name in (quantifier, temporal, fallback, uncertainty):
+        if name is not None:
+            z1_names.append(name)
     z1_names.append(f"{SCOPES[asserted_scope]}_SCOPE")
     if claim_operational:
         z1_names.append("OPERATIONAL_SIGNAL")
@@ -115,28 +184,48 @@ def build_gold_z(index: int) -> dict[str, Any]:
         "APPROX_DURATION": "APPROX",
     }.get(temporal, "NONE")
 
-    base_value = float(1 + (index % 97))
+    value = scalar_permutation_value(ordinal)
     scalars = [0.0, 0.0, 0.0, 0.0]
     scalar_mask = [0, 0, 0, 0]
     if quantifier in {"EXACT_THRESHOLD", "LOWER_BOUND_THRESHOLD", "UPPER_BOUND_THRESHOLD"}:
-        scalars[0], scalar_mask[0] = base_value, 1
+        scalars[0], scalar_mask[0] = value, 1
     if quantifier == "ORDINAL_TRIGGER":
-        scalars[1], scalar_mask[1] = float(1 + (index % 9)), 1
+        scalars[1], scalar_mask[1] = value, 1
     if temporal in {"EXACT_DURATION", "APPROX_DURATION", "EXPIRY_RULE"}:
-        scalars[2], scalar_mask[2] = float(60 * (1 + index % 120)), 1
+        scalars[2], scalar_mask[2] = value, 1
     if temporal == "PERIODIC_RULE":
-        scalars[3], scalar_mask[3] = float(60 * (1 + index % 60)), 1
+        scalars[3], scalar_mask[3] = value, 1
 
-    resolution = relation in {"EXPLICIT_SUPERSESSION", "IMPLICIT_SELECTION", "CORRECTION"}
+    resolution_present = relation_modifier in {
+        "EXPLICIT_SUPERSESSION",
+        "IMPLICIT_SELECTION",
+        "CORRECTION",
+    }
+    numeric_value_asserted = quantifier in {
+        "EXACT_THRESHOLD",
+        "LOWER_BOUND_THRESHOLD",
+        "UPPER_BOUND_THRESHOLD",
+    }
+    temporal_rule_asserted = temporal in {
+        "EXACT_DURATION",
+        "APPROX_DURATION",
+        "PERIODIC_RULE",
+        "EXPIRY_RULE",
+    }
+    fallback_asserted = fallback is not None
+
     z4 = [
-        int(relation == "CONFLICT_EXISTS"),
-        int(resolution and index % 4 != 0),
-        int(scope_relation != SCOPE_RELATIONS.index("BROADER")),
-        int(quantifier is not None and index % 3 != 0),
-        int(temporal is not None and index % 3 != 1),
-        int(fallback is not None and index % 3 != 2),
-        int(claim_operational and index % 4 != 0),
+        int(conflict_present),
+        int(resolution_present and _support_bit(ordinal, 1)),
+        int(_scope_supported(evidence_scope, asserted_scope)),
+        int((not numeric_value_asserted) or _support_bit(ordinal, 2)),
+        int((not temporal_rule_asserted) or _support_bit(ordinal, 3)),
+        int((not fallback_asserted) or _support_bit(ordinal, 4)),
+        int((not claim_operational) or _support_bit(ordinal, 5)),
     ]
+
+    if not any(scalar_mask):
+        raise AssertionError("Amendment 003 requires at least one present scalar per scene")
 
     return {
         "z1": z1,
@@ -234,8 +323,8 @@ def render_surface(scene: CanonicalScene, family: str) -> str:
     raise ValueError(f"unknown renderer family: {family}")
 
 
-def build_scene_from_index(index: int, *, scene_id: str, split: str) -> CanonicalScene:
-    gold_z = build_gold_z(index)
+def build_scene_from_ordinal(ordinal: int, *, scene_id: str, split: str) -> CanonicalScene:
+    gold_z = build_gold_z(ordinal)
     gold_c = recompose_gold_z(gold_z)
     asserted = SCOPES[gold_z["z3_asserted_scope"]].lower()
     evidence_scope = SCOPES[gold_z["z3_evidence_scope"]].lower()
@@ -262,16 +351,19 @@ def build_scene_from_index(index: int, *, scene_id: str, split: str) -> Canonica
 
 def build_scientific_scene(scene_id: int) -> CanonicalScene:
     split = split_for_scientific_scene_id(scene_id)
-    start = {
-        "TRAIN": TRAIN_SCENE_RANGE.start,
-        "VALIDATION": VALIDATION_SCENE_RANGE.start,
-        "PRISTINE_CONFIRMATORY": CONFIRMATORY_SCENE_RANGE.start,
-    }[split]
-    return build_scene_from_index(scene_id - start, scene_id=str(scene_id), split=split)
+    return build_scene_from_ordinal(
+        scientific_ordinal(scene_id),
+        scene_id=str(scene_id),
+        split=split,
+    )
 
 
-def build_fixture_scene(index: int) -> CanonicalScene:
-    return build_scene_from_index(index, scene_id=f"fixture-{index:04d}", split="FIXTURE")
+def build_fixture_scene(ordinal: int) -> CanonicalScene:
+    return build_scene_from_ordinal(
+        ordinal,
+        scene_id=f"fixture-{ordinal:04d}",
+        split="FIXTURE",
+    )
 
 
 def surfaces_for_scene(scene: CanonicalScene) -> list[SurfaceRecord]:
@@ -317,9 +409,14 @@ def materialize_scientific_split(split: str, output_path: str | Path) -> dict[st
     destination.parent.mkdir(parents=True, exist_ok=True)
     count = 0
     scene_ids: set[str] = set()
-    with destination.open("w", encoding="utf-8", newline="\n") as handle:
+    with destination.open("x", encoding="utf-8", newline="\n") as handle:
         for record in iter_scientific_split(split):
             handle.write(json.dumps(asdict(record), sort_keys=True) + "\n")
             count += 1
             scene_ids.add(record.scene_id)
-    return {"split": split, "surface_records": count, "canonical_scenes": len(scene_ids), "path": str(destination)}
+    return {
+        "split": split,
+        "surface_records": count,
+        "canonical_scenes": len(scene_ids),
+        "path": str(destination),
+    }
