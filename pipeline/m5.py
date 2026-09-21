@@ -501,6 +501,7 @@ def run_llama_fixture(
             "2",
             "--no-display-prompt",
             "--simple-io",
+            "--single-turn",
             "--log-disable",
             "--no-perf",
         ]

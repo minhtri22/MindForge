@@ -11,6 +11,7 @@ from pipeline.m5 import (
     build_gguf_manifest,
     evaluate_runtime_parity,
     git_blob_sha1,
+    run_llama_fixture,
     task_success,
     valid_runtime_output,
 )
@@ -130,3 +131,50 @@ def test_converter_python_path_preserves_venv_symlink(tmp_path: Path):
     assert absolute == link.absolute()
     assert absolute != link.resolve()
     assert absolute.is_symlink()
+
+
+def test_llama_fixture_enforces_single_turn_process_exit(monkeypatch, tmp_path: Path):
+    calls: list[list[str]] = []
+
+    def fake_run(command, *, cwd=None, label: str, combine: bool = False):
+        calls.append(list(command))
+        return {
+            "returncode": 0,
+            "stdout": "42\n",
+            "stderr": "",
+            "combined": "42\n",
+            "command_hash": "fixture",
+        }
+
+    monkeypatch.setattr("pipeline.m5._run", fake_run)
+    model = tmp_path / "model-f16.gguf"
+    model.write_bytes(b"GGUFfixture")
+
+    result = run_llama_fixture(
+        llama_cli=Path("llama-cli"),
+        model_path=model,
+        hf_baseline={
+            "rows": [
+                {
+                    "id": "arith-1",
+                    "type": "exact_answer",
+                    "expected": "42",
+                    "prompt_text": "<prompt>",
+                    "output": "42",
+                }
+            ]
+        },
+        inference={
+            "max_new_tokens": 128,
+            "context_length": 2048,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "top_k": 0,
+            "seed": 42,
+        },
+    )
+
+    assert result["task_success_count"] == 1
+    assert len(calls) == 1
+    assert "--single-turn" in calls[0]
+    assert calls[0].count("--single-turn") == 1
