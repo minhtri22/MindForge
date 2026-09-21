@@ -1,6 +1,6 @@
 # MK-1 Implementation Lock Manifest V2
 
-Status: **PENDING WORKFLOW REBIND REVIEW / ZERO-FRESH V0.2 NOT YET REAUTHORIZED**
+Status: **PASS / IMPLEMENTATION V2 HASH LOCKED / ZERO-FRESH V0.2 REAUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -180,3 +180,23 @@ Before a replacement run, independent review must verify:
 5. no materialization trigger has been created.
 
 Only then may V2 return to `IMPLEMENTATION_LOCK_MANIFEST_V2_PASS`.
+
+
+## 10. Workflow rebind review closure
+
+Independent review after the wiring repair proved:
+
+- rebind commit delta after workflow repair changed only this manifest;
+- workflow Git blob = `dd542e2be87bc7998fee4c5bde00944bb9288a6a`;
+- workflow SHA-256 = `9bbe9fb0a11ca55187e664ba9fe44e5e9189076c39b7cb8cc105d9e792f43ffa`;
+- `ZERO_FRESH_TRIGGER_v0.2.md` appears exactly twice in the workflow: push watch and authorization guard;
+- historical `ZERO_FRESH_TRIGGER_v0.1.md` appears zero times;
+- v0.2 marker and V2 manifest guard are present exactly once each;
+- materialization trigger still does not exist;
+- all non-workflow V2 bindings remain unchanged from the completed independent V2 hash review.
+
+Formal verdict restored:
+
+`IMPLEMENTATION_LOCK_MANIFEST_V2_PASS`
+
+A single replacement zero-fresh v0.2 run is authorized. The invalid run `35553272015` remains excluded from evidence.
