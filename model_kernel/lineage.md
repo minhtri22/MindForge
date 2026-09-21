@@ -543,3 +543,71 @@ Tài liệu đóng cổng:
 `38132025530a20cd3d27bc4cc2b9b4b7ab4be525`
 
 Trạng thái: ba namespace khoa học đã spent và frozen; không được regenerate âm thầm. Cổng tiếp theo là fit đúng một tokenizer từ TRAIN input_text בלבד, khóa hash và audit tokenized inputs. Huấn luyện vẫn bị chặn.
+
+
+## 2026-09-21 — Đóng cổng tokenizer khoa học TRAIN-only
+
+Cổng tokenizer được khóa trước khi fit bằng:
+
+`model_kernel/mk1/TOKENIZER_FREEZE_SPEC.md`
+
+Lần chạy đầu:
+
+`35562245262`
+
+không hợp lệ về mặt khoa học vì dừng trước khi tokenizer runner khởi tạo do thiếu dependency `torch` cho import package MindForge. Phân loại:
+
+`INVALID_BEFORE_TOKENIZER_FIT`
+
+Không corpus/tokenizer/result artifact nào được tạo trong run đó.
+
+Sau repair CI-only và re-review implementation lock, replacement canonical run:
+
+- run: `35562370974`;
+- head: `cad02173faed046dba2907b83fa32ee2ddf9c951`;
+- artifact id: `10622602143`;
+- artifact ZIP SHA-256: `3dc96112fb76f84df9cbd983c046af9b9a98f20b51abbe24c5ea67b15da405c6`.
+
+Fit contract:
+
+- chỉ dùng `TRAIN.input_text`;
+- 4.000 TRAIN surfaces;
+- VALIDATION không dùng để fit;
+- PRISTINE_CONFIRMATORY không dùng để fit;
+- corpus SHA-256: `3d154a62ad134c1ff72e7295bee68212282b2f83db9be39f1c432d5f7c4db566`.
+
+Tokenizer frozen:
+
+- SHA-256: `e91c26992c5eafbb33ca1f6c0d2f40b8c79361dc57c95d0a265123ca70974829`;
+- BPE + NFC + ByteLevel;
+- vocab requested: 16.384;
+- vocab actual: 3.261;
+- special token ids: 0 và 1.
+
+Freeze barrier được quan sát đúng thứ tự: tokenizer JSON được lưu và SHA-256 được khóa trước khi VALIDATION/PRISTINE được mở để encode.
+
+Tokenized manifests:
+
+- TRAIN SHA-256 `7be5c48156329e2239ac7345845f705a9b934d7bcc7e940e7dd128c0603a934e`, max length 183, total tokens 645.726;
+- VALIDATION SHA-256 `2b4fbbba5c6d5b975dc010d13f460b0f318c7a7b873bfc116258ddf20f96c16a`, max length 187, total tokens 130.216;
+- PRISTINE_CONFIRMATORY SHA-256 `005a8421bed215037c47901e30d091342ac9e9ee096b3982bc4d779f789f35ce`, max length 217, total tokens 213.944.
+
+Global gates:
+
+- max encoded length = 217 <= 512;
+- max token id = 3260 < 16384;
+- empty sequence = 0;
+- scientific model seed instantiated = false;
+- optimizer constructed = false;
+- model forward = false;
+- training executed = false.
+
+Formal verdict:
+
+`TOKENIZER_FREEZE_PASS`
+
+Tài liệu đóng cổng:
+
+`fcaf1027142a27344b43371cdd491a143058c704`
+
+Bước kế tiếp được phép là paired initialization + exact sample-order/token-budget audit cho các seed 71001..71005. Training vẫn bị chặn.
