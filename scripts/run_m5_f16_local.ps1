@@ -133,7 +133,28 @@ try {
     Write-Host "Report: $ReportPath"
 
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) { throw "git not found in PATH" }
-    if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) { throw "cmake not found in PATH" }
+
+    if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
+        $VsWhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+        if (Test-Path $VsWhere) {
+            $VsRoot = (& $VsWhere -latest -products * -property installationPath).Trim()
+            if (-not [string]::IsNullOrWhiteSpace($VsRoot)) {
+                $VsCmake = Join-Path $VsRoot "Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
+                if (Test-Path $VsCmake) {
+                    $env:Path = "$(Split-Path $VsCmake);$env:Path"
+                }
+            }
+        }
+    }
+    if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) { throw "cmake not found in PATH or Visual Studio Build Tools" }
+
+    # Remove only the deterministic untracked residue created by the M1 test
+    # suite in a prior interrupted local fallback run. Do not broadly clean the
+    # worktree or evidence/report directories.
+    $KnownM1Residue = Join-Path $RepoRoot ".tmp-m1-test-resume"
+    if (Test-Path $KnownM1Residue) {
+        Remove-Item -Recurse -Force $KnownM1Residue
+    }
 
     $GitHead = (& git rev-parse HEAD).Trim()
     if ($LASTEXITCODE -ne 0) { throw "Not inside a Git repository" }
@@ -326,9 +347,30 @@ try {
     )
 
     $HarnessStderr = Join-Path $WorkRoot "m5-f16-stderr.log"
-    $HarnessLines = @(& $PipelinePython @HarnessArgs 2> $HarnessStderr)
-    $HarnessExit = $LASTEXITCODE
-    Write-Utf8NoBom -Path $HarnessJson -Content (($HarnessLines -join [Environment]::NewLine) + [Environment]::NewLine)
+
+    # Windows PowerShell 5.1 turns native stderr into PowerShell error records.
+    # With ErrorActionPreference=Stop that can terminate the runner before the
+    # native process exit code is captured. Redirect at the process boundary
+    # instead so scientific PASS/FAIL comes only from the Python harness.
+    $QuotedHarnessArgs = @()
+    foreach ($Arg in $HarnessArgs) {
+        $Text = [string]$Arg
+        if ($Text -match '[\s"]') {
+            $QuotedHarnessArgs += ('"' + ($Text -replace '"', '\\"') + '"')
+        } else {
+            $QuotedHarnessArgs += $Text
+        }
+    }
+    $HarnessProcess = Start-Process `
+        -FilePath $PipelinePython `
+        -ArgumentList $QuotedHarnessArgs `
+        -WorkingDirectory $RepoRoot `
+        -NoNewWindow `
+        -Wait `
+        -PassThru `
+        -RedirectStandardOutput $HarnessJson `
+        -RedirectStandardError $HarnessStderr
+    $HarnessExit = [int]$HarnessProcess.ExitCode
 
     $Report.artifacts.harness_stdout = [ordered]@{
         path = $HarnessJson
