@@ -1,0 +1,120 @@
+name: MK1 Scientific Training
+
+permissions:
+  contents: read
+  actions: read
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - "model_kernel/mk1/SCIENTIFIC_TRAINING_TRIGGER_v0.1.md"
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - arm: direct
+            seed: 71001
+            init_sha: b74b7ab8a67a11c076a94f9df5325a616231acdb99639c3a94424d65382dd8e8
+            schedule_sha: 18262d3bec5fde01ebdb43bac7afb8142c32dd2aecff8245800435202270eaac
+          - arm: m1z
+            seed: 71001
+            init_sha: b74b7ab8a67a11c076a94f9df5325a616231acdb99639c3a94424d65382dd8e8
+            schedule_sha: 18262d3bec5fde01ebdb43bac7afb8142c32dd2aecff8245800435202270eaac
+          - arm: direct
+            seed: 71002
+            init_sha: 7b2dcc6ab1cd377fedc6a0eb32809719fcac911cfb4cbd235684f9b4f10b621e
+            schedule_sha: 8de8516dd6802106d4cf7fe36745a8636e888d9c5c711d76c7870fc2582f64b3
+          - arm: m1z
+            seed: 71002
+            init_sha: 7b2dcc6ab1cd377fedc6a0eb32809719fcac911cfb4cbd235684f9b4f10b621e
+            schedule_sha: 8de8516dd6802106d4cf7fe36745a8636e888d9c5c711d76c7870fc2582f64b3
+          - arm: direct
+            seed: 71003
+            init_sha: 774ad2e2e5f0dddac8bfd67ee04537854309c983043314c82d5841e7a82ca860
+            schedule_sha: 3e5eb4ba3dbb297ce2176361544773db54ca8a1c3e3ddb89aa1367049bd18077
+          - arm: m1z
+            seed: 71003
+            init_sha: 774ad2e2e5f0dddac8bfd67ee04537854309c983043314c82d5841e7a82ca860
+            schedule_sha: 3e5eb4ba3dbb297ce2176361544773db54ca8a1c3e3ddb89aa1367049bd18077
+          - arm: direct
+            seed: 71004
+            init_sha: 25a96874e33828d9e9dd5de85a98a12028632d138c40c6f3a70760e0ff0b3d32
+            schedule_sha: e4839585f54ad14f02bd8c029d3461b6cb25063f044408cc5eeee08a8d064c5e
+          - arm: m1z
+            seed: 71004
+            init_sha: 25a96874e33828d9e9dd5de85a98a12028632d138c40c6f3a70760e0ff0b3d32
+            schedule_sha: e4839585f54ad14f02bd8c029d3461b6cb25063f044408cc5eeee08a8d064c5e
+          - arm: direct
+            seed: 71005
+            init_sha: 76c427debc7e68012fe5be6b5bf409c8ac49fff9bc2346e6b022befdf37c3730
+            schedule_sha: 52b5ce49529db34761d093cc8aa5c0a04ae19e6224e5d80e8bcf998f8dc435d9
+          - arm: m1z
+            seed: 71005
+            init_sha: 76c427debc7e68012fe5be6b5bf409c8ac49fff9bc2346e6b022befdf37c3730
+            schedule_sha: 52b5ce49529db34761d093cc8aa5c0a04ae19e6224e5d80e8bcf998f8dc435d9
+    env:
+      PYTHONPATH: .
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify scientific training authorization
+        run: |
+          grep -q 'MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK_PASS' model_kernel/mk1/MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK.md
+          grep -q 'TRIGGER_MK1_SCIENTIFIC_TRAINING_v0.1' model_kernel/mk1/SCIENTIFIC_TRAINING_TRIGGER_v0.1.md
+
+      - name: Verify immutable training bundle metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10629399106 --jq '.digest')" = "sha256:56d8f5b9b185215ac744a8299184db666b6018b6fefa7b02488d11e1b2abf7af"
+          test "$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10629399106 --jq '.workflow_run.id')" = "35581007427"
+
+      - name: Download immutable training bundle
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10629399106
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35581007427
+          path: training_bundle
+          digest-mismatch: error
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.5.2 tokenizers==0.21.4 psutil==7.2.2
+          python -m pip install torch==2.12.1 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify bundle and matrix-selected frozen files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m experiments.model_core.mk1.training_execution             --bundle-root training_bundle             --verify-only
+          test "$(sha256sum training_bundle/paired_init_seed_${{ matrix.seed }}.pt | awk '{print $1}')" = "${{ matrix.init_sha }}"
+          test "$(sha256sum training_bundle/schedule_seed_${{ matrix.seed }}.jsonl | awk '{print $1}')" = "${{ matrix.schedule_sha }}"
+
+      - name: Execute locked scientific training arm
+        run: |
+          python -m experiments.model_core.mk1.training_execution             --arm ${{ matrix.arm }}             --seed ${{ matrix.seed }}             --bundle-root training_bundle             --run-dir "mk1_train_${{ matrix.arm }}_${{ matrix.seed }}"
+
+      - name: Upload scientific training arm evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-train-${{ matrix.arm }}-${{ matrix.seed }}
+          path: mk1_train_${{ matrix.arm }}_${{ matrix.seed }}/
+          if-no-files-found: warn
+          compression-level: 1
