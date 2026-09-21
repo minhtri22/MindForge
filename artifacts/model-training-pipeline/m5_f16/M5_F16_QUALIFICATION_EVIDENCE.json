@@ -1,0 +1,99 @@
+{
+  "schema": "mindforge-model-pipeline-m5-f16-qualification-evidence-v1",
+  "repository": "minhtri22/MindForge",
+  "branch": "docs/evidence-model-training-pipeline",
+  "verdict": "PASS",
+  "scientific_identity": {
+    "qualified_scientific_commit": "2cb3cb6d1fbaa2230bc8b8d8bdf6dcdc51f4c719",
+    "closure_parent_head": "0122c83e958a1a39cb618f2d5670752f03fab2db",
+    "bounded_runtime_repair": "ADD_LLAMA_CLI_SINGLE_TURN_ONLY",
+    "repair_authorization_commit": "aa8bac30448078490e563ae73bf08ee749245cb8"
+  },
+  "authoritative_execution": {
+    "workflow": "Model Pipeline M5 F16 Repair Requalification",
+    "run_id": 35617920637,
+    "job_id": 106393309234,
+    "conclusion": "success",
+    "artifact_id": 10647342952,
+    "artifact_name": "m5-f16-repair-requalification",
+    "artifact_zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5"
+  },
+  "result": {
+    "schema": "mindforge-model-pipeline-m5-f16-requalification-v1",
+    "status": "PASS",
+    "m5_status": "HIGH_FIDELITY_PASS_QUANTIZATION_NOT_EXECUTED",
+    "result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "failed_required_gates": [],
+    "quantization_executed": false,
+    "quantization_authorized": true,
+    "m6_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "frozen_runtime": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "converter_sha256": "e9a1da876330bbce9687541ab31736542a01b4ac43c6686126514a50f122fb7f",
+    "llama_cli_sha256": "30814e9b711d940ee96e656abd5f8c69bb4c431eccb094eac5e0026368c2f6a2"
+  },
+  "m2_canonical": {
+    "run_id": "e2e-small-cd9bfabe9280",
+    "canonical_directory_hash": "8be9a4984f89da07f2f9b23250a342edb1fa4d8dc07d6985579613026304b04c",
+    "adjudication_hash": "a1bf1218ca1ab038fa509a7c23468510fc0019a445acf9e175decfbfba8f94e7",
+    "tokenizer_asset_manifest_hash": "1567e178abe4f245846c6bd59e7e6f3b7e842fde92200ddfc74851559a402023",
+    "tokenizer_source_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "tokenizer_source_preserved_exactly": true
+  },
+  "f16_artifact": {
+    "topology": "single_file",
+    "name": "model-f16.gguf",
+    "size": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+  },
+  "required_gates": {
+    "m5_1_mechanism_authorizes_m2_repair": true,
+    "m2_pass": true,
+    "m2_canonical_tokenizer_source_fidelity": true,
+    "m2_tokenizer_manifest_equals_m5_1_source_arm": true,
+    "llama_cpp_exact_lock": true,
+    "converter_capability_qwen2": true,
+    "real_llama_cli_binary": true,
+    "f16_conversion": true,
+    "f16_real_inference": true,
+    "f16_hf_llama_task_format_parity": true,
+    "reasoning_runtime_mapping": true,
+    "quantization_not_executed": true,
+    "bulk_training_not_started": true
+  },
+  "parity": {
+    "pass": true,
+    "format_parity": true,
+    "hf_accuracy": 0,
+    "runtime_accuracy": 0,
+    "hf_task_vector": [
+      false,
+      false
+    ],
+    "runtime_task_vector": [
+      false,
+      false
+    ],
+    "exact_text_equal_count": 0,
+    "exact_text_required": false
+  },
+  "non_blocking_observation": {
+    "id": "M5_F16_PARITY_ABSOLUTE_CAPABILITY_CEILING",
+    "blocking": false,
+    "statement": "The frozen parity gate can PASS when both HF and llama.cpp have zero absolute task accuracy because it tests preservation of task/format behavior, not absolute capability.",
+    "interpretation": "M5 F16 PASS proves high-fidelity runtime preservation under the frozen contract. It does not prove useful absolute task capability on this fixture and must not be cited as such.",
+    "required_follow_up": "Do not rewrite M5 outcome. Carry this limitation into quantization qualification and any later benchmark-design work."
+  },
+  "boundary_after_closure": {
+    "m5_f16_closed": true,
+    "q8_q4_qualification_may_open": true,
+    "q8_q4_qualified": false,
+    "m6_authorized": false,
+    "bulk_training_authorized": false,
+    "no_automatic_m6_transition": true
+  }
+}
