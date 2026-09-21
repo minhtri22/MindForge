@@ -238,3 +238,66 @@ bulk training: CLOSED / NOT AUTHORIZED
 The next permitted governance action is a separate Q4_K_M implementation
 authorization/opening under the already-preregistered M5Q sequence. This entry
 does not open or execute Q4_K_M.
+
+
+## 2026-09-22 — Accidental-agent drift quarantined; Q4 outcome exposure recorded
+
+An accidental agent advanced `docs/evidence-model-training-pipeline` by 15
+commits and created a parallel combined Q8+Q4 program.
+
+Audit found that the authoritative M5Q branch itself had not drifted:
+
+```text
+authoritative M5Q head:
+997e555b53f957268da1ec19ebc10ebb4a0873e9
+```
+
+The full accidental chain was preserved at:
+
+```text
+quarantine/m5-quantization-agent-drift-20260921
+ddb0a080ae06c99b6f72ffa633d34f255989b485
+```
+
+Then the F16 evidence branch was restored to:
+
+```text
+docs/evidence-model-training-pipeline
+9ff987ebd95cd23fef4cd2a0511774d772b14400
+```
+
+No accidental history was deleted.
+
+The audit rejected the combined Q8+Q4 execution semantics as authoritative for
+M5Q because the locked M5Q program is sequential and target-specific.
+
+Useful technical findings were retained as quarantine/reference knowledge:
+exact F16 parent identity checking, order-independent post-serialization target
+membership, and compression/distinct-hash observations. None was cherry-picked
+into active scientific code during this audit.
+
+The accidental Q8 result independently reproduced the authoritative Q8 artifact
+identity. This is corroborative only; Q8 remains closed under its original
+authoritative result.
+
+Q4 scientific work was executed outside the authoritative sequence in run
+`35632404520`, and a later accidental replay `35634940378` exposed a Q4
+artifact and PASS under the accidental protocol. Therefore:
+
+```text
+Q4_K_M formal status:
+NOT FORMALLY QUALIFIED
+
+prior out-of-protocol outcome exposure:
+TRUE
+```
+
+The exposed Q4 outcome is retained as exploratory evidence and is forbidden from
+driving thresholds, tuning, fixture/runtime changes, or a formal PASS claim.
+
+Because Q4_K_M had already been preregistered before exposure, the next Q4 step
+may proceed only as a **formal replication/qualification under the pre-exposure
+preregistered contract**, with a fresh target-specific implementation lock and
+zero-science preflight.
+
+M6 and bulk training remain closed.

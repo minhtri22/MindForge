@@ -1,0 +1,82 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-agent-drift-audit-v1",
+  "status": "AUDIT_COMPLETE",
+  "authoritative_branch": "research/model-pipeline-m5-quantization-qualification",
+  "authoritative_pre_audit_head": "997e555b53f957268da1ec19ebc10ebb4a0873e9",
+  "restored_docs_branch": {
+    "branch": "docs/evidence-model-training-pipeline",
+    "restored_head": "9ff987ebd95cd23fef4cd2a0511774d772b14400"
+  },
+  "quarantine": {
+    "branch": "quarantine/m5-quantization-agent-drift-20260921",
+    "head": "ddb0a080ae06c99b6f72ffa633d34f255989b485",
+    "accidental_commits_preserved": 15
+  },
+  "rejected_authoritative_changes": [
+    "combined_q8_q4_one_shot_protocol",
+    "general_m5_quantized_target_fail_fast_semantic_change",
+    "aggregate_q8_q4_adjudication_as_authoritative_m5q",
+    "q4_replay_as_clean_first_look"
+  ],
+  "salvage_candidates": [
+    {
+      "id": "EXACT_F16_PARENT_IDENTITY_HELPER",
+      "disposition": "KEEP_REFERENCE_NOT_INTEGRATED_NOW",
+      "rationale": "Authoritative M5Q already enforces exact F16 identity; shared refactor deferred until active Q4 sequence closes."
+    },
+    {
+      "id": "ORDER_INDEPENDENT_SERIALIZED_TARGET_MEMBERSHIP",
+      "disposition": "KEEP_REFERENCE_NOT_NEEDED_CURRENT_TARGET_SPECIFIC_PATH",
+      "rationale": "Canonical JSON key sorting is real; membership check is appropriate for future multi-target wrappers."
+    },
+    {
+      "id": "STRICT_COMPRESSION_ORDERING_AND_DISTINCT_HASHES",
+      "disposition": "KEEP_AS_POST_QUANTIZATION_OBSERVATION_CANDIDATE",
+      "rationale": "Do not add retroactively as current Q4 required gate after outcome exposure."
+    }
+  ],
+  "q8": {
+    "formal_status": "PASS_CLOSED",
+    "authoritative_run_id": 35628720499,
+    "result_hash": "16b3ce2f4522481ab086068c4a0ce625f9c0a2759d9d946a3deffc7bcf44c1c8",
+    "artifact_sha256": "35e1d06149ea36b2021f02369db0910cc6e02e691666cdbde0488210172e0146",
+    "artifact_size": 531067744,
+    "accidental_replay_reproduced_same_identity": true
+  },
+  "q4_outcome_exposure": {
+    "formal_status": "NOT_FORMALLY_QUALIFIED",
+    "prior_out_of_protocol_outcome_exposure": true,
+    "first_accidental_run": {
+      "run_id": 35632404520,
+      "job_id": 106441521839,
+      "scientific_work_executed": true,
+      "wrapper_failed_after_scientific_execution": true,
+      "wrapper_failure": "POST_SERIALIZATION_TARGET_KEY_ORDER_GUARD_FALSE_DRIFT"
+    },
+    "accidental_replay": {
+      "run_id": 35634940378,
+      "job_id": 106449940536,
+      "accidental_protocol_status": "PASS",
+      "combined_result_hash": "08d4f3f92ff1422a505d0c87239644f9e4cbff0f6994a879b61fb9e328f232ba"
+    },
+    "observed_artifact": {
+      "name": "model-q4_k_m.gguf",
+      "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+      "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+      "size": 397807456,
+      "accidental_protocol_parity_pass": true
+    },
+    "evidence_class": "OUT_OF_PROTOCOL_EXPLORATORY_OBSERVATION",
+    "may_be_used_for_tuning": false,
+    "may_define_new_q4_thresholds": false,
+    "may_be_claimed_as_formal_q4_pass": false,
+    "next_formal_execution_class": "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT"
+  },
+  "downstream_boundary": {
+    "q4_execution_authorized_by_audit": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "next_valid_action": "Q4_K_M_BOUNDED_IMPLEMENTATION_AUTHORIZATION_WITH_OUTCOME_EXPOSURE_DISCLOSURE"
+}
