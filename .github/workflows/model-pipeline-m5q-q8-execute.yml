@@ -43,8 +43,8 @@ jobs:
           assert auth["preflight_closure_commit"] == "6935e0047e987c4a2d8528f1faf5ca2c16ed9390"
           assert auth["target"] == "q8_0"
           assert auth["quantizer_type"] == "Q8_0"
-          assert auth["q4_execution_authorized"] is False
-          assert auth["m6_authorized"] is False
+          assert auth["rules"]["q4_execution_authorized"] is False
+          assert auth["rules"]["m6_authorized"] is False
 
           assert evidence["verdict"] == "PASS"
           assert evidence["scientific_implementation_commit"] == auth["scientific_implementation_commit"]

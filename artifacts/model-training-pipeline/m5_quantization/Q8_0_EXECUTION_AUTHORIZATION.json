@@ -10,7 +10,7 @@
   "zero_science_preflight_job_id": 106416489333,
   "zero_science_preflight_artifact_id": 10651022297,
   "zero_science_preflight_artifact_sha256": "f823a1041853a12e6513a63326e20d684ec455e4e817ce3c756b4f91d83e65a9",
-  "execution_workflow_git_blob_sha1": "de5e3c1242fb62ec960c996f4ff9bdf536c9e53f",
+  "execution_workflow_git_blob_sha1": "5b45d1d7466095ba1549f013b78455a434d822ec",
   "parent": {
     "m5_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
     "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
@@ -37,5 +37,14 @@
     "bulk_training_authorized": false,
     "scientific_fail_is_terminal": true,
     "missing_result_is_infrastructure_invalid": true
+  },
+  "supersedes_invalid_orchestration": {
+    "run_id": 35628522807,
+    "job_id": 106428724201,
+    "classification": "INVALID_EXECUTION_ORCHESTRATION",
+    "reason": "Authorization workflow read q4_execution_authorized and m6_authorized at the wrong JSON level; scientific execution step was skipped.",
+    "scientific_execution_started": false,
+    "quantization_executed": false,
+    "one_shot_scientific_authorization_consumed": false
   }
 }
