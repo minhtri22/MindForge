@@ -1,0 +1,96 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q8-implementation-lock-v1",
+  "status": "LOCKED",
+  "program": "M5Q",
+  "target": "q8_0",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "parent_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+  "parent_f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+  "implementation_commit": "68bbd071ba78f6325748159703a90232d69e4ade",
+  "implementation_test_evidence": {
+    "workflow_run_id": 35623958915,
+    "workflow_job_id": 106413584115,
+    "conclusion": "success",
+    "existing_m5_tests": {
+      "passed": 12,
+      "failed": 0
+    },
+    "q8_contract_tests": {
+      "passed": 8,
+      "failed": 0
+    },
+    "quantization_executed": false,
+    "q4_executed": false,
+    "m6_authorized": false
+  },
+  "execution_contract": {
+    "quantizer_target": "Q8_0",
+    "target_key": "q8_0",
+    "comparator": "qualified_f16_parent",
+    "comparator_task_vector": [
+      false,
+      false
+    ],
+    "comparator_accuracy": 0,
+    "source_f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "source_f16_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "inference": {
+      "max_new_tokens": 128,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "seed": 42,
+      "context_length": 2048,
+      "threads": 2,
+      "llama_cli_single_turn": true
+    }
+  },
+  "git_blobs": {
+    "pipeline/m5q.py": "aa96345a7ecf47f403b84b40ced015fa8a626284",
+    "tools/m5q_q8_qualification.py": "e553149bf2b5be103086956bbd804cbca504564c",
+    "tools/m5q_q8_preflight.py": "8a3c17826c4104a4c261a54b91b209fda0aff7a1",
+    "tests/test_model_pipeline_m5q_q8.py": "542dbb596863bd4cad8566f734caf43e8204b411",
+    ".github/workflows/model-pipeline-m5q-q8-preflight.yml": "f0f3a0bc99b24f65176360a95d9f871325a7a20a",
+    "pipeline/m5.py": "0249be91acbe57fd20b8577a0cda3d6ea5acb048",
+    "pipeline/m2.py": "51a023e46b48f9d177b506cfa4e409a4f85d930b",
+    "pipeline/m2_model.py": "8c257d3bb767cc2f17b58a0905452bb7f9ae52db",
+    "pipeline/m2_worker.py": "479f1c0efc90bd7e4874ef1f292a1e906a43e5f5",
+    "pipeline/reasoning.py": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "pipeline/canonical.py": "bc1b11db070b617671f87bd77a5282def49421e5",
+    "pipeline/loader.py": "3638ddf6814152245e9e922d9a9a9de56b03dfd4",
+    "docs/model-training-pipeline/examples/end_to_end_small.yaml": "4fff2473b8f64f7db8f037d0fa40087c7efda4ca",
+    "docs/model-training-pipeline/runtime/llama_cpp.lock.json": "9cef982e91d067f7110397ecb5e66ba92af25d38",
+    "docs/model-training-pipeline/profiles/qwen2.5-0.5b-instruct-r0.yaml": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "tests/fixtures/eval_v1/manifest.json": "450d83d38130765fe4a74fb18bab90177328218f",
+    "artifacts/model-training-pipeline/m5_f16/M5_F16_QUALIFICATION_EVIDENCE.json": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9",
+    "artifacts/model-training-pipeline/m5_quantization/PREREGISTRATION.json": "c7f6addf220f659276fd0035b272b235b12df22c",
+    "requirements-pipeline-m5.txt": "81f16dbcf8879a0bcda9c699d87d2f7aa2a8b0d0"
+  },
+  "required_gates": [
+    "parent_f16_identity_exact",
+    "llama_cpp_exact_lock",
+    "quantizer_target_exact",
+    "quantizer_return_code_zero",
+    "quantized_artifact_nonempty",
+    "quantized_artifact_manifest_frozen",
+    "real_llama_cli_load_and_infer",
+    "all_runtime_outputs_nonempty",
+    "task_vector_equals_f16_parent",
+    "runtime_accuracy_equals_f16_parent",
+    "format_parity_with_f16_parent",
+    "reasoning_runtime_mapping_pass",
+    "artifact_smaller_than_f16"
+  ],
+  "hard_boundaries": {
+    "q4_executed": false,
+    "q4_execution_authorized": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false,
+    "scientific_execution_authorized_before_zero_science_preflight": false
+  },
+  "next_gate": "ZERO_SCIENCE_PREFLIGHT"
+}
