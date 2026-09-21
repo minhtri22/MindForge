@@ -1,12 +1,12 @@
 # MK-1 Training Bundle Construction Lock v0.1
 
-Status: **PENDING INDEPENDENT STATIC REVIEW / BUNDLE CONSTRUCTION NOT AUTHORIZED**
+Status: **PASS / BUNDLE CONSTRUCTION HASH LOCKED / ONE RUN AUTHORIZED**
 
 Date: **2026-09-21**
 
 Formal candidate:
 
-`TRAINING_BUNDLE_CONSTRUCTION_LOCK_PENDING_REVIEW`
+`TRAINING_BUNDLE_CONSTRUCTION_LOCK_PASS`
 
 ## 1. Governing specification
 
@@ -119,3 +119,25 @@ Only after review may status become:
 `TRAINING_BUNDLE_CONSTRUCTION_LOCK_PASS`
 
 This authorizes one bundle-construction run only. It does not authorize optimizer step 1.
+
+
+## 8. Independent review closure
+
+Independent static review after candidate-lock creation established:
+
+- candidate-lock commit changed only this lock document;
+- bundle trigger did not exist during review;
+- scientific training trigger did not exist during review;
+- workflow blob remained `d5b51c88975ca080d8870c05097f7417af314fb9`;
+- trigger path appears exactly twice: push watch and authorization guard;
+- all three canonical artifact IDs are hard-bound;
+- no `train_arm`, `prepare_paired_initialization`, `deterministic_sample_indices`, `train_tokenizer`, data-generator, optimizer, or model-forward invocation exists;
+- exact final bundle file-set assertion is present.
+
+Formal verdict:
+
+`TRAINING_BUNDLE_CONSTRUCTION_LOCK_PASS`
+
+One immutable training-input bundle construction is authorized.
+
+Scientific training remains forbidden.
