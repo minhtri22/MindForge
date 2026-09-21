@@ -123,6 +123,7 @@ def main(argv: list[str] | None = None) -> int:
             checkpoint_dir=Path(args.checkpoint_dir).resolve(),
             canonical_dir=Path(args.canonical_dir).resolve() if args.canonical_dir else None,
             tokenizer=tokenizer,
+            source_snapshot=snapshot,
         )
     raise AssertionError(args.mode)
 
@@ -220,6 +221,7 @@ def _resume(
     checkpoint_dir: Path,
     canonical_dir: Path | None,
     tokenizer,
+    source_snapshot: Path,
 ) -> int:
     manifest = restore_checkpoint(checkpoint_dir, repo_root, model, optimizer, scheduler)
     next_index = int(manifest["sampler_state"]["shuffle_state"]["next_index"])
@@ -245,7 +247,7 @@ def _resume(
         "scheduler_last_epoch": int(scheduler.last_epoch),
     }
     if canonical_dir is not None:
-        canonical = save_full_canonical(model, tokenizer, canonical_dir)
+        canonical = save_full_canonical(model, source_snapshot, canonical_dir)
         probe = model_probe(model, tokenizer)
         result["canonical"] = canonical
         result["pre_reload_probe"] = probe

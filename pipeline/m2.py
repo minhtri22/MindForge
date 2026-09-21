@@ -224,6 +224,16 @@ def run_m2_qualification(
     if not exact_reload:
         raise DataIntegrityError("fresh-process canonical HF reload probe mismatch")
 
+    canonical_tokenizer_fidelity = (
+        canonical.get("tokenizer_source_preserved_exactly") is True
+        and canonical.get("tokenizer_source_snapshot_revision") == config.model.revision
+        and canonical.get("tokenizer_asset_manifest") == snapshot_identity["tokenizer_asset_manifest"]
+        and canonical.get("tokenizer_asset_manifest_hash")
+        == snapshot_identity["tokenizer_asset_manifest_hash"]
+    )
+    if not canonical_tokenizer_fidelity:
+        raise DataIntegrityError("canonical tokenizer assets differ from pinned source snapshot")
+
     atomic_write_json(m2_dir / "phase_evidence.json", phase_evidence)
     gates = {
         "m1_prerequisite": {"required": True, "pass": m1.status == "PASS", "evidence_hash": m1.data_manifest_hash},
@@ -290,6 +300,11 @@ def run_m2_qualification(
             "pass": bool(canonical["files"]) and bool(canonical["directory_hash"]),
             "evidence_hash": canonical["directory_hash"],
         },
+        "canonical_tokenizer_source_fidelity": {
+            "required": True,
+            "pass": canonical_tokenizer_fidelity,
+            "evidence_hash": canonical["tokenizer_asset_manifest_hash"],
+        },
         "fresh_process_reload": {
             "required": True,
             "pass": exact_reload and reload_result["model_type"] == "qwen2",
@@ -317,6 +332,7 @@ def run_m2_qualification(
             "scheduler": "torch.optim.lr_scheduler.StepLR(step_size=1,gamma=0.9)",
             "steps_per_phase": M2_STEPS_PER_PHASE,
             "process_boundary_interrupt_exit": INTENTIONAL_INTERRUPT_EXIT,
+            "canonical_tokenizer_export": "byte_preserve_pinned_source_assets",
         },
         "environment_versions": env,
         "gates": gates,

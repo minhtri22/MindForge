@@ -8,6 +8,7 @@ import pytest
 import torch
 
 from pipeline.errors import DataIntegrityError
+from pipeline.m2_model import copy_pinned_tokenizer_assets, tokenizer_asset_manifest
 from pipeline.m2_checkpoint import (
     create_incomplete_checkpoint_sentinel,
     restore_checkpoint,
@@ -134,3 +135,34 @@ def test_scheduler_and_optimizer_are_nontrivial_state():
     assert optimizer.state
     assert scheduler.last_epoch == 1
     assert optimizer.param_groups[0]["lr"] != before
+
+
+def test_pinned_tokenizer_assets_are_copied_byte_exact_without_model_files(tmp_path: Path):
+    source = tmp_path / "snapshot"
+    source.mkdir()
+    assets = {
+        "tokenizer.json": b'{"tokenizer":"raw"}',
+        "tokenizer_config.json": b'{"chat_template":"raw"}',
+        "vocab.json": b'{"a":0}',
+        "merges.txt": b"a b\n",
+    }
+    for name, payload in assets.items():
+        (source / name).write_bytes(payload)
+    (source / "config.json").write_text('{"model_type":"qwen2"}', encoding="utf-8")
+    (source / "model.safetensors").write_bytes(b"weights")
+
+    output = tmp_path / "canonical"
+    output.mkdir()
+    (output / "model.safetensors").write_bytes(b"trained-weights")
+    manifest = copy_pinned_tokenizer_assets(source, output)
+
+    assert manifest == tokenizer_asset_manifest(source)
+    assert tokenizer_asset_manifest(output) == tokenizer_asset_manifest(source)
+    assert (output / "model.safetensors").read_bytes() == b"trained-weights"
+    assert not (output / "config.json").exists()
+
+
+def test_m2_canonical_export_never_reserializes_tokenizer():
+    source = (Path(__file__).resolve().parents[1] / "pipeline/m2_model.py").read_text(encoding="utf-8")
+    assert "tokenizer.save_pretrained(" not in source
+    assert "copy_pinned_tokenizer_assets(source_snapshot, output_dir)" in source

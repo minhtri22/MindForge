@@ -1,27 +1,9 @@
 name: Model Pipeline M5 llama.cpp QA
 
+# Full M5 includes quantization after F16 PASS. It is manual-only until the
+# repaired M2 canonical artifact passes the separately governed F16 gate.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - docs/evidence-model-training-pipeline
-    paths:
-      - 'pipeline/**'
-      - 'tests/test_model_pipeline_m0.py'
-      - 'tests/test_model_pipeline_m1.py'
-      - 'tests/test_model_pipeline_m2_unit.py'
-      - 'tests/test_model_pipeline_m3.py'
-      - 'tests/test_model_pipeline_m4.py'
-      - 'tests/test_model_pipeline_m5.py'
-      - 'requirements-pipeline-m5.txt'
-      - 'docs/model-training-pipeline/**'
-      - '.github/workflows/model-pipeline-m5.yml'
-  pull_request:
-    paths:
-      - 'pipeline/**'
-      - 'tests/test_model_pipeline_m5.py'
-      - 'requirements-pipeline-m5.txt'
-      - 'docs/model-training-pipeline/**'
 
 jobs:
   m5-llama-cpp:

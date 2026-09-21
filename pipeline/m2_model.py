@@ -6,6 +6,7 @@ import hashlib
 import importlib.metadata
 import json
 import random
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +24,54 @@ M2_TRAINABLE_PARAMETER = "model.norm.weight"
 M2_STEPS_PER_PHASE = 2
 M2_SEED = 20260920
 M2_MAX_LENGTH = 48
+
+TOKENIZER_ASSET_NAMES = {
+    "special_tokens_map.json",
+    "added_tokens.json",
+}
+
+
+def is_tokenizer_asset(path: str | Path) -> bool:
+    name = Path(path).name.lower()
+    return (
+        name.startswith("tokenizer")
+        or name.startswith("vocab")
+        or name.startswith("merges")
+        or name in TOKENIZER_ASSET_NAMES
+        or name.endswith(".model")
+        or (name.startswith("chat_template") and name.endswith(".jinja"))
+    )
+
+
+def tokenizer_asset_manifest(root: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for path in sorted(root.rglob("*")):
+        if path.is_file() and is_tokenizer_asset(path.relative_to(root)):
+            rows.append(
+                {
+                    "path": path.relative_to(root).as_posix(),
+                    "size": path.stat().st_size,
+                    "sha256": sha256_file(path),
+                }
+            )
+    return rows
+
+
+def copy_pinned_tokenizer_assets(source_snapshot: Path, output_dir: Path) -> list[dict[str, Any]]:
+    source_manifest = tokenizer_asset_manifest(source_snapshot)
+    if not source_manifest:
+        raise DataIntegrityError("pinned snapshot contains zero tokenizer assets")
+    for row in source_manifest:
+        source = source_snapshot / row["path"]
+        target = output_dir / row["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+    copied_manifest = tokenizer_asset_manifest(output_dir)
+    if copied_manifest != source_manifest:
+        raise DataIntegrityError(
+            "canonical tokenizer assets are not byte-identical to pinned source snapshot"
+        )
+    return copied_manifest
 
 
 def prepare_pinned_snapshot(
@@ -76,6 +125,8 @@ def prepare_pinned_snapshot(
         "tokenizer_class": tokenizer.__class__.__name__,
         "tokenizer_vocab_size": int(len(tokenizer)),
         "chat_template_hash": sha256_object(tokenizer.chat_template),
+        "tokenizer_asset_manifest": tokenizer_asset_manifest(snapshot),
+        "tokenizer_asset_manifest_hash": sha256_object(tokenizer_asset_manifest(snapshot)),
         "files": files,
         "snapshot_manifest_hash": sha256_object(files),
     }
@@ -190,16 +241,27 @@ def train_step(
 
 def save_full_canonical(
     model: torch.nn.Module,
-    tokenizer: Any,
+    source_snapshot: Path,
     output_dir: Path,
 ) -> dict[str, Any]:
+    """Save trained model state while preserving tokenizer source bytes exactly."""
     if output_dir.exists():
-        import shutil
-
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=False)
+
+    # Model/config serialization remains the already-qualified M2 path.
     model.save_pretrained(output_dir, safe_serialization=True, max_shard_size="1GB")
-    tokenizer.save_pretrained(output_dir)
+
+    # M5.1 proved tokenizer.save_pretrained() mutates the canonical tokenizer
+    # representation incompatibly with the pinned llama.cpp converter. Preserve
+    # exact tokenizer source assets instead of reconstructing/serializing them.
+    tokenizer_manifest = copy_pinned_tokenizer_assets(source_snapshot, output_dir)
+    persisted_tokenizer = AutoTokenizer.from_pretrained(
+        output_dir,
+        local_files_only=True,
+        trust_remote_code=False,
+    )
+
     files = []
     for path in sorted(output_dir.rglob("*")):
         if path.is_file():
@@ -213,7 +275,11 @@ def save_full_canonical(
     return {
         "files": files,
         "directory_hash": sha256_object(files),
-        "chat_template_hash": sha256_object(tokenizer.chat_template),
+        "chat_template_hash": sha256_object(persisted_tokenizer.chat_template),
+        "tokenizer_asset_manifest": tokenizer_manifest,
+        "tokenizer_asset_manifest_hash": sha256_object(tokenizer_manifest),
+        "tokenizer_source_snapshot_revision": source_snapshot.name,
+        "tokenizer_source_preserved_exactly": True,
     }
 
 
