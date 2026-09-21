@@ -502,3 +502,30 @@ The original implementation manifest and zero-fresh result remain historical evi
 After Amendment 003 implementation, a new implementation manifest V2 and a new canonical zero-fresh v0.2 execution are mandatory before scientific materialization.
 
 No scientific scene ID may be generated before both V2 gates PASS.
+
+
+## 22. Materialization execution surface under Amendment 003
+
+Before scientific data are created, the implementation lock additionally authorizes exactly one new workflow file:
+
+`.github/workflows/mk1-materialization-audit.yml`
+
+Purpose:
+
+- execute the already-locked deterministic generator exactly once after V2 zero-fresh PASS;
+- run split/duplicate/renderer/target-stability/observable-identifiability/support audits in the same job;
+- upload all three materialized split files plus audit JSON and file-hash manifest as one canonical artifact.
+
+The materialization workflow is inert until this exact trigger path is created:
+
+`model_kernel/mk1/MATERIALIZATION_TRIGGER_v0.1.md`
+
+The job must require:
+
+- `IMPLEMENTATION_LOCK_MANIFEST_V2_PASS`;
+- `ZERO_FRESH_PREFLIGHT_V2_PASS`;
+- exact trigger marker `TRIGGER_SCIENTIFIC_MATERIALIZATION_v0.1`.
+
+No model forward pass, optimizer construction, scientific tokenizer fitting, paired scientific seed initialization, validation model outcome, or pristine-confirmatory model inference is authorized in that workflow.
+
+The new workflow and the Amendment-003 changes must be included in Implementation Lock Manifest V2 before zero-fresh v0.2 is triggered.
