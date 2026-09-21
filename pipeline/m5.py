@@ -94,7 +94,7 @@ def run_m5_qualification(
     llama_source = Path(llama_source).resolve()
     llama_cli = Path(llama_cli).resolve()
     llama_quantize = Path(llama_quantize).resolve()
-    converter_python = Path(converter_python).resolve()
+    converter_python = absolute_preserving_symlink(converter_python)
     build_manifest = Path(build_manifest).resolve()
 
     lock_evidence = verify_llama_cpp_lock(
@@ -278,6 +278,14 @@ def run_m5_qualification(
     atomic_write_json(m5_dir / "m5_result.json", result.to_dict())
     return result
 
+
+
+def absolute_preserving_symlink(path: str | Path) -> Path:
+    """Return an absolute path without dereferencing a venv interpreter symlink."""
+    value = Path(path)
+    if value.is_absolute():
+        return value.absolute()
+    return (Path.cwd() / value).absolute()
 
 def verify_llama_cpp_lock(
     *,

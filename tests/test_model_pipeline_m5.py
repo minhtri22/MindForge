@@ -7,6 +7,7 @@ import pytest
 
 from pipeline.errors import RuntimeParityError
 from pipeline.m5 import (
+    absolute_preserving_symlink,
     build_gguf_manifest,
     evaluate_runtime_parity,
     git_blob_sha1,
@@ -116,3 +117,16 @@ def test_converter_probe_script_is_standalone_and_compiles():
     compile(source, str(path), "exec")
     assert "from . " not in source
     assert "import pipeline" not in source
+
+
+def test_converter_python_path_preserves_venv_symlink(tmp_path: Path):
+    target = tmp_path / "system-python"
+    target.write_text("#!/bin/sh\n", encoding="utf-8")
+    link_dir = tmp_path / "venv" / "bin"
+    link_dir.mkdir(parents=True)
+    link = link_dir / "python"
+    link.symlink_to(target)
+    absolute = absolute_preserving_symlink(link)
+    assert absolute == link.absolute()
+    assert absolute != link.resolve()
+    assert absolute.is_symlink()
