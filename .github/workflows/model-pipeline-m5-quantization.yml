@@ -1,0 +1,156 @@
+name: Model Pipeline M5 Q8 Q4 Quantization Qualification
+
+on:
+  workflow_dispatch:
+
+jobs:
+  m5-quantization:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pipeline dependencies
+        run: python -m pip install -r requirements-pipeline-m5.txt
+
+      - name: Zero-outcome regression and quantization contract QA
+        run: |
+          python -m pytest -q tests/test_model_pipeline_m0.py
+          python -m pytest -q tests/test_model_pipeline_m1.py
+          python -m pytest -q tests/test_model_pipeline_m2_unit.py
+          python -m pytest -q tests/test_model_pipeline_m3.py
+          python -m pytest -q tests/test_model_pipeline_m4.py
+          python -m pytest -q tests/test_model_pipeline_m5.py
+          python -m pytest -q tests/test_model_pipeline_m5_quantization.py
+
+      - name: Checkout exact pinned llama.cpp source
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(pathlib.Path("docs/model-training-pipeline/runtime/llama_cpp.lock.json").read_text())
+          root = pathlib.Path(".m5q-tools")
+          source = root / "llama.cpp"
+          root.mkdir(exist_ok=True)
+          subprocess.run(["git", "init", str(source)], check=True)
+          subprocess.run(["git", "-C", str(source), "remote", "add", "origin", lock["source_url"]], check=True)
+          subprocess.run(["git", "-C", str(source), "fetch", "--depth", "1", "origin", lock["commit_sha"]], check=True)
+          subprocess.run(["git", "-C", str(source), "checkout", "--detach", "FETCH_HEAD"], check=True)
+          actual = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
+          if actual != lock["commit_sha"]:
+              raise SystemExit(f"llama.cpp SHA mismatch: {actual}")
+          print(actual)
+          PY
+
+      - name: Create exact isolated converter environment
+        run: |
+          python -m venv .m5q-tools/convert-venv
+          .m5q-tools/convert-venv/bin/python -m pip install --upgrade pip
+          .m5q-tools/convert-venv/bin/python -m pip install \
+            -r .m5q-tools/llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
+
+      - name: Verify converter imports
+        run: |
+          .m5q-tools/convert-venv/bin/python pipeline/m5_converter_probe.py | tee .m5q-tools/converter_probe.json
+          python - <<'PY'
+          import json
+          import pathlib
+
+          data = json.loads(pathlib.Path(".m5q-tools/converter_probe.json").read_text())
+          failed = {k:v for k,v in data.items() if not isinstance(v, dict) or v.get("import_ok") is not True}
+          if failed:
+              raise SystemExit("converter preflight failed: " + json.dumps(failed, sort_keys=True))
+          PY
+
+      - name: Build exact llama.cpp binaries and manifest
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(pathlib.Path("docs/model-training-pipeline/runtime/llama_cpp.lock.json").read_text())
+          source = pathlib.Path(".m5q-tools/llama.cpp").resolve()
+          build = source / "build"
+          configure = ["cmake", "-S", str(source), "-B", str(build), *lock["build"]["flags"]]
+          subprocess.run(configure, check=True)
+          compile_cmd = [
+              "cmake", "--build", str(build),
+              "--target", *lock["build"]["targets"],
+              "-j2",
+          ]
+          subprocess.run(compile_cmd, check=True)
+          commit = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
+          manifest = {
+              "schema": "mindforge-llama-cpp-build-v1",
+              "source_commit": commit,
+              "flags": lock["build"]["flags"],
+              "targets": lock["build"]["targets"],
+              "configure_command": configure,
+              "build_command": compile_cmd,
+          }
+          pathlib.Path(".m5q-tools/build_manifest.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+      - name: Execute frozen Q8 Q4 one-shot qualification
+        run: |
+          set -o pipefail
+          python -m tools.m5_quantization_qualification \
+            -c docs/model-training-pipeline/quantization/end_to_end_small_q8_q4.yaml \
+            --workspace . \
+            --runs-root .m5q-runs \
+            --llama-source .m5q-tools/llama.cpp \
+            --llama-cli .m5q-tools/llama.cpp/build/bin/llama-cli \
+            --llama-quantize .m5q-tools/llama.cpp/build/bin/llama-quantize \
+            --converter-python .m5q-tools/convert-venv/bin/python \
+            --build-manifest .m5q-tools/build_manifest.json \
+            --json | tee .m5q-result.json
+
+      - name: Enforce quantization-only governance boundary
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+
+          data = json.loads(pathlib.Path(".m5q-result.json").read_text())
+          assert data["status"] == "PASS"
+          assert data["quantization_executed"] is True
+          assert data["quantization_qualified"] is True
+          assert data["absolute_capability_claimed"] is False
+          assert data["m6_authorized"] is False
+          assert data["bulk_training_authorized"] is False
+          assert data["gates"]["exact_f16_parent_identity"]["pass"] is True
+          assert data["gates"]["q8_0_real_runtime_preservation"]["pass"] is True
+          assert data["gates"]["q4_k_m_real_runtime_preservation"]["pass"] is True
+          assert data["gates"]["strict_compression_ordering"]["pass"] is True
+          print(data["result_hash"])
+          PY
+
+      - name: Upload quantization evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m5-q8-q4-quantization-qualification
+          path: |
+            .m5q-result.json
+            .m5q-tools/converter_probe.json
+            .m5q-runs/**/m5/M5_QUANTIZATION_QUALIFICATION_RESULT.json
+            .m5q-runs/**/m5/m5_adjudication.json
+            .m5q-runs/**/m5/quantized_results.json
+            .m5q-runs/**/m5/high_fidelity_parent_identity.json
+            .m5q-runs/**/m5/manifest_high_fidelity.json
+          if-no-files-found: warn
