@@ -384,3 +384,42 @@ bulk training: CLOSED / NOT AUTHORIZED
 ```
 
 The only next gate is lock-present zero-science preflight.
+
+
+## 2026-09-22 — Q4_K_M lock-present zero-science preflight PASS
+
+Authoritative preflight:
+
+```text
+run: 35641025835
+job: 106470091499
+conclusion: success
+artifact: 10658486459
+artifact zip sha256:
+388e0794fa7906efc443dabe4d32b357ae350ec735a34e75c171399b33d222a4
+```
+
+The emitted Q4 zero-science result is `PASS`.
+
+All locked blobs matched. Static checks confirmed that the implementation is
+Q4-target-specific, does not invoke the general M5 multi-target loop or Q8
+execution entrypoint, does not introduce strict Q4<Q8 compression ordering, and
+keeps M6 hard-closed.
+
+Critically, the preflight dynamically read the recorded accidental Q4 exposure
+and verified that the exposed outcome values are absent from the Q4
+implementation/runner/tests/workflow/lock.
+
+Execution boundary at closure:
+
+```text
+quantization_executed=false
+q4_scientific_execution_executed=false
+Q4 formal PASS claim: NOT AUTHORIZED
+M6: CLOSED / NOT AUTHORIZED
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+Q4_K_M is now ready only for a **separate formal replication execution
+authorization** under the pre-exposure preregistered contract. This preflight
+does not authorize or execute Q4 science.

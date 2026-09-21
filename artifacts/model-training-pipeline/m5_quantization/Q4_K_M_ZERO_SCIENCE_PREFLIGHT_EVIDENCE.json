@@ -1,0 +1,73 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q4-zero-science-preflight-evidence-v1",
+  "program": "M5Q",
+  "target": "q4_k_m",
+  "verdict": "PASS",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "implementation_commit": "97d7dad329aa0196ead9005e631eebbeb8aa2163",
+  "implementation_lock_commit": "87bc09f479c5fd6ba3e3ec3725d859ed5ad9feb1",
+  "implementation_lock_git_blob_sha1": "fb4714bb93d6b2fd4400c3ec450478843516db87",
+  "prior_out_of_protocol_outcome_exposure": true,
+  "execution_class": "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT",
+  "tests": {
+    "pre_lock_run_id": 35640617420,
+    "pre_lock_job_id": 106468748043,
+    "existing_m5": {
+      "passed": 12,
+      "failed": 0
+    },
+    "q8_regression": {
+      "passed": 8,
+      "failed": 0
+    },
+    "q4_contract": {
+      "passed": 10,
+      "failed": 0
+    }
+  },
+  "authoritative_preflight": {
+    "run_id": 35641025835,
+    "job_id": 106470091499,
+    "conclusion": "success",
+    "artifact_id": 10658486459,
+    "artifact_name": "m5q-q4-zero-science-preflight",
+    "artifact_zip_sha256": "388e0794fa7906efc443dabe4d32b357ae350ec735a34e75c171399b33d222a4"
+  },
+  "preflight_result": {
+    "status": "PASS",
+    "static_checks": {
+      "all_locked_blobs_match": true,
+      "exposed_outcome_values_absent_from_q4_implementation": true,
+      "m6_auto_open_hard_false": true,
+      "m6_hard_false_in_result": true,
+      "no_general_m5_target_loop": true,
+      "no_q8_execution_entrypoint": true,
+      "no_strict_q4_q8_ordering_gate": true,
+      "post_exposure_thresholds_hard_false": true,
+      "preflight_does_not_import_q4_runtime": true,
+      "q4_target_key_present": true,
+      "q4_target_literal_present": true,
+      "q8_hard_false_in_sequence_provenance": true,
+      "runner_calls_q4_only_entrypoint": true
+    },
+    "quantization_executed": false,
+    "q4_scientific_execution_executed": false,
+    "m6_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "frozen_boundaries": {
+    "q4_scientific_execution_authorized": false,
+    "q4_quantization_authorized": false,
+    "q4_formal_pass_claim_authorized": false,
+    "q8_rerun_authorized": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "state_after_preflight": {
+    "q4_k_m": "READY_FOR_SEPARATE_FORMAL_REPLICATION_EXECUTION_AUTHORIZATION",
+    "q4_scientific_execution_executed": false,
+    "next_valid_action": "SEPARATE_Q4_FORMAL_REPLICATION_EXECUTION_AUTHORIZATION",
+    "m6": "CLOSED_NOT_AUTHORIZED"
+  }
+}
