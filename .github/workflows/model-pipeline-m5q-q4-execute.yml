@@ -1,0 +1,327 @@
+name: Model Pipeline M5Q Q4 Formal Replication
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m5-quantization-qualification
+    paths:
+      - '.github/workflows/model-pipeline-m5q-q4-execute.yml'
+      - 'artifacts/model-training-pipeline/m5_quantization/Q4_K_M_EXECUTION_ORCHESTRATION.json'
+
+jobs:
+  q4-formal-replication:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify formal-replication authorization and orchestration binding
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          AUTH_COMMIT = "0402cb334fcf4a9f77c44e4348525a7c0b5489a9"
+          AUTH_BLOB = "2f59651069649e9171fb71215b233ee6b3e3792c"
+
+          parent = subprocess.check_output(
+              ["git", "rev-parse", "HEAD^"], text=True
+          ).strip()
+          assert parent == AUTH_COMMIT, (parent, AUTH_COMMIT)
+
+          auth_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m5_quantization/"
+              "Q4_K_M_EXECUTION_AUTHORIZATION.json"
+          )
+          orchestration_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m5_quantization/"
+              "Q4_K_M_EXECUTION_ORCHESTRATION.json"
+          )
+          preflight_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m5_quantization/"
+              "Q4_K_M_ZERO_SCIENCE_PREFLIGHT_EVIDENCE.json"
+          )
+
+          auth = json.loads(auth_path.read_text())
+          orchestration = json.loads(orchestration_path.read_text())
+          preflight = json.loads(preflight_path.read_text())
+
+          actual_auth_blob = subprocess.check_output(
+              ["git", "hash-object", "--", str(auth_path)], text=True
+          ).strip()
+          assert actual_auth_blob == AUTH_BLOB, (actual_auth_blob, AUTH_BLOB)
+
+          assert auth["schema"] == (
+              "mindforge-model-pipeline-m5q-q4-formal-replication-execution-authorization-v1"
+          )
+          assert auth["status"] == "AUTHORIZED_ONE_FORMAL_REPLICATION"
+          assert auth["target"] == "q4_k_m"
+          assert auth["quantizer_type"] == "Q4_K_M"
+          assert auth["execution_class"] == (
+              "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT"
+          )
+          assert auth["authorization_scope"]["scientific_invocations_authorized"] == 1
+          assert auth["exact_identity"]["scientific_implementation_commit"] == (
+              "97d7dad329aa0196ead9005e631eebbeb8aa2163"
+          )
+          assert auth["exact_identity"]["implementation_lock_commit"] == (
+              "87bc09f479c5fd6ba3e3ec3725d859ed5ad9feb1"
+          )
+          assert auth["downstream_boundary"]["m6_authorized"] is False
+          assert auth["downstream_boundary"]["m6_auto_open"] is False
+
+          assert orchestration["schema"] == (
+              "mindforge-model-pipeline-m5q-q4-formal-replication-orchestration-v1"
+          )
+          assert orchestration["status"] == "BOUND_FOR_SINGLE_EXECUTION"
+          assert orchestration["authorization_commit"] == AUTH_COMMIT
+          assert orchestration["authorization_git_blob_sha1"] == AUTH_BLOB
+          assert orchestration["scientific_implementation_commit"] == (
+              "97d7dad329aa0196ead9005e631eebbeb8aa2163"
+          )
+          assert orchestration["implementation_lock_commit"] == (
+              "87bc09f479c5fd6ba3e3ec3725d859ed5ad9feb1"
+          )
+          assert orchestration["scientific_invocations_planned"] == 1
+          assert orchestration["target"] == "q4_k_m"
+          assert orchestration["quantizer_type"] == "Q4_K_M"
+          assert orchestration["m6_authorized"] is False
+
+          workflow = ".github/workflows/model-pipeline-m5q-q4-execute.yml"
+          actual_workflow_blob = subprocess.check_output(
+              ["git", "hash-object", "--", workflow], text=True
+          ).strip()
+          assert actual_workflow_blob == orchestration["execution_workflow_git_blob_sha1"], (
+              actual_workflow_blob,
+              orchestration["execution_workflow_git_blob_sha1"],
+          )
+
+          assert preflight["verdict"] == "PASS"
+          assert preflight["implementation_commit"] == (
+              "97d7dad329aa0196ead9005e631eebbeb8aa2163"
+          )
+          assert preflight["preflight_result"]["quantization_executed"] is False
+          assert preflight["preflight_result"]["q4_scientific_execution_executed"] is False
+          assert preflight["state_after_preflight"]["q4_k_m"] == (
+              "READY_FOR_SEPARATE_FORMAL_REPLICATION_EXECUTION_AUTHORIZATION"
+          )
+
+          print("Q4_FORMAL_REPLICATION_AUTHORIZATION_AND_ORCHESTRATION_VERIFIED")
+          PY
+
+      - name: Install exact locked M5 dependencies
+        run: python -m pip install -r requirements-pipeline-m5.txt
+
+      - name: Reverify exact Q4 implementation lock before science
+        run: |
+          set -o pipefail
+          python -m tools.m5q_q4_preflight --workspace . --json | tee q4-pre-execution-lock-check.json
+          python - <<'PY'
+          import json
+          import pathlib
+
+          data = json.loads(pathlib.Path("q4-pre-execution-lock-check.json").read_text())
+          assert data["status"] == "PASS"
+          assert data["implementation_commit"] == "97d7dad329aa0196ead9005e631eebbeb8aa2163"
+          assert data["prior_out_of_protocol_outcome_exposure"] is True
+          assert data["static_checks"]["all_locked_blobs_match"] is True
+          assert data["static_checks"]["exposed_outcome_values_absent_from_q4_implementation"] is True
+          assert data["static_checks"]["no_general_m5_target_loop"] is True
+          assert data["static_checks"]["no_q8_execution_entrypoint"] is True
+          assert data["static_checks"]["no_strict_q4_q8_ordering_gate"] is True
+          assert data["quantization_executed"] is False
+          assert data["q4_scientific_execution_executed"] is False
+          assert data["m6_authorized"] is False
+          PY
+
+      - name: Checkout exact pinned llama.cpp source
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(
+              pathlib.Path("docs/model-training-pipeline/runtime/llama_cpp.lock.json").read_text()
+          )
+          root = pathlib.Path(".m5q-q4-tools")
+          source = root / "llama.cpp"
+          root.mkdir(exist_ok=True)
+          subprocess.run(["git", "init", str(source)], check=True)
+          subprocess.run(
+              ["git", "-C", str(source), "remote", "add", "origin", lock["source_url"]],
+              check=True,
+          )
+          subprocess.run(
+              ["git", "-C", str(source), "fetch", "--depth", "1", "origin", lock["commit_sha"]],
+              check=True,
+          )
+          subprocess.run(
+              ["git", "-C", str(source), "checkout", "--detach", "FETCH_HEAD"],
+              check=True,
+          )
+          actual = subprocess.check_output(
+              ["git", "-C", str(source), "rev-parse", "HEAD"], text=True
+          ).strip()
+          assert actual == lock["commit_sha"], (actual, lock["commit_sha"])
+          print(actual)
+          PY
+
+      - name: Create exact isolated converter environment
+        run: |
+          python -m venv .m5q-q4-tools/convert-venv
+          .m5q-q4-tools/convert-venv/bin/python -m pip install --upgrade pip
+          .m5q-q4-tools/convert-venv/bin/python -m pip install             -r .m5q-q4-tools/llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
+
+      - name: Verify converter imports
+        run: |
+          set -o pipefail
+          .m5q-q4-tools/convert-venv/bin/python pipeline/m5_converter_probe.py             | tee .m5q-q4-tools/converter_probe.json
+          python - <<'PY'
+          import json
+          import pathlib
+
+          data = json.loads(
+              pathlib.Path(".m5q-q4-tools/converter_probe.json").read_text()
+          )
+          failed = {
+              key: value
+              for key, value in data.items()
+              if not isinstance(value, dict) or value.get("import_ok") is not True
+          }
+          if failed:
+              raise SystemExit(
+                  "converter preflight failed: " + json.dumps(failed, sort_keys=True)
+              )
+          PY
+
+      - name: Build exact llama.cpp binaries and manifest
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(
+              pathlib.Path("docs/model-training-pipeline/runtime/llama_cpp.lock.json").read_text()
+          )
+          source = pathlib.Path(".m5q-q4-tools/llama.cpp").resolve()
+          build = source / "build"
+          configure = [
+              "cmake", "-S", str(source), "-B", str(build), *lock["build"]["flags"]
+          ]
+          subprocess.run(configure, check=True)
+          compile_cmd = [
+              "cmake", "--build", str(build),
+              "--target", *lock["build"]["targets"],
+              "-j2",
+          ]
+          subprocess.run(compile_cmd, check=True)
+          commit = subprocess.check_output(
+              ["git", "-C", str(source), "rev-parse", "HEAD"], text=True
+          ).strip()
+          manifest = {
+              "schema": "mindforge-llama-cpp-build-v1",
+              "source_commit": commit,
+              "flags": lock["build"]["flags"],
+              "targets": lock["build"]["targets"],
+              "configure_command": configure,
+              "build_command": compile_cmd,
+          }
+          pathlib.Path(".m5q-q4-tools/build_manifest.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+      - name: Execute exactly one Q4_K_M formal scientific replication
+        id: execute_q4
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m tools.m5q_q4_qualification             -c docs/model-training-pipeline/examples/end_to_end_small.yaml             --workspace .             --runs-root .m5q-q4-formal-runs             --llama-source .m5q-q4-tools/llama.cpp             --llama-cli .m5q-q4-tools/llama.cpp/build/bin/llama-cli             --llama-quantize .m5q-q4-tools/llama.cpp/build/bin/llama-quantize             --converter-python .m5q-q4-tools/convert-venv/bin/python             --build-manifest .m5q-q4-tools/build_manifest.json             --json | tee .m5q-q4-console-result.json
+
+      - name: Freeze and adjudicate formal Q4 result
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          results = list(
+              pathlib.Path(".m5q-q4-formal-runs").glob(
+                  "**/M5Q_Q4_QUALIFICATION_RESULT.json"
+              )
+          )
+          if len(results) != 1:
+              print(json.dumps({
+                  "classification": "INVALID_INFRASTRUCTURE_OR_EXECUTION_ORCHESTRATION",
+                  "reason": f"expected exactly one Q4 scientific result, found {len(results)}",
+                  "scientific_invocation_step_reached": True,
+                  "m6_authorized": False,
+              }, indent=2))
+              sys.exit(3)
+
+          data = json.loads(results[0].read_text())
+          assert data["schema"] == "mindforge-model-pipeline-m5q-q4-qualification-v1"
+          assert data["target"] == "q4_k_m"
+          assert data["quantizer_type"] == "Q4_K_M"
+          assert data["execution_class"] == (
+              "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT"
+          )
+          assert data["prior_out_of_protocol_outcome_exposure"] is True
+          assert data["sequence_provenance"]["q8_pass_inherited_as_q4_pass"] is False
+          assert data["sequence_provenance"]["q8_executed"] is False
+          assert data["post_exposure_thresholds_added"] is False
+          assert data["m6_authorized"] is False
+          assert data["m6_auto_open"] is False
+          assert data["bulk_training_authorized"] is False
+          assert data["parent"]["m5_f16_closure_commit"] == (
+              "9ff987ebd95cd23fef4cd2a0511774d772b14400"
+          )
+          assert data["parent"]["f16_result_hash"] == (
+              "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57"
+          )
+
+          pathlib.Path(".m5q-q4-result.json").write_text(
+              json.dumps(data, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps({
+              "classification": "SCIENTIFIC_RESULT",
+              "status": data["status"],
+              "result_hash": data["result_hash"],
+              "failed_required_gates": data["failed_required_gates"],
+              "prior_out_of_protocol_outcome_exposure": True,
+              "m6_authorized": data["m6_authorized"],
+          }, indent=2))
+
+          if data["status"] != "PASS":
+              sys.exit(2)
+          PY
+
+      - name: Upload frozen Q4 formal-replication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m5q-q4-formal-replication-evidence
+          path: |
+            .m5q-q4-result.json
+            .m5q-q4-console-result.json
+            q4-pre-execution-lock-check.json
+            .m5q-q4-tools/converter_probe.json
+            .m5q-q4-tools/build_manifest.json
+            .m5q-q4-formal-runs/**/m5q_q4_k_m/*.json
+            .m5q-q4-formal-runs/**/m5q_q4_k_m/*.log
+          if-no-files-found: warn
