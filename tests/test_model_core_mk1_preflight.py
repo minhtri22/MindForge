@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from experiments.model_core.mk1.contracts import C_SLICES, D_C, D_Z, Z1_LABELS, Z_SLICES
 from experiments.model_core.mk1.data_contract import build_fixture_scene, render_surface
-from experiments.model_core.mk1.preflight import _projected_generator_qa
+from experiments.model_core.mk1.preflight import (
+    _independent_parse_z,
+    _independent_recompose,
+    _projected_generator_qa,
+)
 from experiments.model_core.mk1.recompose import canonical_equal, recompose_gold_z
 from experiments.model_core.mk1.trainer import deterministic_sample_indices
 
@@ -53,3 +57,14 @@ def test_amendment_003_projected_generator_qa_passes() -> None:
     assert result["minimum_confirmatory_c1_binary_cell"] >= 40
     assert result["minimum_train_c5_binary_cell"] >= 100
     assert result["minimum_confirmatory_c5_binary_cell"] >= 40
+
+
+
+def test_independent_observable_parser_recovers_fixture_targets() -> None:
+    for index in range(64):
+        scene = build_fixture_scene(index)
+        for family in ("A", "B", "C"):
+            text = render_surface(scene, family)
+            parsed_z = _independent_parse_z(text)
+            assert parsed_z == scene.gold_z
+            assert _independent_recompose(parsed_z) == scene.gold_c
