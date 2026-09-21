@@ -152,3 +152,89 @@ bulk training: CLOSED / NOT AUTHORIZED
 
 Q8_0 is now `READY_FOR_ONE_SHOT_EXECUTION`. This lineage entry does not execute
 or adjudicate Q8_0.
+
+
+## 2026-09-21 — Q8_0 one-shot scientific qualification PASS / CLOSED
+
+The first orchestration attempt stopped before scientific execution:
+
+```text
+run: 35628522807
+job: 106428724201
+classification: INVALID_EXECUTION_ORCHESTRATION
+scientific execution started: NO
+quantization executed: NO
+one-shot scientific authorization consumed: NO
+```
+
+The defect was restricted to the execution authorization lookup and was repaired
+without changing the scientific Q8 implementation, config, fixture, inference
+contract, quantizer target, or preservation rule.
+
+Authoritative one-shot execution:
+
+```text
+run: 35628720499
+job: 106429375737
+head: b74f30553c648b9951719b2001ba9f253af5bb5c
+artifact: 10653802062
+artifact zip sha256:
+f05934d02eeb25a21cc51e9d6160866d0966b8c5fa7590857d18c76d71ae4b91
+```
+
+Scientific result:
+
+```text
+status: PASS
+result_hash:
+16b3ce2f4522481ab086068c4a0ce625f9c0a2759d9d946a3deffc7bcf44c1c8
+
+failed_required_gates: []
+```
+
+Q8_0 artifact:
+
+```text
+file: model-q8_0.gguf
+quantizer type: Q8_0
+size: 531067744 bytes
+sha256:
+35e1d06149ea36b2021f02369db0910cc6e02e691666cdbde0488210172e0146
+
+aggregate manifest hash:
+2b7133017c74b3d5a1775b1620eed65a8fccaa70f35009038d88fde2daaf9e0b
+```
+
+The exact frozen F16 parent identity was regenerated and matched before Q8
+quantization. All 13 preregistered Q8 gates passed, including real llama-cli
+load/inference, task-vector and accuracy identity versus F16, format
+preservation, reasoning runtime mapping, and artifact-size reduction.
+
+The inherited F16 benchmark limitation remains non-blocking and unchanged:
+
+```text
+F16 task vector: [false, false]
+Q8 task vector:  [false, false]
+F16 accuracy:    0.0
+Q8 accuracy:     0.0
+preservation:    PASS
+absolute capability claim: NO
+```
+
+Terminal state:
+
+```text
+Q8_0: PASS / CLOSED
+Q8 rerun: NOT AUTHORIZED
+
+Q4_K_M: NOT EXECUTED
+Q4 does not inherit Q8 PASS
+
+M6: CLOSED / NOT AUTHORIZED
+M6 auto-open: FALSE
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+The next permitted governance action is a separate Q4_K_M implementation
+authorization/opening under the already-preregistered M5Q sequence. This entry
+does not open or execute Q4_K_M.

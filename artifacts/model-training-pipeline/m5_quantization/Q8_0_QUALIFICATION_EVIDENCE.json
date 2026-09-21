@@ -1,0 +1,119 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q8-qualification-evidence-v1",
+  "program": "M5Q",
+  "target": "q8_0",
+  "verdict": "PASS",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "scientific_implementation_commit": "68bbd071ba78f6325748159703a90232d69e4ade",
+  "execution_authorization_commit": "b74f30553c648b9951719b2001ba9f253af5bb5c",
+  "invalid_pre_science_orchestration": {
+    "run_id": 35628522807,
+    "job_id": 106428724201,
+    "classification": "INVALID_EXECUTION_ORCHESTRATION",
+    "scientific_execution_started": false,
+    "quantization_executed": false,
+    "one_shot_scientific_authorization_consumed": false
+  },
+  "authoritative_execution": {
+    "run_id": 35628720499,
+    "job_id": 106429375737,
+    "conclusion": "success",
+    "head_sha": "b74f30553c648b9951719b2001ba9f253af5bb5c",
+    "artifact_id": 10653802062,
+    "artifact_name": "m5q-q8-one-shot-evidence",
+    "artifact_zip_sha256": "f05934d02eeb25a21cc51e9d6160866d0966b8c5fa7590857d18c76d71ae4b91",
+    "scientific_invocation_started": true,
+    "one_shot_authorization_consumed": true
+  },
+  "result": {
+    "schema": "mindforge-model-pipeline-m5q-q8-qualification-v1",
+    "status": "PASS",
+    "result_hash": "16b3ce2f4522481ab086068c4a0ce625f9c0a2759d9d946a3deffc7bcf44c1c8",
+    "failed_required_gates": []
+  },
+  "parent": {
+    "m5_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_artifact_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "f16_artifact_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "f16_task_vector": [
+      false,
+      false
+    ],
+    "f16_accuracy": 0
+  },
+  "q8_artifact": {
+    "name": "model-q8_0.gguf",
+    "topology": "single_file",
+    "size": 531067744,
+    "sha256": "35e1d06149ea36b2021f02369db0910cc6e02e691666cdbde0488210172e0146",
+    "aggregate_manifest_hash": "2b7133017c74b3d5a1775b1620eed65a8fccaa70f35009038d88fde2daaf9e0b",
+    "quantizer_type": "Q8_0",
+    "quantizer_return_code": 0,
+    "quantizer_command_hash": "e29cfbcacb2c645ac9e17639a9c6826fbea2194849afca6eef475ec947bc8d8f",
+    "quantizer_log_hash": "c68cc74b23bb5b1b8c2cd749737b21200755181486e8087e6e52ce5da09b6bf5"
+  },
+  "runtime": {
+    "all_outputs_nonempty": true,
+    "task_vector": [
+      false,
+      false
+    ],
+    "accuracy": 0,
+    "model_sha256": "35e1d06149ea36b2021f02369db0910cc6e02e691666cdbde0488210172e0146",
+    "runtime_error": null
+  },
+  "preservation": {
+    "pass": true,
+    "comparator": "qualified_f16_parent",
+    "format_parity": true,
+    "f16_task_vector": [
+      false,
+      false
+    ],
+    "q8_task_vector": [
+      false,
+      false
+    ],
+    "f16_accuracy": 0,
+    "q8_accuracy": 0,
+    "exact_text_required": false,
+    "absolute_capability_claimed": false
+  },
+  "runtime_lock": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "llama_cli_sha256": "fa9cec2f99403e96c5f18b3fff80bc42fedbff007213e3378a9d3b3190100d09",
+    "llama_quantize_sha256": "39ff5b31504b908e1f5ae2798e3b6306b749d2f10982a1e5e05be2197d7b5b02"
+  },
+  "required_gates": {
+    "parent_f16_identity_exact": true,
+    "llama_cpp_exact_lock": true,
+    "quantizer_target_exact": true,
+    "quantizer_return_code_zero": true,
+    "quantized_artifact_nonempty": true,
+    "quantized_artifact_manifest_frozen": true,
+    "real_llama_cli_load_and_infer": true,
+    "all_runtime_outputs_nonempty": true,
+    "task_vector_equals_f16_parent": true,
+    "runtime_accuracy_equals_f16_parent": true,
+    "format_parity_with_f16_parent": true,
+    "reasoning_runtime_mapping_pass": true,
+    "artifact_smaller_than_f16": true
+  },
+  "inherited_non_blocking_observation": {
+    "id": "M5_F16_PARITY_ABSOLUTE_CAPABILITY_CEILING",
+    "applies": true,
+    "statement": "Q8_0 PASS is a preservation/runtime qualification against the frozen F16 parent. It is not an absolute-capability result; both frozen task vectors remain [false,false] at accuracy 0.0."
+  },
+  "boundaries_after_adjudication": {
+    "q8_0": "PASS_CLOSED",
+    "q8_rerun_authorized": false,
+    "q4_k_m": "NOT_EXECUTED_NOT_OPENED_IN_THIS_TURN",
+    "q4_inherited_q8_pass": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false,
+    "next_permitted_governance_action": "separate Q4_K_M implementation authorization/opening under the preregistered M5Q sequence"
+  }
+}
