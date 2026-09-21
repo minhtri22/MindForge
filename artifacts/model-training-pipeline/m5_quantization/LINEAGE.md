@@ -73,3 +73,40 @@ The exact implementation/dependency blob set is frozen in
 
 The only next gate is zero-science preflight. No Q8_0 scientific execution is
 authorized until that preflight passes.
+
+
+## 2026-09-21 — Zero-science preflight helper invalidation and bounded repair
+
+The first lock-present preflight invocation is terminally classified:
+
+```text
+run: 35624467187
+job: 106415285615
+artifact: 10651021689
+classification: INVALID_ZERO_SCIENCE_PREFLIGHT_HELPER
+scientific execution consumed: NO
+```
+
+The JSON itself reported `status=FAIL` because the helper attempted to prove it
+did not import `pipeline.m5q` by searching its own source for a literal that was
+necessarily present inside that check. The workflow nevertheless appeared green
+because `python ... | tee` did not enable `pipefail`.
+
+Bounded repair only:
+
+```text
+tools/m5q_q8_preflight.py:
+literal self-scan -> AST import inspection
+
+.github/workflows/model-pipeline-m5q-q8-preflight.yml:
+enable set -o pipefail
+```
+
+The scientific Q8_0 implementation commit remains exactly:
+
+```text
+68bbd071ba78f6325748159703a90232d69e4ade
+```
+
+No model/config/fixture/inference/quantizer target/parity rule changed.
+No quantization executed. Q4 and M6 remain closed.

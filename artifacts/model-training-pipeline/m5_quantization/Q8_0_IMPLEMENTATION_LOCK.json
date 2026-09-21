@@ -51,9 +51,9 @@
   "git_blobs": {
     "pipeline/m5q.py": "aa96345a7ecf47f403b84b40ced015fa8a626284",
     "tools/m5q_q8_qualification.py": "e553149bf2b5be103086956bbd804cbca504564c",
-    "tools/m5q_q8_preflight.py": "8a3c17826c4104a4c261a54b91b209fda0aff7a1",
+    "tools/m5q_q8_preflight.py": "4ba9c408a80ae76475535f245d6ab9a61965400c",
     "tests/test_model_pipeline_m5q_q8.py": "542dbb596863bd4cad8566f734caf43e8204b411",
-    ".github/workflows/model-pipeline-m5q-q8-preflight.yml": "f0f3a0bc99b24f65176360a95d9f871325a7a20a",
+    ".github/workflows/model-pipeline-m5q-q8-preflight.yml": "0754e2f99f248aab8999f7e26c72fec984ef777a",
     "pipeline/m5.py": "0249be91acbe57fd20b8577a0cda3d6ea5acb048",
     "pipeline/m2.py": "51a023e46b48f9d177b506cfa4e409a4f85d930b",
     "pipeline/m2_model.py": "8c257d3bb767cc2f17b58a0905452bb7f9ae52db",
@@ -92,5 +92,16 @@
     "bulk_training_authorized": false,
     "scientific_execution_authorized_before_zero_science_preflight": false
   },
-  "next_gate": "ZERO_SCIENCE_PREFLIGHT"
+  "next_gate": "ZERO_SCIENCE_PREFLIGHT_REQUALIFICATION",
+  "helper_repair_lineage": {
+    "supersedes_preflight_run_id": 35624467187,
+    "supersedes_preflight_artifact_id": 10651021689,
+    "classification": "INVALID_ZERO_SCIENCE_PREFLIGHT_HELPER",
+    "reason": "Self-check inspected its own source for a literal that was present in the check expression, while workflow piping through tee lacked pipefail and masked exit code 2.",
+    "scientific_implementation_changed": false,
+    "bounded_changes": [
+      "Replace literal self-scan with AST import inspection.",
+      "Enable shell pipefail for the preflight JSON pipeline."
+    ]
+  }
 }

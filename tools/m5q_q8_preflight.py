@@ -7,6 +7,7 @@ not invoke llama-quantize, llama-cli, model loading, conversion, or training.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import subprocess
 from pathlib import Path
@@ -69,6 +70,19 @@ def run_preflight(repo_root: Path) -> dict[str, Any]:
         encoding="utf-8"
     )
 
+    preflight_tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    imports_q8_runtime = any(
+        (
+            isinstance(node, ast.Import)
+            and any(alias.name == "pipeline.m5q" for alias in node.names)
+        )
+        or (
+            isinstance(node, ast.ImportFrom)
+            and node.module == "pipeline.m5q"
+        )
+        for node in ast.walk(preflight_tree)
+    )
+
     static_checks = {
         "all_locked_blobs_match": all(row["match"] for row in checks),
         "q8_target_literal_present": 'Q8_QUANTIZER_TYPE = "Q8_0"' in q8_source,
@@ -79,9 +93,7 @@ def run_preflight(repo_root: Path) -> dict[str, Any]:
         "m6_hard_false_in_result": '"m6_authorized": False' in q8_source,
         "m6_auto_open_hard_false": '"m6_auto_open": False' in q8_source,
         "runner_calls_q8_only_entrypoint": "run_q8_qualification" in runner_source,
-        "preflight_does_not_import_q8_runtime": "from pipeline.m5q" not in Path(
-            __file__
-        ).read_text(encoding="utf-8"),
+        "preflight_does_not_import_q8_runtime": not imports_q8_runtime,
     }
 
     passed = all(static_checks.values())

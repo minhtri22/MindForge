@@ -34,6 +34,7 @@ jobs:
 
       - name: Zero-science locked provenance preflight
         run: |
+          set -o pipefail
           if [ -f artifacts/model-training-pipeline/m5_quantization/Q8_0_IMPLEMENTATION_LOCK.json ]; then
             python -m tools.m5q_q8_preflight --workspace . --json | tee q8-zero-science-preflight.json
           else
