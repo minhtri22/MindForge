@@ -1,0 +1,117 @@
+{
+  "schema": "mindforge-model-pipeline-m5-quantization-preregistration-v1",
+  "program": "M5Q — Q8_0 / Q4_K_M Quantized GGUF Qualification",
+  "status": "OPEN_SPECIFICATION_ONLY",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "parent": {
+    "m5_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+    "qualified_scientific_commit": "2cb3cb6d1fbaa2230bc8b8d8bdf6dcdc51f4c719",
+    "authoritative_run_id": 35617920637,
+    "authoritative_job_id": 106393309234,
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_artifact_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "f16_artifact_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "f16_status": "PASS_CLOSED"
+  },
+  "claim_scope": {
+    "primary_question": "Does each frozen quantized target preserve the qualified F16 runtime behavior under the same pinned llama.cpp, fixture, and inference contract?",
+    "targets": [
+      "q8_0",
+      "q4_k_m"
+    ],
+    "absolute_capability_claimed": false,
+    "model_quality_improvement_claimed": false,
+    "production_target_selection_claimed": false
+  },
+  "frozen_inputs": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "config_path": "docs/model-training-pipeline/examples/end_to_end_small.yaml",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "source_f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "source_f16_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "fixture_set": "tests/fixtures/eval_v1",
+    "inference": {
+      "max_new_tokens": 128,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "seed": 42,
+      "context_length": 2048,
+      "threads": 2,
+      "llama_cli_single_turn": true
+    }
+  },
+  "target_order": {
+    "execution_order": [
+      "q8_0",
+      "q4_k_m"
+    ],
+    "rationale": "Run one target at a time for traceability. Q8_0 is the lower-distortion quantized control; Q4_K_M follows under unchanged controls.",
+    "cross_target_tuning_forbidden": true,
+    "q4_may_run_after_q8_scientific_fail": true,
+    "note": "Q4_K_M is an independent target, not a rescue for Q8_0. A Q8 scientific FAIL is frozen before Q4 executes."
+  },
+  "per_target_required_gates": [
+    "parent_f16_identity_exact",
+    "llama_cpp_exact_lock",
+    "quantizer_target_exact",
+    "quantizer_return_code_zero",
+    "quantized_artifact_nonempty",
+    "quantized_artifact_manifest_frozen",
+    "real_llama_cli_load_and_infer",
+    "all_runtime_outputs_nonempty",
+    "task_vector_equals_f16_parent",
+    "runtime_accuracy_equals_f16_parent",
+    "format_parity_with_f16_parent",
+    "reasoning_runtime_mapping_pass",
+    "artifact_smaller_than_f16"
+  ],
+  "comparison_contract": {
+    "comparator": "qualified F16 parent",
+    "f16_task_vector": [
+      false,
+      false
+    ],
+    "f16_accuracy": 0,
+    "exact_text_equality_required": false,
+    "no_degradation_definition": "quantized task vector and accuracy must equal the frozen F16 parent and outputs must remain format-valid",
+    "limitation": "Because the parent frozen task vector is [false,false], this preservation gate is not an absolute-capability test."
+  },
+  "non_blocking_parent_observation": {
+    "id": "M5_F16_PARITY_ABSOLUTE_CAPABILITY_CEILING",
+    "carried_forward": true,
+    "blocking": false,
+    "rule": "Do not reinterpret Q8/Q4 preservation PASS as proof of absolute task capability. Do not redesign the frozen parent benchmark inside this qualification."
+  },
+  "adjudication": {
+    "PASS": "all required gates pass for the target",
+    "FAIL_QUANTIZATION": "quantizer exits nonzero or target artifact is missing/invalid",
+    "FAIL_RUNTIME": "quantized artifact cannot load or produce valid outputs under real llama-cli",
+    "FAIL_PRESERVATION": "task vector, accuracy, or format parity differs from the frozen F16 parent",
+    "FAIL_REASONING_MAPPING": "artifact-specific reasoning runtime mapping gate fails",
+    "INVALID_PROVENANCE": "any frozen parent/model/runtime/source-F16 identity differs",
+    "INVALID_INFRASTRUCTURE": "execution venue/tooling fails before a target adjudication artifact is emitted"
+  },
+  "forbidden": {
+    "model_or_revision_change": true,
+    "training_or_checkpoint_change": true,
+    "tokenizer_change": true,
+    "fixture_or_expected_answer_change": true,
+    "inference_parameter_change": true,
+    "llama_cpp_commit_change": true,
+    "converter_change": true,
+    "parity_rule_relaxation": true,
+    "target_specific_tuning_after_outcome": true,
+    "rerun_scientific_fail_to_seek_pass": true,
+    "m6_execution": true,
+    "bulk_training": true
+  },
+  "downstream_boundary": {
+    "m6_authorized_by_target_pass": false,
+    "m6_auto_open": false,
+    "required_after_both_targets_terminal": "separate post-quantization governance review",
+    "bulk_training_authorized": false
+  }
+}
