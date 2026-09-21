@@ -16,6 +16,15 @@ from pipeline.m5 import run_m5_qualification, single_file_gguf_identity
 EXPECTED_TARGETS = ("q8_0", "q4_k_m")
 
 
+def exact_adjudicated_target_membership(value: Any) -> bool:
+    """Ignore canonical JSON key order but reject missing/extra target IDs."""
+    return (
+        isinstance(value, dict)
+        and len(value) == len(EXPECTED_TARGETS)
+        and set(value.keys()) == set(EXPECTED_TARGETS)
+    )
+
+
 def read_obj(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
@@ -79,8 +88,9 @@ def main() -> int:
     m5_dir = result.run_dir / "m5"
     adjudication = read_obj(m5_dir / "m5_adjudication.json")
     quant = adjudication.get("quantized_targets", {})
-    if tuple(quant.keys()) != EXPECTED_TARGETS:
-        raise RuntimeError(f"adjudicated target set drifted: {tuple(quant.keys())}")
+    if not exact_adjudicated_target_membership(quant):
+        observed = tuple(quant.keys()) if isinstance(quant, dict) else type(quant).__name__
+        raise RuntimeError(f"adjudicated target set drifted: {observed}")
 
     identities: dict[str, dict[str, Any]] = {}
     for target in EXPECTED_TARGETS:

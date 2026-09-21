@@ -4,6 +4,10 @@ import json
 from pathlib import Path
 
 from pipeline.m5 import high_fidelity_identity_matches, single_file_gguf_identity
+from tools.m5_quantization_qualification import (
+    EXPECTED_TARGETS,
+    exact_adjudicated_target_membership,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -75,3 +79,18 @@ def test_quantization_harness_compiles_and_keeps_m6_closed():
     assert '"m6_authorized": False' in source
     assert '"absolute_capability_claimed": False' in source
     assert "POST_QUANTIZATION_GOVERNANCE_DECISION" in source
+
+
+def test_adjudicated_target_membership_ignores_canonical_json_key_order():
+    # atomic_write_json(sort_keys=True) serializes q4_k_m before q8_0.
+    canonical_order = {"q4_k_m": {}, "q8_0": {}}
+    assert tuple(canonical_order.keys()) != EXPECTED_TARGETS
+    assert exact_adjudicated_target_membership(canonical_order) is True
+
+
+def test_adjudicated_target_membership_rejects_missing_extra_or_wrong_type():
+    assert exact_adjudicated_target_membership({"q8_0": {}}) is False
+    assert exact_adjudicated_target_membership(
+        {"q8_0": {}, "q4_k_m": {}, "q5_0": {}}
+    ) is False
+    assert exact_adjudicated_target_membership(["q8_0", "q4_k_m"]) is False
