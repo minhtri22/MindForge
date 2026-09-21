@@ -1,0 +1,91 @@
+name: MK1 Paired Init Token Budget Audit
+
+permissions:
+  contents: read
+  actions: read
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - "model_kernel/mk1/PRETRAINING_AUDIT_TRIGGER_v0.1.md"
+
+jobs:
+  paired-init-token-budget:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: .
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify pretraining-audit authorization
+        run: |
+          grep -q 'PRETRAINING_AUDIT_IMPLEMENTATION_LOCK_PASS' model_kernel/mk1/PRETRAINING_AUDIT_IMPLEMENTATION_LOCK.md
+          grep -q 'TOKENIZER_FREEZE_PASS' model_kernel/mk1/TOKENIZER_FREEZE_RESULT.md
+          grep -q 'TRIGGER_PAIRED_INIT_TOKEN_BUDGET_AUDIT_v0.1' model_kernel/mk1/PRETRAINING_AUDIT_TRIGGER_v0.1.md
+
+      - name: Verify frozen artifact metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          md="$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10619711251 --jq '.digest')"
+          test "$md" = "sha256:b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997"
+          mr="$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10619711251 --jq '.workflow_run.id')"
+          test "$mr" = "35553551910"
+          td="$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10622602143 --jq '.digest')"
+          test "$td" = "sha256:3dc96112fb76f84df9cbd983c046af9b9a98f20b51abbe24c5ea67b15da405c6"
+          tr="$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10622602143 --jq '.workflow_run.id')"
+          test "$tr" = "35562370974"
+
+      - name: Download frozen scientific materialization
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10619711251
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35553551910
+          path: canonical_materialization
+          digest-mismatch: error
+
+      - name: Download frozen tokenizer and tokenized manifests
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10622602143
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35562370974
+          path: canonical_tokenizer
+          digest-mismatch: error
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen audit dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.5.2 pytest==9.1.1 tokenizers==0.21.4 psutil==7.2.2
+          python -m pip install torch==2.12.1 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Fixture-only implementation tests
+        run: |
+          python -m py_compile experiments/model_core/mk1/pretraining_audit.py
+          pytest -q tests/test_model_core_mk1_pretraining_audit.py
+
+      - name: Run paired initialization and exact token-budget audit
+        run: |
+          python -m experiments.model_core.mk1.pretraining_audit             --materialization-root canonical_materialization             --tokenizer-root canonical_tokenizer             --output-root mk1_pretraining_audit_v0_1             --result PAIRED_INIT_AND_TOKEN_BUDGET_RESULT.json
+
+      - name: Upload canonical pretraining-audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-paired-init-token-budget-v0-1
+          path: |
+            mk1_pretraining_audit_v0_1/
+            PAIRED_INIT_AND_TOKEN_BUDGET_RESULT.json
+          if-no-files-found: warn
+          compression-level: 1
