@@ -51,6 +51,50 @@ def deterministic_sample_indices(count: int, seed: int) -> Iterator[int]:
         cycle += 1
 
 
+def load_frozen_schedule(
+    path: str | Path,
+    expected_sha256: str,
+    train_rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    schedule_path = Path(path)
+    digest = sha256_file(schedule_path)
+    if digest != expected_sha256:
+        raise ValueError("frozen schedule SHA-256 mismatch")
+
+    key_to_record: dict[str, dict[str, Any]] = {}
+    for record in train_rows:
+        key = f"{record['scene_id']}:{record['renderer_family']}"
+        if key in key_to_record:
+            raise ValueError(f"duplicate TRAIN sample key: {key}")
+        key_to_record[key] = record
+
+    rows: list[dict[str, Any]] = []
+    with schedule_path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            if line.strip():
+                rows.append(json.loads(line))
+    if len(rows) != TRAINING_LOCK.steps:
+        raise ValueError("frozen schedule step count mismatch")
+
+    expected_samples = TRAINING_LOCK.accumulation
+    for expected_step, row in enumerate(rows, start=1):
+        if int(row.get("step", -1)) != expected_step:
+            raise ValueError("frozen schedule step index mismatch")
+        sample_keys = row.get("sample_keys")
+        token_counts = row.get("token_counts")
+        if not isinstance(sample_keys, list) or len(sample_keys) != expected_samples:
+            raise ValueError("frozen schedule sample count mismatch")
+        if not isinstance(token_counts, list) or len(token_counts) != expected_samples:
+            raise ValueError("frozen schedule token-count vector mismatch")
+        for key in sample_keys:
+            if str(key) not in key_to_record:
+                raise ValueError(f"frozen schedule references unknown TRAIN sample: {key}")
+        if int(row.get("step_input_tokens", -1)) != sum(int(value) for value in token_counts):
+            raise ValueError("frozen schedule step token total mismatch")
+
+    return rows
+
+
 def encoded_input(tokenizer: Tokenizer, text: str, device: torch.device) -> torch.Tensor:
     ids = tokenizer.encode(text).ids
     if not ids:
@@ -171,6 +215,8 @@ def train_arm(
     tokenizer_path: str | Path,
     train_records_path: str | Path,
     validation_records_path: str | Path,
+    schedule_path: str | Path,
+    expected_schedule_sha256: str,
     run_dir: str | Path,
     resume_path: str | Path | None = None,
 ) -> dict[str, Any]:
@@ -219,9 +265,15 @@ def train_arm(
         best_score = float(payload["best_validation_score"])
         best_step = payload["best_step"]
 
-    schedule = deterministic_sample_indices(len(train_rows), seed)
-    for _ in range(start_step * TRAINING_LOCK.accumulation):
-        next(schedule)
+    schedule_rows = load_frozen_schedule(
+        schedule_path,
+        expected_schedule_sha256,
+        train_rows,
+    )
+    train_by_key = {
+        f"{record['scene_id']}:{record['renderer_family']}": record
+        for record in train_rows
+    }
 
     lr_config = TrainingConfig(
         steps=TRAINING_LOCK.steps,
@@ -257,16 +309,24 @@ def train_arm(
         accumulated = 0.0
         sample_ids: list[str] = []
         step_input_tokens = 0
-        for _micro in range(TRAINING_LOCK.accumulation):
-            record = train_rows[next(schedule)]
-            sample_ids.append(f"{record['scene_id']}:{record['renderer_family']}")
+        schedule_row = schedule_rows[step]
+        scheduled_keys = [str(value) for value in schedule_row["sample_keys"]]
+        scheduled_token_counts = [int(value) for value in schedule_row["token_counts"]]
+        for micro_index, sample_key in enumerate(scheduled_keys):
+            record = train_by_key[sample_key]
+            sample_ids.append(sample_key)
             x = encoded_input(tokenizer, record["input_text"], spec.device)
-            step_input_tokens += int(x.numel())
+            observed_tokens = int(x.numel())
+            if observed_tokens != scheduled_token_counts[micro_index]:
+                raise ValueError("frozen schedule token count disagrees with encoded TRAIN input")
+            step_input_tokens += observed_tokens
             z_target, c_target = target_tensors(record, spec.device)
             logits = model(x)
             loss, _ = direct_loss(logits, c_target) if arm == "direct" else m1z_loss(logits, z_target)
             (loss / TRAINING_LOCK.accumulation).backward()
             accumulated += float(loss.detach().cpu()) / TRAINING_LOCK.accumulation
+        if step_input_tokens != int(schedule_row["step_input_tokens"]):
+            raise ValueError("frozen schedule step token total disagrees with execution")
 
         torch.nn.utils.clip_grad_norm_(model.parameters(), TRAINING_LOCK.gradient_clip)
         lr = TRAINING_LOCK.learning_rate * learning_rate_multiplier(step, lr_config)
@@ -331,6 +391,7 @@ def train_arm(
         "best_step": best_step,
         "tokenizer_sha256": tokenizer_sha,
         "paired_init_sha256": paired_sha,
+        "schedule_sha256": expected_schedule_sha256,
         "parameter_count": expected,
         "processed_input_tokens": processed_input_tokens,
     }
