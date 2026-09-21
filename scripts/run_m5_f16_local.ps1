@@ -280,7 +280,7 @@ try {
     # Complete the exact pinned HF snapshot in a persistent cache before the
     # scientific harness. Retries are finite infrastructure retries only.
     $PrefetchArgs = @(
-        "scripts/prefetch_m5_f16_hf.py",
+        "-m","scripts.prefetch_m5_f16_hf",
         "-c","docs/model-training-pipeline/examples/end_to_end_small.yaml",
         "--workspace",".",
         "--cache-dir",$PersistentHfCache,
