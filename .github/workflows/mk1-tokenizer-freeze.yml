@@ -1,0 +1,76 @@
+name: MK1 TRAIN-Only Tokenizer Freeze
+
+permissions:
+  contents: read
+  actions: read
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - "model_kernel/mk1/TOKENIZER_FREEZE_TRIGGER_v0.1.md"
+
+jobs:
+  tokenizer-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: .
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify tokenizer-freeze authorization
+        run: |
+          grep -q 'TOKENIZER_FREEZE_IMPLEMENTATION_LOCK_PASS' model_kernel/mk1/TOKENIZER_FREEZE_IMPLEMENTATION_LOCK.md
+          grep -q 'SCIENTIFIC_MATERIALIZATION_AND_DATA_AUDIT_PASS' model_kernel/mk1/MATERIALIZATION_AND_DATA_AUDIT_RESULT.md
+          grep -q 'TRIGGER_TRAIN_ONLY_TOKENIZER_FREEZE_v0.1' model_kernel/mk1/TOKENIZER_FREEZE_TRIGGER_v0.1.md
+
+      - name: Verify immutable source artifact metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          digest="$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10619711251 --jq '.digest // empty')"
+          if [ -n "$digest" ]; then
+            test "$digest" = "sha256:b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997"
+          fi
+          run_id="$(gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10619711251 --jq '.workflow_run.id')"
+          test "$run_id" = "35553551910"
+
+      - name: Download exact frozen materialization artifact
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: 10619711251
+          github-token: ${{ github.token }}
+          repository: minhtri22/MindForge
+          run-id: 35553551910
+          path: canonical_materialization
+          digest-mismatch: error
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen tokenizer dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install tokenizers==0.21.4
+
+      - name: Static tokenizer runner sanity
+        run: |
+          python -m py_compile mindforge/tokenizer.py experiments/model_core/mk1/tokenizer_freeze.py
+
+      - name: Fit TRAIN-only tokenizer, freeze and audit all encoded inputs
+        run: |
+          python -m experiments.model_core.mk1.tokenizer_freeze             --source-root canonical_materialization             --output-root mk1_tokenizer_freeze_v0_1             --result TOKENIZER_FREEZE_RESULT.json
+
+      - name: Upload canonical tokenizer-freeze evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-tokenizer-freeze-v0-1
+          path: |
+            mk1_tokenizer_freeze_v0_1/
+            TOKENIZER_FREEZE_RESULT.json
+          if-no-files-found: warn
