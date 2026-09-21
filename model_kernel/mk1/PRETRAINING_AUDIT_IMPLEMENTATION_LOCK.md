@@ -1,6 +1,6 @@
 # MK-1 Pretraining Audit Implementation Lock v0.1
 
-Status: **PENDING INDEPENDENT STATIC REVIEW / SCIENTIFIC SEED INSTANTIATION NOT AUTHORIZED**
+Status: **PASS / PRETRAINING AUDIT HASH LOCKED / ONE SCIENTIFIC AUDIT AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -10,7 +10,7 @@ Source HEAD before this lock:
 
 Candidate state:
 
-`PRETRAINING_AUDIT_IMPLEMENTATION_LOCK_PENDING_REVIEW`
+`PRETRAINING_AUDIT_IMPLEMENTATION_LOCK_PASS`
 
 ## 1. New gate implementation bindings
 
@@ -130,3 +130,27 @@ Only then may status become:
 and one canonical scientific pretraining audit may be triggered.
 
 Scientific optimizer training remains forbidden regardless of this lock.
+
+
+## 9. Independent review closure
+
+Independent review after candidate-lock creation established:
+
+- candidate-lock commit changed only this lock document;
+- trigger did not exist during review;
+- all section-1 implementation Git blobs and SHA-256 values re-matched exactly;
+- all section-2 scientific dependency Git blobs and SHA-256 values re-matched exactly;
+- workflow references the pretraining-audit trigger path exactly twice: push watch and authorization guard;
+- runner source contains zero `torch.optim` construction;
+- runner source contains zero `train_arm` call;
+- runner source contains zero explicit `.forward(...)` call;
+- runner source contains zero explicit `.backward(...)` call;
+- tokenizer/data artifact identities match the formal prior closures.
+
+Formal verdict:
+
+`PRETRAINING_AUDIT_IMPLEMENTATION_LOCK_PASS`
+
+Exactly one canonical paired-initialization/token-budget audit is now authorized.
+
+Scientific optimizer training remains forbidden.
