@@ -320,42 +320,44 @@ def verify_llama_cpp_lock(
     if build.get("source_commit") != expected_commit:
         raise LlamaCppLockError("build manifest source commit differs from runtime lock")
 
+    probe_script = Path(__file__).resolve().with_name("m5_converter_probe.py")
     converter_env = _run(
-        [str(converter_python), "-m", "pip", "list", "--format=json"],
-        label="converter environment identity",
+        [str(converter_python), str(probe_script)],
+        label="converter environment import probe",
     )
     try:
-        installed = json.loads(converter_env["stdout"])
+        converter_probe = json.loads(converter_env["stdout"])
     except json.JSONDecodeError as error:
-        raise LlamaCppLockError(f"cannot parse converter pip inventory: {error}") from error
-    if not isinstance(installed, list):
-        raise LlamaCppLockError("converter pip inventory must be a list")
+        raise LlamaCppLockError(f"cannot parse converter environment probe: {error}") from error
+    if not isinstance(converter_probe, dict):
+        raise LlamaCppLockError("converter environment probe must return an object")
 
-    inventory = {
-        str(row.get("name", "")).lower(): str(row.get("version", ""))
-        for row in installed
-        if isinstance(row, dict)
-    }
-    required_distributions = {
-        "torch": "torch",
-        "transformers": "transformers",
-        "numpy": "numpy",
-        "sentencepiece": "sentencepiece",
-        "protobuf": "protobuf",
-        "gguf": "gguf",
-    }
+    required_modules = ("torch", "transformers", "numpy", "sentencepiece", "protobuf", "gguf")
     missing = [
-        distribution
-        for distribution in required_distributions.values()
-        if distribution.lower() not in inventory
+        name
+        for name in required_modules
+        if not isinstance(converter_probe.get(name), dict)
+        or converter_probe[name].get("import_ok") is not True
     ]
     if missing:
         raise LlamaCppLockError(
-            f"converter environment missing required distributions: {missing}"
+            f"converter environment missing/import-failed modules: {missing}"
         )
+
+    pip_freeze = _run(
+        [str(converter_python), "-m", "pip", "freeze", "--all"],
+        label="converter environment freeze",
+    )["stdout"]
+    freeze_lines = sorted(
+        line.strip()
+        for line in pip_freeze.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    )
+    if not freeze_lines:
+        raise LlamaCppLockError("converter pip freeze is empty")
     converter_versions = {
-        logical: inventory[distribution.lower()]
-        for logical, distribution in required_distributions.items()
+        name: str(converter_probe[name].get("version"))
+        for name in required_modules
     }
 
     return {
@@ -373,6 +375,9 @@ def verify_llama_cpp_lock(
         "build_flags": build["flags"],
         "build_targets": build["targets"],
         "converter_environment_versions": converter_versions,
+        "converter_environment_probe": converter_probe,
+        "converter_pip_freeze": freeze_lines,
+        "converter_pip_freeze_hash": sha256_object(freeze_lines),
         "lock_hash": sha256_object(lock),
     }
 

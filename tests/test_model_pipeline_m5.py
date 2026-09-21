@@ -108,3 +108,11 @@ def test_runtime_output_format_guard():
 def test_unknown_fixture_type_is_rejected():
     with pytest.raises(RuntimeParityError):
         task_success({"type": "judge", "expected": "x"}, "x")
+
+
+def test_converter_probe_script_is_standalone_and_compiles():
+    path = ROOT / "pipeline/m5_converter_probe.py"
+    source = path.read_text(encoding="utf-8")
+    compile(source, str(path), "exec")
+    assert "from . " not in source
+    assert "import pipeline" not in source
