@@ -62,6 +62,35 @@ class M5Result:
         }
 
 
+def single_file_gguf_identity(manifest: Mapping[str, Any]) -> dict[str, Any] | None:
+    if manifest.get("topology") != "single_file":
+        return None
+    files = manifest.get("files")
+    if not isinstance(files, list) or len(files) != 1 or not isinstance(files[0], dict):
+        return None
+    row = files[0]
+    return {
+        "name": row.get("name"),
+        "size": row.get("size"),
+        "sha256": row.get("sha256"),
+        "aggregate_hash": manifest.get("aggregate_hash"),
+    }
+
+
+def high_fidelity_identity_matches(
+    manifest: Mapping[str, Any],
+    expected: Mapping[str, Any],
+) -> bool:
+    observed = single_file_gguf_identity(manifest)
+    required = {
+        "name": expected.get("name"),
+        "size": expected.get("size"),
+        "sha256": expected.get("sha256"),
+        "aggregate_hash": expected.get("aggregate_hash"),
+    }
+    return observed == required
+
+
 def run_m5_qualification(
     config_path: str | Path,
     repo_root: str | Path,
@@ -72,6 +101,7 @@ def run_m5_qualification(
     llama_quantize: str | Path,
     converter_python: str | Path,
     build_manifest: str | Path,
+    expected_high_fidelity_identity: Mapping[str, Any] | None = None,
 ) -> M5Result:
     repo_root = Path(repo_root).resolve()
     config_path = Path(config_path)
@@ -173,6 +203,27 @@ def run_m5_qualification(
     )
     atomic_write_text(m5_dir / "conversion_high_fidelity.log", conversion["combined"])
     high_manifest = build_gguf_manifest(hf_gguf, high_fidelity)
+    atomic_write_json(m5_dir / "manifest_high_fidelity.json", high_manifest)
+
+    high_fidelity_parent_identity_pass = True
+    if expected_high_fidelity_identity is not None:
+        observed_identity = single_file_gguf_identity(high_manifest)
+        high_fidelity_parent_identity_pass = high_fidelity_identity_matches(
+            high_manifest,
+            expected_high_fidelity_identity,
+        )
+        atomic_write_json(
+            m5_dir / "high_fidelity_parent_identity.json",
+            {
+                "expected": dict(expected_high_fidelity_identity),
+                "observed": observed_identity,
+                "pass": high_fidelity_parent_identity_pass,
+            },
+        )
+        if not high_fidelity_parent_identity_pass:
+            raise RuntimeParityError(
+                "high-fidelity parent identity mismatch; quantization is forbidden"
+            )
 
     hf_runtime = run_llama_fixture(
         llama_cli=llama_cli,
@@ -183,8 +234,6 @@ def run_m5_qualification(
     high_parity = evaluate_runtime_parity(hf_baseline, hf_runtime)
     atomic_write_json(m5_dir / "runtime_high_fidelity.json", hf_runtime)
     atomic_write_json(m5_dir / "parity_high_fidelity.json", high_parity)
-    atomic_write_json(m5_dir / "manifest_high_fidelity.json", high_manifest)
-
     if not high_parity["pass"]:
         raise RuntimeParityError(
             "high-fidelity GGUF parity failed; quantization is forbidden"
@@ -231,6 +280,8 @@ def run_m5_qualification(
         and all(item["parity"]["pass"] for item in quant_results.values()),
         "no_bulk_training": m2.public_bulk_download_started is False,
     }
+    if expected_high_fidelity_identity is not None:
+        gates["high_fidelity_parent_identity"] = high_fidelity_parent_identity_pass
     failed = [name for name, value in gates.items() if not value]
     adjudication = {
         "schema": "mindforge-model-pipeline-m5-adjudication-v1",
