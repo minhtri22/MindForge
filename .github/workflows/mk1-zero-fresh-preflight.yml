@@ -20,7 +20,7 @@ jobs:
       - name: Verify post-manifest one-shot authorization
         run: |
           grep -q 'IMPLEMENTATION_LOCK_MANIFEST_V2_PASS' model_kernel/mk1/IMPLEMENTATION_LOCK_MANIFEST_V2.md
-          grep -q 'TRIGGER_CANONICAL_ZERO_FRESH_v0.2' model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md
+          grep -q 'TRIGGER_CANONICAL_ZERO_FRESH_v0.2' model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.2.md
 
       - uses: actions/setup-python@v5
         with:
