@@ -1,6 +1,6 @@
 # MK-1 Tokenizer Freeze Implementation Lock v0.1
 
-Status: **PASS / TOKENIZER FREEZE IMPLEMENTATION HASH LOCKED / ONE SCIENTIFIC FIT AUTHORIZED**
+Status: **PENDING CI DEPENDENCY REBIND REVIEW / REPLACEMENT FIT NOT YET AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -18,7 +18,7 @@ Candidate state:
 |---|---|---|
 | `model_kernel/mk1/TOKENIZER_FREEZE_SPEC.md` | `74df8e6b9f2ee3a3985c5a003a1573e17390feae` | `fa9d5110e7d65df42b8fdf4e77308e27c4361c5fa000200226eaeff8a98b81ec` |
 | `experiments/model_core/mk1/tokenizer_freeze.py` | `ac9456d80935133cae27ebe91fed886479d8501b` | `42d5556d1bc40638abb6058fcad11a79cdd699d3c2ccc91ed84bcd17a5efa9aa` |
-| `.github/workflows/mk1-tokenizer-freeze.yml` | `fc7b5c310a6e6b37fa45e84ca0eddc044f8d778b` | `e8595fc79fc4b7a8343e32080d520ba125c60e1e4d851fc2afff816f3e64c3b8` |
+| `.github/workflows/mk1-tokenizer-freeze.yml` | `2ff7db93aaba9e8059ccc6a0f3c2120e3baeddae` | `391889ccbe6a384f38b268a03c65385995dd18158412ad4306b9fa734935b7a0` |
 | `mindforge/tokenizer.py` | `68c7d687c684c800c98344e26be7c75425ea528f` | `3315abd29e7ff086df1a67db5f15f2ae161a2f7d7e9b58913f14572fcc2c8c6e` |
 | `model_kernel/mk1/MATERIALIZATION_AND_DATA_AUDIT_RESULT.md` | `1c12495fabdc1429416b000b6f7c87034bc4eebe` | `0fd89e02b47bf69fb05aa749abb00679d3448270b3a4d994c84d86c088a9c093` |
 
@@ -152,3 +152,70 @@ Formal verdict:
 Exactly one canonical tokenizer-freeze execution is now authorized.
 
 Scientific model initialization and training remain forbidden.
+
+
+## 10. Invalid pre-fit execution and CI dependency repair
+
+The first tokenizer workflow run:
+
+`35562245262`
+
+at head:
+
+`416a2b48a67d09baffe51e1964397cea21d25747`
+
+passed:
+
+- authorization guard;
+- immutable source artifact metadata check;
+- exact artifact download;
+- Python setup;
+- tokenizers dependency installation;
+- static source compilation.
+
+It then failed before runner initialization because importing the MindForge package transitively imported `mindforge.model`, which requires PyTorch.
+
+Observed exception:
+
+`ModuleNotFoundError: No module named 'torch'`
+
+No runner event was emitted.
+
+No TRAIN corpus was created.
+
+No tokenizer fit started.
+
+No tokenizer JSON/result artifact existed.
+
+Scientific classification:
+
+`INVALID_BEFORE_TOKENIZER_FIT`
+
+This run is excluded from tokenizer evidence.
+
+The workflow-only repair at:
+
+`dd7322ec6b081d6e76914cbd6db2ba54b2cdc476`
+
+adds the frozen CPU runtime dependency:
+
+`torch==2.12.1`
+
+from the PyTorch CPU index.
+
+It changes none of:
+
+- source artifact/data;
+- tokenizer runner;
+- tokenizer procedure;
+- vocabulary contract;
+- fit corpus;
+- tokenization gates;
+- model/training scientific state.
+
+Updated workflow binding:
+
+- Git blob: `2ff7db93aaba9e8059ccc6a0f3c2120e3baeddae`
+- SHA-256: `391889ccbe6a384f38b268a03c65385995dd18158412ad4306b9fa734935b7a0`
+
+Before a replacement fit is authorized, independent review must prove the workflow-only nature of this repair and unchanged runner/spec/tokenizer/data-result bindings.
