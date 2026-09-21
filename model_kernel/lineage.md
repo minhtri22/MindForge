@@ -692,3 +692,76 @@ Tài liệu đóng cổng:
 `42627f51e3b630a3874596fe470addaa0ce26189`
 
 Trạng thái: toàn bộ pre-training evidence gates đã PASS. Bước tiếp theo bắt buộc là khóa riêng `MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK`; optimizer step 1 vẫn chưa được phép chạy.
+
+
+## 2026-09-21 — Khóa thực thi scientific training MK-1
+
+Đã khóa execution-enforcement specification trước optimizer step tại:
+
+`96f6b4c26062cd259834e232e2402edc30265b0c`
+
+Scientific training path sau đó được bind để tiêu thụ exact frozen schedule artifact thay vì tái tạo sample order. Trainer enforcement commit:
+
+`d2214990b8db10ccac92e34b074b060d9d414868`
+
+Đã tạo training-only bundle bất biến từ các scientific artifact đã frozen. Canonical bundle run:
+
+- run: `35581007427`;
+- head: `362836e664a6074f37fc51763c5bf1c406db8065`;
+- artifact: `10629399106`;
+- ZIP SHA-256: `56d8f5b9b185215ac744a8299184db666b6018b6fefa7b02488d11e1b2abf7af`;
+- file count: 14.
+
+Bundle chứa đúng:
+
+- TRAIN;
+- VALIDATION;
+- frozen tokenizer;
+- 5 paired initialization files;
+- 5 exact schedule files;
+- bundle manifest.
+
+Bundle không chứa confirmatory data hay confirmatory tokenized inputs.
+
+Formal bundle result:
+
+`TRAINING_INPUT_BUNDLE_PASS`
+
+Result commit:
+
+`8747ba7529a2f6ee936a02152b7e416d2f8b0d0c`
+
+Candidate scientific training workflow được khóa ở:
+
+`1395413ddbffa4384d2e177014bd4f443a7b6c31`
+
+Static execution QA xác nhận:
+
+- matrix = 10 jobs, gồm 5 DIRECT + 5 M1-Z;
+- workflow chỉ download artifact `10629399106`;
+- direct upstream artifact access = 0;
+- confirmatory-path access = 0;
+- data/tokenizer/init/schedule regeneration path = 0;
+- mỗi matrix job bind đúng paired-init hash và schedule hash;
+- `train_arm` dùng frozen schedule loader;
+- RNG schedule call trong scientific training path = 0;
+- AdamW/LR/warmup/cosine/min-LR/gradient-clip/5000-step/accumulation-8 contract giữ nguyên;
+- validation interval = 250;
+- best checkpoint dùng strict canonical-C balanced-score improvement;
+- early stopping = none.
+
+Final independent execution lock:
+
+`MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK_PASS`
+
+PASS commit:
+
+`59362f5ccba352b8a632475574359c85a5bffd52`
+
+Tại thời điểm đóng lock:
+
+- scientific training trigger chưa tồn tại;
+- optimizer step 1 chưa chạy;
+- scientific model outcome chưa tồn tại.
+
+Trạng thái: scientific training đã đủ điều kiện thực thi dưới exact frozen execution contract, nhưng chưa được trigger.
