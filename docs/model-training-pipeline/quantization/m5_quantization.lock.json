@@ -1,0 +1,38 @@
+{
+  "schema": "mindforge-m5-quantization-lock-v1",
+  "parent": {
+    "closure_evidence_path": "artifacts/model-training-pipeline/m5_f16/M5_F16_QUALIFICATION_EVIDENCE.json",
+    "closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+    "qualified_scientific_commit": "2cb3cb6d1fbaa2230bc8b8d8bdf6dcdc51f4c719",
+    "result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "m2_canonical_directory_hash": "8be9a4984f89da07f2f9b23250a342edb1fa4d8dc07d6985579613026304b04c",
+    "tokenizer_asset_manifest_hash": "1567e178abe4f245846c6bd59e7e6f3b7e842fde92200ddfc74851559a402023",
+    "f16": {
+      "name": "model-f16.gguf",
+      "size": 994156384,
+      "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+      "aggregate_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+    }
+  },
+  "runtime": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c"
+  },
+  "targets": [
+    {
+      "id": "q8_0",
+      "llama_mode": "Q8_0",
+      "source": "f16_parent"
+    },
+    {
+      "id": "q4_k_m",
+      "llama_mode": "Q4_K_M",
+      "source": "f16_parent"
+    }
+  ],
+  "required_boundaries": {
+    "m6_authorized": false,
+    "bulk_training_authorized": false,
+    "no_automatic_m6_transition": true
+  }
+}
