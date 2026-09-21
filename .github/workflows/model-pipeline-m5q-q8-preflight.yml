@@ -1,0 +1,57 @@
+name: Model Pipeline M5Q Q8 Zero-Science Preflight
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/model-pipeline-m5-quantization-qualification
+    paths:
+      - 'pipeline/m5q.py'
+      - 'tools/m5q_q8_qualification.py'
+      - 'tools/m5q_q8_preflight.py'
+      - 'tests/test_model_pipeline_m5q_q8.py'
+      - 'artifacts/model-training-pipeline/m5_quantization/Q8_0_IMPLEMENTATION_LOCK.json'
+      - 'artifacts/model-training-pipeline/m5_quantization/PREREGISTRATION.json'
+      - '.github/workflows/model-pipeline-m5q-q8-preflight.yml'
+
+jobs:
+  q8-zero-science-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen M5 test dependencies
+        run: python -m pip install -r requirements-pipeline-m5.txt
+
+      - name: Q8 implementation unit and contract tests
+        run: |
+          python -m pytest -q tests/test_model_pipeline_m5.py
+          python -m pytest -q tests/test_model_pipeline_m5q_q8.py
+
+      - name: Zero-science locked provenance preflight
+        run: |
+          if [ -f artifacts/model-training-pipeline/m5_quantization/Q8_0_IMPLEMENTATION_LOCK.json ]; then
+            python -m tools.m5q_q8_preflight --workspace . --json | tee q8-zero-science-preflight.json
+          else
+            echo "Implementation lock not committed yet; unit tests only."
+          fi
+
+      - name: Prove no scientific execution
+        run: |
+          test ! -e .m5q-runs
+          test ! -e model-q8_0.gguf
+          echo "quantization_executed=false"
+          echo "q4_executed=false"
+          echo "m6_authorized=false"
+
+      - name: Upload zero-science preflight evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m5q-q8-zero-science-preflight
+          path: q8-zero-science-preflight.json
+          if-no-files-found: ignore
