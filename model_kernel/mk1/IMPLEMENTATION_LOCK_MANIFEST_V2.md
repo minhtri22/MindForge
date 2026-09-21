@@ -1,6 +1,6 @@
 # MK-1 Implementation Lock Manifest V2
 
-Status: **PASS / IMPLEMENTATION V2 HASH LOCKED / ZERO-FRESH V0.2 AUTHORIZED**
+Status: **PENDING WORKFLOW REBIND REVIEW / ZERO-FRESH V0.2 NOT YET REAUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -58,7 +58,7 @@ Current implementation-lock specification:
 | `experiments/model_core/mk1/metrics.py` | `22e97e9ad29f3b483b8f100a363a934dc7612e1b` | `ce55ecbe4db075ac6e20d39c8aa38e5ea8cdc2b0913112eb65f3660edb02f1b2` |
 | `experiments/model_core/mk1/preflight.py` | `24f708c1775145559d4c730cb47af500937ccf8c` | `dd6bcf5e2c21efbd6f64b474d18661424079987e6045ca874506b910a20931be` |
 | `tests/test_model_core_mk1_preflight.py` | `d729bbf17477098515a96b3990715e0e7600c936` | `512353c92368b7cccdaadc32fabb553ee131b2e80dbf68d5a30f57dc54b3a874` |
-| `.github/workflows/mk1-zero-fresh-preflight.yml` | `3a21d834057c1c8d471677ad550b493aea61a6ba` | `62fb1c339052281116967bd894d5ca70f512e81f12750802fb1597253e74fb93` |
+| `.github/workflows/mk1-zero-fresh-preflight.yml` | `dd542e2be87bc7998fee4c5bde00944bb9288a6a` | `9bbe9fb0a11ca55187e664ba9fe44e5e9189076c39b7cb8cc105d9e792f43ffa` |
 | `.github/workflows/mk1-materialization-audit.yml` | `f25733b89ad3b66ae1ff67351affa2f03084fdd7` | `e93957b3c68573b687ef9135fdb596bf86fc09ee3e0f65b16e18dd5fe3722d6e` |
 
 ## 4. Frozen unchanged runtime dependencies
@@ -140,3 +140,43 @@ Formal verdict:
 The only authorized next action is canonical zero-fresh preflight v0.2.
 
 Scientific materialization remains blocked until a separate v0.2 PASS result is committed.
+
+
+## 9. Invalid v0.2 authorization-wiring run and workflow rebind
+
+The first v0.2 trigger produced workflow run:
+
+`35553272015`
+
+at head:
+
+`2c8561e6b63b5a5ba4480707cbc140f5e479edb0`.
+
+It failed in the authorization guard before dependency installation, tests, preflight, or artifact creation because the guard referenced the historical v0.1 trigger file.
+
+Scientific status:
+
+`INVALID_BEFORE_ZERO_FRESH_EXECUTION`
+
+No scientific data or scientific outcome was produced.
+
+The workflow was corrected at:
+
+`075a563920e2ae2600b79006104d1cc90f1089c9`
+
+New binding:
+
+- Git blob: `dd542e2be87bc7998fee4c5bde00944bb9288a6a`
+- SHA-256: `9bbe9fb0a11ca55187e664ba9fe44e5e9189076c39b7cb8cc105d9e792f43ffa`
+
+The only change is the authorization-guard path from the old v0.1 trigger file to the already-frozen v0.2 trigger file.
+
+Before a replacement run, independent review must verify:
+
+1. the corrected workflow blob/hash above;
+2. the workflow watches only `ZERO_FRESH_TRIGGER_v0.2.md`;
+3. the guard reads the same v0.2 trigger file;
+4. all other V2 implementation hashes remain unchanged;
+5. no materialization trigger has been created.
+
+Only then may V2 return to `IMPLEMENTATION_LOCK_MANIFEST_V2_PASS`.
