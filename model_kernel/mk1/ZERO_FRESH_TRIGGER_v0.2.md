@@ -10,3 +10,11 @@ Authorization basis:
 - no scientific materialization
 - no scientific tokenizer fitting
 - no scientific training
+
+
+Replacement authorization after invalid wiring run:
+
+- invalid run: 35553272015
+- V2 reauthorization commit: 28cb51a3748710c70b3d37f11b24986e38bc3f17
+- reason: authorization guard path only
+- scientific execution in invalid run: none
