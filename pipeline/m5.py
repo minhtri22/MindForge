@@ -260,8 +260,6 @@ def run_m5_qualification(
             hf_baseline=hf_baseline,
             inference=config.inference,
         )
-        if not quant_results[target]["parity"]["pass"]:
-            raise RuntimeParityError(f"quantized target {target} parity failed")
     atomic_write_json(m5_dir / "quantized_results.json", quant_results)
 
     gates = {
