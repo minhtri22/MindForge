@@ -100,7 +100,8 @@ jobs:
 
       - name: Execute preregistered A/B F16 decomposition
         run: |
-          python tools/m5_1_decomposition.py \
+          set -o pipefail
+          python -m tools.m5_1_decomposition \
             -c docs/model-training-pipeline/examples/end_to_end_small.yaml \
             --workspace . \
             --runs-root .m5-1-runs \
