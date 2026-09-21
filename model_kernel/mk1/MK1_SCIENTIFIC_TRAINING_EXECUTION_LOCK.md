@@ -1,12 +1,12 @@
 # MK-1 Scientific Training Execution Lock v0.1
 
-Status: **PENDING INDEPENDENT FINAL REVIEW / OPTIMIZER STEP 1 FORBIDDEN**
+Status: **PASS / SCIENTIFIC TRAINING EXECUTION HASH LOCKED / OPTIMIZER STEP 1 ELIGIBLE BUT NOT TRIGGERED**
 
 Date: **2026-09-21**
 
 Formal candidate:
 
-`MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK_PENDING_REVIEW`
+`MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK_PASS`
 
 ## 1. Frozen scientific artifacts
 
@@ -253,3 +253,44 @@ Only then may status become:
 `MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK_PASS`
 
 Even after PASS, no optimizer step occurs unless a separate explicit scientific-training trigger is created.
+
+
+## 13. Independent final review closure
+
+Independent review was repeated after candidate-lock commit and before any scientific-training trigger existed.
+
+Results:
+
+- candidate-lock commit changed only this lock document;
+- all section-3 implementation Git blobs and SHA-256 values re-matched exactly;
+- all section-4 scientific dependency Git blobs and SHA-256 values re-matched exactly;
+- bundle artifact metadata re-confirmed:
+  - run `35581007427`
+  - artifact `10629399106`
+  - digest `sha256:56d8f5b9b185215ac744a8299184db666b6018b6fefa7b02488d11e1b2abf7af`
+  - expired = false;
+- scientific-training trigger did not exist during review;
+- candidate workflow matrix = exactly 10 entries:
+  - 5 DIRECT
+  - 5 M1-Z;
+- workflow direct upstream artifact-ID occurrences = 0;
+- workflow confirmatory-path term occurrences = 0;
+- workflow regeneration-function terms = 0;
+- `train_arm` frozen-schedule-loader calls = 1;
+- `train_arm` RNG-schedule calls = 0;
+- `train_arm` AdamW calls = 1;
+- `train_arm` learning-rate-multiplier calls = 1;
+- validation-interval gate occurs exactly once;
+- strict best-checkpoint comparison occurs exactly once;
+- early-stop/break terms in the scientific training loop = 0;
+- execution wrapper calls `train_arm` exactly once;
+- execution wrapper regeneration-function terms = 0;
+- execution wrapper confirmatory-path term occurrences = 0.
+
+Formal verdict:
+
+`MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK_PASS`
+
+This PASS authorizes creation of a separate explicit scientific-training trigger.
+
+No trigger was created as part of this closure, and no optimizer step was executed.
