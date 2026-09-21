@@ -1,7 +1,7 @@
 {
   "schema": "mindforge-m5-quantization-execution-authorization-v1",
-  "scientific_candidate_commit": "f3b6aaf030cb3c935ade7be878363266b4bd7ea1",
-  "authorization_commit": "87c7445ccefcd57e42b8ab9a5e259969d6aeec28",
+  "scientific_candidate_commit": "72d71edc87703bada5e7f766d62a1bfd59eb7923",
+  "authorization_commit": "8ce38a5e66fef0d65816c007cda7aeb134a83696",
   "parent_f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
   "targets": [
     "q8_0",
@@ -10,5 +10,9 @@
   "one_shot": true,
   "m6_authorized": false,
   "bulk_training_authorized": false,
-  "absolute_capability_claimed": false
+  "absolute_capability_claimed": false,
+  "prior_invalid_run_id": 35632404520,
+  "repair_authorization_commit": "3e9167e48977566ed2e40985fe4f4567215f9f64",
+  "replay_after_technical_invalid": true,
+  "replay_reason": "POST_SERIALIZATION_TARGET_KEY_ORDER_GUARD_FALSE_DRIFT"
 }
