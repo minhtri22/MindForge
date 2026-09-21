@@ -1,0 +1,113 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q4-implementation-lock-v1",
+  "status": "LOCKED",
+  "program": "M5Q",
+  "target": "q4_k_m",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "parent_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+  "parent_f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+  "q8_status": "PASS_CLOSED",
+  "implementation_commit": "97d7dad329aa0196ead9005e631eebbeb8aa2163",
+  "implementation_test_evidence": {
+    "workflow_run_id": 35640617420,
+    "workflow_job_id": 106468748043,
+    "conclusion": "success",
+    "existing_m5_tests": {
+      "passed": 12,
+      "failed": 0
+    },
+    "q8_regression_tests": {
+      "passed": 8,
+      "failed": 0
+    },
+    "q4_contract_tests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "quantization_executed": false,
+    "q4_scientific_execution_executed": false,
+    "m6_authorized": false
+  },
+  "exposure_disclosure": {
+    "prior_out_of_protocol_outcome_exposure": true,
+    "exposure_record_git_blob_sha1": "ae92c5b582508e9fb97f0b64714629535701a9b8",
+    "exposed_outcome_values_embedded_in_lock": false,
+    "exposed_outcome_values_may_define_thresholds": false,
+    "formal_execution_class": "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT"
+  },
+  "execution_contract": {
+    "quantizer_target": "Q4_K_M",
+    "target_key": "q4_k_m",
+    "comparator": "qualified_f16_parent",
+    "comparator_task_vector": [
+      false,
+      false
+    ],
+    "comparator_accuracy": 0,
+    "source_f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "source_f16_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "inference": {
+      "max_new_tokens": 128,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "seed": 42,
+      "context_length": 2048,
+      "threads": 2,
+      "llama_cli_single_turn": true
+    }
+  },
+  "git_blobs": {
+    "pipeline/m5q_q4.py": "023b46579f62ba096ed244c6ba7a7357dca6411e",
+    "tools/m5q_q4_qualification.py": "13cf15692f2e542ff48467a9a0fcac24c900ceab",
+    "tools/m5q_q4_preflight.py": "bed0938e13d75d76049818e5ed6f153426207173",
+    "tests/test_model_pipeline_m5q_q4.py": "76362415fadbfd0e8f5a048f0c4ab9a3d12b767a",
+    ".github/workflows/model-pipeline-m5q-q4-preflight.yml": "535b040b5e93f1b7c74408aabc082b6e6f018e99",
+    "pipeline/m5.py": "0249be91acbe57fd20b8577a0cda3d6ea5acb048",
+    "pipeline/m5q.py": "aa96345a7ecf47f403b84b40ced015fa8a626284",
+    "pipeline/m2.py": "51a023e46b48f9d177b506cfa4e409a4f85d930b",
+    "pipeline/m2_model.py": "8c257d3bb767cc2f17b58a0905452bb7f9ae52db",
+    "pipeline/m2_worker.py": "479f1c0efc90bd7e4874ef1f292a1e906a43e5f5",
+    "pipeline/reasoning.py": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "pipeline/canonical.py": "bc1b11db070b617671f87bd77a5282def49421e5",
+    "pipeline/loader.py": "3638ddf6814152245e9e922d9a9a9de56b03dfd4",
+    "docs/model-training-pipeline/examples/end_to_end_small.yaml": "4fff2473b8f64f7db8f037d0fa40087c7efda4ca",
+    "docs/model-training-pipeline/runtime/llama_cpp.lock.json": "9cef982e91d067f7110397ecb5e66ba92af25d38",
+    "docs/model-training-pipeline/profiles/qwen2.5-0.5b-instruct-r0.yaml": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "tests/fixtures/eval_v1/manifest.json": "450d83d38130765fe4a74fb18bab90177328218f",
+    "artifacts/model-training-pipeline/m5_f16/M5_F16_QUALIFICATION_EVIDENCE.json": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9",
+    "artifacts/model-training-pipeline/m5_quantization/PREREGISTRATION.json": "c7f6addf220f659276fd0035b272b235b12df22c",
+    "artifacts/model-training-pipeline/m5_quantization/Q4_K_M_IMPLEMENTATION_AUTHORIZATION.json": "72934bd4a0359e444fc057a44ac90274c757870c",
+    "artifacts/model-training-pipeline/m5_quantization/Q4_OUTCOME_EXPOSURE.json": "ae92c5b582508e9fb97f0b64714629535701a9b8",
+    "artifacts/model-training-pipeline/m5_quantization/Q8_0_QUALIFICATION_EVIDENCE.json": "a94e0253191dd4ede64f777d27ad791efae62a0a",
+    "requirements-pipeline-m5.txt": "81f16dbcf8879a0bcda9c699d87d2f7aa2a8b0d0"
+  },
+  "required_gates": [
+    "parent_f16_identity_exact",
+    "llama_cpp_exact_lock",
+    "quantizer_target_exact",
+    "quantizer_return_code_zero",
+    "quantized_artifact_nonempty",
+    "quantized_artifact_manifest_frozen",
+    "real_llama_cli_load_and_infer",
+    "all_runtime_outputs_nonempty",
+    "task_vector_equals_f16_parent",
+    "runtime_accuracy_equals_f16_parent",
+    "format_parity_with_f16_parent",
+    "reasoning_runtime_mapping_pass",
+    "artifact_smaller_than_f16"
+  ],
+  "hard_boundaries": {
+    "q4_quantization_authorized": false,
+    "q4_scientific_execution_authorized": false,
+    "q4_formal_pass_claim_authorized": false,
+    "q8_rerun_authorized": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "next_gate": "ZERO_SCIENCE_PREFLIGHT"
+}

@@ -334,3 +334,53 @@ bulk training: CLOSED / NOT AUTHORIZED
 
 Next valid action: implement the target-specific Q4 path and run zero-outcome
 tests. Exact implementation lock may be created only after tests PASS.
+
+
+## 2026-09-22 — Q4_K_M implementation tests PASS; exact implementation locked
+
+Target-specific Q4 implementation:
+
+```text
+97d7dad329aa0196ead9005e631eebbeb8aa2163
+```
+
+Zero-outcome test workflow:
+
+```text
+run: 35640617420
+job: 106468748043
+conclusion: success
+
+M5 regression: 12/12 PASS
+Q8 regression: 8/8 PASS
+Q4 contract tests: 10/10 PASS
+```
+
+The workflow explicitly proved:
+
+```text
+quantization_executed=false
+q4_scientific_execution_executed=false
+m6_authorized=false
+```
+
+The implementation is now frozen in
+`Q4_K_M_IMPLEMENTATION_LOCK.json`, including the target-specific code and all
+transitive scientific/provenance dependencies required to regenerate and verify
+the frozen F16 comparator.
+
+The lock records prior out-of-protocol outcome exposure but does not embed the
+exposed Q4 artifact SHA, manifest, size, or accidental PASS as an expected value
+or threshold.
+
+Current boundary:
+
+```text
+Q4 implementation: LOCKED
+Q4 zero-outcome tests: PASS
+Q4 scientific execution: NOT AUTHORIZED
+M6: CLOSED / NOT AUTHORIZED
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+The only next gate is lock-present zero-science preflight.
