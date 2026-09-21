@@ -2,6 +2,11 @@ name: Model Pipeline M5 Q8 Q4 Quantization Qualification
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - docs/evidence-model-training-pipeline
+    paths:
+      - 'artifacts/model-training-pipeline/m5_quantization/EXECUTE_FROZEN_Q8_Q4.json'
 
 jobs:
   m5-quantization:
@@ -22,6 +27,38 @@ jobs:
 
       - name: Install pipeline dependencies
         run: python -m pip install -r requirements-pipeline-m5.txt
+
+      - name: Verify execution authorization marker
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          marker = json.loads(pathlib.Path(
+              "artifacts/model-training-pipeline/m5_quantization/EXECUTE_FROZEN_Q8_Q4.json"
+          ).read_text())
+          assert marker["schema"] == "mindforge-m5-quantization-execution-authorization-v1"
+          assert marker["targets"] == ["q8_0", "q4_k_m"]
+          assert marker["parent_f16_result_hash"] == "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57"
+          assert marker["m6_authorized"] is False
+          assert marker["bulk_training_authorized"] is False
+
+          candidate = marker["scientific_candidate_commit"]
+          subprocess.run(["git", "merge-base", "--is-ancestor", candidate, "HEAD"], check=True)
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", candidate + "..HEAD"],
+              text=True,
+          ).splitlines()
+          allowed = {
+              "artifacts/model-training-pipeline/m5_quantization/IMPLEMENTATION_AUTHORIZATION.md",
+              "artifacts/model-training-pipeline/m5_quantization/EXECUTE_FROZEN_Q8_Q4.json",
+          }
+          unexpected = sorted(set(changed) - allowed)
+          if unexpected:
+              raise SystemExit(f"scientific files changed after candidate lock: {unexpected}")
+          print(candidate)
+          PY
 
       - name: Zero-outcome regression and quantization contract QA
         run: |
