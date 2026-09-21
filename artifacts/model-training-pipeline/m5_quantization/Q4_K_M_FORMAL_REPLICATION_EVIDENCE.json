@@ -1,0 +1,122 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q4-formal-replication-evidence-v1",
+  "program": "M5Q",
+  "target": "q4_k_m",
+  "verdict": "PASS",
+  "execution_class": "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "scientific_implementation_commit": "97d7dad329aa0196ead9005e631eebbeb8aa2163",
+  "implementation_lock_commit": "87bc09f479c5fd6ba3e3ec3725d859ed5ad9feb1",
+  "execution_authorization_commit": "0402cb334fcf4a9f77c44e4348525a7c0b5489a9",
+  "execution_orchestration_commit": "98289fdc63403d91603c6794615206c574e7813b",
+  "authorization_consumed": true,
+  "scientific_invocation_count": 1,
+  "prior_out_of_protocol_outcome_exposure": true,
+  "authoritative_execution": {
+    "run_id": 35645292452,
+    "job_id": 106484145054,
+    "conclusion": "success",
+    "head_sha": "98289fdc63403d91603c6794615206c574e7813b",
+    "artifact_id": 10660640056,
+    "artifact_name": "m5q-q4-formal-replication-evidence",
+    "artifact_zip_sha256": "aeb4300972620d74b639b7153fcd974c397abfbc92731f2339ff78ac3f7f0736"
+  },
+  "result": {
+    "schema": "mindforge-model-pipeline-m5q-q4-qualification-v1",
+    "status": "PASS",
+    "result_hash": "da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef",
+    "failed_required_gates": []
+  },
+  "parent": {
+    "m5_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_artifact_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "f16_artifact_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "f16_task_vector": [
+      false,
+      false
+    ],
+    "f16_accuracy": 0
+  },
+  "q4_artifact": {
+    "name": "model-q4_k_m.gguf",
+    "topology": "single_file",
+    "size": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "quantizer_type": "Q4_K_M",
+    "quantizer_return_code": 0,
+    "quantizer_command_hash": "ec6c160bda356716426f1780af24fa3113dcdb8c9559d4300638ac1235cef254",
+    "quantizer_log_hash": "8c524601959bfed4e0019849724ef24832dedf55ef7e368fa3afc2c0e6585c16"
+  },
+  "runtime": {
+    "all_outputs_nonempty": true,
+    "task_vector": [
+      false,
+      false
+    ],
+    "accuracy": 0,
+    "model_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "runtime_error": null
+  },
+  "preservation": {
+    "pass": true,
+    "comparator": "qualified_f16_parent",
+    "format_parity": true,
+    "f16_task_vector": [
+      false,
+      false
+    ],
+    "q4_task_vector": [
+      false,
+      false
+    ],
+    "f16_accuracy": 0,
+    "q4_accuracy": 0,
+    "exact_text_required": false,
+    "absolute_capability_claimed": false
+  },
+  "runtime_lock": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "llama_cli_sha256": "c284a8df022bd1ec61b68c8b21adab7c6b7730ca0d84fa3783a771a0747408fa",
+    "llama_quantize_sha256": "94f3d380b1105a59382ba8f3003cf241058b1c901b619cccdec0a66bbda73267"
+  },
+  "required_gates": {
+    "parent_f16_identity_exact": true,
+    "llama_cpp_exact_lock": true,
+    "quantizer_target_exact": true,
+    "quantizer_return_code_zero": true,
+    "quantized_artifact_nonempty": true,
+    "quantized_artifact_manifest_frozen": true,
+    "real_llama_cli_load_and_infer": true,
+    "all_runtime_outputs_nonempty": true,
+    "task_vector_equals_f16_parent": true,
+    "runtime_accuracy_equals_f16_parent": true,
+    "format_parity_with_f16_parent": true,
+    "reasoning_runtime_mapping_pass": true,
+    "artifact_smaller_than_f16": true
+  },
+  "exposure_adjudication": {
+    "accidental_outcome_conditioned_formal_protocol": false,
+    "post_exposure_thresholds_added": false,
+    "formal_artifact_reproduced_previously_exposed_identity": true,
+    "interpretation": "CORROBORATIVE_REPRODUCIBILITY_OBSERVATION_ONLY",
+    "accidental_result_used_as_acceptance_criterion": false
+  },
+  "inherited_non_blocking_observation": {
+    "id": "M5_F16_PARITY_ABSOLUTE_CAPABILITY_CEILING",
+    "applies": true,
+    "statement": "Q4 PASS is preservation/runtime qualification against the frozen F16 parent. It is not an absolute-capability result; both task vectors remain [false,false] at accuracy 0.0."
+  },
+  "terminal_state": {
+    "q4_k_m": "PASS_CLOSED",
+    "q4_rerun_authorized": false,
+    "q8_0": "PASS_CLOSED",
+    "q8_rerun_authorized": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false,
+    "next_valid_action": "POST_QUANTIZATION_GOVERNANCE_REVIEW_BEFORE_ANY_M6_AUTHORIZATION"
+  }
+}

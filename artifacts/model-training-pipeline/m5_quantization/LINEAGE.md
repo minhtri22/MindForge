@@ -469,3 +469,93 @@ bulk training: CLOSED / NOT AUTHORIZED
 
 Next valid action: bounded execution orchestration bound to this authorization,
 followed by exactly one formal Q4 replication.
+
+
+## 2026-09-22 — Q4_K_M formal replication PASS / CLOSED
+
+Bounded orchestration commit:
+
+```text
+98289fdc63403d91603c6794615206c574e7813b
+```
+
+The orchestration verified the exact execution authorization, exact
+implementation lock, lock-present preflight, exposed-outcome absence, and pinned
+llama.cpp identities before scientific execution.
+
+Authoritative formal replication:
+
+```text
+run: 35645292452
+job: 106484145054
+head: 98289fdc63403d91603c6794615206c574e7813b
+artifact: 10660640056
+artifact zip sha256:
+aeb4300972620d74b639b7153fcd974c397abfbc92731f2339ff78ac3f7f0736
+```
+
+The Q4 scientific invocation started exactly once. Therefore the formal
+replication authorization was consumed.
+
+Scientific result:
+
+```text
+status: PASS
+result_hash:
+da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef
+
+failed_required_gates: []
+```
+
+Q4_K_M artifact:
+
+```text
+file: model-q4_k_m.gguf
+size: 397807456 bytes
+sha256:
+ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977
+
+aggregate manifest:
+e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b
+```
+
+All 13 preregistered gates passed. Q4 runtime preserved the frozen F16
+task-success vector and accuracy:
+
+```text
+F16 task vector: [false, false]
+Q4 task vector:  [false, false]
+
+F16 accuracy: 0.0
+Q4 accuracy:  0.0
+
+preservation: PASS
+absolute capability claim: NO
+```
+
+The formal Q4 artifact independently reproduced the same artifact identity that
+had previously been exposed by the quarantined accidental run. Because the
+formal implementation, gates and thresholds were frozen without using those
+exposed values, this match is recorded only as corroborative reproducibility
+evidence and was not an acceptance criterion.
+
+The inherited absolute-capability ceiling observation remains non-blocking and
+unchanged. Q4 PASS is a preservation/runtime result, not an absolute benchmark
+capability claim.
+
+Terminal state:
+
+```text
+Q8_0: PASS / CLOSED
+Q8 rerun: NOT AUTHORIZED
+
+Q4_K_M: PASS / CLOSED
+Q4 rerun: NOT AUTHORIZED
+
+M6: CLOSED / NOT AUTHORIZED
+M6 auto-open: FALSE
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+The next valid action is a separate post-quantization governance review. Q4 PASS
+does not itself authorize M6.
