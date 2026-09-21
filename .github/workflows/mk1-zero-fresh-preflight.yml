@@ -6,7 +6,7 @@ on:
     branches:
       - research/model_core
     paths:
-      - "model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md"
+      - "model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.2.md"
 
 jobs:
   zero-fresh-preflight:
@@ -19,8 +19,8 @@ jobs:
 
       - name: Verify post-manifest one-shot authorization
         run: |
-          grep -q 'IMPLEMENTATION_LOCK_MANIFEST_PASS' model_kernel/mk1/IMPLEMENTATION_LOCK_MANIFEST.md
-          grep -q 'TRIGGER_CANONICAL_ZERO_FRESH_v0.1' model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md
+          grep -q 'IMPLEMENTATION_LOCK_MANIFEST_V2_PASS' model_kernel/mk1/IMPLEMENTATION_LOCK_MANIFEST_V2.md
+          grep -q 'TRIGGER_CANONICAL_ZERO_FRESH_v0.2' model_kernel/mk1/ZERO_FRESH_TRIGGER_v0.1.md
 
       - uses: actions/setup-python@v5
         with:
@@ -43,6 +43,6 @@ jobs:
       - name: Upload zero-fresh evidence
         uses: actions/upload-artifact@v4
         with:
-          name: mk1-zero-fresh-preflight
+          name: mk1-zero-fresh-preflight-v0-2
           path: mk1_zero_fresh_preflight_result.json
           if-no-files-found: error
