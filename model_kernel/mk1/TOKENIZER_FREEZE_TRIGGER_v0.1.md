@@ -11,3 +11,11 @@ Authorization basis:
 - no dataset regeneration
 - no scientific model initialization
 - no scientific training
+
+
+Replacement authorization:
+
+- prior invalid run: 35562245262
+- classification: INVALID_BEFORE_TOKENIZER_FIT
+- reauthorization commit: 2e1f0b1a109bb01c6848f8f9a80786d4c50904fc
+- scientific tokenizer fit in invalid run: none
