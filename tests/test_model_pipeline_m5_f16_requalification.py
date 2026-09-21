@@ -10,8 +10,8 @@ def test_f16_requalification_harness_never_calls_quantization():
     source = path.read_text(encoding="utf-8")
     compile(source, str(path), "exec")
     assert "run_quantized_target" not in source
-    assert "quantization_executed": False" in source
-    assert "quantization_authorized": pass_f16" in source
+    assert '"quantization_executed": False' in source
+    assert '"quantization_authorized": pass_f16' in source
     assert "OPEN_HIGH_FIDELITY_FAIL" in source
     assert "HIGH_FIDELITY_PASS_QUANTIZATION_NOT_EXECUTED" in source
 

@@ -166,3 +166,5 @@ def test_m2_canonical_export_never_reserializes_tokenizer():
     source = (Path(__file__).resolve().parents[1] / "pipeline/m2_model.py").read_text(encoding="utf-8")
     assert "tokenizer.save_pretrained(" not in source
     assert "copy_pinned_tokenizer_assets(source_snapshot, output_dir)" in source
+
+# M5 F16 repair qualification requires this M2 suite on the exact candidate SHA.
