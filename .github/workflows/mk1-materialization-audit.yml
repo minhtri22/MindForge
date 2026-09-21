@@ -1,0 +1,48 @@
+name: MK1 Scientific Materialization Audit
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - "model_kernel/mk1/MATERIALIZATION_TRIGGER_v0.1.md"
+
+jobs:
+  materialize-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify scientific materialization authorization
+        run: |
+          grep -q 'IMPLEMENTATION_LOCK_MANIFEST_V2_PASS' model_kernel/mk1/IMPLEMENTATION_LOCK_MANIFEST_V2.md
+          grep -q 'ZERO_FRESH_PREFLIGHT_V2_PASS' model_kernel/mk1/ZERO_FRESH_PREFLIGHT_V2_RESULT.md
+          grep -q 'TRIGGER_SCIENTIFIC_MATERIALIZATION_v0.1' model_kernel/mk1/MATERIALIZATION_TRIGGER_v0.1.md
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen audit dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.5.2 tokenizers==0.21.4 psutil==7.2.2
+          python -m pip install torch==2.12.1 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Materialize exactly once and run pre-training data audits
+        run: |
+          python -m experiments.model_core.mk1.preflight             --mode materialize-audit             --materialize-dir mk1_materialized_v0_1             --audit-output mk1_pretraining_data_audit.json             --manifest-output mk1_materialization_manifest.json
+
+      - name: Upload canonical materialization evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-scientific-materialization-v0-1
+          path: |
+            mk1_materialized_v0_1/
+            mk1_pretraining_data_audit.json
+            mk1_materialization_manifest.json
+          if-no-files-found: error
