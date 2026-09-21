@@ -471,3 +471,34 @@ Any implementation need that requires changing:
 - training schedule;
 
 must stop and return to a new preregistration/lock amendment before scientific data or outcomes exist.
+
+
+## 21. Amendment 003 pre-materialization correction
+
+Amendment 003 was frozen after the canonical v0.1 zero-fresh PASS but before any scientific data materialization.
+
+Binding:
+
+`model_kernel/mk1/PREREGISTRATION_AMENDMENT_003.md`
+
+Amendment 003 authorizes changes only to already-allowed implementation surfaces:
+
+- `experiments/model_core/mk1/data_contract.py`;
+- `experiments/model_core/mk1/metrics.py`;
+- `experiments/model_core/mk1/preflight.py`;
+- `tests/test_model_core_mk1_preflight.py`;
+- `.github/workflows/mk1-zero-fresh-preflight.yml`.
+
+Purpose:
+
+- remove split-local canonical-scene duplication before first materialization;
+- restore prospective support for all primary target classes;
+- make `C1.resolves_conflict` reachable;
+- project support/integrity gates with fixture ordinals only;
+- exclude contextual scope-relation cases from H1c relation scoring because frozen PIT-v3 uses a non-identical `CONTEXTUAL` relation.
+
+The original implementation manifest and zero-fresh result remain historical evidence for implementation v0.1.
+
+After Amendment 003 implementation, a new implementation manifest V2 and a new canonical zero-fresh v0.2 execution are mandatory before scientific materialization.
+
+No scientific scene ID may be generated before both V2 gates PASS.
