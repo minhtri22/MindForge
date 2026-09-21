@@ -237,3 +237,25 @@ which must bind:
 - the no-confirmatory-before-selection rule.
 
 Only after that final execution lock passes may optimizer step 1 be run.
+
+
+## 12. Implementation allowlist
+
+Before any scientific seed is instantiated, this gate may add exactly:
+
+- `experiments/model_core/mk1/pretraining_audit.py`;
+- `tests/test_model_core_mk1_pretraining_audit.py`;
+- `.github/workflows/mk1-pretraining-audit.yml`;
+- `model_kernel/mk1/PRETRAINING_AUDIT_IMPLEMENTATION_LOCK.md`;
+- `model_kernel/mk1/PRETRAINING_AUDIT_TRIGGER_v0.1.md` only after lock PASS.
+
+Existing scientific implementation files are read-only dependencies for this gate:
+
+- `experiments/model_core/mk1/contracts.py`;
+- `experiments/model_core/mk1/modeling.py`;
+- `experiments/model_core/mk1/trainer.py`;
+- `mindforge/config.py`;
+- `mindforge/model.py`;
+- `mindforge/tokenizer.py`.
+
+No change to those dependencies is authorized by this gate.
