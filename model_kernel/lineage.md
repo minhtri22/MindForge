@@ -454,3 +454,92 @@ Trạng thái sau cổng:
 - scientific training: chưa chạy.
 
 Cổng kế tiếp đúng khoa học là materialize các namespace đã đăng ký chỉ để chạy các audit trước huấn luyện: split/integrity, target stability/margin, observable identifiability, coverage/support, renderer isolation, TRAIN-only tokenizer freeze và input-length contract. Huấn luyện vẫn bị chặn cho đến khi toàn bộ các cổng này đạt.
+
+
+## 2026-09-21 — Sửa bộ sinh trước dữ liệu và materialize tập khoa học
+
+Trước lần materialize đầu tiên, rà soát tĩnh phát hiện bộ sinh cũ sẽ tạo trùng cảnh giữa các tập và thiếu support cho một số lớp mục tiêu. Vì chưa có dữ liệu khoa học nào được tạo, đã khóa phụ lục sửa trước kết quả tại:
+
+`9d9df52e3b03fc9cf92e3bbd6c602bdeb497bc58`
+
+Các sửa chính:
+
+- dùng một ordinal chung không reset giữa TRAIN, VALIDATION và PRISTINE_CONFIRMATORY;
+- sửa lịch primitive/quantifier/temporal/scope để tất cả lớp chính có support;
+- cho phép conflict và resolution cùng tồn tại để `resolves_conflict` có lớp dương;
+- dùng lịch scalar xác định và duy nhất trên 3.000 cảnh;
+- loại quan hệ scope contextual khỏi H1c khi PIT-v3 không có nhãn tương ứng chính xác.
+
+Đã khóa registry khả năng nhận dạng từ input hiện tại tại:
+
+`d069ae6ad4421aecb20384e224e75de4ab8387ac`
+
+Manifest cài đặt V2 đã qua rà soát hash. Lần chạy zero-fresh v0.2 đầu:
+
+`35553272015`
+
+không hợp lệ do guard CI còn trỏ file trigger v0.1; nó dừng trước test/preflight và không tạo bằng chứng khoa học.
+
+Đã sửa wiring tại:
+
+`075a563920e2ae2600b79006104d1cc90f1089c9`
+
+và reauthorize V2 tại:
+
+`28cb51a3748710c70b3d37f11b24986e38bc3f17`.
+
+Canonical zero-fresh v0.2 hợp lệ:
+
+- run: `35553426498`;
+- head: `9158031d43b5e4c05e11e672a75485f216a304dd`;
+- test: `16 passed`;
+- artifact: `10619885524`;
+- mã băm ZIP: `37a5050c581e1934740334b573110cebc5ac32bdd0760e8bac620b99750053b1`;
+- support dự kiến tối thiểu đều vượt cổng;
+- không chạm namespace khoa học, seed khoa học hay dữ liệu khoa học.
+
+Sau PASS đó đã materialize đúng một lần tại run:
+
+`35553551910`
+
+head:
+
+`13f60afec53252b0ddd0ca7d333f7af2afb1be41`
+
+Artifact khoa học canonical:
+
+- id: `10619711251`;
+- mã băm ZIP: `b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997`.
+
+Kết quả dữ liệu:
+
+- TRAIN: 2.000 cảnh / 4.000 surface, SHA-256 `5bf1b1b5a193ce46baee9aee97e7e03a1e8c2f66bee8216c30cf518a6fb1468a`;
+- VALIDATION: 400 cảnh / 800 surface, SHA-256 `8c1eed22186d43b3311c7bbb63edfce7ba13880a11c528529bc411b9062a1495`;
+- PRISTINE_CONFIRMATORY: 600 cảnh / 1.200 surface, SHA-256 `5902fec0e68c296d7fa7463f37f7f0acb4b287718030516d3b67d71f96fc78f6`.
+
+Audit thực tế:
+
+- raw-text duplicate: 0;
+- canonical-Z duplicate: 0;
+- lỗi bất biến giữa surface: 0;
+- lỗi phục hồi Z độc lập từ input_text: 0;
+- lỗi ghép C độc lập: 0;
+- lỗi ghép C bằng R đã khóa: 0;
+- cảnh mơ hồ: 0;
+- đọc thông tin cấm: 0;
+- support tối thiểu TRAIN: 180 cho lớp phẳng, 500 cho Z4 cell, 400 cho C1 cell, 500 cho C5 cell;
+- support tối thiểu confirmatory: 54, 150, 120, 150 tương ứng;
+- multi-factor confirmatory: 1,0;
+- H1c scope-relation coverage chính xác: 0,719;
+- scientific tokenizer fitted: false;
+- scientific training executed: false.
+
+Formal verdict:
+
+`SCIENTIFIC_MATERIALIZATION_AND_DATA_AUDIT_PASS`
+
+Tài liệu đóng cổng:
+
+`38132025530a20cd3d27bc4cc2b9b4b7ab4be525`
+
+Trạng thái: ba namespace khoa học đã spent và frozen; không được regenerate âm thầm. Cổng tiếp theo là fit đúng một tokenizer từ TRAIN input_text בלבד, khóa hash và audit tokenized inputs. Huấn luyện vẫn bị chặn.
