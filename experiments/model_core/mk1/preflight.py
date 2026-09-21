@@ -8,8 +8,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import re
 import tempfile
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -21,12 +21,18 @@ from mindforge.tokenizer import metadata, train_tokenizer
 
 from .contracts import (
     B0_PARAMETER_COUNT,
+    C1_FIELDS,
+    C5_FIELDS,
     C_SLICES,
+    COMPARATORS,
     DIRECT_PARAMETER_COUNT,
     D_C,
     D_Z,
     M1Z_PARAMETER_COUNT,
     SCIENTIFIC_TRAINING_SEEDS,
+    SCOPES,
+    SCOPE_RELATIONS,
+    TEMPORAL_PRECISIONS,
     Z1_LABELS,
     Z4_FIELDS,
     Z_SLICES,
@@ -119,6 +125,188 @@ def _finite_backward(arm_name: str, arm: torch.nn.Module, input_ids: torch.Tenso
         if parameter.grad is not None and not bool(torch.isfinite(parameter.grad).all()):
             raise AssertionError(f"{arm_name} has non-finite gradient")
     return float(loss.detach().cpu())
+
+
+def _projected_generator_qa() -> dict[str, object]:
+    """Fixture-only projection of Amendment-003 support/integrity gates."""
+    train_ordinals = range(0, 2_000)
+    confirm_ordinals = range(2_400, 3_000)
+    all_ordinals = range(0, 3_000)
+
+    train_scenes = [build_fixture_scene(i) for i in train_ordinals]
+    confirm_scenes = [build_fixture_scene(i) for i in confirm_ordinals]
+    all_scenes = [build_fixture_scene(i) for i in all_ordinals]
+
+    def positive_counts(scenes, key: str, names: tuple[str, ...]) -> dict[str, int]:
+        counts = {name: 0 for name in names}
+        for scene in scenes:
+            values = scene.gold_z[key]
+            for name, value in zip(names, values):
+                counts[name] += int(bool(value))
+        return counts
+
+    def binary_counts(scenes, source: str, names: tuple[str, ...]) -> dict[str, dict[str, int]]:
+        counts = {name: {"positive": 0, "negative": 0} for name in names}
+        for scene in scenes:
+            values = scene.gold_z[source] if source.startswith("z") else scene.gold_c[source]
+            for name, value in zip(names, values):
+                counts[name]["positive" if bool(value) else "negative"] += 1
+        return counts
+
+    def categorical_counts(scenes, source: str, names: tuple[str, ...], *, canonical: bool = False) -> dict[str, int]:
+        counts = Counter()
+        for scene in scenes:
+            value = scene.gold_c[source] if canonical else scene.gold_z[source]
+            counts[names[int(value)]] += 1
+        return {name: int(counts[name]) for name in names}
+
+    z1_train = positive_counts(train_scenes, "z1", tuple(Z1_LABELS))
+    z1_confirm = positive_counts(confirm_scenes, "z1", tuple(Z1_LABELS))
+    comparator_train = categorical_counts(train_scenes, "z2_comparator", tuple(COMPARATORS))
+    comparator_confirm = categorical_counts(confirm_scenes, "z2_comparator", tuple(COMPARATORS))
+    precision_train = categorical_counts(train_scenes, "z2_temporal_precision", tuple(TEMPORAL_PRECISIONS))
+    precision_confirm = categorical_counts(confirm_scenes, "z2_temporal_precision", tuple(TEMPORAL_PRECISIONS))
+
+    scalar_names = ("numeric_value", "ordinal_index", "duration_seconds", "period_seconds")
+    scalar_train = {name: 0 for name in scalar_names}
+    scalar_confirm = {name: 0 for name in scalar_names}
+    for scene in train_scenes:
+        for name, present in zip(scalar_names, scene.gold_z["z2_scalar_mask"]):
+            scalar_train[name] += int(bool(present))
+    for scene in confirm_scenes:
+        for name, present in zip(scalar_names, scene.gold_z["z2_scalar_mask"]):
+            scalar_confirm[name] += int(bool(present))
+
+    z3_ev_train = categorical_counts(train_scenes, "z3_evidence_scope", tuple(SCOPES))
+    z3_ev_confirm = categorical_counts(confirm_scenes, "z3_evidence_scope", tuple(SCOPES))
+    z3_as_train = categorical_counts(train_scenes, "z3_asserted_scope", tuple(SCOPES))
+    z3_as_confirm = categorical_counts(confirm_scenes, "z3_asserted_scope", tuple(SCOPES))
+    z3_rel_train = categorical_counts(train_scenes, "z3_scope_relation", tuple(SCOPE_RELATIONS))
+    z3_rel_confirm = categorical_counts(confirm_scenes, "z3_scope_relation", tuple(SCOPE_RELATIONS))
+
+    z4_train = binary_counts(train_scenes, "z4", tuple(Z4_FIELDS))
+    z4_confirm = binary_counts(confirm_scenes, "z4", tuple(Z4_FIELDS))
+    c1_train = binary_counts(train_scenes, "c1", tuple(C1_FIELDS))
+    c1_confirm = binary_counts(confirm_scenes, "c1", tuple(C1_FIELDS))
+    c5_train = binary_counts(train_scenes, "c5", tuple(C5_FIELDS))
+    c5_confirm = binary_counts(confirm_scenes, "c5", tuple(C5_FIELDS))
+
+    c2_train = categorical_counts(train_scenes, "c2", tuple(SCOPES), canonical=True)
+    c2_confirm = categorical_counts(confirm_scenes, "c2", tuple(SCOPES), canonical=True)
+    c3_train = categorical_counts(train_scenes, "c3", tuple(SCOPES), canonical=True)
+    c3_confirm = categorical_counts(confirm_scenes, "c3", tuple(SCOPES), canonical=True)
+    c4_train = categorical_counts(train_scenes, "c4", tuple(SCOPE_RELATIONS), canonical=True)
+    c4_confirm = categorical_counts(confirm_scenes, "c4", tuple(SCOPE_RELATIONS), canonical=True)
+
+    def require_minimum(counts: dict[str, int], minimum: int, label: str) -> None:
+        bad = {name: count for name, count in counts.items() if count < minimum}
+        if bad:
+            raise AssertionError(f"{label} support below {minimum}: {bad}")
+
+    def require_binary_minimum(counts: dict[str, dict[str, int]], minimum: int, label: str) -> None:
+        bad = {
+            name: values
+            for name, values in counts.items()
+            if values["positive"] < minimum or values["negative"] < minimum
+        }
+        if bad:
+            raise AssertionError(f"{label} binary support below {minimum}: {bad}")
+
+    for label, train_counts, confirm_counts in (
+        ("Z1", z1_train, z1_confirm),
+        ("Z2 comparator", comparator_train, comparator_confirm),
+        ("Z2 temporal precision", precision_train, precision_confirm),
+        ("Z2 scalar presence", scalar_train, scalar_confirm),
+        ("Z3 evidence scope", z3_ev_train, z3_ev_confirm),
+        ("Z3 asserted scope", z3_as_train, z3_as_confirm),
+        ("Z3 scope relation", z3_rel_train, z3_rel_confirm),
+        ("C2 evidence scope", c2_train, c2_confirm),
+        ("C3 asserted scope", c3_train, c3_confirm),
+        ("C4 scope relation", c4_train, c4_confirm),
+    ):
+        require_minimum(train_counts, 100, f"{label} TRAIN")
+        require_minimum(confirm_counts, 40, f"{label} confirmatory")
+
+    for label, train_counts, confirm_counts in (
+        ("Z4", z4_train, z4_confirm),
+        ("C1", c1_train, c1_confirm),
+        ("C5", c5_train, c5_confirm),
+    ):
+        require_binary_minimum(train_counts, 100, f"{label} TRAIN")
+        require_binary_minimum(confirm_counts, 40, f"{label} confirmatory")
+
+    signatures = {
+        json.dumps(scene.gold_z, sort_keys=True, separators=(",", ":"))
+        for scene in all_scenes
+    }
+    if len(signatures) != 3_000:
+        raise AssertionError("projected canonical Z signatures are not unique")
+
+    if any(not any(scene.gold_z["z2_scalar_mask"]) for scene in all_scenes):
+        raise AssertionError("projected scene without a continuous scalar")
+
+    family_slices = (
+        slice(0, 6),
+        slice(6, 11),
+        slice(11, 16),
+        slice(16, 19),
+        slice(19, 23),
+        slice(31, 32),
+    )
+    multifactor = 0
+    for scene in confirm_scenes:
+        z1 = scene.gold_z["z1"]
+        active_families = sum(int(any(z1[sl])) for sl in family_slices)
+        multifactor += int(active_families >= 2)
+    multifactor_fraction = multifactor / len(confirm_scenes)
+    if multifactor_fraction < 0.30:
+        raise AssertionError("projected confirmatory multi-factor fraction below 30%")
+
+    contextual = SCOPES.index("CONTEXTUAL")
+    h1c_relation_covered = sum(
+        int(
+            scene.gold_z["z3_evidence_scope"] != contextual
+            and scene.gold_z["z3_asserted_scope"] != contextual
+        )
+        for scene in all_scenes
+    )
+    h1c_scope_relation_coverage = h1c_relation_covered / len(all_scenes)
+
+    return {
+        "status": "PASS",
+        "projected_train_scenes": len(train_scenes),
+        "projected_confirmatory_scenes": len(confirm_scenes),
+        "projected_total_scenes": len(all_scenes),
+        "canonical_z_unique": len(signatures) == 3_000,
+        "all_scenes_have_scalar": True,
+        "confirmatory_multifactor_fraction": multifactor_fraction,
+        "h1c_scope_relation_coverage": h1c_scope_relation_coverage,
+        "minimum_train_z1_support": min(z1_train.values()),
+        "minimum_confirmatory_z1_support": min(z1_confirm.values()),
+        "minimum_train_scalar_presence": min(scalar_train.values()),
+        "minimum_confirmatory_scalar_presence": min(scalar_confirm.values()),
+        "minimum_train_scope_relation_support": min(z3_rel_train.values()),
+        "minimum_confirmatory_scope_relation_support": min(z3_rel_confirm.values()),
+        "minimum_train_z4_binary_cell": min(
+            min(v["positive"], v["negative"]) for v in z4_train.values()
+        ),
+        "minimum_confirmatory_z4_binary_cell": min(
+            min(v["positive"], v["negative"]) for v in z4_confirm.values()
+        ),
+        "minimum_train_c1_binary_cell": min(
+            min(v["positive"], v["negative"]) for v in c1_train.values()
+        ),
+        "minimum_confirmatory_c1_binary_cell": min(
+            min(v["positive"], v["negative"]) for v in c1_confirm.values()
+        ),
+        "minimum_train_c5_binary_cell": min(
+            min(v["positive"], v["negative"]) for v in c5_train.values()
+        ),
+        "minimum_confirmatory_c5_binary_cell": min(
+            min(v["positive"], v["negative"]) for v in c5_confirm.values()
+        ),
+        "threshold_margin_gate": "NOT_APPLICABLE_NO_THRESHOLD_DERIVED_PRIMARY_HARD_TARGETS",
+    }
 
 
 def run_preflight(output_path: str | Path) -> dict[str, object]:
@@ -218,8 +406,10 @@ def run_preflight(output_path: str | Path) -> dict[str, object]:
     if any(path.exists() for path in forbidden_paths):
         raise AssertionError("zero-fresh preflight found a scientific data/run directory")
 
+    projected_generator = _projected_generator_qa()
+
     result: dict[str, object] = {
-        "schema": "MK1-ZERO-FRESH-PREFLIGHT-v0.1",
+        "schema": "MK1-ZERO-FRESH-PREFLIGHT-v0.2",
         "status": "PASS",
         "b0_parameter_count": B0_PARAMETER_COUNT,
         "hidden_state_logit_parity": parity,
@@ -237,6 +427,7 @@ def run_preflight(output_path: str | Path) -> dict[str, object]:
         "scientific_namespace_touched": False,
         "scientific_seed_touched": False,
         "scientific_data_created": False,
+        "amendment_003_projected_generator_qa": projected_generator,
     }
     serialized = json.dumps(result, sort_keys=True)
     if "710" in serialized or any(str(seed) in serialized for seed in SCIENTIFIC_TRAINING_SEEDS):
