@@ -325,9 +325,18 @@ def verify_llama_cpp_lock(
             str(converter_python),
             "-c",
             (
-                "import json, importlib.metadata as m; "
-                "print(json.dumps({k:m.version(k) for k in "
-                "['torch','transformers','numpy','sentencepiece','protobuf','gguf']}))"
+                "import json, importlib, importlib.metadata as md; "
+                "mods={'torch':'torch','transformers':'transformers','numpy':'numpy',"
+                "'sentencepiece':'sentencepiece','protobuf':'google.protobuf','gguf':'gguf'}; "
+                "out={}; "
+                "exec(\"for dist,modname in mods.items():\\n\"
+                "    mod=importlib.import_module(modname)\\n\"
+                "    version=getattr(mod,'__version__',None)\\n\"
+                "    if version is None:\\n\"
+                "        try: version=md.version(dist)\\n\"
+                "        except md.PackageNotFoundError: version='module-present-metadata-unavailable'\\n\"
+                "    out[dist]=str(version)\"); "
+                "print(json.dumps(out, sort_keys=True))"
             ),
         ],
         label="converter environment identity",
