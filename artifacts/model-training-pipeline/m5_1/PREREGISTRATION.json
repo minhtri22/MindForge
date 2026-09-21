@@ -1,0 +1,80 @@
+{
+  "schema": "mindforge-model-pipeline-m5-1-preregistration-v1",
+  "program": "M5.1 Canonical Tokenizer Export Fidelity Decomposition",
+  "parent_failure": {
+    "implementation_sha": "8c8eba03d71ab4c4463b6811b2cc475465553304",
+    "workflow_run_id": 35565868782,
+    "workflow_name": "Model Pipeline M5 llama.cpp QA",
+    "stage": "F16_HF_TO_GGUF_CONVERSION",
+    "m5_status": "OPEN",
+    "observed_failure_signature": [
+      "FileNotFoundError: File not found: <canonical_hf>/tokenizer.model",
+      "AttributeError: 'list' object has no attribute 'keys'"
+    ]
+  },
+  "frozen_inputs": {
+    "config_path": "docs/model-training-pipeline/examples/end_to_end_small.yaml",
+    "config_git_blob_sha1": "4fff2473b8f64f7db8f037d0fa40087c7efda4ca",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "llama_cpp_lock_git_blob_sha1": "9cef982e91d067f7110397ecb5e66ba92af25d38",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "outtype": "f16",
+    "production_code_git_blobs": {
+      "pipeline/m2.py": "a500a070c42907784addd6c3e5c656949852c10e",
+      "pipeline/m2_model.py": "a531ad93728ff5508ac4d8c7d1e9229ac901aaf6",
+      "pipeline/m2_worker.py": "74e4aa7fa313c7fb22b1afd9c5019b54e03e2cce",
+      "pipeline/m5.py": "d0e2932ad0761bc22d881a181c001cc586fe714b"
+    }
+  },
+  "intervention": {
+    "only_independent_variable": "tokenizer_source",
+    "arm_A": "current M2 canonical-HF tokenizer artifacts exactly as exported",
+    "arm_B": "same canonical-HF directory/model weights/config, with tokenizer artifacts replaced byte-for-byte from exact pinned Qwen source snapshot; no save_pretrained call",
+    "required_same_between_arms": [
+      "model weights",
+      "model config and all non-tokenizer files",
+      "llama.cpp commit",
+      "converter script blob",
+      "converter Python environment",
+      "converter invocation",
+      "outtype=f16"
+    ]
+  },
+  "preconversion_inspection": [
+    "tokenizer_class",
+    "tokenizer_vocab_type",
+    "tokenizer_vocab_hash",
+    "tokenizer_vocab_size",
+    "special_tokens_map",
+    "chat_template_hash",
+    "tokenizer_asset_manifest",
+    "encode_decode_probe"
+  ],
+  "forbidden": {
+    "production_code_rescue_before_adjudication": true,
+    "llama_cpp_commit_change": true,
+    "quantization_q8_q4": true,
+    "m6_open": true,
+    "bulk_wikipedia_codeparrot_training": true
+  },
+  "adjudication": {
+    "A_FAIL_B_PASS": {
+      "mechanism": "M2_CANONICAL_TOKENIZER_EXPORT_FIDELITY_DEFECT",
+      "next_action": "REPAIR_M2_CANONICAL_TOKENIZER_EXPORT_CONTRACT_THEN_RERUN_M2_TO_M5"
+    },
+    "A_FAIL_B_FAIL": {
+      "mechanism": "PINNED_LLAMA_CPP_CONVERTER_COMPATIBILITY_DEFECT",
+      "next_action": "OPEN_BOUNDED_UPSTREAM_COMPATIBILITY_INVESTIGATION_NO_M2_REPAIR"
+    },
+    "A_PASS_B_PASS": {
+      "mechanism": "INVALID_ENVIRONMENTAL_PARENT_FAILURE_NOT_REPRODUCED",
+      "next_action": "REPRODUCIBILITY_INVESTIGATION_M5_REMAINS_OPEN"
+    },
+    "A_PASS_B_FAIL": {
+      "mechanism": "INCONSISTENT_PROVENANCE_OR_ARTIFACT_MIXUP",
+      "next_action": "STOP_AND_INVESTIGATE_PROVENANCE_NO_REPAIR"
+    }
+  }
+}

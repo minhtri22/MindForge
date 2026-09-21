@@ -1,0 +1,135 @@
+name: Model Pipeline M5.1 Tokenizer Decomposition
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - docs/evidence-model-training-pipeline
+    paths:
+      - 'tools/m5_1_*.py'
+      - 'tests/test_model_pipeline_m5_1.py'
+      - 'requirements-pipeline-m5-1.txt'
+      - 'artifacts/model-training-pipeline/m5_1/PREREGISTRATION.json'
+      - '.github/workflows/model-pipeline-m5-1.yml'
+  pull_request:
+    paths:
+      - 'tools/m5_1_*.py'
+      - 'tests/test_model_pipeline_m5_1.py'
+      - 'requirements-pipeline-m5-1.txt'
+      - 'artifacts/model-training-pipeline/m5_1/PREREGISTRATION.json'
+
+jobs:
+  m5-1-decomposition:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install M5.1 pipeline dependencies
+        run: python -m pip install -r requirements-pipeline-m5-1.txt
+
+      - name: Foundation regressions
+        run: |
+          python -m pytest -q tests/test_model_pipeline_m0.py
+          python -m pytest -q tests/test_model_pipeline_m1.py
+          python -m pytest -q tests/test_model_pipeline_m2_unit.py
+          python -m pytest -q tests/test_model_pipeline_m3.py
+          python -m pytest -q tests/test_model_pipeline_m4.py
+
+      - name: M5.1 preregistration and decomposition unit tests
+        run: python -m pytest -q tests/test_model_pipeline_m5_1.py
+
+      - name: Checkout exact frozen llama.cpp source
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          prereg = json.loads(pathlib.Path(
+              "artifacts/model-training-pipeline/m5_1/PREREGISTRATION.json"
+          ).read_text())
+          root = pathlib.Path(".m5-1-tools")
+          source = root / "llama.cpp"
+          root.mkdir(exist_ok=True)
+          subprocess.run(["git", "init", str(source)], check=True)
+          subprocess.run([
+              "git", "-C", str(source), "remote", "add", "origin",
+              "https://github.com/ggml-org/llama.cpp.git",
+          ], check=True)
+          subprocess.run([
+              "git", "-C", str(source), "fetch", "--depth", "1", "origin",
+              prereg["frozen_inputs"]["llama_cpp_commit"],
+          ], check=True)
+          subprocess.run(["git", "-C", str(source), "checkout", "--detach", "FETCH_HEAD"], check=True)
+          actual = subprocess.check_output(
+              ["git", "-C", str(source), "rev-parse", "HEAD"], text=True
+          ).strip()
+          if actual != prereg["frozen_inputs"]["llama_cpp_commit"]:
+              raise SystemExit(f"llama.cpp SHA mismatch: {actual}")
+          print(actual)
+          PY
+
+      - name: Create exact isolated converter environment
+        run: |
+          python -m venv .m5-1-tools/convert-venv
+          .m5-1-tools/convert-venv/bin/python -m pip install --upgrade pip
+          .m5-1-tools/convert-venv/bin/python -m pip install \
+            -r .m5-1-tools/llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
+
+      - name: Verify converter imports
+        run: |
+          .m5-1-tools/convert-venv/bin/python pipeline/m5_converter_probe.py | tee .m5-1-tools/converter_probe.json
+          python - <<'PY'
+          import json
+          import pathlib
+          data = json.loads(pathlib.Path(".m5-1-tools/converter_probe.json").read_text())
+          failed = {k:v for k,v in data.items() if not isinstance(v, dict) or v.get("import_ok") is not True}
+          if failed:
+              raise SystemExit("converter preflight failed: " + json.dumps(failed, sort_keys=True))
+          print(json.dumps(data, indent=2, sort_keys=True))
+          PY
+
+      - name: Execute preregistered A/B F16 decomposition
+        run: |
+          python tools/m5_1_decomposition.py \
+            -c docs/model-training-pipeline/examples/end_to_end_small.yaml \
+            --workspace . \
+            --runs-root .m5-1-runs \
+            --llama-source .m5-1-tools/llama.cpp \
+            --converter-python .m5-1-tools/convert-venv/bin/python \
+            --prereg artifacts/model-training-pipeline/m5_1/PREREGISTRATION.json \
+            --json | tee .m5-1-result.json
+
+      - name: Verify diagnostic never authorizes quantization
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          data = json.loads(pathlib.Path(".m5-1-result.json").read_text())
+          assert data["diagnostic_status"] == "PASS"
+          assert data["m5_status"] == "OPEN"
+          assert data["quantization_authorized"] is False
+          assert data["m6_authorized"] is False
+          assert data["controlled_variable_check"]["non_tokenizer_manifest_equal"] is True
+          assert data["controlled_variable_check"]["converter_command_shape_equal"] is True
+          print(data["adjudication"])
+          PY
+
+      - name: Upload M5.1 diagnostic evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: m5-1-tokenizer-decomposition
+          path: |
+            .m5-1-result.json
+            .m5-1-tools/converter_probe.json
+            .m5-1-runs/**/m5_1/M5_1_RESULT.json
+          if-no-files-found: error
