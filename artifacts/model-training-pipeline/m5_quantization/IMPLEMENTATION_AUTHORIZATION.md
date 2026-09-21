@@ -78,3 +78,40 @@ Even if both quantized targets PASS:
 - bulk training remains CLOSED;
 - no absolute-capability claim is authorized;
 - only a separate post-quantization governance decision may open next work.
+
+
+## Bounded adjudicator repair and exact replay authorization
+
+Prior execution:
+
+- run: `35632404520`
+- job: `106441521839`
+- head: `58ba71b22140ef8b89e28d38804e268feecbf347`
+- classification: `INVALID_ADJUDICATOR / SCIENTIFIC_OUTCOME_UNADJUDICATED`
+- failure point: wrapper post-serialization target-key ordering guard
+- observed keys: `q4_k_m, q8_0`
+- frozen execution order: `q8_0, q4_k_m`
+
+Mechanism:
+
+`pipeline.io.atomic_write_json()` canonicalizes JSON with `sort_keys=True`.
+The wrapper incorrectly treated serialized mapping key order as scientific target
+order. The pre-execution config-order guard remains unchanged and still enforces
+`q8_0 -> q4_k_m`.
+
+Repair authorization:
+
+- repair-governance commit:
+  `3e9167e48977566ed2e40985fe4f4567215f9f64`
+- repaired scientific candidate:
+  `72d71edc87703bada5e7f766d62a1bfd59eb7923`
+- allowed semantic change: post-serialization exact target membership only;
+- regression coverage: canonical sorted order accepted; missing, extra and
+  non-mapping forms rejected.
+
+Exactly one exact replay is authorized from this repaired candidate. All frozen
+model, parent, target, threshold, seed, prompt, llama.cpp, converter and runtime
+contracts remain unchanged. A genuine PASS or FAIL from the repaired
+adjudicator is terminal.
+
+M6 remains CLOSED. Bulk training remains CLOSED.
