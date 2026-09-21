@@ -1,0 +1,41 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q8-execution-authorization-v1",
+  "status": "AUTHORIZED_ONE_SHOT",
+  "program": "M5Q",
+  "target": "q8_0",
+  "quantizer_type": "Q8_0",
+  "scientific_implementation_commit": "68bbd071ba78f6325748159703a90232d69e4ade",
+  "preflight_closure_commit": "6935e0047e987c4a2d8528f1faf5ca2c16ed9390",
+  "zero_science_preflight_run_id": 35624821038,
+  "zero_science_preflight_job_id": 106416489333,
+  "zero_science_preflight_artifact_id": 10651022297,
+  "zero_science_preflight_artifact_sha256": "f823a1041853a12e6513a63326e20d684ec455e4e817ce3c756b4f91d83e65a9",
+  "execution_workflow_git_blob_sha1": "de5e3c1242fb62ec960c996f4ff9bdf536c9e53f",
+  "parent": {
+    "m5_f16_closure_commit": "9ff987ebd95cd23fef4cd2a0511774d772b14400",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_artifact_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "f16_artifact_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+  },
+  "frozen_execution": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "comparator": "qualified_f16_parent",
+    "q8_quantizer_target": "Q8_0"
+  },
+  "rules": {
+    "one_scientific_invocation_only": true,
+    "scientific_code_change_authorized": false,
+    "config_change_authorized": false,
+    "fixture_change_authorized": false,
+    "inference_change_authorized": false,
+    "quantizer_change_authorized": false,
+    "parity_rule_change_authorized": false,
+    "q4_execution_authorized": false,
+    "m6_authorized": false,
+    "bulk_training_authorized": false,
+    "scientific_fail_is_terminal": true,
+    "missing_result_is_infrastructure_invalid": true
+  }
+}
