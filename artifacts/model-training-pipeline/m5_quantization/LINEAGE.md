@@ -301,3 +301,36 @@ preregistered contract**, with a fresh target-specific implementation lock and
 zero-science preflight.
 
 M6 and bulk training remain closed.
+
+
+## 2026-09-22 — Q4_K_M bounded implementation authorization opened
+
+Q4_K_M remains `NOT FORMALLY QUALIFIED` with prior out-of-protocol outcome
+exposure explicitly disclosed.
+
+The controlling contract is still the pre-exposure preregistration blob:
+
+```text
+c7f6addf220f659276fd0035b272b235b12df22c
+```
+
+The accidental Q4 outcome is forbidden from influencing code, tests, thresholds,
+lock criteria, or expected results. Q4 will proceed as a formal
+replication/qualification under that pre-exposure contract.
+
+Only target-specific Q4 implementation/test/preflight files may be added.
+`pipeline/m5.py`, Q8 scientific code/evidence, and the preregistration remain
+frozen.
+
+Current boundary:
+
+```text
+Q4 implementation: AUTHORIZED
+Q4 tests: AUTHORIZED
+Q4 scientific execution: NOT AUTHORIZED
+M6: CLOSED / NOT AUTHORIZED
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+Next valid action: implement the target-specific Q4 path and run zero-outcome
+tests. Exact implementation lock may be created only after tests PASS.

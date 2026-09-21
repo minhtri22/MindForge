@@ -1,0 +1,144 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-q4-bounded-implementation-authorization-v1",
+  "status": "AUTHORIZED_IMPLEMENTATION_ONLY",
+  "program": "M5Q",
+  "target": "q4_k_m",
+  "quantizer_type": "Q4_K_M",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "basis": {
+    "preregistration": {
+      "path": "artifacts/model-training-pipeline/m5_quantization/PREREGISTRATION.json",
+      "git_blob_sha1": "c7f6addf220f659276fd0035b272b235b12df22c",
+      "pre_exposure": true
+    },
+    "q8_closure": {
+      "path": "artifacts/model-training-pipeline/m5_quantization/Q8_0_QUALIFICATION_EVIDENCE.json",
+      "git_blob_sha1": "a94e0253191dd4ede64f777d27ad791efae62a0a",
+      "status": "PASS_CLOSED"
+    },
+    "drift_audit": {
+      "path": "artifacts/model-training-pipeline/m5_quantization/AGENT_DRIFT_AUDIT_20260922.md",
+      "git_blob_sha1": "e546d7d78fad532ac4a837b63f1f5e33018b9311"
+    },
+    "exposure": {
+      "path": "artifacts/model-training-pipeline/m5_quantization/Q4_OUTCOME_EXPOSURE.json",
+      "git_blob_sha1": "ae92c5b582508e9fb97f0b64714629535701a9b8",
+      "prior_out_of_protocol_outcome_exposure": true
+    }
+  },
+  "execution_class": "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT",
+  "frozen_contract": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "config_path": "docs/model-training-pipeline/examples/end_to_end_small.yaml",
+    "config_git_blob_sha1": "4fff2473b8f64f7db8f037d0fa40087c7efda4ca",
+    "fixture_set": "tests/fixtures/eval_v1",
+    "source_f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "source_f16_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "llama_cpp_lock_git_blob_sha1": "9cef982e91d067f7110397ecb5e66ba92af25d38",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "target": "Q4_K_M",
+    "comparator": "qualified_f16_parent",
+    "f16_task_vector": [
+      false,
+      false
+    ],
+    "f16_accuracy": 0,
+    "inference": {
+      "max_new_tokens": 128,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "seed": 42,
+      "context_length": 2048,
+      "threads": 2,
+      "llama_cli_single_turn": true
+    },
+    "required_gates": [
+      "parent_f16_identity_exact",
+      "llama_cpp_exact_lock",
+      "quantizer_target_exact",
+      "quantizer_return_code_zero",
+      "quantized_artifact_nonempty",
+      "quantized_artifact_manifest_frozen",
+      "real_llama_cli_load_and_infer",
+      "all_runtime_outputs_nonempty",
+      "task_vector_equals_f16_parent",
+      "runtime_accuracy_equals_f16_parent",
+      "format_parity_with_f16_parent",
+      "reasoning_runtime_mapping_pass",
+      "artifact_smaller_than_f16"
+    ]
+  },
+  "structural_reference": {
+    "q8_module_path": "pipeline/m5q.py",
+    "q8_module_git_blob_sha1": "aa96345a7ecf47f403b84b40ced015fa8a626284",
+    "allowed_use": "STRUCTURAL_REFERENCE_ONLY"
+  },
+  "protected_existing_surfaces": {
+    "pipeline/m5.py": {
+      "git_blob_sha1": "0249be91acbe57fd20b8577a0cda3d6ea5acb048",
+      "modification_authorized": false
+    },
+    "pipeline/m5q.py": {
+      "git_blob_sha1": "aa96345a7ecf47f403b84b40ced015fa8a626284",
+      "modification_authorized": false
+    },
+    "tools/m5q_q8_qualification.py": {
+      "git_blob_sha1": "e553149bf2b5be103086956bbd804cbca504564c",
+      "modification_authorized": false
+    },
+    "tests/test_model_pipeline_m5q_q8.py": {
+      "git_blob_sha1": "542dbb596863bd4cad8566f734caf43e8204b411",
+      "modification_authorized": false
+    },
+    "artifacts/model-training-pipeline/m5_quantization/PREREGISTRATION.json": {
+      "git_blob_sha1": "c7f6addf220f659276fd0035b272b235b12df22c",
+      "modification_authorized": false
+    }
+  },
+  "allowed_new_files": [
+    "pipeline/m5q_q4.py",
+    "tools/m5q_q4_qualification.py",
+    "tools/m5q_q4_preflight.py",
+    "tests/test_model_pipeline_m5q_q4.py",
+    ".github/workflows/model-pipeline-m5q-q4-preflight.yml"
+  ],
+  "exposure_constraints": {
+    "exposed_values_must_not_be_copied_into_q4_code_tests_lock_or_gates": true,
+    "exposed_values_must_not_define_thresholds": true,
+    "exposed_values_must_not_define_expected_hash_or_size": true,
+    "exposed_pass_must_not_be_used_as_expected_result": true,
+    "no_strict_q4_lt_q8_gate": true
+  },
+  "requirements": [
+    "Q4 implementation must be target-specific and must not invoke the general multi-target M5 quantization loop.",
+    "Q4 contract loader must require q4_k_m as the second preregistered target and Q8 PASS/CLOSED only as sequence provenance.",
+    "F16 parent must be regenerated and verified against frozen SHA256 and manifest before Q4 quantization.",
+    "Q4 quantizer command must end in exact Q4_K_M.",
+    "Q4 preservation must compare directly with the qualified F16 parent.",
+    "Q4 result must keep M6 unauthorized, M6 auto-open false, and bulk training unauthorized.",
+    "Tests must validate target specificity, frozen comparator semantics, downstream boundaries, and absence of Q8/full-M5 execution paths."
+  ],
+  "authorized_sequence": [
+    "Q4 target-specific implementation",
+    "Q4 unit/contract tests",
+    "tests PASS",
+    "exact Q4 implementation lock",
+    "lock-present zero-science preflight"
+  ],
+  "boundaries": {
+    "q4_implementation_authorized": true,
+    "q4_tests_authorized": true,
+    "q4_lock_creation_authorized_after_tests_pass": true,
+    "zero_science_preflight_authorized_after_lock": true,
+    "q4_quantization_authorized": false,
+    "q4_scientific_execution_authorized": false,
+    "q4_formal_pass_claim_authorized": false,
+    "m6_authorized": false,
+    "m6_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "next_valid_action": "Q4_TARGET_SPECIFIC_IMPLEMENTATION_AND_ZERO_OUTCOME_TESTS"
+}
