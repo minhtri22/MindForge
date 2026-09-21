@@ -423,3 +423,49 @@ bulk training: CLOSED / NOT AUTHORIZED
 Q4_K_M is now ready only for a **separate formal replication execution
 authorization** under the pre-exposure preregistered contract. This preflight
 does not authorize or execute Q4 science.
+
+
+## 2026-09-22 — Q4_K_M formal replication execution authorized
+
+All pre-execution gates are complete:
+
+```text
+implementation:
+97d7dad329aa0196ead9005e631eebbeb8aa2163
+
+implementation lock:
+87bc09f479c5fd6ba3e3ec3725d859ed5ad9feb1
+
+zero-science preflight:
+PASS
+run 35641025835
+artifact 10658486459
+```
+
+A separate Q4 formal replication execution authorization is now opened with the
+execution class frozen as:
+
+```text
+FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT
+```
+
+Exactly one Q4 scientific invocation is authorized. No scientific parameter,
+gate, threshold, model/runtime identity, fixture or comparator change is
+permitted.
+
+Prior out-of-protocol outcome exposure remains disclosed and may not influence
+implementation, thresholds, expected outcomes or rerun decisions.
+
+This authorization commit contains no execution workflow and does not itself
+start Q4 science.
+
+Downstream remains closed:
+
+```text
+Q8 rerun: NOT AUTHORIZED
+M6: CLOSED / NOT AUTHORIZED
+bulk training: CLOSED / NOT AUTHORIZED
+```
+
+Next valid action: bounded execution orchestration bound to this authorization,
+followed by exactly one formal Q4 replication.
