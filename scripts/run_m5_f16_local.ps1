@@ -5,7 +5,7 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
-$ScientificCodeSha = "8dd08cbd7cd1b9050f6ae7eda6f3ab41d6edbc0a"
+$ScientificCodeSha = "2cb3cb6d1fbaa2230bc8b8d8bdf6dcdc51f4c719"
 $InvalidGithubRunId = 35577280214
 $TaskName = "M5_F16_REQUALIFICATION"
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
@@ -196,13 +196,16 @@ try {
         "pipeline/m2.py" = "51a023e46b48f9d177b506cfa4e409a4f85d930b"
         "pipeline/m2_model.py" = "8c257d3bb767cc2f17b58a0905452bb7f9ae52db"
         "pipeline/m2_worker.py" = "479f1c0efc90bd7e4874ef1f292a1e906a43e5f5"
-        "pipeline/m5.py" = "d0e2932ad0761bc22d881a181c001cc586fe714b"
+        "pipeline/m5.py" = "0249be91acbe57fd20b8577a0cda3d6ea5acb048"
         "pipeline/m5_converter_probe.py" = "5466dce5d67b090dbb66009d4a72fda4582f3c10"
         "tools/m5_f16_requalification.py" = "7be53a3ef4d8871bd1cf60e0ab45535c0906183f"
         "docs/model-training-pipeline/runtime/llama_cpp.lock.json" = "9cef982e91d067f7110397ecb5e66ba92af25d38"
         "docs/model-training-pipeline/examples/end_to_end_small.yaml" = "4fff2473b8f64f7db8f037d0fa40087c7efda4ca"
         "artifacts/model-training-pipeline/m5_1/M5_1_RESULT_EVIDENCE.json" = "07d8adc2539176234833a213e213dd7962ea11b7"
         "requirements-pipeline-m5.txt" = "81f16dbcf8879a0bcda9c699d87d2f7aa2a8b0d0"
+        "tests/test_model_pipeline_m5.py" = "814e429786c3002197edf7059c2d2ad5332ac104"
+        ".github/workflows/model-pipeline-m5-f16-repair.yml" = "39255c3c6861541c812de6278a6cda07bb9177a7"
+        "artifacts/model-training-pipeline/m5_f16/INVALID_RUN_REPAIR_AUTHORIZATION.md" = "5f7746aad41cff9ac96c0bfec57f0e439d20e608"
     }
     $BlobChecks = @()
     foreach ($Rel in $ExpectedBlobs.Keys) {
