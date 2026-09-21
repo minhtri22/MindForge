@@ -320,25 +320,33 @@ def verify_llama_cpp_lock(
     if build.get("source_commit") != expected_commit:
         raise LlamaCppLockError("build manifest source commit differs from runtime lock")
 
+    converter_probe = """
+import importlib
+import importlib.metadata as md
+import json
+
+modules = {
+    "torch": "torch",
+    "transformers": "transformers",
+    "numpy": "numpy",
+    "sentencepiece": "sentencepiece",
+    "protobuf": "google.protobuf",
+    "gguf": "gguf",
+}
+out = {}
+for dist, module_name in modules.items():
+    module = importlib.import_module(module_name)
+    version = getattr(module, "__version__", None)
+    if version is None:
+        try:
+            version = md.version(dist)
+        except md.PackageNotFoundError:
+            version = "module-present-metadata-unavailable"
+    out[dist] = str(version)
+print(json.dumps(out, sort_keys=True))
+"""
     converter_env = _run(
-        [
-            str(converter_python),
-            "-c",
-            (
-                "import json, importlib, importlib.metadata as md; "
-                "mods={'torch':'torch','transformers':'transformers','numpy':'numpy',"
-                "'sentencepiece':'sentencepiece','protobuf':'google.protobuf','gguf':'gguf'}; "
-                "out={}; "
-                "exec(\"for dist,modname in mods.items():\\n\"
-                "    mod=importlib.import_module(modname)\\n\"
-                "    version=getattr(mod,'__version__',None)\\n\"
-                "    if version is None:\\n\"
-                "        try: version=md.version(dist)\\n\"
-                "        except md.PackageNotFoundError: version='module-present-metadata-unavailable'\\n\"
-                "    out[dist]=str(version)\"); "
-                "print(json.dumps(out, sort_keys=True))"
-            ),
-        ],
+        [str(converter_python), "-c", converter_probe],
         label="converter environment identity",
     )
     try:
