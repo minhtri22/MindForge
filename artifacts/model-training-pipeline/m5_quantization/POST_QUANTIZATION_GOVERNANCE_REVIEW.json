@@ -1,0 +1,193 @@
+{
+  "schema": "mindforge-model-pipeline-m5q-post-quantization-governance-review-v1",
+  "status": "COMPLETE",
+  "program": "M5Q",
+  "branch": "research/model-pipeline-m5-quantization-qualification",
+  "review_parent_commit": "1d4c8b638d5c76f13ece7c945d9da36d3c617041",
+  "evidence_identity": {
+    "f16_evidence_git_blob_sha1": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9",
+    "q8_evidence_git_blob_sha1": "a94e0253191dd4ede64f777d27ad791efae62a0a",
+    "q4_evidence_git_blob_sha1": "5741a532120c87443faa9223a70bddb7a7699802",
+    "preregistration_git_blob_sha1": "c7f6addf220f659276fd0035b272b235b12df22c",
+    "drift_audit_git_blob_sha1": "e546d7d78fad532ac4a837b63f1f5e33018b9311",
+    "acceptance_criteria_git_blob_sha1": "eb0ed9c20acb97eebbbe30d9fa0f7b1a473fb38a",
+    "implementation_plan_git_blob_sha1": "46259d9be814a533ba8388fe18a19fe380ce2027",
+    "inference_contract_git_blob_sha1": "ad8d1a9a63a1844f73b2e248c58d66f1769252a9"
+  },
+  "terminal_evidence": {
+    "f16": {
+      "status": "PASS_CLOSED",
+      "result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+      "artifact_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+      "artifact_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+    },
+    "q8_0": {
+      "status": "PASS_CLOSED",
+      "result_hash": "16b3ce2f4522481ab086068c4a0ce625f9c0a2759d9d946a3deffc7bcf44c1c8",
+      "artifact_sha256": "35e1d06149ea36b2021f02369db0910cc6e02e691666cdbde0488210172e0146",
+      "artifact_size": 531067744,
+      "rerun_authorized": false
+    },
+    "q4_k_m": {
+      "status": "PASS_CLOSED",
+      "result_hash": "da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef",
+      "artifact_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+      "artifact_size": 397807456,
+      "execution_class": "FORMAL_REPLICATION_QUALIFICATION_UNDER_PRE_EXPOSURE_PREREGISTERED_CONTRACT",
+      "prior_out_of_protocol_outcome_exposure": true,
+      "rerun_authorized": false
+    }
+  },
+  "claims_adjudicated_pass": [
+    {
+      "id": "M5_HIGH_FIDELITY_RUNTIME_PRESERVATION",
+      "verdict": "PROVED_WITHIN_FROZEN_FIXTURE_CONTRACT",
+      "statement": "The canonical HF artifact can be converted to the exact pinned F16 GGUF identity and loaded/inferred by pinned llama.cpp while preserving the frozen task/format behavior."
+    },
+    {
+      "id": "M5_Q8_RUNTIME_PRESERVATION",
+      "verdict": "PROVED_WITHIN_FROZEN_FIXTURE_CONTRACT",
+      "statement": "Q8_0 can be produced from the exact qualified F16 parent, loaded/inferred by pinned llama.cpp, and preserves the frozen F16 task vector, accuracy, and format-validity contract."
+    },
+    {
+      "id": "M5_Q4_RUNTIME_PRESERVATION",
+      "verdict": "PROVED_WITHIN_FROZEN_FIXTURE_CONTRACT",
+      "statement": "Q4_K_M can be produced from the exact qualified F16 parent, loaded/inferred by pinned llama.cpp, and preserves the frozen F16 task vector, accuracy, and format-validity contract."
+    },
+    {
+      "id": "M5_QUANTIZED_ARTIFACT_REDUCTION",
+      "verdict": "PROVED_FOR_Q8_AND_Q4_VS_F16",
+      "statement": "Both qualified quantized artifacts satisfy the preregistered artifact_smaller_than_f16 gate."
+    },
+    {
+      "id": "M5_REASONING_RUNTIME_MAPPING",
+      "verdict": "PROVED_FOR_QUALIFIED_LLAMA_CPP_ARTIFACTS",
+      "statement": "Artifact-specific reasoning runtime mapping gates passed for F16, Q8_0, and Q4_K_M under the pinned llama.cpp parser contract."
+    },
+    {
+      "id": "M5_Q4_REPLICATION_REPRODUCIBILITY",
+      "verdict": "CORROBORATED_NOT_USED_AS_ACCEPTANCE_CRITERION",
+      "statement": "The formal Q4 replication independently reproduced the previously exposed Q4 artifact identity under a pre-exposure frozen protocol; the exposed identity was not used to tune or adjudicate the formal run."
+    }
+  ],
+  "claims_not_proved": [
+    {
+      "id": "ABSOLUTE_TASK_CAPABILITY",
+      "reason": "The frozen F16, Q8 and Q4 task vectors are [false,false] with accuracy 0.0. Preservation PASS does not establish useful absolute task capability."
+    },
+    {
+      "id": "MODEL_QUALITY_IMPROVEMENT",
+      "reason": "M5Q explicitly tests runtime/export preservation, not improvement over the parent model."
+    },
+    {
+      "id": "PRODUCTION_TARGET_SELECTION",
+      "reason": "M5Q did not preregister a production-target winner or utility/performance trade-off criterion."
+    },
+    {
+      "id": "OLLAMA_RUNTIME_QUALIFICATION",
+      "reason": "No Ollama runtime, Modelfile, pinned Ollama version, create/chat/cleanup, or Ollama parity evidence has been executed in M5Q."
+    },
+    {
+      "id": "FULL_CROSS_RUNTIME_PARITY",
+      "reason": "The repository contract requires HF, llama.cpp high-fidelity/quantized, and Ollama parity. The Ollama leg remains unexecuted."
+    },
+    {
+      "id": "RELEASE_OR_FULL_MVP_ACCEPTANCE",
+      "reason": "AC-08, Ollama portion of AC-10, and the remaining AC-01..AC-18 release/MVP gates are outside this M5Q closure."
+    },
+    {
+      "id": "SHARD_SET_RUNTIME_QUALIFICATION",
+      "reason": "The implementation contains shard-set manifest support and unit coverage, but the authoritative F16/Q8/Q4 evidence artifacts are single_file. No shard-set runtime qualification is claimed."
+    }
+  ],
+  "contract_mapping": {
+    "AC-06_HIGH_FIDELITY_GGUF": {
+      "status": "SATISFIED_FOR_M5_SCOPE",
+      "evidence": "F16 exact pinned conversion/load/infer PASS"
+    },
+    "AC-07_QUANTIZED_GGUF": {
+      "status": "SATISFIED_FOR_M5_SCOPE",
+      "evidence": "Q8_0 and Q4_K_M each have target-specific frozen load/infer/preservation PASS; at least one required quantized target is therefore qualified"
+    },
+    "AC-08_OLLAMA": {
+      "status": "NOT_YET_TESTED",
+      "owner_milestone": "M6"
+    },
+    "AC-10_CROSS_RUNTIME_PARITY": {
+      "status": "PARTIAL",
+      "satisfied_legs": [
+        "HF canonical",
+        "F16 llama.cpp",
+        "Q8_0 llama.cpp",
+        "Q4_K_M llama.cpp"
+      ],
+      "missing_leg": "Ollama packaged target"
+    },
+    "M5_IMPLEMENTATION_PLAN_SCOPE": {
+      "status": "PASS_FOR_CURRENT_M5_EXIT",
+      "components": [
+        "pinned llama.cpp build/converter capability evidence",
+        "high-fidelity GGUF qualification",
+        "quantized GGUF qualification",
+        "frozen inference runtime fixtures",
+        "shard-aware manifest implementation/unit coverage"
+      ]
+    }
+  },
+  "m5_exit_adjudication": {
+    "verdict": "PASS_CLOSED",
+    "rationale": [
+      "F16 high-fidelity qualification is PASS/CLOSED.",
+      "Both preregistered M5Q quantized targets are terminal PASS/CLOSED.",
+      "All per-target required gates passed under frozen parent/runtime/fixture identities.",
+      "No target rerun remains authorized.",
+      "The next-milestone rule can therefore be evaluated against a closed M5 evidence set."
+    ]
+  },
+  "m6_admission_decision": {
+    "basis_to_open_m6": true,
+    "verdict": "AUTHORIZED_TO_OPEN_M6_SPECIFICATION_AND_IMPLEMENTATION_GOVERNANCE_ONLY",
+    "rationale": [
+      "The implementation plan permits entry to the next milestone only after the current milestone exit gate passes; M5 is now adjudicated PASS/CLOSED.",
+      "M6 is the repository-defined Ollama milestone and is the correct owner of the missing Ollama runtime/parity leg.",
+      "Opening M6 is necessary to address AC-08 and complete the Ollama leg of AC-10."
+    ],
+    "limitations": [
+      "No Ollama lock file is present in the reviewed tree.",
+      "No M6 implementation/runtime evidence is present.",
+      "No Ollama create/chat/cleanup/parity run has been performed.",
+      "M5Q PASS must not be inherited as M6 PASS."
+    ],
+    "m6_scientific_execution_authorized": false,
+    "m6_runtime_execution_authorized": false,
+    "m6_pass_claim_authorized": false,
+    "bulk_training_authorized": false,
+    "allowed_next_scope": [
+      "M6 specification/preregistration",
+      "pin exact Ollama version/runtime identity",
+      "define deterministic Modelfile generation from the frozen inference contract",
+      "define safe ephemeral namespace and ownership/cleanup semantics",
+      "define Q4/Q8 or selected-target packaging policy without retroactive M5 target ranking",
+      "define Ollama reasoning/think mapping",
+      "define HF/llama.cpp/Ollama parity gates",
+      "implement M6 code/tests",
+      "zero-science preflight before any Ollama runtime execution"
+    ],
+    "forbidden_without_separate_authorization": [
+      "ollama create",
+      "ollama run/chat",
+      "runtime model installation/update",
+      "M6 scientific qualification",
+      "M6 PASS claim",
+      "bulk training"
+    ]
+  },
+  "program_closure": {
+    "m5q_status": "PASS_CLOSED",
+    "f16": "PASS_CLOSED",
+    "q8_0": "PASS_CLOSED",
+    "q4_k_m": "PASS_CLOSED",
+    "m6": "NOT_OPENED_BY_THIS_REVIEW",
+    "next_valid_action": "OPEN_BOUNDED_M6_SPECIFICATION_AND_IMPLEMENTATION_AUTHORIZATION"
+  }
+}

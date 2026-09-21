@@ -559,3 +559,56 @@ bulk training: CLOSED / NOT AUTHORIZED
 
 The next valid action is a separate post-quantization governance review. Q4 PASS
 does not itself authorize M6.
+
+
+## 2026-09-22 — Post-quantization governance review: M5/M5Q PASS / CLOSED
+
+The complete M5 export/runtime evidence set has been reviewed after terminal F16,
+Q8_0 and Q4_K_M adjudication.
+
+Terminal state:
+
+```text
+F16:    PASS / CLOSED
+Q8_0:   PASS / CLOSED
+Q4_K_M: PASS / CLOSED
+
+M5Q:    PASS / CLOSED
+M5 exit: PASS / CLOSED
+```
+
+The review confirms that M5 establishes high-fidelity and quantized llama.cpp
+runtime preservation under the frozen fixture contract. It does not establish
+absolute task capability, model-quality improvement, production-target
+selection, Ollama compatibility, or release readiness.
+
+The inherited absolute-capability limitation remains open because F16, Q8 and Q4
+all have task vector `[false,false]` and accuracy `0.0`.
+
+The Q4 formal replication reproduced the previously exposed artifact identity
+without using that outcome as an acceptance threshold; this is retained only as
+corroborative reproducibility evidence.
+
+M6 admission was adjudicated separately:
+
+```text
+basis to open M6: YES
+
+scope authorized by this review:
+SPECIFICATION / IMPLEMENTATION GOVERNANCE ONLY
+
+M6 runtime execution: NOT AUTHORIZED
+M6 scientific qualification: NOT AUTHORIZED
+M6 PASS claim: NOT AUTHORIZED
+```
+
+M6 is the correct owner of the missing Ollama runtime/package/parity work needed
+for AC-08 and the Ollama leg of AC-10. The reviewed tree has no Ollama lock or M6
+runtime evidence, so those identities/contracts must be created and locked
+inside M6 before any runtime execution.
+
+Q8 and Q4 reruns remain forbidden. Bulk training remains closed.
+
+Next valid action: open a bounded M6 specification + implementation
+authorization program, with zero-runtime execution until its own lock and
+preflight PASS.
