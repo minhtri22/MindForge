@@ -320,39 +320,43 @@ def verify_llama_cpp_lock(
     if build.get("source_commit") != expected_commit:
         raise LlamaCppLockError("build manifest source commit differs from runtime lock")
 
-    converter_probe = """
-import importlib
-import importlib.metadata as md
-import json
-
-modules = {
-    "torch": "torch",
-    "transformers": "transformers",
-    "numpy": "numpy",
-    "sentencepiece": "sentencepiece",
-    "protobuf": "google.protobuf",
-    "gguf": "gguf",
-}
-out = {}
-for dist, module_name in modules.items():
-    module = importlib.import_module(module_name)
-    version = getattr(module, "__version__", None)
-    if version is None:
-        try:
-            version = md.version(dist)
-        except md.PackageNotFoundError:
-            version = "module-present-metadata-unavailable"
-    out[dist] = str(version)
-print(json.dumps(out, sort_keys=True))
-"""
     converter_env = _run(
-        [str(converter_python), "-c", converter_probe],
+        [str(converter_python), "-m", "pip", "list", "--format=json"],
         label="converter environment identity",
     )
     try:
-        converter_versions = json.loads(converter_env["stdout"])
+        installed = json.loads(converter_env["stdout"])
     except json.JSONDecodeError as error:
-        raise LlamaCppLockError(f"cannot parse converter environment versions: {error}") from error
+        raise LlamaCppLockError(f"cannot parse converter pip inventory: {error}") from error
+    if not isinstance(installed, list):
+        raise LlamaCppLockError("converter pip inventory must be a list")
+
+    inventory = {
+        str(row.get("name", "")).lower(): str(row.get("version", ""))
+        for row in installed
+        if isinstance(row, dict)
+    }
+    required_distributions = {
+        "torch": "torch",
+        "transformers": "transformers",
+        "numpy": "numpy",
+        "sentencepiece": "sentencepiece",
+        "protobuf": "protobuf",
+        "gguf": "gguf",
+    }
+    missing = [
+        distribution
+        for distribution in required_distributions.values()
+        if distribution.lower() not in inventory
+    ]
+    if missing:
+        raise LlamaCppLockError(
+            f"converter environment missing required distributions: {missing}"
+        )
+    converter_versions = {
+        logical: inventory[distribution.lower()]
+        for logical, distribution in required_distributions.items()
+    }
 
     return {
         "source_commit": commit,
