@@ -1,6 +1,6 @@
 # MK-1 Tokenizer Freeze Implementation Lock v0.1
 
-Status: **PENDING CI DEPENDENCY REBIND REVIEW / REPLACEMENT FIT NOT YET AUTHORIZED**
+Status: **PASS / TOKENIZER FREEZE IMPLEMENTATION HASH LOCKED / REPLACEMENT FIT AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -219,3 +219,23 @@ Updated workflow binding:
 - SHA-256: `391889ccbe6a384f38b268a03c65385995dd18158412ad4306b9fa734935b7a0`
 
 Before a replacement fit is authorized, independent review must prove the workflow-only nature of this repair and unchanged runner/spec/tokenizer/data-result bindings.
+
+
+## 11. CI dependency rebind review closure
+
+Independent review after the runtime-dependency repair proved:
+
+- repair commit changed only `.github/workflows/mk1-tokenizer-freeze.yml`;
+- post-repair manifest update changed only this lock document;
+- tokenizer runner blob remains `ac9456d80935133cae27ebe91fed886479d8501b`;
+- tokenizer spec blob remains `74df8e6b9f2ee3a3985c5a003a1573e17390feae`;
+- `mindforge/tokenizer.py` remains `68c7d687c684c800c98344e26be7c75425ea528f`;
+- materialization/data-audit result remains `1c12495fabdc1429416b000b6f7c87034bc4eebe`;
+- repaired workflow blob is `2ff7db93aaba9e8059ccc6a0f3c2120e3baeddae`;
+- the only scientific-execution blocker repaired was the missing package runtime dependency before runner import.
+
+Formal verdict restored:
+
+`TOKENIZER_FREEZE_IMPLEMENTATION_LOCK_PASS`
+
+One replacement tokenizer-freeze execution is authorized. Run `35562245262` remains excluded as `INVALID_BEFORE_TOKENIZER_FIT`.
