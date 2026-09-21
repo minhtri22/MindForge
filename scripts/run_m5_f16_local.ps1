@@ -47,9 +47,19 @@ $Report = [ordered]@{
     error = $null
 }
 
+function Write-Utf8NoBom {
+    param(
+        [string]$Path,
+        [string]$Content
+    )
+    $Encoding = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($Path, $Content, $Encoding)
+}
+
 function Save-Report {
     $Report.completed_at = (Get-Date).ToUniversalTime().ToString("o")
-    $Report | ConvertTo-Json -Depth 20 | Set-Content -Path $ReportPath -Encoding UTF8
+    $Json = $Report | ConvertTo-Json -Depth 20
+    Write-Utf8NoBom -Path $ReportPath -Content ($Json + [Environment]::NewLine)
 }
 
 function Add-Stage {
@@ -250,8 +260,10 @@ try {
     $ConverterReq = Join-Path $LlamaSource "requirements\requirements-convert_hf_to_gguf.txt"
     Invoke-Checked -Stage "converter_dependencies" -FilePath $ConverterPython -Arguments @("-m","pip","install","-r",$ConverterReq)
 
-    & $ConverterPython "pipeline/m5_converter_probe.py" | Set-Content -Path $ConverterProbeJson -Encoding UTF8
-    if ($LASTEXITCODE -ne 0) { throw "Converter import probe failed" }
+    $ProbeLines = @(& $ConverterPython "pipeline/m5_converter_probe.py")
+    $ProbeExit = $LASTEXITCODE
+    Write-Utf8NoBom -Path $ConverterProbeJson -Content (($ProbeLines -join [Environment]::NewLine) + [Environment]::NewLine)
+    if ($ProbeExit -ne 0) { throw "Converter import probe failed" }
     $Probe = Get-Content $ConverterProbeJson -Raw | ConvertFrom-Json
     foreach ($Name in @("torch","transformers","numpy","sentencepiece","protobuf","gguf")) {
         if (-not $Probe.$Name.import_ok) { throw "Converter import failed for $Name" }
@@ -287,7 +299,8 @@ try {
         llama_cli = [ordered]@{ path = $LlamaCli; sha256 = Get-Sha256 $LlamaCli }
         llama_quantize = [ordered]@{ path = $LlamaQuantize; sha256 = Get-Sha256 $LlamaQuantize }
     }
-    $Manifest | ConvertTo-Json -Depth 10 | Set-Content -Path $BuildManifest -Encoding UTF8
+    $ManifestJson = $Manifest | ConvertTo-Json -Depth 10
+    Write-Utf8NoBom -Path $BuildManifest -Content ($ManifestJson + [Environment]::NewLine)
     $Report.artifacts.build_manifest = [ordered]@{
         path = $BuildManifest
         sha256 = Get-Sha256 $BuildManifest
@@ -312,40 +325,71 @@ try {
         "--json"
     )
 
-    & $PipelinePython @HarnessArgs | Tee-Object -FilePath $HarnessJson
+    $HarnessStderr = Join-Path $WorkRoot "m5-f16-stderr.log"
+    $HarnessLines = @(& $PipelinePython @HarnessArgs 2> $HarnessStderr)
     $HarnessExit = $LASTEXITCODE
+    Write-Utf8NoBom -Path $HarnessJson -Content (($HarnessLines -join [Environment]::NewLine) + [Environment]::NewLine)
+
     $Report.artifacts.harness_stdout = [ordered]@{
         path = $HarnessJson
         sha256 = Get-Sha256 $HarnessJson
     }
+    $Report.artifacts.harness_stderr = [ordered]@{
+        path = $HarnessStderr
+        sha256 = Get-Sha256 $HarnessStderr
+        tail = if (Test-Path $HarnessStderr) {
+            ((Get-Content $HarnessStderr -Tail 80) -join [Environment]::NewLine)
+        } else {
+            ""
+        }
+    }
 
     if (Test-Path $HarnessJson -PathType Leaf) {
-        try {
-            $Parsed = Get-Content $HarnessJson -Raw | ConvertFrom-Json
-            $Report.f16_result = $Parsed
-            $Report.scientific_outcome = $Parsed.status
-            $Report.quantization_executed = [bool]$Parsed.quantization_executed
-            $Report.quantization_authorized = [bool]$Parsed.quantization_authorized
-        } catch {
-            $Report.f16_result = [ordered]@{
-                parse_error = $_.Exception.Message
+        $HarnessRaw = Get-Content $HarnessJson -Raw
+        if (-not [string]::IsNullOrWhiteSpace($HarnessRaw)) {
+            try {
+                $Parsed = $HarnessRaw | ConvertFrom-Json
+                $Report.f16_result = $Parsed
+                $Report.scientific_outcome = $Parsed.status
+                $Report.quantization_executed = [bool]$Parsed.quantization_executed
+                $Report.quantization_authorized = [bool]$Parsed.quantization_authorized
+            } catch {
+                $Report.f16_result = [ordered]@{
+                    parse_error = $_.Exception.Message
+                }
             }
         }
     }
 
     $ResultCandidates = @(Get-ChildItem -Path $RunsRoot -Recurse -File -Filter "M5_F16_REQUALIFICATION_RESULT.json" -ErrorAction SilentlyContinue)
     if ($ResultCandidates.Count -eq 1) {
+        $ScientificResultPath = $ResultCandidates[0].FullName
+        $ScientificResult = Get-Content $ScientificResultPath -Raw | ConvertFrom-Json
         $Report.artifacts.scientific_result = [ordered]@{
-            path = $ResultCandidates[0].FullName
-            sha256 = Get-Sha256 $ResultCandidates[0].FullName
+            path = $ScientificResultPath
+            sha256 = Get-Sha256 $ScientificResultPath
         }
+        $Report.f16_result = $ScientificResult
+        $Report.scientific_outcome = $ScientificResult.status
+        $Report.quantization_executed = [bool]$ScientificResult.quantization_executed
+        $Report.quantization_authorized = [bool]$ScientificResult.quantization_authorized
     } elseif ($ResultCandidates.Count -gt 1) {
         throw "Multiple M5_F16_REQUALIFICATION_RESULT.json files found; refusing ambiguous evidence"
     }
 
     if ($HarnessExit -ne 0) {
-        Add-Stage -Name "f16_requalification" -Status "FAIL" -ExitCode $HarnessExit -Detail "Scientific harness returned non-zero."
-        $Report.overall_status = "SCIENTIFIC_FAIL"
+        Add-Stage -Name "f16_requalification" -Status "FAIL" -ExitCode $HarnessExit -Detail "Harness returned non-zero."
+        if ($null -ne $Report.f16_result -and $Report.f16_result.status -eq "FAIL" -and $ResultCandidates.Count -eq 1) {
+            $Report.overall_status = "SCIENTIFIC_FAIL"
+            $Report.scientific_outcome = "FAIL"
+        } else {
+            $Report.overall_status = "EXECUTION_FAIL"
+            $Report.scientific_outcome = "UNADJUDICATED"
+            $Report.error = [ordered]@{
+                message = "Harness exited before a scientific result artifact was produced."
+                stderr_tail = $Report.artifacts.harness_stderr.tail
+            }
+        }
         Save-Report
         Write-Host "Report written: $ReportPath"
         exit $HarnessExit
