@@ -611,3 +611,84 @@ Tài liệu đóng cổng:
 `fcaf1027142a27344b43371cdd491a143058c704`
 
 Bước kế tiếp được phép là paired initialization + exact sample-order/token-budget audit cho các seed 71001..71005. Training vẫn bị chặn.
+
+
+## 2026-09-21 — Đóng cổng paired initialization và exact sample/token budget
+
+Sau khi tokenizer khoa học PASS, đã khóa specification cho cổng paired initialization + token-budget tại:
+
+`784956c70bafe44ba1bc5906bb58e5a07a761562`
+
+Runner/workflow/test được hash-lock và independent-review trước khi seed khoa học được instantiate.
+
+Canonical audit:
+
+- run: `35572770344`;
+- head: `dccccbf9eebccde581bd92031650a4b88c39a795`;
+- fixture QA: `2 passed in 2.35s`;
+- artifact id: `10626846126`;
+- artifact ZIP SHA-256: `01579c6643003aab615dfd9c530f5c1a0868250072f7e922e8aa90968af88ff3`.
+
+Input alignment:
+
+- TRAIN surfaces = 4.000;
+- source/tokenized index alignment = EXACT;
+- exact token IDs re-encoded = true;
+- one-pass tokens = 645.726;
+- tokenizer SHA = `e91c26992c5eafbb33ca1f6c0d2f40b8c79361dc57c95d0a265123ca70974829`.
+
+Paired initialization state hashes:
+
+- 71001: `c8a7fbf63e0df8a827ff7c9291d4955db9a59b14ad1d28387fffa00e0b7a2ad7`;
+- 71002: `04cd00ce71965649281c618212c120c165d6283519eab2d9f13beb22110f674d`;
+- 71003: `f3ffadfa63e011bf691ac2e0f86a67eb023606d19a875104b77ea40d35577beb`;
+- 71004: `2f1d93bf7119ffb67c939e3c6235054232854d59ab4151e5b95ae6e2828d931d`;
+- 71005: `e553c8aa984a7b7040e392776f5a35aa6925658dbb932bc5777a0e5f35d326ab`.
+
+Mỗi seed:
+
+- DIRECT backbone hash = M1-Z backbone hash = paired B0 state hash;
+- DIRECT readout zero;
+- M1-Z readout zero;
+- DIRECT params = 10.350.114;
+- M1-Z params = 10.361.670.
+
+Schedule hashes:
+
+- 71001: `18262d3bec5fde01ebdb43bac7afb8142c32dd2aecff8245800435202270eaac`;
+- 71002: `8de8516dd6802106d4cf7fe36745a8636e888d9c5c711d76c7870fc2582f64b3`;
+- 71003: `3e5eb4ba3dbb297ce2176361544773db54ca8a1c3e3ddb89aa1367049bd18077`;
+- 71004: `e4839585f54ad14f02bd8c029d3461b6cb25063f044408cc5eeee08a8d064c5e`;
+- 71005: `52b5ce49529db34761d093cc8aa5c0a04ae19e6224e5d80e8bcf998f8dc435d9`.
+
+Không có collision schedule hash.
+
+Mỗi seed:
+
+- 5.000 optimizer-step slots đã freeze;
+- accumulation = 8;
+- 40.000 scheduled samples;
+- 4.000 unique TRAIN sample keys;
+- mỗi surface xuất hiện đúng 10 lần;
+- DIRECT/M1-Z schedule bytes giống nhau;
+- DIRECT/M1-Z token total đều `6.457.260`;
+- token gap = 0.
+
+Execution boundary:
+
+- optimizer constructed = false;
+- model forward = false;
+- model backward = false;
+- training executed = false;
+- validation model outcome used = false;
+- pristine-confirmatory inference = false.
+
+Formal verdict:
+
+`PAIRED_INIT_AND_TOKEN_BUDGET_PASS`
+
+Tài liệu đóng cổng:
+
+`42627f51e3b630a3874596fe470addaa0ce26189`
+
+Trạng thái: toàn bộ pre-training evidence gates đã PASS. Bước tiếp theo bắt buộc là khóa riêng `MK1_SCIENTIFIC_TRAINING_EXECUTION_LOCK`; optimizer step 1 vẫn chưa được phép chạy.
