@@ -82,6 +82,24 @@ jobs:
           .m5-tools/convert-venv/bin/python -m pip install \
             -r .m5-tools/llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
 
+      - name: Verify isolated converter imports before build
+        run: |
+          .m5-tools/convert-venv/bin/python pipeline/m5_converter_probe.py | tee .m5-tools/converter_probe.json
+          python - <<'PY'
+          import json
+          import pathlib
+
+          path = pathlib.Path(".m5-tools/converter_probe.json")
+          data = json.loads(path.read_text())
+          failed = {
+              name: row for name, row in data.items()
+              if not isinstance(row, dict) or row.get("import_ok") is not True
+          }
+          if failed:
+              raise SystemExit("converter import preflight failed: " + json.dumps(failed, sort_keys=True))
+          print(json.dumps(data, indent=2, sort_keys=True))
+          PY
+
       - name: Build llama.cpp from lock and emit build manifest
         run: |
           python - <<'PY'

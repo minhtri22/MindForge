@@ -340,8 +340,10 @@ def verify_llama_cpp_lock(
         or converter_probe[name].get("import_ok") is not True
     ]
     if missing:
+        details = {name: converter_probe.get(name) for name in missing}
         raise LlamaCppLockError(
-            f"converter environment missing/import-failed modules: {missing}"
+            "converter environment missing/import-failed modules: "
+            f"{missing}; details={details}"
         )
 
     pip_freeze = _run(
