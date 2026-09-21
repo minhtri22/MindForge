@@ -24,6 +24,10 @@ $LlamaSource = Join-Path $ToolRoot "llama.cpp"
 $BuildManifest = Join-Path $ToolRoot "build_manifest.json"
 $HarnessJson = Join-Path $WorkRoot "m5-f16-result.json"
 $ConverterProbeJson = Join-Path $ToolRoot "converter_probe.json"
+$PersistentCacheRoot = Join-Path $RepoRoot ".local-cache\m5-f16-hf"
+$PersistentHfCache = Join-Path $PersistentCacheRoot "hf-cache"
+$PrefetchJson = Join-Path $WorkRoot "hf-prefetch.json"
+$PrefetchStderr = Join-Path $WorkRoot "hf-prefetch-stderr.log"
 
 $Report = [ordered]@{
     schema = "mindforge-local-execution-report-v1"
@@ -171,6 +175,7 @@ try {
 
     $AllowedDirtyPrefixes = @(
         ".local-exec/",
+        ".local-cache/",
         "local-reports/"
     )
     $UnexpectedDirty = @()
@@ -238,16 +243,102 @@ try {
     $Report.host.python_launcher = $BasePython.command
     $Report.host.python_prefix = $BasePython.prefix
 
+    # Preserve any partial/complete HF cache from an interrupted prior local
+    # invocation before resetting ephemeral execution state. This is
+    # infrastructure-only and does not preserve run/adjudication outputs.
+    $OldEphemeralHfCache = Join-Path $RunsRoot ".hf-cache"
+    if (Test-Path $OldEphemeralHfCache) {
+        $OldCacheItem = Get-Item -Force $OldEphemeralHfCache
+        $IsJunctionOrLink = [bool]($OldCacheItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint)
+        if ($IsJunctionOrLink) {
+            # A prior patched invocation already bound this path to the
+            # persistent cache. Remove only the link before deleting WorkRoot.
+            Remove-Item -Force $OldEphemeralHfCache
+        } else {
+            # Migrate partial bytes from pre-patch interrupted runs so the
+            # exact pinned prefetch can resume instead of starting over.
+            New-Item -ItemType Directory -Force -Path $PersistentHfCache | Out-Null
+            & robocopy.exe $OldEphemeralHfCache $PersistentHfCache /E /R:2 /W:2 /NFL /NDL /NJH /NJS /NP | Out-Null
+            $RoboCode = $LASTEXITCODE
+            if ($RoboCode -gt 7) {
+                throw "Failed to preserve prior HF cache; robocopy exit code $RoboCode"
+            }
+        }
+    }
+
     if (Test-Path $WorkRoot) {
         Remove-Item -Recurse -Force $WorkRoot
     }
-    New-Item -ItemType Directory -Force -Path $ToolRoot, $RunsRoot | Out-Null
+    New-Item -ItemType Directory -Force -Path $ToolRoot, $RunsRoot, $PersistentHfCache | Out-Null
 
     $CreatePipelineVenvArgs = @($BasePython.prefix) + @("-m","venv",$PipelineVenv)
     & $BasePython.command @CreatePipelineVenvArgs
     if ($LASTEXITCODE -ne 0) { throw "Failed to create pipeline venv" }
     $PipelinePython = Join-Path $PipelineVenv "Scripts\python.exe"
     Invoke-Checked -Stage "install_pipeline_dependencies" -FilePath $PipelinePython -Arguments @("-m","pip","install","-r","requirements-pipeline-m5.txt")
+
+    # Complete the exact pinned HF snapshot in a persistent cache before the
+    # scientific harness. Retries are finite infrastructure retries only.
+    $PrefetchArgs = @(
+        "scripts/prefetch_m5_f16_hf.py",
+        "-c","docs/model-training-pipeline/examples/end_to_end_small.yaml",
+        "--workspace",".",
+        "--cache-dir",$PersistentHfCache,
+        "--attempts","3",
+        "--json"
+    )
+    $QuotedPrefetchArgs = @()
+    foreach ($Arg in $PrefetchArgs) {
+        $Text = [string]$Arg
+        if ($Text -match '[\s"]') {
+            $QuotedPrefetchArgs += ('"' + ($Text -replace '"', '\\"') + '"')
+        } else {
+            $QuotedPrefetchArgs += $Text
+        }
+    }
+    $PrefetchProcess = Start-Process `
+        -FilePath $PipelinePython `
+        -ArgumentList $QuotedPrefetchArgs `
+        -WorkingDirectory $RepoRoot `
+        -NoNewWindow `
+        -Wait `
+        -PassThru `
+        -RedirectStandardOutput $PrefetchJson `
+        -RedirectStandardError $PrefetchStderr
+    $PrefetchExit = [int]$PrefetchProcess.ExitCode
+    $Report.artifacts.hf_prefetch = [ordered]@{
+        path = $PrefetchJson
+        sha256 = Get-Sha256 $PrefetchJson
+        stderr_path = $PrefetchStderr
+        stderr_sha256 = Get-Sha256 $PrefetchStderr
+    }
+    if ($PrefetchExit -ne 0) {
+        $Tail = if (Test-Path $PrefetchStderr) { ((Get-Content $PrefetchStderr -Tail 80) -join [Environment]::NewLine) } else { "" }
+        Add-Stage -Name "hf_pinned_snapshot_prefetch" -Status "FAIL" -ExitCode $PrefetchExit -Detail $Tail
+        throw "Pinned HF snapshot prefetch failed with exit code $PrefetchExit"
+    }
+    $PrefetchResult = Get-Content $PrefetchJson -Raw | ConvertFrom-Json
+    if ($PrefetchResult.status -ne "PASS" -or $PrefetchResult.snapshot_path_tail_matches_revision -ne $true) {
+        throw "Pinned HF snapshot prefetch did not prove exact revision identity"
+    }
+    $Report.provenance.hf_prefetch = [ordered]@{
+        model_id = $PrefetchResult.model_id
+        revision = $PrefetchResult.revision
+        snapshot_path_tail = $PrefetchResult.snapshot_path_tail
+        snapshot_manifest_hash = $PrefetchResult.snapshot_manifest_hash
+        file_count = $PrefetchResult.file_count
+        attempts = $PrefetchResult.attempts
+    }
+    Add-Stage -Name "hf_pinned_snapshot_prefetch" -Status "PASS" -ExitCode 0 -Detail $PrefetchResult.snapshot_manifest_hash
+
+    # M2 is intentionally unchanged and still addresses runs_root/.hf-cache.
+    # A directory junction maps that exact path onto the persistent cache.
+    $RunsHfCache = Join-Path $RunsRoot ".hf-cache"
+    if (Test-Path $RunsHfCache) {
+        Remove-Item -Recurse -Force $RunsHfCache
+    }
+    New-Item -ItemType Junction -Path $RunsHfCache -Target $PersistentHfCache | Out-Null
+    Add-Stage -Name "hf_cache_binding" -Status "PASS" -ExitCode 0 -Detail $PersistentHfCache
 
     $TestFiles = @(
         "tests/test_model_pipeline_m0.py",
@@ -329,6 +420,7 @@ try {
     Add-Stage -Name "llama_build_manifest" -Status "PASS"
 
     $env:HF_HUB_DISABLE_TELEMETRY = "1"
+    $env:HF_HUB_OFFLINE = "1"
     $env:TOKENIZERS_PARALLELISM = "false"
     $env:OMP_NUM_THREADS = "1"
     $env:MKL_NUM_THREADS = "1"
