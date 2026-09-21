@@ -1,6 +1,6 @@
 # MK-1 Implementation Lock Manifest V2
 
-Status: **PENDING INDEPENDENT STATIC REVIEW / ZERO-FRESH V0.2 NOT AUTHORIZED YET**
+Status: **PASS / IMPLEMENTATION V2 HASH LOCKED / ZERO-FRESH V0.2 AUTHORIZED**
 
 Date: **2026-09-21**
 
@@ -10,7 +10,7 @@ Implementation source HEAD before this manifest:
 
 Formal candidate state:
 
-`MK1_IMPLEMENTATION_V2_HASH_BOUND_PENDING_REVIEW`
+`IMPLEMENTATION_LOCK_MANIFEST_V2_PASS`
 
 ## 1. Scientific boundary
 
@@ -118,3 +118,25 @@ Then the only authorized execution is:
 `CANONICAL_ZERO_FRESH_PREFLIGHT_V0_2`
 
 The scientific materialization trigger remains forbidden until a separate v0.2 zero-fresh PASS result is committed.
+
+
+## 8. Independent static review closure
+
+Independent re-fetch/re-hash review was completed after manifest creation and before any v0.2 trigger existed.
+
+Results:
+
+- all complete implementation bindings in section 3: Git blob exact match and SHA-256 exact match;
+- all frozen runtime dependencies in section 4: Git blob exact match and SHA-256 exact match;
+- Amendment 003, observable field registry, and implementation-lock specification: exact match;
+- candidate manifest commit changed only `IMPLEMENTATION_LOCK_MANIFEST_V2.md`;
+- `ZERO_FRESH_TRIGGER_v0.2.md` did not exist during review;
+- no scientific data file exists in the repository.
+
+Formal verdict:
+
+`IMPLEMENTATION_LOCK_MANIFEST_V2_PASS`
+
+The only authorized next action is canonical zero-fresh preflight v0.2.
+
+Scientific materialization remains blocked until a separate v0.2 PASS result is committed.
