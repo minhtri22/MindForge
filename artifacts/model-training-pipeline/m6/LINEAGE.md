@@ -300,3 +300,23 @@ Next valid action: open a bounded parent-artifact materialization/provenance
 program for M6. It must produce or recover a byte-identical Q4 parent without
 reopening or re-adjudicating Q4 science; only after exact SHA/size admission may
 a separate create/chat/owned-cleanup scientific runtime authorization be used.
+
+
+## 2026-09-22 — Bounded parent-artifact materialization program opened
+
+A separate M6 sub-program now owns recovery/materialization of the missing
+frozen Q4 parent bytes.
+
+It may recover an existing copy or, only after recovery is exhausted,
+deterministically reconstruct the artifact under exact frozen identities.
+
+This does not reopen Q4 science:
+
+```text
+Q4_K_M = PASS / CLOSED
+Q4 scientific rerun = NOT AUTHORIZED
+M6 create/chat = NOT AUTHORIZED
+```
+
+Admission is byte-identity only. A match or mismatch does not alter the closed
+Q4 scientific verdict.

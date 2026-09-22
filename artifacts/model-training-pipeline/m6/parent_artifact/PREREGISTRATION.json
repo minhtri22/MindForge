@@ -1,0 +1,99 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-materialization-preregistration-v1",
+  "status": "OPEN_SPECIFICATION_ONLY",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin": {
+    "m6_venue_evidence_commit": "a78951e4a392aed099c255ad82b3ed6a226de0b6",
+    "windows_venue_evidence_git_blob_sha1": "af35e05d93220228b6bc6423f502a49681b36122",
+    "venue_classification": "INVALID_PROVENANCE_PARENT_ARTIFACT_UNAVAILABLE",
+    "scientific_fail": false,
+    "m6_scientific_execution_executed": false
+  },
+  "sole_objective": "Recover or materialize one byte-identical copy of the already-qualified Q4_K_M parent artifact for M6 packaging, without reopening, rerunning, or re-adjudicating Q4 science.",
+  "frozen_target_identity": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "target_key": "q4_k_m",
+    "quantizer_type": "Q4_K_M",
+    "formal_q4_result_hash": "da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef",
+    "formal_q4_evidence_git_blob_sha1": "5741a532120c87443faa9223a70bddb7a7699802"
+  },
+  "source_hierarchy": [
+    {
+      "priority": 1,
+      "class": "RECOVER_EXISTING_BYTES",
+      "description": "Recover an already-existing copy from user-owned/local storage, an explicitly supplied file, or another provenance-safe store.",
+      "permitted": true,
+      "recomputation": false,
+      "required_provenance": [
+        "source location or source reference",
+        "byte size",
+        "SHA256 before admission"
+      ]
+    },
+    {
+      "priority": 2,
+      "class": "DETERMINISTIC_ARTIFACT_RECONSTRUCTION",
+      "description": "If no existing copy can be recovered, reconstruct only the Q4 artifact bytes from exact frozen parent/runtime/quantizer identities. This is artifact reconstruction, not a scientific rerun.",
+      "permitted_only_after_recovery_exhausted": true,
+      "scientific_evaluation_forbidden": true,
+      "outcome_adjudication_forbidden": true,
+      "acceptance_criterion": "exact pre-existing byte identity only"
+    }
+  ],
+  "reconstruction_identity": {
+    "scientific_implementation_commit": "97d7dad329aa0196ead9005e631eebbeb8aa2163",
+    "q4_implementation_lock_commit": "87bc09f479c5fd6ba3e3ec3725d859ed5ad9feb1",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "source_f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "source_f16_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c",
+    "quantizer_type": "Q4_K_M",
+    "forbidden_to_change": true
+  },
+  "forbidden_operations": [
+    "run Q4 task fixtures for scientific evaluation",
+    "run llama-cli to re-adjudicate Q4 preservation",
+    "emit a new M5Q Q4 scientific result",
+    "modify Q4 gates, thresholds, fixtures, model/revision, converter, llama.cpp commit, or quantizer type",
+    "treat a reconstruction mismatch as a new Q4 scientific FAIL",
+    "treat a reconstruction match as a new Q4 scientific PASS",
+    "use M6 runtime outcome to alter parent reconstruction",
+    "ollama create",
+    "ollama chat/run",
+    "M6 scientific qualification",
+    "M7",
+    "bulk training"
+  ],
+  "materialization_outcomes": [
+    "ADMITTED_EXISTING_BYTES",
+    "ADMITTED_DETERMINISTIC_RECONSTRUCTION",
+    "NOT_FOUND_RECOVERY_EXHAUSTED",
+    "RECONSTRUCTION_IDENTITY_MISMATCH",
+    "INVALID_PROVENANCE",
+    "INVALID_INFRASTRUCTURE"
+  ],
+  "adjudication_rules": {
+    "admitted_requires_exact_size": true,
+    "admitted_requires_exact_sha256": true,
+    "admitted_requires_exact_aggregate_manifest_when_reconstructed": true,
+    "identity_match_changes_q4_scientific_status": false,
+    "identity_mismatch_changes_q4_scientific_status": false,
+    "q4_remains": "PASS_CLOSED",
+    "q4_rerun_authorized": false,
+    "m6_scientific_execution_authorized": false
+  },
+  "persistence_policy": {
+    "admitted_bytes_must_be_persisted_for_m6_use": true,
+    "preferred_store": "GitHub Actions artifact or other explicit provenance-safe binary store",
+    "store_must_record_sha256_and_size": true,
+    "evidence_json_required": true,
+    "repository_git_blob_required": false
+  },
+  "next_gate": "BOUNDED_IMPLEMENTATION_AND_ZERO_SCIENCE_MATERIALIZATION_TOOLING"
+}

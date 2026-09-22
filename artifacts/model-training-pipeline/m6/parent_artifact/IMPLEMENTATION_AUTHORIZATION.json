@@ -1,0 +1,70 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-materialization-authorization-v1",
+  "status": "AUTHORIZED_BOUNDED_MATERIALIZATION_IMPLEMENTATION",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_commit": "a78951e4a392aed099c255ad82b3ed6a226de0b6",
+  "preregistration_path": "artifacts/model-training-pipeline/m6/parent_artifact/PREREGISTRATION.json",
+  "authorized_now": [
+    "implement provenance-safe source discovery/admission logic",
+    "implement exact size/SHA256/manifest verification",
+    "implement deterministic reconstruction tooling bound to the frozen Q4 implementation identities",
+    "add zero-science tests proving no Q4 evaluation/adjudication path exists",
+    "add a recovery-first materialization workflow",
+    "persist admitted binary and evidence only after exact identity verification"
+  ],
+  "recovery_scope": {
+    "current_repository_scan_authorized": true,
+    "current_actions_artifact_metadata_scan_authorized": true,
+    "user_supplied_or_user_owned_existing_file_admission_authorized": true,
+    "connected_storage_search_requires_separate_explicit_use": true
+  },
+  "deterministic_reconstruction_scope": {
+    "authorized_after_recovery_exhausted": true,
+    "exact_quantizer_execution_for_artifact_bytes": true,
+    "q4_scientific_rerun": false,
+    "q4_fixture_evaluation": false,
+    "llama_cli_evaluation": false,
+    "q4_result_json_generation": false,
+    "scientific_adjudication": false,
+    "acceptance_only_against_preexisting_identity": true
+  },
+  "hard_boundaries": {
+    "q4_status_must_remain": "PASS_CLOSED",
+    "q4_rerun_authorized": false,
+    "m5q_reopened": false,
+    "ollama_create_authorized": false,
+    "ollama_chat_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "m6_pass_claim_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "required_tests_before_materialization_execution": [
+    "recovery source cannot be admitted without exact size and SHA256",
+    "reconstruction command is exactly Q4_K_M against the frozen F16 parent",
+    "no llama-cli scientific evaluation command is present",
+    "no fixture runner is invoked",
+    "no M5Q result/adjudication artifact is emitted",
+    "mismatch classification is reconstruction/provenance only",
+    "Q4 terminal status remains PASS_CLOSED",
+    "Ollama create/chat remains forbidden",
+    "admitted binary persistence records exact SHA256 and size"
+  ],
+  "allowed_surfaces": [
+    "artifacts/model-training-pipeline/m6/parent_artifact/**",
+    "tools/m6_parent_artifact_materialize.py",
+    "tests/test_m6_parent_artifact_materialization.py",
+    ".github/workflows/model-pipeline-m6-parent-artifact.yml"
+  ],
+  "protected_surfaces": [
+    "pipeline/m5.py",
+    "pipeline/m5q.py",
+    "pipeline/m5q_q4.py",
+    "tools/m5q_q4_qualification.py",
+    "tests/fixtures/eval_v1/**",
+    "artifacts/model-training-pipeline/m5_quantization/**",
+    ".github/workflows/model-pipeline-m5q-q4-execute.yml"
+  ],
+  "next_valid_action": "IMPLEMENT_RECOVERY_FIRST_MATERIALIZATION_TOOLING_AND_ZERO_SCIENCE_TESTS"
+}
