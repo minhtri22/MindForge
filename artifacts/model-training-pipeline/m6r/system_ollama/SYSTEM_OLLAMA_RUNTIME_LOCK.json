@@ -1,0 +1,41 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-system-ollama-runtime-lock-v1",
+  "status": "LOCKED_FOR_ONE_LOCAL_EXECUTION",
+  "program": "M6R_SYSTEM_OLLAMA_REPLICATION",
+  "implementation_commit": "f9ffccc2a51ffea307d3acba76cd323aec505d65",
+  "execution_authorization_git_blob_sha1": "bae61e84ba1beaa03c1e77d57f342ee97a2ec8d2",
+  "exact_blobs": {
+    "preregistration_git_blob_sha1": "e06a290937dd1fd36fd76dbc466e99a777385d83",
+    "implementation_authorization_git_blob_sha1": "1b5a3d18f01420f8c1be81d485e0662fe36d0a46",
+    "script_git_blob_sha1": "e98d5aae30ff7f36f925f6cbd38ca298940e810a",
+    "tests_git_blob_sha1": "136474cc53cf9a3d03e1d7ddab151d487403616c",
+    "workflow_git_blob_sha1": "56009d74bcc0dacd2848db53418ef0455a8e8ce2"
+  },
+  "static_qa": {
+    "run_id": 35737544519,
+    "job_id": 106778562602,
+    "contract_tests": "17/17_PASS",
+    "powershell_parse": "PASS",
+    "no_execution_proof": "PASS"
+  },
+  "frozen_runtime": {
+    "mode": "installed_system_ollama",
+    "target_version": "0.34.2",
+    "host": "127.0.0.1:11434",
+    "installer_sha256": "8c9eb7ba71f3c6a62df4c7d204cc4739d90c335e1cbeb07c99fd471544066a8b",
+    "signer": "Ollama Inc."
+  },
+  "frozen_q4": {
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "one_attempt_rule": {
+    "attempts_authorized": 1,
+    "durable_state_path": ".local/M6R-SYSTEM-OLLAMA/attempt-state.json",
+    "retry_to_seek_pass": false,
+    "marker_reset_authorized": false
+  },
+  "report_path": ".local/M6R-SYSTEM-OLLAMA/report/M6R_SYSTEM_OLLAMA_REPORT.json",
+  "next_after_report": "RETURN_REPORT_FOR_FORMAL_M6R_ADJUDICATION; DO_NOT_AUTO_OPEN_M7"
+}

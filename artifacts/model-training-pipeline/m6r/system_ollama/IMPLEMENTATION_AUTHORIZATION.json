@@ -1,0 +1,38 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-system-ollama-implementation-authorization-v1",
+  "status": "IMPLEMENTATION_LOCKED_STATIC_QA_PASS",
+  "program": "M6R_SYSTEM_OLLAMA_REPLICATION",
+  "implementation_commit": "f9ffccc2a51ffea307d3acba76cd323aec505d65",
+  "exact_blobs": {
+    "preregistration_git_blob_sha1": "e06a290937dd1fd36fd76dbc466e99a777385d83",
+    "script_git_blob_sha1": "e98d5aae30ff7f36f925f6cbd38ca298940e810a",
+    "tests_git_blob_sha1": "136474cc53cf9a3d03e1d7ddab151d487403616c",
+    "workflow_git_blob_sha1": "56009d74bcc0dacd2848db53418ef0455a8e8ce2",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+  },
+  "static_qa": {
+    "run_id": 35737544519,
+    "job_id": 106778562602,
+    "conclusion": "success",
+    "contract_tests": "17/17_PASS",
+    "powershell_parse": "PASS",
+    "system_ollama_upgrade_executed": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "m6r_scientific_execution_executed": false
+  },
+  "frozen_upgrade": {
+    "target_version": "0.34.2",
+    "installer_sha256": "8c9eb7ba71f3c6a62df4c7d204cc4739d90c335e1cbeb07c99fd471544066a8b",
+    "signer": "Ollama Inc.",
+    "silent_args": [
+      "/VERYSILENT",
+      "/NORESTART",
+      "/SUPPRESSMSGBOXES"
+    ]
+  },
+  "science_changed_from_preregistration": false,
+  "local_execution_started": false
+}

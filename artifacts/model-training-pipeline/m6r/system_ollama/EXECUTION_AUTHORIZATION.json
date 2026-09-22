@@ -1,0 +1,102 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-system-ollama-execution-authorization-v1",
+  "status": "AUTHORIZED_ONE_M6R_SYSTEM_OLLAMA_EXECUTION",
+  "program": "M6R_SYSTEM_OLLAMA_REPLICATION",
+  "authorization_parent_commit": "f9ffccc2a51ffea307d3acba76cd323aec505d65",
+  "exact_binding": {
+    "implementation_commit": "f9ffccc2a51ffea307d3acba76cd323aec505d65",
+    "preregistration_git_blob_sha1": "e06a290937dd1fd36fd76dbc466e99a777385d83",
+    "implementation_authorization_git_blob_sha1": "1b5a3d18f01420f8c1be81d485e0662fe36d0a46",
+    "script_git_blob_sha1": "e98d5aae30ff7f36f925f6cbd38ca298940e810a",
+    "tests_git_blob_sha1": "136474cc53cf9a3d03e1d7ddab151d487403616c",
+    "workflow_git_blob_sha1": "56009d74bcc0dacd2848db53418ef0455a8e8ce2",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+  },
+  "static_qa": {
+    "run_id": 35737544519,
+    "job_id": 106778562602,
+    "conclusion": "success",
+    "contract_tests": "17/17_PASS",
+    "powershell_parse": "PASS",
+    "system_ollama_upgrade_executed": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "m6r_scientific_execution_executed": false
+  },
+  "system_runtime": {
+    "required_installed": true,
+    "previously_observed_version": "0.34.0",
+    "target_version": "0.34.2",
+    "host": "127.0.0.1:11434",
+    "existing_user_model_store": true,
+    "installer_url": "https://github.com/ollama/ollama/releases/download/v0.34.2/OllamaSetup.exe",
+    "installer_size_bytes": 1569993232,
+    "installer_sha256": "8c9eb7ba71f3c6a62df4c7d204cc4739d90c335e1cbeb07c99fd471544066a8b",
+    "signer_required": "Ollama Inc.",
+    "upgrade_if_older_authorized": true,
+    "fresh_install_if_missing_authorized": false,
+    "downgrade_authorized": false
+  },
+  "parent_q4": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "native_process_boundary": {
+    "direct_powershell_native_pipeline": false,
+    "start_process_redirected_io": true,
+    "explicit_exit_code": true
+  },
+  "one_attempt": {
+    "attempts_authorized": 1,
+    "durable_state_path": ".local/M6R-SYSTEM-OLLAMA/attempt-state.json",
+    "consumed_when": "atomic durable marker immediately before installed ollama create starts",
+    "upgrade_or_service_failure_before_consumption_consumes_attempt": false,
+    "retry_before_consumption_allowed_only_for_infrastructure_resolution": true,
+    "retry_after_consumption": false,
+    "marker_reset_or_deletion_authorized": false
+  },
+  "command_allowlist": [
+    "detect existing installed ollama.exe",
+    "read installed ollama version using redirected native process",
+    "if older than 0.34.2 download exact official v0.34.2 OllamaSetup.exe",
+    "verify installer SHA256 and Authenticode signer Ollama Inc.",
+    "run exact silent upgrade with /VERYSILENT /NORESTART /SUPPRESSMSGBOXES",
+    "reverify installed Ollama exact 0.34.2",
+    "use existing localhost:11434 service or start installed ollama serve if absent",
+    "GET /api/tags to snapshot user model names",
+    "copy exact Q4 into owned package directory",
+    "write exact frozen Modelfile",
+    "atomically persist one-attempt consumed marker",
+    "ollama create only owned pipeline-test-m6r namespace using redirected native process",
+    "POST frozen eval_v1 tasks to /api/chat",
+    "ollama rm only owned model using ownership verification and redirected native process",
+    "verify final model-name set equals initial set",
+    "freeze report and evidence manifest"
+  ],
+  "forbidden": [
+    "reopen or rewrite closed M6",
+    "fresh install Ollama if missing",
+    "downgrade a newer Ollama installation",
+    "ollama pull",
+    "delete or mutate unowned user models",
+    "change OLLAMA_MODELS to an isolated store",
+    "Q4 reconstruction or requantization",
+    "llama-cli inference",
+    "fixture/threshold/seed/inference-parameter modification",
+    "direct native ollama stdout/stderr pipeline capture in PowerShell",
+    "reset/delete consumed M6R attempt marker",
+    "retry after M6R attempt consumption",
+    "M7 execution",
+    "bulk training"
+  ],
+  "downstream": {
+    "m6_status": "FAIL_PACKAGE_CLOSED",
+    "m7_authorized": false,
+    "m7_auto_open": false,
+    "bulk_training_authorized": false
+  }
+}
