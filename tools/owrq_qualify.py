@@ -89,9 +89,9 @@ def parse_launch_evidence(text: str) -> Dict[str, Any]:
     lines = [line for line in text.splitlines() if "llama-server" in line or "--cache-type-" in line or "--flash-attn" in line]
     joined = "\n".join(lines)
     normalized = joined.replace('"', ' ').replace("'", " ")
-    v_f16 = bool(re.search(r"--cache-type-v(?:=|\\s+)f16(?:\\s|$)", normalized))
-    k_f16 = bool(re.search(r"--cache-type-k(?:=|\\s+)f16(?:\\s|$)", normalized))
-    q4_v = bool(re.search(r"--cache-type-v(?:=|\\s+)q4_0(?:\\s|$)", normalized))
+    v_f16 = bool(re.search(r"--cache-type-v(?:=|\s+)f16(?:\s|$)", normalized))
+    k_f16 = bool(re.search(r"--cache-type-k(?:=|\s+)f16(?:\s|$)", normalized))
+    q4_v = bool(re.search(r"--cache-type-v(?:=|\s+)q4_0(?:\s|$)", normalized))
     if "--flash-attn off" in normalized or "--flash-attn=off" in normalized:
         flash_mode = "off"
     elif "--flash-attn on" in normalized or "--flash-attn=on" in normalized:

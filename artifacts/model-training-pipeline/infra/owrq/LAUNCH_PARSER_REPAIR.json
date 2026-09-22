@@ -1,0 +1,11 @@
+{
+  "schema": "mindforge-owrq-launch-parser-repair-v1",
+  "status": "STATIC_INFRA_REPAIR",
+  "failed_run_id": 35748027319,
+  "failed_job_id": 106814564851,
+  "failure": "Launch parser used raw-regex tokens \\\\s and therefore matched a literal backslash-s rather than whitespace.",
+  "repair": "Use regex whitespace token \\s for both space-separated and = option forms; add quoted/prefixed launch-line regression test.",
+  "scientific_contract_changed": false,
+  "local_qualification_executed": false,
+  "m6r2_execution_authorized": false
+}

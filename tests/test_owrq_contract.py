@@ -75,6 +75,15 @@ def test_repaired_launch_is_detected():
     assert r["known_conflict_error_observed"] is False
 
 
+
+def test_launch_parser_supports_equals_form_and_log_prefixes():
+    text = 'time=2026-09-22T14:09:54Z level=INFO source=runner.go msg="starting llama server" cmd="llama-server --cache-type-k=f16 --cache-type-v=f16 --flash-attn=off"'
+    r = qualifier.parse_launch_evidence(text)
+    assert r["cache_type_k_f16_observed"] is True
+    assert r["cache_type_v_f16_observed"] is True
+    assert r["cache_type_v_q4_0_observed"] is False
+    assert r["flash_attention_mode"] == "off"
+
 def test_child_environment_preserves_flash_attention_value(monkeypatch):
     monkeypatch.setenv("OLLAMA_FLASH_ATTENTION", "false")
     env = adapter.child_environment("127.0.0.1:11468", "f16")
