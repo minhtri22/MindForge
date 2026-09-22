@@ -1,0 +1,111 @@
+{
+  "schema": "mindforge-model-pipeline-m6-implementation-lock-v1",
+  "status": "LOCKED",
+  "program": "M6",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_review_commit": "7bcacfa8fb291a9a55e2acf19077c8e61f33c329",
+  "implementation_authorization_commit": "1387a4189330715e780e5d8079c98995f76f1bcc",
+  "implementation_commit": "85165660e2e820b016403dd95ffc91945766ff9b",
+  "implementation_test_evidence": {
+    "run_id": 35672110940,
+    "job_id": 106570655074,
+    "conclusion": "success",
+    "tests_passed": 13,
+    "tests_failed": 0,
+    "ollama_executable_invoked": false,
+    "ollama_runtime_execution_executed": false,
+    "m6_scientific_execution_executed": false,
+    "m7_authorized": false
+  },
+  "ollama_release_lock": {
+    "version": "0.34.2",
+    "tag": "v0.34.2",
+    "release_id": 389486962,
+    "published_at": "2026-09-15T21:21:07Z",
+    "checksums_asset_digest": "sha256:8067b9126966bdc6a69edb2525907d5b0d6dcefd6c9a60e3656234cf7f76d3e7",
+    "windows_amd64_digest": "sha256:8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b",
+    "linux_amd64_digest": "sha256:e155b83589986d2c581fdbf1381ea3ebdb16549883679cd5a0627f7cdc05b12b",
+    "executable_invocation_authorized": false,
+    "download_authorized": false,
+    "install_update_authorized": false
+  },
+  "frozen_parent": {
+    "target_key": "q4_k_m",
+    "quantizer_type": "Q4_K_M",
+    "q4_result_hash": "da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef",
+    "q4_artifact_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "q4_artifact_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "q4_artifact_size": 397807456
+  },
+  "frozen_inference": {
+    "fixture_set": "tests/fixtures/eval_v1",
+    "max_new_tokens": 128,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 0,
+    "seed": 42,
+    "context_length": 2048,
+    "stream": false,
+    "comparator_task_vector": [
+      false,
+      false
+    ],
+    "comparator_accuracy": 0,
+    "exact_text_equality_required": false
+  },
+  "modelfile_contract": {
+    "source": "./model-q4_k_m.gguf",
+    "parameters": [
+      "num_ctx",
+      "num_predict",
+      "temperature",
+      "top_p",
+      "top_k",
+      "seed"
+    ],
+    "deterministic": true,
+    "stream_is_request_layer": true,
+    "independent_defaults_forbidden": true
+  },
+  "namespace_cleanup_contract": {
+    "pattern": "pipeline-test-<run_id>-<artifact_hash_prefix>",
+    "ownership_marker_required": true,
+    "cleanup_owned_only": true,
+    "overwrite_unowned_forbidden": true
+  },
+  "git_blobs": {
+    "docs/model-training-pipeline/runtime/ollama.lock.json": "773131fc8092a29bb1210dbabab9839e4f74ef55",
+    "pipeline/m6.py": "979a6cb3c307d8e1576ee2b9d524e5cf92ede787",
+    "tools/m6_ollama_preflight.py": "f0fbdeacd5b5afbd359ad76184263655d0a9ab57",
+    "tests/test_model_pipeline_m6.py": "87c4cae9106fb2d09b4caa0e254eb1b92156a045",
+    ".github/workflows/model-pipeline-m6-preflight.yml": "146c33af5e514bb0d3e7b435c987c1a0df966e05",
+    "artifacts/model-training-pipeline/m6/PREREGISTRATION.json": "83b068b7cdc1849ceae56f6a0ef199c98182c749",
+    "artifacts/model-training-pipeline/m6/IMPLEMENTATION_AUTHORIZATION.json": "26d02c4bc40d63f54b73b976c13d1c7e3e9f59ff",
+    "artifacts/model-training-pipeline/m6/IMPLEMENTATION_AUTHORIZATION.md": "2703f982dc22ebbb68ca103928be05d98140e274",
+    "artifacts/model-training-pipeline/m5_quantization/POST_QUANTIZATION_GOVERNANCE_REVIEW.json": "d42633d422eb46bd6e94958e1210ba7f8c211356",
+    "artifacts/model-training-pipeline/m5_quantization/Q4_K_M_FORMAL_REPLICATION_EVIDENCE.json": "5741a532120c87443faa9223a70bddb7a7699802",
+    "docs/model-training-pipeline/07_EXPORT_LLAMA_OLLAMA.md": "0aef59b6accb567231c21d41f7b043d5006ca502",
+    "docs/model-training-pipeline/11_ACCEPTANCE_CRITERIA.md": "eb0ed9c20acb97eebbbe30d9fa0f7b1a473fb38a",
+    "docs/model-training-pipeline/12_IMPLEMENTATION_PLAN.md": "46259d9be814a533ba8388fe18a19fe380ce2027",
+    "docs/model-training-pipeline/13_SECURITY_LICENSE_REPRODUCIBILITY.md": "acea4958f0c5b913060b879f5b8667ac0c55549e",
+    "docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md": "ad8d1a9a63a1844f73b2e248c58d66f1769252a9",
+    "docs/model-training-pipeline/examples/end_to_end_small.yaml": "4fff2473b8f64f7db8f037d0fa40087c7efda4ca",
+    "tests/fixtures/eval_v1/manifest.json": "450d83d38130765fe4a74fb18bab90177328218f"
+  },
+  "hard_boundaries": {
+    "ollama_executable_invocation_authorized": false,
+    "ollama_version_probe_authorized": false,
+    "ollama_create_authorized": false,
+    "ollama_run_or_chat_authorized": false,
+    "ollama_pull_authorized": false,
+    "ollama_remove_authorized": false,
+    "ollama_serve_authorized": false,
+    "ollama_install_update_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "m6_pass_claim_authorized": false,
+    "m7_authorized": false,
+    "m7_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "next_gate": "LOCK_PRESENT_ZERO_SCIENCE_ZERO_RUNTIME_PREFLIGHT"
+}

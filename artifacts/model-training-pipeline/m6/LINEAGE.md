@@ -64,3 +64,57 @@ Next valid action:
 ```text
 implement M6 specification/code + zero-runtime tests
 ```
+
+
+## 2026-09-22 — M6 zero-runtime implementation tests PASS; exact implementation locked
+
+Authoritative zero-runtime test run:
+
+```text
+run: 35672110940
+job: 106570655074
+conclusion: success
+tests: 13/13 PASS
+```
+
+The run proved:
+
+```text
+ollama_executable_invoked=false
+ollama_runtime_execution_executed=false
+m6_scientific_execution_executed=false
+m7_authorized=false
+```
+
+M6 now has a deterministic zero-runtime implementation for:
+
+```text
+exact Ollama release lock
+frozen Q4 source identity verification
+deterministic Modelfile generation
+ephemeral namespace construction
+ownership-gated cleanup planning
+reasoning/think request mapping
+frozen llama.cpp-parent parity comparison
+hard downstream boundaries
+```
+
+The Ollama release lock is pinned to official release `v0.34.2` and retains
+authoritative asset digests for Windows amd64 and Linux amd64. No Ollama binary
+was downloaded, installed, probed or executed.
+
+The implementation and its transitive governance/runtime-contract dependencies
+are frozen in `IMPLEMENTATION_LOCK.json`.
+
+Current boundary:
+
+```text
+M6 implementation: LOCKED
+zero-runtime tests: PASS
+Ollama runtime execution: NOT AUTHORIZED
+M6 scientific execution: NOT AUTHORIZED
+M7: CLOSED
+bulk training: CLOSED
+```
+
+Next valid gate: lock-present zero-science / zero-runtime preflight.
