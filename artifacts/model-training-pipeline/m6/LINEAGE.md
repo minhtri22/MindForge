@@ -938,3 +938,46 @@ Static zero-science QA for repaired package:
 One scientific attempt remains authorized because the admitted failure occurred
 strictly before the durable consumed marker and before ollama create.
 Retry-after-consumption remains forbidden. M7 and bulk training remain closed.
+
+
+## 2026-09-22 — Second M6 pre-create infrastructure failure admitted; PowerShell/curl isolation repair re-authorized
+
+Invocation from exact HEAD ed4bb6977a1aa7590d19a64208e5f6621d1b8d78
+returned INVALID_INFRASTRUCTURE before scientific attempt consumption.
+
+Observed report:
+- source SHA256: 1c6f4deb7766c449a865d48050de82da178f5a716e9a3c149f271d8dc0f6d215
+- attempt_consumed=false
+- scientific_runtime_started=false
+- parent Q4 exact_identity=true
+- failure line: 242
+- error type: System.Management.Automation.RemoteException
+- error text was curl progress-meter stderr, not an Ollama scientific/runtime outcome
+- no owned model was created
+- M7 and bulk training remained closed
+
+Root cause: under Windows PowerShell 5.1 with ErrorActionPreference=Stop,
+curl.exe stderr progress output was promoted into the PowerShell error stream.
+
+Bounded infrastructure-only repair:
+ae6bdde0e392ba70cabdf7846a190b9252c68d98
+
+New exact blobs:
+- script: a757dd619a49fcea7f3a085956360032699cac89
+- tests: 0249a1fb5f611f7feed356b914b2a2875aaadf0f
+
+curl.exe now runs via Start-Process with stdout/stderr redirected to owned log
+files and explicit ExitCode adjudication. Curl retry policy, exact asset URL,
+version and SHA256 remain unchanged. All Q4, Modelfile, fixture, seed,
+inference, parity, reasoning, cleanup, and attempt-consumption contracts remain unchanged.
+
+Static zero-science QA:
+- run 35726512461
+- job 106741371823
+- 14/14 contract tests PASS
+- PowerShell parse PASS
+- local runtime execution in CI=false
+
+The second failed invocation consumed zero scientific attempts.
+Exactly one scientific attempt remains authorized. Retry after consumption,
+marker reset/deletion, M7, and bulk training remain forbidden.

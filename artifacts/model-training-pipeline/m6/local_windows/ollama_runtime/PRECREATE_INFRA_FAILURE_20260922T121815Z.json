@@ -1,0 +1,62 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-ollama-precreate-infrastructure-failure-v2",
+  "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
+  "verdict": "ADMITTED_NONCONSUMING_INFRASTRUCTURE_FAILURE",
+  "source_report": {
+    "filename": "M6_LOCAL_OLLAMA_RUNTIME_REPORT(1).json",
+    "sha256": "1c6f4deb7766c449a865d48050de82da178f5a716e9a3c149f271d8dc0f6d215",
+    "size_bytes": 4302,
+    "started_at": "2026-09-22T12:18:10.5748659Z",
+    "completed_at": "2026-09-22T12:18:15.3087911Z"
+  },
+  "execution_identity": {
+    "repo_head": "ed4bb6977a1aa7590d19a64208e5f6621d1b8d78",
+    "script_git_blob_sha1": "fbfdddeb34b0e4132a7cdf3d75a02e63e1a3f027",
+    "tracked_worktree_clean": true
+  },
+  "observed": {
+    "overall_status": "FAIL",
+    "classification": "INVALID_INFRASTRUCTURE",
+    "attempt_consumed": false,
+    "scientific_runtime_started": false,
+    "parent_q4_exact_identity": true,
+    "parent_q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "installed_ollama_modified": false,
+    "ollama_pull_executed": false,
+    "q4_requantization_executed": false,
+    "llama_cli_inference_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "failure": {
+    "stage": "pre-create pinned Ollama asset download wrapper",
+    "script_line_observed": 242,
+    "error_type": "System.Management.Automation.RemoteException",
+    "error_message": "% Total % Received % Xferd Average Speed Time Time Time Current",
+    "mechanism": "Windows PowerShell 5.1 promoted curl.exe stderr progress output into the PowerShell error stream under ErrorActionPreference=Stop."
+  },
+  "adjudication": {
+    "scientific_attempt_consumed": false,
+    "scientific_result": null,
+    "remaining_authorized_scientific_attempts": 1,
+    "rerun_allowed_only_after_infrastructure_resolution": true
+  },
+  "bounded_repair": {
+    "commit": "ae6bdde0e392ba70cabdf7846a190b9252c68d98",
+    "scope": "pre-create curl process I/O isolation only",
+    "script_git_blob_sha1": "a757dd619a49fcea7f3a085956360032699cac89",
+    "tests_git_blob_sha1": "0249a1fb5f611f7feed356b914b2a2875aaadf0f",
+    "mechanism": "Start-Process with stdout/stderr redirected to files; exit code adjudicated explicitly",
+    "curl_retry_unchanged": true,
+    "pinned_asset_sha256_unchanged": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b",
+    "scientific_contract_changed": false,
+    "static_qa": {
+      "run_id": 35726512461,
+      "job_id": 106741371823,
+      "conclusion": "success",
+      "contract_tests": "14/14_PASS",
+      "powershell_parse": "PASS",
+      "no_execution_proof": "PASS"
+    }
+  }
+}

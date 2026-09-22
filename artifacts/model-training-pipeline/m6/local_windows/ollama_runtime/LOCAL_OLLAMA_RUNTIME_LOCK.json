@@ -1,13 +1,13 @@
 {
-  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v3",
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v4",
   "status": "LOCKED_FOR_LOCAL_EXECUTION",
   "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
-  "implementation_commit": "7ec6dc4d0663a933eff139c200298a1d8c81ee83",
-  "supersedes_lock_commit": "69671729aeb7832c1a1072ccf0979e4c0f20bf4b",
-  "execution_authorization_git_blob_sha1": "7a35c5bbb0e17e0d6037fb63e0a471f9036bff4a",
+  "implementation_commit": "ae6bdde0e392ba70cabdf7846a190b9252c68d98",
+  "supersedes_lock_commit": "ed4bb6977a1aa7590d19a64208e5f6621d1b8d78",
+  "execution_authorization_git_blob_sha1": "e255453a7ef458cd3598ebe633fd9317d0a9b6fe",
   "exact_blobs": {
-    "script_git_blob_sha1": "fbfdddeb34b0e4132a7cdf3d75a02e63e1a3f027",
-    "tests_git_blob_sha1": "3812b30af71b4f7aa24b4ff5b501800cb7cd27eb",
+    "script_git_blob_sha1": "a757dd619a49fcea7f3a085956360032699cac89",
+    "tests_git_blob_sha1": "0249a1fb5f611f7feed356b914b2a2875aaadf0f",
     "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
     "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
     "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
@@ -17,22 +17,31 @@
     "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
     "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
     "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
-    "precreate_infrastructure_failure_evidence_git_blob_sha1": "48eb2b646ca7963374d569691e6e43742a0ec725"
+    "second_precreate_infrastructure_failure_evidence_git_blob_sha1": "e5483cbc8029576ac879387772180533180a8671"
   },
   "zero_science_static_qa": {
-    "run_id": 35724632583,
-    "job_id": 106735260580,
+    "run_id": 35726512461,
+    "job_id": 106741371823,
     "conclusion": "success",
-    "contract_tests": "13/13_PASS",
+    "contract_tests": "14/14_PASS",
     "powershell_parse": "PASS",
     "no_execution_proof": "PASS"
   },
-  "admitted_prior_local_invocation": {
-    "classification": "INVALID_INFRASTRUCTURE",
-    "source_report_sha256": "df8aaca94f08f4ac48c4480f52910a57bf7b24513ee3470d17e85e0c0869f6e0",
-    "attempt_consumed": false,
-    "scientific_runtime_started": false
-  },
+  "admitted_prior_local_invocations": [
+    {
+      "repo_head": "69671729aeb7832c1a1072ccf0979e4c0f20bf4b",
+      "classification": "INVALID_INFRASTRUCTURE",
+      "attempt_consumed": false,
+      "scientific_runtime_started": false
+    },
+    {
+      "repo_head": "ed4bb6977a1aa7590d19a64208e5f6621d1b8d78",
+      "classification": "INVALID_INFRASTRUCTURE",
+      "attempt_consumed": false,
+      "scientific_runtime_started": false,
+      "source_report_sha256": "1c6f4deb7766c449a865d48050de82da178f5a716e9a3c149f271d8dc0f6d215"
+    }
+  ],
   "frozen_parent_q4": {
     "size_bytes": 397807456,
     "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
@@ -50,7 +59,7 @@
   },
   "one_attempt_rule": {
     "attempts_authorized": 1,
-    "prior_failed_invocation_consumed_attempt": false,
+    "prior_failed_invocations_consumed_attempt": false,
     "remaining_attempts_authorized": 1,
     "durable_state_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/attempt-state.json",
     "consumed_when": "atomic durable marker immediately before owned ollama create",
