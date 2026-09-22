@@ -1,6 +1,6 @@
 # OWRQ Implementation
 
-Status: STATIC IMPLEMENTATION / ZERO-SCIENCE QA PENDING
+Status: STATIC IMPLEMENTATION / FINAL ZERO-SCIENCE RECHECK PENDING
 
 The implementation consists of:
 
@@ -12,3 +12,6 @@ The adapter contract is the exact M6R2 consumer interface snapshot blob:
 `0973749fc01dfe873ec7be92e55d2898fc67b9ed`.
 
 Qualification never imports `eval_v1`, does not pull/create/delete the fixture, and does not score fixture output.
+
+
+Qualification authorization semantics are reusable infrastructure authorization, not a scientific one-attempt budget. Every local run still writes a unique evidence directory and is independently adjudicated as QUALIFIED_RUNTIME_SCOPE / FAIL_INFRA / UNRESOLVED_INFRA.

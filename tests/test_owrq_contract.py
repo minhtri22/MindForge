@@ -136,8 +136,16 @@ def test_wrapper_requires_future_lock_and_auth_before_local_execution():
     auth = p.index("$AuthPath")
     run = p.index('& python "tools/owrq_qualify.py"')
     assert lock < run and auth < run
-    assert "AUTHORIZED_ONE_OWRQ_LOCAL_QUALIFICATION" in p
+    assert "AUTHORIZED_OWRQ_LOCAL_QUALIFICATION" in p
 
+
+
+def test_wrapper_binds_clean_head_and_its_own_blob():
+    p = WRAPPER_PATH.read_text(encoding="utf-8")
+    assert "Tracked worktree must be clean for OWRQ qualification" in p
+    assert "git merge-base --is-ancestor" in p
+    assert "$WrapperBlob" in p
+    assert "wrapper_git_blob_sha1" in p
 
 def test_adapter_contract_contains_durable_response_semantics():
     a = ADAPTER_PATH.read_text(encoding="utf-8")

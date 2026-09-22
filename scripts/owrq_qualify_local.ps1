@@ -16,13 +16,21 @@ if(-not (Test-Path $AuthPath -PathType Leaf)){throw "OWRQ local execution author
 $Lock=Get-Content $LockPath -Raw | ConvertFrom-Json
 $Auth=Get-Content $AuthPath -Raw | ConvertFrom-Json
 if($Lock.status -ne "LOCKED_OWRQ_INFRA_IMPLEMENTATION"){throw "Invalid OWRQ implementation lock"}
-if($Auth.status -ne "AUTHORIZED_ONE_OWRQ_LOCAL_QUALIFICATION"){throw "OWRQ local qualification not authorized"}
+if($Auth.status -ne "AUTHORIZED_OWRQ_LOCAL_QUALIFICATION"){throw "OWRQ local qualification not authorized"}
+
+$Head=(& git rev-parse HEAD).Trim()
+$Dirty=@(& git status --porcelain --untracked-files=no)
+if($Dirty.Count -gt 0){throw "Tracked worktree must be clean for OWRQ qualification"}
+& git merge-base --is-ancestor ([string]$Lock.implementation_commit) $Head *> $null
+if($LASTEXITCODE -ne 0){throw "OWRQ implementation lock is not an ancestor of HEAD"}
 
 $LockBlob=(& git hash-object -- $LockPath).Trim()
 if([string]$Auth.implementation_lock_git_blob_sha1 -ne $LockBlob){throw "Authorization does not bind current OWRQ lock"}
 
+$WrapperBlob=(& git hash-object -- $PSCommandPath).Trim()
 $AdapterBlob=(& git hash-object -- "tools/ollama_windows_adapter.py").Trim()
 $QualifierBlob=(& git hash-object -- "tools/owrq_qualify.py").Trim()
+if($WrapperBlob -ne [string]$Lock.exact_blobs.wrapper_git_blob_sha1){throw "OWRQ wrapper blob mismatch"}
 if($AdapterBlob -ne [string]$Lock.exact_blobs.adapter_git_blob_sha1){throw "OWRQ adapter blob mismatch"}
 if($QualifierBlob -ne [string]$Lock.exact_blobs.qualifier_git_blob_sha1){throw "OWRQ qualifier blob mismatch"}
 

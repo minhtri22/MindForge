@@ -1,7 +1,7 @@
 {
   "schema": "mindforge-owrq-implementation-adversarial-review-v1",
-  "status": "FINDINGS_PATCHED_PENDING_FINAL_QA",
-  "reviewed_commit": "73eb97f883ab6935aa7cd8abf351e94bbb2a0add",
+  "status": "PASS_PENDING_FINAL_STATIC_RECHECK",
+  "reviewed_commit": "3329669a4ec5a2faa43d45f1b2dccc031f1a3d58",
   "scientific_contract_changed": false,
   "findings": [
     {
@@ -33,6 +33,18 @@
       "severity": "LOW",
       "finding": "First regex hardening did not handle quoted flash-attention tokens in actual launch strings.",
       "repair": "Normalize command-line quotes and parse flash-attention with explicit on/off token substrings."
+    },
+    {
+      "id": "OWRQ-F06",
+      "severity": "MEDIUM",
+      "finding": "The local wrapper used one-attempt wording even though OWRQ is reusable non-scientific infrastructure, and it did not bind its own blob/worktree ancestry.",
+      "repair": "Use reusable AUTHORIZED_OWRQ_LOCAL_QUALIFICATION semantics and bind clean worktree, implementation ancestry, wrapper blob, adapter blob, and qualifier blob."
+    },
+    {
+      "id": "OWRQ-F07",
+      "severity": "MEDIUM",
+      "finding": "Launch option regex used literal \\\\s in a raw regex, so known-bad and repaired launch lines were not recognized.",
+      "repair": "Use actual regex whitespace tokens and regression-test both space-separated and equals-form quoted launch lines."
     }
   ],
   "unresolved_findings_after_patch": 0
