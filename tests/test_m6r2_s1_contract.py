@@ -23,7 +23,6 @@ row_from_response = m6r2.row_from_response
 scan_prior_outcome_directory = m6r2.scan_prior_outcome_directory
 validate_owrq_binding = m6r2.validate_owrq_binding
 
-ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "m6r2_parity_oneclick.ps1"
 PREREG = ROOT / "artifacts" / "model-training-pipeline" / "m6r2" / "PREREGISTRATION.json"
 INTERFACE = ROOT / "artifacts" / "model-training-pipeline" / "m6r2" / "S1_INFRA_ADAPTER_INTERFACE.json"
