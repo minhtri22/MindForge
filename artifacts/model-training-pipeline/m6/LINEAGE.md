@@ -522,3 +522,47 @@ search is forbidden.
 After static zero-science QA PASS, the implementation will be locked for local
 execution and will emit one JSON report under
 `.local/M6-LOCAL-PREFLIGHT/report/`.
+
+
+## 2026-09-22 — Local Windows M6 preflight implementation locked / ready for user execution
+
+The local-Windows preflight package passed static zero-science QA:
+
+```text
+implementation:
+91d32a3285a0c6fcb8d1965f1f29aedf2dd89e13
+
+run:
+35682182111
+
+job:
+106601279783
+
+Python contract tests:
+6/6 PASS
+
+PowerShell parse:
+PASS
+```
+
+The exact one-click script is frozen by Git blob:
+
+```text
+scripts/m6_local_windows_preflight_oneclick.ps1
+09ca351360eff4061629f64030ad78e19864b527
+```
+
+This gate executed no local preflight, model regeneration, Q4 reconstruction,
+or Ollama scientific runtime.
+
+The script is now authorized for execution on the user's local Windows clone.
+It searches only the current MindForge clone, the parent MindForge workspace,
+and explicitly supplied extra roots. It records exact Q4/F16 identity,
+local Ollama inventory, local llama.cpp source/binary provenance, and emits:
+
+```text
+.local/M6-LOCAL-PREFLIGHT/report/M6_LOCAL_WINDOWS_PREFLIGHT_REPORT.json
+```
+
+The local report must be returned before any regeneration, Q4 reconstruction,
+or Ollama create/chat scientific execution is opened.

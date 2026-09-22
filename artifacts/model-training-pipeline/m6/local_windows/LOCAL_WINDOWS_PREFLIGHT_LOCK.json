@@ -1,0 +1,44 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-windows-preflight-lock-v1",
+  "status": "LOCKED_FOR_LOCAL_EXECUTION",
+  "program": "M6_LOCAL_WINDOWS_VENUE_PREFLIGHT",
+  "branch": "research/model-pipeline-m6-ollama",
+  "implementation_commit": "91d32a3285a0c6fcb8d1965f1f29aedf2dd89e13",
+  "lock_git_blob_sha1": "SELF_NOT_APPLICABLE",
+  "lock_integrity_rule": "Tracked worktree must be clean; this lock binds exact implementation/script/test/workflow/governance blobs. The lock does not self-hash to avoid a circular identity field.",
+  "exact_blobs": {
+    "script_git_blob_sha1": "09ca351360eff4061629f64030ad78e19864b527",
+    "tests_git_blob_sha1": "9cec2f29c3236054ef620bc4ce86f2983690de4d",
+    "workflow_git_blob_sha1": "22979c2a1eb10460f5e69851f9e8b2f6b05a5aa2",
+    "preregistration_git_blob_sha1": "11cf56f4a478a549152594de951f144e03a1fb46",
+    "implementation_authorization_git_blob_sha1": "65679395b1839d80a3e9e39c5827d28ccada9b48",
+    "venue_independence_amendment_git_blob_sha1": "5d67202f3103f36736cf0e7973c054cf6df658fd",
+    "q4_reconstruction_authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5"
+  },
+  "zero_science_static_qa": {
+    "run_id": 35682182111,
+    "job_id": 106601279783,
+    "conclusion": "success",
+    "python_contract_tests": "6/6_PASS",
+    "powershell_parse": "PASS",
+    "local_preflight_executed": false,
+    "artifact_regeneration_executed": false,
+    "q4_reconstruction_executed": false,
+    "ollama_scientific_execution_executed": false
+  },
+  "local_execution_scope": {
+    "preflight_execution_authorized": true,
+    "bounded_local_artifact_search_authorized": true,
+    "exact_hash_admission_authorized": true,
+    "runtime_inventory_authorized": true,
+    "model_download_authorized": false,
+    "f16_regeneration_authorized": false,
+    "hf_to_gguf_conversion_authorized": false,
+    "q4_reconstruction_authorized": false,
+    "llama_cli_inference_authorized": false,
+    "ollama_create_chat_authorized": false,
+    "scientific_adjudication_authorized": false
+  },
+  "report_path": ".local/M6-LOCAL-PREFLIGHT/report/M6_LOCAL_WINDOWS_PREFLIGHT_REPORT.json",
+  "next_after_local_report": "RETURN_REPORT_FOR_ADJUDICATION_AND_OPEN_EXACT_NEXT_LOCAL_EXECUTION_GATE"
+}
