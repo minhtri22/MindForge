@@ -1,0 +1,45 @@
+name: Model Pipeline M6R System Ollama Contract
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6r-installed-ollama
+    paths:
+      - 'scripts/m6r_system_ollama_oneclick.ps1'
+      - 'tests/test_m6r_system_ollama_contract.py'
+      - 'artifacts/model-training-pipeline/m6r/**'
+      - 'docs/model-training-pipeline/M6R_SYSTEM_OLLAMA_REPLICATION.md'
+      - '.github/workflows/model-pipeline-m6r-system-ollama-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  static-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest==8.4.2
+      - name: M6R system Ollama contract tests
+        run: python -m pytest -q tests/test_m6r_system_ollama_contract.py
+      - name: PowerShell parse
+        shell: pwsh
+        run: |
+          $tokens=$null
+          $errors=$null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path 'scripts/m6r_system_ollama_oneclick.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if($errors.Count -gt 0){$errors | ForEach-Object { Write-Error $_.Message }; exit 1}
+          Write-Host 'PowerShell syntax PASS'
+      - name: Prove M6R local execution did not occur
+        run: |
+          test ! -d .local/M6R-SYSTEM-OLLAMA
+          echo "system_ollama_upgrade_executed=false"
+          echo "ollama_create_executed=false"
+          echo "ollama_chat_executed=false"
+          echo "m6r_scientific_execution_executed=false"
