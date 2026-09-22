@@ -1,0 +1,102 @@
+{
+  "schema": "mindforge-model-pipeline-m6-bounded-specification-implementation-authorization-v1",
+  "status": "AUTHORIZED_SPECIFICATION_AND_IMPLEMENTATION_ONLY",
+  "program": "M6",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_commit": "7bcacfa8fb291a9a55e2acf19077c8e61f33c329",
+  "preregistration_path": "artifacts/model-training-pipeline/m6/PREREGISTRATION.json",
+  "authorized_work": [
+    "create and refine M6 preregistration/specification without changing the frozen M5 parent claims",
+    "create docs/model-training-pipeline/runtime/ollama.lock.json with an exact version/release identity, without executing or installing Ollama",
+    "implement deterministic Modelfile generation from the frozen inference contract",
+    "implement exact source-artifact identity verification against the frozen Q4 identity",
+    "implement ephemeral namespace and ownership/collision/cleanup planning",
+    "implement normalized Ollama reasoning/think mapping adapters",
+    "implement parity/adjudication data structures and pure comparison logic",
+    "implement zero-runtime preflight helper",
+    "add unit/contract tests using mocks or pure functions only",
+    "add a zero-runtime CI workflow that cannot invoke the Ollama executable",
+    "after zero-runtime tests PASS, create an exact M6 implementation lock",
+    "after lock creation, run lock-present zero-science/zero-runtime preflight"
+  ],
+  "allowed_new_or_modified_surfaces": [
+    "artifacts/model-training-pipeline/m6/**",
+    "docs/model-training-pipeline/runtime/ollama.lock.json",
+    "pipeline/m6.py",
+    "tools/m6_ollama_preflight.py",
+    "tools/m6_ollama_qualification.py",
+    "tests/test_model_pipeline_m6.py",
+    ".github/workflows/model-pipeline-m6-preflight.yml"
+  ],
+  "protected_surfaces": {
+    "pipeline/m5.py": {
+      "modification_authorized": false
+    },
+    "pipeline/m5q.py": {
+      "modification_authorized": false
+    },
+    "pipeline/m5q_q4.py": {
+      "modification_authorized": false
+    },
+    "artifacts/model-training-pipeline/m5_quantization/**": {
+      "modification_authorized": false
+    },
+    "docs/model-training-pipeline/examples/end_to_end_small.yaml": {
+      "modification_authorized": false
+    },
+    "tests/fixtures/eval_v1/**": {
+      "modification_authorized": false
+    }
+  },
+  "implementation_constraints": {
+    "use_q4_as_canonical_smoke_package_target_without_claiming_production_superiority": true,
+    "m5q_pass_must_not_be_inherited_as_m6_pass": true,
+    "absolute_capability_claim_forbidden": true,
+    "fixture_or_expected_answer_change_forbidden": true,
+    "inference_parameter_change_forbidden": true,
+    "target_specific_tuning_after_runtime_outcome_forbidden": true,
+    "runtime_output_threshold_tuning_forbidden": true,
+    "unrelated_user_model_mutation_forbidden": true
+  },
+  "required_zero_runtime_tests": [
+    "ollama lock schema/exact-version contract",
+    "deterministic Modelfile byte identity",
+    "Modelfile parameters equal frozen inference contract",
+    "source Q4 identity verifier uses frozen hash/manifest",
+    "ephemeral namespace deterministic and collision-safe",
+    "ownership marker required before cleanup",
+    "cleanup refuses unowned model names",
+    "Ollama command builder contains no install/update/pull in qualification path",
+    "reasoning/think mapping contract is deterministic",
+    "parity comparator uses frozen llama.cpp parent metrics and does not require exact text",
+    "M6 result boundary hard-codes M7/bulk unauthorized",
+    "preflight helper does not import or invoke runtime execution entrypoint"
+  ],
+  "implementation_sequence": [
+    "freeze M6 specification",
+    "implement Ollama lock schema/content and target-specific M6 code",
+    "run zero-runtime unit/contract tests",
+    "tests PASS",
+    "create exact M6 implementation lock",
+    "run lock-present zero-science/zero-runtime preflight",
+    "only after separate runtime execution authorization may any Ollama executable command run"
+  ],
+  "authorization_boundaries": {
+    "specification_authorized": true,
+    "implementation_authorized": true,
+    "zero_runtime_tests_authorized": true,
+    "implementation_lock_authorized_after_tests_pass": true,
+    "zero_science_preflight_authorized_after_lock": true,
+    "ollama_executable_invocation_authorized": false,
+    "ollama_create_authorized": false,
+    "ollama_run_or_chat_authorized": false,
+    "ollama_pull_authorized": false,
+    "ollama_remove_authorized": false,
+    "runtime_install_or_update_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "m6_pass_claim_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "next_valid_action": "IMPLEMENT_M6_SPECIFICATION_AND_ZERO_RUNTIME_CODE_TESTS"
+}

@@ -1,0 +1,171 @@
+{
+  "schema": "mindforge-model-pipeline-m6-ollama-preregistration-v1",
+  "program": "M6 — Ollama Packaging / Runtime Parity Qualification",
+  "status": "OPEN_SPECIFICATION_IMPLEMENTATION_ONLY",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin": {
+    "m5q_post_quantization_review_commit": "7bcacfa8fb291a9a55e2acf19077c8e61f33c329",
+    "m5q_review_json_git_blob_sha1": "d42633d422eb46bd6e94958e1210ba7f8c211356",
+    "m5_exit": "PASS_CLOSED",
+    "m5q_status": "PASS_CLOSED",
+    "q8_status": "PASS_CLOSED",
+    "q4_status": "PASS_CLOSED",
+    "q8_rerun_authorized": false,
+    "q4_rerun_authorized": false
+  },
+  "scientific_question": "Can an exact M5-qualified GGUF artifact be packaged into a pinned Ollama runtime with deterministic Modelfile generation, safe ephemeral ownership/cleanup, normalized reasoning semantics, and parity to the frozen inference contract without changing the underlying model/runtime claim?",
+  "claim_scope": {
+    "ollama_packaging_correctness": true,
+    "ollama_runtime_load_chat": true,
+    "safe_ephemeral_namespace_and_cleanup": true,
+    "normalized_reasoning_mapping": true,
+    "cross_runtime_parity_completion": true,
+    "absolute_capability_claimed": false,
+    "model_quality_improvement_claimed": false,
+    "production_target_selection_claimed": false,
+    "release_readiness_claimed": false
+  },
+  "canonical_contracts": {
+    "export_ollama_doc": {
+      "path": "docs/model-training-pipeline/07_EXPORT_LLAMA_OLLAMA.md",
+      "git_blob_sha1": "0aef59b6accb567231c21d41f7b043d5006ca502"
+    },
+    "acceptance_criteria": {
+      "path": "docs/model-training-pipeline/11_ACCEPTANCE_CRITERIA.md",
+      "git_blob_sha1": "eb0ed9c20acb97eebbbe30d9fa0f7b1a473fb38a"
+    },
+    "implementation_plan": {
+      "path": "docs/model-training-pipeline/12_IMPLEMENTATION_PLAN.md",
+      "git_blob_sha1": "46259d9be814a533ba8388fe18a19fe380ce2027"
+    },
+    "inference_contract": {
+      "path": "docs/model-training-pipeline/19_GATE_MATRIX_INFERENCE_CONTRACT.md",
+      "git_blob_sha1": "ad8d1a9a63a1844f73b2e248c58d66f1769252a9"
+    },
+    "security_reproducibility": {
+      "path": "docs/model-training-pipeline/13_SECURITY_LICENSE_REPRODUCIBILITY.md",
+      "git_blob_sha1": "acea4958f0c5b913060b879f5b8667ac0c55549e"
+    }
+  },
+  "frozen_parent": {
+    "packaged_artifact_role": "canonical_config_required_quantized_smoke_target",
+    "target_key": "q4_k_m",
+    "quantizer_type": "Q4_K_M",
+    "rationale": "The canonical end_to_end_small config already declares q4_k_m as its required quantized smoke target. Using Q4_K_M in M6 is configuration continuity, not a production-target ranking.",
+    "q4_result_hash": "da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef",
+    "q4_artifact_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "q4_artifact_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "q4_artifact_size": 397807456,
+    "source_f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "source_f16_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "converter_git_blob_sha1": "e09616b190cf124e818d8a740468d4e84086015c"
+  },
+  "frozen_inference_contract": {
+    "fixture_set": "tests/fixtures/eval_v1",
+    "max_new_tokens": 128,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 0,
+    "seed": 42,
+    "context_length": 2048,
+    "stream": false,
+    "comparator_task_vector": [
+      false,
+      false
+    ],
+    "comparator_accuracy": 0,
+    "exact_text_equality_required": false,
+    "limitation": "The frozen M5 comparator has zero absolute task accuracy. M6 parity can prove packaging/runtime preservation but cannot establish absolute task capability."
+  },
+  "ollama_lock_policy": {
+    "lock_path": "docs/model-training-pipeline/runtime/ollama.lock.json",
+    "status": "MUST_BE_CREATED_AND_FROZEN_BEFORE_RUNTIME_EXECUTION",
+    "exact_version_required": true,
+    "authoritative_source_required": true,
+    "install_or_update_during_implementation": false,
+    "executable_invocation_during_implementation": false,
+    "runtime_version_probe_during_implementation": false,
+    "checksum_or_release_identity_required_when_authoritative_source_provides_it": true
+  },
+  "modelfile_contract": {
+    "deterministic_generation": true,
+    "source_artifact_must_match_frozen_q4_identity": true,
+    "inference_values_derived_from_frozen_contract": true,
+    "independent_temperature_or_top_p_defaults_forbidden": true,
+    "model_identity_or_behavior_modification_forbidden": true,
+    "generated_modelfile_hash_must_be_frozen_before_runtime_execution": true
+  },
+  "namespace_cleanup_contract": {
+    "name_pattern": "pipeline-test-<run_id>-<artifact_hash_prefix>",
+    "ownership_marker_required": true,
+    "pre_create_collision_check_required": true,
+    "overwrite_unowned_model_forbidden": true,
+    "cleanup_owned_models_only": true,
+    "cleanup_manifest_required": true,
+    "unrelated_user_model_delete_forbidden": true
+  },
+  "reasoning_contract": {
+    "preserve_normalized_reasoning_semantics": true,
+    "raw_transport_evidence_required": true,
+    "visible_hidden_off_mapping_must_follow_model_capability": true,
+    "ollama_specific_think_mapping_must_be_preregistered_before_runtime": true,
+    "generated_reasoning_quality_claimed": false
+  },
+  "required_future_runtime_gates": [
+    "ollama_exact_version_lock",
+    "source_q4_identity_exact",
+    "modelfile_deterministic_and_frozen",
+    "ephemeral_namespace_collision_safe",
+    "ollama_create_owned_model_only",
+    "ollama_chat_real_runtime",
+    "all_outputs_nonempty",
+    "task_vector_equals_frozen_llama_parent",
+    "runtime_accuracy_equals_frozen_llama_parent",
+    "format_parity_with_frozen_llama_parent",
+    "reasoning_runtime_mapping_pass",
+    "cleanup_owned_artifact_only",
+    "no_unowned_model_mutation",
+    "runtime_evidence_manifest_frozen"
+  ],
+  "adjudication_classes": [
+    "PASS",
+    "FAIL_PACKAGE",
+    "FAIL_RUNTIME",
+    "FAIL_PARITY",
+    "FAIL_REASONING_MAPPING",
+    "FAIL_CLEANUP_SAFETY",
+    "INVALID_PROVENANCE",
+    "INVALID_INFRASTRUCTURE"
+  ],
+  "implementation_stage_rules": {
+    "zero_runtime": true,
+    "zero_scientific_execution": true,
+    "mock_or_pure_function_tests_only": true,
+    "subprocess_command_construction_tests_allowed": true,
+    "subprocess_execution_of_ollama_forbidden": true,
+    "filesystem_fixture_tests_allowed": true,
+    "generated_modelfile_text_tests_allowed": true,
+    "static_policy_tests_allowed": true
+  },
+  "forbidden_before_exact_lock_and_zero_science_preflight_pass": {
+    "ollama_create": true,
+    "ollama_run": true,
+    "ollama_chat": true,
+    "ollama_pull": true,
+    "ollama_rm": true,
+    "ollama_serve": true,
+    "ollama_version_probe": true,
+    "ollama_install_or_update": true,
+    "m6_scientific_qualification": true,
+    "m6_pass_claim": true,
+    "m5_q8_or_q4_rerun": true,
+    "bulk_training": true
+  },
+  "downstream_boundary": {
+    "m7_authorized": false,
+    "m7_auto_open": false,
+    "bulk_training_authorized": false,
+    "required_before_runtime_execution": "exact M6 implementation lock + lock-present zero-science/zero-runtime preflight PASS + separate runtime execution authorization"
+  }
+}
