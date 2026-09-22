@@ -1,0 +1,246 @@
+name: Model Pipeline M6 Windows Venue Qualification
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - '.github/workflows/model-pipeline-m6-venue.yml'
+      - 'artifacts/model-training-pipeline/m6/VENUE_ORCHESTRATION.json'
+
+jobs:
+  venue:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    env:
+      M6_OLLAMA_VERSION: '0.34.2'
+      M6_OLLAMA_ASSET_SHA256: '8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b'
+      M6_OLLAMA_HOST: '127.0.0.1:11467'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify authorization and orchestration binding
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $AuthCommit = '5eb195bb78136be1d26f1acb7308d3f698c69d31'
+          $AuthBlob = 'ac748e7a0608e5c8edac1a7c54e953a58793e1fc'
+          $Parent = (git rev-parse HEAD^).Trim()
+          if ($Parent -ne $AuthCommit) { throw "authorization parent mismatch: $Parent" }
+
+          $AuthPath = 'artifacts/model-training-pipeline/m6/RUNTIME_EXECUTION_AUTHORIZATION.json'
+          $OrchPath = 'artifacts/model-training-pipeline/m6/VENUE_ORCHESTRATION.json'
+          $PreflightPath = 'artifacts/model-training-pipeline/m6/ZERO_RUNTIME_PREFLIGHT_EVIDENCE.json'
+
+          $ActualAuthBlob = (git hash-object -- $AuthPath).Trim()
+          if ($ActualAuthBlob -ne $AuthBlob) { throw "authorization blob mismatch" }
+
+          $auth = Get-Content $AuthPath -Raw | ConvertFrom-Json
+          $orch = Get-Content $OrchPath -Raw | ConvertFrom-Json
+          $pre = Get-Content $PreflightPath -Raw | ConvertFrom-Json
+
+          if ($auth.status -ne 'AUTHORIZED_CONDITIONAL_RUNTIME_EXECUTION') { throw 'authorization status mismatch' }
+          if ($auth.venue.runner_label -ne 'windows-2025') { throw 'venue label drift' }
+          if ($auth.venue.architecture -ne 'x64') { throw 'venue arch drift' }
+          if ($auth.venue.ollama_release.asset -ne 'ollama-windows-amd64.zip') { throw 'asset drift' }
+          if ($auth.venue.ollama_release.sha256 -ne $env:M6_OLLAMA_ASSET_SHA256) { throw 'asset digest drift' }
+          if ($auth.parent_artifact_admission.silent_q4_requantization_authorized -ne $false) { throw 'requantization boundary drift' }
+          if ($pre.verdict -ne 'PASS') { throw 'zero-runtime preflight not PASS' }
+
+          if ($orch.authorization_commit -ne $AuthCommit) { throw 'orchestration authorization commit mismatch' }
+          if ($orch.authorization_git_blob_sha1 -ne $AuthBlob) { throw 'orchestration authorization blob mismatch' }
+          if ($orch.runner_label -ne 'windows-2025') { throw 'orchestration venue drift' }
+          if ($orch.phase -ne 'VENUE_ASSET_AND_PARENT_ADMISSION') { throw 'orchestration phase drift' }
+          Write-Host 'M6_VENUE_AUTHORIZATION_BOUND'
+
+      - name: Capture exact runner venue metadata
+        id: venue
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:RUNNER_OS -ne 'Windows') { throw "unexpected RUNNER_OS=$env:RUNNER_OS" }
+          if ($env:RUNNER_ARCH -ne 'X64') { throw "unexpected RUNNER_ARCH=$env:RUNNER_ARCH" }
+          $meta = [ordered]@{
+            runner_os = $env:RUNNER_OS
+            runner_arch = $env:RUNNER_ARCH
+            image_os = $env:ImageOS
+            image_version = $env:ImageVersion
+            runner_name = $env:RUNNER_NAME
+            ps_version = $PSVersionTable.PSVersion.ToString()
+          }
+          $meta | ConvertTo-Json -Depth 4 | Set-Content -Encoding utf8 venue-metadata.json
+          Write-Host ($meta | ConvertTo-Json -Compress)
+
+      - name: Download exact pinned Ollama Windows amd64 asset
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $url = 'https://github.com/ollama/ollama/releases/download/v0.34.2/ollama-windows-amd64.zip'
+          $zip = Join-Path $env:RUNNER_TEMP 'ollama-windows-amd64.zip'
+          Invoke-WebRequest -Uri $url -OutFile $zip
+          $actual = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
+          if ($actual -ne $env:M6_OLLAMA_ASSET_SHA256) {
+            throw "Ollama asset SHA256 mismatch: $actual"
+          }
+          Set-Content -Encoding ascii -Path ollama-asset-sha256.txt -Value $actual
+          Write-Host "OLLAMA_ASSET_SHA256=$actual"
+
+      - name: Extract isolated Ollama runtime and verify exact version
+        id: ollama
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $zip = Join-Path $env:RUNNER_TEMP 'ollama-windows-amd64.zip'
+          $runtime = Join-Path $env:RUNNER_TEMP 'mindforge-m6-ollama-runtime'
+          New-Item -ItemType Directory -Force -Path $runtime | Out-Null
+          Expand-Archive -Path $zip -DestinationPath $runtime -Force
+          $exe = Get-ChildItem -Path $runtime -Filter 'ollama.exe' -Recurse | Select-Object -First 1
+          if (-not $exe) { throw 'ollama.exe not found in pinned archive' }
+          $versionText = (& $exe.FullName --version 2>&1 | Out-String).Trim()
+          if ($LASTEXITCODE -ne 0) { throw "ollama --version exit=$LASTEXITCODE" }
+          if ($versionText -notmatch [regex]::Escape($env:M6_OLLAMA_VERSION)) {
+            throw "unexpected Ollama version output: $versionText"
+          }
+          $versionText | Set-Content -Encoding utf8 ollama-version.txt
+          "exe=$($exe.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          Write-Host "OLLAMA_VERSION=$versionText"
+
+      - name: Start isolated Ollama server and prove health
+        id: server
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $models = Join-Path $env:RUNNER_TEMP 'mindforge-m6-ollama-models'
+          New-Item -ItemType Directory -Force -Path $models | Out-Null
+          $env:OLLAMA_HOST = $env:M6_OLLAMA_HOST
+          $env:OLLAMA_MODELS = $models
+          $env:OLLAMA_NO_CLOUD = '1'
+
+          $stdout = Join-Path $env:RUNNER_TEMP 'ollama-serve.stdout.log'
+          $stderr = Join-Path $env:RUNNER_TEMP 'ollama-serve.stderr.log'
+          $proc = Start-Process -FilePath '${{ steps.ollama.outputs.exe }}' -ArgumentList 'serve' -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+
+          $healthy = $false
+          for ($i=0; $i -lt 30; $i++) {
+            Start-Sleep -Seconds 1
+            try {
+              $tags = Invoke-RestMethod -Method Get -Uri "http://$env:M6_OLLAMA_HOST/api/tags" -TimeoutSec 2
+              $healthy = $true
+              break
+            } catch {}
+          }
+          if (-not $healthy) {
+            if (-not $proc.HasExited) { Stop-Process -Id $proc.Id -Force }
+            throw 'isolated Ollama server did not become healthy'
+          }
+
+          $tags | ConvertTo-Json -Depth 20 | Set-Content -Encoding utf8 ollama-initial-tags.json
+          "pid=$($proc.Id)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "models=$models" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          Write-Host 'OLLAMA_ISOLATED_SERVER_HEALTH=PASS'
+
+      - name: Q4 parent artifact admission gate
+        id: parent
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $candidate = Join-Path $env:GITHUB_WORKSPACE 'model-q4_k_m.gguf'
+          $available = $false
+          $reason = 'PARENT_ARTIFACT_UNAVAILABLE'
+          if (Test-Path $candidate) {
+            $size = (Get-Item $candidate).Length
+            $sha = (Get-FileHash -Algorithm SHA256 $candidate).Hash.ToLowerInvariant()
+            if ($size -eq 397807456 -and $sha -eq 'ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977') {
+              $available = $true
+              $reason = 'PARENT_ARTIFACT_ADMITTED'
+            } else {
+              $reason = 'PARENT_ARTIFACT_IDENTITY_MISMATCH'
+            }
+          }
+          "available=$($available.ToString().ToLowerInvariant())" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "reason=$reason" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+          $gate = [ordered]@{
+            available = $available
+            reason = $reason
+            required_filename = 'model-q4_k_m.gguf'
+            required_size = 397807456
+            required_sha256 = 'ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977'
+            q4_requantization_executed = $false
+          }
+          $gate | ConvertTo-Json -Depth 5 | Set-Content -Encoding utf8 parent-artifact-admission.json
+          Write-Host ($gate | ConvertTo-Json -Compress)
+
+      - name: Create owned model only after exact parent admission
+        if: steps.parent.outputs.available == 'true'
+        shell: pwsh
+        run: |
+          throw 'Full create/chat execution is intentionally not implemented in venue-admission orchestration.'
+
+      - name: Freeze venue qualification result
+        if: always()
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $venue = if (Test-Path venue-metadata.json) { Get-Content venue-metadata.json -Raw | ConvertFrom-Json } else { $null }
+          $parent = if (Test-Path parent-artifact-admission.json) { Get-Content parent-artifact-admission.json -Raw | ConvertFrom-Json } else { $null }
+          $assetSha = if (Test-Path ollama-asset-sha256.txt) { (Get-Content ollama-asset-sha256.txt -Raw).Trim() } else { $null }
+          $version = if (Test-Path ollama-version.txt) { (Get-Content ollama-version.txt -Raw).Trim() } else { $null }
+
+          $classification = 'INVALID_INFRASTRUCTURE_OR_VENUE'
+          if ($venue -and $assetSha -eq $env:M6_OLLAMA_ASSET_SHA256 -and $version -match [regex]::Escape($env:M6_OLLAMA_VERSION)) {
+            if ($parent -and $parent.available -eq $false -and $parent.reason -eq 'PARENT_ARTIFACT_UNAVAILABLE') {
+              $classification = 'INVALID_PROVENANCE_PARENT_ARTIFACT_UNAVAILABLE'
+            } elseif ($parent -and $parent.available -eq $true) {
+              $classification = 'VENUE_AND_PARENT_ADMITTED_READY_FOR_SEPARATE_SCIENTIFIC_RUNTIME_ORCHESTRATION'
+            }
+          }
+
+          $result = [ordered]@{
+            schema = 'mindforge-model-pipeline-m6-windows-venue-qualification-v1'
+            classification = $classification
+            authorization_commit = '5eb195bb78136be1d26f1acb7308d3f698c69d31'
+            orchestration_commit = $env:GITHUB_SHA
+            venue = $venue
+            ollama_asset_sha256 = $assetSha
+            ollama_version_output = $version
+            isolated_server_started = [bool]('${{ steps.server.outputs.pid }}')
+            parent_artifact = $parent
+            ollama_create_executed = $false
+            ollama_chat_executed = $false
+            owned_cleanup_executed = $false
+            q4_requantization_executed = $false
+            m6_scientific_result = $null
+            m6_pass_claim_authorized = $false
+            m7_authorized = $false
+            bulk_training_authorized = $false
+          }
+          $result | ConvertTo-Json -Depth 20 | Set-Content -Encoding utf8 m6-venue-qualification-result.json
+          Write-Host ($result | ConvertTo-Json -Depth 20)
+
+      - name: Stop isolated Ollama server
+        if: always()
+        shell: pwsh
+        run: |
+          $pidText = '${{ steps.server.outputs.pid }}'
+          if ($pidText) {
+            $serverPid = [int]$pidText
+            $p = Get-Process -Id $serverPid -ErrorAction SilentlyContinue
+            if ($p) { Stop-Process -Id $serverPid -Force }
+          }
+
+      - name: Upload venue evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m6-windows-venue-qualification
+          path: |
+            venue-metadata.json
+            ollama-asset-sha256.txt
+            ollama-version.txt
+            ollama-initial-tags.json
+            parent-artifact-admission.json
+            m6-venue-qualification-result.json
+          if-no-files-found: warn
