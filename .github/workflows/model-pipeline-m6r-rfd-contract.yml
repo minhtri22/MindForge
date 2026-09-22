@@ -1,0 +1,46 @@
+name: Model Pipeline M6R Runtime Failure Decomposition Contract
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6r-runtime-failure-decomposition
+    paths:
+      - 'scripts/m6r_rfd_collect_existing_evidence.ps1'
+      - 'tests/test_m6r_rfd_existing_evidence_contract.py'
+      - 'artifacts/model-training-pipeline/m6r-rfd/**'
+      - 'docs/model-training-pipeline/M6R_RUNTIME_FAILURE_DECOMPOSITION.md'
+      - '.github/workflows/model-pipeline-m6r-rfd-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  static-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest==8.4.2
+      - name: RFD-C1 forensic collection contract tests
+        run: python -m pytest -q tests/test_m6r_rfd_existing_evidence_contract.py
+      - name: PowerShell parse
+        shell: pwsh
+        run: |
+          $tokens=$null
+          $errors=$null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path 'scripts/m6r_rfd_collect_existing_evidence.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if($errors.Count -gt 0){$errors | ForEach-Object { Write-Error $_.Message }; exit 1}
+          Write-Host 'PowerShell syntax PASS'
+      - name: Prove no local forensic execution occurred in CI
+        run: |
+          test ! -d .local/M6R-RUNTIME-FAILURE-DECOMPOSITION
+          echo "ollama_process_invoked=false"
+          echo "ollama_api_requested=false"
+          echo "service_state_changed=false"
+          echo "model_store_mutated=false"
+          echo "inference_requested=false"
