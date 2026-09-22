@@ -1,0 +1,76 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-existing-byte-materialization-orchestration-v1",
+  "status": "BOUND_FOR_ONE_EXISTING_BYTE_ATTEMPT",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "authorization_commit": "1e4f759fc358bde74473a373f138d3c813b909bc",
+  "authorization_git_blob_sha1": "9e503d1306637d8ea238d295936445e3c29c02dd",
+  "implementation_commit": "24768d87f9f22b820ac02e7428d40ea3df015bf7",
+  "implementation_lock_commit": "8055fdb382a0f6006ecd78ae0f4321e8e1516b8d",
+  "implementation_lock_git_blob_sha1": "6a373d046bd344eebe1835d859baf845d697490e",
+  "workflow_path": ".github/workflows/model-pipeline-m6-f16-materialize.yml",
+  "workflow_git_blob_sha1": "6a2853146935513cf40bf2ac943dcda01a45a790",
+  "attempt_number": 1,
+  "sources": [
+    {
+      "type": "repository_workspace",
+      "ref": "orchestration checkout",
+      "filename": "model-f16.gguf"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35617920637,
+      "artifact_id": 10647342952,
+      "name": "m5-f16-repair-requalification",
+      "zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35631188086,
+      "artifact_id": 10654815953,
+      "name": "m5-f16-repair-requalification",
+      "zip_sha256": "5f8836456197860234221fb7c9940024813cb4f110ced368d7061a5026c454f7"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35631247719,
+      "artifact_id": 10654486533,
+      "name": "m5-f16-repair-requalification",
+      "zip_sha256": "16ebea1c29e19ee7be7096e2eb1bbdf550a377279482f1108a73ff647917b3c2"
+    }
+  ],
+  "previously_checked_no_artifact_runs": [
+    35577280214,
+    35576957471,
+    35576629814,
+    35565868782,
+    35565295993,
+    35564704830,
+    35559811211,
+    35559345651,
+    35559195761,
+    35552469677
+  ],
+  "expected_f16": {
+    "filename": "model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+  },
+  "source_inventory_downloads_are_provenance_inspection_not_target_materialization": true,
+  "byte_materialization_starts_only_when_exact_candidate_is_copied_to_admitted_store": true,
+  "terminal_result_closes_this_orchestration_even_if_no_exact_candidate_exists": true,
+  "f16_regeneration_in_workflow": false,
+  "hf_to_gguf_conversion_in_workflow": false,
+  "q4_reconstruction_in_workflow": false,
+  "q4_reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+  "q4_reconstruction_authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+  "q4_reconstruction_authorization_consumed": false,
+  "valid_terminal_outcomes": [
+    "ADMITTED_EXISTING_F16_BYTES",
+    "F16_EXISTING_BYTES_NOT_FOUND",
+    "F16_EXISTING_BYTES_IDENTITY_MISMATCH",
+    "INVALID_PROVENANCE",
+    "INVALID_INFRASTRUCTURE"
+  ],
+  "stop_before_q4_reconstruction": true
+}

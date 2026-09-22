@@ -1,0 +1,370 @@
+name: Model Pipeline M6 F16 Existing-Byte Materialization
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - '.github/workflows/model-pipeline-m6-f16-materialize.yml'
+      - 'artifacts/model-training-pipeline/m6/f16_parent/EXECUTION_ORCHESTRATION.json'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      AUTH_COMMIT: '1e4f759fc358bde74473a373f138d3c813b909bc'
+      AUTH_BLOB: '9e503d1306637d8ea238d295936445e3c29c02dd'
+      IMPL_LOCK_BLOB: '6a373d046bd344eebe1835d859baf845d697490e'
+      Q4_RECON_AUTH_BLOB: 'f26754440d710904f45eb1d7916d334484f43bb5'
+      EXPECTED_F16_SIZE: '994156384'
+      EXPECTED_F16_SHA256: '437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b'
+      EXPECTED_F16_MANIFEST: 'eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8'
+      GH_TOKEN: '${{ github.token }}'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify authorization and orchestration binding
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "$AUTH_COMMIT"
+
+          auth='artifacts/model-training-pipeline/m6/f16_parent/EXECUTION_AUTHORIZATION.json'
+          lock='artifacts/model-training-pipeline/m6/f16_parent/IMPLEMENTATION_LOCK.json'
+          orch='artifacts/model-training-pipeline/m6/f16_parent/EXECUTION_ORCHESTRATION.json'
+          q4auth='artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json'
+
+          test "$(git hash-object -- "$auth")" = "$AUTH_BLOB"
+          test "$(git hash-object -- "$lock")" = "$IMPL_LOCK_BLOB"
+          test "$(git hash-object -- "$q4auth")" = "$Q4_RECON_AUTH_BLOB"
+
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          auth = json.loads(pathlib.Path(
+              "artifacts/model-training-pipeline/m6/f16_parent/"
+              "EXECUTION_AUTHORIZATION.json"
+          ).read_text())
+          lock = json.loads(pathlib.Path(
+              "artifacts/model-training-pipeline/m6/f16_parent/"
+              "IMPLEMENTATION_LOCK.json"
+          ).read_text())
+          orch = json.loads(pathlib.Path(
+              "artifacts/model-training-pipeline/m6/f16_parent/"
+              "EXECUTION_ORCHESTRATION.json"
+          ).read_text())
+          q4auth = json.loads(pathlib.Path(
+              "artifacts/model-training-pipeline/m6/parent_artifact/"
+              "DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json"
+          ).read_text())
+
+          assert auth["status"] == "AUTHORIZED_ONE_F16_EXISTING_BYTE_MATERIALIZATION"
+          assert auth["one_attempt_contract"]["attempts_authorized"] == 1
+          assert set(auth["authorized_materialization_modes"]) == {
+              "COPY_EXISTING_FILE",
+              "DOWNLOAD_EXISTING_OBJECT",
+              "EXTRACT_EXISTING_ARCHIVE_MEMBER",
+              "REASSEMBLE_EXISTING_CHUNKS",
+          }
+          assert all(value is False for value in auth["boundaries"].values())
+          assert lock["status"] == "LOCKED"
+          assert lock["implementation_commit"] == (
+              "24768d87f9f22b820ac02e7428d40ea3df015bf7"
+          )
+          assert q4auth["execution_state"]["reconstruction_authorization_consumed"] is False
+          assert orch["status"] == "BOUND_FOR_ONE_EXISTING_BYTE_ATTEMPT"
+          assert orch["authorization_commit"] == (
+              "1e4f759fc358bde74473a373f138d3c813b909bc"
+          )
+          assert orch["authorization_git_blob_sha1"] == (
+              "9e503d1306637d8ea238d295936445e3c29c02dd"
+          )
+          assert orch["f16_regeneration_in_workflow"] is False
+          assert orch["q4_reconstruction_in_workflow"] is False
+
+          wf = pathlib.Path(
+              ".github/workflows/model-pipeline-m6-f16-materialize.yml"
+          )
+          actual = subprocess.check_output(
+              ["git", "hash-object", "--", str(wf)], text=True
+          ).strip()
+          assert actual == orch["workflow_git_blob_sha1"]
+          print("M6_F16_EXISTING_BYTE_AUTHORIZATION_BOUND")
+          PY
+
+      - name: Inventory provenance-safe existing F16 sources
+        id: inventory
+        run: |
+          set -euo pipefail
+          mkdir -p .m6-f16-inventory/actions .m6-f16-admitted
+
+          find . -type f -name 'model-f16.gguf'             -not -path './.git/*'             -not -path './.m6-f16-inventory/*'             -not -path './.m6-f16-admitted/*'             -print > .m6-f16-inventory/repo-candidates.txt
+
+          cat > .m6-f16-inventory/action-sources.json <<'JSON'
+          [
+            {
+              "run_id": 35617920637,
+              "artifact_id": 10647342952,
+              "name": "m5-f16-repair-requalification",
+              "expected_zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5"
+            },
+            {
+              "run_id": 35631188086,
+              "artifact_id": 10654815953,
+              "name": "m5-f16-repair-requalification",
+              "expected_zip_sha256": "5f8836456197860234221fb7c9940024813cb4f110ced368d7061a5026c454f7"
+            },
+            {
+              "run_id": 35631247719,
+              "artifact_id": 10654486533,
+              "name": "m5-f16-repair-requalification",
+              "expected_zip_sha256": "16ebea1c29e19ee7be7096e2eb1bbdf550a377279482f1108a73ff647917b3c2"
+            }
+          ]
+          JSON
+
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import subprocess
+          import zipfile
+
+          root = pathlib.Path.cwd()
+          sources = json.loads(
+              (root / ".m6-f16-inventory/action-sources.json").read_text()
+          )
+          records = []
+          for source in sources:
+              aid = source["artifact_id"]
+              zip_path = root / ".m6-f16-inventory/actions" / f"{aid}.zip"
+              out_dir = root / ".m6-f16-inventory/actions" / str(aid)
+              out_dir.mkdir(parents=True, exist_ok=True)
+
+              url = (
+                  f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}"
+                  f"/actions/artifacts/{aid}/zip"
+              )
+              cp = subprocess.run(
+                  [
+                      "curl", "-L", "--fail", "--silent", "--show-error",
+                      "-H", f"Authorization: Bearer {os.environ['GH_TOKEN']}",
+                      "-H", "Accept: application/vnd.github+json",
+                      "-H", "X-GitHub-Api-Version: 2022-11-28",
+                      url, "-o", str(zip_path),
+                  ],
+                  text=True,
+                  capture_output=True,
+                  check=False,
+              )
+              record = dict(source)
+              record["inventory_download_return_code"] = cp.returncode
+              record["inventory_downloaded"] = cp.returncode == 0
+              if cp.returncode != 0:
+                  record["inventory_download_stderr"] = cp.stderr[-2000:]
+                  records.append(record)
+                  continue
+
+              digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
+              record["actual_zip_sha256"] = digest
+              record["zip_digest_match"] = (
+                  digest == source["expected_zip_sha256"]
+              )
+              if not record["zip_digest_match"]:
+                  records.append(record)
+                  continue
+
+              with zipfile.ZipFile(zip_path) as zf:
+                  record["members"] = sorted(zf.namelist())
+                  zf.extractall(out_dir)
+              records.append(record)
+
+          (root / ".m6-f16-inventory/action-records.json").write_text(
+              json.dumps(records, indent=2, sort_keys=True) + "\n"
+          )
+
+          if any(
+              not row.get("inventory_downloaded", False)
+              or not row.get("zip_digest_match", False)
+              for row in records
+          ):
+              raise SystemExit(
+                  "provenance inventory could not verify every frozen Actions source"
+              )
+          PY
+
+          find .m6-f16-inventory/actions -type f -name 'model-f16.gguf'             -print > .m6-f16-inventory/action-candidates.txt
+          cat .m6-f16-inventory/repo-candidates.txt               .m6-f16-inventory/action-candidates.txt               > .m6-f16-inventory/all-candidates.txt
+
+          candidate_count="$(grep -cve '^$' .m6-f16-inventory/all-candidates.txt || true)"
+          echo "candidate_count=$candidate_count" >> "$GITHUB_OUTPUT"
+
+      - name: Execute one existing-byte materialization attempt
+        id: materialize
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util
+          import json
+          import pathlib
+          import shutil
+          import sys
+
+          root = pathlib.Path.cwd()
+          spec = importlib.util.spec_from_file_location(
+              "m6_f16_materialization_execution",
+              root / "tools/m6_f16_parent_materialize.py",
+          )
+          assert spec is not None and spec.loader is not None
+          mat = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = mat
+          spec.loader.exec_module(mat)
+
+          candidate_paths = [
+              pathlib.Path(line.strip())
+              for line in (
+                  root / ".m6-f16-inventory/all-candidates.txt"
+              ).read_text().splitlines()
+              if line.strip()
+          ]
+          inspected = [mat.inspect_artifact(path) for path in candidate_paths]
+          admitted = next((row for row in inspected if row["admitted"]), None)
+
+          materialization_started = False
+          byte_operation_consumed = False
+          persisted = None
+
+          if admitted is not None:
+              materialization_started = True
+              byte_operation_consumed = True
+              result = mat.persist_existing_file(
+                  pathlib.Path(admitted["path"]),
+                  root / ".m6-f16-admitted/model-f16.gguf",
+                  execution_authorization=root / (
+                      "artifacts/model-training-pipeline/m6/f16_parent/"
+                      "EXECUTION_AUTHORIZATION.json"
+                  ),
+              )
+              persisted = result["persisted"]
+              classification = "ADMITTED_EXISTING_F16_BYTES"
+          elif candidate_paths:
+              classification = "F16_EXISTING_BYTES_IDENTITY_MISMATCH"
+          else:
+              classification = "F16_EXISTING_BYTES_NOT_FOUND"
+
+          action_records = json.loads(
+              (root / ".m6-f16-inventory/action-records.json").read_text()
+          )
+          result = {
+              "schema": (
+                  "mindforge-model-pipeline-m6-f16-parent-"
+                  "existing-byte-materialization-result-v1"
+              ),
+              "classification": classification,
+              "scientific_fail": False,
+              "authorization_commit": (
+                  "1e4f759fc358bde74473a373f138d3c813b909bc"
+              ),
+              "orchestration_commit": __import__("os").environ["GITHUB_SHA"],
+              "attempt_number": 1,
+              "recovery_inventory_executed": True,
+              "materialization_started": materialization_started,
+              "byte_operation_consumed": byte_operation_consumed,
+              "authorization_terminal_after_result": True,
+              "candidate_count": len(candidate_paths),
+              "inspected_candidates": inspected,
+              "persisted_artifact": persisted,
+              "sources": {
+                  "repository_workspace_scanned": True,
+                  "actions_artifacts": action_records,
+              },
+              "f16_scientific_status": "PASS_CLOSED",
+              "f16_regeneration_executed": False,
+              "hf_to_gguf_conversion_executed": False,
+              "llama_cli_evaluation_executed": False,
+              "fixture_evaluation_executed": False,
+              "model_inference_executed": False,
+              "scientific_adjudication_executed": False,
+              "new_f16_scientific_result_generated": False,
+              "q4_reconstruction_executed": False,
+              "q4_reconstruction_authorization_commit": (
+                  "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
+              ),
+              "q4_reconstruction_authorization_consumed": False,
+              "ollama_create_executed": False,
+              "ollama_chat_executed": False,
+              "m6_scientific_execution_executed": False,
+              "m7_authorized": False,
+              "bulk_training_authorized": False,
+          }
+          (root / "f16-materialization-result.json").write_text(
+              json.dumps(result, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+
+          classification="$(python - <<'PY'
+          import json
+          print(json.load(open("f16-materialization-result.json"))["classification"])
+          PY
+          )"
+          echo "classification=$classification" >> "$GITHUB_OUTPUT"
+
+      - name: Prove scientific and Q4 reconstruction boundaries remained closed
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("f16-materialization-result.json").read_text())
+          assert data["attempt_number"] == 1
+          assert data["authorization_terminal_after_result"] is True
+          assert data["classification"] in {
+              "ADMITTED_EXISTING_F16_BYTES",
+              "F16_EXISTING_BYTES_NOT_FOUND",
+              "F16_EXISTING_BYTES_IDENTITY_MISMATCH",
+          }
+          assert data["f16_scientific_status"] == "PASS_CLOSED"
+          assert data["f16_regeneration_executed"] is False
+          assert data["hf_to_gguf_conversion_executed"] is False
+          assert data["llama_cli_evaluation_executed"] is False
+          assert data["fixture_evaluation_executed"] is False
+          assert data["model_inference_executed"] is False
+          assert data["scientific_adjudication_executed"] is False
+          assert data["new_f16_scientific_result_generated"] is False
+          assert data["q4_reconstruction_executed"] is False
+          assert data["q4_reconstruction_authorization_consumed"] is False
+          assert data["ollama_create_executed"] is False
+          assert data["ollama_chat_executed"] is False
+          assert data["m6_scientific_execution_executed"] is False
+          assert data["m7_authorized"] is False
+          assert data["bulk_training_authorized"] is False
+          PY
+
+          actual_q4_auth="$(git hash-object -- artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json)"
+          test "$actual_q4_auth" = "$Q4_RECON_AUTH_BLOB"
+
+      - name: Upload frozen F16 materialization evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m6-f16-existing-byte-materialization-evidence
+          path: |
+            f16-materialization-result.json
+            .m6-f16-inventory/repo-candidates.txt
+            .m6-f16-inventory/action-candidates.txt
+            .m6-f16-inventory/action-sources.json
+            .m6-f16-inventory/action-records.json
+            .m6-f16-admitted/model-f16.gguf
+          if-no-files-found: warn
