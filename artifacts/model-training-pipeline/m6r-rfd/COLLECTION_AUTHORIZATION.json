@@ -1,0 +1,80 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-rfd-c1-collection-authorization-v1",
+  "status": "AUTHORIZED_EXISTING_EVIDENCE_COLLECTION",
+  "program": "M6R_RUNTIME_FAILURE_DECOMPOSITION",
+  "phase": "RFD-C1_EXISTING_EVIDENCE_ONLY",
+  "authorization_parent_commit": "93dc9c10e8831165252576d4e760305a38a982b4",
+  "exact_binding": {
+    "implementation_commit": "93dc9c10e8831165252576d4e760305a38a982b4",
+    "preregistration_git_blob_sha1": "739b01da076d8b17250c9c247aad748018b17b35",
+    "methodology_git_blob_sha1": "92249998ec5972aaa58aa0586972c6a4f7c89ef8",
+    "script_git_blob_sha1": "8e695819c4380b4eb93a0a42ce8399dd193ac6f5",
+    "tests_git_blob_sha1": "bcb957bba605e1a7a1d7b06213cb50c9a7ee16b2",
+    "workflow_git_blob_sha1": "dca995836ea246ebbf4704496c23ff131b15641c"
+  },
+  "static_qa": {
+    "run_id": 35739829174,
+    "job_id": 106786382958,
+    "conclusion": "success",
+    "contract_tests": "12/12_PASS",
+    "powershell_parse": "PASS",
+    "ollama_process_invoked": false,
+    "ollama_api_requested": false,
+    "service_state_changed": false,
+    "model_store_mutated": false,
+    "inference_requested": false
+  },
+  "frozen_window": {
+    "run_start_utc": "2026-09-22T14:09:47.4135943Z",
+    "run_end_utc": "2026-09-22T14:09:56.6906965Z",
+    "context_before_seconds": 120,
+    "context_after_seconds": 120
+  },
+  "sources": {
+    "authoritative": [
+      "%LOCALAPPDATA%\\Ollama\\server.log",
+      "%LOCALAPPDATA%\\Ollama\\server-*.log"
+    ],
+    "supplemental_if_present": [
+      "%LOCALAPPDATA%\\Ollama\\app.log"
+    ]
+  },
+  "allowed": [
+    "read existing source log file metadata",
+    "compute source SHA256",
+    "copy existing source logs into repo-local forensic output",
+    "compute copied-file SHA256",
+    "parse timestamps without modifying source",
+    "extract exact-window and frozen +/-120 second context lines",
+    "record unparsed textual time candidates",
+    "write repo-local forensic report and excerpts"
+  ],
+  "forbidden": [
+    "invoke ollama executable or application",
+    "call Ollama HTTP API",
+    "create/run/pull/remove any model",
+    "start/stop/restart Ollama",
+    "enable debug mode",
+    "modify source logs",
+    "modify model store",
+    "issue inference",
+    "reset M6R attempt state",
+    "assign root cause during collection",
+    "open M6R2",
+    "open M7",
+    "bulk training"
+  ],
+  "execution_semantics": {
+    "scientific_attempt": false,
+    "outcome_generation": false,
+    "retry_if_file_read_or_rotation_problem": true,
+    "rationale": "Collection reads pre-existing evidence only; repeated read-only collection cannot generate a new M6R scientific outcome."
+  },
+  "output": {
+    "root": ".local/M6R-RUNTIME-FAILURE-DECOMPOSITION/RFD-C1",
+    "report": ".local/M6R-RUNTIME-FAILURE-DECOMPOSITION/RFD-C1/RFD_C1_EXISTING_EVIDENCE_REPORT.json",
+    "raw_directory": ".local/M6R-RUNTIME-FAILURE-DECOMPOSITION/RFD-C1/raw",
+    "excerpt_directory": ".local/M6R-RUNTIME-FAILURE-DECOMPOSITION/RFD-C1/excerpts"
+  },
+  "next_after_report": "RETURN_RFD_C1_EXISTING_EVIDENCE_REPORT_FOR_INTEGRITY_TIME_WINDOW_QA_AND_MECHANISM_DECOMPOSITION; DO_NOT_RUN_NEW INFERENCE"
+}
