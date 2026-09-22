@@ -1,0 +1,68 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-q4-reconstruction-lock-v1",
+  "status": "LOCKED_FOR_LOCAL_EXECUTION",
+  "program": "M6_LOCAL_Q4_DETERMINISTIC_RECONSTRUCTION",
+  "implementation_commit": "f4906f921a0a57fae8418f9dfeac778900bf2a5b",
+  "authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+  "authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+  "venue_independence_amendment_commit": "4aed637eb8bb41cc5e67c7b079402cf16d6948d2",
+  "local_preflight_evidence_git_blob_sha1": "aa6516d84e06526a7200044198f769c37d039092",
+  "exact_blobs": {
+    "script_git_blob_sha1": "b3e51acad4755cb7a29fcc4584fc56d02de3de9e",
+    "tests_git_blob_sha1": "da1e2e1451d00af64ba06b9bee4d5c48e3cd70d0",
+    "workflow_git_blob_sha1": "de92ca4a81c86141bf70aabe705659630bd4730d",
+    "preregistration_git_blob_sha1": "65b31aea1d2d90f42f9e853d8504eb20115926a3",
+    "llama_cpp_runtime_lock_git_blob_sha1": "9cef982e91d067f7110397ecb5e66ba92af25d38",
+    "q4_reconstruction_authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+    "venue_independence_amendment_git_blob_sha1": "5d67202f3103f36736cf0e7973c054cf6df658fd"
+  },
+  "frozen_inputs": {
+    "f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "f16_size_bytes": 994156384,
+    "f16_manifest": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb"
+  },
+  "frozen_output": {
+    "q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "q4_size_bytes": 397807456,
+    "q4_manifest": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "quantization_type": "Q4_K_M"
+  },
+  "venue_rule": {
+    "platform": "local Windows",
+    "fresh_llama_quantize_build_required": true,
+    "executable_sha_is_venue_specific": true,
+    "executable_sha_must_be_recorded": true,
+    "Linux_GitHub_binary_sha_equality_required": false
+  },
+  "one_attempt_rule": {
+    "attempts_authorized": 1,
+    "consumed_when": "llama-quantize process starts",
+    "rerun_until_match": false,
+    "mismatch_is_not_scientific_fail": true
+  },
+  "zero_science_static_qa": {
+    "run_id": 35684609753,
+    "job_id": 106608658328,
+    "conclusion": "success",
+    "contract_tests": "7/7_PASS",
+    "powershell_parse": "PASS",
+    "q4_reconstruction_executed": false,
+    "ollama_scientific_execution_executed": false
+  },
+  "local_execution_scope": {
+    "exact_f16_admission": true,
+    "fresh_quantizer_build": true,
+    "q4_k_m_reconstruction": true,
+    "exact_q4_identity_adjudication": true,
+    "f16_regeneration": false,
+    "llama_cli_inference": false,
+    "fixture_evaluation": false,
+    "scientific_adjudication": false,
+    "ollama_execution": false,
+    "m7_authorized": false
+  },
+  "report_path": ".local/M6-LOCAL-Q4-RECONSTRUCTION/report/M6_LOCAL_Q4_RECONSTRUCTION_REPORT.json",
+  "output_path": ".local/M6-LOCAL-Q4-RECONSTRUCTION/output/model-q4_k_m.gguf",
+  "next_after_local_report": "RETURN_REPORT_FOR_FREEZE; ONLY EXACT Q4 ADMISSION MAY OPEN LOCAL OLLAMA M6 EXECUTION"
+}

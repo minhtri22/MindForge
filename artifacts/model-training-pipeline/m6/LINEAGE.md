@@ -705,3 +705,53 @@ unconsumed authorization `9506e5fc...`. It must build a fresh Windows
 `llama-quantize.exe` from the exact frozen source/build contract, record its
 venue-specific SHA256, execute exactly one quantization attempt, compare the
 result against the pre-existing Q4 identity, and stop before Ollama.
+
+
+## 2026-09-22 — Local deterministic Q4 reconstruction package locked
+
+The local preflight recovered an exact frozen F16 and exact llama.cpp source
+commit, so the still-unconsumed deterministic reconstruction authorization
+`9506e5fc...` is now bound to a local Windows one-click execution package.
+
+The package passed zero-science static QA:
+
+```text
+implementation:
+f4906f921a0a57fae8418f9dfeac778900bf2a5b
+
+run:
+35684609753
+
+job:
+106608658328
+
+contract tests:
+7/7 PASS
+
+PowerShell parse:
+PASS
+
+Q4 reconstruction executed:
+false
+
+Ollama scientific execution:
+false
+```
+
+The local execution contract is:
+
+```text
+exact local F16
+→ exact llama.cpp source ce8caa6e...
+→ fresh Windows build of llama-quantize
+→ record venue-specific executable SHA256
+→ exactly one Q4_K_M quantization
+→ compare size/SHA256/manifest with frozen Q4 identity
+→ stop before Ollama
+```
+
+No llama-cli inference, fixture evaluation, model-quality adjudication, or Ollama
+execution is authorized in this package.
+
+A reconstructed mismatch is an artifact-identity result, not a Q4 scientific
+FAIL. The one authorized attempt is consumed when the quantizer process starts.
