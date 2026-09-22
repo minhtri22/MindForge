@@ -1,0 +1,77 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-windows-preflight-preregistration-v1",
+  "status": "FROZEN_PREOUTCOME",
+  "program": "M6_LOCAL_WINDOWS_VENUE_PREFLIGHT",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_commit": "4aed637eb8bb41cc5e67c7b079402cf16d6948d2",
+  "venue_independence_amendment_git_blob_sha1": "5d67202f3103f36736cf0e7973c054cf6df658fd",
+  "purpose": "Qualify the user's local Windows clone as an evidence-producing M6 venue and discover/admit already-existing local Q4/F16 artifacts before any regeneration or M6 scientific runtime.",
+  "execution_scope": [
+    "verify exact repository/governance identities",
+    "record Windows host/runtime inventory",
+    "search bounded local MindForge roots for model-q4_k_m.gguf and model-f16.gguf",
+    "hash candidate artifacts and compare exact frozen size/SHA256/aggregate manifest identities",
+    "discover local Ollama executable/version without starting a server",
+    "discover existing local llama.cpp source/build binaries and record commit/hashes",
+    "write one machine-readable local preflight report"
+  ],
+  "bounded_search_policy": {
+    "default_roots": [
+      "current MindForge clone",
+      "parent directory containing sibling MindForge clones/worktrees"
+    ],
+    "whole_drive_scan": false,
+    "optional_additional_roots_allowed": true,
+    "exact_filenames_only": [
+      "model-q4_k_m.gguf",
+      "model-f16.gguf"
+    ]
+  },
+  "frozen_artifacts": {
+    "f16": {
+      "filename": "model-f16.gguf",
+      "size_bytes": 994156384,
+      "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+      "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+    },
+    "q4": {
+      "filename": "model-q4_k_m.gguf",
+      "size_bytes": 397807456,
+      "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+      "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+    }
+  },
+  "frozen_runtime": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "ollama_version": "0.34.2",
+    "windows_ollama_asset_sha256": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b"
+  },
+  "terminal_classifications": [
+    "LOCAL_Q4_ADMITTED",
+    "LOCAL_F16_ADMITTED",
+    "LOCAL_Q4_AND_F16_ADMITTED",
+    "LOCAL_PARENT_ARTIFACTS_NOT_FOUND",
+    "LOCAL_PARENT_ARTIFACT_IDENTITY_MISMATCH_ONLY",
+    "INVALID_LOCAL_PREFLIGHT_INFRASTRUCTURE"
+  ],
+  "next_rule": {
+    "LOCAL_Q4_ADMITTED": "open separate local Ollama create/chat/parity/cleanup execution authorization",
+    "LOCAL_Q4_AND_F16_ADMITTED": "prefer exact Q4 direct admission; open separate local Ollama execution authorization",
+    "LOCAL_F16_ADMITTED": "create new deterministic Q4 reconstruction orchestration using still-unconsumed authorization 9506e5fc...",
+    "LOCAL_PARENT_ARTIFACTS_NOT_FOUND": "open separate pre-outcome deterministic local artifact-regeneration authorization",
+    "LOCAL_PARENT_ARTIFACT_IDENTITY_MISMATCH_ONLY": "freeze mismatch evidence; do not use mismatched artifacts; separately decide regeneration authorization"
+  },
+  "forbidden_in_preflight": [
+    "download model weights or GGUF artifacts",
+    "install/build llama.cpp or Ollama",
+    "run HF-to-GGUF converter",
+    "run llama-quantize",
+    "run llama-cli inference",
+    "ollama serve/create/chat/run/pull/rm",
+    "fixture evaluation",
+    "model-quality adjudication",
+    "F16/Q4 scientific status changes",
+    "M7 opening",
+    "bulk training"
+  ]
+}

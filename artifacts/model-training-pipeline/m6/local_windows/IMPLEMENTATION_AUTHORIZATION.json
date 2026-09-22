@@ -1,0 +1,19 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-windows-preflight-implementation-authorization-v1",
+  "status": "AUTHORIZED_IMPLEMENTATION_AND_ZERO_SCIENCE_STATIC_QA",
+  "program": "M6_LOCAL_WINDOWS_VENUE_PREFLIGHT",
+  "origin_commit": "4aed637eb8bb41cc5e67c7b079402cf16d6948d2",
+  "allowed_surfaces": [
+    "scripts/m6_local_windows_preflight_oneclick.ps1",
+    "tests/test_m6_local_windows_preflight_contract.py",
+    ".github/workflows/model-pipeline-m6-local-windows-preflight-contract.yml",
+    "artifacts/model-training-pipeline/m6/local_windows/**",
+    "artifacts/model-training-pipeline/m6/LINEAGE.md"
+  ],
+  "static_qa_only": true,
+  "local_preflight_execution_authorized_after_lock": true,
+  "scientific_runtime_execution_authorized": false,
+  "artifact_regeneration_authorized": false,
+  "q4_reconstruction_authorized_in_this_package": false,
+  "ollama_scientific_execution_authorized": false
+}

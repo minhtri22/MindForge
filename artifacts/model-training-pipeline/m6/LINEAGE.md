@@ -493,3 +493,32 @@ verdict.
 
 Next valid action: local-Windows M6 venue qualification / pre-outcome execution
 package.
+
+
+## 2026-09-22 — Local Windows M6 preflight package opened
+
+Following the venue-independence amendment, M6 now opens a local-Windows
+pre-outcome package whose only purpose is to qualify the user's local clone,
+discover exact already-existing F16/Q4 bytes, and inventory local Ollama /
+llama.cpp runtime provenance.
+
+The one-click script is explicitly preflight-only:
+
+```text
+no model download
+no F16 regeneration
+no HF-to-GGUF conversion
+no llama-quantize
+no llama-cli inference
+no ollama serve/create/chat/run/pull/rm
+no fixture evaluation
+no scientific adjudication
+```
+
+The default artifact search is bounded to the current MindForge clone and its
+parent directory containing sibling MindForge clones/worktrees. Whole-drive
+search is forbidden.
+
+After static zero-science QA PASS, the implementation will be locked for local
+execution and will emit one JSON report under
+`.local/M6-LOCAL-PREFLIGHT/report/`.

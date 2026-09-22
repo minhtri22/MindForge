@@ -1,0 +1,50 @@
+name: Model Pipeline M6 Local Windows Preflight Contract
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - 'scripts/m6_local_windows_preflight_oneclick.ps1'
+      - 'tests/test_m6_local_windows_preflight_contract.py'
+      - 'artifacts/model-training-pipeline/m6/local_windows/**'
+      - '.github/workflows/model-pipeline-m6-local-windows-preflight-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  static-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Python static contract tests
+        run: python -m pytest -q tests/test_m6_local_windows_preflight_contract.py
+
+      - name: PowerShell parse-only syntax check
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path 'scripts/m6_local_windows_preflight_oneclick.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+          Write-Host "PowerShell syntax PASS"
+
+      - name: Prove local preflight was not executed
+        run: |
+          test ! -d .local/M6-LOCAL-PREFLIGHT
+          echo "local_preflight_executed=false"
+          echo "artifact_regeneration_executed=false"
+          echo "q4_reconstruction_executed=false"
+          echo "ollama_scientific_execution_executed=false"
