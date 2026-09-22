@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+ROOT = Path(__file__).resolve().parents[1]
 import importlib.util
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "tools" / "m6r2_contract.py"
