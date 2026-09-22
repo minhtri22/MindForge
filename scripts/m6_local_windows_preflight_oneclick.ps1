@@ -75,7 +75,7 @@ function Test-GitAncestor {
 }
 
 function Get-CandidateRecord {
-    param([System.IO.FileInfo]$File,[hashtable]$Expected)
+    param([System.IO.FileInfo]$File,[System.Collections.IDictionary]$Expected)
 
     $Sha = Get-Sha256File $File.FullName
     $ManifestJson = '[{"name":"' + $Expected.filename + '","sha256":"' + $Sha + '","size":' + [string]$File.Length + '}]'
