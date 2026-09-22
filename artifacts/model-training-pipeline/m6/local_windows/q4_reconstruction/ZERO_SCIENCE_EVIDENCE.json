@@ -2,12 +2,20 @@
   "schema": "mindforge-model-pipeline-m6-local-q4-reconstruction-zero-science-evidence-v1",
   "verdict": "PASS",
   "program": "M6_LOCAL_Q4_DETERMINISTIC_RECONSTRUCTION",
-  "implementation_commit": "f4906f921a0a57fae8418f9dfeac778900bf2a5b",
+  "implementation_commit": "ca2a1bb4b684409880decf71eac61dc0bc22a0b3",
+  "supersedes_lock_commit": "2bf0e1ca93e25ab8b921326d02ab1201a56ea77e",
+  "prior_local_failure": {
+    "observed_error": "cmake not found",
+    "phase": "BEFORE_ATTEMPT",
+    "q4_reconstruction_authorization_consumed": false,
+    "quantizer_started": false,
+    "scientific_execution_occurred": false
+  },
   "authoritative_run": {
-    "run_id": 35684609753,
-    "job_id": 106608658328,
+    "run_id": 35687179539,
+    "job_id": 106616392097,
     "conclusion": "success",
-    "contract_tests_passed": 7,
+    "contract_tests_passed": 9,
     "contract_tests_failed": 0,
     "powershell_parse": "PASS"
   },
@@ -16,7 +24,7 @@
     "ollama_scientific_execution_executed": false,
     "authorization_consumed": false
   },
-  "exact_script_git_blob_sha1": "b3e51acad4755cb7a29fcc4584fc56d02de3de9e",
+  "exact_script_git_blob_sha1": "ca265d65549bdf89fa17296dd98e52c22019376e",
   "state_after_gate": {
     "local_q4_reconstruction_execution_authorized": true,
     "q4_reconstruction_authorization_consumed": false,

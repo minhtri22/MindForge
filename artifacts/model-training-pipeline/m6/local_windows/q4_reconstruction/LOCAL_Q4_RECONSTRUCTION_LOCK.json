@@ -1,15 +1,18 @@
 {
   "schema": "mindforge-model-pipeline-m6-local-q4-reconstruction-lock-v1",
   "status": "LOCKED_FOR_LOCAL_EXECUTION",
+  "supersedes_lock_commit": "2bf0e1ca93e25ab8b921326d02ab1201a56ea77e",
+  "supersession_reason": "First local invocation failed before attempt start because cmake was not on PATH under powershell.exe -NoProfile. Repair adds Visual Studio vswhere-based CMake discovery already proven in the M5 local runner; no scientific contract changed.",
   "program": "M6_LOCAL_Q4_DETERMINISTIC_RECONSTRUCTION",
-  "implementation_commit": "f4906f921a0a57fae8418f9dfeac778900bf2a5b",
+  "implementation_commit": "ca2a1bb4b684409880decf71eac61dc0bc22a0b3",
   "authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
   "authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+  "authorization_consumed": false,
   "venue_independence_amendment_commit": "4aed637eb8bb41cc5e67c7b079402cf16d6948d2",
   "local_preflight_evidence_git_blob_sha1": "aa6516d84e06526a7200044198f769c37d039092",
   "exact_blobs": {
-    "script_git_blob_sha1": "b3e51acad4755cb7a29fcc4584fc56d02de3de9e",
-    "tests_git_blob_sha1": "da1e2e1451d00af64ba06b9bee4d5c48e3cd70d0",
+    "script_git_blob_sha1": "ca265d65549bdf89fa17296dd98e52c22019376e",
+    "tests_git_blob_sha1": "ea898d396499aead942dc4b0f5d358405b19f7f5",
     "workflow_git_blob_sha1": "de92ca4a81c86141bf70aabe705659630bd4730d",
     "preregistration_git_blob_sha1": "65b31aea1d2d90f42f9e853d8504eb20115926a3",
     "llama_cpp_runtime_lock_git_blob_sha1": "9cef982e91d067f7110397ecb5e66ba92af25d38",
@@ -28,6 +31,13 @@
     "q4_manifest": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
     "quantization_type": "Q4_K_M"
   },
+  "infrastructure_repair": {
+    "prior_local_failure": "cmake not found",
+    "failure_phase": "BEFORE_ATTEMPT",
+    "attempt_consumed": false,
+    "repair": "PATH lookup followed by Visual Studio vswhere CMake discovery",
+    "scientific_scope_changed": false
+  },
   "venue_rule": {
     "platform": "local Windows",
     "fresh_llama_quantize_build_required": true,
@@ -42,10 +52,10 @@
     "mismatch_is_not_scientific_fail": true
   },
   "zero_science_static_qa": {
-    "run_id": 35684609753,
-    "job_id": 106608658328,
+    "run_id": 35687179539,
+    "job_id": 106616392097,
     "conclusion": "success",
-    "contract_tests": "7/7_PASS",
+    "contract_tests": "9/9_PASS",
     "powershell_parse": "PASS",
     "q4_reconstruction_executed": false,
     "ollama_scientific_execution_executed": false

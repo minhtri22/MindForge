@@ -755,3 +755,57 @@ execution is authorized in this package.
 
 A reconstructed mismatch is an artifact-identity result, not a Q4 scientific
 FAIL. The one authorized attempt is consumed when the quantizer process starts.
+
+
+## 2026-09-22 — Local Q4 reconstruction CMake discovery repair / authorization still unconsumed
+
+The first local invocation of the locked Q4 reconstruction package terminated
+before any quantizer process was started because `powershell.exe -NoProfile`
+could not resolve `cmake` from PATH.
+
+Observed terminal condition:
+
+```text
+cmake not found
+```
+
+This is an infrastructure-only pre-attempt failure. The one-shot deterministic
+Q4 reconstruction authorization remains unconsumed because
+`llama-quantize.exe` never started.
+
+A bounded repair now reuses the already-proven M5 local CMake discovery policy:
+
+```text
+Get-Command cmake
+    else
+Visual Studio Installer vswhere.exe
+    -> latest Visual Studio installation
+    -> Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe
+    -> prepend directory to PATH
+```
+
+No frozen F16/Q4 identity, llama.cpp source commit, build flags,
+quantization type, one-attempt semantics, or downstream boundary changed.
+
+Authoritative repair:
+
+```text
+ca2a1bb4b684409880decf71eac61dc0bc22a0b3
+
+script blob:
+ca265d65549bdf89fa17296dd98e52c22019376e
+```
+
+Static zero-science QA:
+
+```text
+run: 35687179539
+job: 106616392097
+contract tests: 9/9 PASS
+PowerShell parse: PASS
+Q4 reconstruction executed: false
+Ollama scientific execution: false
+```
+
+The previous reconstruction lock is superseded. This repaired package remains
+authorized for the same single local Q4_K_M reconstruction attempt.
