@@ -255,3 +255,30 @@ No adapter edit, no runner edit, no contract edit, no science change.
 
 S3 authorization is temporarily suspended fail-closed until zero-science QA
 confirms the materialized adapter blob.
+
+
+## 2026-09-22 — S2-F01 repaired / S3 authorization v2 issued
+
+Binding materialization QA:
+- run 35756574487 / job 106843739494
+- exact adapter path tools/ollama_windows_adapter.py
+- exact adapter blob 075b3b354bbd0c7674d629070d99769d201ad619
+- 23/23 tests PASS
+- Python compile PASS
+- PowerShell parse PASS
+- runner blob unchanged
+- contract blob unchanged
+- no scientific execution
+- attempts consumed = 0
+
+S3 v1 suspension is superseded.
+
+S3 authorization v2:
+AUTHORIZED_ONE_FRESH_M6R2_OUTCOME_EXECUTION
+attempts authorized = 1
+attempts consumed = 0
+
+Authorization now binds both the exact qualified runtime scope and the exact
+materialized qualified adapter blob on the execution branch.
+
+M7 and bulk training remain closed.

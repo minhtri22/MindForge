@@ -1,15 +1,50 @@
 {
-  "schema": "mindforge-model-pipeline-m6r2-s3-execution-authorization-v1",
-  "status": "SUSPENDED_PENDING_BINDING_MATERIALIZATION_QA",
+  "schema": "mindforge-model-pipeline-m6r2-s3-execution-authorization-v2",
+  "status": "AUTHORIZED_ONE_FRESH_M6R2_OUTCOME_EXECUTION",
   "program": "M6R2_PARITY_REPLICATION",
-  "prior_authorization_git_blob_sha1": "c55074d364972f5b120bc254d389e9c9f5cb2553",
+  "authorized_from_commit": "3cf74db95b32f7376feb50eea5361a05a389bb7d",
+  "supersedes_authorization_git_blob_sha1": "c55074d364972f5b120bc254d389e9c9f5cb2553",
+  "supersedes_suspended_git_blob_sha1": "5a5ab061d4325d1cef5e8ac76ac5f15ccb6e3690",
   "s1_implementation_lock_git_blob_sha1": "124b21063675e6d37202a81b88c04efc4aa2254e",
   "s2_authorization_git_blob_sha1": "281b79a4482ed3df57c84c5a138cd00df7d72842",
+  "s2_formal_closure_git_blob_sha1": "0f85f13b4278247253209089bcf78b0d24d5a092",
+  "binding_materialization_repair_git_blob_sha1": "2d41308058f10b747664bd920fa89d3c14f5e26b",
+  "binding_materialization_qa_git_blob_sha1": "9b394ca625470b94b2414a25a8ae1a177c0768a6",
   "qualified_runtime_artifact_sha256": "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370",
-  "reason": "Exact qualified adapter blob was not materialized on M6R2 execution branch. Authorization is fail-closed until zero-science materialization QA passes.",
-  "attempts_authorized": 0,
+  "exact_runtime_adapter": {
+    "path": "tools/ollama_windows_adapter.py",
+    "git_blob_sha1": "075b3b354bbd0c7674d629070d99769d201ad619",
+    "materialized_on_execution_branch": true
+  },
+  "attempts_authorized": 1,
+  "attempts_consumed_before_authorization": 0,
+  "allowed": [
+    "execute exact locked scripts/m6r2_parity_oneclick.ps1",
+    "consume exact bound QUALIFIED_RUNTIME_SCOPE.json",
+    "use exact materialized qualified adapter blob",
+    "create only owned ephemeral M6R2 namespace",
+    "submit frozen eval_v1 under frozen generation contract",
+    "adjudicate only frozen parity/reasoning endpoints",
+    "cleanup only owned artifacts"
+  ],
+  "forbidden": [
+    "change runner or pure science contract",
+    "change qualified adapter content",
+    "change Q4 or Modelfile",
+    "change eval_v1 or generation parameters",
+    "change parent comparator or parity/reasoning criteria",
+    "selective rerun after outcome exposure",
+    "reset/delete/overwrite outcome-exposure state",
+    "open M7",
+    "bulk training"
+  ],
+  "outcome_boundary": {
+    "consume_on": "first durable eval_v1 response with non-empty message.content or message.thinking",
+    "preoutcome_positive_infra_failure": "INVALID_INFRA_PREOUTCOME / attempt not consumed",
+    "postoutcome_infra_failure": "INVALID_INFRA_POSTOUTCOME / attempt consumed",
+    "ambiguous_request": "INVALID_PROVENANCE"
+  },
   "execution_performed": false,
-  "scientific_attempts_consumed": 0,
   "m7_authorized": false,
   "bulk_training_authorized": false
 }

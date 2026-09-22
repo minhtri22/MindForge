@@ -171,7 +171,7 @@ def git_blob_sha1(path):
     return cp.stdout.strip()
 
 
-def test_s2_binding_and_s3_suspended_during_adapter_materialization_qa():
+def test_s2_binding_and_s3_v2_one_attempt_authorization_present():
     assert S2.exists()
     s2 = json.loads(S2.read_text(encoding="utf-8"))
     assert s2["status"] == "AUTHORIZED_ONE_CONSOLIDATED_INFRA_BINDING"
@@ -189,11 +189,15 @@ def test_s2_binding_and_s3_suspended_during_adapter_materialization_qa():
 
     assert S3.exists()
     s3 = json.loads(S3.read_text(encoding="utf-8"))
-    assert s3["status"] == "SUSPENDED_PENDING_BINDING_MATERIALIZATION_QA"
-    assert s3["attempts_authorized"] == 0
+    assert s3["status"] == "AUTHORIZED_ONE_FRESH_M6R2_OUTCOME_EXECUTION"
+    assert s3["schema"] == "mindforge-model-pipeline-m6r2-s3-execution-authorization-v2"
+    assert s3["attempts_authorized"] == 1
     assert s3["s1_implementation_lock_git_blob_sha1"] == "124b21063675e6d37202a81b88c04efc4aa2254e"
     assert s3["s2_authorization_git_blob_sha1"] == "281b79a4482ed3df57c84c5a138cd00df7d72842"
     assert s3["qualified_runtime_artifact_sha256"] == "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370"
+    assert s3["exact_runtime_adapter"]["path"] == "tools/ollama_windows_adapter.py"
+    assert s3["exact_runtime_adapter"]["git_blob_sha1"] == "075b3b354bbd0c7674d629070d99769d201ad619"
+    assert s3["exact_runtime_adapter"]["materialized_on_execution_branch"] is True
     assert s3["execution_performed"] is False
     assert s3["m7_authorized"] is False
     assert s3["bulk_training_authorized"] is False
