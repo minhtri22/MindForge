@@ -74,3 +74,34 @@ Every run must use a unique evidence directory and exact locked implementation.
 
 M6R2 S2/S3 remain unauthorized. A successful local OWRQ qualification only
 produces a reusable QUALIFIED_RUNTIME_SCOPE artifact for later S2 binding.
+
+
+## 2026-09-22 — Local qualification PASS / OWRQ formally closed
+
+Source artifacts:
+- OWRQ_QUALIFICATION_REPORT.json
+  - SHA256 e5bafb7d07707f57bf274649683e50f929ea7f8d973d1e5d0efc6f359d7df689
+  - status QUALIFIED_RUNTIME_SCOPE
+- QUALIFIED_RUNTIME_SCOPE.json
+  - SHA256 4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370
+  - status QUALIFIED_RUNTIME_SCOPE
+
+Observed qualified tuple:
+- Ollama 0.34.2
+- ollama.exe SHA256 ad41dcf55c5de96d4a0bff7c559a17285c3aa064a6f12d23db3ebf59ad8e4125
+- adapter blob 075b3b354bbd0c7674d629070d99769d201ad619
+- machine fingerprint a208a4c542eeaf70363b77344cac81eec531cc0c9be85aada22d61c112c08993
+- host 127.0.0.1:11468
+- KV cache f16
+- flash attention forced false / resolved off
+- fixture llama3.2:1b digest baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878
+
+All ten qualification gates PASS.
+Scientific firewall PASS:
+no eval_v1, no quality/reasoning scoring, no model pull/create/delete.
+
+Terminal result:
+QUALIFIED_RUNTIME_SCOPE / FORMALLY_CLOSED
+
+This authorizes no M6R2 science by itself.
+The exact scope may now be consumed by M6R2 S2 metadata binding.

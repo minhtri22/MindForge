@@ -1,0 +1,75 @@
+{
+  "schema": "mindforge-owrq-formal-adjudication-v1",
+  "status": "FORMALLY_CLOSED",
+  "terminal_class": "QUALIFIED_RUNTIME_SCOPE",
+  "program": "OLLAMA_WINDOWS_RUNTIME_QUALIFICATION",
+  "implementation_lock_git_blob_sha1": "81c82912746ce696c951e01aa69d554a2fed457c",
+  "local_execution_authorization_git_blob_sha1": "c3822bae1796df22b2b00724752e8714e2e7dd57",
+  "canonical_implementation_commit": "f40c3ffcdfdd56dd0e50ae16ecf119d19434f587",
+  "authorization_commit": "f142377b53ebc13a1486a1d7ecfa92c4fb024681",
+  "source_artifacts": {
+    "qualification_report": {
+      "filename": "OWRQ_QUALIFICATION_REPORT.json",
+      "size_bytes": 8868,
+      "sha256": "e5bafb7d07707f57bf274649683e50f929ea7f8d973d1e5d0efc6f359d7df689",
+      "schema": "mindforge-owrq-qualification-report-v1",
+      "status": "QUALIFIED_RUNTIME_SCOPE"
+    },
+    "qualified_runtime_scope": {
+      "filename": "QUALIFIED_RUNTIME_SCOPE.json",
+      "size_bytes": 3964,
+      "sha256": "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370",
+      "schema": "mindforge-owrq-qualified-runtime-scope-v1",
+      "status": "QUALIFIED_RUNTIME_SCOPE"
+    },
+    "evidence_manifest_sha256": "7e27a33e0c0f8f3cc0cc63c7a60cf95de9abfe527ab02787eb405acc8049b0c7"
+  },
+  "observed_scope": {
+    "ollama_version": "0.34.2",
+    "ollama_executable_sha256": "ad41dcf55c5de96d4a0bff7c559a17285c3aa064a6f12d23db3ebf59ad8e4125",
+    "runtime_adapter_git_blob_sha1": "075b3b354bbd0c7674d629070d99769d201ad619",
+    "runtime_adapter_contract_version": "mindforge-owrq-runtime-adapter-v1",
+    "local_machine_fingerprint_sha256": "a208a4c542eeaf70363b77344cac81eec531cc0c9be85aada22d61c112c08993",
+    "host": "127.0.0.1:11468",
+    "chat_endpoint": "/api/chat",
+    "kv_cache_type": "f16",
+    "flash_attention_forced": false,
+    "flash_attention_observed_value": "false",
+    "flash_attention_mode": "off",
+    "fixture": {
+      "name": "llama3.2:1b",
+      "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+      "size": 1321098329
+    }
+  },
+  "gates": {
+    "exact_ollama_0_34_2": true,
+    "fixture_preexisting": true,
+    "plumbing_request_completed": true,
+    "cache_type_k_f16_observed": true,
+    "cache_type_v_f16_observed": true,
+    "cache_type_v_q4_0_absent": true,
+    "known_conflict_error_absent": true,
+    "flash_attention_resolution_observed": true,
+    "qualification_model_set_unchanged": true,
+    "system_11434_unchanged": true,
+    "all_pass": true
+  },
+  "scientific_firewall": {
+    "scientific": false,
+    "eval_v1_accessed": false,
+    "model_quality_scored": false,
+    "reasoning_scored": false,
+    "ollama_pull_executed": false,
+    "model_create_executed": false,
+    "model_delete_executed": false,
+    "m6r2_science_authorized": false
+  },
+  "interpretation": "The exact OWRQ runtime scope is qualified for reuse. The historical q4_0 V-cache/flash-attention conflict is absent under the qualified f16 process-scoped configuration. This is infrastructure qualification only and does not alter M6/M6R scientific outcomes.",
+  "downstream": {
+    "m6r2_s2_may_bind_exact_scope": true,
+    "m6r2_s3_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}

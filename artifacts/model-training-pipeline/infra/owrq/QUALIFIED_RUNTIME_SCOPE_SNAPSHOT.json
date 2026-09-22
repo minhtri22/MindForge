@@ -1,0 +1,40 @@
+{
+  "schema": "mindforge-owrq-qualified-runtime-scope-snapshot-v1",
+  "source_file_sha256": "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370",
+  "status": "QUALIFIED_RUNTIME_SCOPE",
+  "adapter": {
+    "contract_version": "mindforge-owrq-runtime-adapter-v1",
+    "entrypoint": "tools/ollama_windows_adapter.py",
+    "runtime_adapter_git_blob_sha1": "075b3b354bbd0c7674d629070d99769d201ad619"
+  },
+  "api_contract": {
+    "host": "127.0.0.1:11468",
+    "chat_endpoint": "/api/chat"
+  },
+  "backend_resolution": {
+    "flash_attention_mode": "off"
+  },
+  "runtime": {
+    "ollama_version": "0.34.2",
+    "ollama_executable_path": "C:\\Users\\minht\\AppData\\Local\\Programs\\Ollama\\ollama.exe",
+    "ollama_executable_sha256": "ad41dcf55c5de96d4a0bff7c559a17285c3aa064a6f12d23db3ebf59ad8e4125"
+  },
+  "runtime_environment": {
+    "OLLAMA_KV_CACHE_TYPE": "f16",
+    "OLLAMA_FLASH_ATTENTION_forced": false,
+    "OLLAMA_FLASH_ATTENTION_observed_value": "false"
+  },
+  "target_scope": {
+    "local_machine_fingerprint_sha256": "a208a4c542eeaf70363b77344cac81eec531cc0c9be85aada22d61c112c08993",
+    "machine": "AMD64",
+    "os": "Windows",
+    "release": "11",
+    "version": "10.0.26200"
+  },
+  "fixture_identity": {
+    "name": "llama3.2:1b",
+    "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+    "size": 1321098329
+  },
+  "note": "Normalized repository snapshot. Exact local source artifact identity is source_file_sha256."
+}
