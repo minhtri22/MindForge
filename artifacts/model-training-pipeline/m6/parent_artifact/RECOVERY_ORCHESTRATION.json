@@ -1,0 +1,60 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-recovery-orchestration-v1",
+  "status": "BOUND_FOR_ONE_RECOVERY_ATTEMPT",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "phase": "RECOVERY_EXISTING_BYTES_ONLY",
+  "authorization_commit": "24edd4ca44b2260742b4dc976655548186404699",
+  "authorization_git_blob_sha1": "9c95487933d912147a7ac806e0fd2a599fdcff68",
+  "implementation_commit": "a6f9d4341894cf59cab853d4ae6912e060c10599",
+  "zero_science_closure_commit": "94c9300fa6c9c7df38b271a8295a69ef40572a6a",
+  "workflow_path": ".github/workflows/model-pipeline-m6-parent-recovery.yml",
+  "workflow_git_blob_sha1": "64973b1f9f83663ebfa961fc4f998009af451e66",
+  "attempts_planned": 1,
+  "sources": [
+    {
+      "type": "repository_workspace",
+      "ref": "orchestration checkout",
+      "filename": "model-q4_k_m.gguf"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35645292452,
+      "artifact_id": 10660640056,
+      "name": "m5q-q4-formal-replication-evidence",
+      "zip_sha256": "aeb4300972620d74b639b7153fcd974c397abfbc92731f2339ff78ac3f7f0736"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35632404520,
+      "artifact_id": 10654702903,
+      "name": "m5-q8-q4-quantization-qualification",
+      "zip_sha256": "ea8e52a97184241cf08d9fad5efbf8b7131f3bd6d8a13bb37f73647ca70fbe31"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35634940378,
+      "artifact_id": 10656561362,
+      "name": "m5-q8-q4-quantization-qualification",
+      "zip_sha256": "6ca39627e239d59eb96d10eb778c3f60296f6c340fc41df6f063a36a4203e226"
+    }
+  ],
+  "expected_identity": {
+    "filename": "model-q4_k_m.gguf",
+    "size": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "reconstruction_in_workflow": false,
+  "llama_quantize_authorized": false,
+  "q4_scientific_rerun_authorized": false,
+  "fixture_evaluation_authorized": false,
+  "model_inference_authorized": false,
+  "scientific_adjudication_authorized": false,
+  "ollama_create_authorized": false,
+  "ollama_chat_authorized": false,
+  "valid_terminal_outcomes": [
+    "ADMITTED_EXISTING_BYTES",
+    "NOT_FOUND_RECOVERY_EXHAUSTED"
+  ],
+  "next_rule_if_exhausted": "FREEZE_RECOVERY_EXHAUSTION_EVIDENCE_BEFORE_SEPARATE_RECONSTRUCTION_AUTHORIZATION"
+}

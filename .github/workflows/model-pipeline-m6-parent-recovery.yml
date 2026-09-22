@@ -1,0 +1,319 @@
+name: Model Pipeline M6 Parent Artifact Recovery
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - '.github/workflows/model-pipeline-m6-parent-recovery.yml'
+      - 'artifacts/model-training-pipeline/m6/parent_artifact/RECOVERY_ORCHESTRATION.json'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  recovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      RECOVERY_AUTH_COMMIT: '24edd4ca44b2260742b4dc976655548186404699'
+      RECOVERY_AUTH_BLOB: '9c95487933d912147a7ac806e0fd2a599fdcff68'
+      EXPECTED_Q4_SIZE: '397807456'
+      EXPECTED_Q4_SHA256: 'ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977'
+      EXPECTED_Q4_MANIFEST: 'e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b'
+      GH_TOKEN: '${{ github.token }}'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify recovery-only authorization and orchestration binding
+        run: |
+          set -euo pipefail
+          parent="$(git rev-parse HEAD^)"
+          test "$parent" = "$RECOVERY_AUTH_COMMIT"
+
+          auth_path='artifacts/model-training-pipeline/m6/parent_artifact/EXECUTION_AUTHORIZATION.json'
+          orch_path='artifacts/model-training-pipeline/m6/parent_artifact/RECOVERY_ORCHESTRATION.json'
+
+          actual_auth_blob="$(git hash-object -- "$auth_path")"
+          test "$actual_auth_blob" = "$RECOVERY_AUTH_BLOB"
+
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          auth_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m6/parent_artifact/"
+              "EXECUTION_AUTHORIZATION.json"
+          )
+          orch_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m6/parent_artifact/"
+              "RECOVERY_ORCHESTRATION.json"
+          )
+          auth = json.loads(auth_path.read_text())
+          orch = json.loads(orch_path.read_text())
+
+          assert auth["schema"] == (
+              "mindforge-model-pipeline-m6-parent-artifact-execution-authorization-v1"
+          )
+          assert auth["status"] == "AUTHORIZED_RECOVERY_EXECUTION_ONLY"
+          assert auth["execution_class"] == (
+              "M6_PARENT_ARTIFACT_RECOVERY_FIRST_PROVENANCE_ADMISSION"
+          )
+          assert auth["recovery_authorization"]["attempts_authorized"] == 1
+          assert auth["recovery_authorization"]["mode"] == "RECOVERY_EXISTING_BYTES_ONLY"
+          assert auth["reconstruction_boundary"]["reconstruction_execution_authorized"] is False
+          assert auth["reconstruction_boundary"]["llama_quantize_execution_authorized"] is False
+          assert auth["scientific_boundaries"]["q4_scientific_rerun"] is False
+          assert auth["scientific_boundaries"]["q4_fixture_evaluation"] is False
+          assert auth["scientific_boundaries"]["model_inference"] is False
+          assert auth["scientific_boundaries"]["scientific_adjudication"] is False
+          assert auth["scientific_boundaries"]["ollama_create"] is False
+          assert auth["scientific_boundaries"]["ollama_chat"] is False
+
+          assert orch["schema"] == (
+              "mindforge-model-pipeline-m6-parent-artifact-recovery-orchestration-v1"
+          )
+          assert orch["status"] == "BOUND_FOR_ONE_RECOVERY_ATTEMPT"
+          assert orch["authorization_commit"] == (
+              "24edd4ca44b2260742b4dc976655548186404699"
+          )
+          assert orch["authorization_git_blob_sha1"] == (
+              "9c95487933d912147a7ac806e0fd2a599fdcff68"
+          )
+          assert orch["implementation_commit"] == (
+              "a6f9d4341894cf59cab853d4ae6912e060c10599"
+          )
+          assert orch["reconstruction_in_workflow"] is False
+          assert orch["llama_quantize_authorized"] is False
+
+          wf = pathlib.Path(".github/workflows/model-pipeline-m6-parent-recovery.yml")
+          wf_blob = subprocess.check_output(
+              ["git", "hash-object", "--", str(wf)], text=True
+          ).strip()
+          assert wf_blob == orch["workflow_git_blob_sha1"], (
+              wf_blob,
+              orch["workflow_git_blob_sha1"],
+          )
+          print("M6_PARENT_RECOVERY_AUTHORIZATION_BOUND")
+          PY
+
+      - name: Execute exactly one recovery attempt
+        id: recovery
+        run: |
+          set -euo pipefail
+          mkdir -p recovery-sources/actions recovery-output
+
+          # Candidate class 1: exact filename already present in the repository/workspace.
+          find . -type f -name 'model-q4_k_m.gguf'             -not -path './.git/*'             -not -path './recovery-output/*'             -print > recovery-sources/repo-candidates.txt
+
+          cat > recovery-sources/actions-sources.json <<'JSON'
+          [
+            {
+              "class": "AUTHORITATIVE_Q4_FORMAL_EVIDENCE",
+              "run_id": 35645292452,
+              "artifact_id": 10660640056,
+              "name": "m5q-q4-formal-replication-evidence",
+              "expected_zip_sha256": "aeb4300972620d74b639b7153fcd974c397abfbc92731f2339ff78ac3f7f0736"
+            },
+            {
+              "class": "QUARANTINED_ACCIDENTAL_Q4_EVIDENCE",
+              "run_id": 35632404520,
+              "artifact_id": 10654702903,
+              "name": "m5-q8-q4-quantization-qualification",
+              "expected_zip_sha256": "ea8e52a97184241cf08d9fad5efbf8b7131f3bd6d8a13bb37f73647ca70fbe31"
+            },
+            {
+              "class": "QUARANTINED_ACCIDENTAL_Q4_EVIDENCE",
+              "run_id": 35634940378,
+              "artifact_id": 10656561362,
+              "name": "m5-q8-q4-quantization-qualification",
+              "expected_zip_sha256": "6ca39627e239d59eb96d10eb778c3f60296f6c340fc41df6f063a36a4203e226"
+            }
+          ]
+          JSON
+
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import subprocess
+          import zipfile
+
+          root = pathlib.Path.cwd()
+          sources = json.loads(
+              (root / "recovery-sources/actions-sources.json").read_text()
+          )
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          records = []
+
+          for source in sources:
+              aid = source["artifact_id"]
+              zip_path = root / "recovery-sources/actions" / f"{aid}.zip"
+              extract_dir = root / "recovery-sources/actions" / str(aid)
+              extract_dir.mkdir(parents=True, exist_ok=True)
+              url = f"https://api.github.com/repos/{repo}/actions/artifacts/{aid}/zip"
+              completed = subprocess.run(
+                  [
+                      "curl", "-L", "--fail", "--silent", "--show-error",
+                      "-H", f"Authorization: Bearer {token}",
+                      "-H", "Accept: application/vnd.github+json",
+                      "-H", "X-GitHub-Api-Version: 2022-11-28",
+                      url, "-o", str(zip_path),
+                  ],
+                  text=True,
+                  capture_output=True,
+                  check=False,
+              )
+              record = dict(source)
+              record["download_return_code"] = completed.returncode
+              record["downloaded"] = completed.returncode == 0
+              if completed.returncode != 0:
+                  record["download_stderr"] = completed.stderr[-2000:]
+                  records.append(record)
+                  continue
+
+              digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
+              record["actual_zip_sha256"] = digest
+              record["zip_digest_match"] = digest == source["expected_zip_sha256"]
+              if not record["zip_digest_match"]:
+                  records.append(record)
+                  continue
+
+              with zipfile.ZipFile(zip_path) as zf:
+                  zf.extractall(extract_dir)
+                  record["members"] = sorted(zf.namelist())
+              records.append(record)
+
+          (root / "recovery-sources/actions-download-records.json").write_text(
+              json.dumps(records, indent=2, sort_keys=True) + "\n"
+          )
+
+          if any(
+              (not r.get("downloaded", False)) or (not r.get("zip_digest_match", False))
+              for r in records
+          ):
+              raise SystemExit("one or more provenance-bound Actions artifacts could not be verified")
+          PY
+
+          find recovery-sources/actions -type f -name 'model-q4_k_m.gguf'             -print > recovery-sources/action-candidates.txt
+
+          cat recovery-sources/repo-candidates.txt recovery-sources/action-candidates.txt             > recovery-sources/all-candidates.txt
+
+          python - <<'PY'
+          import importlib.util
+          import json
+          import pathlib
+          import shutil
+          import sys
+
+          root = pathlib.Path.cwd()
+          tool_path = root / "tools/m6_parent_artifact_materialize.py"
+          spec = importlib.util.spec_from_file_location("m6_parent_recovery_runtime", tool_path)
+          assert spec is not None and spec.loader is not None
+          mat = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = mat
+          spec.loader.exec_module(mat)
+
+          candidate_paths = [
+              pathlib.Path(line.strip())
+              for line in (root / "recovery-sources/all-candidates.txt").read_text().splitlines()
+              if line.strip()
+          ]
+          inspected = [mat.inspect_artifact(path, mat.Q4_IDENTITY) for path in candidate_paths]
+          admitted = next((row for row in inspected if row["admitted"]), None)
+
+          result = {
+              "schema": "mindforge-model-pipeline-m6-parent-artifact-recovery-result-v1",
+              "program": mat.PROGRAM,
+              "authorization_commit": "24edd4ca44b2260742b4dc976655548186404699",
+              "orchestration_commit": __import__("os").environ["GITHUB_SHA"],
+              "attempt_number": 1,
+              "candidate_count": len(candidate_paths),
+              "inspected_candidates": inspected,
+              "q4_scientific_status": "PASS_CLOSED",
+              "q4_rerun_authorized": False,
+              "reconstruction_executed": False,
+              "llama_quantize_executed": False,
+              "fixture_evaluation_executed": False,
+              "model_inference_executed": False,
+              "scientific_adjudication_executed": False,
+              "ollama_create_executed": False,
+              "ollama_chat_executed": False,
+              "m6_scientific_execution_executed": False,
+              "m7_authorized": False,
+              "bulk_training_authorized": False,
+          }
+
+          if admitted is None:
+              result["classification"] = "NOT_FOUND_RECOVERY_EXHAUSTED"
+              result["admitted_source"] = None
+              result["persisted_artifact"] = None
+          else:
+              destination = root / "recovery-output" / mat.Q4_FILENAME
+              shutil.copyfile(admitted["path"], destination)
+              persisted = mat.inspect_artifact(destination, mat.Q4_IDENTITY)
+              if not persisted["admitted"]:
+                  raise SystemExit("persisted recovered Q4 failed exact identity verification")
+              result["classification"] = "ADMITTED_EXISTING_BYTES"
+              result["admitted_source"] = admitted
+              result["persisted_artifact"] = persisted
+
+          (root / "recovery-result.json").write_text(
+              json.dumps(result, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+
+          classification="$(python - <<'PY'
+          import json
+          print(json.load(open("recovery-result.json"))["classification"])
+          PY
+          )"
+          echo "classification=$classification" >> "$GITHUB_OUTPUT"
+
+      - name: Prove reconstruction and science remained closed
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("recovery-result.json").read_text())
+          assert data["attempt_number"] == 1
+          assert data["classification"] in {
+              "ADMITTED_EXISTING_BYTES",
+              "NOT_FOUND_RECOVERY_EXHAUSTED",
+          }
+          assert data["q4_scientific_status"] == "PASS_CLOSED"
+          assert data["q4_rerun_authorized"] is False
+          assert data["reconstruction_executed"] is False
+          assert data["llama_quantize_executed"] is False
+          assert data["fixture_evaluation_executed"] is False
+          assert data["model_inference_executed"] is False
+          assert data["scientific_adjudication_executed"] is False
+          assert data["ollama_create_executed"] is False
+          assert data["ollama_chat_executed"] is False
+          assert data["m6_scientific_execution_executed"] is False
+          assert data["m7_authorized"] is False
+          assert data["bulk_training_authorized"] is False
+          PY
+
+      - name: Upload frozen recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m6-parent-artifact-recovery-evidence
+          path: |
+            recovery-result.json
+            recovery-sources/repo-candidates.txt
+            recovery-sources/action-candidates.txt
+            recovery-sources/actions-sources.json
+            recovery-sources/actions-download-records.json
+            recovery-output/model-q4_k_m.gguf
+          if-no-files-found: warn
