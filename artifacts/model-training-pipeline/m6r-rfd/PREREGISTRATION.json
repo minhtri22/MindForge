@@ -1,0 +1,89 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-runtime-failure-decomposition-preregistration-v1",
+  "status": "FROZEN_BEFORE_FORENSIC_COLLECTION",
+  "program": "M6R_RUNTIME_FAILURE_DECOMPOSITION",
+  "origin": {
+    "m6r_formal_close_commit": "63cfcd12fae036dd94cf8ce64854796142751b49",
+    "m6r_terminal_class": "FAIL_RUNTIME",
+    "m6r_source_report_sha256": "4c7fdfda6e747c4be463ffc4a64aba3f10283449f6fb9b0a1d5fb206094c14d2",
+    "observed_failure": "POST /api/chat task arith-1 -> HTTP 500 Internal Server Error",
+    "create_return_code": 0,
+    "m6r_reopened": false,
+    "rescue_rerun": false
+  },
+  "question": "What server-side mechanism caused the first frozen M6R /api/chat request to return HTTP 500 after successful model creation?",
+  "collection_phase": {
+    "phase_id": "RFD-C1",
+    "mode": "EXISTING_EVIDENCE_ONLY",
+    "exact_run_window_utc": {
+      "start": "2026-09-22T14:09:47.4135943Z",
+      "end": "2026-09-22T14:09:56.6906965Z"
+    },
+    "context_window_seconds_before": 120,
+    "context_window_seconds_after": 120,
+    "expected_user_local_offset": "+07:00",
+    "expected_local_window": {
+      "start": "2026-09-22T21:09:47.4135943+07:00",
+      "end": "2026-09-22T21:09:56.6906965+07:00"
+    },
+    "authoritative_sources": [
+      "%LOCALAPPDATA%\\Ollama\\server.log",
+      "%LOCALAPPDATA%\\Ollama\\server-*.log"
+    ],
+    "supplemental_sources": [
+      "%LOCALAPPDATA%\\Ollama\\app.log"
+    ],
+    "source_policy": "Read/hash/copy only files that already exist. No service restart, debug-mode enablement, model recreation, API request, or new inference."
+  },
+  "timestamp_policy": {
+    "preserve_raw_files": true,
+    "source_sha256_required": true,
+    "source_size_required": true,
+    "source_last_write_utc_required": true,
+    "accepted_timestamp_forms": [
+      "RFC3339 with Z or explicit offset",
+      "time=<RFC3339>",
+      "GIN-style yyyy/MM/dd - HH:mm:ss interpreted using current Windows local timezone",
+      "plain yyyy-MM-dd HH:mm:ss interpreted using current Windows local timezone"
+    ],
+    "parsed_excerpt_window": "exact run window expanded by frozen +/-120 second context",
+    "unparsed_lines": "Do not infer timestamps. Preserve raw source; report parser coverage and candidate textual time hits separately."
+  },
+  "mechanism_classes": [
+    "MODEL_LOAD_OR_GGUF_COMPATIBILITY",
+    "MEMORY_OR_BACKEND_ALLOCATION",
+    "INTEL_GPU_OR_RUNTIME_BACKEND",
+    "CONTEXT_TEMPLATE_OR_TOKENIZER",
+    "OLLAMA_SERVER_OTHER",
+    "UNRESOLVED"
+  ],
+  "adjudication_rules": {
+    "no_mechanism_assignment_during_collection": true,
+    "root_cause_requires_positive_log_evidence": true,
+    "absence_of_keyword_is_not_evidence_of_absence": true,
+    "no_m6r_rerun_to_fill_missing_evidence": true,
+    "if_existing_logs_are_insufficient": "FORMAL_CLOSE_RFD_C1_AS_INSUFFICIENT_EVIDENCE_THEN_DECIDE_WHETHER_A_FRESH_DIAGNOSTIC_PROGRAM_IS_JUSTIFIED"
+  },
+  "forbidden": [
+    "ollama create",
+    "ollama run",
+    "ollama pull",
+    "ollama rm",
+    "POST /api/chat",
+    "POST /api/generate",
+    "restart/stop/start Ollama application or service",
+    "enable OLLAMA_DEBUG",
+    "modify model store",
+    "recreate deleted M6R test model",
+    "reset/delete M6R attempt marker",
+    "change Q4, Modelfile, fixtures, parameters, thresholds or seed",
+    "open M6R2 before RFD-C1 adjudication"
+  ],
+  "downstream": {
+    "m6_status": "FAIL_PACKAGE_CLOSED",
+    "m6r_status": "FAIL_RUNTIME_CLOSED",
+    "m6r2_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
