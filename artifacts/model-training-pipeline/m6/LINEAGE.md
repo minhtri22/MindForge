@@ -839,3 +839,28 @@ Ollama native think requests.
 
 Current scope is implementation/static-QA only. No Ollama download, server,
 create, chat, cleanup, or scientific adjudication is authorized yet.
+
+## 2026-09-22 — Local Ollama runtime implementation locked / one execution authorized
+
+Authoritative implementation:
+70edcfbfdcc5d913c0d5be36364d61eaec300110
+
+Static zero-science QA:
+run=35706937068
+job=106678030001
+contract tests=11/11 PASS
+PowerShell parse=PASS
+Ollama asset download=false
+Ollama create=false
+Ollama chat=false
+M6 scientific execution=false
+
+The package is now authorized for exactly one local scientific runtime attempt.
+It uses only isolated extracted Ollama v0.34.2, exact reconstructed Q4,
+frozen Modelfile/inference fixtures, owned ephemeral namespace, and owned cleanup.
+
+The attempt is consumed when owned ollama create starts. Any failure before
+create in asset/version/server/Q4 admission is pre-attempt infrastructure or
+provenance and does not consume the scientific attempt.
+
+M7 remains closed and cannot auto-open from this authorization.

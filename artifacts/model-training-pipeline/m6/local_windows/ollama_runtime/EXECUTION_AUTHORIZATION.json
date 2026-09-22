@@ -1,0 +1,105 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-execution-authorization-v1",
+  "status": "AUTHORIZED_ONE_LOCAL_M6_OLLAMA_EXECUTION",
+  "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
+  "authorization_parent_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
+  "execution_class": "LOCAL_WINDOWS_ISOLATED_OLLAMA_PACKAGE_CHAT_PARITY",
+  "exact_binding": {
+    "implementation_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
+    "script_git_blob_sha1": "9a63f5b026a3f283d501565fc2c916110e506889",
+    "tests_git_blob_sha1": "73ce8165136c99ca8863933654688639597e2f00",
+    "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
+    "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
+    "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
+    "q4_reconstruction_execution_evidence_git_blob_sha1": "892e4b0e80b19fd9b10eaac0d3b9bf2dc532fb91",
+    "m6_core_implementation_lock_git_blob_sha1": "ac2bfadef60d048441cdda6e1e09f15eb4bbf7f2",
+    "ollama_runtime_lock_git_blob_sha1": "773131fc8092a29bb1210dbabab9839e4f74ef55",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+  },
+  "zero_science_qa": {
+    "run_id": 35706937068,
+    "job_id": 106678030001,
+    "conclusion": "success",
+    "contract_tests": "11/11_PASS",
+    "powershell_parse": "PASS",
+    "ollama_asset_downloaded": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "m6_scientific_execution_executed": false
+  },
+  "parent_q4": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "admitted": true
+  },
+  "ollama_runtime": {
+    "version": "0.34.2",
+    "tag": "v0.34.2",
+    "asset": "ollama-windows-amd64.zip",
+    "asset_url": "https://github.com/ollama/ollama/releases/download/v0.34.2/ollama-windows-amd64.zip",
+    "asset_sha256": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b",
+    "isolated_host": "127.0.0.1:11467",
+    "isolated_models_directory": ".local/M6-LOCAL-OLLAMA-RUNTIME/models",
+    "installed_ollama_0_34_0_may_be_used": false,
+    "install_or_update_authorized": false
+  },
+  "command_allowlist": [
+    "download or reuse exact cached official Ollama v0.34.2 Windows amd64 ZIP",
+    "verify exact asset SHA256",
+    "extract to owned .local runtime directory",
+    "run extracted ollama.exe --version",
+    "start extracted ollama.exe serve against isolated host/models directory",
+    "GET /api/tags for collision and final mutation checks",
+    "copy exact admitted Q4 into owned package directory",
+    "write exact frozen Modelfile",
+    "ollama create owned pipeline-test namespace only",
+    "POST /api/chat for exactly frozen eval_v1 tasks and inference parameters",
+    "ollama rm owned model only after ownership-marker verification",
+    "stop isolated server",
+    "freeze local JSON/raw transport evidence"
+  ],
+  "forbidden": [
+    "use or modify installed Ollama 0.34.0",
+    "ollama pull",
+    "Ollama installer/updater",
+    "reuse persistent user Ollama model directory",
+    "delete or mutate any unowned model",
+    "Q4 quantization or reconstruction",
+    "llama-cli inference",
+    "fixture/threshold/seed/inference-parameter modification",
+    "retry to seek PASS",
+    "M7 execution",
+    "bulk training"
+  ],
+  "one_attempt": {
+    "attempts_authorized": 1,
+    "consumed_when": "owned ollama create process starts",
+    "pre_create_asset_version_server_or_provenance_failure_consumes_attempt": false,
+    "retry_after_scientific_attempt": false
+  },
+  "adjudication": {
+    "all_required_gates_pass": "PASS",
+    "create_failure": "FAIL_PACKAGE",
+    "chat_or_output_failure": "FAIL_RUNTIME",
+    "task_or_accuracy_parity_failure": "FAIL_PARITY",
+    "reasoning_mapping_failure": "FAIL_REASONING_MAPPING",
+    "cleanup_or_unowned_mutation_failure": "FAIL_CLEANUP_SAFETY",
+    "parent_q4_failure": "INVALID_PROVENANCE",
+    "pre_create_venue_asset_server_failure": "INVALID_INFRASTRUCTURE",
+    "m6_pass_claim_only_if_all_required_gates_pass": true
+  },
+  "boundaries": {
+    "m7_authorized": false,
+    "m7_auto_open": false,
+    "bulk_training_authorized": false
+  },
+  "execution_state": {
+    "attempt_started_by_this_commit": false,
+    "attempt_consumed": false,
+    "m6_scientific_result": null
+  }
+}

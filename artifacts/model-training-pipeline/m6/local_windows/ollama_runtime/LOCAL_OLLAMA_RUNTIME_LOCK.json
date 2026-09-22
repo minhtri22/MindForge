@@ -1,0 +1,50 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v1",
+  "status": "LOCKED_FOR_LOCAL_EXECUTION",
+  "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
+  "implementation_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
+  "execution_authorization_git_blob_sha1": "4d660b6520b035f3a483ba0e5228a3d9533192d0",
+  "exact_blobs": {
+    "script_git_blob_sha1": "9a63f5b026a3f283d501565fc2c916110e506889",
+    "tests_git_blob_sha1": "73ce8165136c99ca8863933654688639597e2f00",
+    "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
+    "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
+    "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
+    "q4_reconstruction_execution_evidence_git_blob_sha1": "892e4b0e80b19fd9b10eaac0d3b9bf2dc532fb91",
+    "m6_core_implementation_lock_git_blob_sha1": "ac2bfadef60d048441cdda6e1e09f15eb4bbf7f2",
+    "ollama_runtime_lock_git_blob_sha1": "773131fc8092a29bb1210dbabab9839e4f74ef55",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+  },
+  "zero_science_static_qa": {
+    "run_id": 35706937068,
+    "job_id": 106678030001,
+    "conclusion": "success",
+    "contract_tests": "11/11_PASS",
+    "powershell_parse": "PASS",
+    "no_execution_proof": "PASS"
+  },
+  "frozen_parent_q4": {
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "frozen_runtime": {
+    "version": "0.34.2",
+    "asset_sha256": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b",
+    "host": "127.0.0.1:11467",
+    "installed_ollama_used": false
+  },
+  "frozen_modelfile": {
+    "bytes_utf8": 152,
+    "sha256": "5db25cbceaaa6b359b73f7edde1f54acb6a95f27a4803f5d28ad1b65012e1946"
+  },
+  "one_attempt_rule": {
+    "attempts_authorized": 1,
+    "consumed_when": "owned ollama create starts",
+    "retry_to_seek_pass": false
+  },
+  "report_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/report/M6_LOCAL_OLLAMA_RUNTIME_REPORT.json",
+  "next_after_local_report": "RETURN_REPORT_FOR_FORMAL_M6_ADJUDICATION; DO_NOT AUTO-OPEN M7"
+}
