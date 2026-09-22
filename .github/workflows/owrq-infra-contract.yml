@@ -1,0 +1,53 @@
+name: OWRQ Infrastructure Zero-Science Contract
+
+on:
+  push:
+    branches:
+      - infra/ollama-windows-runtime-qualification
+    paths:
+      - 'tools/ollama_windows_adapter.py'
+      - 'tools/owrq_qualify.py'
+      - 'scripts/owrq_qualify_local.ps1'
+      - 'tests/test_owrq_contract.py'
+      - 'artifacts/model-training-pipeline/infra/owrq/**'
+      - 'docs/model-training-pipeline/infra/OWRQ_SPEC.md'
+      - '.github/workflows/owrq-infra-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  static-zero-science:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest==8.4.2
+      - name: OWRQ contract tests
+        run: python -m pytest -q tests/test_owrq_contract.py
+      - name: Python compile
+        run: |
+          python -m py_compile tools/ollama_windows_adapter.py
+          python -m py_compile tools/owrq_qualify.py
+      - name: PowerShell parse only
+        shell: pwsh
+        run: |
+          $tokens=$null
+          $errors=$null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path 'scripts/owrq_qualify_local.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if($errors.Count -gt 0){$errors | ForEach-Object { Write-Error $_.Message }; exit 1}
+          Write-Host 'PowerShell syntax PASS'
+      - name: Prove OWRQ local qualification did not execute in CI
+        run: |
+          test ! -d .local/OWRQ
+          echo "ollama_process_invoked=false"
+          echo "ollama_api_requested=false"
+          echo "fixture_loaded=false"
+          echo "plumbing_request_executed=false"
+          echo "user_model_mutated=false"
+          echo "m6r2_science_executed=false"
