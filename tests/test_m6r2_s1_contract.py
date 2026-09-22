@@ -159,7 +159,7 @@ def test_dangling_request_marker_is_ambiguous_and_fail_closed(tmp_path):
     assert state["ambiguous_pending_request"] is True
 
 
-def test_s2_binding_present_and_s3_still_absent():
+def test_s2_binding_and_s3_one_attempt_authorization_present():
     assert S2.exists()
     s2 = json.loads(S2.read_text(encoding="utf-8"))
     assert s2["status"] == "AUTHORIZED_ONE_CONSOLIDATED_INFRA_BINDING"
@@ -170,8 +170,17 @@ def test_s2_binding_present_and_s3_still_absent():
     assert s2["required_scope"]["ollama_version"] == "0.34.2"
     assert s2["required_scope"]["kv_cache_type"] == "f16"
     assert s2["required_scope"]["flash_attention_forced"] is False
-    assert s2["s3_execution_authorized"] is False
-    assert not S3.exists()
+
+    assert S3.exists()
+    s3 = json.loads(S3.read_text(encoding="utf-8"))
+    assert s3["status"] == "AUTHORIZED_ONE_FRESH_M6R2_OUTCOME_EXECUTION"
+    assert s3["attempts_authorized"] == 1
+    assert s3["s1_implementation_lock_git_blob_sha1"] == "124b21063675e6d37202a81b88c04efc4aa2254e"
+    assert s3["s2_authorization_git_blob_sha1"] == "281b79a4482ed3df57c84c5a138cd00df7d72842"
+    assert s3["qualified_runtime_artifact_sha256"] == "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370"
+    assert s3["execution_performed"] is False
+    assert s3["m7_authorized"] is False
+    assert s3["bulk_training_authorized"] is False
 
 
 def test_runner_requires_lock_and_future_authorizations_before_binding_or_adapter():

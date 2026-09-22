@@ -39,11 +39,11 @@ jobs:
           ) | Out-Null
           if($errors.Count -gt 0){$errors | ForEach-Object { Write-Error $_.Message }; exit 1}
           Write-Host 'PowerShell syntax PASS'
-      - name: Prove S2 binding remained zero-science
+      - name: Prove S3 authorization remained zero-science
         run: |
           test ! -d .local/M6R2-PARITY
           test -f artifacts/model-training-pipeline/m6r2/S2_INFRA_BINDING_AUTHORIZATION.json
-          test ! -f artifacts/model-training-pipeline/m6r2/S3_EXECUTION_AUTHORIZATION.json
+          test -f artifacts/model-training-pipeline/m6r2/S3_EXECUTION_AUTHORIZATION.json
           echo "ollama_process_invoked=false"
           echo "ollama_api_requested=false"
           echo "local_model_created=false"
@@ -51,4 +51,5 @@ jobs:
           echo "scientific_outcome_exposed=false"
           echo "s2_binding_metadata_pass=true"
           echo "s2_runtime_executed=false"
+          echo "s3_authorization_present=true"
           echo "s3_execution_executed=false"

@@ -184,3 +184,26 @@ Scientific state is unchanged:
 S3 remains unauthorized.
 Next governance step is S3_ONE_FRESH_OUTCOME_EXECUTION_AUTHORIZATION_REVIEW.
 M7 and bulk training remain closed.
+
+
+## 2026-09-22 — S3 one-fresh-outcome execution authorization opened
+
+Authorization basis:
+- S1 CLOSED/LOCKED
+- S2 FORMALLY_CLOSED / BINDING_PASS
+- S2 authorization blob 281b79a4482ed3df57c84c5a138cd00df7d72842
+- exact qualified runtime scope SHA256 4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370
+- scientific attempts consumed before S3 = 0
+- scientific outcome exposed before S3 = false
+
+Exactly one M6R2 outcome execution is authorized.
+
+Attempt consumption begins only at the first durable eval_v1 model response with
+non-empty visible content or native thinking.
+
+Pre-outcome positive infrastructure failure does not consume the attempt.
+Post-outcome infrastructure failure consumes the attempt.
+Selective rerun and outcome-state reset remain forbidden.
+
+This commit authorizes but does not execute S3.
+M7 and bulk training remain closed.

@@ -1,0 +1,52 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s3-execution-authorization-v1",
+  "status": "AUTHORIZED_ONE_FRESH_M6R2_OUTCOME_EXECUTION",
+  "program": "M6R2_PARITY_REPLICATION",
+  "authorized_from_commit": "41b6200a7db4202882958a15707b0ae59ea69db1",
+  "s1_implementation_lock_git_blob_sha1": "124b21063675e6d37202a81b88c04efc4aa2254e",
+  "s2_authorization_git_blob_sha1": "281b79a4482ed3df57c84c5a138cd00df7d72842",
+  "s2_formal_closure_git_blob_sha1": "0f85f13b4278247253209089bcf78b0d24d5a092",
+  "qualified_runtime_artifact_sha256": "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370",
+  "attempts_authorized": 1,
+  "allowed": [
+    "execute the exact locked scripts/m6r2_parity_oneclick.ps1",
+    "consume the exact bound QUALIFIED_RUNTIME_SCOPE.json",
+    "create only the owned ephemeral M6R2 model namespace through the qualified adapter",
+    "submit exactly the frozen eval_v1 tasks under the frozen generation contract",
+    "adjudicate only frozen parity/reasoning endpoints",
+    "cleanup only owned artifacts through the qualified adapter"
+  ],
+  "forbidden": [
+    "change Q4 bytes or requantize",
+    "change Modelfile semantics",
+    "change eval_v1",
+    "change generation parameters",
+    "change llama.cpp parent comparator",
+    "change parity or reasoning criteria",
+    "change OWRQ runtime scope after outcome exposure",
+    "selective rerun",
+    "reset/delete/overwrite outcome-exposure state",
+    "open M7",
+    "bulk training"
+  ],
+  "outcome_boundary": {
+    "attempt_consumed_on": "first durable eval_v1 response with non-empty content or thinking",
+    "no_valid_response_plus_positive_infra_evidence": "INVALID_INFRA_PREOUTCOME / attempt not consumed",
+    "postoutcome_infra_failure": "INVALID_INFRA_POSTOUTCOME / attempt consumed",
+    "ambiguous_request_without_terminal_evidence": "INVALID_PROVENANCE"
+  },
+  "terminal_science_verdicts": [
+    "PASS_PARITY",
+    "FAIL_PARITY",
+    "FAIL_REASONING_MAPPING"
+  ],
+  "infra_states": [
+    "BLOCKED_INFRA_BINDING",
+    "INVALID_INFRA_PREOUTCOME",
+    "INVALID_INFRA_POSTOUTCOME",
+    "INVALID_PROVENANCE"
+  ],
+  "execution_performed": false,
+  "m7_authorized": false,
+  "bulk_training_authorized": false
+}

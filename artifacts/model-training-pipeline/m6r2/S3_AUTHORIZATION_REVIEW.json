@@ -1,0 +1,69 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s3-authorization-review-v1",
+  "status": "PASS_AUTHORIZE_ONE_FRESH_OUTCOME_EXECUTION",
+  "program": "M6R2_PARITY_REPLICATION",
+  "reviewed_head": "41b6200a7db4202882958a15707b0ae59ea69db1",
+  "prerequisites": {
+    "s1_closed_locked": true,
+    "s1_lock_git_blob_sha1": "124b21063675e6d37202a81b88c04efc4aa2254e",
+    "s2_formally_closed": true,
+    "s2_terminal_class": "BINDING_PASS",
+    "s2_closure_git_blob_sha1": "0f85f13b4278247253209089bcf78b0d24d5a092",
+    "s2_authorization_git_blob_sha1": "281b79a4482ed3df57c84c5a138cd00df7d72842",
+    "owrq_formally_closed": true,
+    "qualified_runtime_artifact_sha256": "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370",
+    "prior_scientific_attempts_consumed": 0,
+    "prior_scientific_outcome_exposed": false
+  },
+  "frozen_science": {
+    "q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "modelfile_sha256": "5db25cbceaaa6b359b73f7edde1f54acb6a95f27a4803f5d28ad1b65012e1946",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "parent_task_vector": [
+      false,
+      false
+    ],
+    "parent_accuracy": 0,
+    "generation": {
+      "num_ctx": 2048,
+      "num_predict": 128,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "seed": 42,
+      "stream": false
+    }
+  },
+  "exact_runtime_binding": {
+    "ollama_version": "0.34.2",
+    "ollama_executable_sha256": "ad41dcf55c5de96d4a0bff7c559a17285c3aa064a6f12d23db3ebf59ad8e4125",
+    "runtime_adapter_git_blob_sha1": "075b3b354bbd0c7674d629070d99769d201ad619",
+    "local_machine_fingerprint_sha256": "a208a4c542eeaf70363b77344cac81eec531cc0c9be85aada22d61c112c08993",
+    "host": "127.0.0.1:11468",
+    "kv_cache_type": "f16",
+    "flash_attention_mode": "off"
+  },
+  "attempt_policy": {
+    "attempts_authorized": 1,
+    "consume_on": "first durable eval_v1 response with non-empty message.content or message.thinking",
+    "preoutcome_positive_infra_failure_consumes_attempt": false,
+    "postoutcome_infra_failure_consumes_attempt": true,
+    "selective_rerun": false,
+    "marker_reset": false,
+    "science_parameter_change": false
+  },
+  "checks": {
+    "implementation_blobs_locked": true,
+    "s2_exact_binding_pass": true,
+    "exact_qualified_scope_hash_bound": true,
+    "no_science_seen_during_s1_s2": true,
+    "no_posthoc_endpoint_change": true,
+    "no_runtime_repair_as_treatment": true,
+    "one_attempt_only": true,
+    "anti_rescue_preserved": true
+  },
+  "unresolved_findings": 0,
+  "execution_performed": false
+}
