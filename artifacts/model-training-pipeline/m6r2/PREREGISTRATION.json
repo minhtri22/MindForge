@@ -1,0 +1,107 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-parity-preregistration-v1",
+  "status": "SPECIFICATION_ONLY",
+  "program": "M6R2_PARITY_REPLICATION",
+  "parent_governance_commit": "750d6358a88e738cfaf971b3a5db3192f7622889",
+  "relation_to_history": {
+    "m6": "FAIL_PACKAGE_CLOSED",
+    "m6r": "FAIL_RUNTIME_CLOSED",
+    "rfd_c1": "ROOT_CAUSE_IDENTIFIED_CLOSED",
+    "history_rewritten": false
+  },
+  "study_type": "FRESH_NO_TREATMENT_PARITY_REPLICATION",
+  "frozen_artifact": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "frozen_modelfile_sha256": "5db25cbceaaa6b359b73f7edde1f54acb6a95f27a4803f5d28ad1b65012e1946",
+  "frozen_fixtures": {
+    "fixture_set": "tests/fixtures/eval_v1",
+    "manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f"
+  },
+  "frozen_generation": {
+    "num_ctx": 2048,
+    "num_predict": 128,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 0,
+    "seed": 42,
+    "stream": false
+  },
+  "frozen_parent": {
+    "task_vector": [
+      false,
+      false
+    ],
+    "accuracy": 0,
+    "exact_text_equality_required": false
+  },
+  "frozen_reasoning": {
+    "profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "native_think_request": false,
+    "unexpected_nonempty_native_thinking_is_failure": true
+  },
+  "infrastructure": {
+    "qualification_program": "OWRQ",
+    "qualification_branch": "infra/ollama-windows-runtime-qualification",
+    "current_spec_commit": "4e22791a667aa055810ec8491544be9e1f3784fd",
+    "full_requalification_inside_m6r2": false,
+    "one_consolidated_binding_check": true,
+    "blocks_design": false,
+    "blocks_static_implementation": false,
+    "blocks_runtime_execution_until_qualified": true,
+    "kv_cache_repair_is_scientific_treatment": false
+  },
+  "setup_domain": [
+    "runtime health",
+    "infra binding",
+    "namespace safety",
+    "Q4 identity",
+    "Modelfile materialization",
+    "ollama create",
+    "api show metadata",
+    "cleanup"
+  ],
+  "outcome_boundary": {
+    "begins_with": "first frozen eval_v1 request",
+    "attempt_consumed_on": "first valid eval_v1 model response content exposed",
+    "preoutcome_positive_infra_failure_consumes_attempt": false,
+    "postoutcome_infra_failure_consumes_attempt": true,
+    "attempts_authorized_after_future_execution_gate": 1
+  },
+  "scientific_endpoints": [
+    "all_outputs_nonempty",
+    "task_vector_equals_frozen_llama_parent",
+    "runtime_accuracy_equals_frozen_llama_parent",
+    "format_parity_with_frozen_llama_parent",
+    "reasoning_runtime_mapping_pass"
+  ],
+  "verdicts": {
+    "science": [
+      "PASS_PARITY",
+      "FAIL_PARITY",
+      "FAIL_REASONING_MAPPING"
+    ],
+    "infra": [
+      "BLOCKED_INFRA_BINDING",
+      "INVALID_INFRA_PREOUTCOME",
+      "INVALID_INFRA_POSTOUTCOME",
+      "INVALID_PROVENANCE"
+    ]
+  },
+  "stages": [
+    "S0_SPEC_AND_QA",
+    "S1_STATIC_IMPLEMENTATION_ZERO_SCIENCE_QA",
+    "S2_CONSOLIDATED_INFRA_BINDING",
+    "S3_ONE_FRESH_OUTCOME_EXECUTION_AND_ADJUDICATION"
+  ],
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "downstream": {
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
