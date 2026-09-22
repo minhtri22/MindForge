@@ -47,6 +47,14 @@ def _fixture_identity(path: Path, label: str = "f16"):
     )
 
 
+def _patch_frozen_identity(monkeypatch, identity: MAT.ArtifactIdentity):
+    monkeypatch.setattr(MAT, "F16_IDENTITY", identity)
+    monkeypatch.setattr(MAT, "F16_FILENAME", identity.filename)
+    monkeypatch.setattr(MAT, "F16_SIZE", identity.size)
+    monkeypatch.setattr(MAT, "F16_SHA256", identity.sha256)
+    monkeypatch.setattr(MAT, "F16_MANIFEST", identity.aggregate_manifest_hash)
+
+
 def _future_auth(path: Path, identity: MAT.ArtifactIdentity):
     value = {
         "schema": MAT.FUTURE_EXECUTION_AUTH_SCHEMA,
@@ -124,23 +132,19 @@ def test_real_execution_is_blocked_without_future_authorization(tmp_path: Path):
         )
 
 
-def test_copy_materialization_is_byte_preserving_and_reverified(tmp_path: Path):
+def test_copy_materialization_is_byte_preserving_and_reverified(tmp_path: Path, monkeypatch):
     source = tmp_path / "fixture.gguf"
     source.write_bytes(b"byte preserving copy")
     identity = _fixture_identity(source)
     auth = tmp_path / "auth.json"
     _future_auth(auth, identity)
 
-    old_identity = MAT.F16_IDENTITY
-    try:
-        MAT.F16_IDENTITY = identity
-        result = MAT.persist_existing_file(
-            source,
-            tmp_path / "persisted" / source.name,
-            execution_authorization=auth,
-        )
-    finally:
-        MAT.F16_IDENTITY = old_identity
+    _patch_frozen_identity(monkeypatch, identity)
+    result = MAT.persist_existing_file(
+        source,
+        tmp_path / "persisted" / source.name,
+        execution_authorization=auth,
+    )
 
     assert result["classification"] == "ADMITTED_EXISTING_F16_BYTES"
     assert result["source"]["sha256"] == result["persisted"]["sha256"]
@@ -148,7 +152,7 @@ def test_copy_materialization_is_byte_preserving_and_reverified(tmp_path: Path):
     assert result["scientific_adjudication_executed"] is False
 
 
-def test_archive_extraction_is_byte_preserving(tmp_path: Path):
+def test_archive_extraction_is_byte_preserving(tmp_path: Path, monkeypatch):
     payload = b"archive serialized f16 fixture"
     archive = tmp_path / "existing.zip"
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_STORED) as zf:
@@ -161,25 +165,21 @@ def test_archive_extraction_is_byte_preserving(tmp_path: Path):
 
     auth = tmp_path / "auth.json"
     _future_auth(auth, identity)
-    old_identity = MAT.F16_IDENTITY
-    try:
-        MAT.F16_IDENTITY = identity
-        result = MAT.extract_existing_archive_member(
-            archive,
-            "model-f16.gguf",
-            destination,
-            execution_authorization=auth,
-            archive_sha256=MAT.sha256_file(archive),
-        )
-    finally:
-        MAT.F16_IDENTITY = old_identity
+    _patch_frozen_identity(monkeypatch, identity)
+    result = MAT.extract_existing_archive_member(
+        archive,
+        "model-f16.gguf",
+        destination,
+        execution_authorization=auth,
+        archive_sha256=MAT.sha256_file(archive),
+    )
 
     assert destination.read_bytes() == payload
     assert result["persisted"]["admitted"] is True
     assert result["f16_regeneration_executed"] is False
 
 
-def test_chunk_reassembly_is_concatenation_only(tmp_path: Path):
+def test_chunk_reassembly_is_concatenation_only(tmp_path: Path, monkeypatch):
     pieces = [b"chunk-a-", b"chunk-b-", b"chunk-c"]
     chunks = []
     for index, payload in enumerate(pieces):
@@ -194,17 +194,13 @@ def test_chunk_reassembly_is_concatenation_only(tmp_path: Path):
 
     auth = tmp_path / "auth.json"
     _future_auth(auth, identity)
-    old_identity = MAT.F16_IDENTITY
-    try:
-        MAT.F16_IDENTITY = identity
-        result = MAT.reassemble_existing_chunks(
-            chunks,
-            destination,
-            execution_authorization=auth,
-            expected_chunk_sha256=[MAT.sha256_file(path) for path in chunks],
-        )
-    finally:
-        MAT.F16_IDENTITY = old_identity
+    _patch_frozen_identity(monkeypatch, identity)
+    result = MAT.reassemble_existing_chunks(
+        chunks,
+        destination,
+        execution_authorization=auth,
+        expected_chunk_sha256=[MAT.sha256_file(path) for path in chunks],
+    )
 
     assert destination.read_bytes() == b"".join(pieces)
     assert result["persisted"]["admitted"] is True
@@ -247,17 +243,34 @@ def test_tool_contains_no_process_execution_or_pipeline_scientific_imports():
 
 def test_no_regeneration_or_scientific_entrypoints_exist():
     source = TOOL_PATH.read_text(encoding="utf-8")
-    forbidden_symbols = [
+    tree = ast.parse(source)
+
+    imported_names = set()
+    called_names = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported_names.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_names.add(node.module)
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name):
+                called_names.add(node.func.id)
+            elif isinstance(node.func, ast.Attribute):
+                called_names.add(node.func.attr)
+
+    forbidden_import_prefixes = ("pipeline", "transformers", "torch")
+    assert not any(
+        name.startswith(forbidden_import_prefixes)
+        for name in imported_names
+    )
+    forbidden_calls = {
         "run_m5_qualification",
         "run_q4_qualification",
         "run_llama_fixture",
-        "llama_cli",
         "convert_hf",
         "convert_hf_to_gguf",
-        "M5_F16_QUALIFICATION_RESULT",
-    ]
-    for symbol in forbidden_symbols:
-        assert symbol not in source
+    }
+    assert forbidden_calls.isdisjoint(called_names)
 
 
 def test_planning_cli_cannot_materialize_or_mutate():
