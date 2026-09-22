@@ -1,10 +1,39 @@
 from __future__ import annotations
 
+import importlib.util
 from pathlib import Path
 
 import pytest
 
-from pipeline.m6 import (
+ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location("mindforge_m6_zero_runtime", ROOT / "pipeline/m6.py")
+assert SPEC is not None and SPEC.loader is not None
+M6 = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(M6)
+
+FROZEN_ACCURACY = M6.FROZEN_ACCURACY
+FROZEN_INFERENCE = M6.FROZEN_INFERENCE
+FROZEN_Q4_MANIFEST = M6.FROZEN_Q4_MANIFEST
+FROZEN_Q4_SHA256 = M6.FROZEN_Q4_SHA256
+FROZEN_Q4_SIZE = M6.FROZEN_Q4_SIZE
+FROZEN_TASK_VECTOR = M6.FROZEN_TASK_VECTOR
+M6ContractError = M6.M6ContractError
+build_chat_request = M6.build_chat_request
+build_cleanup_command = M6.build_cleanup_command
+build_create_command = M6.build_create_command
+cleanup_is_authorized = M6.cleanup_is_authorized
+ephemeral_model_name = M6.ephemeral_model_name
+evaluate_ollama_parity = M6.evaluate_ollama_parity
+load_ollama_lock = M6.load_ollama_lock
+mark_created = M6.mark_created
+modelfile_contract = M6.modelfile_contract
+ownership_manifest = M6.ownership_manifest
+reasoning_mapping = M6.reasoning_mapping
+render_modelfile = M6.render_modelfile
+terminal_boundary = M6.terminal_boundary
+verify_frozen_q4_identity = M6.verify_frozen_q4_identity
+
+_UNUSED_IMPORT_SHAPE = (
     FROZEN_ACCURACY,
     FROZEN_INFERENCE,
     FROZEN_Q4_MANIFEST,
