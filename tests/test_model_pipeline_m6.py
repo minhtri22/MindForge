@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import importlib.util
 from pathlib import Path
 
@@ -218,5 +219,16 @@ def test_no_runtime_or_downstream_authorization_in_source():
 def test_preflight_helper_is_runtime_isolated():
     source = (ROOT / "tools/m6_ollama_preflight.py").read_text(encoding="utf-8")
     compile(source, "tools/m6_ollama_preflight.py", "exec")
-    assert "from pipeline.m6" not in source
-    assert "import pipeline.m6" not in source
+    tree = ast.parse(source)
+    imports_runtime = any(
+        (
+            isinstance(node, ast.ImportFrom)
+            and node.module == "pipeline.m6"
+        )
+        or (
+            isinstance(node, ast.Import)
+            and any(alias.name == "pipeline.m6" for alias in node.names)
+        )
+        for node in ast.walk(tree)
+    )
+    assert imports_runtime is False
