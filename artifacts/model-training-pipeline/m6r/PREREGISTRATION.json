@@ -1,0 +1,154 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-system-ollama-preregistration-v1",
+  "status": "FROZEN_PREOUTCOME",
+  "program": "M6R_SYSTEM_OLLAMA_REPLICATION",
+  "origin_commit": "c9952ac66be2a15776dcfb92d7bd7e2e1355242e",
+  "relation_to_m6": {
+    "m6_formal_close_commit": "c9952ac66be2a15776dcfb92d7bd7e2e1355242e",
+    "m6_formal_adjudication_git_blob_sha1": "ebe3f3eb1befd683571cb4a497eaf8ff183e26ca",
+    "m6_terminal_class": "FAIL_PACKAGE",
+    "m6_reopened": false,
+    "rescue_rerun": false,
+    "interpretation": "Fresh replication with a different runtime venue and hardened native-process boundary. M6 remains closed and immutable."
+  },
+  "scientific_question": "Can the exact admitted Q4_K_M artifact be packaged and executed through the user's installed Windows Ollama runtime, upgraded to exact 0.34.2 if required, while preserving the frozen task/format/reasoning parity contract and without mutating unowned Ollama models?",
+  "frozen_parent_q4": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "q4_scientific_status": "PASS_CLOSED"
+  },
+  "system_runtime": {
+    "venue": "user_installed_windows_ollama",
+    "host": "127.0.0.1:11434",
+    "previously_observed_installed_version": "0.34.0",
+    "target_version": "0.34.2",
+    "target_tag": "v0.34.2",
+    "official_release_commit_short": "dfabde4",
+    "installer_asset": "OllamaSetup.exe",
+    "installer_url": "https://github.com/ollama/ollama/releases/download/v0.34.2/OllamaSetup.exe",
+    "installer_size_bytes": 1569993232,
+    "installer_sha256": "8c9eb7ba71f3c6a62df4c7d204cc4739d90c335e1cbeb07c99fd471544066a8b",
+    "official_install_script_sha256": "310071580b654bb55de81c65152052771e1143018d7731c8d59b5f49f79c0503",
+    "upgrade_allowed_before_attempt": true,
+    "install_if_missing_allowed": false,
+    "downgrade_allowed": false,
+    "uninstall_allowed": false,
+    "signer_required": "Ollama Inc.",
+    "existing_user_model_store_must_be_preserved": true,
+    "custom_isolated_models_directory": false
+  },
+  "upgrade_policy": {
+    "if_installed_version_equals_target": "NO_UPGRADE",
+    "if_installed_version_is_older_than_target": "DOWNLOAD_EXACT_PINNED_INSTALLER_VERIFY_SHA256_AND_AUTHENTICODE_THEN_SILENT_UPGRADE",
+    "if_installed_version_is_newer_than_target": "STOP_INVALID_INFRASTRUCTURE_NO_DOWNGRADE",
+    "upgrade_is_pre_attempt": true,
+    "upgrade_failure_consumes_attempt": false,
+    "after_upgrade_exact_version_reverification_required": true,
+    "installer_arguments": "/VERYSILENT /NORESTART /SUPPRESSMSGBOXES"
+  },
+  "frozen_modelfile": {
+    "source": "./model-q4_k_m.gguf",
+    "bytes_utf8": 152,
+    "sha256": "5db25cbceaaa6b359b73f7edde1f54acb6a95f27a4803f5d28ad1b65012e1946",
+    "text": "FROM ./model-q4_k_m.gguf\nPARAMETER num_ctx 2048\nPARAMETER num_predict 128\nPARAMETER temperature 0\nPARAMETER top_p 1\nPARAMETER top_k 0\nPARAMETER seed 42\n"
+  },
+  "frozen_inference": {
+    "fixture_set": "tests/fixtures/eval_v1",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "max_new_tokens": 128,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 0,
+    "seed": 42,
+    "context_length": 2048,
+    "stream": false,
+    "frozen_llama_parent_task_vector": [
+      false,
+      false
+    ],
+    "frozen_llama_parent_accuracy": 0,
+    "exact_text_equality_required": false
+  },
+  "reasoning_mapping": {
+    "reference_profile": "docs/model-training-pipeline/profiles/qwen2.5-0.5b-instruct-r0.yaml",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "model_native_reasoning_assumed": false,
+    "transport": "tagged_text",
+    "native_ollama_think_field_sent": false,
+    "visible_supported": true,
+    "hidden_supported_via_post_parser": true,
+    "off_supported": false,
+    "unexpected_nonempty_native_thinking_field_is_failure": true,
+    "generated_reasoning_quality_claimed": false
+  },
+  "native_process_policy": {
+    "direct_native_pipeline_capture_forbidden": true,
+    "all_cli_calls_use_start_process": true,
+    "stdout_stderr_redirected_to_owned_files": true,
+    "exit_code_adjudicated_explicitly": true,
+    "purpose": "Eliminate Windows PowerShell 5.1 native stderr promotion as a confound observed in closed M6."
+  },
+  "namespace_cleanup": {
+    "name_pattern": "pipeline-test-m6r-<run_id>-<artifact_hash_prefix>",
+    "collision_check_before_create": true,
+    "ownership_marker_required": true,
+    "cleanup_owned_only": true,
+    "existing_user_model_store_allowed": true,
+    "initial_and_final_model_name_sets_must_match": true,
+    "unowned_model_mutation_forbidden": true
+  },
+  "one_attempt": {
+    "attempts_authorized_after_execution_gate": 1,
+    "attempt_consumed_when": "durable consumed marker is atomically persisted immediately before installed ollama create process starts",
+    "retry_to_seek_pass": false,
+    "pre_create_upgrade_version_api_q4_or_namespace_failure_consumes_attempt": false
+  },
+  "required_gates": [
+    "system_ollama_present",
+    "system_ollama_exact_version_lock",
+    "system_ollama_api_healthy",
+    "source_q4_identity_exact",
+    "modelfile_deterministic_and_frozen",
+    "ephemeral_namespace_collision_safe",
+    "ollama_create_owned_model_only",
+    "ollama_chat_real_runtime",
+    "all_outputs_nonempty",
+    "task_vector_equals_frozen_llama_parent",
+    "runtime_accuracy_equals_frozen_llama_parent",
+    "format_parity_with_frozen_llama_parent",
+    "reasoning_runtime_mapping_pass",
+    "cleanup_owned_artifact_only",
+    "no_unowned_model_mutation",
+    "runtime_evidence_manifest_frozen"
+  ],
+  "terminal_classes": [
+    "PASS",
+    "FAIL_PACKAGE",
+    "FAIL_RUNTIME",
+    "FAIL_PARITY",
+    "FAIL_REASONING_MAPPING",
+    "FAIL_CLEANUP_SAFETY",
+    "INVALID_PROVENANCE",
+    "INVALID_INFRASTRUCTURE"
+  ],
+  "adjudication": {
+    "create_failure": "FAIL_PACKAGE",
+    "chat_or_output_failure": "FAIL_RUNTIME",
+    "task_or_accuracy_parity_failure": "FAIL_PARITY",
+    "reasoning_mapping_failure": "FAIL_REASONING_MAPPING",
+    "cleanup_or_unowned_mutation_failure": "FAIL_CLEANUP_SAFETY",
+    "q4_failure": "INVALID_PROVENANCE",
+    "missing_system_ollama_newer_version_upgrade_or_service_failure_before_attempt": "INVALID_INFRASTRUCTURE",
+    "pass_only_if_all_required_gates_pass": true
+  },
+  "downstream": {
+    "m6_status": "CLOSED_FAIL_PACKAGE",
+    "m6r_pass_does_not_rewrite_m6": true,
+    "m7_auto_open": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
