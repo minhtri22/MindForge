@@ -221,9 +221,10 @@ foreach ($File in $SourceFiles) {
     }
 
     $SourceShaAfter = Get-Sha256File $File.FullName
-    if ($SourceShaAfter -ne $SourceShaBefore) {
+    $SourceChangedDuringCollection = ($SourceShaAfter -ne $SourceShaBefore)
+    $RawMatchesObservedSourceState = (($RawCopySha -eq $SourceShaBefore) -or ($RawCopySha -eq $SourceShaAfter))
+    if (-not $RawMatchesObservedSourceState) {
         $Report.collection_integrity_pass = $false
-        throw "Source log changed during collection: $($File.FullName)"
     }
 
     $ExactPath = Join-Path $ExcerptDir ($SafeName + ".exact-window.json")
@@ -240,9 +241,10 @@ foreach ($File in $SourceFiles) {
         source_last_write_utc = $File.LastWriteTimeUtc.ToString("o")
         source_sha256_before = $SourceShaBefore
         source_sha256_after = $SourceShaAfter
+        source_changed_during_collection = $SourceChangedDuringCollection
         raw_copy_path = $RawCopy
         raw_copy_sha256 = $RawCopySha
-        raw_copy_exact = ($RawCopySha -eq $SourceShaBefore)
+        raw_copy_matches_observed_source_state = $RawMatchesObservedSourceState
         lines_read = $LineCount
         timestamp_parsed_lines = $ParsedCount
         exact_window_line_count = $FileExact.Count

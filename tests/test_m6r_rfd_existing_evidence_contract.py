@@ -33,7 +33,15 @@ def test_raw_evidence_is_hash_preserved():
     assert '$SourceShaBefore = Get-Sha256File' in x
     assert 'Copy-Item -LiteralPath' in x
     assert '$RawCopySha -ne $SourceShaBefore' in x
-    assert '$SourceShaAfter -ne $SourceShaBefore' in x
+    assert '$SourceShaAfter = Get-Sha256File' in x
+    assert 'source_changed_during_collection = $SourceChangedDuringCollection' in x
+    assert 'raw_copy_matches_observed_source_state = $RawMatchesObservedSourceState' in x
+
+def test_active_log_append_is_recorded_not_misclassified_as_source_mutation():
+    x=t()
+    assert '$SourceChangedDuringCollection = ($SourceShaAfter -ne $SourceShaBefore)' in x
+    assert '$RawMatchesObservedSourceState' in x
+    assert 'throw "Source log changed during collection' not in x
 
 def test_timestamp_parser_supports_offset_and_local_forms():
     x=t()
