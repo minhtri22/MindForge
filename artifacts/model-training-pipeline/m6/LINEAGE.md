@@ -809,3 +809,33 @@ Ollama scientific execution: false
 
 The previous reconstruction lock is superseded. This repaired package remains
 authorized for the same single local Q4_K_M reconstruction attempt.
+
+## 2026-09-22 — Local deterministic Q4 reconstruction PASS / exact parent restored
+
+The returned local reconstruction report is PASS with classification
+ADMITTED_DETERMINISTIC_RECONSTRUCTION. The one reconstruction authorization
+was consumed when llama-quantize started.
+
+Fresh Windows llama-quantize SHA256:
+b731855f600bfa7dae0a4f2f30ccba5d2d913dedd4fac48e49ad794766b0e9ca
+
+Reconstructed Q4 exact identity:
+size=397807456
+sha256=ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977
+manifest=e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b
+
+No llama-cli inference, fixture evaluation, scientific re-adjudication, or
+Ollama execution occurred. Q4 remains PASS / CLOSED.
+
+## 2026-09-22 — Local Ollama M6 runtime package opened pre-outcome
+
+The local runtime package is bound to exact reconstructed Q4 and exact pinned
+Ollama v0.34.2 Windows amd64 asset. The installed Ollama 0.34.0 is excluded
+from scientific execution; an isolated extracted v0.34.2 runtime will be used.
+
+The frozen R0 profile does not assume a native reasoning channel. Local M6
+therefore keeps tagged-text reasoning semantics and does not silently send
+Ollama native think requests.
+
+Current scope is implementation/static-QA only. No Ollama download, server,
+create, chat, cleanup, or scientific adjudication is authorized yet.

@@ -1,0 +1,87 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-q4-reconstruction-execution-evidence-v1",
+  "verdict": "PASS",
+  "classification": "ADMITTED_DETERMINISTIC_RECONSTRUCTION",
+  "source": "user-returned local JSON report",
+  "started_at": "2026-09-22T08:30:04.3795805Z",
+  "completed_at": "2026-09-22T08:32:37.2000740Z",
+  "repo": {
+    "root": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16",
+    "branch": "local/m5-f16-run",
+    "head": "76f12c83c5ab6d3f9a8429b38a59af0f9a15667c",
+    "tracked_worktree_clean": true,
+    "script_git_blob_sha1": "ca265d65549bdf89fa17296dd98e52c22019376e"
+  },
+  "host": {
+    "os": "Microsoft Windows 11 Home Single Language",
+    "build": "26200",
+    "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+    "powershell": "5.1.26100.9444",
+    "cmake": "cmake version 3.31.6-msvc6",
+    "cmake_resolution": {
+      "source": "VISUAL_STUDIO_VSWHERE",
+      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "vswhere_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe",
+      "visual_studio_root": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools"
+    }
+  },
+  "input_f16": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\.local-exec\\m5-f16-work\\runs\\e2e-small-cd9bfabe9280\\m5_f16_requalification\\model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "exact_identity": true
+  },
+  "llama_cpp": {
+    "source_path": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\.local-exec\\m5-f16-work\\tools\\llama.cpp",
+    "source_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "build_flags": [
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DGGML_NATIVE=OFF",
+      "-DGGML_OPENMP=OFF",
+      "-DLLAMA_CURL=OFF",
+      "-DLLAMA_BUILD_SERVER=ON",
+      "-DLLAMA_BUILD_TESTS=OFF",
+      "-DLLAMA_BUILD_EXAMPLES=OFF",
+      "-DLLAMA_BUILD_UI=OFF",
+      "-DLLAMA_USE_PREBUILT_UI=OFF",
+      "-DBUILD_SHARED_LIBS=OFF"
+    ],
+    "fresh_llama_quantize_sha256": "b731855f600bfa7dae0a4f2f30ccba5d2d913dedd4fac48e49ad794766b0e9ca",
+    "executable_sha_policy": "venue_specific_record_only"
+  },
+  "reconstruction": {
+    "quantization_type": "Q4_K_M",
+    "quantizer_exit_code": 0,
+    "authorization_consumed": true,
+    "reconstruction_started": true,
+    "output": {
+      "path": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\.local\\M6-LOCAL-Q4-RECONSTRUCTION\\output\\model-q4_k_m.gguf",
+      "size_bytes": 397807456,
+      "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+      "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+      "exact_identity": true
+    }
+  },
+  "boundaries": {
+    "f16_regeneration_executed": false,
+    "hf_to_gguf_conversion_executed": false,
+    "llama_cli_inference_executed": false,
+    "fixture_evaluation_executed": false,
+    "scientific_adjudication_executed": false,
+    "ollama_server_started": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "m6_scientific_execution_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "interpretation": {
+    "q4_scientific_status": "PASS_CLOSED",
+    "reconstruction_is_artifact_reproducibility": true,
+    "q4_scientific_rerun": false,
+    "parent_artifact_blocker_resolved": true,
+    "deterministic_reconstruction_authorization_consumed": true,
+    "next_valid_action": "LOCAL_M6_OLLAMA_RUNTIME_IMPLEMENTATION_AND_ZERO_SCIENCE_QA"
+  }
+}

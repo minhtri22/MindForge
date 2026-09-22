@@ -1,0 +1,112 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-preregistration-v1",
+  "status": "FROZEN_PREOUTCOME",
+  "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
+  "origin_commit": "76f12c83c5ab6d3f9a8429b38a59af0f9a15667c",
+  "scientific_question": "Can the exact byte-identical Q4_K_M artifact be packaged and executed under the exact pinned Ollama 0.34.2 runtime on the user's local Windows venue while preserving the frozen M6 task/format parity contract and ownership-safe cleanup?",
+  "parent_q4": {
+    "reconstruction_classification": "ADMITTED_DETERMINISTIC_RECONSTRUCTION",
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "q4_scientific_status": "PASS_CLOSED"
+  },
+  "runtime": {
+    "venue": "user_local_windows",
+    "installed_ollama_may_be_used": false,
+    "observed_installed_version": "0.34.0",
+    "exact_runtime_version": "0.34.2",
+    "exact_runtime_tag": "v0.34.2",
+    "official_asset": "ollama-windows-amd64.zip",
+    "official_asset_url": "https://github.com/ollama/ollama/releases/download/v0.34.2/ollama-windows-amd64.zip",
+    "asset_sha256": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b",
+    "installation_or_update_required": false,
+    "execution_mode": "isolated extracted runtime",
+    "host": "127.0.0.1:11467",
+    "models_directory": ".local/M6-LOCAL-OLLAMA-RUNTIME/models",
+    "persistent_user_ollama_state_allowed": false
+  },
+  "frozen_modelfile": {
+    "source": "./model-q4_k_m.gguf",
+    "bytes_utf8": 152,
+    "sha256": "5db25cbceaaa6b359b73f7edde1f54acb6a95f27a4803f5d28ad1b65012e1946",
+    "text": "FROM ./model-q4_k_m.gguf\nPARAMETER num_ctx 2048\nPARAMETER num_predict 128\nPARAMETER temperature 0\nPARAMETER top_p 1\nPARAMETER top_k 0\nPARAMETER seed 42\n"
+  },
+  "frozen_inference": {
+    "fixture_set": "tests/fixtures/eval_v1",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "max_new_tokens": 128,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 0,
+    "seed": 42,
+    "context_length": 2048,
+    "stream": false,
+    "frozen_llama_parent_task_vector": [
+      false,
+      false
+    ],
+    "frozen_llama_parent_accuracy": 0,
+    "exact_text_equality_required": false
+  },
+  "reasoning_mapping": {
+    "reference_profile": "docs/model-training-pipeline/profiles/qwen2.5-0.5b-instruct-r0.yaml",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "model_native_reasoning_assumed": false,
+    "transport": "tagged_text",
+    "native_ollama_think_field_sent": false,
+    "visible_supported": true,
+    "hidden_supported_via_post_parser": true,
+    "off_supported": false,
+    "unexpected_nonempty_native_thinking_field_is_failure": true,
+    "generated_reasoning_quality_claimed": false
+  },
+  "namespace_cleanup": {
+    "name_pattern": "pipeline-test-<run_id>-<artifact_hash_prefix>",
+    "collision_check_before_create": true,
+    "ownership_marker_required": true,
+    "cleanup_owned_only": true,
+    "isolated_models_directory": true,
+    "initial_and_final_model_sets_must_match": true
+  },
+  "one_attempt": {
+    "attempts_authorized_after_execution_gate": 1,
+    "attempt_consumed_when": "ollama create process starts after all venue/asset/Q4/namespace preconditions PASS",
+    "retry_to_seek_pass": false,
+    "pre_create_infrastructure_failure_consumes_attempt": false
+  },
+  "required_gates": [
+    "ollama_exact_version_lock",
+    "source_q4_identity_exact",
+    "modelfile_deterministic_and_frozen",
+    "ephemeral_namespace_collision_safe",
+    "ollama_create_owned_model_only",
+    "ollama_chat_real_runtime",
+    "all_outputs_nonempty",
+    "task_vector_equals_frozen_llama_parent",
+    "runtime_accuracy_equals_frozen_llama_parent",
+    "format_parity_with_frozen_llama_parent",
+    "reasoning_runtime_mapping_pass",
+    "cleanup_owned_artifact_only",
+    "no_unowned_model_mutation",
+    "runtime_evidence_manifest_frozen"
+  ],
+  "terminal_classes": [
+    "PASS",
+    "FAIL_PACKAGE",
+    "FAIL_RUNTIME",
+    "FAIL_PARITY",
+    "FAIL_REASONING_MAPPING",
+    "FAIL_CLEANUP_SAFETY",
+    "INVALID_PROVENANCE",
+    "INVALID_INFRASTRUCTURE"
+  ],
+  "downstream": {
+    "m6_pass_only_if_all_required_gates_pass": true,
+    "m7_auto_open": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
