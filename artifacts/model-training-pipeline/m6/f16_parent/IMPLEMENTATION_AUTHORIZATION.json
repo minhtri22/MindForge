@@ -1,0 +1,72 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-artifact-recovery-materialization-implementation-authorization-v1",
+  "status": "AUTHORIZED_SPECIFICATION_IMPLEMENTATION_ZERO_SCIENCE_ONLY",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_commit": "9b2098e36275f7eecf44f9e3974d3afc5fb4e682",
+  "preregistration_path": "artifacts/model-training-pipeline/m6/f16_parent/PREREGISTRATION.json",
+  "authorized_now": [
+    "implement discovery/admission logic for already-existing serialized F16 bytes",
+    "implement byte-preserving copy/download/archive extraction/chunk reassembly helpers",
+    "implement exact filename/size/SHA256/aggregate-manifest verification",
+    "implement persistence and post-copy reverification",
+    "add zero-science tests proving converter/regeneration/evaluation paths are absent",
+    "add planning-only recovery/materialization workflow",
+    "record candidate provenance and explicit terminal classifications"
+  ],
+  "explicitly_not_authorized_now": [
+    "execute recovery/materialization against external or user-owned sources",
+    "execute HF-to-GGUF converter",
+    "regenerate model-f16.gguf from model weights or canonical HF artifacts",
+    "run llama-cli",
+    "run F16 fixtures or model inference",
+    "emit a new F16 scientific result",
+    "re-adjudicate F16",
+    "run Q4 reconstruction",
+    "consume deterministic reconstruction authorization 9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+    "ollama create/chat",
+    "M6 scientific execution",
+    "M7",
+    "bulk training"
+  ],
+  "allowed_surfaces": [
+    "artifacts/model-training-pipeline/m6/f16_parent/**",
+    "tools/m6_f16_parent_materialize.py",
+    "tests/test_m6_f16_parent_materialization.py",
+    ".github/workflows/model-pipeline-m6-f16-parent.yml"
+  ],
+  "protected_surfaces": [
+    "pipeline/m5.py",
+    "pipeline/m5q.py",
+    "pipeline/m5q_q4.py",
+    "tools/m5q_q4_qualification.py",
+    "artifacts/model-training-pipeline/m5_f16/**",
+    "artifacts/model-training-pipeline/m5_quantization/**",
+    "artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json",
+    ".github/workflows/model-pipeline-m6-parent-reconstruct.yml",
+    "tests/fixtures/eval_v1/**"
+  ],
+  "required_zero_science_tests": [
+    "exact F16 identity constants match frozen F16 evidence",
+    "candidate admission fails unless filename, size, SHA256 and aggregate manifest all match",
+    "copy/materialization is byte-preserving and reverified after persistence",
+    "archive extraction/reassembly cannot transform payload bytes",
+    "no HF-to-GGUF converter command or import exists",
+    "no llama-cli command exists",
+    "no fixture/model inference path exists",
+    "no scientific result/adjudication path exists",
+    "deterministic Q4 reconstruction authorization remains unconsumed and untouched",
+    "Ollama create/chat remain forbidden"
+  ],
+  "execution_sequence": [
+    "implement F16 existing-byte recovery/materialization tooling",
+    "run zero-science unit/contract tests",
+    "tests PASS",
+    "freeze exact F16 materialization implementation",
+    "open separate one-attempt F16 recovery/materialization execution authorization",
+    "execute admission attempt",
+    "if and only if ADMITTED_EXISTING_F16_BYTES: freeze exact F16 evidence",
+    "only then create a new Q4 deterministic reconstruction orchestration using still-unconsumed authorization 9506e5fc..."
+  ],
+  "next_valid_action": "IMPLEMENT_F16_RECOVERY_MATERIALIZATION_TOOLING_AND_ZERO_SCIENCE_TESTS"
+}

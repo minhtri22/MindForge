@@ -407,3 +407,16 @@ evaluation, or Ollama execution occurred.
 
 The deterministic reconstruction authorization remains unconsumed because the
 quantizer never started. M6 scientific execution remains closed.
+
+
+## 2026-09-22 — Bounded F16 parent-artifact recovery/materialization program opened
+
+The Q4 reconstruction attempt remains blocked before build because the frozen
+F16 binary was not persisted.
+
+A separate F16 sub-program is opened for byte-preserving recovery/materialization
+only. F16 regeneration and scientific re-adjudication remain forbidden.
+
+The still-unconsumed Q4 reconstruction authorization `9506e5fc...` is
+protected and may receive a new orchestration only after exact F16 bytes are
+admitted.

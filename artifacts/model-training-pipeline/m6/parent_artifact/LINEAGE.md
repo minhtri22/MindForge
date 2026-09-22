@@ -251,3 +251,20 @@ No F16 regeneration is authorized. The next valid action is a separate bounded
 F16 parent-artifact recovery/materialization program. Only after exact F16 bytes
 are admitted may a new deterministic reconstruction orchestration use the
 still-unconsumed reconstruction authorization.
+
+
+## 2026-09-22 — Separate F16 parent recovery/materialization sub-program opened
+
+The blocked deterministic reconstruction established that the required frozen
+F16 parent bytes are unavailable in the repository and authoritative F16
+evidence artifact.
+
+A new bounded F16 parent sub-program now owns only recovery/materialization of an
+**already-existing serialized F16 object**.
+
+It may not regenerate F16, execute the converter, run llama-cli, run fixtures,
+or re-adjudicate F16 science.
+
+The deterministic Q4 reconstruction authorization
+`9506e5fc205e641aba942a0bc9ff2fbaa7d881a5` remains unconsumed and cannot be
+used again until exact F16 admission PASS.

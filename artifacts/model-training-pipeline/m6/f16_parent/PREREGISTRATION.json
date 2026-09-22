@@ -1,0 +1,116 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-artifact-recovery-materialization-preregistration-v1",
+  "status": "OPEN_SPECIFICATION_ONLY",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin": {
+    "blocked_reconstruction_closure_commit": "9b2098e36275f7eecf44f9e3974d3afc5fb4e682",
+    "blocked_reconstruction_evidence_git_blob_sha1": "8c10eafdc0f12d75774fca39f6999efc626eb97c",
+    "blocked_classification": "INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE",
+    "reconstruction_started": false,
+    "reconstruction_authorization_consumed": false,
+    "still_valid_reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
+  },
+  "sole_objective": "Recover or materialize one exact existing serialized copy of the already-qualified F16 GGUF required as the deterministic Q4 reconstruction parent, without regenerating or re-adjudicating F16 science.",
+  "frozen_f16_identity": {
+    "filename": "model-f16.gguf",
+    "topology": "single_file",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_evidence_git_blob_sha1": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9",
+    "scientific_status": "PASS_CLOSED"
+  },
+  "distinction": {
+    "recovery_or_materialization_definition": "Acquire, copy, download, extract, or reassemble already-existing serialized F16 bytes from an explicit provenance-safe source without invoking the HF-to-GGUF conversion path.",
+    "regeneration_definition": "Create new F16 GGUF bytes from model weights/canonical HF artifacts using converter/runtime logic.",
+    "regeneration_authorized": false,
+    "converter_execution_authorized": false
+  },
+  "source_hierarchy": [
+    {
+      "priority": 1,
+      "class": "EXISTING_LOCAL_OR_USER_SUPPLIED_F16",
+      "permitted": true,
+      "requirements": [
+        "explicit source reference",
+        "source must already contain serialized model-f16.gguf bytes",
+        "exact filename, size, SHA256 and aggregate manifest verification"
+      ]
+    },
+    {
+      "priority": 2,
+      "class": "EXISTING_PERSISTENT_BINARY_STORE",
+      "permitted": true,
+      "requirements": [
+        "explicit immutable object/artifact reference",
+        "record source digest where available",
+        "exact extracted F16 identity verification"
+      ]
+    },
+    {
+      "priority": 3,
+      "class": "EXISTING_ARCHIVE_OR_CHUNK_SET",
+      "permitted": true,
+      "requirements": [
+        "archive/chunk provenance recorded",
+        "reassembly must be byte-preserving only",
+        "no converter/model transformation",
+        "final exact F16 identity verification"
+      ]
+    }
+  ],
+  "known_checked_sources": [
+    {
+      "type": "repository_workspace",
+      "result": "NO_F16_CANDIDATE"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35617920637,
+      "artifact_id": 10647342952,
+      "artifact_name": "m5-f16-repair-requalification",
+      "artifact_zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5",
+      "result": "NO_F16_GGUF_MEMBER"
+    }
+  ],
+  "admission_contract": {
+    "admitted_outcome": "ADMITTED_EXISTING_F16_BYTES",
+    "unavailable_outcome": "F16_EXISTING_BYTES_NOT_FOUND",
+    "mismatch_outcome": "F16_EXISTING_BYTES_IDENTITY_MISMATCH",
+    "invalid_provenance_outcome": "INVALID_PROVENANCE",
+    "invalid_infrastructure_outcome": "INVALID_INFRASTRUCTURE",
+    "exact_filename_required": true,
+    "exact_size_required": true,
+    "exact_sha256_required": true,
+    "exact_aggregate_manifest_required": true,
+    "persisted_copy_reverification_required": true
+  },
+  "scientific_boundaries": {
+    "f16_scientific_rerun": false,
+    "f16_regeneration": false,
+    "hf_to_gguf_conversion": false,
+    "llama_cli_evaluation": false,
+    "fixture_evaluation": false,
+    "model_inference": false,
+    "scientific_adjudication": false,
+    "new_f16_result_generation": false,
+    "f16_status_change_authorized": false,
+    "q4_reconstruction_execution": false,
+    "q4_scientific_rerun": false,
+    "ollama_create": false,
+    "ollama_chat": false,
+    "m6_scientific_execution": false,
+    "m6_pass_claim": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "downstream_rule": {
+    "reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+    "reconstruction_authorization_consumed": false,
+    "may_create_new_reconstruction_orchestration_only_after_f16_admission_pass": true,
+    "existing_reconstruction_authorization_must_not_be_modified_by_this_program": true
+  },
+  "next_gate": "BOUNDED_F16_RECOVERY_MATERIALIZATION_IMPLEMENTATION_AND_ZERO_SCIENCE_TESTS"
+}
