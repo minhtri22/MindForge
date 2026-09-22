@@ -1,0 +1,80 @@
+name: Model Pipeline M6 F16 Parent Zero-Science
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - 'tools/m6_f16_parent_materialize.py'
+      - 'tests/test_m6_f16_parent_materialization.py'
+      - 'artifacts/model-training-pipeline/m6/f16_parent/PREREGISTRATION.json'
+      - 'artifacts/model-training-pipeline/m6/f16_parent/IMPLEMENTATION_AUTHORIZATION.json'
+      - '.github/workflows/model-pipeline-m6-f16-parent.yml'
+  workflow_dispatch:
+
+jobs:
+  zero-science:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install test dependency only
+        run: python -m pip install pytest==8.4.2
+
+      - name: F16 parent zero-science unit and contract tests
+        run: python -m pytest -q tests/test_m6_f16_parent_materialization.py
+
+      - name: Generate planning-only F16 materialization report
+        run: |
+          set -o pipefail
+          python tools/m6_f16_parent_materialize.py --json | tee f16-parent-plan.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("f16-parent-plan.json").read_text())
+          assert data["schema"] == "mindforge-m6-f16-parent-materialization-plan-v1"
+          assert data["execution_authorized_now"] is False
+          assert data["requires_separate_execution_authorization"] is True
+          assert data["frozen_f16"]["scientific_status"] == "PASS_CLOSED"
+          assert data["protected_reconstruction_authorization"]["commit"] == (
+              "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
+          )
+          assert data["protected_reconstruction_authorization"]["consumed"] is False
+          assert all(value is False for value in data["boundaries"].values())
+          PY
+
+      - name: Prove no F16 recovery materialization or regeneration executed
+        run: |
+          set -euo pipefail
+          test ! -f model-f16.gguf
+          test ! -f artifacts/model-training-pipeline/m6/f16_parent/EXECUTION_AUTHORIZATION.json
+          echo "existing_f16_bytes_materialized=false"
+          echo "f16_regeneration_executed=false"
+          echo "hf_to_gguf_conversion_executed=false"
+          echo "llama_cli_evaluation_executed=false"
+          echo "fixture_evaluation_executed=false"
+          echo "model_inference_executed=false"
+          echo "scientific_adjudication_executed=false"
+          echo "q4_reconstruction_executed=false"
+          echo "ollama_create_executed=false"
+          echo "ollama_chat_executed=false"
+
+      - name: Verify protected reconstruction authorization identity
+        run: |
+          set -euo pipefail
+          actual="$(git hash-object -- artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json)"
+          test "$actual" = "f26754440d710904f45eb1d7916d334484f43bb5"
+
+      - name: Upload planning evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m6-f16-parent-zero-science
+          path: f16-parent-plan.json
+          if-no-files-found: ignore
