@@ -1,6 +1,7 @@
 # M6R2 S2 Binding QA Checklist
 
-Status: PENDING CI CONFIRMATION
+Status: **PASS**  
+Unresolved findings: **0**
 
 - [x] OWRQ is formally closed as QUALIFIED_RUNTIME_SCOPE.
 - [x] Exact QUALIFIED_RUNTIME_SCOPE source SHA256 is bound.
@@ -13,5 +14,9 @@ Status: PENDING CI CONFIRMATION
 - [x] Flash attention is not forced and resolved mode is recorded.
 - [x] S2 does not invoke Ollama/API/model/eval.
 - [x] S2 consumes no scientific attempt.
+- [x] Zero-science CI: run 35755564317 / job 106840323025 PASS.
+- [x] 23/23 contract tests PASS.
+- [x] Python compile PASS.
+- [x] PowerShell parse PASS.
 - [x] S3 remains unauthorized.
 - [x] M7 and bulk training remain closed.
