@@ -4,6 +4,7 @@ import ast
 import hashlib
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -14,6 +15,7 @@ TOOL_PATH = ROOT / "tools/m6_parent_artifact_materialize.py"
 SPEC = importlib.util.spec_from_file_location("m6_parent_materialize", TOOL_PATH)
 assert SPEC is not None and SPEC.loader is not None
 MAT = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = MAT
 SPEC.loader.exec_module(MAT)
 
 
