@@ -609,3 +609,62 @@ The script must return
 `.local/M6-LOCAL-PREFLIGHT/report/M6_LOCAL_WINDOWS_PREFLIGHT_REPORT.json`
 before any regeneration, Q4 reconstruction, or Ollama scientific execution is
 opened.
+
+
+## 2026-09-22 — Local preflight infrastructure-gate repair after first user execution
+
+The first local invocation reached the preflight script but terminated before any
+host, artifact, or runtime inventory because the script required the literal
+branch name `research/model-pipeline-m6-ollama`.
+
+The user's clone was on `local/m5-f16-run` while HEAD had already
+fast-forwarded to the exact authorized package commit. Therefore the branch-name
+gate was an infrastructure/package defect, not a scientific or provenance
+failure.
+
+The first local report proved all execution boundaries remained closed:
+
+```text
+model download = false
+F16 regeneration = false
+HF-to-GGUF conversion = false
+llama-quantize = false
+llama-cli inference = false
+Ollama server/create/chat = false
+fixture evaluation = false
+scientific adjudication = false
+Q4 reconstruction authorization consumed = false
+```
+
+A bounded repair now:
+
+1. treats branch name as informational only;
+2. still requires the locked implementation commit to be an ancestor of HEAD;
+3. still requires a clean tracked worktree;
+4. still verifies exact governance and Q4 reconstruction authorization blobs;
+5. corrects script blob verification to
+   `Lock.exact_blobs.script_git_blob_sha1`.
+
+Authoritative repair:
+
+```text
+dba9565ef74b9e7803d0b49853554d246eb1b377
+
+script blob:
+1082fdc5594cc90c4e5936af046fb07f9799ad75
+```
+
+Static QA:
+
+```text
+run: 35683510468
+job: 106605352481
+contract tests: 8/8 PASS
+PowerShell parse: PASS
+no-execution proof: PASS
+```
+
+This repaired package supersedes the previous local-preflight lock. The user may
+execute it from the existing local branch without renaming/switching branches,
+provided the repository fast-forwards to this lock closure and all exact blob
+checks pass.

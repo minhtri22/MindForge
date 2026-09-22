@@ -1,14 +1,20 @@
 {
   "schema": "mindforge-model-pipeline-m6-local-windows-preflight-zero-science-evidence-v1",
   "verdict": "PASS",
-  "supersedes_zero_science_evidence_commit": "3d522455f80915e4f9618897cb8b0070651c6c96",
+  "supersedes_zero_science_lock_commit": "322f2e184f555ef844952922c49b50cae2401420",
   "program": "M6_LOCAL_WINDOWS_VENUE_PREFLIGHT",
-  "implementation_commit": "482be1d4122996cb45fe73deb28e3bb5f825b90f",
+  "implementation_commit": "dba9565ef74b9e7803d0b49853554d246eb1b377",
+  "repair_origin": {
+    "user_local_report_classification": "INVALID_LOCAL_PREFLIGHT_INFRASTRUCTURE",
+    "failure_reason": "branch-name-only mismatch before host/search/runtime inventory",
+    "scientific_or_artifact_execution_occurred": false,
+    "correction": "branch name made informational; exact implementation ancestry and blob identities remain mandatory; lock schema path corrected"
+  },
   "authoritative_run": {
-    "run_id": 35682413176,
-    "job_id": 106601991909,
+    "run_id": 35683510468,
+    "job_id": 106605352481,
     "conclusion": "success",
-    "python_contract_tests_passed": 6,
+    "python_contract_tests_passed": 8,
     "python_contract_tests_failed": 0,
     "powershell_syntax_parse": "PASS"
   },
@@ -18,9 +24,10 @@
     "q4_reconstruction_executed": false,
     "ollama_scientific_execution_executed": false
   },
-  "exact_script_git_blob_sha1": "30351c2754a27aeb86ee61c2f8278bade120750d",
+  "exact_script_git_blob_sha1": "1082fdc5594cc90c4e5936af046fb07f9799ad75",
   "state_after_gate": {
     "local_windows_preflight_execution_authorized": true,
+    "branch_name_scientific_gate": false,
     "f16_or_q4_regeneration_authorized": false,
     "q4_reconstruction_authorized": false,
     "ollama_scientific_execution_authorized": false,
