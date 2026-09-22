@@ -1,0 +1,17 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s2-binding-materialization-repair-v1",
+  "status": "REPAIR_APPLIED_PENDING_ZERO_SCIENCE_QA",
+  "detected_on_head": "f25dd06569c6ef27257ce87da9157481271300d4",
+  "finding_id": "S2-F01",
+  "severity": "HIGH",
+  "finding": "The qualified scope binds adapter entrypoint tools/ollama_windows_adapter.py and blob 075b3b..., but that exact adapter file was absent from the M6R2 execution branch.",
+  "consequence_if_unrepaired": "Locked runner would stop at BLOCKED_INFRA_BINDING before any outcome exposure because the qualified adapter entrypoint is missing.",
+  "repair": "Materialize the exact already-qualified adapter Git blob into the bound entrypoint path. Do not edit adapter content, runner, science contract, or OWRQ scope.",
+  "exact_adapter_git_blob_sha1": "075b3b354bbd0c7674d629070d99769d201ad619",
+  "adapter_path": "tools/ollama_windows_adapter.py",
+  "scientific_contract_changed": false,
+  "scientific_execution_performed": false,
+  "outcome_exposed": false,
+  "attempt_consumed": false,
+  "s3_authorization_temporarily_suspended": true
+}

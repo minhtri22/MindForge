@@ -235,3 +235,23 @@ qualified runtime artifact SHA256
 4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370.
 
 M7 and bulk training remain closed.
+
+
+## 2026-09-22 — S2-F01 binding materialization defect found before science
+
+Pre-execution audit found that the qualified scope requires:
+tools/ollama_windows_adapter.py
+blob 075b3b354bbd0c7674d629070d99769d201ad619
+
+but that path was absent from the M6R2 execution branch.
+
+No scientific execution had occurred.
+No outcome had been exposed.
+Attempts consumed remained 0.
+
+Repair:
+materialize the exact already-qualified adapter blob at the bound path.
+No adapter edit, no runner edit, no contract edit, no science change.
+
+S3 authorization is temporarily suspended fail-closed until zero-science QA
+confirms the materialized adapter blob.

@@ -5,6 +5,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 import importlib.util
+import hashlib
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "tools" / "m6r2_contract.py"
 SPEC = importlib.util.spec_from_file_location("m6r2_contract_s1", MODULE_PATH)
@@ -159,7 +160,13 @@ def test_dangling_request_marker_is_ambiguous_and_fail_closed(tmp_path):
     assert state["ambiguous_pending_request"] is True
 
 
-def test_s2_binding_and_s3_one_attempt_authorization_present():
+def git_blob_sha1(path):
+    data = path.read_bytes()
+    header = f"blob {len(data)}\\0".encode()
+    return hashlib.sha1(header + data).hexdigest()
+
+
+def test_s2_binding_and_s3_suspended_during_adapter_materialization_qa():
     assert S2.exists()
     s2 = json.loads(S2.read_text(encoding="utf-8"))
     assert s2["status"] == "AUTHORIZED_ONE_CONSOLIDATED_INFRA_BINDING"
@@ -171,10 +178,14 @@ def test_s2_binding_and_s3_one_attempt_authorization_present():
     assert s2["required_scope"]["kv_cache_type"] == "f16"
     assert s2["required_scope"]["flash_attention_forced"] is False
 
+    adapter_path = ROOT / "tools" / "ollama_windows_adapter.py"
+    assert adapter_path.exists()
+    assert git_blob_sha1(adapter_path) == "075b3b354bbd0c7674d629070d99769d201ad619"
+
     assert S3.exists()
     s3 = json.loads(S3.read_text(encoding="utf-8"))
-    assert s3["status"] == "AUTHORIZED_ONE_FRESH_M6R2_OUTCOME_EXECUTION"
-    assert s3["attempts_authorized"] == 1
+    assert s3["status"] == "SUSPENDED_PENDING_BINDING_MATERIALIZATION_QA"
+    assert s3["attempts_authorized"] == 0
     assert s3["s1_implementation_lock_git_blob_sha1"] == "124b21063675e6d37202a81b88c04efc4aa2254e"
     assert s3["s2_authorization_git_blob_sha1"] == "281b79a4482ed3df57c84c5a138cd00df7d72842"
     assert s3["qualified_runtime_artifact_sha256"] == "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370"
