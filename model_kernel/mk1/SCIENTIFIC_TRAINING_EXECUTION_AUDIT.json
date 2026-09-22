@@ -1,0 +1,133 @@
+{
+  "schema": "MK1-SCIENTIFIC-TRAINING-EXECUTION-AUDIT-v0.1",
+  "status": "SCIENTIFIC_TRAINING_EXECUTION_AUDIT_PASS",
+  "canonical_run": {
+    "run_id": 35587028399,
+    "head_sha": "063d92299ed8adf90786bea9b5bd6ad3acf23243",
+    "conclusion": "success",
+    "jobs_total": 10,
+    "jobs_success": 10
+  },
+  "training_bundle": {
+    "run_id": 35581007427,
+    "artifact_id": 10629399106,
+    "zip_sha256": "56d8f5b9b185215ac744a8299184db666b6018b6fefa7b02488d11e1b2abf7af",
+    "confirmatory_content_present": false
+  },
+  "frozen_contract": {
+    "steps_per_job": 5000,
+    "processed_input_tokens_per_job": 6457260,
+    "validation_interval": 250,
+    "validation_events_per_job": 20,
+    "early_stopping": false,
+    "tokenizer_sha256": "e91c26992c5eafbb33ca1f6c0d2f40b8c79361dc57c95d0a265123ca70974829"
+  },
+  "jobs": [
+    {
+      "arm": "direct",
+      "seed": 71001,
+      "artifact_id": 10634805274,
+      "zip_sha256": "abb0c2857e8b0f96da7290cbb98e418012ba43eb41c97b1a4782a8662befb7f2",
+      "best_step": 3250,
+      "schedule_sha256": "18262d3bec5fde01ebdb43bac7afb8142c32dd2aecff8245800435202270eaac"
+    },
+    {
+      "arm": "m1z",
+      "seed": 71001,
+      "artifact_id": 10635575980,
+      "zip_sha256": "e413ce076530b7e47dfdd3ebaf518d8165f53d9e8a25ac05ea166a65dabf5a0f",
+      "best_step": 5000,
+      "schedule_sha256": "18262d3bec5fde01ebdb43bac7afb8142c32dd2aecff8245800435202270eaac"
+    },
+    {
+      "arm": "direct",
+      "seed": 71002,
+      "artifact_id": 10636417810,
+      "zip_sha256": "e546e4d6991ad49b178035f5ea82b7766da2fea4c20c6a9038c9f9fcf421849e",
+      "best_step": 3000,
+      "schedule_sha256": "8de8516dd6802106d4cf7fe36745a8636e888d9c5c711d76c7870fc2582f64b3"
+    },
+    {
+      "arm": "m1z",
+      "seed": 71002,
+      "artifact_id": 10638036281,
+      "zip_sha256": "0f9b483a5f8979a92ec330974e56564e292737b5ba4185f081d384f88ba4bf13",
+      "best_step": 3500,
+      "schedule_sha256": "8de8516dd6802106d4cf7fe36745a8636e888d9c5c711d76c7870fc2582f64b3"
+    },
+    {
+      "arm": "direct",
+      "seed": 71003,
+      "artifact_id": 10639446106,
+      "zip_sha256": "cde40257a2e70ef87e5ba16cffebfc4c8a2c95e3f953a9771dc2e89b2fb2e153",
+      "best_step": 5000,
+      "schedule_sha256": "3e5eb4ba3dbb297ce2176361544773db54ca8a1c3e3ddb89aa1367049bd18077"
+    },
+    {
+      "arm": "m1z",
+      "seed": 71003,
+      "artifact_id": 10641678365,
+      "zip_sha256": "0df985887c5d4c58704317c5885574abee69d8ef63312568896c40954cc6826b",
+      "best_step": 5000,
+      "schedule_sha256": "3e5eb4ba3dbb297ce2176361544773db54ca8a1c3e3ddb89aa1367049bd18077"
+    },
+    {
+      "arm": "direct",
+      "seed": 71004,
+      "artifact_id": 10642468353,
+      "zip_sha256": "e7e7f1a2a3f9f9675395d396d8c5f02f5cd7074a43d9bb824f78ee09bf516f29",
+      "best_step": 5000,
+      "schedule_sha256": "e4839585f54ad14f02bd8c029d3461b6cb25063f044408cc5eeee08a8d064c5e"
+    },
+    {
+      "arm": "m1z",
+      "seed": 71004,
+      "artifact_id": 10644396601,
+      "zip_sha256": "45d8c286954565cf0276105db87cebe01cbde14d1cb1446678f466f7d67b908a",
+      "best_step": 4750,
+      "schedule_sha256": "e4839585f54ad14f02bd8c029d3461b6cb25063f044408cc5eeee08a8d064c5e"
+    },
+    {
+      "arm": "direct",
+      "seed": 71005,
+      "artifact_id": 10645591151,
+      "zip_sha256": "f792e488cbe768ead24dde4b9502402db84ddeb3b28694320b477806769aa664",
+      "best_step": 3750,
+      "schedule_sha256": "52b5ce49529db34761d093cc8aa5c0a04ae19e6224e5d80e8bcf998f8dc435d9"
+    },
+    {
+      "arm": "m1z",
+      "seed": 71005,
+      "artifact_id": 10647387273,
+      "zip_sha256": "d107361f967f8ace604ba6cc8d53b4d1b6055178ee296b3bbe51f5f5581c06f1",
+      "best_step": 3000,
+      "schedule_sha256": "52b5ce49529db34761d093cc8aa5c0a04ae19e6224e5d80e8bcf998f8dc435d9"
+    }
+  ],
+  "invariants": {
+    "artifact_zip_sha256_match_all": true,
+    "exact_artifact_file_set_all": true,
+    "run_complete_all": true,
+    "steps_5000_all": true,
+    "parameter_contract_all": true,
+    "exact_token_budget_all": true,
+    "schedule_provenance_all": true,
+    "exact_schedule_row_execution_all": true,
+    "tokenizer_provenance_all": true,
+    "paired_initialization_provenance_all": true,
+    "exact_learning_rate_schedule_all": true,
+    "validation_cadence_all": true,
+    "validation_scores_finite_all": true,
+    "earliest_max_selector_all": true,
+    "best_checkpoint_metadata_all": true,
+    "latest_checkpoint_step_5000_all": true,
+    "training_loss_finite_all": true,
+    "no_early_stop_all": true,
+    "train_sample_namespace_only_all": true,
+    "no_confirmatory_files_all": true,
+    "execution_head_source_blobs_match_lock": true,
+    "trigger_commit_only_added_trigger_file": true
+  },
+  "scientific_outcome_adjudicated": false,
+  "next_authorized_stage": "H1A_THEN_H1B_THEN_H1C_ADJUDICATION"
+}
