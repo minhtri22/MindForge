@@ -92,3 +92,32 @@ S1 is now CLOSED/LOCKED.
 S2 remains unauthorized and waits only for a formally qualified OWRQ scope.
 S3 remains unauthorized.
 M7 and bulk training remain closed.
+
+
+## 2026-09-22 — S1 supplemental zero-science confirmation / S2 specification opened
+
+Canonical S1 lock remains unchanged:
+- implementation commit: 069ad295d9b3a7a52bf203212daa63c628b6d5ef
+- lock blob: 124b21063675e6d37202a81b88c04efc4aa2254e
+- runner blob: b591b55d3e19554507c2c559387c9b947862fd18
+- contract blob: e7312efa54876fe59348d7408352bcc36dcaf5e7
+- adapter interface blob: 0973749fc01dfe873ec7be92e55d2898fc67b9ed
+
+Supplemental confirmation:
+- HEAD 9f7f9cc0a9fb2f7cec12ec20e7eee858c4706c96
+- run 35751922131 / job 106827978783
+- 23/23 tests PASS
+- Python compile PASS
+- PowerShell parse PASS
+- zero runtime/API/model/eval/outcome execution
+
+The supplemental run changed only QA harness plumbing and does not replace or
+mutate the canonical S1 lock.
+
+S2 is now specified as one consolidated metadata/hash binding check to a future
+OWRQ QUALIFIED_RUNTIME_SCOPE.
+
+S2 execution is NOT authorized.
+S3 execution is NOT authorized.
+OWRQ qualification is still required before S2 can bind.
+M7 and bulk training remain closed.

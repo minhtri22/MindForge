@@ -1,0 +1,76 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s2-infra-binding-spec-v1",
+  "status": "SPECIFICATION_ONLY_NOT_AUTHORIZED",
+  "program": "M6R2_PARITY_REPLICATION",
+  "stage": "S2_CONSOLIDATED_INFRA_BINDING",
+  "parent_s1_lock_git_blob_sha1": "124b21063675e6d37202a81b88c04efc4aa2254e",
+  "purpose": "Bind the locked M6R2 science implementation to one independently qualified OWRQ runtime scope immediately before S3, without re-running infrastructure qualification inside M6R2.",
+  "prerequisites": {
+    "s1_status": "CLOSED_LOCKED",
+    "owrq_status_required": "QUALIFIED_RUNTIME_SCOPE",
+    "owrq_qualification_artifact_required": true,
+    "current_owrq_qualification_available": false
+  },
+  "binding_inputs": [
+    "OWRQ qualification artifact SHA256",
+    "OWRQ adapter Git blob SHA1",
+    "OWRQ adapter contract version",
+    "local machine fingerprint SHA256",
+    "Ollama version",
+    "ollama.exe SHA256",
+    "runtime environment contract",
+    "resolved flash-attention mode",
+    "API host and /api/chat contract"
+  ],
+  "exact_requirements": {
+    "ollama_version": "0.34.2",
+    "runtime_adapter_contract_version": "mindforge-owrq-runtime-adapter-v1",
+    "kv_cache_type": "f16",
+    "flash_attention_forced": false,
+    "chat_endpoint": "/api/chat",
+    "same_local_machine_scope_as_owrq": true,
+    "exact_qualified_adapter_blob": true,
+    "exact_qualified_runtime_artifact_hash": true
+  },
+  "operation": {
+    "full_owrq_requalification_inside_s2": false,
+    "calls_ollama": false,
+    "calls_api": false,
+    "creates_model": false,
+    "runs_eval_v1": false,
+    "exposes_scientific_outcome": false,
+    "consumes_scientific_attempt": false,
+    "expected_cost": "metadata/hash/binding verification only"
+  },
+  "outcomes": [
+    {
+      "status": "BINDING_PASS",
+      "meaning": "Exact required OWRQ-qualified scope matches locked M6R2 S1 consumer contract.",
+      "next": "S3 execution authorization may be considered separately."
+    },
+    {
+      "status": "BLOCKED_INFRA_BINDING",
+      "meaning": "Qualified scope is absent or any required scope key/hash/blob differs.",
+      "next": "Return to OWRQ infrastructure lane; M6R2 scientific state remains unchanged."
+    }
+  ],
+  "anti_microgate_rule": "S2 is one consolidated check. It must not split runtime/version/hash/adapter/environment/backend/API into separate user-facing gates.",
+  "retry_semantics": "S2 is metadata binding, not science. It may be re-evaluated after OWRQ produces a new formally qualified scope, without consuming a scientific attempt.",
+  "forbidden": [
+    "run OWRQ qualification from M6R2",
+    "invoke Ollama",
+    "call Ollama API",
+    "create/load/delete model",
+    "run eval_v1",
+    "alter Q4/Modelfile/fixtures/generation/comparator/reasoning contract",
+    "authorize S3 automatically",
+    "open M7",
+    "bulk training"
+  ],
+  "authorization_state": {
+    "s2_execution_authorized": false,
+    "s3_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
