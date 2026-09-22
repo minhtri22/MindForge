@@ -1,0 +1,422 @@
+name: Model Pipeline M6 Parent Deterministic Reconstruction
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - '.github/workflows/model-pipeline-m6-parent-reconstruct.yml'
+      - 'artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_ORCHESTRATION.json'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      AUTH_COMMIT: '9506e5fc205e641aba942a0bc9ff2fbaa7d881a5'
+      AUTH_BLOB: 'f26754440d710904f45eb1d7916d334484f43bb5'
+      F16_EVIDENCE_BLOB: '22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9'
+      F16_ARTIFACT_ID: '10647342952'
+      F16_ARTIFACT_ZIP_SHA256: '0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5'
+      EXPECTED_F16_SIZE: '994156384'
+      EXPECTED_F16_SHA256: '437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b'
+      EXPECTED_F16_MANIFEST: 'eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8'
+      EXPECTED_Q4_SIZE: '397807456'
+      EXPECTED_Q4_SHA256: 'ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977'
+      EXPECTED_Q4_MANIFEST: 'e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b'
+      LLAMA_CPP_COMMIT: 'ce8caa6e60a03093351d6016a818720e0d46f0fb'
+      EXPECTED_LLAMA_QUANTIZE_SHA256: '94f3d380b1105a59382ba8f3003cf241058b1c901b619cccdec0a66bbda73267'
+      GH_TOKEN: '${{ github.token }}'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify reconstruction authorization and orchestration binding
+        run: |
+          set -euo pipefail
+          parent="$(git rev-parse HEAD^)"
+          test "$parent" = "$AUTH_COMMIT"
+
+          auth='artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json'
+          orch='artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_ORCHESTRATION.json'
+          recovery='artifacts/model-training-pipeline/m6/parent_artifact/RECOVERY_EVIDENCE.json'
+          f16ev='artifacts/model-training-pipeline/m5_f16/M5_F16_QUALIFICATION_EVIDENCE.json'
+
+          test "$(git hash-object -- "$auth")" = "$AUTH_BLOB"
+          test "$(git hash-object -- "$f16ev")" = "$F16_EVIDENCE_BLOB"
+
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          auth_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m6/parent_artifact/"
+              "DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json"
+          )
+          orch_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m6/parent_artifact/"
+              "DETERMINISTIC_RECONSTRUCTION_ORCHESTRATION.json"
+          )
+          recovery_path = pathlib.Path(
+              "artifacts/model-training-pipeline/m6/parent_artifact/"
+              "RECOVERY_EVIDENCE.json"
+          )
+          auth = json.loads(auth_path.read_text())
+          orch = json.loads(orch_path.read_text())
+          recovery = json.loads(recovery_path.read_text())
+
+          assert auth["status"] == "AUTHORIZED_ONE_MATERIALIZATION_EXECUTION"
+          assert auth["mode"] == "DETERMINISTIC_RECONSTRUCTION_ONLY"
+          assert auth["execution_class"] == (
+              "M6_PARENT_ARTIFACT_DETERMINISTIC_BYTE_RECONSTRUCTION"
+          )
+          assert auth["authorization_scope"]["reconstruction_attempts_authorized"] == 1
+          assert auth["authorization_scope"]["only_after_f16_parent_admission"] is True
+          assert auth["frozen_f16_parent"]["regeneration_authorized"] is False
+          assert auth["frozen_runtime_quantizer"]["llama_cpp_commit"] == (
+              "ce8caa6e60a03093351d6016a818720e0d46f0fb"
+          )
+          assert auth["frozen_runtime_quantizer"]["quantizer_type"] == "Q4_K_M"
+          assert auth["boundaries"]["q4_scientific_rerun"] is False
+          assert auth["boundaries"]["q4_fixture_evaluation"] is False
+          assert auth["boundaries"]["scientific_adjudication"] is False
+          assert auth["boundaries"]["ollama_create"] is False
+          assert auth["downstream_boundaries"]["ollama_chat"] is False
+
+          assert recovery["verdict"] == "NOT_FOUND_RECOVERY_EXHAUSTED"
+          assert recovery["authorization_consumed"] is True
+          assert recovery["hard_boundary_proof"]["reconstruction_executed"] is False
+
+          assert orch["schema"] == (
+              "mindforge-model-pipeline-m6-parent-artifact-"
+              "deterministic-reconstruction-orchestration-v1"
+          )
+          assert orch["status"] == "BOUND_FOR_ONE_RECONSTRUCTION_ATTEMPT"
+          assert orch["authorization_commit"] == (
+              "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
+          )
+          assert orch["authorization_git_blob_sha1"] == (
+              "f26754440d710904f45eb1d7916d334484f43bb5"
+          )
+          assert orch["f16_admission_precedes_llama_build"] is True
+          assert orch["f16_regeneration_in_workflow"] is False
+          assert orch["reconstruction_attempts_planned"] == 1
+
+          wf = pathlib.Path(
+              ".github/workflows/model-pipeline-m6-parent-reconstruct.yml"
+          )
+          actual = subprocess.check_output(
+              ["git", "hash-object", "--", str(wf)], text=True
+          ).strip()
+          assert actual == orch["workflow_git_blob_sha1"], (
+              actual,
+              orch["workflow_git_blob_sha1"],
+          )
+          print("M6_DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION_BOUND")
+          PY
+
+      - name: Admit exact frozen F16 parent bytes
+        id: f16
+        run: |
+          set -euo pipefail
+          mkdir -p .m6-f16-sources/formal .m6-reconstruction-input
+
+          find . -type f -name 'model-f16.gguf'             -not -path './.git/*'             -not -path './.m6-reconstruction-input/*'             -not -path './.m6-f16-sources/*'             -print > .m6-f16-sources/repo-candidates.txt
+
+          url="https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$F16_ARTIFACT_ID/zip"
+          curl -L --fail --silent --show-error             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "$url" -o .m6-f16-sources/formal/f16-evidence.zip
+
+          actual_zip_sha="$(sha256sum .m6-f16-sources/formal/f16-evidence.zip | awk '{print $1}')"
+          test "$actual_zip_sha" = "$F16_ARTIFACT_ZIP_SHA256"
+          unzip -q .m6-f16-sources/formal/f16-evidence.zip             -d .m6-f16-sources/formal/extracted
+
+          find .m6-f16-sources/formal/extracted -type f -name 'model-f16.gguf'             -print > .m6-f16-sources/formal-candidates.txt
+          cat .m6-f16-sources/repo-candidates.txt               .m6-f16-sources/formal-candidates.txt               > .m6-f16-sources/all-candidates.txt
+
+          python - <<'PY'
+          import importlib.util
+          import json
+          import pathlib
+          import shutil
+          import sys
+
+          root = pathlib.Path.cwd()
+          spec = importlib.util.spec_from_file_location(
+              "m6_parent_reconstruction_admission",
+              root / "tools/m6_parent_artifact_materialize.py",
+          )
+          assert spec is not None and spec.loader is not None
+          mat = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = mat
+          spec.loader.exec_module(mat)
+
+          candidates = [
+              pathlib.Path(line.strip())
+              for line in (
+                  root / ".m6-f16-sources/all-candidates.txt"
+              ).read_text().splitlines()
+              if line.strip()
+          ]
+          inspected = [
+              mat.inspect_artifact(candidate, mat.F16_IDENTITY)
+              for candidate in candidates
+          ]
+          admitted = next((item for item in inspected if item["admitted"]), None)
+
+          if admitted is not None:
+              destination = (
+                  root / ".m6-reconstruction-input" / mat.F16_FILENAME
+              )
+              shutil.copyfile(admitted["path"], destination)
+              persisted = mat.inspect_artifact(destination, mat.F16_IDENTITY)
+              assert persisted["admitted"] is True
+              classification = "F16_PARENT_ADMITTED"
+              available = True
+          elif candidates:
+              persisted = None
+              classification = "INVALID_PROVENANCE_F16_PARENT_MISMATCH"
+              available = False
+          else:
+              persisted = None
+              classification = "INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE"
+              available = False
+
+          result = {
+              "schema": "mindforge-m6-parent-f16-admission-v1",
+              "classification": classification,
+              "candidate_count": len(candidates),
+              "inspected_candidates": inspected,
+              "persisted_parent": persisted,
+              "expected": {
+                  "filename": mat.F16_FILENAME,
+                  "size": mat.F16_SIZE,
+                  "sha256": mat.F16_SHA256,
+                  "aggregate_manifest_hash": mat.F16_MANIFEST,
+              },
+              "f16_regeneration_executed": False,
+              "llama_build_executed": False,
+              "quantizer_executed": False,
+              "scientific_evaluation_executed": False,
+          }
+          (root / "f16-parent-admission.json").write_text(
+              json.dumps(result, indent=2, sort_keys=True) + "\n"
+          )
+          pathlib.Path(".m6-f16-admitted").write_text(
+              "true\n" if available else "false\n"
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+
+          admitted="$(tr -d '\r\n' < .m6-f16-admitted)"
+          echo "admitted=$admitted" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout exact pinned llama.cpp only after F16 admission
+        if: steps.f16.outputs.admitted == 'true'
+        run: |
+          set -euo pipefail
+          source_dir='.m6-reconstruction-tools/llama.cpp'
+          mkdir -p .m6-reconstruction-tools
+          git init "$source_dir"
+          git -C "$source_dir" remote add origin https://github.com/ggml-org/llama.cpp.git
+          git -C "$source_dir" fetch --depth 1 origin "$LLAMA_CPP_COMMIT"
+          git -C "$source_dir" checkout --detach FETCH_HEAD
+          actual="$(git -C "$source_dir" rev-parse HEAD)"
+          test "$actual" = "$LLAMA_CPP_COMMIT"
+          printf '%s\n' "$actual" > llama-source-commit.txt
+
+      - name: Build and verify exact llama-quantize only after F16 admission
+        id: quantizer
+        if: steps.f16.outputs.admitted == 'true'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          lock = json.loads(
+              pathlib.Path(
+                  "docs/model-training-pipeline/runtime/llama_cpp.lock.json"
+              ).read_text()
+          )
+          assert lock["commit_sha"] == (
+              "ce8caa6e60a03093351d6016a818720e0d46f0fb"
+          )
+          source = pathlib.Path(".m6-reconstruction-tools/llama.cpp").resolve()
+          build = source / "build"
+          configure = [
+              "cmake", "-S", str(source), "-B", str(build),
+              *lock["build"]["flags"],
+          ]
+          subprocess.run(configure, check=True)
+          build_cmd = [
+              "cmake", "--build", str(build),
+              "--target", "llama-quantize", "-j2",
+          ]
+          subprocess.run(build_cmd, check=True)
+          manifest = {
+              "schema": "mindforge-m6-reconstruction-llama-build-v1",
+              "source_commit": lock["commit_sha"],
+              "flags": lock["build"]["flags"],
+              "target": "llama-quantize",
+              "configure_command": configure,
+              "build_command": build_cmd,
+          }
+          pathlib.Path("llama-build-manifest.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+          quantizer='.m6-reconstruction-tools/llama.cpp/build/bin/llama-quantize'
+          test -x "$quantizer"
+          actual="$(sha256sum "$quantizer" | awk '{print $1}')"
+          test "$actual" = "$EXPECTED_LLAMA_QUANTIZE_SHA256"
+          printf '%s\n' "$actual" > llama-quantize-sha256.txt
+          echo "path=$quantizer" >> "$GITHUB_OUTPUT"
+
+      - name: Execute exactly one deterministic Q4_K_M reconstruction
+        id: reconstruct
+        if: steps.f16.outputs.admitted == 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p .m6-reconstruction-output reconstruction-admitted
+          python - <<'PY'
+          import importlib.util
+          import json
+          import pathlib
+          import shutil
+          import sys
+
+          root = pathlib.Path.cwd()
+          spec = importlib.util.spec_from_file_location(
+              "m6_parent_reconstruction_execution",
+              root / "tools/m6_parent_artifact_materialize.py",
+          )
+          assert spec is not None and spec.loader is not None
+          mat = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = mat
+          spec.loader.exec_module(mat)
+
+          result = mat.execute_reconstruction(
+              frozen_f16=root / ".m6-reconstruction-input/model-f16.gguf",
+              llama_quantize=root / (
+                  ".m6-reconstruction-tools/llama.cpp/build/bin/llama-quantize"
+              ),
+              output_q4=root / ".m6-reconstruction-output/model-q4_k_m.gguf",
+              execution_authorization=root / (
+                  "artifacts/model-training-pipeline/m6/parent_artifact/"
+                  "DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json"
+              ),
+          )
+
+          result["reconstruction_attempt_number"] = 1
+          result["authorization_commit"] = (
+              "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
+          )
+          result["orchestration_commit"] = __import__("os").environ["GITHUB_SHA"]
+          result["llama_cli_evaluation_executed"] = False
+          result["q4_scientific_result_generated"] = False
+
+          if result["classification"] == "ADMITTED_DETERMINISTIC_RECONSTRUCTION":
+              source = root / ".m6-reconstruction-output/model-q4_k_m.gguf"
+              destination = root / "reconstruction-admitted/model-q4_k_m.gguf"
+              shutil.copyfile(source, destination)
+              admitted = mat.inspect_artifact(destination, mat.Q4_IDENTITY)
+              assert admitted["admitted"] is True
+              result["persisted_admitted_artifact"] = admitted
+          else:
+              output = root / ".m6-reconstruction-output/model-q4_k_m.gguf"
+              if output.exists():
+                  output.unlink()
+              result["persisted_admitted_artifact"] = None
+
+          (root / "reconstruction-result.json").write_text(
+              json.dumps(result, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+
+      - name: Freeze byte-identity or pre-reconstruction provenance result
+        if: always()
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import pathlib
+
+          root = pathlib.Path.cwd()
+          f16 = json.loads((root / "f16-parent-admission.json").read_text())
+          recon_path = root / "reconstruction-result.json"
+
+          if f16["classification"] != "F16_PARENT_ADMITTED":
+              classification = f16["classification"]
+              reconstruction_started = False
+              authorization_consumed = False
+              reconstruction = None
+          elif recon_path.exists():
+              reconstruction = json.loads(recon_path.read_text())
+              classification = reconstruction["classification"]
+              reconstruction_started = True
+              authorization_consumed = True
+          else:
+              classification = "INVALID_INFRASTRUCTURE"
+              reconstruction_started = False
+              authorization_consumed = False
+              reconstruction = None
+
+          result = {
+              "schema": (
+                  "mindforge-model-pipeline-m6-parent-artifact-"
+                  "deterministic-reconstruction-result-v1"
+              ),
+              "classification": classification,
+              "scientific_fail": False,
+              "authorization_commit": (
+                  "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
+              ),
+              "orchestration_commit": __import__("os").environ["GITHUB_SHA"],
+              "f16_parent_admission": f16,
+              "reconstruction": reconstruction,
+              "reconstruction_started": reconstruction_started,
+              "reconstruction_authorization_consumed": authorization_consumed,
+              "f16_regeneration_executed": False,
+              "fixture_evaluation_executed": False,
+              "llama_cli_evaluation_executed": False,
+              "model_inference_executed": False,
+              "scientific_adjudication_executed": False,
+              "q4_scientific_result_generated": False,
+              "q4_scientific_status": "PASS_CLOSED",
+              "q4_rerun_authorized": False,
+              "ollama_create_executed": False,
+              "ollama_chat_executed": False,
+              "m6_scientific_execution_executed": False,
+              "m7_authorized": False,
+              "bulk_training_authorized": False,
+          }
+          (root / "deterministic-reconstruction-result.json").write_text(
+              json.dumps(result, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload reconstruction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m6-parent-deterministic-reconstruction-evidence
+          path: |
+            f16-parent-admission.json
+            deterministic-reconstruction-result.json
+            reconstruction-result.json
+            llama-source-commit.txt
+            llama-build-manifest.json
+            llama-quantize-sha256.txt
+            reconstruction-admitted/model-q4_k_m.gguf
+          if-no-files-found: warn

@@ -1,0 +1,57 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-deterministic-reconstruction-orchestration-v1",
+  "status": "BOUND_FOR_ONE_RECONSTRUCTION_ATTEMPT",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+  "authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+  "implementation_commit": "a6f9d4341894cf59cab853d4ae6912e060c10599",
+  "recovery_exhaustion_commit": "5cbee7be3cefb325207ea56b3daba899aa9ea3d2",
+  "recovery_evidence_git_blob_sha1": "2880512d822b5437b59261be9aee294a10b1fef4",
+  "workflow_path": ".github/workflows/model-pipeline-m6-parent-reconstruct.yml",
+  "workflow_git_blob_sha1": "2e4547cc20b367ce41abfcc55bace863156292fa",
+  "f16_admission_precedes_llama_build": true,
+  "f16_regeneration_in_workflow": false,
+  "f16_sources": [
+    {
+      "type": "repository_workspace",
+      "filename": "model-f16.gguf"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35617920637,
+      "artifact_id": 10647342952,
+      "name": "m5-f16-repair-requalification",
+      "zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5"
+    }
+  ],
+  "frozen_f16": {
+    "filename": "model-f16.gguf",
+    "size": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+  },
+  "frozen_runtime": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "llama_cpp_lock_git_blob_sha1": "9cef982e91d067f7110397ecb5e66ba92af25d38",
+    "quantizer_type": "Q4_K_M",
+    "expected_llama_quantize_sha256": "94f3d380b1105a59382ba8f3003cf241058b1c901b619cccdec0a66bbda73267"
+  },
+  "frozen_q4": {
+    "filename": "model-q4_k_m.gguf",
+    "size": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "reconstruction_attempts_planned": 1,
+  "attempt_consumed_only_when_quantizer_starts": true,
+  "persist_only_exact_admitted_q4": true,
+  "q4_scientific_rerun": false,
+  "fixture_evaluation": false,
+  "llama_cli_evaluation": false,
+  "model_inference": false,
+  "scientific_adjudication": false,
+  "ollama_create": false,
+  "ollama_chat": false,
+  "m7_authorized": false,
+  "bulk_training_authorized": false
+}
