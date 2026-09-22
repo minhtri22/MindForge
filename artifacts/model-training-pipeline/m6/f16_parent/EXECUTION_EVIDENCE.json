@@ -1,0 +1,118 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-existing-byte-materialization-evidence-v1",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "verdict": "F16_EXISTING_BYTES_NOT_FOUND",
+  "scientific_fail": false,
+  "authorization_commit": "1e4f759fc358bde74473a373f138d3c813b909bc",
+  "authorization_git_blob_sha1": "9e503d1306637d8ea238d295936445e3c29c02dd",
+  "orchestration_commit": "19e83fabc2c987e9f0a11af50bdffa3bb152e843",
+  "implementation_commit": "24768d87f9f22b820ac02e7428d40ea3df015bf7",
+  "implementation_lock_commit": "8055fdb382a0f6006ecd78ae0f4321e8e1516b8d",
+  "authoritative_run": {
+    "run_id": 35679343395,
+    "job_id": 106592664344,
+    "conclusion": "success",
+    "artifact_id": 10675160022,
+    "artifact_name": "m6-f16-existing-byte-materialization-evidence",
+    "artifact_size_bytes": 2432,
+    "artifact_zip_sha256": "ec73270a9d9391239c97879948a4baf99f2b4aaf19f2fcf5d65a63f6683897c3"
+  },
+  "expected_f16": {
+    "filename": "model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "scientific_status": "PASS_CLOSED"
+  },
+  "attempt": {
+    "attempt_number": 1,
+    "recovery_inventory_executed": true,
+    "materialization_started": false,
+    "byte_operation_consumed": false,
+    "authorization_terminal_after_result": true,
+    "rerun_after_terminal_outcome": false,
+    "candidate_count": 0,
+    "persisted_artifact": null
+  },
+  "sources_checked": [
+    {
+      "type": "repository_workspace",
+      "result": "NO_MODEL_F16_GGUF"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35617920637,
+      "artifact_id": 10647342952,
+      "artifact_name": "m5-f16-repair-requalification",
+      "zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5",
+      "digest_verified": true,
+      "members": [
+        ".m5-f16-tools/converter_probe.json"
+      ],
+      "result": "NO_MODEL_F16_GGUF_MEMBER"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35631188086,
+      "artifact_id": 10654815953,
+      "artifact_name": "m5-f16-repair-requalification",
+      "zip_sha256": "5f8836456197860234221fb7c9940024813cb4f110ced368d7061a5026c454f7",
+      "digest_verified": true,
+      "members": [
+        ".m5-f16-tools/converter_probe.json"
+      ],
+      "result": "NO_MODEL_F16_GGUF_MEMBER"
+    },
+    {
+      "type": "github_actions_artifact",
+      "run_id": 35631247719,
+      "artifact_id": 10654486533,
+      "artifact_name": "m5-f16-repair-requalification",
+      "zip_sha256": "16ebea1c29e19ee7be7096e2eb1bbdf550a377279482f1108a73ff647917b3c2",
+      "digest_verified": true,
+      "members": [
+        ".m5-f16-tools/converter_probe.json"
+      ],
+      "result": "NO_MODEL_F16_GGUF_MEMBER"
+    }
+  ],
+  "known_related_runs_without_artifacts": [
+    35577280214,
+    35576957471,
+    35576629814,
+    35565868782,
+    35565295993,
+    35564704830,
+    35559811211,
+    35559345651,
+    35559195761,
+    35552469677
+  ],
+  "boundary_proof": {
+    "f16_regeneration_executed": false,
+    "hf_to_gguf_conversion_executed": false,
+    "llama_cli_evaluation_executed": false,
+    "fixture_evaluation_executed": false,
+    "model_inference_executed": false,
+    "scientific_adjudication_executed": false,
+    "new_f16_scientific_result_generated": false,
+    "q4_reconstruction_executed": false,
+    "q4_reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+    "q4_reconstruction_authorization_consumed": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "m6_scientific_execution_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "state_after_result": {
+    "f16_parent_admitted": false,
+    "f16_materialization_authorization_terminal": true,
+    "same_authorization_rerun_allowed": false,
+    "q4_reconstruction_authorization_consumed": false,
+    "q4_reconstruction_orchestration_allowed": false,
+    "reason_q4_reconstruction_blocked": "exact frozen F16 parent was not admitted",
+    "next_valid_action": "STOP_UNLESS_A_GENUINELY_NEW_PREEXISTING_PROVENANCE_SAFE_F16_SOURCE_IS_IDENTIFIED; any renewed F16 recovery attempt requires a new governance amendment/authorization and must not regenerate F16"
+  }
+}

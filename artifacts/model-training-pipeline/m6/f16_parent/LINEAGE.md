@@ -105,3 +105,80 @@ Exactly one future byte-preserving materialization attempt is authorized using c
 F16 regeneration and HF-to-GGUF conversion remain forbidden. The deterministic Q4 reconstruction authorization `9506e5fc...` remains unconsumed and cannot execute inside the F16 materialization workflow.
 
 No materialization is executed by this authorization commit.
+
+
+## 2026-09-22 — One-attempt F16 existing-byte materialization terminal: NOT FOUND
+
+Authorization:
+
+```text
+1e4f759fc358bde74473a373f138d3c813b909bc
+```
+
+Orchestration:
+
+```text
+19e83fabc2c987e9f0a11af50bdffa3bb152e843
+```
+
+Authoritative run:
+
+```text
+run: 35679343395
+job: 106592664344
+conclusion: success
+artifact: 10675160022
+artifact zip sha256:
+ec73270a9d9391239c97879948a4baf99f2b4aaf19f2fcf5d65a63f6683897c3
+```
+
+Terminal result:
+
+```text
+F16_EXISTING_BYTES_NOT_FOUND
+candidate_count = 0
+```
+
+The repository contained no `model-f16.gguf`. Three provenance-bound successful
+F16 requalification artifacts were downloaded for inventory and verified against
+their frozen ZIP digests. Each contained only:
+
+```text
+.m5-f16-tools/converter_probe.json
+```
+
+and no serialized F16 GGUF.
+
+No exact F16 candidate existed, so no target-byte copy/download/extract/reassembly
+operation began:
+
+```text
+materialization_started = false
+byte_operation_consumed = false
+```
+
+Nevertheless this orchestration is terminal under the one-attempt contract and
+may not be rerun to seek a match.
+
+Scientific and downstream boundaries remained closed:
+
+```text
+F16 regeneration = false
+HF-to-GGUF conversion = false
+llama-cli evaluation = false
+fixture/model inference = false
+scientific adjudication = false
+Q4 reconstruction = false
+Ollama create/chat = false
+```
+
+F16 remains `PASS / CLOSED`.
+
+The Q4 deterministic reconstruction authorization `9506e5fc...` remains
+unconsumed but cannot receive a new orchestration because exact F16 admission
+did not PASS.
+
+The program must now stop unless a genuinely new, pre-existing,
+provenance-safe F16 source is independently identified. Any renewed recovery
+attempt would require a new governance amendment/authorization and still may
+not regenerate F16.

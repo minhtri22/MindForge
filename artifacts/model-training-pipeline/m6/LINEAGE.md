@@ -442,3 +442,26 @@ A one-attempt F16 parent materialization authorization is opened after exact imp
 It is strictly byte-preserving and cannot regenerate F16 or execute Q4 reconstruction.
 
 The Q4 reconstruction authorization `9506e5fc...` remains untouched and unconsumed. M6 scientific execution remains closed.
+
+
+## 2026-09-22 — F16 parent existing-byte attempt terminal / no source found
+
+The bounded F16 parent attempt completed successfully at the orchestration layer
+but found no exact serialized F16 bytes in the provenance-safe sources examined.
+
+```text
+classification:
+F16_EXISTING_BYTES_NOT_FOUND
+
+F16 parent admitted:
+false
+
+Q4 reconstruction executed:
+false
+```
+
+The Q4 reconstruction authorization `9506e5fc...` remains unconsumed, but no
+new reconstruction orchestration is admissible until exact frozen F16 bytes are
+admitted.
+
+M6 scientific execution remains closed.

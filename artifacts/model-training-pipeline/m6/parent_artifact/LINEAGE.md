@@ -291,3 +291,19 @@ Only pre-existing serialized F16 bytes may be copied, downloaded, extracted or r
 F16 regeneration remains forbidden. Q4 reconstruction remains separate and authorization `9506e5fc...` remains unconsumed.
 
 No F16 materialization or Q4 reconstruction is executed by this authorization.
+
+
+## 2026-09-22 — F16 existing-byte materialization closed without admission
+
+The one-attempt F16 parent orchestration completed as:
+
+```text
+F16_EXISTING_BYTES_NOT_FOUND
+candidate_count = 0
+```
+
+No F16 regeneration, converter execution or Q4 reconstruction occurred.
+
+The F16 materialization authorization is terminal and may not be rerun under the
+same authorization. The Q4 reconstruction authorization remains unconsumed but
+blocked because exact F16 parent admission is false.
