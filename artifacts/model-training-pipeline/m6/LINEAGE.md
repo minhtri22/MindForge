@@ -355,3 +355,20 @@ This authorization cannot execute the Q4_K_M quantizer. A real
 reconstruction can receive a separate authorization.
 
 M6 scientific execution remains closed.
+
+
+## 2026-09-22 — Existing-byte recovery exhausted
+
+The bounded parent-artifact recovery attempt completed with:
+
+```text
+NOT_FOUND_RECOVERY_EXHAUSTED
+candidate_count = 0
+```
+
+The recovery authorization is consumed. No quantizer, model inference, Q4
+scientific adjudication, or Ollama create/chat path executed.
+
+The exact Q4 parent remains unavailable. Deterministic reconstruction remains
+closed until a separate authorization is opened against the frozen F16 and Q4
+identities.

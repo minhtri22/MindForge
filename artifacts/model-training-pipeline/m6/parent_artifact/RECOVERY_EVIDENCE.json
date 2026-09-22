@@ -1,0 +1,92 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-recovery-evidence-v1",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "verdict": "NOT_FOUND_RECOVERY_EXHAUSTED",
+  "scientific_fail": false,
+  "branch": "research/model-pipeline-m6-ollama",
+  "authorization_commit": "24edd4ca44b2260742b4dc976655548186404699",
+  "orchestration_commit": "8f93cd1f03cbfad122733cbc6c15254ef0e3ec8c",
+  "implementation_commit": "a6f9d4341894cf59cab853d4ae6912e060c10599",
+  "zero_science_closure_commit": "94c9300fa6c9c7df38b271a8295a69ef40572a6a",
+  "authorization_consumed": true,
+  "recovery_attempt_count": 1,
+  "authoritative_run": {
+    "run_id": 35675448577,
+    "job_id": 106580919267,
+    "conclusion": "success",
+    "artifact_id": 10672763329,
+    "artifact_name": "m6-parent-artifact-recovery-evidence",
+    "artifact_size_bytes": 2210,
+    "artifact_zip_sha256": "05c900dd0e19e0af6b44f7b8b60fb19e9ce0fe8e1f88d5d64f2ed388e33abddf"
+  },
+  "frozen_target_identity": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "sources_attempted": [
+    {
+      "type": "repository_workspace",
+      "result": "NO_EXACT_FILENAME_CANDIDATE"
+    },
+    {
+      "type": "github_actions_artifact",
+      "class": "AUTHORITATIVE_Q4_FORMAL_EVIDENCE",
+      "run_id": 35645292452,
+      "artifact_id": 10660640056,
+      "artifact_name": "m5q-q4-formal-replication-evidence",
+      "zip_sha256": "aeb4300972620d74b639b7153fcd974c397abfbc92731f2339ff78ac3f7f0736",
+      "zip_digest_verified": true,
+      "result": "NO_Q4_GGUF_MEMBER"
+    },
+    {
+      "type": "github_actions_artifact",
+      "class": "QUARANTINED_ACCIDENTAL_Q4_EVIDENCE",
+      "run_id": 35632404520,
+      "artifact_id": 10654702903,
+      "artifact_name": "m5-q8-q4-quantization-qualification",
+      "zip_sha256": "ea8e52a97184241cf08d9fad5efbf8b7131f3bd6d8a13bb37f73647ca70fbe31",
+      "zip_digest_verified": true,
+      "result": "NO_Q4_GGUF_MEMBER"
+    },
+    {
+      "type": "github_actions_artifact",
+      "class": "QUARANTINED_ACCIDENTAL_Q4_EVIDENCE",
+      "run_id": 35634940378,
+      "artifact_id": 10656561362,
+      "artifact_name": "m5-q8-q4-quantization-qualification",
+      "zip_sha256": "6ca39627e239d59eb96d10eb778c3f60296f6c340fc41df6f063a36a4203e226",
+      "zip_digest_verified": true,
+      "result": "NO_Q4_GGUF_MEMBER"
+    }
+  ],
+  "result": {
+    "classification": "NOT_FOUND_RECOVERY_EXHAUSTED",
+    "candidate_count": 0,
+    "admitted_source": null,
+    "persisted_artifact": null
+  },
+  "hard_boundary_proof": {
+    "q4_scientific_status": "PASS_CLOSED",
+    "q4_rerun_authorized": false,
+    "reconstruction_executed": false,
+    "llama_quantize_executed": false,
+    "fixture_evaluation_executed": false,
+    "model_inference_executed": false,
+    "scientific_adjudication_executed": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "m6_scientific_execution_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "state_after_recovery": {
+    "recovery_authorization_consumed": true,
+    "recovery_terminal": true,
+    "deterministic_reconstruction_authorized": false,
+    "deterministic_reconstruction_execution_executed": false,
+    "m6_parent_artifact_admitted": false,
+    "next_valid_action": "OPEN_SEPARATE_DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION_BOUND_TO_FROZEN_F16_AND_Q4_IDENTITIES"
+  }
+}

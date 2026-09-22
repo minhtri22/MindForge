@@ -105,3 +105,54 @@ If real recovery is exhausted, that outcome must be frozen before a separate
 reconstruction authorization may be opened.
 
 Q4 remains PASS / CLOSED. M6 create/chat remains closed.
+
+
+## 2026-09-22 — Recovery attempt exhausted / frozen
+
+Authoritative recovery:
+
+```text
+authorization:
+24edd4ca44b2260742b4dc976655548186404699
+
+orchestration:
+8f93cd1f03cbfad122733cbc6c15254ef0e3ec8c
+
+run:
+35675448577
+
+job:
+106580919267
+
+result:
+NOT_FOUND_RECOVERY_EXHAUSTED
+```
+
+The one authorized recovery attempt is consumed.
+
+Sources checked under explicit provenance were the repository workspace, the
+authoritative Q4 formal evidence artifact, and both quarantined accidental Q4
+evidence artifacts. Their expected ZIP digests verified, but none contained the
+frozen Q4 GGUF. No repository candidate existed.
+
+Observed candidate count:
+
+```text
+0
+```
+
+The recovery result did not fall through into reconstruction:
+
+```text
+reconstruction executed = false
+llama-quantize executed = false
+fixture evaluation = false
+model inference = false
+scientific adjudication = false
+ollama create/chat = false
+```
+
+Q4 remains `PASS / CLOSED`.
+
+Deterministic reconstruction is still not authorized. A separate authorization
+is now the only valid next governance action.
