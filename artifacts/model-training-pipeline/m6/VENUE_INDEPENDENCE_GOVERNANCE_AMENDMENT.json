@@ -1,0 +1,65 @@
+{
+  "schema": "mindforge-model-pipeline-m6-venue-independence-governance-amendment-v1",
+  "status": "ADOPTED",
+  "program": "M6",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_commit": "1ab6397e8a02d391e4a98c9ad5422b2e52258879",
+  "problem_statement": "The prior terminal F16/Q4 recovery conclusions were correct for the GitHub/repository sources actually inspected, but their downstream wording over-constrained research continuation by treating absence from GitHub-hosted persistence as if it were global artifact unavailability.",
+  "correction": {
+    "github_actions_is_required_scientific_venue": false,
+    "github_artifact_persistence_is_required_for_research_continuation": false,
+    "local_windows_is_admissible_authoritative_venue": true,
+    "source_not_found_scope": "A NOT_FOUND/UNAVAILABLE result applies only to the explicitly inspected source set and venue. It must not be interpreted as proof that the artifact cannot exist or cannot be reproducibly materialized elsewhere.",
+    "prior_run_results_changed": false,
+    "prior_hashes_or_scientific_verdicts_changed": false
+  },
+  "venue_independence_contract": {
+    "permitted_venues": [
+      "GitHub Actions hosted runner",
+      "user-controlled local Windows machine",
+      "other explicitly qualified deterministic venue"
+    ],
+    "validity_requirements": [
+      "exact source/model/runtime identities frozen before outcome",
+      "commands/config/flags recorded before execution",
+      "artifact hashes and sizes frozen after execution",
+      "raw machine-readable evidence exported",
+      "no threshold/fixture/config tuning after outcome",
+      "venue-specific binaries recorded rather than assumed byte-identical across operating systems"
+    ]
+  },
+  "local_windows_path": {
+    "q4_if_present_locally": "If model-q4_k_m.gguf exists locally and exact size/SHA256/manifest match the frozen Q4 identity, it may be admitted directly for M6 local Ollama qualification.",
+    "f16_if_present_locally": "If model-f16.gguf exists locally and exact size/SHA256/manifest match the frozen F16 identity, it may be admitted and used for the already-authorized deterministic Q4_K_M reconstruction.",
+    "if_neither_binary_exists": "A separate pre-outcome deterministic local artifact-regeneration program may recreate F16 from the exact frozen model revision/converter contract and then Q4_K_M from the exact frozen llama.cpp source/quantizer contract. This is artifact reproducibility/materialization, not a model-quality scientific rerun, provided no fixtures/inference/adjudication are executed during regeneration.",
+    "github_upload_required_before_local_execution": false,
+    "github_upload_required_after_local_execution": false,
+    "evidence_commit_or_upload_recommended_after_execution": true
+  },
+  "frozen_scientific_identities": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "f16_sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "f16_size": 994156384,
+    "q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "q4_size": 397807456,
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "quantizer_type": "Q4_K_M",
+    "ollama_version": "0.34.2"
+  },
+  "cross_os_binary_rule": {
+    "source_commit_and_build_contract_are_authoritative": true,
+    "executable_sha256_may_be_venue_specific": true,
+    "prior_linux_or_github_binary_sha_is_not_required_to_equal_windows_local_binary_sha": true,
+    "local_binary_sha_must_be_recorded": true
+  },
+  "unchanged_boundaries": {
+    "q4_scientific_status": "PASS_CLOSED",
+    "f16_scientific_status": "PASS_CLOSED",
+    "no_model_quality_rerun": true,
+    "no_fixture_or_threshold_tuning": true,
+    "m6_pass_requires_actual_ollama_create_chat_parity_cleanup": true,
+    "m7_auto_open": false
+  },
+  "next_valid_action": "OPEN_LOCAL_WINDOWS_M6_VENUE_QUALIFICATION_AND_PREOUTCOME_EXECUTION_PACKAGE; discover/admit local Q4 or F16 first, otherwise preregister deterministic local artifact regeneration before any regeneration command"
+}

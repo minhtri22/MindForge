@@ -182,3 +182,20 @@ The program must now stop unless a genuinely new, pre-existing,
 provenance-safe F16 source is independently identified. Any renewed recovery
 attempt would require a new governance amendment/authorization and still may
 not regenerate F16.
+
+
+## 2026-09-22 — Venue-independence correction
+
+The terminal `F16_EXISTING_BYTES_NOT_FOUND` result is scoped to the repository
+and GitHub Actions sources actually inspected. It is not evidence that exact F16
+bytes cannot exist on the user's local machine, nor is GitHub persistence a
+requirement for valid research execution.
+
+A local exact F16 may be admitted by the same frozen filename/size/SHA256/
+manifest contract.
+
+If no local F16 exists, deterministic local F16 regeneration may only be opened
+under a new pre-outcome artifact-reproducibility authorization; it is not
+authorized retroactively by this amendment.
+
+F16 remains PASS / CLOSED.

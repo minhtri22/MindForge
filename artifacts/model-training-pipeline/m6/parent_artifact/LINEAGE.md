@@ -307,3 +307,16 @@ No F16 regeneration, converter execution or Q4 reconstruction occurred.
 The F16 materialization authorization is terminal and may not be rerun under the
 same authorization. The Q4 reconstruction authorization remains unconsumed but
 blocked because exact F16 parent admission is false.
+
+
+## 2026-09-22 — Venue-independence correction
+
+The Q4/F16 missing-artifact outcomes are source-set/venue scoped. GitHub-hosted
+artifact persistence is not a prerequisite for M6 research continuation.
+
+Exact local Q4 bytes may be admitted directly. Exact local F16 bytes may be
+admitted for deterministic Q4 reconstruction. If neither exists, a separately
+preregistered local artifact-regeneration path may be opened without reopening
+Q4 model-quality science.
+
+The existing deterministic Q4 reconstruction authorization remains unconsumed.

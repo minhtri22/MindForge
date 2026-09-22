@@ -465,3 +465,31 @@ new reconstruction orchestration is admissible until exact frozen F16 bytes are
 admitted.
 
 M6 scientific execution remains closed.
+
+
+## 2026-09-22 — Venue-independence amendment: GitHub persistence is not a research blocker
+
+The previous GitHub-hosted recovery results remain valid for the exact source
+sets inspected, but their downstream interpretation is amended.
+
+```text
+NOT FOUND IN GITHUB != GLOBALLY UNAVAILABLE
+GITHUB ACTIONS != REQUIRED SCIENTIFIC VENUE
+```
+
+A qualified local Windows machine is an admissible authoritative M6 execution
+venue.
+
+M6 may proceed locally by first admitting an exact local Q4 or F16 binary. If
+neither binary exists locally, a separate pre-outcome deterministic artifact
+regeneration program may recreate F16/Q4 under the already frozen identities
+without running model-quality fixtures or re-adjudicating F16/Q4 science.
+
+Cross-OS executable hashes are venue-specific; exact source commit/build
+contract/input/output identities remain the cross-venue invariants.
+
+This amendment does not change any previous run result, hash, or scientific
+verdict.
+
+Next valid action: local-Windows M6 venue qualification / pre-outcome execution
+package.
