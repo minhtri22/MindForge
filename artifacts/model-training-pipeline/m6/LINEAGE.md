@@ -210,3 +210,93 @@ No Ollama command has been executed by this authorization commit.
 Next valid action: create the bounded Windows venue orchestration. Venue/asset
 qualification may run, but create/chat must remain gated on exact Q4 parent
 artifact admission.
+
+
+## 2026-09-22 — Windows amd64 M6 venue qualified; parent artifact admission blocked
+
+Runtime authorization:
+
+```text
+5eb195bb78136be1d26f1acb7308d3f698c69d31
+```
+
+Bounded venue orchestration:
+
+```text
+ace26397115fba8dcdf3aac1e771d2ea042491ca
+```
+
+Authoritative venue run:
+
+```text
+run: 35673229900
+job: 106574150869
+conclusion: success
+artifact: 10672072418
+artifact zip sha256:
+e21a20fe75c8630ab5a1665d6a5879627b70041fed91ffa2c2c7eb926a20921b
+```
+
+Venue evidence:
+
+```text
+requested runner: windows-2025 / x64
+actual ImageOS: win25-vs2026
+actual ImageVersion: 20260907.229.1
+PowerShell: 7.6.5
+
+Ollama asset SHA256:
+PASS
+
+Ollama client version:
+0.34.2 / PASS
+
+isolated server health:
+PASS
+```
+
+The parent-artifact gate correctly blocked scientific packaging:
+
+```text
+required:
+model-q4_k_m.gguf
+
+size:
+397807456
+
+sha256:
+ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977
+
+observed:
+PARENT_ARTIFACT_UNAVAILABLE
+```
+
+Therefore the run is classified:
+
+```text
+INVALID_PROVENANCE_PARENT_ARTIFACT_UNAVAILABLE
+```
+
+This is **not** an M6 scientific FAIL.
+
+The orchestration did not attempt to rescue the missing parent by requantizing
+Q4:
+
+```text
+ollama create executed = false
+ollama chat executed = false
+owned cleanup executed = false
+Q4 requantization executed = false
+M6 scientific result = null
+```
+
+The Windows Ollama venue itself is now qualified at the asset/version/isolated
+server layer. Full M6 packaging/parity remains blocked solely on admission of the
+exact frozen Q4 parent bytes.
+
+M7 and bulk training remain closed.
+
+Next valid action: open a bounded parent-artifact materialization/provenance
+program for M6. It must produce or recover a byte-identical Q4 parent without
+reopening or re-adjudicating Q4 science; only after exact SHA/size admission may
+a separate create/chat/owned-cleanup scientific runtime authorization be used.
