@@ -668,3 +668,40 @@ This repaired package supersedes the previous local-preflight lock. The user may
 execute it from the existing local branch without renaming/switching branches,
 provided the repository fast-forwards to this lock closure and all exact blob
 checks pass.
+
+
+## 2026-09-22 — Local Windows preflight PASS / exact F16 recovered
+
+The user returned a successful local-Windows preflight report from authoritative
+lock `bb71e7b6...`.
+
+Result:
+
+```text
+overall_status: PASS
+classification: LOCAL_F16_ADMITTED
+exact F16 candidates: 1
+exact Q4 candidates: 0
+```
+
+The recovered local F16 is byte-identical to the frozen scientific parent:
+
+```text
+size: 994156384
+sha256:
+437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b
+manifest:
+eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8
+```
+
+The local llama.cpp source also matches
+`ce8caa6e60a03093351d6016a818720e0d46f0fb`.
+
+The existing local Ollama client is version 0.34.0, not the frozen 0.34.2, so
+Ollama scientific execution remains closed.
+
+The next local package is deterministic Q4_K_M reconstruction using the still
+unconsumed authorization `9506e5fc...`. It must build a fresh Windows
+`llama-quantize.exe` from the exact frozen source/build contract, record its
+venue-specific SHA256, execute exactly one quantization attempt, compare the
+result against the pre-existing Q4 identity, and stop before Ollama.

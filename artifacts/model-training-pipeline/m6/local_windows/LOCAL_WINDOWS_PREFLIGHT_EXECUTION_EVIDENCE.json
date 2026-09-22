@@ -1,0 +1,76 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-windows-preflight-execution-evidence-v1",
+  "verdict": "PASS",
+  "classification": "LOCAL_F16_ADMITTED",
+  "source": "user-returned local JSON report",
+  "local_report_completed_at": "2026-09-22T03:45:44.0026379Z",
+  "repo": {
+    "root": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16",
+    "branch": "local/m5-f16-run",
+    "head": "bb71e7b6c1b8d67500bb4f2b5920a5d11fcae29d",
+    "tracked_worktree_clean": true,
+    "script_git_blob_sha1": "1082fdc5594cc90c4e5936af046fb07f9799ad75"
+  },
+  "host": {
+    "os": "Microsoft Windows 11 Home Single Language",
+    "os_build": "26200",
+    "architecture": "64-bit",
+    "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+    "logical_processors": 8,
+    "memory_bytes": 33916248064,
+    "powershell_version": "5.1.26100.9444",
+    "git_version": "2.52.0.windows.1",
+    "cmake_version": "3.31.6-msvc6"
+  },
+  "admitted_f16": {
+    "path": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\.local-exec\\m5-f16-work\\runs\\e2e-small-cd9bfabe9280\\m5_f16_requalification\\model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "filename_exact": true,
+    "size_exact": true,
+    "sha256_exact": true,
+    "aggregate_manifest_exact": true,
+    "exact_identity": true
+  },
+  "q4": {
+    "candidates": 0,
+    "exact_candidates": 0,
+    "admitted": false
+  },
+  "local_llama_cpp": {
+    "source_path": "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\.local-exec\\m5-f16-work\\tools\\llama.cpp",
+    "source_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "source_commit_exact": true,
+    "llama_cli_sha256": "ea55cd4e818b9393f6b5987676b63644e92e674662dde04720a9f35c8405e568",
+    "llama_quantize_sha256": "2ff1312d59dd1aaf7cfc03fd91a9585e1532b28b22399fefa6bdcd9193d1686c"
+  },
+  "local_ollama": {
+    "path": "C:\\Users\\minht\\AppData\\Local\\Programs\\Ollama\\ollama.exe",
+    "sha256": "1f9b38e594a3e1cffdf606a507ac8660626c0985ee0782dd6b49309153d38080",
+    "observed_client_version": "0.34.0",
+    "expected_version": "0.34.2",
+    "expected_version_match": false
+  },
+  "governance": {
+    "q4_reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+    "q4_reconstruction_authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+    "q4_reconstruction_authorization_consumed": false,
+    "venue_independence_amendment_commit": "4aed637eb8bb41cc5e67c7b079402cf16d6948d2"
+  },
+  "boundaries": {
+    "model_download_executed": false,
+    "f16_regeneration_executed": false,
+    "hf_to_gguf_conversion_executed": false,
+    "llama_quantize_executed": false,
+    "llama_cli_inference_executed": false,
+    "ollama_server_started": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false,
+    "fixture_evaluation_executed": false,
+    "scientific_adjudication_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "next_valid_action": "LOCAL_Q4_K_M_DETERMINISTIC_RECONSTRUCTION_USING_UNCONSUMED_9506E5FC_AUTHORIZATION"
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-q4-reconstruction-preregistration-v1",
+  "status": "FROZEN_PREOUTCOME",
+  "program": "M6_LOCAL_Q4_DETERMINISTIC_RECONSTRUCTION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_commit": "bb71e7b6c1b8d67500bb4f2b5920a5d11fcae29d",
+  "prerequisite_local_preflight_classification": "LOCAL_F16_ADMITTED",
+  "authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+  "authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+  "venue_independence_amendment_commit": "4aed637eb8bb41cc5e67c7b079402cf16d6948d2",
+  "frozen_f16": {
+    "filename": "model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+  },
+  "frozen_q4": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "runtime": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "quantizer_target": "llama-quantize",
+    "quantization_type": "Q4_K_M",
+    "executable_sha_policy": "venue_specific_record_only",
+    "build_contract_source": "docs/model-training-pipeline/runtime/llama_cpp.lock.json",
+    "fresh_build_required": true,
+    "fresh_build_reason": "prove the Windows quantizer from the frozen source/build contract rather than rely only on a previously built binary"
+  },
+  "execution_contract": {
+    "reconstruction_attempts_authorized": 1,
+    "attempt_consumed_when": "freshly built llama-quantize process starts with Q4_K_M command",
+    "exact_command_shape": [
+      "<fresh-windows-llama-quantize.exe>",
+      "<exact-local-model-f16.gguf>",
+      "<output-model-q4_k_m.gguf>",
+      "Q4_K_M"
+    ],
+    "rerun_until_match": false,
+    "output_persist_if_exact_match": true,
+    "mismatch_output_delete_after_hashing": true
+  },
+  "forbidden": [
+    "HF-to-GGUF conversion",
+    "F16 regeneration",
+    "llama-cli inference",
+    "fixtures",
+    "model-quality evaluation",
+    "scientific re-adjudication",
+    "Ollama serve/create/chat/run/pull/rm",
+    "M6 PASS claim",
+    "M7",
+    "bulk training"
+  ],
+  "terminal_outcomes": [
+    "ADMITTED_DETERMINISTIC_RECONSTRUCTION",
+    "RECONSTRUCTION_IDENTITY_MISMATCH",
+    "INVALID_LOCAL_F16_IDENTITY",
+    "INVALID_LOCAL_LLAMA_SOURCE_IDENTITY",
+    "INVALID_INFRASTRUCTURE_BEFORE_ATTEMPT",
+    "INVALID_INFRASTRUCTURE_AFTER_ATTEMPT"
+  ]
+}
