@@ -30,3 +30,31 @@ Scientific outcome exposure begins with eval_v1 runtime output, not with
 package/create/runtime plumbing.
 
 No implementation or execution is authorized by this specification commit.
+
+
+## 2026-09-22 — S0 specification QA PASS / S1 static implementation authorized
+
+S0 reviewed commit:
+d6d77951c381b3edf994ddf2567981a80f0eca8e
+
+QA:
+- unresolved findings = 0
+- no-treatment replication preserved
+- infrastructure externalization PASS
+- one-binding-check rule PASS
+- pre-outcome infra failure semantics PASS
+- post-outcome anti-rescue semantics PASS
+
+Decision:
+S1 static implementation + zero-science QA is authorized.
+
+OWRQ qualification is NOT required to begin S1.
+
+Still forbidden:
+- Ollama process/API execution
+- local model create/load/delete
+- eval_v1 execution
+- S2 runtime binding execution
+- S3 scientific execution
+- M7
+- bulk training
