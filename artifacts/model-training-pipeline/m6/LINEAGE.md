@@ -864,3 +864,33 @@ create in asset/version/server/Q4 admission is pre-attempt infrastructure or
 provenance and does not consume the scientific attempt.
 
 M7 remains closed and cannot auto-open from this authorization.
+
+## 2026-09-22 — Local Ollama one-attempt enforcement repaired and re-authorized
+
+Pre-execution audit identified that the first local Ollama authorization marked
+attempt consumption only inside the report. A process crash after create start
+could therefore permit an unintended second invocation.
+
+The package was repaired before user execution. It now persists:
+
+.local/M6-LOCAL-OLLAMA-RUNTIME/attempt-state.json
+
+atomically immediately before owned ollama create. Any later invocation with
+consumed=true fails closed. Reset/deletion of the marker is not authorized.
+
+Authoritative repaired implementation:
+0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3
+
+script blob:
+f0e444c894ec96a6b984e20ba3cee41416d03f27
+
+Static zero-science QA:
+run 35711151635
+job 106691789710
+12/12 contract tests PASS
+PowerShell parse PASS
+no runtime execution PASS
+
+The earlier authorization at f167813b... is superseded. This v2 authorization
+is the only authoritative local M6 Ollama scientific execution authorization.
+M7 and bulk training remain closed.

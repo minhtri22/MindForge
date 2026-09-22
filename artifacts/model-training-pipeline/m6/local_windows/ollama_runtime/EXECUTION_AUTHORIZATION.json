@@ -1,13 +1,15 @@
 {
-  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-execution-authorization-v1",
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-execution-authorization-v2",
   "status": "AUTHORIZED_ONE_LOCAL_M6_OLLAMA_EXECUTION",
   "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
-  "authorization_parent_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
+  "authorization_parent_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
+  "supersedes_authorization_commit": "f167813b9b874bac8693261105b66f2cb881c021",
+  "supersession_reason": "Previous authorization did not durably enforce one-attempt consumption across process crash/rerun. The repaired package atomically persists a local consumed marker immediately before ollama create.",
   "execution_class": "LOCAL_WINDOWS_ISOLATED_OLLAMA_PACKAGE_CHAT_PARITY",
   "exact_binding": {
-    "implementation_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
-    "script_git_blob_sha1": "9a63f5b026a3f283d501565fc2c916110e506889",
-    "tests_git_blob_sha1": "73ce8165136c99ca8863933654688639597e2f00",
+    "implementation_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
+    "script_git_blob_sha1": "f0e444c894ec96a6b984e20ba3cee41416d03f27",
+    "tests_git_blob_sha1": "bde615cf5f1886a5169bb0415bd99c047168d1e2",
     "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
     "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
     "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
@@ -19,10 +21,10 @@
     "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
   },
   "zero_science_qa": {
-    "run_id": 35706937068,
-    "job_id": 106678030001,
+    "run_id": 35711151635,
+    "job_id": 106691789710,
     "conclusion": "success",
-    "contract_tests": "11/11_PASS",
+    "contract_tests": "12/12_PASS",
     "powershell_parse": "PASS",
     "ollama_asset_downloaded": false,
     "ollama_create_executed": false,
@@ -56,6 +58,7 @@
     "GET /api/tags for collision and final mutation checks",
     "copy exact admitted Q4 into owned package directory",
     "write exact frozen Modelfile",
+    "atomically persist one-attempt consumed marker",
     "ollama create owned pipeline-test namespace only",
     "POST /api/chat for exactly frozen eval_v1 tasks and inference parameters",
     "ollama rm owned model only after ownership-marker verification",
@@ -71,15 +74,19 @@
     "Q4 quantization or reconstruction",
     "llama-cli inference",
     "fixture/threshold/seed/inference-parameter modification",
-    "retry to seek PASS",
+    "delete/reset/overwrite a consumed attempt marker to obtain another attempt",
+    "retry after scientific attempt to seek PASS",
     "M7 execution",
     "bulk training"
   ],
   "one_attempt": {
     "attempts_authorized": 1,
-    "consumed_when": "owned ollama create process starts",
+    "durable_state_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/attempt-state.json",
+    "consumed_when": "durable consumed marker is atomically moved into place immediately before owned ollama create starts",
     "pre_create_asset_version_server_or_provenance_failure_consumes_attempt": false,
-    "retry_after_scientific_attempt": false
+    "rerun_before_consumption_allowed_only_for_infrastructure_resolution": true,
+    "retry_after_consumption": false,
+    "consumed_marker_reset_authorized": false
   },
   "adjudication": {
     "all_required_gates_pass": "PASS",

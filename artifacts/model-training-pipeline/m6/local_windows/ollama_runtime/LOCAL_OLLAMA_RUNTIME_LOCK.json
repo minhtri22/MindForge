@@ -1,12 +1,13 @@
 {
-  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v1",
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v2",
   "status": "LOCKED_FOR_LOCAL_EXECUTION",
   "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
-  "implementation_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
-  "execution_authorization_git_blob_sha1": "4d660b6520b035f3a483ba0e5228a3d9533192d0",
+  "implementation_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
+  "supersedes_lock_commit": "f167813b9b874bac8693261105b66f2cb881c021",
+  "execution_authorization_git_blob_sha1": "7bc2f81972b7e97230620cf9d0a92265312b09ad",
   "exact_blobs": {
-    "script_git_blob_sha1": "9a63f5b026a3f283d501565fc2c916110e506889",
-    "tests_git_blob_sha1": "73ce8165136c99ca8863933654688639597e2f00",
+    "script_git_blob_sha1": "f0e444c894ec96a6b984e20ba3cee41416d03f27",
+    "tests_git_blob_sha1": "bde615cf5f1886a5169bb0415bd99c047168d1e2",
     "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
     "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
     "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
@@ -18,10 +19,10 @@
     "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
   },
   "zero_science_static_qa": {
-    "run_id": 35706937068,
-    "job_id": 106678030001,
+    "run_id": 35711151635,
+    "job_id": 106691789710,
     "conclusion": "success",
-    "contract_tests": "11/11_PASS",
+    "contract_tests": "12/12_PASS",
     "powershell_parse": "PASS",
     "no_execution_proof": "PASS"
   },
@@ -42,8 +43,10 @@
   },
   "one_attempt_rule": {
     "attempts_authorized": 1,
-    "consumed_when": "owned ollama create starts",
-    "retry_to_seek_pass": false
+    "durable_state_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/attempt-state.json",
+    "consumed_when": "atomic durable marker immediately before owned ollama create",
+    "retry_to_seek_pass": false,
+    "marker_reset_authorized": false
   },
   "report_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/report/M6_LOCAL_OLLAMA_RUNTIME_REPORT.json",
   "next_after_local_report": "RETURN_REPORT_FOR_FORMAL_M6_ADJUDICATION; DO_NOT AUTO-OPEN M7"

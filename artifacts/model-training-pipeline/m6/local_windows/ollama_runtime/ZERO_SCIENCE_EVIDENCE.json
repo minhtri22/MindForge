@@ -1,13 +1,14 @@
 {
-  "schema": "mindforge-model-pipeline-m6-local-ollama-zero-science-evidence-v1",
+  "schema": "mindforge-model-pipeline-m6-local-ollama-zero-science-evidence-v2",
   "verdict": "PASS",
   "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
-  "implementation_commit": "70edcfbfdcc5d913c0d5be36364d61eaec300110",
+  "implementation_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
+  "supersedes_authorization_commit": "f167813b9b874bac8693261105b66f2cb881c021",
   "authoritative_run": {
-    "run_id": 35706937068,
-    "job_id": 106678030001,
+    "run_id": 35711151635,
+    "job_id": 106691789710,
     "conclusion": "success",
-    "contract_tests_passed": 11,
+    "contract_tests_passed": 12,
     "contract_tests_failed": 0,
     "powershell_parse": "PASS"
   },
@@ -17,7 +18,8 @@
     "ollama_chat_executed": false,
     "m6_scientific_execution_executed": false
   },
-  "exact_script_git_blob_sha1": "9a63f5b026a3f283d501565fc2c916110e506889",
+  "exact_script_git_blob_sha1": "f0e444c894ec96a6b984e20ba3cee41416d03f27",
+  "durable_one_attempt_enforcement": true,
   "state_after_gate": {
     "local_ollama_execution_authorized": true,
     "attempt_consumed": false,
