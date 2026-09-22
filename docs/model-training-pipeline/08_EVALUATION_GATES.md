@@ -37,3 +37,26 @@ Only release/eligible confirmatory artifacts with every required gate PASS and e
 
 ## Threshold policy
 No universal real-experiment threshold. Calibration freezes threshold before fresh evidence. Smoke thresholds only prove plumbing/format.
+
+
+## Gate-domain amendment
+
+The G0-G10 product/evaluation matrix does not imply that every implementation/runtime gate is a scientific gate.
+
+Each concrete gate instance must additionally declare one domain:
+
+- `SCIENCE_GATE`
+- `INFRA_QUALIFICATION`
+- `INFRA_BINDING_CHECK`
+- `RELEASE_GATE`
+
+G0 environment/runtime capability and backend plumbing are normally infrastructure-domain.
+
+G8 Ollama has two layers:
+
+1. reusable Ollama runtime-adapter/substrate qualification — `INFRA_QUALIFICATION`;
+2. study-specific cross-runtime behavior/parity — `SCIENCE_GATE` or release/product evidence according to the claim.
+
+A failed layer 1 blocks layer 2 execution but does not fail the scientific claim.
+
+When an infra qualification already covers the exact runtime/version/hash/adapter/environment/substrate scope, the study performs one `INFRA_BINDING_CHECK`; full infra requalification is not repeated.

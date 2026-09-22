@@ -37,5 +37,16 @@ Sandbox, PII/secret/license gates, run locks, evidence seal, bundle ordering, ex
 ## M8 — Full E2E + hardening
 AC-01..AC-18, Windows bootstrap, failure injection, reproducibility replay, docs.
 
-## Rule
-Do not enter next milestone unless current exit gate PASS. Software-development Git lineage is separate from training-run lineage.
+## Dependency rule
+
+The original single serial rule is superseded by `23_INFRASTRUCTURE_SCIENCE_SEPARATION.md`.
+
+Core semantic/model dependencies remain ordered where one artifact truly depends on another. Infrastructure and product-hardening work use dependency edges rather than a global stop-the-world gate.
+
+In particular:
+- Ollama runtime/harness qualification may block Ollama-dependent execution;
+- it does not block unrelated scientific design, analysis or implementation;
+- qualified infrastructure is reusable by exact binding rather than repeated qualification;
+- M7/M8 release/product requirements remain required for release eligibility.
+
+Software-development Git lineage remains separate from training-run lineage.

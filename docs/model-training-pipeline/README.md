@@ -18,6 +18,7 @@ Nếu tài liệu tóm tắt mâu thuẫn với contract/schema dưới đây, c
 - 20_SECURITY_PRIVACY_SANDBOX_CONTRACT.md
 - 21_EVIDENCE_CONCURRENCY_LINEAGE_CONTRACT.md
 - 22_REFERENCE_MODEL_PROFILE.md
+- 23_INFRASTRUCTURE_SCIENCE_SEPARATION.md
 - schemas/experiment_config.schema.json
 - schemas/execution_contract.schema.json
 - schemas/data_manifest.schema.json

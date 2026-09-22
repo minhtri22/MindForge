@@ -1,0 +1,105 @@
+{
+  "schema": "mindforge-model-pipeline-infra-science-separation-decision-v1",
+  "status": "ADOPTED_ZERO_SCIENCE",
+  "date": "2026-09-22",
+  "parent_commit": "fdfec8a926ff11f5e10ce0e360251b0ce86e5221",
+  "lessons": {
+    "arcllm": {
+      "sources": [
+        {
+          "repo": "minhtri22/ArcLLM",
+          "path": "docs/research/arcllm-ttft-m2/A1_GOVERNANCE_AMENDMENT_EXECUTION_SUBSTRATE.md",
+          "git_blob_sha1": "0948d9dbc8b213840e208aaa679e9cc32541ea75"
+        },
+        {
+          "repo": "minhtri22/ArcLLM",
+          "path": "docs/research/arcllm-v1/ARCLLM_V1_ARCHITECTURE_REFRAME.md",
+          "git_blob_sha1": "5f06a648d200366066e79c9355ae3bb448e1c8fb"
+        },
+        {
+          "repo": "minhtri22/ArcLLM",
+          "path": "docs/research/arcllm-ttft-m2/P9A_FRESH_SCIENTIFIC_DESIGN_ADOPTION_AND_REVALIDATION.md",
+          "git_blob_sha1": "3aea806ad3d7e08b1c126670754535bcd9e8fcfd"
+        }
+      ],
+      "adopted": [
+        "separate research package, orchestration/transport, execution substrate, scientific execution",
+        "infrastructure failure does not automatically consume research-package/scientific repair budget",
+        "semantic/scientific contract is separate from execution topology/runtime",
+        "fresh science is revalidated independently of infrastructure repair"
+      ]
+    },
+    "nexus": {
+      "sources": [
+        {
+          "repo": "minhtri22/NEXUS",
+          "path": "experiments/HR_WMT_V02/ORIGIN.md",
+          "git_blob_sha1": "66e6bbc8e4b08ca3e4e97fd0bd33fab71c4151d3"
+        },
+        {
+          "repo": "minhtri22/NEXUS",
+          "path": "experiments/HR_WMT_V02/SPEC_v0.2.md",
+          "git_blob_sha1": "7d81de844692422eb339ee0608fa31418bdee38f"
+        },
+        {
+          "repo": "minhtri22/NEXUS",
+          "path": "experiments/HR_WMT_V02/PROGRAM_STATUS_v0.2.json",
+          "git_blob_sha1": "5905cfd3f1beec7023aa6220484b9ab7f30e82c0"
+        }
+      ],
+      "adopted": [
+        "harness reliability is a non-scientific qualification program",
+        "explicit scientific firewall",
+        "synthetic/non-study qualification fixtures",
+        "reusable qualified harness bound by future studies",
+        "evidence-first observability and separate FAIL_INFRA/UNRESOLVED_INFRA semantics"
+      ]
+    }
+  },
+  "governance": {
+    "control_objects": [
+      "SCIENCE_GATE",
+      "INFRA_QUALIFICATION",
+      "INFRA_BINDING_CHECK"
+    ],
+    "infra_failure_can_set_scientific_fail": false,
+    "infra_repair_consumes_scientific_budget": false,
+    "infra_blocks_only_dependent_execution": true,
+    "science_design_can_progress_while_infra_unresolved": true,
+    "qualified_infra_reusable_by_binding": true,
+    "binding_check_is_consolidated_not_microgated": true
+  },
+  "m6r_history": {
+    "m6": "FAIL_PACKAGE_CLOSED",
+    "m6r": "FAIL_RUNTIME_CLOSED",
+    "rfd_c1": "ROOT_CAUSE_IDENTIFIED",
+    "history_rewritten": false
+  },
+  "supersession": {
+    "artifact": "artifacts/model-training-pipeline/m6r-rfd/M6R2_OPENING_DECISION.json",
+    "old_decision_git_blob_sha1": "1793032fe9aeb9cc21d02c7c77d825aa8c82c7db",
+    "superseded_field": "required_single_intervention classified as scientific",
+    "preserved_fact": "q4_0 V-cache + flash-attn off was the direct M6R runtime failure mechanism",
+    "new_classification": "q4_0 -> f16/default is an infrastructure/runtime-adapter repair"
+  },
+  "new_lanes": {
+    "infrastructure": {
+      "program": "OWRQ",
+      "expansion": "OLLAMA_WINDOWS_RUNTIME_QUALIFICATION",
+      "scientific": false,
+      "reusable": true
+    },
+    "m6r2": {
+      "program": "M6R2_PARITY_REPLICATION",
+      "infrastructure_intervention_as_scientific_treatment": false,
+      "specification_authorized": true,
+      "implementation_authorized": false,
+      "execution_authorized": false,
+      "depends_on_runtime_binding_for_execution_only": true
+    }
+  },
+  "downstream": {
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
