@@ -268,3 +268,15 @@ or re-adjudicate F16 science.
 The deterministic Q4 reconstruction authorization
 `9506e5fc205e641aba942a0bc9ff2fbaa7d881a5` remains unconsumed and cannot be
 used again until exact F16 admission PASS.
+
+
+## 2026-09-22 — F16 parent recovery/materialization implementation locked
+
+The F16 parent sub-program completed its zero-science implementation gate with
+14/14 tests PASS.
+
+No F16 bytes were materialized or regenerated. The Q4 deterministic
+reconstruction authorization remains unconsumed.
+
+The next valid action is a separate F16 existing-byte materialization execution
+authorization; Q4 reconstruction remains blocked until exact F16 admission PASS.

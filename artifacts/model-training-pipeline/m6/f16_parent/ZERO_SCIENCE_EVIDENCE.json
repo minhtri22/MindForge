@@ -1,0 +1,57 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-zero-science-evidence-v1",
+  "verdict": "PASS",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "implementation_commit": "24768d87f9f22b820ac02e7428d40ea3df015bf7",
+  "implementation_lock_pending_in_same_closure": true,
+  "authoritative_run": {
+    "run_id": 35678265391,
+    "job_id": 106589294845,
+    "conclusion": "success",
+    "tests_passed": 14,
+    "tests_failed": 0,
+    "artifact_id": 10673403827,
+    "artifact_name": "m6-f16-parent-zero-science",
+    "artifact_size_bytes": 973,
+    "artifact_zip_sha256": "cbb746488ff00c127911022c62dec6abd0d37dc7ea36ae967fe621332f1fabd9"
+  },
+  "planning_result": {
+    "schema": "mindforge-m6-f16-parent-materialization-plan-v1",
+    "execution_authorized_now": false,
+    "requires_separate_execution_authorization": true,
+    "frozen_f16_scientific_status": "PASS_CLOSED",
+    "protected_reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+    "protected_reconstruction_authorization_consumed": false
+  },
+  "zero_science_proof": {
+    "existing_f16_bytes_materialized": false,
+    "f16_regeneration_executed": false,
+    "hf_to_gguf_conversion_executed": false,
+    "llama_cli_evaluation_executed": false,
+    "fixture_evaluation_executed": false,
+    "model_inference_executed": false,
+    "scientific_adjudication_executed": false,
+    "q4_reconstruction_executed": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false
+  },
+  "exact_locked_blobs": {
+    "materialization_tool": "657827d31ac32f2853e9d6cdaf4bac30685ce0cf",
+    "tests": "830237e923706291b9203fada483429de3b41aaf",
+    "planning_workflow": "8ae344608ab555f449cdbdb0543965ad6410cb59",
+    "preregistration": "30ea305f73dbd1c3c91cd7bef643d367e719e98e",
+    "implementation_authorization": "ef6f9c59fcc53b9482f9d5cde831f3c2de16b4ae",
+    "protected_q4_reconstruction_authorization": "f26754440d710904f45eb1d7916d334484f43bb5"
+  },
+  "state_after_gate": {
+    "implementation": "LOCKABLE",
+    "execution_authorized": false,
+    "f16_parent_admitted": false,
+    "f16_scientific_status": "PASS_CLOSED",
+    "reconstruction_authorization_consumed": false,
+    "q4_reconstruction_execution_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "next_valid_action": "OPEN_SEPARATE_ONE_ATTEMPT_F16_EXISTING_BYTE_MATERIALIZATION_EXECUTION_AUTHORIZATION"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-artifact-implementation-lock-v1",
+  "status": "LOCKED",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "origin_program_commit": "12952014091f1c3925acb142bdc0181cfe2643af",
+  "implementation_commit": "24768d87f9f22b820ac02e7428d40ea3df015bf7",
+  "frozen_f16": {
+    "filename": "model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "scientific_status": "PASS_CLOSED"
+  },
+  "git_blobs": {
+    "tools/m6_f16_parent_materialize.py": "657827d31ac32f2853e9d6cdaf4bac30685ce0cf",
+    "tests/test_m6_f16_parent_materialization.py": "830237e923706291b9203fada483429de3b41aaf",
+    ".github/workflows/model-pipeline-m6-f16-parent.yml": "8ae344608ab555f449cdbdb0543965ad6410cb59",
+    "artifacts/model-training-pipeline/m6/f16_parent/PREREGISTRATION.json": "30ea305f73dbd1c3c91cd7bef643d367e719e98e",
+    "artifacts/model-training-pipeline/m6/f16_parent/IMPLEMENTATION_AUTHORIZATION.json": "ef6f9c59fcc53b9482f9d5cde831f3c2de16b4ae",
+    "artifacts/model-training-pipeline/m6/parent_artifact/DETERMINISTIC_RECONSTRUCTION_AUTHORIZATION.json": "f26754440d710904f45eb1d7916d334484f43bb5",
+    "artifacts/model-training-pipeline/m5_f16/M5_F16_QUALIFICATION_EVIDENCE.json": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9"
+  },
+  "zero_science_gate": {
+    "run_id": 35678265391,
+    "job_id": 106589294845,
+    "conclusion": "success",
+    "tests_passed": 14,
+    "tests_failed": 0,
+    "planning_artifact_id": 10673403827,
+    "planning_artifact_name": "m6-f16-parent-zero-science",
+    "planning_artifact_zip_sha256": "cbb746488ff00c127911022c62dec6abd0d37dc7ea36ae967fe621332f1fabd9"
+  },
+  "supported_existing_byte_modes": [
+    "COPY_EXISTING_FILE",
+    "DOWNLOAD_EXISTING_OBJECT",
+    "EXTRACT_EXISTING_ARCHIVE_MEMBER",
+    "REASSEMBLE_EXISTING_CHUNKS"
+  ],
+  "hard_boundaries": {
+    "execution_authorized_now": false,
+    "f16_regeneration_authorized": false,
+    "hf_to_gguf_conversion_authorized": false,
+    "llama_cli_evaluation_authorized": false,
+    "fixture_evaluation_authorized": false,
+    "model_inference_authorized": false,
+    "scientific_adjudication_authorized": false,
+    "q4_reconstruction_execution_authorized": false,
+    "reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+    "reconstruction_authorization_consumed": false,
+    "ollama_create_authorized": false,
+    "ollama_chat_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "next_gate": "SEPARATE_ONE_ATTEMPT_F16_EXISTING_BYTE_MATERIALIZATION_EXECUTION_AUTHORIZATION"
+}

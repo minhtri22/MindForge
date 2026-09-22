@@ -420,3 +420,16 @@ only. F16 regeneration and scientific re-adjudication remain forbidden.
 The still-unconsumed Q4 reconstruction authorization `9506e5fc...` is
 protected and may receive a new orchestration only after exact F16 bytes are
 admitted.
+
+
+## 2026-09-22 — F16 parent recovery/materialization zero-science PASS
+
+The bounded F16 parent sub-program is implemented and locked after 14/14
+zero-science tests PASS.
+
+No F16 recovery/materialization, F16 regeneration, Q4 reconstruction, or Ollama
+scientific execution occurred.
+
+The still-unconsumed Q4 reconstruction authorization `9506e5fc...` remains
+protected. A separate F16 materialization execution authorization is required
+before exact F16 bytes may be admitted.
