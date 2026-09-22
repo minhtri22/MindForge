@@ -1,0 +1,48 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s1-zero-science-qa-v1",
+  "status": "PASS",
+  "program": "M6R2_PARITY_REPLICATION",
+  "reviewed_implementation_commit": "069ad295d9b3a7a52bf203212daa63c628b6d5ef",
+  "qa_trigger_commit": "95039c40045cca89a1d550467b3396effdbd62ec",
+  "runs": [
+    {
+      "run_id": 35745858995,
+      "job_id": 106807189138,
+      "role": "AUTHORITATIVE_FRESH_RUNNER",
+      "conclusion": "success",
+      "tests_passed": 23,
+      "tests_failed": 0
+    },
+    {
+      "run_id": 35745524564,
+      "job_id": 106806033750,
+      "role": "CONFIRMING_SAME_IMPLEMENTATION_AFTER_SLOW_CHECKOUT",
+      "conclusion": "success",
+      "tests_passed": 23,
+      "tests_failed": 0
+    }
+  ],
+  "checks": {
+    "pure_contract_stdlib_isolated": true,
+    "powershell_syntax": true,
+    "frozen_science_identity": true,
+    "adapter_interface_externalized": true,
+    "exact_owrq_binding_required": true,
+    "adapter_blob_binding_required": true,
+    "no_direct_ollama_runtime_logic": true,
+    "no_direct_ollama_api_logic": true,
+    "outcome_exposure_visible_or_thinking": true,
+    "response_durable_before_consumption": true,
+    "ambiguous_crash_fail_closed": true,
+    "positive_infra_evidence_required": true,
+    "cleanup_validity_required": true,
+    "evidence_manifest_required": true,
+    "no_current_s2_authorization": true,
+    "no_current_s3_authorization": true,
+    "no_science_executed": true
+  },
+  "adversarial_findings_total": 7,
+  "adversarial_findings_repaired": 7,
+  "unresolved_findings": 0,
+  "scientific_contract_changed": false
+}

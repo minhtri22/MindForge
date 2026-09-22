@@ -58,3 +58,37 @@ Still forbidden:
 - S3 scientific execution
 - M7
 - bulk training
+
+
+## 2026-09-22 — S1 static implementation / zero-science QA PASS
+
+Canonical implementation commit:
+069ad295d9b3a7a52bf203212daa63c628b6d5ef
+
+Canonical implementation blobs:
+- runner: b591b55d3e19554507c2c559387c9b947862fd18
+- pure contract: e7312efa54876fe59348d7408352bcc36dcaf5e7
+- OWRQ adapter consumer interface: 0973749fc01dfe873ec7be92e55d2898fc67b9ed
+- tests: 598377f386ae261c0baef6d7e05d873973205dc9
+- workflow: 3645d04a504e3683a48cede8850bbc0a2f8c4546
+
+Adversarial implementation review found seven implementation-only issues.
+All seven were repaired without changing S0 science.
+
+Most important correction:
+M6R2 no longer implements Ollama serve/create/API logic.
+It consumes the exact independently-qualified OWRQ adapter blob.
+
+Zero-science QA:
+- authoritative run 35745858995 / job 106807189138: PASS
+- confirming run 35745524564 / job 106806033750: PASS
+- 23/23 tests
+- Python compile PASS
+- PowerShell parse PASS
+- no Ollama process/API/model/eval/outcome execution
+
+S1 is now CLOSED/LOCKED.
+
+S2 remains unauthorized and waits only for a formally qualified OWRQ scope.
+S3 remains unauthorized.
+M7 and bulk training remain closed.

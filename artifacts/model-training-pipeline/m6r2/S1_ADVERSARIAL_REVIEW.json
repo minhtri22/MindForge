@@ -1,6 +1,6 @@
 {
   "schema": "mindforge-model-pipeline-m6r2-s1-adversarial-review-v1",
-  "status": "FINDINGS_PATCHED_PENDING_FINAL_QA",
+  "status": "PASS_FINAL_ZERO_SCIENCE_QA",
   "reviewed_commit": "a542321cc90896878d8db801d3f61d868c798ba9",
   "scientific_contract_changed": false,
   "findings": [
@@ -47,5 +47,11 @@
       "repair": "Move canonical pure contract to tools/m6r2_contract.py and load it directly without importing pipeline package."
     }
   ],
-  "unresolved_findings_after_patch": 0
+  "unresolved_findings_after_patch": 0,
+  "final_qa": {
+    "run_id": 35745858995,
+    "job_id": 106807189138,
+    "tests": "23/23_PASS",
+    "unresolved_findings": 0
+  }
 }

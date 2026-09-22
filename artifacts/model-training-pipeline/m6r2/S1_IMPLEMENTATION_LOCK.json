@@ -1,0 +1,67 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s1-implementation-lock-v1",
+  "status": "LOCKED_S1_ZERO_SCIENCE_IMPLEMENTATION",
+  "program": "M6R2_PARITY_REPLICATION",
+  "implementation_commit": "069ad295d9b3a7a52bf203212daa63c628b6d5ef",
+  "qa_trigger_commit": "95039c40045cca89a1d550467b3396effdbd62ec",
+  "exact_blobs": {
+    "s0_spec_git_blob_sha1": "910eb4bf3d0af736977e487f8b2a2705dc339dc2",
+    "s0_preregistration_git_blob_sha1": "6098bc201eb2b7acbf9cc36d4ccb2f13a2e80962",
+    "s1_authorization_git_blob_sha1": "d27c0a6dded04f524ecfd84de9aafcfe1b5d9468",
+    "outcome_clarification_git_blob_sha1": "eb8335863eb3aa1314827aee0f9088563aac8ac3",
+    "adapter_interface_git_blob_sha1": "0973749fc01dfe873ec7be92e55d2898fc67b9ed",
+    "contract_git_blob_sha1": "e7312efa54876fe59348d7408352bcc36dcaf5e7",
+    "runner_git_blob_sha1": "b591b55d3e19554507c2c559387c9b947862fd18",
+    "tests_git_blob_sha1": "598377f386ae261c0baef6d7e05d873973205dc9",
+    "workflow_git_blob_sha1": "3645d04a504e3683a48cede8850bbc0a2f8c4546",
+    "adversarial_review_git_blob_sha1": "3ea1f2a544327bbab2ffcd7f1323e108479d8845",
+    "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
+    "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+  },
+  "zero_science_qa": {
+    "authoritative_run_id": 35745858995,
+    "authoritative_job_id": 106807189138,
+    "conclusion": "success",
+    "tests": "23/23_PASS",
+    "python_compile": "PASS",
+    "powershell_parse": "PASS",
+    "proof": {
+      "ollama_process_invoked": false,
+      "ollama_api_requested": false,
+      "local_model_created": false,
+      "eval_v1_executed": false,
+      "scientific_outcome_exposed": false,
+      "s2_binding_executed": false,
+      "s3_execution_executed": false
+    },
+    "confirming_same_implementation_run": {
+      "run_id": 35745524564,
+      "job_id": 106806033750,
+      "conclusion": "success"
+    }
+  },
+  "infrastructure_separation": {
+    "direct_ollama_runtime_implementation_in_science_lane": false,
+    "direct_ollama_api_calls_in_science_lane": false,
+    "runtime_adapter_contract": "mindforge-owrq-runtime-adapter-v1",
+    "exact_qualified_adapter_blob_required": true,
+    "exact_qualified_runtime_artifact_sha256_required": true,
+    "one_consolidated_binding_check_required": true
+  },
+  "outcome_boundary": {
+    "exposed_if_nonempty_visible_content_or_native_thinking": true,
+    "durable_response_before_exposure_marker": true,
+    "dangling_request_marker_fails_closed_as_invalid_provenance": true,
+    "generic_preoutcome_transport_failure_is_not_assumed_infrastructure": true,
+    "positive_infra_evidence_required_for_invalid_infra_preoutcome": true
+  },
+  "next_state": {
+    "s1_closed": true,
+    "s2_authorized": false,
+    "s3_authorized": false,
+    "owrq_qualification_required_before_s2": true,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
