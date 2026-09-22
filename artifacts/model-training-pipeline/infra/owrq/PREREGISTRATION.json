@@ -1,0 +1,44 @@
+{
+  "schema": "mindforge-owrq-preregistration-v1",
+  "status": "SPECIFICATION_ONLY",
+  "program": "OLLAMA_WINDOWS_RUNTIME_QUALIFICATION",
+  "scientific": false,
+  "parent_governance_commit": "750d6358a88e738cfaf971b3a5db3192f7622889",
+  "target": {
+    "os_scope": "exact local Windows research machine",
+    "ollama_version": "0.34.2",
+    "installed_binary_required": true,
+    "qualification_host": "127.0.0.1:11468",
+    "preexisting_service_host": "127.0.0.1:11434",
+    "process_env": {
+      "OLLAMA_KV_CACHE_TYPE": "f16"
+    },
+    "OLLAMA_FLASH_ATTENTION_set": false
+  },
+  "fixture": {
+    "preferred_existing_model": "llama3.2:1b",
+    "pull_allowed": false,
+    "create_allowed": false,
+    "delete_allowed": false,
+    "scientific_fixture": false,
+    "eval_v1_access": false,
+    "quality_scoring": false
+  },
+  "required_result": "QUALIFIED_RUNTIME_SCOPE",
+  "terminal_classes": [
+    "QUALIFIED_RUNTIME_SCOPE",
+    "FAIL_INFRA",
+    "UNRESOLVED_INFRA"
+  ],
+  "reusable": true,
+  "reuse_requires_exact_scope_binding": true,
+  "scientific_firewall": {
+    "m6_reinterpretation": false,
+    "m6r_reinterpretation": false,
+    "parity_evaluation": false,
+    "reasoning_evaluation": false,
+    "m6r2_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
