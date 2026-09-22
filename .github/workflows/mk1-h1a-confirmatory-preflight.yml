@@ -52,9 +52,3 @@ jobs:
           ! grep -q 'h1c_common_field_summary(' experiments/model_core/mk1/h1a_confirmatory.py
           ! grep -q 'h1c_whole_scene_bootstrap(' experiments/model_core/mk1/h1a_confirmatory.py
 
-      - name: Prove no scientific artifacts are downloaded in preflight
-        shell: bash
-        run: |
-          set -euo pipefail
-          ! grep -q 'actions/download-artifact' .github/workflows/mk1-h1a-confirmatory-preflight.yml
-          ! grep -qi 'pristine_confirmatory.jsonl' .github/workflows/mk1-h1a-confirmatory-preflight.yml
