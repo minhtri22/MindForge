@@ -5,7 +5,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 import importlib.util
-import hashlib
+import subprocess
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "tools" / "m6r2_contract.py"
 SPEC = importlib.util.spec_from_file_location("m6r2_contract_s1", MODULE_PATH)
@@ -161,9 +161,14 @@ def test_dangling_request_marker_is_ambiguous_and_fail_closed(tmp_path):
 
 
 def git_blob_sha1(path):
-    data = path.read_bytes()
-    header = f"blob {len(data)}\\0".encode()
-    return hashlib.sha1(header + data).hexdigest()
+    cp = subprocess.run(
+        ["git", "hash-object", "--", str(path)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    return cp.stdout.strip()
 
 
 def test_s2_binding_and_s3_suspended_during_adapter_materialization_qa():
