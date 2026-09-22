@@ -64,3 +64,64 @@ ollama create starts. Native Ollama CLI processes use redirected stdout/stderr
 and explicit exit codes; direct PowerShell native pipeline capture is forbidden.
 
 M6 remains FAIL_PACKAGE/CLOSED. M7 and bulk training remain closed.
+
+
+## 2026-09-22 — M6R system Ollama scientific attempt consumed / FAIL_RUNTIME / CLOSED
+
+Returned report is bound to exact HEAD:
+c6b2d2acd77f568b4c2d163bf9cddbd393aa8830
+
+Source report SHA256:
+4c7fdfda6e747c4be463ffc4a64aba3f10283449f6fb9b0a1d5fb206094c14d2
+
+Observed pre-chat gates:
+- system Ollama present=true
+- exact version 0.34.2=true
+- API healthy=true
+- exact Q4 identity=true
+- frozen Modelfile=true
+- namespace collision-free=true
+- ollama create owned model=true
+- create return code=0
+
+The one authorized M6R attempt was consumed before owned ollama create.
+The owned model was successfully created.
+
+The first frozen inference request, task arith-1, failed at POST /api/chat with:
+HTTP 500 Internal Server Error
+
+This maps directly to the preregistered terminal class:
+chat/output failure -> FAIL_RUNTIME
+
+Authoritative result:
+M6R = FAIL_RUNTIME / CLOSED
+
+Attempts:
+- authorized=1
+- consumed=1
+- remaining=0
+- retry-to-seek-pass=false
+- marker reset/deletion unauthorized
+
+Not measured:
+- task vector
+- runtime accuracy
+- format parity
+- reasoning mapping
+
+Cleanup completed safely:
+- owned model removal return code=0
+- final user model-name set equals initial set
+- no unowned model mutation observed
+
+Current evidence does not contain the HTTP 500 response body or an authoritative
+server diagnostic log for the failed request. Therefore the server-side root
+cause remains unresolved. No model-quality or parity conclusion is supported.
+
+M6 remains FAIL_PACKAGE/CLOSED.
+M6R is now FAIL_RUNTIME/CLOSED.
+M7 and bulk training remain closed.
+
+Next valid work is a separate post-closure runtime-failure decomposition that
+collects already-existing server/application diagnostics first, without
+recreating the model or issuing another M6R inference request.

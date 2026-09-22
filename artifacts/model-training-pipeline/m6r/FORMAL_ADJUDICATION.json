@@ -1,0 +1,111 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-system-ollama-formal-adjudication-v1",
+  "program": "M6R_SYSTEM_OLLAMA_REPLICATION",
+  "status": "FORMALLY_CLOSED",
+  "adjudication_date": "2026-09-22",
+  "source_report": {
+    "filename": "M6R_SYSTEM_OLLAMA_REPORT.json",
+    "sha256": "4c7fdfda6e747c4be463ffc4a64aba3f10283449f6fb9b0a1d5fb206094c14d2",
+    "size_bytes": 12067,
+    "started_at": "2026-09-22T14:09:47.4135943Z",
+    "completed_at": "2026-09-22T14:09:56.6906965Z",
+    "repo_head": "c6b2d2acd77f568b4c2d163bf9cddbd393aa8830",
+    "script_git_blob_sha1": "e98d5aae30ff7f36f925f6cbd38ca298940e810a"
+  },
+  "preregistration": {
+    "git_blob_sha1": "e06a290937dd1fd36fd76dbc466e99a777385d83",
+    "attempt_consumed_when": "durable consumed marker is atomically persisted immediately before installed ollama create process starts",
+    "retry_to_seek_pass": false,
+    "create_failure_terminal_class": "FAIL_PACKAGE",
+    "chat_or_output_failure_terminal_class": "FAIL_RUNTIME",
+    "parity_failure_terminal_class": "FAIL_PARITY",
+    "reasoning_failure_terminal_class": "FAIL_REASONING_MAPPING"
+  },
+  "observed": {
+    "raw_report_overall_status": "FAIL",
+    "raw_report_classification": "FAIL_RUNTIME",
+    "attempt_consumed": true,
+    "scientific_runtime_started": true,
+    "system_ollama_present": true,
+    "system_ollama_version": "0.34.2",
+    "system_ollama_host": "127.0.0.1:11434",
+    "system_ollama_api_healthy": true,
+    "system_upgrade_executed": false,
+    "parent_q4_exact_identity": true,
+    "parent_q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "modelfile_sha256": "5db25cbceaaa6b359b73f7edde1f54acb6a95f27a4803f5d28ad1b65012e1946",
+    "namespace_collision_free": true,
+    "owned_model_created": true,
+    "create_return_code": 0,
+    "first_chat_task": "arith-1",
+    "first_chat_http_result": "500 Internal Server Error",
+    "chat_completed": false,
+    "parity_measured": false,
+    "reasoning_mapping_measured": false,
+    "cleanup_attempted": true,
+    "cleanup_return_code": 0,
+    "initial_final_model_sets_match": true,
+    "unowned_model_mutation_observed": false
+  },
+  "failure_localization": {
+    "phase": "ollama_chat_runtime",
+    "endpoint": "POST /api/chat",
+    "task_id": "arith-1",
+    "script_line": 482,
+    "error_type": "System.Management.Automation.RuntimeException",
+    "error_message": "Ollama /api/chat failed for arith-1: The remote server returned an error: (500) Internal Server Error.",
+    "package_creation_succeeded": true,
+    "failure_body_captured": false,
+    "server_diagnostic_log_captured": false,
+    "root_cause": "UNRESOLVED_FROM_CURRENT_EVIDENCE"
+  },
+  "authoritative_verdict": {
+    "terminal_class": "FAIL_RUNTIME",
+    "m6r_pass": false,
+    "m6r_closed": true,
+    "scientific_attempts_authorized": 1,
+    "scientific_attempts_consumed": 1,
+    "scientific_attempts_remaining": 0,
+    "retry_authorized": false,
+    "attempt_marker_reset_or_deletion_authorized": false,
+    "package_creation_result": "PASS_WITHIN_RUN",
+    "chat_runtime_result": "FAIL_HTTP_500",
+    "task_vector_result": "NOT_MEASURED",
+    "runtime_accuracy_result": "NOT_MEASURED",
+    "format_parity_result": "NOT_MEASURED",
+    "reasoning_mapping_result": "NOT_MEASURED",
+    "interpretation": "The exact Q4 was successfully packaged into the installed Ollama 0.34.2 runtime and the owned model was created, but the first frozen /api/chat request failed with HTTP 500. Current evidence does not identify the server-side cause and does not support a claim about model task quality, parity, or reasoning behavior."
+  },
+  "safety_and_cleanup": {
+    "owned_test_model_removed": true,
+    "cleanup_return_code": 0,
+    "initial_final_model_sets_match": true,
+    "user_model_store_preserved": true,
+    "ollama_pull_executed": false,
+    "q4_requantization_executed": false,
+    "llama_cli_inference_executed": false,
+    "fixture_modified": false,
+    "threshold_modified": false
+  },
+  "downstream": {
+    "m6_status": "FAIL_PACKAGE_CLOSED",
+    "m6r_status": "FAIL_RUNTIME_CLOSED",
+    "m6r_rescue_rerun_authorized": false,
+    "m7_authorized": false,
+    "m7_auto_open": false,
+    "bulk_training_authorized": false,
+    "next_scientific_action": "POST_CLOSURE_RUNTIME_FAILURE_DECOMPOSITION_WITHOUT_M6R_RERUN"
+  },
+  "post_closure_diagnostic_program": {
+    "allowed": true,
+    "purpose": "Determine server-side mechanism of the observed HTTP 500 without rerunning the consumed M6R experiment.",
+    "first_step": "Recover or collect existing Ollama server/application logs and exact 500 response details from the failed time window if still available; do not recreate the model or issue another inference request.",
+    "forbidden": [
+      "M6R rerun",
+      "attempt-marker reset",
+      "recreate test model under M6R identity",
+      "new /api/chat request presented as M6R evidence",
+      "reinterpret FAIL_RUNTIME as infrastructure without new independently-governed evidence"
+    ]
+  }
+}
