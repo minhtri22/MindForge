@@ -3,19 +3,25 @@ from pathlib import Path
 
 import pytest
 
-from pipeline.m6r2_contract import (
-    ADAPTER_CONTRACT_VERSION,
-    ContractError,
-    EXPECTED_MODELFILE_SHA256,
-    EXPECTED_Q4_SHA256,
-    FROZEN_PARENT_VECTOR,
-    adjudicate_completed_rows,
-    classify_failure,
-    response_exposes_outcome,
-    row_from_response,
-    scan_prior_outcome_directory,
-    validate_owrq_binding,
-)
+import importlib.util
+
+MODULE_PATH = Path(__file__).resolve().parents[1] / "tools" / "m6r2_contract.py"
+SPEC = importlib.util.spec_from_file_location("m6r2_contract_s1", MODULE_PATH)
+assert SPEC is not None and SPEC.loader is not None
+m6r2 = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(m6r2)
+
+ADAPTER_CONTRACT_VERSION = m6r2.ADAPTER_CONTRACT_VERSION
+ContractError = m6r2.ContractError
+EXPECTED_MODELFILE_SHA256 = m6r2.EXPECTED_MODELFILE_SHA256
+EXPECTED_Q4_SHA256 = m6r2.EXPECTED_Q4_SHA256
+FROZEN_PARENT_VECTOR = m6r2.FROZEN_PARENT_VECTOR
+adjudicate_completed_rows = m6r2.adjudicate_completed_rows
+classify_failure = m6r2.classify_failure
+response_exposes_outcome = m6r2.response_exposes_outcome
+row_from_response = m6r2.row_from_response
+scan_prior_outcome_directory = m6r2.scan_prior_outcome_directory
+validate_owrq_binding = m6r2.validate_owrq_binding
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "m6r2_parity_oneclick.ps1"
@@ -222,3 +228,12 @@ def test_science_verdict_vocabulary_has_no_legacy_package_runtime_failures():
     assert '"INVALID_INFRA_POSTOUTCOME"' in t
     assert '"FAIL_PACKAGE"' not in t
     assert '"FAIL_RUNTIME"' not in t
+
+
+def test_contract_module_is_stdlib_isolated_from_pipeline_package():
+    t = SCRIPT.read_text(encoding="utf-8")
+    assert "tools/m6r2_contract.py" in t
+    assert "pipeline/m6r2_contract.py" not in t
+    source = MODULE_PATH.read_text(encoding="utf-8")
+    assert "import yaml" not in source
+    assert "from pipeline" not in source

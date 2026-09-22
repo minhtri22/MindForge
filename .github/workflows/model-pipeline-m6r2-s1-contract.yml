@@ -5,7 +5,7 @@ on:
     branches:
       - research/model-pipeline-m6r2-parity
     paths:
-      - 'pipeline/m6r2_contract.py'
+      - 'tools/m6r2_contract.py'
       - 'scripts/m6r2_parity_oneclick.ps1'
       - 'tests/test_m6r2_s1_contract.py'
       - 'artifacts/model-training-pipeline/m6r2/**'
@@ -26,7 +26,7 @@ jobs:
       - name: M6R2 S1 contract tests
         run: python -m pytest -q tests/test_m6r2_s1_contract.py
       - name: Python compile
-        run: python -m py_compile pipeline/m6r2_contract.py
+        run: python -m py_compile tools/m6r2_contract.py
       - name: PowerShell parse only
         shell: pwsh
         run: |

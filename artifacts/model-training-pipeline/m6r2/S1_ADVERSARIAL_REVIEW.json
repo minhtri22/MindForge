@@ -1,7 +1,7 @@
 {
   "schema": "mindforge-model-pipeline-m6r2-s1-adversarial-review-v1",
   "status": "FINDINGS_PATCHED_PENDING_FINAL_QA",
-  "reviewed_commit": "5fdab6292ef3769d25f6a8355527b7a2176c0913",
+  "reviewed_commit": "a542321cc90896878d8db801d3f61d868c798ba9",
   "scientific_contract_changed": false,
   "findings": [
     {
@@ -39,6 +39,12 @@
       "severity": "MEDIUM",
       "finding": "Evidence manifest was missing from final report.",
       "repair": "Hash durable evidence/outcome-ledger files into final manifest."
+    },
+    {
+      "id": "S1-F07",
+      "severity": "MEDIUM",
+      "finding": "Pure M6R2 contract was placed under pipeline package, causing pipeline/__init__.py to import unrelated PyYAML-dependent training modules during zero-science QA.",
+      "repair": "Move canonical pure contract to tools/m6r2_contract.py and load it directly without importing pipeline package."
     }
   ],
   "unresolved_findings_after_patch": 0

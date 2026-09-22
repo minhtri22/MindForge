@@ -90,7 +90,7 @@ function Assert-FutureExecutionAuthorized {
     if([string]$S3.s2_authorization_git_blob_sha1 -ne $S2Blob){ throw "S3 does not bind current S2 authorization" }
 
     $ScriptBlob=(& git hash-object -- $PSCommandPath).Trim()
-    $ContractBlob=(& git hash-object -- "pipeline/m6r2_contract.py").Trim()
+    $ContractBlob=(& git hash-object -- "tools/m6r2_contract.py").Trim()
     if($ScriptBlob -ne [string]$Lock.exact_blobs.runner_git_blob_sha1){ throw "M6R2 runner blob mismatch" }
     if($ContractBlob -ne [string]$Lock.exact_blobs.contract_git_blob_sha1){ throw "M6R2 contract blob mismatch" }
 
@@ -112,7 +112,7 @@ function Read-And-VerifyQualifiedRuntime {
     $ActualSha=Get-Sha256File $Path
     if($ActualSha -ne [string]$S2.qualified_runtime_artifact_sha256){ throw "BLOCKED_INFRA_BINDING: qualified OWRQ artifact hash mismatch" }
 
-    $Verify=& python -m pipeline.m6r2_contract verify-binding $Path 2>&1
+    $Verify=& python tools/m6r2_contract.py verify-binding $Path 2>&1
     if($LASTEXITCODE -ne 0){ throw "BLOCKED_INFRA_BINDING: $($Verify -join [Environment]::NewLine)" }
     $Binding=$Verify -join [Environment]::NewLine | ConvertFrom-Json
 
@@ -140,7 +140,7 @@ function Read-And-VerifyQualifiedRuntime {
 }
 function Assert-NoPriorOutcomeExposure {
     New-Item -ItemType Directory -Force -Path $OutcomeDir | Out-Null
-    $Scan=& python -m pipeline.m6r2_contract scan-prior $OutcomeDir 2>&1
+    $Scan=& python tools/m6r2_contract.py scan-prior $OutcomeDir 2>&1
     if($LASTEXITCODE -ne 0){ throw "INVALID_PROVENANCE: prior outcome ledger cannot be scanned" }
     $State=$Scan -join [Environment]::NewLine | ConvertFrom-Json
     if($State.outcome_exposed -eq $true){ throw "INVALID_PROVENANCE: prior scientific outcome already exposed; rerun forbidden" }
@@ -320,14 +320,14 @@ try {
         }
 
         if(-not (Test-Path $ResponsePath -PathType Leaf)){throw "INVALID_PROVENANCE: adapter returned success without durable response"}
-        $RowJson=& python -m pipeline.m6r2_contract row-from-files $TaskPath $ResponsePath 2>&1
+        $RowJson=& python tools/m6r2_contract.py row-from-files $TaskPath $ResponsePath 2>&1
         if($LASTEXITCODE -ne 0){throw "INVALID_PROVENANCE: row normalization failed"}
         $Rows += ($RowJson -join [Environment]::NewLine | ConvertFrom-Json)
     }
 
     $RowsPath=Join-Path $OutcomeDir "completed-rows.json"
     Write-AtomicJson $RowsPath ([ordered]@{rows=$Rows})
-    $AdjJson=& python -m pipeline.m6r2_contract adjudicate-rows $RowsPath 2>&1
+    $AdjJson=& python tools/m6r2_contract.py adjudicate-rows $RowsPath 2>&1
     if($LASTEXITCODE -ne 0){throw "INVALID_PROVENANCE: parity adjudication failed"}
     $Adj=$AdjJson -join [Environment]::NewLine | ConvertFrom-Json
     $Classification=[string]$Adj.scientific_verdict
