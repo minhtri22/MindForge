@@ -765,3 +765,66 @@ Tại thời điểm đóng lock:
 - scientific model outcome chưa tồn tại.
 
 Trạng thái: scientific training đã đủ điều kiện thực thi dưới exact frozen execution contract, nhưng chưa được trigger.
+
+
+## 2026-09-23 — Formal-close MK-1 scientific training execution
+
+Canonical scientific training execution:
+
+- run: `35587028399`
+- execution head: `063d92299ed8adf90786bea9b5bd6ad3acf23243`
+- jobs: `10/10 SUCCESS`
+- artifacts: `10/10 frozen`
+
+Post-training execution audit downloaded and inspected all ten frozen artifacts plus immutable training-input bundle `10629399106`.
+
+For every arm × seed artifact, audit verified:
+
+- artifact ZIP digest;
+- exact four-file evidence set: `run.json`, `metrics.jsonl`, `best.pt`, `latest.pt`;
+- `status=COMPLETE`;
+- exactly 5.000 executed steps;
+- exact arm parameter contract;
+- exact processed input tokens = `6.457.260`;
+- frozen tokenizer and paired-init provenance;
+- exact frozen schedule SHA;
+- row-by-row equality between executed sample IDs/token totals and the frozen schedule;
+- TRAIN namespace only;
+- exact locked warmup + cosine LR schedule;
+- validation only at steps 250,500,...,5000;
+- finite train losses and validation scores;
+- earliest-maximum checkpoint selection;
+- matching `best.pt` metadata;
+- `latest.pt.step=5000`;
+- no early stop;
+- no confirmatory/pristine file in training evidence.
+
+Best steps used only for selector-integrity audit:
+
+- 71001: DIRECT 3250; M1-Z 5000
+- 71002: DIRECT 3000; M1-Z 3500
+- 71003: DIRECT 5000; M1-Z 5000
+- 71004: DIRECT 5000; M1-Z 4750
+- 71005: DIRECT 3750; M1-Z 3000
+
+No cross-arm scientific interpretation was made during execution audit.
+
+Execution-head provenance audit additionally proved that the only delta from pre-trigger HEAD `d049617281bd0f120e55c5ef11e592424ef3fec8` to execution head was addition of `SCIENTIFIC_TRAINING_TRIGGER_v0.1.md`, while all locked scientific implementation blobs remained exact.
+
+Machine-readable audit:
+
+- `model_kernel/mk1/SCIENTIFIC_TRAINING_EXECUTION_AUDIT.json`
+- commit `d9b85ec0b617f6dc74026e72a7502091ab43f5d2`
+
+Formal closure:
+
+- `model_kernel/mk1/SCIENTIFIC_TRAINING_EXECUTION_AUDIT_RESULT.md`
+- commit `b45448752d12b9e3a895f97a0ac8642377cbd185`
+
+Formal verdict:
+
+`SCIENTIFIC_TRAINING_EXECUTION_AUDIT_PASS`
+
+The ten frozen training results/checkpoints are now admissible scientific evidence.
+
+H1a/H1b/H1c remain unadjudicated at this closure. The next authorized stage is outcome adjudication in frozen order `H1a -> H1b -> H1c`. No retraining, seed replacement, schedule modification, checkpoint reselection, threshold change, or confirmatory access is authorized.
