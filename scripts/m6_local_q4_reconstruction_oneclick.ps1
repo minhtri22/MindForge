@@ -115,7 +115,39 @@ $Report=[ordered]@{
 
 try {
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) { throw "git not found" }
-    if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) { throw "cmake not found" }
+
+    $CMakeResolution = [ordered]@{
+        source = "PATH"
+        path = $null
+        vswhere_path = $null
+        visual_studio_root = $null
+    }
+    $CMakeCommand = Get-Command cmake -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($null -eq $CMakeCommand) {
+        $VsWhere = "${env:ProgramFiles(x86)}\\Microsoft Visual Studio\\Installer\\vswhere.exe"
+        if (Test-Path $VsWhere -PathType Leaf) {
+            $CMakeResolution.vswhere_path = $VsWhere
+            $VsRoot = (& $VsWhere -latest -products * -property installationPath).Trim()
+            if (-not [string]::IsNullOrWhiteSpace($VsRoot)) {
+                $CMakeResolution.visual_studio_root = $VsRoot
+                $VsCmake = Join-Path $VsRoot "Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe"
+                if (Test-Path $VsCmake -PathType Leaf) {
+                    $env:Path = "$(Split-Path $VsCmake);$env:Path"
+                    $CMakeCommand = Get-Command cmake -ErrorAction SilentlyContinue | Select-Object -First 1
+                    if ($null -ne $CMakeCommand) {
+                        $CMakeResolution.source = "VISUAL_STUDIO_VSWHERE"
+                        $CMakeResolution.path = $VsCmake
+                    }
+                }
+            }
+        }
+    }
+    if ($null -eq $CMakeCommand) {
+        throw "cmake not found in PATH or Visual Studio CMake discovery"
+    }
+    if ($null -eq $CMakeResolution.path) {
+        $CMakeResolution.path = $CMakeCommand.Source
+    }
 
     $Head=(& git rev-parse HEAD).Trim()
     $Branch=(& git branch --show-current).Trim()
@@ -139,6 +171,7 @@ try {
         os=$OS.Caption;build=$OS.BuildNumber;cpu=$CPU.Name.Trim()
         powershell=$PSVersionTable.PSVersion.ToString()
         cmake=((& cmake --version | Select-Object -First 1).Trim())
+        cmake_resolution=$CMakeResolution
     }
 
     $SearchRoot=Split-Path $RepoRoot -Parent

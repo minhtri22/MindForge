@@ -60,3 +60,21 @@ def test_no_ollama_execution_in_reconstruction_package():
     text=SCRIPT.read_text(encoding="utf-8").lower()
     assert "ollama.exe" not in text
     assert "ollama serve" not in text
+
+
+def test_cmake_has_visual_studio_fallback_before_attempt():
+    text=SCRIPT.read_text(encoding="utf-8")
+    assert "vswhere.exe" in text
+    assert "VISUAL_STUDIO_VSWHERE" in text
+    assert "Common7\\\\IDE\\\\CommonExtensions\\\\Microsoft\\\\CMake\\\\CMake\\\\bin\\\\cmake.exe" in text
+    fallback=text.index("vswhere.exe")
+    consumed=text.index("$Report.authorization_consumed=$true")
+    assert fallback < consumed
+
+
+def test_missing_cmake_remains_pre_attempt_infrastructure_failure():
+    text=SCRIPT.read_text(encoding="utf-8")
+    assert 'throw "cmake not found in PATH or Visual Studio CMake discovery"' in text
+    cmake_fail=text.index('throw "cmake not found in PATH or Visual Studio CMake discovery"')
+    consumed=text.index("$Report.authorization_consumed=$true")
+    assert cmake_fail < consumed
