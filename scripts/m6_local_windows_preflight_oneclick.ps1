@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 $Program = "M6_LOCAL_WINDOWS_VENUE_PREFLIGHT"
-$ExpectedBranch = "research/model-pipeline-m6-ollama"
+$PreferredBranch = "research/model-pipeline-m6-ollama"
 $VenueAmendmentCommit = "4aed637eb8bb41cc5e67c7b079402cf16d6948d2"
 $VenueAmendmentBlob = "5d67202f3103f36736cf0e7973c054cf6df658fd"
 $Q4ReconstructionAuthorizationCommit = "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5"
@@ -158,9 +158,7 @@ try {
     $Head = (& git rev-parse HEAD).Trim()
     if ($LASTEXITCODE -ne 0) { throw "Not inside a Git repository" }
     $Branch = (& git branch --show-current).Trim()
-    if ($Branch -ne $ExpectedBranch) {
-        throw "Wrong branch. expected=$ExpectedBranch actual=$Branch"
-    }
+    $BranchMatchesPreferred = ($Branch -eq $PreferredBranch)
 
     $TrackedStatus = @(& git status --porcelain --untracked-files=no)
     if ($TrackedStatus.Count -gt 0) {
@@ -175,8 +173,9 @@ try {
     }
 
     $ScriptBlob = (& git hash-object -- $PSCommandPath).Trim()
-    if ($ScriptBlob -ne [string]$Lock.script_git_blob_sha1) {
-        throw "Preflight script blob mismatch expected=$($Lock.script_git_blob_sha1) actual=$ScriptBlob"
+    $ExpectedScriptBlob = [string]$Lock.exact_blobs.script_git_blob_sha1
+    if ($ScriptBlob -ne $ExpectedScriptBlob) {
+        throw "Preflight script blob mismatch expected=$ExpectedScriptBlob actual=$ScriptBlob"
     }
 
     $AmendmentPath = "artifacts/model-training-pipeline/m6/VENUE_INDEPENDENCE_GOVERNANCE_AMENDMENT.json"
@@ -194,6 +193,8 @@ try {
     $Report.repo = [ordered]@{
         root = $RepoRoot
         branch = $Branch
+        preferred_branch = $PreferredBranch
+        branch_matches_preferred = $BranchMatchesPreferred
         head = $Head
         tracked_worktree_clean = $true
         script_git_blob_sha1 = $ScriptBlob

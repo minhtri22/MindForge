@@ -95,3 +95,17 @@ def test_report_keeps_scientific_boundaries_closed():
         "q4_reconstruction_authorization_consumed = $false",
     ]:
         assert field in text
+
+
+def test_branch_name_is_informational_not_scientific_gate():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert '$PreferredBranch = "research/model-pipeline-m6-ollama"' in text
+    assert "branch_matches_preferred = $BranchMatchesPreferred" in text
+    assert "Wrong branch." not in text
+    assert "$Branch -ne $ExpectedBranch" not in text
+
+
+def test_script_reads_exact_script_blob_from_lock_schema():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert "$Lock.exact_blobs.script_git_blob_sha1" in text
+    assert "$Lock.script_git_blob_sha1" not in text
