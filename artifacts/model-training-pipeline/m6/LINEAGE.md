@@ -894,3 +894,47 @@ no runtime execution PASS
 The earlier authorization at f167813b... is superseded. This v2 authorization
 is the only authoritative local M6 Ollama scientific execution authorization.
 M7 and bulk training remain closed.
+
+
+## 2026-09-22 — M6 local Ollama pre-create transport failure admitted; transport-only repair re-authorized
+
+The first invocation from exact HEAD 69671729aeb7832c1a1072ccf0979e4c0f20bf4b
+returned INVALID_INFRASTRUCTURE before scientific attempt consumption.
+
+Observed report:
+- source SHA256: df8aaca94f08f4ac48c4480f52910a57bf7b24513ee3470d17e85e0c0869f6e0
+- attempt_consumed=false
+- scientific_runtime_started=false
+- parent Q4 exact_identity=true
+- failure stage: pinned Ollama v0.34.2 asset download
+- transport error: remote host forcibly closed the connection during Invoke-WebRequest
+- no owned model was created; M7 and bulk training remained closed
+
+This is not an M6 scientific FAIL and consumes zero scientific attempts.
+
+Bounded infrastructure-only repair:
+7ec6dc4d0663a933eff139c200298a1d8c81ee83
+
+New exact blobs:
+- script: fbfdddeb34b0e4132a7cdf3d75a02e63e1a3f027
+- tests: 3812b30af71b4f7aa24b4ff5b501800cb7cd27eb
+
+Repair scope is limited to pre-create asset transport:
+curl.exe with bounded retry when available, with bounded Invoke-WebRequest fallback.
+The pinned Ollama asset URL/version/SHA256, Q4 identity, Modelfile, fixtures,
+seed, inference parameters, parity criteria, reasoning mapping, cleanup rules,
+and attempt-consumption boundary are unchanged.
+
+Static zero-science QA for repaired package:
+- run 35724632583
+- job 106735260580
+- 13/13 contract tests PASS
+- PowerShell parse PASS
+- Ollama asset execution in CI=false
+- ollama create=false
+- ollama chat=false
+- M6 scientific execution=false
+
+One scientific attempt remains authorized because the admitted failure occurred
+strictly before the durable consumed marker and before ollama create.
+Retry-after-consumption remains forbidden. M7 and bulk training remain closed.

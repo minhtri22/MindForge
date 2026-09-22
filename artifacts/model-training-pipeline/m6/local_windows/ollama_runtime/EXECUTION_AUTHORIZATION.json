@@ -1,15 +1,15 @@
 {
-  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-execution-authorization-v2",
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-execution-authorization-v3",
   "status": "AUTHORIZED_ONE_LOCAL_M6_OLLAMA_EXECUTION",
   "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
-  "authorization_parent_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
-  "supersedes_authorization_commit": "f167813b9b874bac8693261105b66f2cb881c021",
-  "supersession_reason": "Previous authorization did not durably enforce one-attempt consumption across process crash/rerun. The repaired package atomically persists a local consumed marker immediately before ollama create.",
+  "authorization_parent_commit": "7ec6dc4d0663a933eff139c200298a1d8c81ee83",
+  "supersedes_authorization_commit": "69671729aeb7832c1a1072ccf0979e4c0f20bf4b",
+  "supersession_reason": "A non-consuming pre-create infrastructure failure occurred while PowerShell Invoke-WebRequest downloaded the pinned Ollama asset. No scientific runtime started. The download transport only was hardened with bounded retry while preserving the same pinned asset hash and all scientific contracts.",
   "execution_class": "LOCAL_WINDOWS_ISOLATED_OLLAMA_PACKAGE_CHAT_PARITY",
   "exact_binding": {
-    "implementation_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
-    "script_git_blob_sha1": "f0e444c894ec96a6b984e20ba3cee41416d03f27",
-    "tests_git_blob_sha1": "bde615cf5f1886a5169bb0415bd99c047168d1e2",
+    "implementation_commit": "7ec6dc4d0663a933eff139c200298a1d8c81ee83",
+    "script_git_blob_sha1": "fbfdddeb34b0e4132a7cdf3d75a02e63e1a3f027",
+    "tests_git_blob_sha1": "3812b30af71b4f7aa24b4ff5b501800cb7cd27eb",
     "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
     "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
     "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
@@ -18,18 +18,27 @@
     "ollama_runtime_lock_git_blob_sha1": "773131fc8092a29bb1210dbabab9839e4f74ef55",
     "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
     "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
-    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "precreate_infrastructure_failure_evidence_git_blob_sha1": "48eb2b646ca7963374d569691e6e43742a0ec725"
   },
   "zero_science_qa": {
-    "run_id": 35711151635,
-    "job_id": 106691789710,
+    "run_id": 35724632583,
+    "job_id": 106735260580,
     "conclusion": "success",
-    "contract_tests": "12/12_PASS",
+    "contract_tests": "13/13_PASS",
     "powershell_parse": "PASS",
     "ollama_asset_downloaded": false,
     "ollama_create_executed": false,
     "ollama_chat_executed": false,
     "m6_scientific_execution_executed": false
+  },
+  "observed_nonconsuming_failure": {
+    "source_report_sha256": "df8aaca94f08f4ac48c4480f52910a57bf7b24513ee3470d17e85e0c0869f6e0",
+    "classification": "INVALID_INFRASTRUCTURE",
+    "attempt_consumed": false,
+    "scientific_runtime_started": false,
+    "failure_stage": "pre-create pinned Ollama asset download",
+    "scientific_result": null
   },
   "parent_q4": {
     "filename": "model-q4_k_m.gguf",
@@ -49,8 +58,15 @@
     "installed_ollama_0_34_0_may_be_used": false,
     "install_or_update_authorized": false
   },
+  "transport_repair": {
+    "scope": "pre-create asset download only",
+    "curl_retry_if_available": true,
+    "invoke_webrequest_bounded_retry_fallback": true,
+    "exact_asset_sha256_verification_required": true,
+    "scientific_contract_changed": false
+  },
   "command_allowlist": [
-    "download or reuse exact cached official Ollama v0.34.2 Windows amd64 ZIP",
+    "download or reuse exact cached official Ollama v0.34.2 Windows amd64 ZIP using bounded resilient transport",
     "verify exact asset SHA256",
     "extract to owned .local runtime directory",
     "run extracted ollama.exe --version",
@@ -81,6 +97,8 @@
   ],
   "one_attempt": {
     "attempts_authorized": 1,
+    "prior_failed_invocation_consumed_attempt": false,
+    "remaining_attempts_authorized": 1,
     "durable_state_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/attempt-state.json",
     "consumed_when": "durable consumed marker is atomically moved into place immediately before owned ollama create starts",
     "pre_create_asset_version_server_or_provenance_failure_consumes_attempt": false,

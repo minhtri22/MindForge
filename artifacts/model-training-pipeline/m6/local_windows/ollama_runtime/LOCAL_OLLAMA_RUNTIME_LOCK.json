@@ -1,13 +1,13 @@
 {
-  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v2",
+  "schema": "mindforge-model-pipeline-m6-local-ollama-runtime-lock-v3",
   "status": "LOCKED_FOR_LOCAL_EXECUTION",
   "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
-  "implementation_commit": "0ff23a4deaa9b5556bb66ff8df0c1c734cab1db3",
-  "supersedes_lock_commit": "f167813b9b874bac8693261105b66f2cb881c021",
-  "execution_authorization_git_blob_sha1": "7bc2f81972b7e97230620cf9d0a92265312b09ad",
+  "implementation_commit": "7ec6dc4d0663a933eff139c200298a1d8c81ee83",
+  "supersedes_lock_commit": "69671729aeb7832c1a1072ccf0979e4c0f20bf4b",
+  "execution_authorization_git_blob_sha1": "7a35c5bbb0e17e0d6037fb63e0a471f9036bff4a",
   "exact_blobs": {
-    "script_git_blob_sha1": "f0e444c894ec96a6b984e20ba3cee41416d03f27",
-    "tests_git_blob_sha1": "bde615cf5f1886a5169bb0415bd99c047168d1e2",
+    "script_git_blob_sha1": "fbfdddeb34b0e4132a7cdf3d75a02e63e1a3f027",
+    "tests_git_blob_sha1": "3812b30af71b4f7aa24b4ff5b501800cb7cd27eb",
     "workflow_git_blob_sha1": "aa19697220ffa811a43eeff812034e236038e4ea",
     "preregistration_git_blob_sha1": "a6d947b01b58d3eea96b3a03b35173d4c3c69eaf",
     "implementation_authorization_git_blob_sha1": "fd290e10b5ee5de0d44ce6767f15cd87f0ef66fe",
@@ -16,15 +16,22 @@
     "ollama_runtime_lock_git_blob_sha1": "773131fc8092a29bb1210dbabab9839e4f74ef55",
     "fixture_manifest_git_blob_sha1": "450d83d38130765fe4a74fb18bab90177328218f",
     "reference_profile_git_blob_sha1": "1214e551c250e73b7a8cbbde71201fdd17e49ae1",
-    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4"
+    "reasoning_implementation_git_blob_sha1": "3813ae3ff00a49f2f97ccbda7833e0bf299ff1e4",
+    "precreate_infrastructure_failure_evidence_git_blob_sha1": "48eb2b646ca7963374d569691e6e43742a0ec725"
   },
   "zero_science_static_qa": {
-    "run_id": 35711151635,
-    "job_id": 106691789710,
+    "run_id": 35724632583,
+    "job_id": 106735260580,
     "conclusion": "success",
-    "contract_tests": "12/12_PASS",
+    "contract_tests": "13/13_PASS",
     "powershell_parse": "PASS",
     "no_execution_proof": "PASS"
+  },
+  "admitted_prior_local_invocation": {
+    "classification": "INVALID_INFRASTRUCTURE",
+    "source_report_sha256": "df8aaca94f08f4ac48c4480f52910a57bf7b24513ee3470d17e85e0c0869f6e0",
+    "attempt_consumed": false,
+    "scientific_runtime_started": false
   },
   "frozen_parent_q4": {
     "size_bytes": 397807456,
@@ -43,11 +50,13 @@
   },
   "one_attempt_rule": {
     "attempts_authorized": 1,
+    "prior_failed_invocation_consumed_attempt": false,
+    "remaining_attempts_authorized": 1,
     "durable_state_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/attempt-state.json",
     "consumed_when": "atomic durable marker immediately before owned ollama create",
     "retry_to_seek_pass": false,
     "marker_reset_authorized": false
   },
   "report_path": ".local/M6-LOCAL-OLLAMA-RUNTIME/report/M6_LOCAL_OLLAMA_RUNTIME_REPORT.json",
-  "next_after_local_report": "RETURN_REPORT_FOR_FORMAL_M6_ADJUDICATION; DO_NOT AUTO-OPEN M7"
+  "next_after_local_report": "RETURN_REPORT_FOR_FORMAL_M6_ADJUDICATION; DO NOT AUTO-OPEN M7"
 }

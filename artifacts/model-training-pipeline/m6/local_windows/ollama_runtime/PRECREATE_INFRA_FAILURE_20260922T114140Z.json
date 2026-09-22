@@ -1,0 +1,61 @@
+{
+  "schema": "mindforge-model-pipeline-m6-local-ollama-precreate-infrastructure-failure-v1",
+  "program": "M6_LOCAL_OLLAMA_RUNTIME_QUALIFICATION",
+  "verdict": "ADMITTED_NONCONSUMING_INFRASTRUCTURE_FAILURE",
+  "source_report": {
+    "filename": "M6_LOCAL_OLLAMA_RUNTIME_REPORT.json",
+    "sha256": "df8aaca94f08f4ac48c4480f52910a57bf7b24513ee3470d17e85e0c0869f6e0",
+    "size_bytes": 4314,
+    "started_at": "2026-09-22T11:28:46.3462008Z",
+    "completed_at": "2026-09-22T11:41:40.1990610Z"
+  },
+  "execution_identity": {
+    "repo_head": "69671729aeb7832c1a1072ccf0979e4c0f20bf4b",
+    "script_git_blob_sha1": "f0e444c894ec96a6b984e20ba3cee41416d03f27",
+    "tracked_worktree_clean": true
+  },
+  "observed": {
+    "overall_status": "FAIL",
+    "classification": "INVALID_INFRASTRUCTURE",
+    "attempt_consumed": false,
+    "scientific_runtime_started": false,
+    "parent_q4_exact_identity": true,
+    "parent_q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "installed_ollama_modified": false,
+    "ollama_pull_executed": false,
+    "q4_requantization_executed": false,
+    "llama_cli_inference_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "failure": {
+    "stage": "pre-create pinned Ollama asset download",
+    "original_transport": "PowerShell Invoke-WebRequest",
+    "script_line_observed": 239,
+    "error_type": "System.IO.IOException",
+    "error_message": "Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host."
+  },
+  "adjudication": {
+    "scientific_attempt_consumed": false,
+    "scientific_result": null,
+    "remaining_authorized_scientific_attempts": 1,
+    "rerun_allowed_only_after_infrastructure_resolution": true
+  },
+  "bounded_repair": {
+    "commit": "7ec6dc4d0663a933eff139c200298a1d8c81ee83",
+    "scope": "pre-create asset transport only",
+    "script_git_blob_sha1": "fbfdddeb34b0e4132a7cdf3d75a02e63e1a3f027",
+    "tests_git_blob_sha1": "3812b30af71b4f7aa24b4ff5b501800cb7cd27eb",
+    "transport": "curl.exe with bounded retry when available; Invoke-WebRequest bounded retry fallback",
+    "pinned_asset_sha256_unchanged": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b",
+    "scientific_contract_changed": false,
+    "static_qa": {
+      "run_id": 35724632583,
+      "job_id": 106735260580,
+      "conclusion": "success",
+      "contract_tests": "13/13_PASS",
+      "powershell_parse": "PASS",
+      "no_execution_proof": "PASS"
+    }
+  }
+}
