@@ -1,0 +1,57 @@
+name: Model Pipeline M6 Zero-Runtime Preflight
+
+on:
+  push:
+    branches:
+      - research/model-pipeline-m6-ollama
+    paths:
+      - 'docs/model-training-pipeline/runtime/ollama.lock.json'
+      - 'pipeline/m6.py'
+      - 'tools/m6_ollama_preflight.py'
+      - 'tests/test_model_pipeline_m6.py'
+      - 'artifacts/model-training-pipeline/m6/IMPLEMENTATION_LOCK.json'
+      - '.github/workflows/model-pipeline-m6-preflight.yml'
+  workflow_dispatch:
+
+jobs:
+  m6-zero-runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install test dependency only
+        run: python -m pip install pytest==8.4.2
+
+      - name: M6 zero-runtime unit and contract tests
+        run: python -m pytest -q tests/test_model_pipeline_m6.py
+
+      - name: Lock-present zero-science preflight
+        run: |
+          set -o pipefail
+          if [ -f artifacts/model-training-pipeline/m6/IMPLEMENTATION_LOCK.json ]; then
+            python -m tools.m6_ollama_preflight --workspace . --json | tee m6-zero-runtime-preflight.json
+          else
+            echo "M6 implementation lock not committed yet; zero-runtime tests only."
+          fi
+
+      - name: Prove zero Ollama runtime execution
+        run: |
+          test ! -e .ollama
+          test ! -e m6-runtime-output.json
+          echo "ollama_executable_invoked=false"
+          echo "ollama_runtime_execution_executed=false"
+          echo "m6_scientific_execution_executed=false"
+          echo "m7_authorized=false"
+
+      - name: Upload zero-runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m6-zero-runtime-preflight
+          path: m6-zero-runtime-preflight.json
+          if-no-files-found: ignore
