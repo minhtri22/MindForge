@@ -1,0 +1,33 @@
+{
+  "schema": "mindforge-model-pipeline-infra-science-separation-qa-v1",
+  "status": "PASS",
+  "reviewed_commit": "64e159272eb3d37e50117c9e549efd6a417c7532",
+  "initial_findings": 2,
+  "repaired_findings": 2,
+  "unresolved_findings": 0,
+  "findings": [
+    {
+      "id": "QA-01",
+      "severity": "MEDIUM",
+      "issue": "Historical M6R2 opening decision remained locally ambiguous after governance supersession.",
+      "repair": "Added explicit M6R2_OPENING_DECISION_SUPERSESSION.json and append-only RFD lineage entry."
+    },
+    {
+      "id": "QA-02",
+      "severity": "LOW",
+      "issue": "README read-order stopped at 22 after section 23 was added.",
+      "repair": "Advanced read-order to 15..23."
+    }
+  ],
+  "final_checks": {
+    "infra_science_domains_separated": true,
+    "scientific_anti_rescue_preserved": true,
+    "infra_reuse_rule_defined": true,
+    "microgate_reduction_defined": true,
+    "old_history_preserved": true,
+    "m6r2_spec_only": true,
+    "m6r2_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}

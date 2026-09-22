@@ -52,7 +52,7 @@ Scientific baseline là exact parent artifact; matched-control bắt buộc khi 
 
 ## 6. Read order
 
-Đọc 00..14, sau đó 15..22, schemas/profiles/examples và cuối cùng AGENT_MASTER_PROMPT.md. QA_REMEDIATION_CHECKLIST.md là audit index.
+Đọc 00..14, sau đó 15..23, schemas/profiles/examples và cuối cùng AGENT_MASTER_PROMPT.md. QA_REMEDIATION_CHECKLIST.md là audit index.
 
 ## 7. Spec lock
 

@@ -128,3 +128,25 @@ M6R2 implementation/execution remains unauthorized until a fresh specification,
 adversarial QA, zero-science implementation lock, and explicit one-attempt gate.
 
 M7 and bulk training remain closed.
+
+
+## 2026-09-22 — M6R2 opening decision partially superseded by infra/science separation
+
+The historical artifact `M6R2_OPENING_DECISION.json` is preserved unchanged.
+
+Its root-cause basis and permission to open a fresh M6R2 specification remain valid.
+
+The following interpretation is superseded:
+- q4_0 KV cache -> f16 as a scientific M6R2 intervention.
+
+Canonical replacement:
+- q4_0 -> f16/default is an infrastructure/runtime-adapter repair;
+- it belongs to reusable OWRQ qualification;
+- M6R2 has no scientific treatment corresponding to that repair;
+- M6R2 execution later performs one exact infra binding check.
+
+Authority:
+- docs/model-training-pipeline/23_INFRASTRUCTURE_SCIENCE_SEPARATION.md
+- artifacts/model-training-pipeline/governance/INFRA_SCIENCE_SEPARATION_DECISION.json
+
+M6R historical closure and RFD-C1 root-cause adjudication remain unchanged.
