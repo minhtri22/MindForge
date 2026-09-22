@@ -156,3 +156,38 @@ Q4 remains `PASS / CLOSED`.
 
 Deterministic reconstruction is still not authorized. A separate authorization
 is now the only valid next governance action.
+
+
+## 2026-09-22 — Deterministic reconstruction authorized after exhausted recovery
+
+Recovery is terminal:
+
+```text
+NOT_FOUND_RECOVERY_EXHAUSTED
+recovery evidence:
+5cbee7be3cefb325207ea56b3daba899aa9ea3d2
+```
+
+A separate authorization now permits exactly one deterministic artifact
+reconstruction, conditional on admission of the exact frozen F16 parent:
+
+```text
+model-f16.gguf
+size: 994156384
+sha256:
+437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b
+
+llama.cpp:
+ce8caa6e60a03093351d6016a818720e0d46f0fb
+
+quantizer:
+Q4_K_M
+```
+
+F16 regeneration is not authorized.
+
+The only acceptance criterion is exact equality with the pre-existing frozen Q4
+byte identity. No fixtures, llama-cli evaluation, model inference, scientific
+result generation, or Q4 re-adjudication is authorized.
+
+Q4 remains PASS / CLOSED.

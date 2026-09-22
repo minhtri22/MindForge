@@ -1,0 +1,106 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-execution-authorization-v1",
+  "status": "AUTHORIZED_ONE_MATERIALIZATION_EXECUTION",
+  "mode": "DETERMINISTIC_RECONSTRUCTION_ONLY",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "authorization_parent_commit": "5cbee7be3cefb325207ea56b3daba899aa9ea3d2",
+  "execution_class": "M6_PARENT_ARTIFACT_DETERMINISTIC_BYTE_RECONSTRUCTION",
+  "prerequisite_evidence": {
+    "recovery_exhaustion_commit": "5cbee7be3cefb325207ea56b3daba899aa9ea3d2",
+    "recovery_evidence_git_blob_sha1": "2880512d822b5437b59261be9aee294a10b1fef4",
+    "recovery_verdict": "NOT_FOUND_RECOVERY_EXHAUSTED",
+    "recovery_attempt_count": 1,
+    "recovery_authorization_consumed": true,
+    "recovery_candidate_count": 0,
+    "zero_science_closure_commit": "94c9300fa6c9c7df38b271a8295a69ef40572a6a",
+    "zero_science_evidence_git_blob_sha1": "4f579cdc117e63de283a9587f091859ad443b11c",
+    "implementation_commit": "a6f9d4341894cf59cab853d4ae6912e060c10599",
+    "materialization_tool_git_blob_sha1": "7bb16e37af748372008d4b78b9f140bb6868a027"
+  },
+  "frozen_f16_parent": {
+    "filename": "model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_evidence_git_blob_sha1": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9",
+    "source_artifact_admission_required": true,
+    "regeneration_authorized": false,
+    "admission_rule": "reconstruction MUST NOT start unless an existing materialized F16 file verifies exact filename, size, SHA256, and aggregate manifest"
+  },
+  "frozen_q4_target": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "formal_q4_result_hash": "da5e1bcb6b542c0dbecbabfb26f79cd1f986d49546181bede2779693426570ef",
+    "formal_q4_evidence_git_blob_sha1": "5741a532120c87443faa9223a70bddb7a7699802",
+    "acceptance_rule": "reconstructed artifact is admitted only if exact size, SHA256, and aggregate manifest equal this pre-existing frozen identity"
+  },
+  "frozen_runtime_quantizer": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "quantizer_type": "Q4_K_M",
+    "exact_command_shape": [
+      "<llama-quantize>",
+      "<exact-frozen-model-f16.gguf>",
+      "<output-model-q4_k_m.gguf>",
+      "Q4_K_M"
+    ],
+    "formal_q4_quantizer_command_hash": "ec6c160bda356716426f1780af24fa3113dcdb8c9559d4300638ac1235cef254",
+    "formal_q4_quantizer_log_hash": "8c524601959bfed4e0019849724ef24832dedf55ef7e368fa3afc2c0e6585c16",
+    "formal_q4_llama_quantize_sha256_reference": "94f3d380b1105a59382ba8f3003cf241058b1c901b619cccdec0a66bbda73267",
+    "source_commit_is_mandatory": true,
+    "source_or_quantizer_target_change_authorized": false
+  },
+  "authorization_scope": {
+    "reconstruction_attempts_authorized": 1,
+    "deterministic_quantizer_execution_authorized": true,
+    "only_after_f16_parent_admission": true,
+    "persist_reconstructed_q4_if_and_only_if_exact_identity_match": true,
+    "persist_reconstruction_evidence": true,
+    "scientific_fixture_execution_authorized": false,
+    "llama_cli_evaluation_authorized": false,
+    "model_inference_authorized": false,
+    "q4_scientific_result_generation_authorized": false,
+    "q4_scientific_adjudication_authorized": false
+  },
+  "valid_terminal_outcomes": [
+    "ADMITTED_DETERMINISTIC_RECONSTRUCTION",
+    "RECONSTRUCTION_IDENTITY_MISMATCH",
+    "INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE",
+    "INVALID_PROVENANCE_F16_PARENT_MISMATCH",
+    "INVALID_INFRASTRUCTURE"
+  ],
+  "adjudication_rules": {
+    "admitted_requires_exact_q4_size": true,
+    "admitted_requires_exact_q4_sha256": true,
+    "admitted_requires_exact_q4_manifest": true,
+    "identity_match_changes_q4_scientific_status": false,
+    "identity_mismatch_changes_q4_scientific_status": false,
+    "reconstruction_is_q4_scientific_rerun": false,
+    "scientific_fail_possible": false,
+    "q4_status_must_remain": "PASS_CLOSED",
+    "q4_rerun_authorized": false
+  },
+  "boundaries": {
+    "q4_scientific_rerun": false,
+    "q4_fixture_evaluation": false,
+    "scientific_adjudication": false,
+    "ollama_create": false
+  },
+  "downstream_boundaries": {
+    "ollama_chat": false,
+    "m6_scientific_execution": false,
+    "m6_pass_claim": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "expected_q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+  "expected_q4_size": 397807456,
+  "execution_state": {
+    "reconstruction_started_by_this_commit": false,
+    "reconstruction_authorization_consumed": false,
+    "next_valid_action": "CREATE_DETERMINISTIC_RECONSTRUCTION_ORCHESTRATION_BOUND_TO_THIS_AUTHORIZATION; ADMIT_EXACT_F16_PARENT; EXECUTE EXACTLY ONE Q4_K_M ARTIFACT RECONSTRUCTION; FREEZE BYTE-IDENTITY RESULT"
+  }
+}

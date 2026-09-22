@@ -372,3 +372,22 @@ scientific adjudication, or Ollama create/chat path executed.
 The exact Q4 parent remains unavailable. Deterministic reconstruction remains
 closed until a separate authorization is opened against the frozen F16 and Q4
 identities.
+
+
+## 2026-09-22 — Parent-artifact deterministic reconstruction authorized
+
+Existing-byte recovery is exhausted and frozen. The parent-artifact sub-program
+now authorizes exactly one deterministic reconstruction attempt after exact F16
+parent admission.
+
+This is artifact materialization only:
+
+```text
+F16 exact bytes
+→ exact llama.cpp ce8caa6e...
+→ Q4_K_M
+→ compare exact frozen Q4 byte identity
+```
+
+It is not a Q4 scientific rerun. M6 create/chat and all downstream scientific
+execution remain closed until reconstructed Q4 bytes are admitted and frozen.
