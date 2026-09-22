@@ -1,0 +1,65 @@
+{
+  "schema": "mindforge-model-pipeline-m6-zero-runtime-preflight-evidence-v1",
+  "program": "M6",
+  "verdict": "PASS",
+  "branch": "research/model-pipeline-m6-ollama",
+  "implementation_commit": "85165660e2e820b016403dd95ffc91945766ff9b",
+  "implementation_lock_commit": "4cfcaf13240ab06ce036dd64207e9abc03200f4c",
+  "implementation_lock_git_blob_sha1": "ac2bfadef60d048441cdda6e1e09f15eb4bbf7f2",
+  "authoritative_preflight": {
+    "run_id": 35672245794,
+    "job_id": 106571075062,
+    "conclusion": "success",
+    "artifact_id": 10671841332,
+    "artifact_name": "m6-zero-runtime-preflight",
+    "artifact_zip_sha256": "1e936fc0512d1758353ce05e23c8261aae8b1110df78b3709eafa2bbecaa646b"
+  },
+  "tests": {
+    "lock_present_run_tests_passed": 13,
+    "lock_present_run_tests_failed": 0
+  },
+  "ollama_release_lock": {
+    "version": "0.34.2",
+    "tag": "v0.34.2",
+    "release_id": 389486962,
+    "executable_invoked": false,
+    "version_probe_executed": false,
+    "runtime_download_executed": false,
+    "install_update_executed": false
+  },
+  "preflight_result": {
+    "status": "PASS",
+    "static_checks": {
+      "all_locked_blobs_match": true,
+      "bulk_training_hard_false": true,
+      "cleanup_requires_ownership": true,
+      "m6_source_has_no_subprocess_import": true,
+      "m7_hard_false": true,
+      "modelfile_is_deterministic": true,
+      "no_ollama_subprocess_execution": true,
+      "ollama_lock_disallows_download": true,
+      "ollama_lock_disallows_executable_invocation": true,
+      "ollama_lock_disallows_install_update": true,
+      "ollama_lock_disallows_version_probe": true,
+      "ollama_lock_exact_version": true,
+      "parity_is_not_exact_text": true,
+      "preflight_does_not_import_m6_runtime": true
+    },
+    "ollama_executable_invoked": false,
+    "ollama_runtime_execution_executed": false,
+    "m6_scientific_execution_executed": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "state_after_preflight": {
+    "m6_implementation": "LOCKED",
+    "zero_runtime_tests": "PASS",
+    "zero_science_zero_runtime_preflight": "PASS",
+    "ollama_runtime_execution_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "m6_pass_claim_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false,
+    "next_valid_action": "SEPARATE_M6_RUNTIME_EXECUTION_AUTHORIZATION_AND_VENUE_QUALIFICATION"
+  }
+}

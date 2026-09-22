@@ -118,3 +118,50 @@ bulk training: CLOSED
 ```
 
 Next valid gate: lock-present zero-science / zero-runtime preflight.
+
+
+## 2026-09-22 — M6 lock-present zero-science / zero-runtime preflight PASS
+
+Authoritative preflight:
+
+```text
+run: 35672245794
+job: 106571075062
+conclusion: success
+artifact: 10671841332
+artifact zip sha256:
+1e936fc0512d1758353ce05e23c8261aae8b1110df78b3709eafa2bbecaa646b
+```
+
+The emitted preflight result is `PASS`.
+
+All locked blobs matched. Static checks confirmed:
+
+```text
+exact Ollama release lock = PASS
+no Ollama subprocess execution = PASS
+no runtime import from preflight = PASS
+deterministic Modelfile contract = PASS
+ownership-gated cleanup = PASS
+task/format parity rather than exact-text parity = PASS
+M7 hard-closed = PASS
+bulk training hard-closed = PASS
+```
+
+The same lock-present run also retained 13/13 zero-runtime contract tests PASS.
+
+Execution boundary:
+
+```text
+ollama_executable_invoked=false
+ollama_runtime_execution_executed=false
+m6_scientific_execution_executed=false
+M6 PASS claim: NOT AUTHORIZED
+M7: CLOSED
+bulk training: CLOSED
+```
+
+M6 is now ready only for a **separate runtime execution authorization** that
+must choose an exact pinned venue/asset and explicitly authorize the minimum
+Ollama commands needed for qualification. This preflight itself does not
+authorize or execute Ollama.
