@@ -126,3 +126,16 @@ def test_one_attempt_has_durable_fail_closed_consumption_ledger():
     report_consumed = text.index('$Report.attempt_consumed = $true')
     create = text.index('& $OllamaExe create $ModelName')
     assert marker < move < report_consumed < create
+
+
+def test_asset_download_transport_repair_is_pre_create_and_hash_guarded():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert "Get-Command curl.exe" in text
+    assert "--retry 5" in text
+    assert "Invoke-WebRequest -Uri $OllamaAssetUrl" in text
+    download = text.index("if ($NeedDownload)")
+    asset_hash = text.index("$AssetSha = Get-Sha256File $Zip")
+    consumed = text.index("$Report.attempt_consumed = $true")
+    create = text.index("& $OllamaExe create $ModelName")
+    assert download < asset_hash < consumed < create
+    assert 'Pinned Ollama asset SHA256 mismatch' in text

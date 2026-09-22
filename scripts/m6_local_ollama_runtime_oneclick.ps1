@@ -236,7 +236,31 @@ try {
         }
     }
     if ($NeedDownload) {
-        Invoke-WebRequest -Uri $OllamaAssetUrl -OutFile $Zip -UseBasicParsing
+        $Curl = Get-Command curl.exe -ErrorAction SilentlyContinue
+        if ($null -ne $Curl) {
+            if (Test-Path $Zip -PathType Leaf) { Remove-Item -Force $Zip }
+            $CurlOutput = @(& $Curl.Source --fail --location --retry 5 --retry-delay 5 --connect-timeout 30 --output $Zip $OllamaAssetUrl 2>&1)
+            $CurlRc = $LASTEXITCODE
+            if ($CurlRc -ne 0) {
+                if (Test-Path $Zip -PathType Leaf) { Remove-Item -Force $Zip }
+                throw ("Pinned Ollama asset download failed via curl.exe rc=" + $CurlRc + ": " + ($CurlOutput -join " "))
+            }
+        } else {
+            $DownloadSucceeded = $false
+            for ($DownloadAttempt = 1; $DownloadAttempt -le 3; $DownloadAttempt++) {
+                try {
+                    if (Test-Path $Zip -PathType Leaf) { Remove-Item -Force $Zip }
+                    Invoke-WebRequest -Uri $OllamaAssetUrl -OutFile $Zip -UseBasicParsing -TimeoutSec 1800
+                    $DownloadSucceeded = $true
+                    break
+                } catch {
+                    if (Test-Path $Zip -PathType Leaf) { Remove-Item -Force $Zip }
+                    if ($DownloadAttempt -eq 3) { throw }
+                    Start-Sleep -Seconds (5 * $DownloadAttempt)
+                }
+            }
+            if (-not $DownloadSucceeded) { throw "Pinned Ollama asset download failed after retries" }
+        }
     }
     $AssetSha = Get-Sha256File $Zip
     if ($AssetSha -ne $OllamaAssetSha256) { throw "Pinned Ollama asset SHA256 mismatch" }
