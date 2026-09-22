@@ -83,3 +83,25 @@ unconsumed.
 
 F16 recovery/materialization execution is still not authorized. The next valid
 gate is a separate one-attempt existing-byte materialization authorization.
+
+
+## 2026-09-22 — One-attempt F16 existing-byte materialization authorized
+
+The locked implementation and zero-science evidence are now bound into a separate execution authorization.
+
+```text
+implementation:
+24768d87f9f22b820ac02e7428d40ea3df015bf7
+
+lock / zero-science closure:
+8055fdb382a0f6006ecd78ae0f4321e8e1516b8d
+
+tests:
+14/14 PASS
+```
+
+Exactly one future byte-preserving materialization attempt is authorized using copy, existing-object download, archive extraction, or ordered chunk reassembly.
+
+F16 regeneration and HF-to-GGUF conversion remain forbidden. The deterministic Q4 reconstruction authorization `9506e5fc...` remains unconsumed and cannot execute inside the F16 materialization workflow.
+
+No materialization is executed by this authorization commit.

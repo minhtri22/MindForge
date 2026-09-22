@@ -1,0 +1,109 @@
+{
+  "schema": "mindforge-model-pipeline-m6-f16-parent-artifact-recovery-materialization-execution-authorization-v1",
+  "status": "AUTHORIZED_ONE_F16_EXISTING_BYTE_MATERIALIZATION",
+  "program": "M6_F16_PARENT_ARTIFACT_RECOVERY_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "authorization_parent_commit": "8055fdb382a0f6006ecd78ae0f4321e8e1516b8d",
+  "execution_class": "M6_F16_PARENT_EXISTING_BYTE_RECOVERY_MATERIALIZATION",
+  "exact_binding": {
+    "implementation_commit": "24768d87f9f22b820ac02e7428d40ea3df015bf7",
+    "implementation_lock_commit": "8055fdb382a0f6006ecd78ae0f4321e8e1516b8d",
+    "implementation_lock_git_blob_sha1": "6a373d046bd344eebe1835d859baf845d697490e",
+    "zero_science_evidence_git_blob_sha1": "ff4ecfde229f42d7f32c170d3460a8da29240212",
+    "zero_science_run_id": 35678265391,
+    "zero_science_job_id": 106589294845,
+    "zero_science_tests": "14/14_PASS",
+    "zero_science_artifact_id": 10673403827,
+    "zero_science_artifact_zip_sha256": "cbb746488ff00c127911022c62dec6abd0d37dc7ea36ae967fe621332f1fabd9",
+    "materialization_tool_git_blob_sha1": "657827d31ac32f2853e9d6cdaf4bac30685ce0cf",
+    "tests_git_blob_sha1": "830237e923706291b9203fada483429de3b41aaf",
+    "preregistration_git_blob_sha1": "30ea305f73dbd1c3c91cd7bef643d367e719e98e",
+    "implementation_authorization_git_blob_sha1": "ef6f9c59fcc53b9482f9d5cde831f3c2de16b4ae"
+  },
+  "expected_f16": {
+    "filename": "model-f16.gguf",
+    "topology": "single_file",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "scientific_status": "PASS_CLOSED",
+    "f16_result_hash": "0f76c8b2a420a629927f758fc6bc21b4c92c08b052ee7b76e49eef9161dd3e57",
+    "f16_evidence_git_blob_sha1": "22dc8ed4e078c19b45852f9b9713f2cc83e3d8b9"
+  },
+  "one_attempt_contract": {
+    "attempts_authorized": 1,
+    "attempt_consumed_when": "first real byte materialization operation begins against an authorized provenance source",
+    "dry_run_or_planning_consumes_attempt": false,
+    "source_inventory_only_consumes_attempt": false,
+    "retry_to_seek_match": false,
+    "rerun_after_terminal_outcome": false
+  },
+  "authorized_materialization_modes": [
+    "COPY_EXISTING_FILE",
+    "DOWNLOAD_EXISTING_OBJECT",
+    "EXTRACT_EXISTING_ARCHIVE_MEMBER",
+    "REASSEMBLE_EXISTING_CHUNKS"
+  ],
+  "source_requirements": {
+    "explicit_source_reference_required": true,
+    "source_must_preexist_execution": true,
+    "source_provenance_record_required": true,
+    "immutable_object_or_source_digest_required_when_available": true,
+    "hidden_regeneration_or_conversion_forbidden": true,
+    "transformed_or_model_derived_source_forbidden": true
+  },
+  "admission_contract": {
+    "admitted_outcome": "ADMITTED_EXISTING_F16_BYTES",
+    "unavailable_outcome": "F16_EXISTING_BYTES_NOT_FOUND",
+    "mismatch_outcome": "F16_EXISTING_BYTES_IDENTITY_MISMATCH",
+    "invalid_provenance_outcome": "INVALID_PROVENANCE",
+    "invalid_infrastructure_outcome": "INVALID_INFRASTRUCTURE",
+    "filename_exact_required": true,
+    "size_exact_required": true,
+    "sha256_exact_required": true,
+    "aggregate_manifest_exact_required": true,
+    "persisted_copy_reverification_required": true,
+    "persist_only_after_exact_identity_match": true
+  },
+  "reconstruction_authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+  "reconstruction_authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5",
+  "reconstruction_authorization_consumed": false,
+  "downstream_rule": {
+    "q4_reconstruction_may_run_in_same_f16_attempt": false,
+    "new_q4_reconstruction_orchestration_allowed_only_after_f16_admission_evidence_frozen": true,
+    "deterministic_reconstruction_authorization_must_remain_unmodified": true
+  },
+  "boundaries": {
+    "f16_regeneration": false,
+    "hf_to_gguf_conversion": false,
+    "llama_cli_evaluation": false,
+    "fixture_evaluation": false,
+    "model_inference": false,
+    "scientific_adjudication": false,
+    "new_f16_scientific_result_generation": false,
+    "f16_status_change_authorized": false,
+    "q4_reconstruction_execution": false,
+    "q4_scientific_rerun": false,
+    "ollama_create": false,
+    "ollama_chat": false,
+    "m6_scientific_execution": false,
+    "m6_pass_claim": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "interpretation_rules": {
+    "exact_match_changes_f16_scientific_status": false,
+    "no_match_changes_f16_scientific_status": false,
+    "identity_mismatch_changes_f16_scientific_status": false,
+    "infrastructure_failure_is_scientific_fail": false,
+    "materialization_is_f16_scientific_rerun": false,
+    "f16_remains": "PASS_CLOSED"
+  },
+  "execution_state": {
+    "attempt_started_by_this_commit": false,
+    "attempt_consumed": false,
+    "f16_parent_admitted": false,
+    "q4_reconstruction_authorization_consumed": false,
+    "next_valid_action": "CREATE_ONE_ATTEMPT_F16_EXISTING_BYTE_MATERIALIZATION_ORCHESTRATION_AND_FREEZE_RESULT_BEFORE_ANY_Q4_RECONSTRUCTION"
+  }
+}

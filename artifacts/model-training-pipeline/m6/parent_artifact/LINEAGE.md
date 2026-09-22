@@ -280,3 +280,14 @@ reconstruction authorization remains unconsumed.
 
 The next valid action is a separate F16 existing-byte materialization execution
 authorization; Q4 reconstruction remains blocked until exact F16 admission PASS.
+
+
+## 2026-09-22 — F16 one-attempt existing-byte materialization authorized
+
+The F16 parent sub-program now has a separate one-attempt execution authorization bound to the locked implementation and 14/14 zero-science PASS.
+
+Only pre-existing serialized F16 bytes may be copied, downloaded, extracted or reassembled and exact-admitted.
+
+F16 regeneration remains forbidden. Q4 reconstruction remains separate and authorization `9506e5fc...` remains unconsumed.
+
+No F16 materialization or Q4 reconstruction is executed by this authorization.

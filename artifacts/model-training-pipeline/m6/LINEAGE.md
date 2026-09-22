@@ -433,3 +433,12 @@ scientific execution occurred.
 The still-unconsumed Q4 reconstruction authorization `9506e5fc...` remains
 protected. A separate F16 materialization execution authorization is required
 before exact F16 bytes may be admitted.
+
+
+## 2026-09-22 — F16 existing-byte materialization execution authorized
+
+A one-attempt F16 parent materialization authorization is opened after exact implementation lock and zero-science PASS.
+
+It is strictly byte-preserving and cannot regenerate F16 or execute Q4 reconstruction.
+
+The Q4 reconstruction authorization `9506e5fc...` remains untouched and unconsumed. M6 scientific execution remains closed.
