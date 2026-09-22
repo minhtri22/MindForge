@@ -499,6 +499,7 @@ finally {
             }
         }
     } else {
+        $CleanupGate = $true
         $Report.cleanup = [ordered]@{attempted=$false;authorized=$false;reason="no_owned_model_created"}
     }
 
@@ -572,6 +573,9 @@ finally {
             $Report.overall_status = "PASS"
         } elseif ($PreCleanupClass -eq "PASS" -and -not $AllGatesPass) {
             $Report.classification = "FAIL_RUNTIME"
+            $Report.overall_status = "FAIL"
+        } elseif ($null -ne $PreCleanupClass) {
+            $Report.classification = $PreCleanupClass
             $Report.overall_status = "FAIL"
         }
     }

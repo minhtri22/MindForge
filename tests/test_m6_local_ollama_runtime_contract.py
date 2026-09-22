@@ -105,3 +105,11 @@ def test_required_gate_names_are_frozen_before_runtime():
       "runtime_evidence_manifest_frozen",
     ]
     assert data["required_gates"] == expected
+
+
+def test_create_failure_is_not_mislabeled_cleanup_failure_when_no_model_exists():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert '$CleanupGate = $true' in text
+    assert '$Report.classification = $PreCleanupClass' in text
+    assert 'no_owned_model_created' in text
+    assert '-not $CleanupGate -or -not $NoMutationGate' in text
