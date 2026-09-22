@@ -179,6 +179,15 @@ def session_open(args: argparse.Namespace) -> int:
     if env_contract.get("OLLAMA_FLASH_ATTENTION_forced") is not False:
         raise AdapterError("qualified scope forces flash attention")
 
+    q4_path = Path(args.q4_path)
+    modelfile_path = Path(args.modelfile_path)
+    if not q4_path.is_file():
+        raise AdapterError("study Q4 path missing")
+    if not modelfile_path.is_file():
+        raise AdapterError("study Modelfile path missing")
+    if q4_path.parent.resolve() != modelfile_path.parent.resolve():
+        raise AdapterError("Q4 and Modelfile must share the owned package directory")
+
     evidence_dir = Path(args.evidence_dir)
     server = start_server(ollama_exe, api["host"], evidence_dir, "f16")
     tags = probe_tags(api["host"])
@@ -226,6 +235,10 @@ def session_open(args: argparse.Namespace) -> int:
         "ollama_executable_path": str(ollama_exe),
         "ollama_executable_sha256": runtime["ollama_executable_sha256"],
         "model_name": args.model_name,
+        "q4_path": str(q4_path),
+        "q4_sha256": sha256_file(q4_path),
+        "modelfile_path": str(modelfile_path),
+        "modelfile_sha256": sha256_file(modelfile_path),
         "initial_model_names": initial_names,
         "evidence_dir": str(evidence_dir),
         "kv_cache_type": "f16",

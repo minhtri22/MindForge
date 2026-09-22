@@ -1,0 +1,33 @@
+{
+  "schema": "mindforge-owrq-implementation-adversarial-review-v1",
+  "status": "FINDINGS_PATCHED_PENDING_FINAL_QA",
+  "reviewed_commit": "232b5407e494df6426518a9dee771c868da4c231",
+  "scientific_contract_changed": false,
+  "findings": [
+    {
+      "id": "OWRQ-F01",
+      "severity": "MEDIUM",
+      "finding": "Flash-attention parser rejected quoted logged command lines.",
+      "repair": "Use a word-boundary parser for --flash-attn on|off."
+    },
+    {
+      "id": "OWRQ-F02",
+      "severity": "MEDIUM",
+      "finding": "Firewall test rejected the explicit eval_v1_accessed=false audit field rather than real fixture access.",
+      "repair": "Reject the concrete eval_v1 path and require the false audit marker."
+    },
+    {
+      "id": "OWRQ-F03",
+      "severity": "HIGH",
+      "finding": "Qualified adapter accepted q4-path without verifying or recording the supplied Q4/Modelfile package pair.",
+      "repair": "Require both files, same owned package directory, and record both SHA256 values in session evidence."
+    },
+    {
+      "id": "OWRQ-F04",
+      "severity": "LOW",
+      "finding": "Evidence manifest report exclusion was order-dependent.",
+      "repair": "Explicitly exclude final report and manifest to avoid circular/order-dependent hashing."
+    }
+  ],
+  "unresolved_findings_after_patch": 0
+}

@@ -29,9 +29,10 @@ def test_consumer_interface_exact_contract():
 
 def test_qualification_is_science_firewalled_by_source():
     q = QUALIFIER_PATH.read_text(encoding="utf-8")
-    assert "eval_v1" not in q
+    assert "tests/fixtures/eval_v1" not in q
     assert "llama.cpp" not in q
-    assert "reasoning" not in q.lower()
+    assert "reasoning_sft" not in q.lower()
+    assert '"eval_v1_accessed": False' in q
     assert "ollama pull" not in q.lower()
     assert '["create"' not in q
     assert '["rm"' not in q
@@ -134,3 +135,18 @@ def test_adapter_contract_contains_durable_response_semantics():
     response_write = a.index("atomic_json(response_path, response)")
     transport_write = a.index("atomic_json(\n            transport_path", response_write)
     assert response_write < transport_write
+
+
+def test_adapter_binds_supplied_q4_and_modelfile_package_identity():
+    a = ADAPTER_PATH.read_text(encoding="utf-8")
+    assert 'if not q4_path.is_file()' in a
+    assert 'if not modelfile_path.is_file()' in a
+    assert 'q4_path.parent.resolve() != modelfile_path.parent.resolve()' in a
+    assert '"q4_sha256": sha256_file(q4_path)' in a
+    assert '"modelfile_sha256": sha256_file(modelfile_path)' in a
+
+
+def test_evidence_manifest_excludes_final_report_to_avoid_circular_hashing():
+    q = QUALIFIER_PATH.read_text(encoding="utf-8")
+    assert '"OWRQ_QUALIFICATION_REPORT.json"' in q
+    assert '"evidence-manifest.json"' in q

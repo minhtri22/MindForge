@@ -106,7 +106,7 @@ def parse_launch_evidence(text: str) -> Dict[str, Any]:
 def evidence_manifest(root: Path) -> Dict[str, Any]:
     rows = []
     for p in sorted(root.rglob("*")):
-        if p.is_file() and p.name != "evidence-manifest.json":
+        if p.is_file() and p.name not in {"evidence-manifest.json", "OWRQ_QUALIFICATION_REPORT.json"}:
             rows.append({
                 "path": str(p.relative_to(root)).replace("\\", "/"),
                 "size": p.stat().st_size,
