@@ -1,13 +1,15 @@
 {
   "schema": "mindforge-model-pipeline-m6-local-windows-preflight-lock-v1",
   "status": "LOCKED_FOR_LOCAL_EXECUTION",
+  "supersedes_lock_commit": "3d522455f80915e4f9618897cb8b0070651c6c96",
+  "supersession_reason": "PowerShell compatibility repair changed only the candidate identity parameter type from Hashtable to IDictionary; runtime scope and frozen contracts are unchanged.",
   "program": "M6_LOCAL_WINDOWS_VENUE_PREFLIGHT",
   "branch": "research/model-pipeline-m6-ollama",
-  "implementation_commit": "91d32a3285a0c6fcb8d1965f1f29aedf2dd89e13",
+  "implementation_commit": "482be1d4122996cb45fe73deb28e3bb5f825b90f",
   "lock_git_blob_sha1": "SELF_NOT_APPLICABLE",
   "lock_integrity_rule": "Tracked worktree must be clean; this lock binds exact implementation/script/test/workflow/governance blobs. The lock does not self-hash to avoid a circular identity field.",
   "exact_blobs": {
-    "script_git_blob_sha1": "09ca351360eff4061629f64030ad78e19864b527",
+    "script_git_blob_sha1": "30351c2754a27aeb86ee61c2f8278bade120750d",
     "tests_git_blob_sha1": "9cec2f29c3236054ef620bc4ce86f2983690de4d",
     "workflow_git_blob_sha1": "22979c2a1eb10460f5e69851f9e8b2f6b05a5aa2",
     "preregistration_git_blob_sha1": "11cf56f4a478a549152594de951f144e03a1fb46",
@@ -16,8 +18,8 @@
     "q4_reconstruction_authorization_git_blob_sha1": "f26754440d710904f45eb1d7916d334484f43bb5"
   },
   "zero_science_static_qa": {
-    "run_id": 35682182111,
-    "job_id": 106601279783,
+    "run_id": 35682413176,
+    "job_id": 106601991909,
     "conclusion": "success",
     "python_contract_tests": "6/6_PASS",
     "powershell_parse": "PASS",
@@ -39,6 +41,11 @@
     "ollama_create_chat_authorized": false,
     "scientific_adjudication_authorized": false
   },
+  "default_search_scope": [
+    "current MindForge clone",
+    "parent directory containing sibling MindForge clones/worktrees"
+  ],
+  "optional_additional_search_roots_authorized": true,
   "report_path": ".local/M6-LOCAL-PREFLIGHT/report/M6_LOCAL_WINDOWS_PREFLIGHT_REPORT.json",
   "next_after_local_report": "RETURN_REPORT_FOR_ADJUDICATION_AND_OPEN_EXACT_NEXT_LOCAL_EXECUTION_GATE"
 }

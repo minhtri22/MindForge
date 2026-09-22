@@ -566,3 +566,46 @@ local Ollama inventory, local llama.cpp source/binary provenance, and emits:
 
 The local report must be returned before any regeneration, Q4 reconstruction,
 or Ollama create/chat scientific execution is opened.
+
+
+## 2026-09-22 — Local Windows preflight compatibility repair re-locked
+
+A bounded PowerShell compatibility repair changed the candidate identity
+parameter contract from `[hashtable]` to
+`[System.Collections.IDictionary]` so ordered dictionaries bind consistently
+across Windows PowerShell 5.1 and PowerShell 7.
+
+No execution scope or scientific contract changed.
+
+Authoritative repaired implementation:
+
+```text
+482be1d4122996cb45fe73deb28e3bb5f825b90f
+
+script blob:
+30351c2754a27aeb86ee61c2f8278bade120750d
+```
+
+Authoritative static QA:
+
+```text
+run: 35682413176
+job: 106601991909
+Python contract tests: 6/6 PASS
+PowerShell parse: PASS
+local preflight executed: false
+artifact regeneration executed: false
+Q4 reconstruction executed: false
+Ollama scientific execution executed: false
+```
+
+The earlier local-preflight lock is superseded. This repaired lock is the only
+authorized local preflight package.
+
+The user may now pull the branch and execute
+`scripts/m6_local_windows_preflight_oneclick.ps1`.
+
+The script must return
+`.local/M6-LOCAL-PREFLIGHT/report/M6_LOCAL_WINDOWS_PREFLIGHT_REPORT.json`
+before any regeneration, Q4 reconstruction, or Ollama scientific execution is
+opened.
