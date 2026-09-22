@@ -35,12 +35,20 @@ $RuntimeDir = Join-Path $WorkRoot "runtime"
 $ModelsDir = Join-Path $WorkRoot "models"
 $PackageDir = Join-Path $WorkRoot "package"
 $EvidenceDir = Join-Path $WorkRoot "evidence"
+$AttemptStatePath = Join-Path $WorkRoot "attempt-state.json"
 if ([string]::IsNullOrWhiteSpace($ReportPath)) {
     $ReportDir = Join-Path $WorkRoot "report"
     New-Item -ItemType Directory -Force -Path $ReportDir | Out-Null
     $ReportPath = Join-Path $ReportDir "M6_LOCAL_OLLAMA_RUNTIME_REPORT.json"
 }
 New-Item -ItemType Directory -Force -Path (Split-Path $ReportPath -Parent) | Out-Null
+
+if (Test-Path $AttemptStatePath -PathType Leaf) {
+    $ExistingAttemptState = Get-Content $AttemptStatePath -Raw | ConvertFrom-Json
+    if ($ExistingAttemptState.consumed -eq $true) {
+        throw "Local Ollama one-attempt authorization already consumed"
+    }
+}
 
 function Write-Utf8NoBom {
     param([string]$Path,[string]$Content)
@@ -321,6 +329,19 @@ try {
         created_by_current_run = $false
     }
     Save-Report
+
+    $AttemptState = [ordered]@{
+        schema = "mindforge-model-pipeline-m6-local-ollama-attempt-state-v1"
+        consumed = $true
+        consumed_at = (Get-Date).ToUniversalTime().ToString("o")
+        repo_head = $Head
+        model_name = $ModelName
+        q4_sha256 = $ExpectedQ4Sha256
+        trigger = "immediately_before_ollama_create"
+    }
+    $AttemptTmp = $AttemptStatePath + ".tmp"
+    Write-Utf8NoBom $AttemptTmp (($AttemptState | ConvertTo-Json -Depth 10) + [Environment]::NewLine)
+    Move-Item -Force $AttemptTmp $AttemptStatePath
 
     $Report.attempt_consumed = $true
     $Report.scientific_runtime_started = $true

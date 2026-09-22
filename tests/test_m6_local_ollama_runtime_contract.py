@@ -113,3 +113,16 @@ def test_create_failure_is_not_mislabeled_cleanup_failure_when_no_model_exists()
     assert '$Report.classification = $PreCleanupClass' in text
     assert 'no_owned_model_created' in text
     assert '-not $CleanupGate -or -not $NoMutationGate' in text
+
+
+def test_one_attempt_has_durable_fail_closed_consumption_ledger():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert 'attempt-state.json' in text
+    assert 'authorization already consumed' in text
+    assert 'consumed = $true' in text
+    assert 'immediately_before_ollama_create' in text
+    marker = text.index('trigger = "immediately_before_ollama_create"')
+    move = text.index('Move-Item -Force $AttemptTmp $AttemptStatePath')
+    report_consumed = text.index('$Report.attempt_consumed = $true')
+    create = text.index('& $OllamaExe create $ModelName')
+    assert marker < move < report_consumed < create
