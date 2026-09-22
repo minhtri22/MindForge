@@ -121,3 +121,33 @@ S2 execution is NOT authorized.
 S3 execution is NOT authorized.
 OWRQ qualification is still required before S2 can bind.
 M7 and bulk training remain closed.
+
+
+## 2026-09-22 — S2 exact OWRQ binding PASS / zero-science CI pending
+
+OWRQ formal-close commit:
+46709f0266970a7a16ce4ca2b07b9365c55329b4
+
+Bound source artifacts:
+- qualification report SHA256 e5bafb7d07707f57bf274649683e50f929ea7f8d973d1e5d0efc6f359d7df689
+- qualified runtime scope SHA256 4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370
+
+Binding tuple:
+- Ollama 0.34.2
+- ollama.exe SHA256 ad41dcf55c5de96d4a0bff7c559a17285c3aa064a6f12d23db3ebf59ad8e4125
+- adapter blob 075b3b354bbd0c7674d629070d99769d201ad619
+- adapter contract mindforge-owrq-runtime-adapter-v1
+- machine fingerprint a208a4c542eeaf70363b77344cac81eec531cc0c9be85aada22d61c112c08993
+- host 127.0.0.1:11468
+- chat endpoint /api/chat
+- KV cache f16
+- flash attention forced false / resolved off
+
+S2 operation was metadata/hash binding only:
+no Ollama invocation, no API call, no model create, no eval_v1, no outcome exposure,
+no scientific attempt consumed.
+
+Binding result: BINDING_PASS.
+
+S3 remains unauthorized pending S2 zero-science CI confirmation and separate
+one-fresh-outcome execution authorization review.

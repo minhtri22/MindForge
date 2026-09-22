@@ -159,8 +159,18 @@ def test_dangling_request_marker_is_ambiguous_and_fail_closed(tmp_path):
     assert state["ambiguous_pending_request"] is True
 
 
-def test_no_current_s2_or_s3_execution_authorization_exists():
-    assert not S2.exists()
+def test_s2_binding_present_and_s3_still_absent():
+    assert S2.exists()
+    s2 = json.loads(S2.read_text(encoding="utf-8"))
+    assert s2["status"] == "AUTHORIZED_ONE_CONSOLIDATED_INFRA_BINDING"
+    assert s2["binding_status"] == "BINDING_PASS"
+    assert s2["s1_implementation_lock_git_blob_sha1"] == "124b21063675e6d37202a81b88c04efc4aa2254e"
+    assert s2["qualified_runtime_artifact_sha256"] == "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370"
+    assert s2["required_scope"]["runtime_adapter_git_blob_sha1"] == "075b3b354bbd0c7674d629070d99769d201ad619"
+    assert s2["required_scope"]["ollama_version"] == "0.34.2"
+    assert s2["required_scope"]["kv_cache_type"] == "f16"
+    assert s2["required_scope"]["flash_attention_forced"] is False
+    assert s2["s3_execution_authorized"] is False
     assert not S3.exists()
 
 
