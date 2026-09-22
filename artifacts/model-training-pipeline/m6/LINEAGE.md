@@ -391,3 +391,19 @@ F16 exact bytes
 
 It is not a Q4 scientific rerun. M6 create/chat and all downstream scientific
 execution remain closed until reconstructed Q4 bytes are admitted and frozen.
+
+
+## 2026-09-22 — Q4 reconstruction blocked before build by missing frozen F16 bytes
+
+The deterministic reconstruction orchestration reached the mandatory F16
+parent-admission gate and terminated as:
+
+```text
+INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE
+```
+
+No llama.cpp build, quantizer execution, Q4 reconstruction, scientific
+evaluation, or Ollama execution occurred.
+
+The deterministic reconstruction authorization remains unconsumed because the
+quantizer never started. M6 scientific execution remains closed.

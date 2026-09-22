@@ -191,3 +191,63 @@ byte identity. No fixtures, llama-cli evaluation, model inference, scientific
 result generation, or Q4 re-adjudication is authorized.
 
 Q4 remains PASS / CLOSED.
+
+
+## 2026-09-22 — Deterministic reconstruction orchestration blocked at F16 parent admission
+
+Authorization:
+
+```text
+9506e5fc205e641aba942a0bc9ff2fbaa7d881a5
+```
+
+Orchestration:
+
+```text
+f727ffca3af9ad4c087938f40a6984d9b17d1a1f
+```
+
+Authoritative run:
+
+```text
+run: 35676198318
+job: 106583131292
+conclusion: success
+artifact: 10672744745
+artifact zip sha256:
+b987f09b58ccb56aedb033bf22be23a804b91e151d670bbb3921c648d4bf18fb
+```
+
+F16 parent admission returned:
+
+```text
+INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE
+candidate_count = 0
+```
+
+The repository contained no `model-f16.gguf`. The authoritative F16 Actions
+artifact verified its expected ZIP digest but contained evidence only, not the
+994,156,384-byte F16 GGUF.
+
+Because F16 admission failed, the orchestration correctly skipped:
+
+```text
+llama.cpp checkout
+llama.cpp build
+llama-quantize binary verification
+Q4_K_M quantizer execution
+Q4 reconstruction
+```
+
+Therefore:
+
+```text
+reconstruction authorization consumed = false
+reconstruction started = false
+Q4_K_M = PASS / CLOSED
+```
+
+No F16 regeneration is authorized. The next valid action is a separate bounded
+F16 parent-artifact recovery/materialization program. Only after exact F16 bytes
+are admitted may a new deterministic reconstruction orchestration use the
+still-unconsumed reconstruction authorization.

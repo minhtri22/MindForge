@@ -1,0 +1,84 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-deterministic-reconstruction-evidence-v1",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "classification": "INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE",
+  "scientific_fail": false,
+  "authorization_commit": "9506e5fc205e641aba942a0bc9ff2fbaa7d881a5",
+  "orchestration_commit": "f727ffca3af9ad4c087938f40a6984d9b17d1a1f",
+  "authorization_consumed": false,
+  "reconstruction_started": false,
+  "authoritative_run": {
+    "run_id": 35676198318,
+    "job_id": 106583131292,
+    "conclusion": "success",
+    "artifact_id": 10672744745,
+    "artifact_name": "m6-parent-deterministic-reconstruction-evidence",
+    "artifact_size_bytes": 1404,
+    "artifact_zip_sha256": "b987f09b58ccb56aedb033bf22be23a804b91e151d670bbb3921c648d4bf18fb"
+  },
+  "f16_parent_admission": {
+    "classification": "INVALID_PROVENANCE_F16_PARENT_UNAVAILABLE",
+    "candidate_count": 0,
+    "persisted_parent": null,
+    "expected": {
+      "filename": "model-f16.gguf",
+      "size": 994156384,
+      "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+      "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8"
+    },
+    "sources_checked": [
+      {
+        "type": "repository_workspace",
+        "result": "NO_F16_CANDIDATE"
+      },
+      {
+        "type": "github_actions_artifact",
+        "run_id": 35617920637,
+        "artifact_id": 10647342952,
+        "artifact_name": "m5-f16-repair-requalification",
+        "artifact_zip_sha256": "0f5bab6b69361ef88c4fdefaf3608a1876d7033722e618ae702a36b4678029a5",
+        "digest_verified": true,
+        "result": "NO_F16_GGUF_MEMBER"
+      }
+    ]
+  },
+  "exact_reconstruction_contract": {
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "quantizer_type": "Q4_K_M",
+    "expected_llama_quantize_sha256": "94f3d380b1105a59382ba8f3003cf241058b1c901b619cccdec0a66bbda73267",
+    "q4_expected_size": 397807456,
+    "q4_expected_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "q4_expected_manifest": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b"
+  },
+  "execution_proof": {
+    "f16_regeneration_executed": false,
+    "llama_source_checkout_executed": false,
+    "llama_build_executed": false,
+    "llama_quantize_binary_verification_executed": false,
+    "quantizer_executed": false,
+    "reconstruction_executed": false,
+    "fixture_evaluation_executed": false,
+    "llama_cli_evaluation_executed": false,
+    "model_inference_executed": false,
+    "scientific_adjudication_executed": false,
+    "q4_scientific_result_generated": false,
+    "ollama_create_executed": false,
+    "ollama_chat_executed": false
+  },
+  "scientific_state": {
+    "q4_scientific_status": "PASS_CLOSED",
+    "q4_rerun_authorized": false,
+    "m6_scientific_execution_authorized": false,
+    "m6_pass_claim_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "state_after_run": {
+    "exact_f16_parent_admitted": false,
+    "deterministic_reconstruction_completed": false,
+    "deterministic_reconstruction_authorization_consumed": false,
+    "reconstruction_authorization_remains_conditionally_valid": true,
+    "next_valid_action": "OPEN_BOUNDED_F16_PARENT_ARTIFACT_RECOVERY_OR_MATERIALIZATION_PROGRAM; admit exact frozen F16 bytes without regenerating/re-adjudicating F16 science; only then create a new reconstruction orchestration bound to the still-unconsumed authorization"
+  }
+}
