@@ -345,7 +345,7 @@ try {
     Write-Host "=== M6 LOCAL WINDOWS PREFLIGHT COMPLETE ==="
     Write-Host "Classification: $($Report.classification)"
     Write-Host "Report JSON: $ReportPath"
-    Write-Host "No model regeneration, quantization, inference, Ollama create/chat, or scientific adjudication was executed."
+    Write-Host "No model regeneration, quantization, inference, scientific Ollama operation, or scientific adjudication was executed."
     exit 0
 }
 catch {
