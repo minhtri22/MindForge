@@ -1,0 +1,126 @@
+{
+  "schema": "mindforge-model-pipeline-m6r-rfd-c1-adjudication-v1",
+  "program": "M6R_RUNTIME_FAILURE_DECOMPOSITION",
+  "phase": "RFD-C1_EXISTING_EVIDENCE_ONLY",
+  "status": "FORMALLY_ADJUDICATED",
+  "source_report": {
+    "filename": "RFD_C1_EXISTING_EVIDENCE_REPORT.json",
+    "sha256": "cf6e6f4feab464cd0b920560405a674ee01eb19f07aff7ae4fed8bff7a20a8d1",
+    "size_bytes": 40750,
+    "collector_head": "eb1b4604b4a0bb51e0bb6b16289fedbbf4f718bc",
+    "collection_integrity_pass": true,
+    "evidence_adequacy": "TIMESTAMPED_CONTEXT_EVIDENCE_PRESENT",
+    "files_found": 7,
+    "lines_read": 121652,
+    "timestamp_parsed_lines": 9611,
+    "exact_window_lines": 22,
+    "context_window_lines": 22
+  },
+  "authoritative_source": {
+    "file": "server.log",
+    "sha256": "ff84c9d93f846b49af1fe5eae0729f23581db8ffb885050fd817b5b20425dd3d",
+    "source_changed_during_collection": false,
+    "raw_copy_matches_observed_source_state": true
+  },
+  "evidence_chain": [
+    {
+      "utc": "2026-09-22T14:09:54.0000000Z",
+      "event": "POST /api/create returned 200",
+      "significance": "Owned M6R model package creation succeeded."
+    },
+    {
+      "utc": "2026-09-22T14:09:54.3410000Z",
+      "event": "llama-server launched with --cache-type-k q4_0 --cache-type-v q4_0 --flash-attn off",
+      "significance": "The runtime launch configuration contains the incompatible option pair later rejected by llama-server."
+    },
+    {
+      "utc": "2026-09-22T14:09:54.3630000Z",
+      "event": "System memory logged total 31.6 GiB, free 11.9 GiB, free_swap 26.3 GiB",
+      "significance": "No positive allocation-failure evidence is present at this point."
+    },
+    {
+      "utc": "2026-09-22T14:09:55.3480000Z",
+      "event": "llama-server terminated with exit status 1",
+      "significance": "Failure occurs during model runtime initialization before inference completes."
+    },
+    {
+      "utc": "2026-09-22T14:09:55.4600000Z",
+      "event": "Load failed: llama_init_from_model: quantized V cache requires flash_attn to be enabled",
+      "significance": "Direct positive root-cause evidence."
+    },
+    {
+      "utc": "2026-09-22T14:09:55Z",
+      "event": "POST /api/chat returned HTTP 500",
+      "significance": "Observed API failure is downstream consequence of llama-server initialization failure."
+    }
+  ],
+  "exact_ollama_source_evidence": {
+    "tag": "v0.34.2",
+    "commit": "dfabde4539e42ba1e1eab50a3a50b88aea7958a0",
+    "facts": [
+      {
+        "path": "envconfig/config.go",
+        "fact": "KvCacheType is read from OLLAMA_KV_CACHE_TYPE through envconfig.Var/os.Getenv."
+      },
+      {
+        "path": "llm/server.go",
+        "fact": "kvct := strings.ToLower(envconfig.KvCacheType()) is passed into NewLlamaServerRunner."
+      },
+      {
+        "path": "llm/llama_server.go",
+        "fact": "Non-empty launch.kvCacheType is emitted as both --cache-type-k and --cache-type-v."
+      },
+      {
+        "path": "llm/llama_server.go",
+        "fact": "Flash-attention is resolved independently and may emit --flash-attn off when explicitly disabled or unsupported."
+      }
+    ]
+  },
+  "root_cause": {
+    "identified": true,
+    "confidence": "DIRECT_POSITIVE_EVIDENCE",
+    "preregistered_mechanism_class": "INTEL_GPU_OR_RUNTIME_BACKEND",
+    "subtype": "RUNTIME_BACKEND_CONFIGURATION_CONFLICT",
+    "intel_gpu_specific_attribution": false,
+    "statement": "Ollama 0.34.2 launched llama-server with quantized V-cache q4_0 while flash attention was off. llama-server rejects this combination during model initialization, exits status 1, Ollama records Load failed, and the pending /api/chat returns HTTP 500.",
+    "causal_chain": [
+      "runtime KV-cache setting resolves to q4_0",
+      "Ollama emits --cache-type-k q4_0 and --cache-type-v q4_0",
+      "flash-attention resolves independently to off",
+      "llama_init_from_model rejects quantized V cache without flash_attn",
+      "llama-server exits 1",
+      "Ollama model load fails",
+      "/api/chat returns HTTP 500"
+    ]
+  },
+  "ruled_out_as_primary_root_cause": [
+    {
+      "mechanism": "MODEL_LOAD_OR_GGUF_COMPATIBILITY",
+      "verdict": "NOT_PRIMARY",
+      "basis": "Package creation returned 200 and the direct loader error names a runtime cache/flash-attention constraint rather than unsupported GGUF/model format."
+    },
+    {
+      "mechanism": "MEMORY_OR_BACKEND_ALLOCATION",
+      "verdict": "NOT_PRIMARY",
+      "basis": "The positive terminating error is the V-cache/flash-attention constraint. Memory values are logged but no allocation/OOM failure is reported."
+    },
+    {
+      "mechanism": "CONTEXT_TEMPLATE_OR_TOKENIZER",
+      "verdict": "NOT_PRIMARY",
+      "basis": "llama-server exits during model initialization before a model-backed chat response can be produced; no template/tokenizer error is logged."
+    },
+    {
+      "mechanism": "OLLAMA_SERVER_OTHER",
+      "verdict": "NOT_SELECTED",
+      "basis": "A more specific preregistered runtime-backend class directly fits the positive evidence."
+    }
+  ],
+  "scientific_interpretation": {
+    "m6r_result_unchanged": "FAIL_RUNTIME_CLOSED",
+    "q4_quality_claim_supported": false,
+    "parity_claim_supported": false,
+    "packaging_path_invalidated": false,
+    "packaging_path_change_required": false,
+    "root_cause_is_runtime_configuration": true
+  }
+}

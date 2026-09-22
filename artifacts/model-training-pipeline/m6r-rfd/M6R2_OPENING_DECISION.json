@@ -1,0 +1,42 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-opening-decision-v1",
+  "status": "M6R2_PREREGISTRATION_SCIENTIFICALLY_JUSTIFIED",
+  "based_on": "RFD-C1 direct positive root-cause evidence",
+  "m6r2_execution_authorized": false,
+  "rationale": [
+    "M6R package creation succeeded, so changing packaging path is not supported by the failure evidence.",
+    "The HTTP 500 has a specific causal runtime mechanism: quantized V cache q4_0 with flash-attn off.",
+    "A single mechanism-specific intervention can be preregistered without altering Q4 bytes, Modelfile, fixtures, prompts, generation parameters, parity target, or reasoning mapping."
+  ],
+  "required_single_intervention": {
+    "target": "KV_CACHE_TYPE",
+    "from_observed": "q4_0",
+    "to": "f16",
+    "justification": "f16 is the documented Ollama default KV-cache type and removes the exact quantized-V-cache precondition that caused llama_init_from_model to abort.",
+    "flash_attention_change_authorized": false,
+    "reason_flash_attention_not_changed": "Current evidence does not establish that enabling flash-attention is supported or appropriate on this runtime/backend; changing it would introduce a second causal intervention."
+  },
+  "preregistration_constraints": [
+    "Use installed Ollama 0.34.2 exact binary/runtime family; no version change.",
+    "Keep exact Q4 bytes/hash/manifest unchanged.",
+    "Keep frozen Modelfile unchanged.",
+    "Keep eval_v1 fixtures and all generation parameters unchanged.",
+    "Keep parity and reasoning mapping criteria unchanged.",
+    "Prove the M6R2 server process sees KV cache f16 before attempt.",
+    "Do not modify global/user/machine Ollama environment settings as part of the experiment; prefer a process-scoped controlled runtime environment.",
+    "Do not enable flash-attention as a rescue.",
+    "Do not treat M6R2 as rewriting M6 or M6R outcomes.",
+    "One fresh attempt only after zero-science static QA and explicit execution authorization."
+  ],
+  "next_governance_step": "OPEN_M6R2_SPECIFICATION_ONLY",
+  "downstream": {
+    "m6_status": "FAIL_PACKAGE_CLOSED",
+    "m6r_status": "FAIL_RUNTIME_CLOSED",
+    "rfd_c1_status": "ROOT_CAUSE_IDENTIFIED_CLOSED",
+    "m6r2_preregistration_authorized": true,
+    "m6r2_implementation_authorized": false,
+    "m6r2_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}

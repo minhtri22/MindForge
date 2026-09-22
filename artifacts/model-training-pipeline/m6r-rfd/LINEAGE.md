@@ -70,3 +70,61 @@ Mechanism assignment remains unauthorized until the returned collection report
 passes integrity and time-window QA.
 
 M6R2, M7 and bulk training remain closed.
+
+
+## 2026-09-22 — RFD-C1 root cause identified / mechanism adjudicated
+
+Returned RFD-C1 report:
+- SHA256: cf6e6f4feab464cd0b920560405a674ee01eb19f07aff7ae4fed8bff7a20a8d1
+- bytes: 40750
+- collection integrity: PASS
+- evidence adequacy: TIMESTAMPED_CONTEXT_EVIDENCE_PRESENT
+- exact-window lines: 22
+- authoritative server.log SHA256:
+  ff84c9d93f846b49af1fe5eae0729f23581db8ffb885050fd817b5b20425dd3d
+
+Direct failure chain:
+1. /api/create returned 200.
+2. Ollama launched llama-server with:
+   --cache-type-k q4_0
+   --cache-type-v q4_0
+   --flash-attn off
+3. llama-server exited status 1 during model initialization.
+4. Ollama logged:
+   llama_init_from_model: quantized V cache requires flash_attn to be enabled
+5. /api/chat returned HTTP 500.
+
+Authoritative preregistered mechanism class:
+INTEL_GPU_OR_RUNTIME_BACKEND
+
+Subtype:
+RUNTIME_BACKEND_CONFIGURATION_CONFLICT
+
+This class is selected through its runtime-backend branch. The evidence does not
+support a claim that Intel GPU hardware itself caused the failure.
+
+Exact Ollama v0.34.2 source commit:
+dfabde4539e42ba1e1eab50a3a50b88aea7958a0
+
+Source confirms:
+- OLLAMA_KV_CACHE_TYPE is read into kvCacheType
+- non-empty kvCacheType is emitted as both K and V cache type
+- flash-attention is resolved independently
+
+Therefore M6R remains FAIL_RUNTIME/CLOSED, but its HTTP 500 root cause is now
+identified by direct positive evidence.
+
+Packaging path is not invalidated; model package creation succeeded.
+
+Fresh M6R2 is scientifically justified for preregistration only, with one
+mechanism-specific intervention:
+q4_0 KV cache -> f16 KV cache.
+
+No flash-attention change is authorized. No Ollama version change, Q4 change,
+Modelfile change, fixture/parameter change, parity-target change, or reasoning
+change is authorized.
+
+M6R2 implementation/execution remains unauthorized until a fresh specification,
+adversarial QA, zero-science implementation lock, and explicit one-attempt gate.
+
+M7 and bulk training remain closed.
