@@ -1,0 +1,21 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s1-outcome-boundary-clarification-v1",
+  "status": "CONSERVATIVE_IMPLEMENTATION_CLARIFICATION",
+  "parent_s0_spec_blob": "910eb4bf3d0af736977e487f8b2a2705dc339dc2",
+  "parent_s0_preregistration_blob": "6098bc201eb2b7acbf9cc36d4ccb2f13a2e80962",
+  "scientific_contract_changed": false,
+  "clarification": {
+    "exposed_model_output": "A valid eval response exposes scientific outcome if either message.content or message.thinking contains non-whitespace model-generated text.",
+    "reason": "Prevents native reasoning text from being observed without consuming the fresh attempt merely because visible content is empty.",
+    "crash_ambiguity": "A prior request-start marker without a durable terminal request record is INVALID_PROVENANCE and cannot be treated as proven pre-outcome.",
+    "durable_order": [
+      "write request-start marker",
+      "issue request",
+      "on HTTP/error without model response write request-complete-no-response evidence",
+      "on response write raw response atomically",
+      "derive exposure from durable response",
+      "if exposed write durable consumed state before scientific adjudication"
+    ]
+  },
+  "anti_rescue_preserved": true
+}
