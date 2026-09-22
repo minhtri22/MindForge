@@ -165,3 +165,48 @@ M6 is now ready only for a **separate runtime execution authorization** that
 must choose an exact pinned venue/asset and explicitly authorize the minimum
 Ollama commands needed for qualification. This preflight itself does not
 authorize or execute Ollama.
+
+
+## 2026-09-22 — M6 runtime authorization opened; Windows amd64 venue selected
+
+The runtime venue is frozen as:
+
+```text
+GitHub Actions windows-2025 / x64
+Ollama v0.34.2
+ollama-windows-amd64.zip
+sha256:
+8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b
+```
+
+The authorization permits only a bounded isolated runtime sequence:
+asset verification, version probe, isolated server, owned create, frozen chat
+parity, and owned cleanup.
+
+A provenance gap was identified before runtime execution: the exact formal Q4
+GGUF bytes were not persisted in the repo or any authoritative/accidental
+Actions artifact. Only its frozen identity/evidence remains.
+
+Therefore a hard parent-artifact admission gate is added:
+
+```text
+ollama create is forbidden until an existing materialized Q4 parent verifies:
+
+size:
+397807456
+
+sha256:
+ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977
+```
+
+Silent Q4 requantization is explicitly forbidden because Q4 scientific rerun is
+closed.
+
+If exact parent bytes cannot be supplied, the correct state is
+`INVALID_PROVENANCE_PARENT_ARTIFACT_UNAVAILABLE`, not scientific FAIL.
+
+No Ollama command has been executed by this authorization commit.
+
+Next valid action: create the bounded Windows venue orchestration. Venue/asset
+qualification may run, but create/chat must remain gated on exact Q4 parent
+artifact admission.

@@ -1,0 +1,49 @@
+{
+  "schema": "mindforge-model-pipeline-m6-venue-qualification-v1",
+  "status": "VENUE_SELECTED_EXECUTION_PENDING_PARENT_ARTIFACT",
+  "venue_id": "github-actions-windows-2025-x64",
+  "provider": "GitHub Actions",
+  "runner_label": "windows-2025",
+  "architecture": "x64",
+  "ollama_asset": {
+    "version": "0.34.2",
+    "tag": "v0.34.2",
+    "asset": "ollama-windows-amd64.zip",
+    "asset_id": 571258336,
+    "sha256": "8f3fd071a2a2f9497b562f43502c77c2b701a99d1ee5dfda28da8c786373063b"
+  },
+  "isolation": {
+    "OLLAMA_HOST": "127.0.0.1:11467",
+    "OLLAMA_MODELS": "$RUNNER_TEMP/mindforge-m6-ollama-models",
+    "reuse_existing_daemon": false,
+    "reuse_existing_models": false
+  },
+  "phase_a_venue_admission": [
+    "capture ImageOS/ImageVersion/RUNNER_OS/RUNNER_ARCH",
+    "download exact official pinned asset",
+    "verify exact archive SHA256",
+    "extract to runner temp",
+    "run version probe and require 0.34.2",
+    "start isolated server and prove health",
+    "do not create any model yet"
+  ],
+  "phase_b_parent_admission": [
+    "materialize existing exact Q4 parent bytes from an approved provenance-safe source",
+    "require filename model-q4_k_m.gguf",
+    "require size 397807456",
+    "require SHA256 ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "forbid requantization as a venue workaround"
+  ],
+  "phase_c_scientific_runtime": [
+    "collision check",
+    "deterministic Modelfile freeze",
+    "owned ephemeral create",
+    "real /api/chat fixtures",
+    "parity/reasoning adjudication",
+    "owned cleanup",
+    "no-unowned-mutation proof"
+  ],
+  "full_qualification_status": "BLOCKED_UNTIL_PARENT_ARTIFACT_ADMISSION",
+  "m7_authorized": false,
+  "bulk_training_authorized": false
+}
