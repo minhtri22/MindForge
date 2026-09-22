@@ -99,8 +99,9 @@ def single_file_manifest(path: Path, label: str) -> dict[str, Any]:
 
 def inspect_artifact(
     path: Path,
-    expected: ArtifactIdentity = F16_IDENTITY,
+    expected: ArtifactIdentity | None = None,
 ) -> dict[str, Any]:
+    expected = expected or F16_IDENTITY
     if not path.is_file():
         return {
             "path": str(path),
@@ -136,8 +137,9 @@ def inspect_artifact(
 
 def discover_existing(
     candidates: Iterable[Path],
-    expected: ArtifactIdentity = F16_IDENTITY,
+    expected: ArtifactIdentity | None = None,
 ) -> dict[str, Any]:
+    expected = expected or F16_IDENTITY
     inspected: list[dict[str, Any]] = []
     for candidate in candidates:
         result = inspect_artifact(Path(candidate), expected)
