@@ -1,0 +1,70 @@
+{
+  "schema": "mindforge-m6r2-required-owrq-adapter-interface-v1",
+  "status": "FROZEN_CONSUMER_INTERFACE",
+  "contract_version": "mindforge-owrq-runtime-adapter-v1",
+  "purpose": "M6R2 consumes an independently OWRQ-qualified runtime adapter without implementing Ollama runtime operations in the science lane.",
+  "required_binding_fields": [
+    "adapter.entrypoint",
+    "adapter.runtime_adapter_git_blob_sha1",
+    "adapter.contract_version",
+    "runtime.ollama_version",
+    "runtime.ollama_executable_sha256",
+    "runtime_environment.OLLAMA_KV_CACHE_TYPE",
+    "runtime_environment.OLLAMA_FLASH_ATTENTION_forced",
+    "runtime_environment.OLLAMA_FLASH_ATTENTION_observed_value",
+    "backend_resolution.flash_attention_mode",
+    "target_scope.local_machine_fingerprint_sha256",
+    "api_contract.host",
+    "api_contract.chat_endpoint"
+  ],
+  "commands": {
+    "session-open": {
+      "inputs": [
+        "qualified-runtime-path",
+        "q4-path",
+        "modelfile-path",
+        "model-name",
+        "evidence-dir",
+        "session-out"
+      ],
+      "must_not_submit_scientific_prompt": true,
+      "output_status": "READY",
+      "responsibilities": [
+        "bind exact qualified runtime",
+        "start isolated study session",
+        "namespace safety",
+        "create owned model",
+        "api show metadata",
+        "write durable setup evidence"
+      ]
+    },
+    "chat": {
+      "inputs": [
+        "session-file",
+        "request-file",
+        "response-file",
+        "transport-evidence-file"
+      ],
+      "response_durability": "If any model response body is received, write response-file atomically before returning.",
+      "transport_failure_evidence": "transport-evidence-file must state positive_infra_failure true only with positive adapter/runtime invariant evidence."
+    },
+    "session-close": {
+      "inputs": [
+        "session-file",
+        "cleanup-out"
+      ],
+      "responsibilities": [
+        "remove only owned model",
+        "stop only owned session",
+        "prove initial/final user model sets match",
+        "write durable cleanup evidence"
+      ]
+    }
+  },
+  "science_lane_forbidden_runtime_primitives": [
+    "direct ollama.exe invocation",
+    "direct /api/* calls",
+    "runtime service lifecycle implementation",
+    "runtime environment repair logic"
+  ]
+}

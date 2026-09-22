@@ -1,0 +1,45 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s1-adversarial-review-v1",
+  "status": "FINDINGS_PATCHED_PENDING_FINAL_QA",
+  "reviewed_commit": "5fdab6292ef3769d25f6a8355527b7a2176c0913",
+  "scientific_contract_changed": false,
+  "findings": [
+    {
+      "id": "S1-F01",
+      "severity": "HIGH",
+      "finding": "Science-lane runner directly reimplemented Ollama serve/create/API operations, so OWRQ could qualify a different implementation than M6R2 executes.",
+      "repair": "Replace all direct Ollama operations with a frozen consumer interface to the exact OWRQ-qualified adapter blob."
+    },
+    {
+      "id": "S1-F02",
+      "severity": "HIGH",
+      "finding": "Generic pre-outcome /api/chat exception was automatically classified as infrastructure failure without positive infra evidence.",
+      "repair": "Only use INVALID_INFRA_PREOUTCOME when adapter transport evidence explicitly records positive_infra_failure=true; otherwise fail closed as INVALID_PROVENANCE."
+    },
+    {
+      "id": "S1-F03",
+      "severity": "HIGH",
+      "finding": "Qualified OWRQ artifact and adapter were not cryptographically bound to future S2/S3 authorization.",
+      "repair": "Require exact qualification SHA256, adapter Git blob, S1 lock binding and S2->S3 authorization binding."
+    },
+    {
+      "id": "S1-F04",
+      "severity": "MEDIUM",
+      "finding": "Inline python -c JSON transport was fragile on Windows PowerShell quoting.",
+      "repair": "Use durable task/response JSON files and row-from-files CLI."
+    },
+    {
+      "id": "S1-F05",
+      "severity": "MEDIUM",
+      "finding": "Cleanup/user-model restoration did not participate in final validity.",
+      "repair": "Consume qualified adapter cleanup evidence and invalidate as infrastructure if owned cleanup or initial/final model-set equality fails."
+    },
+    {
+      "id": "S1-F06",
+      "severity": "MEDIUM",
+      "finding": "Evidence manifest was missing from final report.",
+      "repair": "Hash durable evidence/outcome-ledger files into final manifest."
+    }
+  ],
+  "unresolved_findings_after_patch": 0
+}

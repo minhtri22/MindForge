@@ -3,9 +3,10 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Sequence
+from typing import Any, Dict, Mapping, Sequence
 
 PROGRAM = "M6R2_PARITY_REPLICATION"
+ADAPTER_CONTRACT_VERSION = "mindforge-owrq-runtime-adapter-v1"
 EXPECTED_OLLAMA_VERSION = "0.34.2"
 EXPECTED_Q4_SIZE = 397_807_456
 EXPECTED_Q4_SHA256 = "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977"
@@ -62,6 +63,7 @@ def validate_owrq_binding(binding: Mapping[str, Any]) -> Dict[str, Any]:
     target = binding.get("target_scope")
     adapter = binding.get("adapter")
     api = binding.get("api_contract")
+    backend = binding.get("backend_resolution")
 
     for name, obj in [
         ("runtime", runtime),
@@ -69,6 +71,7 @@ def validate_owrq_binding(binding: Mapping[str, Any]) -> Dict[str, Any]:
         ("target_scope", target),
         ("adapter", adapter),
         ("api_contract", api),
+        ("backend_resolution", backend),
     ]:
         if not isinstance(obj, Mapping):
             raise ContractError(f"missing binding object: {name}")
@@ -77,31 +80,39 @@ def validate_owrq_binding(binding: Mapping[str, Any]) -> Dict[str, Any]:
         raise ContractError("Ollama version is outside M6R2 qualified scope")
     if not _nonempty(runtime.get("ollama_executable_sha256")):
         raise ContractError("missing ollama executable SHA256")
-    if not _nonempty(runtime.get("ollama_executable_path")):
-        raise ContractError("missing qualified ollama executable path")
+    if adapter.get("contract_version") != ADAPTER_CONTRACT_VERSION:
+        raise ContractError("unexpected OWRQ adapter contract")
+    if not _nonempty(adapter.get("entrypoint")):
+        raise ContractError("missing qualified runtime adapter entrypoint")
+    if not _nonempty(adapter.get("runtime_adapter_git_blob_sha1")):
+        raise ContractError("missing qualified runtime adapter blob")
     if environment.get("OLLAMA_KV_CACHE_TYPE") != "f16":
         raise ContractError("qualified runtime must bind OLLAMA_KV_CACHE_TYPE=f16")
     if environment.get("OLLAMA_FLASH_ATTENTION_forced") is not False:
         raise ContractError("M6R2 may not bind a qualification that forces flash attention")
+    if "OLLAMA_FLASH_ATTENTION_observed_value" not in environment:
+        raise ContractError("qualified scope must record observed flash-attention environment value")
+    if not _nonempty(backend.get("flash_attention_mode")):
+        raise ContractError("qualified scope must record resolved flash-attention mode")
     if not _nonempty(target.get("local_machine_fingerprint_sha256")):
         raise ContractError("missing local target fingerprint")
-    if not _nonempty(adapter.get("runtime_adapter_git_blob_sha1")):
-        raise ContractError("missing qualified runtime adapter blob")
     if not _nonempty(api.get("host")):
         raise ContractError("missing qualified API host")
     if api.get("chat_endpoint") != "/api/chat":
         raise ContractError("unexpected chat API contract")
 
     return {
-        "qualification_sha256": binding.get("qualification_sha256"),
         "ollama_version": runtime["ollama_version"],
-        "ollama_executable_path": runtime["ollama_executable_path"],
         "ollama_executable_sha256": runtime["ollama_executable_sha256"],
+        "runtime_adapter_entrypoint": adapter["entrypoint"],
         "runtime_adapter_git_blob_sha1": adapter["runtime_adapter_git_blob_sha1"],
+        "runtime_adapter_contract_version": adapter["contract_version"],
         "local_machine_fingerprint_sha256": target["local_machine_fingerprint_sha256"],
         "host": api["host"],
         "kv_cache_type": environment["OLLAMA_KV_CACHE_TYPE"],
         "flash_attention_forced": environment["OLLAMA_FLASH_ATTENTION_forced"],
+        "flash_attention_observed_value": environment["OLLAMA_FLASH_ATTENTION_observed_value"],
+        "flash_attention_mode": backend["flash_attention_mode"],
     }
 
 
@@ -125,9 +136,7 @@ def row_from_response(task: Mapping[str, Any], response: Mapping[str, Any]) -> D
 def adjudicate_completed_rows(rows: Sequence[Mapping[str, Any]]) -> Dict[str, Any]:
     if len(rows) != 2:
         raise ContractError("M6R2 frozen eval_v1 requires exactly two completed rows")
-
-    exposed = any(bool(r.get("outcome_exposed")) for r in rows)
-    if not exposed:
+    if not any(bool(r.get("outcome_exposed")) for r in rows):
         raise ContractError("completed scientific adjudication requires outcome exposure")
 
     all_outputs_nonempty = all(_nonempty(r.get("output")) and bool(r.get("format_valid")) for r in rows)
@@ -162,28 +171,12 @@ def adjudicate_completed_rows(rows: Sequence[Mapping[str, Any]]) -> Dict[str, An
 
 def classify_failure(*, outcome_exposed: bool, positive_infra_failure: bool, binding_failed: bool = False) -> Dict[str, Any]:
     if binding_failed:
-        return {
-            "classification": "BLOCKED_INFRA_BINDING",
-            "attempt_consumed": False,
-            "scientific_fail": False,
-        }
+        return {"classification": "BLOCKED_INFRA_BINDING", "attempt_consumed": False, "scientific_fail": False}
     if outcome_exposed:
-        return {
-            "classification": "INVALID_INFRA_POSTOUTCOME",
-            "attempt_consumed": True,
-            "scientific_fail": False,
-        }
+        return {"classification": "INVALID_INFRA_POSTOUTCOME", "attempt_consumed": True, "scientific_fail": False}
     if positive_infra_failure:
-        return {
-            "classification": "INVALID_INFRA_PREOUTCOME",
-            "attempt_consumed": False,
-            "scientific_fail": False,
-        }
-    return {
-        "classification": "INVALID_PROVENANCE",
-        "attempt_consumed": False,
-        "scientific_fail": False,
-    }
+        return {"classification": "INVALID_INFRA_PREOUTCOME", "attempt_consumed": False, "scientific_fail": False}
+    return {"classification": "INVALID_PROVENANCE", "attempt_consumed": False, "scientific_fail": False}
 
 
 def scan_prior_outcome_directory(path: Path) -> Dict[str, Any]:
@@ -207,10 +200,9 @@ def scan_prior_outcome_directory(path: Path) -> Dict[str, Any]:
         if response_exposes_outcome(data):
             exposed = True
 
-    ambiguous = bool(starts - terminals)
     return {
         "outcome_exposed": exposed,
-        "ambiguous_pending_request": ambiguous,
+        "ambiguous_pending_request": bool(starts - terminals),
         "responses": responses,
     }
 
@@ -229,6 +221,10 @@ def main() -> int:
     sp = sub.add_parser("scan-prior")
     sp.add_argument("path")
 
+    rr = sub.add_parser("row-from-files")
+    rr.add_argument("task_path")
+    rr.add_argument("response_path")
+
     ar = sub.add_parser("adjudicate-rows")
     ar.add_argument("path")
 
@@ -237,10 +233,11 @@ def main() -> int:
         print(json.dumps(validate_owrq_binding(_load(args.path)), sort_keys=True))
     elif args.cmd == "scan-prior":
         print(json.dumps(scan_prior_outcome_directory(Path(args.path)), sort_keys=True))
+    elif args.cmd == "row-from-files":
+        print(json.dumps(row_from_response(_load(args.task_path), _load(args.response_path)), sort_keys=True))
     elif args.cmd == "adjudicate-rows":
         data = _load(args.path)
-        rows = data["rows"]
-        print(json.dumps(adjudicate_completed_rows(rows), sort_keys=True))
+        print(json.dumps(adjudicate_completed_rows(data["rows"]), sort_keys=True))
     return 0
 
 
