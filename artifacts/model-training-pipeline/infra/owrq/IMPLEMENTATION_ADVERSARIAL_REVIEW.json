@@ -1,7 +1,7 @@
 {
   "schema": "mindforge-owrq-implementation-adversarial-review-v1",
   "status": "FINDINGS_PATCHED_PENDING_FINAL_QA",
-  "reviewed_commit": "232b5407e494df6426518a9dee771c868da4c231",
+  "reviewed_commit": "73eb97f883ab6935aa7cd8abf351e94bbb2a0add",
   "scientific_contract_changed": false,
   "findings": [
     {
@@ -27,6 +27,12 @@
       "severity": "LOW",
       "finding": "Evidence manifest report exclusion was order-dependent.",
       "repair": "Explicitly exclude final report and manifest to avoid circular/order-dependent hashing."
+    },
+    {
+      "id": "OWRQ-F05",
+      "severity": "LOW",
+      "finding": "First regex hardening did not handle quoted flash-attention tokens in actual launch strings.",
+      "repair": "Normalize command-line quotes and parse flash-attention with explicit on/off token substrings."
     }
   ],
   "unresolved_findings_after_patch": 0

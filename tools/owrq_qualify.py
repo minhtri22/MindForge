@@ -88,17 +88,23 @@ def read_runtime_logs(evidence_dir: Path) -> str:
 def parse_launch_evidence(text: str) -> Dict[str, Any]:
     lines = [line for line in text.splitlines() if "llama-server" in line or "--cache-type-" in line or "--flash-attn" in line]
     joined = "\n".join(lines)
-    v_f16 = bool(re.search(r"--cache-type-v(?:=|\s+)f16(?:\s|$)", joined))
-    k_f16 = bool(re.search(r"--cache-type-k(?:=|\s+)f16(?:\s|$)", joined))
-    q4_v = bool(re.search(r"--cache-type-v(?:=|\s+)q4_0(?:\s|$)", joined))
-    flash = re.search(r"--flash-attn(?:=|\s+)(on|off)(?:\s|$)", joined)
+    normalized = joined.replace('"', ' ').replace("'", " ")
+    v_f16 = bool(re.search(r"--cache-type-v(?:=|\\s+)f16(?:\\s|$)", normalized))
+    k_f16 = bool(re.search(r"--cache-type-k(?:=|\\s+)f16(?:\\s|$)", normalized))
+    q4_v = bool(re.search(r"--cache-type-v(?:=|\\s+)q4_0(?:\\s|$)", normalized))
+    if "--flash-attn off" in normalized or "--flash-attn=off" in normalized:
+        flash_mode = "off"
+    elif "--flash-attn on" in normalized or "--flash-attn=on" in normalized:
+        flash_mode = "on"
+    else:
+        flash_mode = ""
     conflict = "quantized V cache requires flash_attn" in text
     return {
         "candidate_lines": lines,
         "cache_type_k_f16_observed": k_f16,
         "cache_type_v_f16_observed": v_f16,
         "cache_type_v_q4_0_observed": q4_v,
-        "flash_attention_mode": flash.group(1) if flash else "",
+        "flash_attention_mode": flash_mode,
         "known_conflict_error_observed": conflict,
     }
 
