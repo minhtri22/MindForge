@@ -1,0 +1,53 @@
+{
+  "schema": "mindforge-owrq-implementation-lock-v1",
+  "status": "LOCKED_OWRQ_INFRA_IMPLEMENTATION",
+  "program": "OLLAMA_WINDOWS_RUNTIME_QUALIFICATION",
+  "implementation_commit": "f40c3ffcdfdd56dd0e50ae16ecf119d19434f587",
+  "exact_blobs": {
+    "spec_git_blob_sha1": "dd2a47c8af6f584c650a6185dda84126fe4e452b",
+    "preregistration_git_blob_sha1": "09d3251e8b848a3996fe20c213777c9261592a95",
+    "consumer_interface_snapshot_git_blob_sha1": "0973749fc01dfe873ec7be92e55d2898fc67b9ed",
+    "adapter_git_blob_sha1": "075b3b354bbd0c7674d629070d99769d201ad619",
+    "qualifier_git_blob_sha1": "ea0935f4f56e8aed5de099a711ca2bd8c86a0454",
+    "wrapper_git_blob_sha1": "dfe0a2fe4ffc4f07289131d54f8722aa0aeec184",
+    "tests_git_blob_sha1": "809e3c6301c7131c845619e38053c2a46ba80a09",
+    "workflow_git_blob_sha1": "3f934063560b2f0c496d11f4182ce0cb79395435",
+    "adversarial_review_git_blob_sha1": "beee67877749d5e4752669488b7950c30c6783a1",
+    "launch_parser_repair_git_blob_sha1": "6a409c1c92a34fd2e93d3ac45a742fd1f87ed27e"
+  },
+  "static_qa": {
+    "run_id": 35751137271,
+    "job_id": 106825278054,
+    "conclusion": "success",
+    "tests": "17/17_PASS",
+    "python_compile": "PASS",
+    "powershell_parse": "PASS",
+    "local_qualification_executed": false,
+    "ollama_process_invoked": false
+  },
+  "scope": {
+    "scientific": false,
+    "target_ollama_version": "0.34.2",
+    "qualification_host": "127.0.0.1:11468",
+    "protected_system_host": "127.0.0.1:11434",
+    "kv_cache_type": "f16",
+    "flash_attention_forced": false,
+    "default_fixture": "llama3.2:1b",
+    "pull_allowed": false,
+    "fixture_create_allowed": false,
+    "fixture_delete_allowed": false,
+    "eval_v1_access": false,
+    "model_quality_scoring": false,
+    "reasoning_scoring": false
+  },
+  "results": [
+    "QUALIFIED_RUNTIME_SCOPE",
+    "FAIL_INFRA",
+    "UNRESOLVED_INFRA"
+  ],
+  "reusable_infrastructure_qualification": true,
+  "scientific_attempt_budget": false,
+  "m6r2_execution_authorized": false,
+  "m7_authorized": false,
+  "bulk_training_authorized": false
+}

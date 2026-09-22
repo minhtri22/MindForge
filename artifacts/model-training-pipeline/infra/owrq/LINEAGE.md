@@ -42,3 +42,35 @@ Result:
 
 OWRQ implementation remains a separate infrastructure-lane next step.
 It does not block M6R2 static design/implementation.
+
+
+## 2026-09-22 — OWRQ implementation locked / local infra qualification authorized
+
+Canonical implementation:
+f40c3ffcdfdd56dd0e50ae16ecf119d19434f587
+
+Exact blobs:
+- adapter: 075b3b354bbd0c7674d629070d99769d201ad619
+- qualifier: ea0935f4f56e8aed5de099a711ca2bd8c86a0454
+- wrapper: dfe0a2fe4ffc4f07289131d54f8722aa0aeec184
+- tests: 809e3c6301c7131c845619e38053c2a46ba80a09
+- workflow: 3f934063560b2f0c496d11f4182ce0cb79395435
+- M6R2 consumer interface snapshot: 0973749fc01dfe873ec7be92e55d2898fc67b9ed
+
+Static QA:
+- run 35751137271 / job 106825278054
+- 17/17 tests PASS
+- Python compile PASS
+- PowerShell parse PASS
+- no local OWRQ qualification in CI
+- no scientific execution
+
+All seven adversarial implementation findings are repaired.
+
+OWRQ local qualification is now authorized as reusable NON-SCIENTIFIC
+infrastructure work. It is not a one-shot scientific attempt.
+
+Every run must use a unique evidence directory and exact locked implementation.
+
+M6R2 S2/S3 remain unauthorized. A successful local OWRQ qualification only
+produces a reusable QUALIFIED_RUNTIME_SCOPE artifact for later S2 binding.

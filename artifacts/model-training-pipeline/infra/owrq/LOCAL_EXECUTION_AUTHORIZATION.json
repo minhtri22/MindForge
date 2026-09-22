@@ -1,0 +1,49 @@
+{
+  "schema": "mindforge-owrq-local-qualification-authorization-v1",
+  "status": "AUTHORIZED_OWRQ_LOCAL_QUALIFICATION",
+  "program": "OLLAMA_WINDOWS_RUNTIME_QUALIFICATION",
+  "implementation_commit": "f40c3ffcdfdd56dd0e50ae16ecf119d19434f587",
+  "implementation_lock_git_blob_sha1": "81c82912746ce696c951e01aa69d554a2fed457c",
+  "semantics": {
+    "scientific": false,
+    "reusable": true,
+    "one_scientific_attempt": false,
+    "unique_evidence_directory_per_run": true,
+    "exact_implementation_required": true,
+    "infra_repairs_require_new_version_and_static_qa": true
+  },
+  "allowed": [
+    "run exact installed Ollama 0.34.2 as a dedicated process-scoped server on 127.0.0.1:11468",
+    "set process-scoped OLLAMA_KV_CACHE_TYPE=f16",
+    "inherit but do not set/remove OLLAMA_FLASH_ATTENTION",
+    "read existing model list and exact fixture identity",
+    "use already-present llama3.2:1b or user-specified existing non-study fixture",
+    "send one non-study plumbing /api/chat request",
+    "collect runtime launch/server evidence",
+    "stop only the OWRQ-owned server process",
+    "emit OWRQ_QUALIFICATION_REPORT.json and, on PASS, QUALIFIED_RUNTIME_SCOPE.json"
+  ],
+  "forbidden": [
+    "ollama pull",
+    "create/delete fixture model",
+    "mutate user/system environment variables",
+    "stop/restart/replace system Ollama on 127.0.0.1:11434",
+    "access tests/fixtures/eval_v1",
+    "score model quality/parity/reasoning",
+    "run M6R2",
+    "reinterpret M6/M6R/RFD outcomes",
+    "open M7",
+    "bulk training"
+  ],
+  "output_root_pattern": ".local/OWRQ/attempt-<UTC_TIMESTAMP>",
+  "return_for_adjudication": [
+    "OWRQ_QUALIFICATION_REPORT.json",
+    "QUALIFIED_RUNTIME_SCOPE.json if created"
+  ],
+  "downstream": {
+    "m6r2_s2_binding_authorized_by_this_artifact": false,
+    "m6r2_s3_execution_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  }
+}
