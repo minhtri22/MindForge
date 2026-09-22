@@ -981,3 +981,66 @@ Static zero-science QA:
 The second failed invocation consumed zero scientific attempts.
 Exactly one scientific attempt remains authorized. Retry after consumption,
 marker reset/deletion, M7, and bulk training remain forbidden.
+
+
+## 2026-09-22 — M6 local Ollama single scientific attempt consumed / FAIL_PACKAGE / CLOSED
+
+The returned local execution report is bound to exact HEAD:
+
+f507cf780848247a49f01999aff6e6bb38136c49
+
+Source report SHA256:
+de5efd6d9684dc7b139bec37ec4e95cb184c16065f0bb0a4f9d885916fc52a6e
+
+Observed:
+- overall_status=FAIL
+- raw report classification=FAIL_RUNTIME
+- attempt_consumed=true
+- scientific_runtime_started=true
+- pinned Ollama version gate=true
+- parent Q4 exact identity=true
+- frozen Modelfile gate=true
+- namespace collision-safe=true
+- owned model created=false
+- chat execution=false
+- initial/final isolated model sets match=true
+- no installed Ollama mutation, pull, requantization, llama-cli inference,
+  fixture modification, or threshold modification occurred
+
+Failure localized to the owned ollama create invocation at script line 388.
+Windows PowerShell 5.1 promoted native stderr progress text ("gathering model
+components") into System.Management.Automation.RemoteException under
+ErrorActionPreference=Stop before the script could record CreateRc.
+
+The raw script fallback labeled this FAIL_RUNTIME, but the frozen preregistered
+adjudication is phase-specific:
+
+create failure -> FAIL_PACKAGE
+chat/output failure -> FAIL_RUNTIME
+
+Therefore the authoritative terminal class is:
+
+FAIL_PACKAGE
+
+This is not reclassified as INVALID_INFRASTRUCTURE, because the scientific
+attempt had already been consumed exactly at the frozen boundary immediately
+before ollama create. No new post-outcome terminal class is introduced.
+
+Scientific interpretation:
+- M6 PASS=false
+- M6 CLOSED=true
+- authorized attempts=1
+- consumed attempts=1
+- remaining attempts=0
+- retry to seek PASS=false
+- parity=NOT_MEASURED
+- runtime accuracy=NOT_MEASURED
+- reasoning mapping=NOT_MEASURED
+
+The run supports no negative claim about model quality or chat parity; those
+measurements were never reached. It does establish failure of the frozen
+single-attempt Ollama packaging/execution qualification at the create stage.
+
+M7 remains CLOSED and unauthorized. Bulk training remains unauthorized.
+Any later harness repair is engineering follow-up for future programs only and
+must not be used to rerun, rescue, or reinterpret this consumed M6 attempt.
