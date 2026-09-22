@@ -1,0 +1,105 @@
+{
+  "schema": "mindforge-model-pipeline-m6-parent-artifact-execution-authorization-v1",
+  "status": "AUTHORIZED_RECOVERY_EXECUTION_ONLY",
+  "program": "M6_PARENT_ARTIFACT_MATERIALIZATION",
+  "branch": "research/model-pipeline-m6-ollama",
+  "authorization_parent_commit": "94c9300fa6c9c7df38b271a8295a69ef40572a6a",
+  "execution_class": "M6_PARENT_ARTIFACT_RECOVERY_FIRST_PROVENANCE_ADMISSION",
+  "exact_identity": {
+    "implementation_commit": "a6f9d4341894cf59cab853d4ae6912e060c10599",
+    "tooling_commit": "8869a0beed6112f06d6bdbc08ab65a48cd65e30a",
+    "zero_science_closure_commit": "94c9300fa6c9c7df38b271a8295a69ef40572a6a",
+    "zero_science_evidence_git_blob_sha1": "4f579cdc117e63de283a9587f091859ad443b11c",
+    "preregistration_git_blob_sha1": "11bce385fbb864a5257664a9562a4bb9c5bd5f8d",
+    "implementation_authorization_git_blob_sha1": "b0744fafc50d4fbf1f5cc5c4974ea87b26575e5e",
+    "materialization_tool_git_blob_sha1": "7bb16e37af748372008d4b78b9f140bb6868a027",
+    "tests_git_blob_sha1": "1f9b4004d0efe8d85972cea4f4950f90505283fe"
+  },
+  "prerequisite_evidence": {
+    "zero_science_run_id": 35674627035,
+    "zero_science_job_id": 106578392811,
+    "zero_science_conclusion": "success",
+    "tests": "12/12_PASS",
+    "planning_recovery_classification": "NOT_FOUND_RECOVERY_EXHAUSTED",
+    "planning_only": true,
+    "quantizer_executed": false,
+    "fixture_evaluation_executed": false,
+    "model_inference_executed": false,
+    "scientific_adjudication_executed": false
+  },
+  "frozen_target_identity": {
+    "filename": "model-q4_k_m.gguf",
+    "size_bytes": 397807456,
+    "sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "aggregate_manifest_hash": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "q4_scientific_status": "PASS_CLOSED"
+  },
+  "frozen_reconstruction_parent_identity": {
+    "filename": "model-f16.gguf",
+    "size_bytes": 994156384,
+    "sha256": "437c300945705b9a255322366eab3017e890ac6d997716eb7d1351b2e76f4d4b",
+    "aggregate_manifest_hash": "eb1113def8177252743eb462aa06d24925387f6c5544f27a115850bc6f0efbb8",
+    "llama_cpp_commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "quantizer_type": "Q4_K_M",
+    "note": "Frozen for a possible later reconstruction authorization only; this authorization does not permit quantizer execution."
+  },
+  "recovery_authorization": {
+    "attempts_authorized": 1,
+    "mode": "RECOVERY_EXISTING_BYTES_ONLY",
+    "source_classes_allowed": [
+      "explicit user-supplied/local file materialized into the execution venue",
+      "existing provenance-safe persistent binary store",
+      "existing repository or workflow binary artifact if one is later located"
+    ],
+    "required_before_admission": [
+      "source reference recorded",
+      "filename exact",
+      "size exact",
+      "SHA256 exact",
+      "aggregate manifest exact after materialization",
+      "persisted copy reverified byte-identical"
+    ],
+    "admitted_outcome": "ADMITTED_EXISTING_BYTES",
+    "exhausted_outcome": "NOT_FOUND_RECOVERY_EXHAUSTED",
+    "invalid_outcomes": [
+      "INVALID_PROVENANCE",
+      "INVALID_INFRASTRUCTURE"
+    ]
+  },
+  "reconstruction_boundary": {
+    "reconstruction_execution_authorized": false,
+    "llama_quantize_execution_authorized": false,
+    "deterministic_reconstruction_may_be_considered_only_after_frozen_recovery_exhaustion_evidence": true,
+    "separate_reconstruction_authorization_required": true,
+    "recovery_failure_must_not_implicitly_enable_reconstruction": true
+  },
+  "scientific_boundaries": {
+    "q4_scientific_rerun": false,
+    "q4_fixture_evaluation": false,
+    "llama_cli_evaluation": false,
+    "model_inference": false,
+    "scientific_adjudication": false,
+    "new_q4_result_generation": false,
+    "q4_status_change_authorized": false,
+    "m5q_reopen_authorized": false,
+    "ollama_create": false,
+    "ollama_chat": false,
+    "m6_scientific_execution": false,
+    "m6_pass_claim": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false
+  },
+  "interpretation_rules": {
+    "recovery_match_changes_q4_scientific_status": false,
+    "recovery_miss_changes_q4_scientific_status": false,
+    "identity_mismatch_changes_q4_scientific_status": false,
+    "recovery_exhaustion_is_not_scientific_fail": true,
+    "reconstruction_later_would_be_artifact_materialization_not_q4_scientific_rerun": true
+  },
+  "execution_state": {
+    "recovery_execution_started_by_this_commit": false,
+    "recovery_authorization_consumed": false,
+    "reconstruction_authorization_opened": false,
+    "next_valid_action": "CREATE_RECOVERY_ONLY_ORCHESTRATION_BOUND_TO_THIS_AUTHORIZATION; EXECUTE ONE RECOVERY ATTEMPT; FREEZE RESULT BEFORE ANY RECONSTRUCTION_DECISION"
+  }
+}

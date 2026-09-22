@@ -75,3 +75,33 @@ ollama create/chat executed = false
 Q4 remains `PASS / CLOSED`.
 
 Materialization/reconstruction execution is not authorized by this PASS.
+
+
+## 2026-09-22 — Recovery-only execution authorization opened
+
+The zero-science tooling gate is PASS and the program now authorizes exactly one
+**existing-byte recovery** attempt.
+
+Bound identities:
+
+```text
+implementation:
+a6f9d4341894cf59cab853d4ae6912e060c10599
+
+zero-science closure:
+94c9300fa6c9c7df38b271a8295a69ef40572a6a
+```
+
+Recovery may admit only the exact frozen Q4 artifact.
+
+Deterministic reconstruction remains explicitly closed:
+
+```text
+llama-quantize execution = NOT AUTHORIZED
+reconstruction execution = NOT AUTHORIZED
+```
+
+If real recovery is exhausted, that outcome must be frozen before a separate
+reconstruction authorization may be opened.
+
+Q4 remains PASS / CLOSED. M6 create/chat remains closed.

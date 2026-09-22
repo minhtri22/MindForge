@@ -342,3 +342,16 @@ adjudication, Ollama create, or Ollama chat execution occurred.
 
 A separate execution authorization remains mandatory before any real
 recovery-copy or deterministic reconstruction.
+
+
+## 2026-09-22 — Parent-artifact recovery execution authorized, reconstruction still closed
+
+The M6 parent-artifact sub-program is authorized for one recovery-only attempt
+bound to implementation `a6f9d434...` and zero-science closure
+`94c9300f...`.
+
+This authorization cannot execute the Q4_K_M quantizer. A real
+`NOT_FOUND_RECOVERY_EXHAUSTED` result must be frozen before deterministic
+reconstruction can receive a separate authorization.
+
+M6 scientific execution remains closed.
