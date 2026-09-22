@@ -239,11 +239,22 @@ try {
         $Curl = Get-Command curl.exe -ErrorAction SilentlyContinue
         if ($null -ne $Curl) {
             if (Test-Path $Zip -PathType Leaf) { Remove-Item -Force $Zip }
-            $CurlOutput = @(& $Curl.Source --fail --location --retry 5 --retry-delay 5 --connect-timeout 30 --output $Zip $OllamaAssetUrl 2>&1)
-            $CurlRc = $LASTEXITCODE
+            $CurlStdout = Join-Path $Downloads "curl-download.stdout.log"
+            $CurlStderr = Join-Path $Downloads "curl-download.stderr.log"
+            foreach ($LogPath in @($CurlStdout,$CurlStderr)) {
+                if (Test-Path $LogPath -PathType Leaf) { Remove-Item -Force $LogPath }
+            }
+            $CurlArgs = @(
+                "--fail","--location","--retry","5","--retry-delay","5",
+                "--connect-timeout","30","--silent","--show-error",
+                "--output",$Zip,$OllamaAssetUrl
+            )
+            $CurlProc = Start-Process -FilePath $Curl.Source -ArgumentList $CurlArgs -NoNewWindow -Wait -PassThru -RedirectStandardOutput $CurlStdout -RedirectStandardError $CurlStderr
+            $CurlRc = $CurlProc.ExitCode
             if ($CurlRc -ne 0) {
                 if (Test-Path $Zip -PathType Leaf) { Remove-Item -Force $Zip }
-                throw ("Pinned Ollama asset download failed via curl.exe rc=" + $CurlRc + ": " + ($CurlOutput -join " "))
+                $CurlErrorText = if (Test-Path $CurlStderr -PathType Leaf) { (Get-Content $CurlStderr -Raw).Trim() } else { "" }
+                throw ("Pinned Ollama asset download failed via curl.exe rc=" + $CurlRc + ": " + $CurlErrorText)
             }
         } else {
             $DownloadSucceeded = $false

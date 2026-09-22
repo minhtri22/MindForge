@@ -131,7 +131,10 @@ def test_one_attempt_has_durable_fail_closed_consumption_ledger():
 def test_asset_download_transport_repair_is_pre_create_and_hash_guarded():
     text = SCRIPT.read_text(encoding="utf-8")
     assert "Get-Command curl.exe" in text
-    assert "--retry 5" in text
+    assert '"--retry","5"' in text
+    assert "Start-Process -FilePath $Curl.Source" in text
+    assert "-RedirectStandardError $CurlStderr" in text
+    assert '"--silent","--show-error"' in text
     assert "Invoke-WebRequest -Uri $OllamaAssetUrl" in text
     download = text.index("if ($NeedDownload)")
     asset_hash = text.index("$AssetSha = Get-Sha256File $Zip")
@@ -139,3 +142,9 @@ def test_asset_download_transport_repair_is_pre_create_and_hash_guarded():
     create = text.index("& $OllamaExe create $ModelName")
     assert download < asset_hash < consumed < create
     assert 'Pinned Ollama asset SHA256 mismatch' in text
+
+def test_curl_stderr_cannot_become_powershell_terminating_error():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert "@(& $Curl.Source" not in text
+    assert "2>&1" not in text[text.index("$Curl = Get-Command curl.exe"):text.index("$AssetSha = Get-Sha256File $Zip")]
+    assert "$CurlRc = $CurlProc.ExitCode" in text
