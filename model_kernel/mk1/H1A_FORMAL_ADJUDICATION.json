@@ -1,0 +1,153 @@
+{
+  "schema": "MK1-H1A-FORMAL-ADJUDICATION-v0.1",
+  "status": "H1A_FAIL",
+  "terminal_mk1_verdict": "LEARNED_STRUCTURED_REPRESENTATION_NOT_SUPPORTED",
+  "canonical_confirmatory_run": {
+    "run_id": 35888512940,
+    "head_sha": "84a1e9db50ad0dc32200c68ed372ec7c12e486fe",
+    "conclusion": "success"
+  },
+  "frozen_evidence": {
+    "artifact_id": 10763618301,
+    "artifact_name": "mk1-h1a-confirmatory-v0-1",
+    "artifact_zip_sha256": "ac8ef000f58e3f529bfd1d8b5e7fd31f13e338020985101d12a3e4794cac261e",
+    "artifact_expired": false,
+    "internal_checksum_entries": 12,
+    "internal_checksum_errors": 0,
+    "predictions_per_seed": 1200
+  },
+  "adjudication_rule": "ALL_FIVE_PREREGISTERED_M1Z_SEEDS_MUST_INDIVIDUALLY_PASS_ALL_H1A_GATES",
+  "seed_results": {
+    "71001": {
+      "status": "FAIL",
+      "z1_micro_precision": 0.9074103086323045,
+      "z1_micro_recall": 0.7977961432506887,
+      "z1_macro_f1": 0.8353977352956954,
+      "z3_scope_relation_accuracy": 0.8733333333333333,
+      "z4_pooled_precision": 0.9234422492401215,
+      "z4_pooled_recall": 0.9319401840490797,
+      "canonical_field_accuracy": 0.8780882352941176,
+      "invariance_cluster_consistency": 0.09833333333333333,
+      "gate_failures": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G07",
+        "G08",
+        "G09",
+        "G12"
+      ]
+    },
+    "71002": {
+      "status": "FAIL",
+      "z1_micro_precision": 0.8520050922978994,
+      "z1_micro_recall": 0.7374655647382921,
+      "z1_macro_f1": 0.7474462016224348,
+      "z3_scope_relation_accuracy": 0.86,
+      "z4_pooled_precision": 0.9189442156495694,
+      "z4_pooled_recall": 0.9411426380368099,
+      "canonical_field_accuracy": 0.8791666666666667,
+      "invariance_cluster_consistency": 0.085,
+      "gate_failures": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G07",
+        "G08",
+        "G09",
+        "G12"
+      ]
+    },
+    "71003": {
+      "status": "FAIL",
+      "z1_micro_precision": 0.8826722967878148,
+      "z1_micro_recall": 0.806198347107438,
+      "z1_macro_f1": 0.8135700917457438,
+      "z3_scope_relation_accuracy": 0.8991666666666667,
+      "z4_pooled_precision": 0.9389680400462072,
+      "z4_pooled_recall": 0.9350076687116564,
+      "canonical_field_accuracy": 0.9014705882352941,
+      "invariance_cluster_consistency": 0.24,
+      "gate_failures": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G07",
+        "G08",
+        "G09",
+        "G12"
+      ]
+    },
+    "71004": {
+      "status": "FAIL",
+      "z1_micro_precision": 0.8997718631178707,
+      "z1_micro_recall": 0.8148760330578513,
+      "z1_macro_f1": 0.8370636149798083,
+      "z3_scope_relation_accuracy": 0.9258333333333333,
+      "z4_pooled_precision": 0.9574099055694739,
+      "z4_pooled_recall": 0.9524539877300614,
+      "canonical_field_accuracy": 0.9141176470588235,
+      "invariance_cluster_consistency": 0.145,
+      "gate_failures": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G07",
+        "G08",
+        "G09",
+        "G12"
+      ]
+    },
+    "71005": {
+      "status": "FAIL",
+      "z1_micro_precision": 0.9312614819350888,
+      "z1_micro_recall": 0.8378787878787879,
+      "z1_macro_f1": 0.8660500110439887,
+      "z3_scope_relation_accuracy": 0.9341666666666667,
+      "z4_pooled_precision": 0.9671589584143023,
+      "z4_pooled_recall": 0.9541794478527608,
+      "canonical_field_accuracy": 0.9219607843137255,
+      "invariance_cluster_consistency": 0.25333333333333335,
+      "gate_failures": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G07",
+        "G08",
+        "G09",
+        "G12"
+      ]
+    }
+  },
+  "cross_seed_observations": {
+    "all_five_fail": true,
+    "z4_pooled_recall_passes_all_five": true,
+    "z4_pooled_precision_passes_seeds": [
+      71004,
+      71005
+    ],
+    "continuous_z2_scalar_gate_fails_all_five": true,
+    "invariance_gate_fails_all_five": true,
+    "canonical_field_accuracy_gate_fails_all_five": true,
+    "supported_class_recall_floor_fails_all_five": true
+  },
+  "prerequisites": {
+    "target_stability": "PASS",
+    "observable_identifiability": "PASS",
+    "scientific_training_execution_audit": "PASS"
+  },
+  "later_hypotheses": {
+    "h1b_authorized": false,
+    "h1c_authorized": false,
+    "reason": "H1a FAIL is terminal under frozen sequential adjudication; H1b/H1c cannot rescue H1a."
+  },
+  "rescue_authorized": false
+}
