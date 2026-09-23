@@ -1,0 +1,197 @@
+name: MK1 H1a One-Shot Confirmatory
+
+permissions:
+  contents: read
+  actions: read
+
+on:
+  push:
+    branches:
+      - research/model_core
+    paths:
+      - "model_kernel/mk1/H1A_CONFIRMATORY_TRIGGER_v0.1.md"
+
+jobs:
+  h1a-confirmatory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      PYTHONPATH: .
+      PYTHONHASHSEED: "0"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify H1a execution authorization and locked source blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'TRIGGER_H1A_CONFIRMATORY_ONE_SHOT_v0.1' model_kernel/mk1/H1A_CONFIRMATORY_TRIGGER_v0.1.md
+          test "$(git rev-parse HEAD:model_kernel/mk1/H1A_CONFIRMATORY_ADJUDICATION_SPEC.md)" = "8cbeff53c5f7ac2b91312621c9fdaaef5c57bb63"
+          test "$(git rev-parse HEAD:experiments/model_core/mk1/h1a_confirmatory.py)" = "3492ccda1ef6c297d8626da080c4faaf302fb2b3"
+          test "$(git rev-parse HEAD:experiments/model_core/mk1/metrics.py)" = "22e97e9ad29f3b483b8f100a363a934dc7612e1b"
+          test "$(git rev-parse HEAD:experiments/model_core/mk1/recompose.py)" = "5e1ce91c4e6c176f7b6392adc35d96b36851219a"
+          test "$(git rev-parse HEAD:experiments/model_core/mk1/modeling.py)" = "f6f79e044a7787d604b46b41a0c68b423cc600ab"
+          test "$(git rev-parse HEAD:experiments/model_core/mk1/contracts.py)" = "cb9d8c067586dfc52b8b23cac7b88868b7498a9f"
+          test "$(git rev-parse HEAD:mindforge/config.py)" = "91a3f92ea2449a82fb2d03e0442cbf6e72980caf"
+          test "$(git rev-parse HEAD:mindforge/model.py)" = "b585945631a027fb1f124c780fc5f7fd330c0287"
+          test "$(git rev-parse HEAD:mindforge/tokenizer.py)" = "68c7d687c684c800c98344e26be7c75425ea528f"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen evaluation runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.5.2 tokenizers==0.21.4 psutil==7.2.2
+          python -m pip install torch==2.12.1 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify exact upstream artifact metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_artifact () {
+            local id="$1"
+            local expected_name="$2"
+            local expected_digest="$3"
+            local expected_run="$4"
+            local name digest expired run_id
+            name="$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}" --jq '.name')"
+            digest="$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}" --jq '.digest')"
+            expired="$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}" --jq '.expired')"
+            run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}" --jq '.workflow_run.id')"
+            test "$name" = "$expected_name"
+            test "$digest" = "sha256:$expected_digest"
+            test "$expired" = "false"
+            test "$run_id" = "$expected_run"
+          }
+
+          check_artifact 10619711251 mk1-scientific-materialization-v0-1 b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997 35553551910
+          check_artifact 10629399106 mk1-training-input-bundle-v0-1 56d8f5b9b185215ac744a8299184db666b6018b6fefa7b02488d11e1b2abf7af 35581007427
+          check_artifact 10635575980 mk1-train-m1z-71001 e413ce076530b7e47dfdd3ebaf518d8165f53d9e8a25ac05ea166a65dabf5a0f 35587028399
+          check_artifact 10638036281 mk1-train-m1z-71002 0f9b483a5f8979a92ec330974e56564e292737b5ba4185f081d384f88ba4bf13 35587028399
+          check_artifact 10641678365 mk1-train-m1z-71003 0df985887c5d4c58704317c5885574abee69d8ef63312568896c40954cc6826b 35587028399
+          check_artifact 10644396601 mk1-train-m1z-71004 45d8c286954565cf0276105db87cebe01cbde14d1cb1446678f466f7d67b908a 35587028399
+          check_artifact 10647387273 mk1-train-m1z-71005 d107361f967f8ace604ba6cc8d53b4d1b6055178ee296b3bbe51f5f5581c06f1 35587028399
+
+      - name: Download exact frozen input artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p downloads inputs/materialization inputs/bundle
+          for seed in 71001 71002 71003 71004 71005; do
+            mkdir -p "inputs/checkpoints/$seed"
+          done
+
+          download_artifact () {
+            local id="$1"
+            local zip="$2"
+            local expected_sha="$3"
+            gh api -H "Accept: application/vnd.github+json" "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > "$zip"
+            echo "$expected_sha  $zip" | sha256sum -c -
+          }
+
+          download_artifact 10619711251 downloads/materialization.zip b32084d85c3fd259ef66cdfbd9aed8fb7a48bd2efdea7affbbd6ac1d864dd997
+          download_artifact 10629399106 downloads/training-bundle.zip 56d8f5b9b185215ac744a8299184db666b6018b6fefa7b02488d11e1b2abf7af
+          download_artifact 10635575980 downloads/m1z-71001.zip e413ce076530b7e47dfdd3ebaf518d8165f53d9e8a25ac05ea166a65dabf5a0f
+          download_artifact 10638036281 downloads/m1z-71002.zip 0f9b483a5f8979a92ec330974e56564e292737b5ba4185f081d384f88ba4bf13
+          download_artifact 10641678365 downloads/m1z-71003.zip 0df985887c5d4c58704317c5885574abee69d8ef63312568896c40954cc6826b
+          download_artifact 10644396601 downloads/m1z-71004.zip 45d8c286954565cf0276105db87cebe01cbde14d1cb1446678f466f7d67b908a
+          download_artifact 10647387273 downloads/m1z-71005.zip d107361f967f8ace604ba6cc8d53b4d1b6055178ee296b3bbe51f5f5581c06f1
+
+          unzip -q downloads/materialization.zip -d inputs/materialization
+          unzip -q downloads/training-bundle.zip -d inputs/bundle
+          unzip -q downloads/m1z-71001.zip -d inputs/checkpoints/71001
+          unzip -q downloads/m1z-71002.zip -d inputs/checkpoints/71002
+          unzip -q downloads/m1z-71003.zip -d inputs/checkpoints/71003
+          unzip -q downloads/m1z-71004.zip -d inputs/checkpoints/71004
+          unzip -q downloads/m1z-71005.zip -d inputs/checkpoints/71005
+
+      - name: Verify exact input file boundary before inference
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f inputs/materialization/mk1_materialized_v0_1/pristine_confirmatory.jsonl
+          test -f inputs/bundle/mk1-tokenizer.json
+          for seed in 71001 71002 71003 71004 71005; do
+            test -f "inputs/checkpoints/$seed/best.pt"
+            test -f "inputs/checkpoints/$seed/run.json"
+            test -f "inputs/checkpoints/$seed/metrics.jsonl"
+            test -f "inputs/checkpoints/$seed/latest.pt"
+          done
+
+          test "$(sha256sum inputs/materialization/mk1_materialized_v0_1/pristine_confirmatory.jsonl | awk '{print $1}')" = "5902fec0e68c296d7fa7463f37f7f0acb4b287718030516d3b67d71f96fc78f6"
+          test "$(sha256sum inputs/bundle/mk1-tokenizer.json | awk '{print $1}')" = "e91c26992c5eafbb33ca1f6c0d2f40b8c79361dc57c95d0a265123ca70974829"
+
+          test "$(sha256sum inputs/checkpoints/71001/best.pt | awk '{print $1}')" = "84c5c163877afb74caf9de4c72945b3c801bc6ff7ebdd701f6f03d40d850b699"
+          test "$(sha256sum inputs/checkpoints/71002/best.pt | awk '{print $1}')" = "0ed0d152f27ea9e3f8219ae3f47c5c205507296ac47181761df03672755bf1e3"
+          test "$(sha256sum inputs/checkpoints/71003/best.pt | awk '{print $1}')" = "def7b229623fbca317f064b3d4af6156323dbfb34497954a28456ec3b29c7d12"
+          test "$(sha256sum inputs/checkpoints/71004/best.pt | awk '{print $1}')" = "207a1443acb6266a699fe223b492bd2881857c3d2dbda0d21ee8b7e2b6087fd7"
+          test "$(sha256sum inputs/checkpoints/71005/best.pt | awk '{print $1}')" = "5f37529a4948948b0e5a362c46f455b87ff65b5fb4d63027d294365f08313282"
+
+      - name: Execute one-shot H1a PRISTINE_CONFIRMATORY inference
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e h1a_out
+          python -m experiments.model_core.mk1.h1a_confirmatory \
+            --pristine inputs/materialization/mk1_materialized_v0_1/pristine_confirmatory.jsonl \
+            --tokenizer inputs/bundle/mk1-tokenizer.json \
+            --checkpoint-root inputs/checkpoints \
+            --output-dir h1a_out \
+            | tee h1a_console.json
+
+      - name: Validate one-shot evidence package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("h1a_out")
+          formal = json.loads((root / "H1A_FORMAL_ADJUDICATION.json").read_text(encoding="utf-8"))
+          assert formal["schema"] == "MK1-H1A-CONFIRMATORY-ADJUDICATION-v0.1"
+          assert formal["status"] in {"H1A_PASS", "H1A_FAIL"}
+          assert formal["seed_rule"] == "ALL_FIVE_PREREGISTERED_M1Z_SEEDS_MUST_INDIVIDUALLY_PASS_ALL_H1A_GATES"
+          assert formal["seeds"] == [71001, 71002, 71003, 71004, 71005]
+          assert formal["h1b_computed"] is False
+          assert formal["h1c_computed"] is False
+
+          for seed in formal["seeds"]:
+              prediction = root / f"predictions_m1z_{seed}.jsonl"
+              result = root / f"h1a_seed_{seed}.json"
+              assert prediction.exists()
+              assert result.exists()
+              assert sum(1 for _ in prediction.open("r", encoding="utf-8")) == 1200
+
+          manifest = {
+              "schema": "MK1-H1A-CONFIRMATORY-EXECUTION-MANIFEST-v0.1",
+              "github_run_id": __import__("os").environ["GITHUB_RUN_ID"],
+              "github_sha": __import__("os").environ["GITHUB_SHA"],
+              "formal_status": formal["status"],
+              "artifact_inputs": {
+                  "materialization": 10619711251,
+                  "training_bundle": 10629399106,
+                  "m1z": [10635575980, 10638036281, 10641678365, 10644396601, 10647387273],
+              },
+          }
+          (root / "EXECUTION_MANIFEST.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+          (cd h1a_out && sha256sum *.json *.jsonl | sort > EVIDENCE_SHA256SUMS.txt)
+
+      - name: Upload frozen H1a confirmatory evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk1-h1a-confirmatory-v0-1
+          path: h1a_out/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
