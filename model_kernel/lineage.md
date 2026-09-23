@@ -828,3 +828,68 @@ Formal verdict:
 The ten frozen training results/checkpoints are now admissible scientific evidence.
 
 H1a/H1b/H1c remain unadjudicated at this closure. The next authorized stage is outcome adjudication in frozen order `H1a -> H1b -> H1c`. No retraining, seed replacement, schedule modification, checkpoint reselection, threshold change, or confirmatory access is authorized.
+
+
+## 2026-09-23 — MK-1 H1a one-shot confirmatory adjudication
+
+Infrastructure preparation was separated from the scientific step.
+
+Infrastructure lock:
+
+- candidate lock commit: `bc5bbaec8b1d36848122f48689bc937dd56e60e8`
+- independent review commit: `24f9122b6fc31f9e35a4ea8c6302dca101cf7aad`
+- formal infra verdict: `H1A_CONFIRMATORY_EXECUTION_LOCK_PASS`
+
+Scientific trigger:
+
+- `model_kernel/mk1/H1A_CONFIRMATORY_TRIGGER_v0.1.md`
+- trigger commit: `84a1e9db50ad0dc32200c68ed372ec7c12e486fe`
+
+Canonical one-shot H1a PRISTINE_CONFIRMATORY execution:
+
+- run: `35888512940`
+- execution head: `84a1e9db50ad0dc32200c68ed372ec7c12e486fe`
+- workflow conclusion: `SUCCESS`
+- evidence artifact: `10763618301`
+- artifact name: `mk1-h1a-confirmatory-v0-1`
+- artifact ZIP SHA-256: `ac8ef000f58e3f529bfd1d8b5e7fd31f13e338020985101d12a3e4794cac261e`
+- internal checksum mismatches: `0`
+- predictions: `1200` per seed for all five preregistered M1-Z seeds
+
+Frozen adjudication rule:
+
+`H1A_PASS iff all five preregistered M1-Z seeds individually pass every H1a absolute gate.`
+
+Per-seed verdict:
+
+- 71001: FAIL
+- 71002: FAIL
+- 71003: FAIL
+- 71004: FAIL
+- 71005: FAIL
+
+All five seeds fail G01/G02/G03/G04/G07/G08/G09/G12.
+
+Z4 pooled recall G06 passes all five seeds. Z4 pooled precision G05 passes only 71004 and 71005.
+
+Continuous Z2 scalar mean nAE is approximately 0.976..1.001 across supported seed/scalar combinations versus frozen maximum 0.05; p95 nAE is approximately 0.993..0.999 versus frozen maximum 0.10.
+
+Invariance-cluster consistency is 0.0850..0.2533 across seeds versus frozen minimum 0.95.
+
+Formal artifacts:
+
+- `model_kernel/mk1/H1A_FORMAL_ADJUDICATION.json`
+- commit `9be678343ee45653261a1f0a440bf385af2c0be3`
+
+- `model_kernel/mk1/H1A_FORMAL_ADJUDICATION_RESULT.md`
+- commit `fdc63c5304c337d8601b63123468d4946f604880`
+
+Formal H1a verdict:
+
+`H1A_FAIL`
+
+Preregistered terminal MK-1 verdict:
+
+`LEARNED_STRUCTURED_REPRESENTATION_NOT_SUPPORTED`
+
+Under the frozen sequential adjudication rule, H1b and H1c are blocked and cannot rescue H1a. No threshold tuning, seed replacement, checkpoint reselection, selective confirmatory rerun, or other MK-1 rescue is authorized. Any continuation must start from a new uncertainty and a new preregistered research question.
