@@ -38,3 +38,28 @@ Authorized next: design and preregistration of MSA-1 only.
 
 Still forbidden: fresh MSA execution, difficulty mutation, predictor fitting,
 controller work, and reuse of protected/spent evidence.
+
+
+## MSA-1 preregistration status
+
+MSA-1 Current-Substrate Endpoint Adequacy Qualification is now preregistered,
+implementation-frozen and zero-science preflight qualified.
+
+```text
+72-seed manifest             FROZEN
+unchanged substrate identity FROZEN
+endpoint pair                FROZEN
+accuracy classification      FROZEN
+loss classification          FROZEN
+joint matrix                 FROZEN
+execution lock v1            FROZEN
+zero-science preflight       PASS
+
+fresh MSA-1 science          NOT AUTHORIZED YET
+MSA-2                        CLOSED
+predictor                    CLOSED
+```
+
+Canonical closure: `MSA1_PREFLIGHT_QA.md`.
+
+Next admissible step: independent execution-lock verification only.

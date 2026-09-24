@@ -121,3 +121,27 @@ Existing entries must never be rewritten or silently removed.
 - Current substrate mutation permitted: **NO**.
 - Fresh MSA-1 execution: **BLOCKED** pending zero-science preflight and later independent lock verification.
 - Predictor/controller/KCL-7: **CLOSED**.
+
+---
+
+## 2026-09-24 — MSA-1 Zero-Science Preflight Closed PASS
+
+- Canonical workflow run: `36023316869`.
+- Synthetic/contract tests: **7/7 PASS**.
+- Verdict: `MSA1_ZERO_SCIENCE_PREFLIGHT_PASS`.
+- Protocol SHA-256: `4d9ce52b66192c3847d78883cb99fe21a767a6d719c4495149f1d43996b5ec48`.
+- Execution-lock SHA-256: `c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657`.
+- Preflight JSON SHA-256: `5d0d64bf1bb9382a76a1e08f0fd8374b43e14d9d207476e3cbcdcf7fb7320e14`.
+- Artifact ID: `10818421146`.
+- Artifact ZIP SHA-256: `41fb1920bfbcdc0a3c0d7ef1831fc863f0127f01a68aaa58a3f6961f42f0b3e8`.
+- Fresh-seed collision audit: **PASS / ZERO COLLISIONS**.
+- Frozen substrate/source identity: **PASS**.
+- Historical probe seed: `9595`; exact repeat: **PASS**.
+- Fresh MSA-1 seed execution: **NO**.
+- Scientific outcome generated: **NO**.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- Fresh collection: **NONE**.
+- Formal result: **NONE**.
+- Independent execution-lock verification: **PENDING**.
+- MSA-2/predictor/controller/KCL-7: **CLOSED**.
