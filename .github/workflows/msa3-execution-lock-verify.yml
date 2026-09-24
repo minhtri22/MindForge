@@ -1,0 +1,70 @@
+name: MSA — MSA-3 execution-lock verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/measurement-substrate-adequacy
+    paths:
+      - tools/msa/verify_msa3_execution_lock.py
+      - tests/test_msa3_execution_lock.py
+      - .github/workflows/msa3-execution-lock-verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Independent verifier tests
+        run: PYTHONPATH=. python -m pytest tests/test_msa3_execution_lock.py -q
+
+      - name: Run independent static verifier
+        run: |
+          mkdir -p artifacts
+          PYTHONPATH=. python tools/msa/verify_msa3_execution_lock.py
+
+      - name: Enforce exact lock result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/msa3_execution_lock_verification.json",encoding="utf-8"))
+          assert d["status"]=="PASS", d
+          assert d["verdict"]=="MSA3_EXECUTION_LOCK_VERIFICATION_PASS", d
+          assert d["lock_sha256"]=="bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7", d
+          assert not any(d["collisions"].values()), d
+          assert d["checks"]["scientific_contract_exact_copy"], d
+          assert d["checks"]["fresh_execution_workflow_absent"], d
+          assert d["checks"]["fresh_collection_absent"], d
+          assert d["checks"]["formal_result_absent"], d
+          assert d["fresh_seed_execution_attempted"] is False, d
+          assert d["scientific_outcome_generated"] is False, d
+          assert d["difficulty_mutation_performed"] is False, d
+          assert d["predictor_fitting_performed"] is False, d
+          print("MSA3_EXECUTION_LOCK_VERIFICATION=PASS")
+          PY
+          sha256sum artifacts/msa3_execution_lock_verification.json
+          sha256sum docs/research/measurement-substrate-adequacy/MSA3_EXECUTION_LOCK.json
+
+      - name: Upload verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: msa3-execution-lock-verification
+          path: artifacts/msa3_execution_lock_verification.json
+          if-no-files-found: error

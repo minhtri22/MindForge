@@ -319,3 +319,15 @@ Existing entries must never be rewritten or silently removed.
 - Difficulty mutation: **NO**.
 - Predictor fitting: **NO**.
 - Independent execution-lock verification: **PENDING**.
+
+---
+
+## 2026-09-25 — MSA-3 Independent Execution-Lock Verification Opened
+
+- Exact MSA-3 lock SHA-256: `bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7`.
+- Verifier is static and does not import or execute any MSA scientific module.
+- Checks include: discovery binding, protocol/wrapper/MSA-1 classifier blobs, eight substrate blobs, exact copied MSA-1 gates/matrix, 72-seed deterministic regeneration, historical/protected/ACO/CPRM/MSA-1 exclusions, runtime, retry policy, replication rule, and absence of execution workflow/collection/result.
+- Fresh MSA-3 seed execution during verification: **PROHIBITED**.
+- Difficulty mutation: **PROHIBITED**.
+- Predictor fitting: **PROHIBITED**.
+- Verification result at this entry: **PENDING**.
