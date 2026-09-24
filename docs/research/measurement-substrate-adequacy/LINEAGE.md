@@ -173,3 +173,33 @@ Existing entries must never be rewritten or silently removed.
 - Difficulty mutation: **NO**.
 - Predictor fitting: **NO**.
 - Recovery scope: verifier-only safe static numeric-expression evaluator; no scientific runner import or execution.
+
+---
+
+## 2026-09-24 — MSA-1 Independent Execution-Lock Verification Closed PASS
+
+- Canonical workflow: `36026801647`.
+- Independent tests: **5/5 PASS**.
+- Verified lock SHA-256: `c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657`.
+- Verdict: `MSA1_EXECUTION_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256: `cb8896c048576103f3ab0cddc2d41195d7c1e8525d06ce250d893a71c4322753`.
+- Artifact ID: `10819766185`.
+- Artifact ZIP SHA-256: `d23cca03803d37fa531f069951181076ed1f8a9dce8b3e19c98f7fbb97f71f11`.
+- Protocol/runner/test/preflight blobs: **EXACT**.
+- Eight substrate blobs: **EXACT**.
+- 72-seed manifest + deterministic regeneration: **EXACT**.
+- Runtime: **EXACT**.
+- Historical/protected/ACO/CPRM collisions: **ZERO**.
+- Accuracy gates: **EXACT**.
+- Loss gates: **EXACT**.
+- Classification matrix: **EXACT**.
+- Retry policy: **EXACT**.
+- Fresh execution workflow: **ABSENT**.
+- Fresh collection: **ABSENT**.
+- Formal result: **ABSENT**.
+- Fresh scientific seed execution: **NO**.
+- Scientific outcome generated: **NO**.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- MSA-1 fresh collection is now **ELIGIBLE TO OPEN under exact verified lock**, but has not started.
+- MSA-2/predictor/controller/KCL-7 remain **CLOSED**.

@@ -63,3 +63,25 @@ predictor                    CLOSED
 Canonical closure: `MSA1_PREFLIGHT_QA.md`.
 
 Next admissible step: independent execution-lock verification only.
+
+
+## MSA-1 independent execution-lock verification
+
+Independent verification is now **PASS / CLOSED**.
+
+Canonical closure: `MSA1_EXECUTION_LOCK_VERIFICATION.md`.
+
+```text
+lock SHA-256
+c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657
+
+MSA1_EXECUTION_LOCK_VERIFICATION_PASS
+```
+
+No fresh MSA-1 seed was executed during verification.
+
+The frozen 72-seed / 216-boundary current-substrate collection is now eligible
+to be opened under the exact verified lock.
+
+No fresh execution workflow has yet been created. MSA-2, predictor fitting,
+controller work and KCL-7 remain closed.
