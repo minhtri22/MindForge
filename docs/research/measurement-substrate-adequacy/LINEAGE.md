@@ -88,3 +88,21 @@ Existing entries must never be rewritten or silently removed.
 - MSA-0: **PASS / CLOSED**.
 - MSA-1 scientific execution: **NOT AUTHORIZED**.
 - Next admissible action: design and preregister MSA-1 Current-Substrate Endpoint Adequacy Qualification only.
+
+---
+
+## 2026-09-24 — MSA-1 Protocol Preregistered Before Fresh Science
+
+- Milestone: `MSA-1 — Current-Substrate Endpoint Adequacy Qualification`.
+- Current substrate difficulty mutation: **FORBIDDEN / NONE**.
+- Predictor fitting: **FORBIDDEN / NONE**.
+- Fresh cohort: exactly `72` seeds generated from frozen hash-based provenance.
+- Seed manifest SHA-256: `e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347`.
+- Population: `216` matched boundaries / `648` A/B/C endpoint pairs.
+- Reliability repeats: first `6` seeds, exact deterministic equality required.
+- Mandatory endpoint pair: terminal accuracy + terminal cross-entropy loss from the same canonical step-250 curve point.
+- Accuracy saturation/informativeness gates: **FROZEN**.
+- Loss saturation/informativeness gates: **FROZEN**.
+- Joint four-way classification matrix: **FROZEN**.
+- Scientific fresh execution: **LOCKED / NOT AUTHORIZED**.
+- Next: bind exact protocol/runner/substrate/runtime in MSA-1 Execution Lock, then zero-science preflight only.
