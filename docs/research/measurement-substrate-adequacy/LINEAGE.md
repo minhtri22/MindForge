@@ -223,3 +223,44 @@ Existing entries must never be rewritten or silently removed.
 - MSA-2 remains **CLOSED** regardless of MSA-1 verdict until a formal transition review.
 - Predictor/controller/KCL-7 remain **CLOSED**.
 - Scientific result at this lineage entry: **UNOBSERVED**.
+
+---
+
+## 2026-09-25 — MSA-1 Fresh Execution Closed PASS
+
+- Workflow: `36033469789`.
+- Fresh seeds: **72/72 COMPLETE**.
+- Matched boundaries: **216/216 COMPLETE**.
+- A/B/C endpoint pairs: **648**.
+- Reliability repeats: **6/6 EXACT PASS**.
+- Integrity/support: **PASS**.
+- Collection SHA-256: `4b7269a5fb0ab6750e067cfd26d95913dabbe2181af4001a689a1cea85cdbcd4`.
+- Collection evidence commit: `f5ec2e3a38813904a76290ff88f2df4fbc4b2167`.
+- Collection-before-adjudication artifact ID: `10823599007`.
+- Collection artifact ZIP SHA-256: `3ceb17a0add080d4fffd4c98e2b621c70021a56acc21baec6a9e3f7c21c87e08`.
+- Intermediate endpoint-classification inspection: **NO**.
+- One-shot adjudicator calls: **1**.
+- Formal-result SHA-256: `359cdc7c505244e71a5122d0a1038f045d20af27782008afab9b1bbddbf51637`.
+- Formal-result evidence commit: `42a549601f44e80ebc35c446123ae8191eee5b53`.
+- Complete execution artifact ID: `10823374088`.
+- Complete execution artifact ZIP SHA-256: `465356e0d173978fd7f6aeef894f9ccb41d5402ed7317bde8f37f5bcacb91458`.
+- Formal status: **PASS**.
+- Formal verdict: `ACCURACY_COARSE_LOSS_INFORMATIVE`.
+- Accuracy global state: saturated **TRUE**, informative **FALSE**.
+- Loss global state: informative **TRUE**, saturated **FALSE**.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- MSA-1 cohort: **HISTORICAL / SPENT**.
+
+---
+
+## 2026-09-25 — MSA-1 Formal Transition Review Closed
+
+- Open MSA-2 to search for informative accuracy: **REJECTED**.
+- Immediate structure-dependence MSA-2: **NOT AUTHORIZED / DEFERRED**.
+- Selected next milestone: **MSA-3 — Independent Fresh Replication**.
+- MSA-3 design/preregistration: **AUTHORIZED**.
+- MSA-3 fresh execution: **NOT AUTHORIZED**.
+- Replication must preserve exact MSA-1 substrate, endpoints, gates and classification matrix.
+- Difficulty mutation/new endpoint metric/predictor fitting: **FORBIDDEN**.
+- MSA-2/predictor/controller/KCL-7 remain **CLOSED**.

@@ -85,3 +85,31 @@ to be opened under the exact verified lock.
 
 No fresh execution workflow has yet been created. MSA-2, predictor fitting,
 controller work and KCL-7 remain closed.
+
+
+## MSA-1 scientific result
+
+MSA-1 completed under the verified frozen lock and returned:
+
+```text
+PASS
+ACCURACY_COARSE_LOSS_INFORMATIVE
+```
+
+The frozen global classification is:
+
+```text
+terminal accuracy           SATURATED
+terminal cross-entropy loss INFORMATIVE
+```
+
+Canonical scientific closure: `MSA1_FORMAL_CLOSURE.md`.
+
+Formal transition review: `MSA1_FORMAL_TRANSITION_REVIEW.md`.
+
+The transition review does **not** open MSA-2. The next authorized work is
+MSA-3 independent-replication **design/preregistration only**, preserving the
+exact MSA-1 substrate, endpoint definitions, gates and classification matrix.
+
+MSA-3 fresh execution, MSA-2, predictor fitting, controller work and KCL-7
+remain closed.

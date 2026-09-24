@@ -1,12 +1,9 @@
-name: MSA — MSA-1 locked fresh execution
+name: MSA — MSA-1 locked fresh execution (RETIRED)
 
+# Canonical MSA-1 execution completed successfully in run 36033469789.
+# Retained for provenance only. Manual invocation is hard-disabled.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/measurement-substrate-adequacy
-    paths:
-      - .github/workflows/msa1-locked-execute.yml
 
 permissions:
   contents: write
@@ -17,6 +14,7 @@ concurrency:
 
 jobs:
   execute:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 300
 
