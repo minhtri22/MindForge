@@ -1,0 +1,285 @@
+{
+  "schema": "MSA1-EXECUTION-LOCK-v1",
+  "program": "MSA-1",
+  "status": "LOCKED_PENDING_ZERO_SCIENCE_PREFLIGHT_AND_INDEPENDENT_VERIFICATION",
+  "authorization_condition": "Fresh MSA-1 execution is prohibited until zero-science preflight PASS and an independent execution-lock verification closes PASS on this exact immutable lock hash.",
+  "implementation": {
+    "commit": "3dfb18c3704f4f8e91160b30514687fe7a1fbb00",
+    "runner_path": "experiments/msa/msa1_endpoint_adequacy.py",
+    "runner_git_blob_sha": "55d6686c6c1182b7706f4831cb8f49eec2ec032d",
+    "test_path": "tests/test_msa1_endpoint_adequacy.py",
+    "test_git_blob_sha": "0cd1702ae2ecc64af270aa0e8843df3ea1f75fae",
+    "preflight_workflow_path": ".github/workflows/msa1-zero-science-preflight.yml",
+    "preflight_workflow_git_blob_sha": "a72ea5105e6dc306d7f214084b4160463f49f00d",
+    "post_lock_scientific_source_change_allowed": false
+  },
+  "protocol": {
+    "path": "docs/research/measurement-substrate-adequacy/msa1-endpoint-adequacy-protocol.md",
+    "git_blob_sha": "b4a68aee9db6a0698f70dbb1e1e4b33fbf7ffc4a"
+  },
+  "substrate": {
+    "identity": "UNCHANGED_CANONICAL_KCL_COMPATIBLE_SUBSTRATE",
+    "git_blobs": {
+      "experiments/kernel_cl/kcl1_substrate.py": "4303dd544e0bdb935c499abedc62aa095bc56674",
+      "experiments/kernel_cl/kcl6_long_horizon.py": "33a743d62b5a83286c8945ffc0f473ae66fe50c0",
+      "experiments/kernel_cl/kcl61_weighted_replay_ab.py": "9a2ea8435bc92d65af7044b5351d06adc6cc2d44",
+      "experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py": "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7",
+      "experiments/kernel_cl/kcl65_specificity_ab.py": "88aa11fea6e8474c323c02491c0b85a91722c686",
+      "experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py": "7119b9520f50de53a42313f7c7173c8d5daec2f1",
+      "mindforge/config.py": "54ab270a25edd962e62360e14736b28f52a4fbcd",
+      "mindforge/model.py": "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+    },
+    "config": {
+      "vocab_size": 96,
+      "d_model": 16,
+      "n_heads": 2,
+      "n_layers": 1,
+      "max_context": 2,
+      "ff_mult": 4,
+      "dropout": 0,
+      "relations": 24,
+      "batch_size": 16,
+      "stage_steps": 250,
+      "learning_rate": 0.003,
+      "weight_decay": 0
+    },
+    "task_order": [
+      "T1_U1_A",
+      "T2_U1_B",
+      "T3_U3_A",
+      "T4_U3_B"
+    ],
+    "policies": [
+      "A_CARRY_ALL",
+      "B_RESET_ALL",
+      "C_CARRY_STEP_RESET_MOMENTS"
+    ],
+    "current_samples_per_update": 15,
+    "replay_samples_per_update": 1,
+    "endpoint_step": 250,
+    "difficulty_mutation_allowed": false
+  },
+  "seed_manifest": {
+    "generation_phrase": "MindForge|MSA-1|current-substrate-endpoint-adequacy|v1",
+    "generation_rule": "2,000,000 + uint64_be(SHA256(phrase + '|' + decimal(i))[0:8]) mod 7,000,000; accept unique candidates in counter order",
+    "count": 72,
+    "sha256": "e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347",
+    "seeds": [
+      7852877,
+      2761307,
+      7980060,
+      8886053,
+      8372679,
+      3779647,
+      4340369,
+      4656404,
+      2606362,
+      8420602,
+      5624433,
+      6963476,
+      7109847,
+      4349361,
+      4173979,
+      3032355,
+      8811213,
+      4469405,
+      2348174,
+      7601591,
+      7945831,
+      7994374,
+      4658109,
+      2192576,
+      4761197,
+      2128138,
+      3590175,
+      2017834,
+      8060511,
+      5925203,
+      8484385,
+      2496490,
+      2757847,
+      3322545,
+      8487705,
+      3599975,
+      3093036,
+      2132012,
+      4581015,
+      6358053,
+      8139369,
+      8085240,
+      5318924,
+      7730623,
+      5530158,
+      8191416,
+      7476487,
+      5469329,
+      3337298,
+      7726785,
+      7539302,
+      6456627,
+      7169558,
+      2637791,
+      4500255,
+      3710728,
+      8425464,
+      8494433,
+      5135219,
+      6119817,
+      4907431,
+      8799077,
+      8489437,
+      5715340,
+      2301093,
+      2230544,
+      7672062,
+      2312271,
+      6591423,
+      5628578,
+      5723797,
+      6209697
+    ]
+  },
+  "reliability_repeat_seeds": [
+    7852877,
+    2761307,
+    7980060,
+    8886053,
+    8372679,
+    3779647
+  ],
+  "excluded_evidence": {
+    "protected_kcl": [
+      13635,
+      13837,
+      14039,
+      14241,
+      14443,
+      14645,
+      14847,
+      15049,
+      15251,
+      15453,
+      15655,
+      15857,
+      16059,
+      16261,
+      16463,
+      16665,
+      16867,
+      17069,
+      17271,
+      17473
+    ],
+    "spent_aco_manifest_sha256": "9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91",
+    "spent_cprm_manifest_sha256": "d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3",
+    "historical_kcl_collision_scan_required": true
+  },
+  "population": {
+    "seeds": 72,
+    "boundaries_per_seed": 3,
+    "expected_boundaries": 216,
+    "expected_per_stage": {
+      "1": 72,
+      "2": 72,
+      "3": 72
+    },
+    "policies_per_boundary": 3,
+    "expected_endpoint_pairs": 648
+  },
+  "endpoint_contract": {
+    "extraction": "same canonical step-250 kcl655 curve point",
+    "terminal_accuracy": true,
+    "terminal_cross_entropy_loss": true,
+    "additional_gradient_updates": 0,
+    "alternate_eval_set": false
+  },
+  "gates": {
+    "reliability": {
+      "repeat_count": 6,
+      "max_abs_diff": 0,
+      "structure_identical": true
+    },
+    "accuracy": {
+      "natural_resolution": "1/24",
+      "saturated_cell": {
+        "ceiling_fraction_min": 0.5,
+        "p10_min": "23/24"
+      },
+      "informative_cell": {
+        "unique_count_min": 4,
+        "robust_span_min": "2/24"
+      },
+      "global_rule": "same state for >=2 of 3 policies at each of all 3 stages"
+    },
+    "loss": {
+      "mastery_reference": "-ln(0.95)",
+      "mastery_reference_value": 0.05129329438755058,
+      "saturated_cell": {
+        "p90_max": "-ln(0.95)"
+      },
+      "informative_cell": {
+        "unique_count_min": 10,
+        "robust_span_min": 0.02,
+        "p90_must_exceed_mastery_reference": true
+      },
+      "global_rule": "same state for >=2 of 3 policies at each of all 3 stages"
+    },
+    "classifications": {
+      "ACCURACY_INFORMATIVE+LOSS_INFORMATIVE": "ENDPOINT_MEASUREMENT_ADEQUATE",
+      "ACCURACY_SATURATED+LOSS_INFORMATIVE": "ACCURACY_COARSE_LOSS_INFORMATIVE",
+      "ACCURACY_SATURATED+LOSS_SATURATED": "CURRENT_SUBSTRATE_ENDPOINT_SATURATED",
+      "ANY_OTHER_COMPLETE_PATTERN": "STOP_INTEGRITY_OR_SUPPORT"
+    }
+  },
+  "runtime": {
+    "platform": "GitHub-hosted ubuntu-24.04",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "pip": "26.2.1",
+    "numpy": "2.3.3",
+    "pytest": "8.4.2",
+    "torch": "2.10.0+cpu",
+    "torch_index_url": "https://download.pytorch.org/whl/cpu",
+    "device": "CPU",
+    "deterministic_algorithms": true,
+    "torch_num_threads": 1
+  },
+  "commands": {
+    "preflight": "PYTHONPATH=. python experiments/msa/msa1_endpoint_adequacy.py --phase preflight --output artifacts/msa1_zero_science_preflight.json",
+    "collect": "PYTHONPATH=. python experiments/msa/msa1_endpoint_adequacy.py --phase collect --output experiments/msa/results/msa1_fresh_endpoints.json",
+    "adjudicate": "PYTHONPATH=. python experiments/msa/msa1_endpoint_adequacy.py --phase adjudicate --input experiments/msa/results/msa1_fresh_endpoints.json --output experiments/msa/results/FORMAL_RESULT.json"
+  },
+  "outputs": {
+    "preflight": "artifacts/msa1_zero_science_preflight.json",
+    "collection": "experiments/msa/results/msa1_fresh_endpoints.json",
+    "formal_result": "experiments/msa/results/FORMAL_RESULT.json"
+  },
+  "adjudication": {
+    "one_shot": true,
+    "no_intermediate_endpoint_classification_inspection": true,
+    "allowed_verdicts": [
+      "ENDPOINT_MEASUREMENT_ADEQUATE",
+      "ACCURACY_COARSE_LOSS_INFORMATIVE",
+      "CURRENT_SUBSTRATE_ENDPOINT_SATURATED",
+      "STOP_INTEGRITY_OR_SUPPORT"
+    ]
+  },
+  "technical_retry_policy": {
+    "collection_retry_only_before_complete_valid_collection": true,
+    "same_seed_same_lock": true,
+    "seed_substitution": false,
+    "difficulty_change": false,
+    "outcome_inspection_before_retry": false,
+    "complete_valid_collection_must_not_be_rerun": true,
+    "adjudication_exactly_one_valid_run": true,
+    "adjudication_retry_only_if_no_valid_formal_result": true,
+    "source_protocol_seed_runtime_or_gate_change_invalidates_lock": true
+  },
+  "downstream": {
+    "msa2_not_automatic": true,
+    "formal_post_msa1_transition_review_required": true,
+    "predictor_training_remains_outside_msa": true,
+    "controller_closed": true,
+    "kcl7_closed": true
+  }
+}

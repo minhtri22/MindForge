@@ -106,3 +106,18 @@ Existing entries must never be rewritten or silently removed.
 - Joint four-way classification matrix: **FROZEN**.
 - Scientific fresh execution: **LOCKED / NOT AUTHORIZED**.
 - Next: bind exact protocol/runner/substrate/runtime in MSA-1 Execution Lock, then zero-science preflight only.
+
+---
+
+## 2026-09-24 — MSA-1 Execution Lock v1 Frozen
+
+- Scientific implementation commit: `3dfb18c3704f4f8e91160b30514687fe7a1fbb00`.
+- Protocol Git blob: `b4a68aee9db6a0698f70dbb1e1e4b33fbf7ffc4a`.
+- Runner Git blob: `55d6686c6c1182b7706f4831cb8f49eec2ec032d`.
+- Synthetic-test Git blob: `0cd1702ae2ecc64af270aa0e8843df3ea1f75fae`.
+- Preflight-workflow Git blob: `a72ea5105e6dc306d7f214084b4160463f49f00d`.
+- Eight exact substrate/model/replay/policy Git blobs are frozen in the lock.
+- Fresh manifest SHA-256: `e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347`.
+- Current substrate mutation permitted: **NO**.
+- Fresh MSA-1 execution: **BLOCKED** pending zero-science preflight and later independent lock verification.
+- Predictor/controller/KCL-7: **CLOSED**.

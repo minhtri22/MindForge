@@ -1,15 +1,8 @@
 name: MSA — MSA-0 zero-science specification QA
 
+# MSA-0 is formally closed. Historical verifier is manual-only.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/measurement-substrate-adequacy
-    paths:
-      - docs/research/measurement-substrate-adequacy/**
-      - tools/msa/**
-      - tests/test_msa0_spec.py
-      - .github/workflows/msa0-zero-science-spec-qa.yml
 
 permissions:
   contents: read
