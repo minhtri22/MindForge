@@ -264,3 +264,22 @@ Existing entries must never be rewritten or silently removed.
 - Replication must preserve exact MSA-1 substrate, endpoints, gates and classification matrix.
 - Difficulty mutation/new endpoint metric/predictor fitting: **FORBIDDEN**.
 - MSA-2/predictor/controller/KCL-7 remain **CLOSED**.
+
+---
+
+## 2026-09-25 — MSA-3 Independent Fresh Replication Preregistered
+
+- Trigger: MSA-1 formal transition review selected exact fresh replication.
+- Discovery claim: `ACCURACY_COARSE_LOSS_INFORMATIVE`.
+- Discovery formal-result SHA-256: `359cdc7c505244e71a5122d0a1038f045d20af27782008afab9b1bbddbf51637`.
+- MSA-1 scientific contract changes: **NONE**.
+- Fresh cohort size: `72` seeds.
+- Fresh manifest SHA-256: `5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8`.
+- Population: `216` boundaries / `648` endpoint pairs.
+- Reliability repeats: first `6` MSA-3 seeds, exact equality required.
+- Replication criterion: exact underlying verdict `ACCURACY_COARSE_LOSS_INFORMATIVE` → `REPLICATION_CONFIRMED`; every other verdict → `REPLICATION_NOT_CONFIRMED`.
+- Difficulty mutation: **FORBIDDEN / NONE**.
+- New endpoint metric: **FORBIDDEN / NONE**.
+- Predictor fitting: **FORBIDDEN / NONE**.
+- Fresh MSA-3 execution: **LOCKED / NOT AUTHORIZED**.
+- Next: freeze exact MSA-3 execution lock, run zero-science preflight, then independent lock verification.
