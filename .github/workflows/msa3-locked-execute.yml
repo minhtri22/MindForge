@@ -1,12 +1,9 @@
-name: MSA — MSA-3 locked fresh replication
+name: MSA — MSA-3 locked fresh replication (RETIRED)
 
+# Canonical MSA-3 replication completed in run 36051817225.
+# Retained for provenance only; execution is hard-disabled.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/measurement-substrate-adequacy
-    paths:
-      - .github/workflows/msa3-locked-execute.yml
 
 permissions:
   contents: write
@@ -17,6 +14,7 @@ concurrency:
 
 jobs:
   execute:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 300
 

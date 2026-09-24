@@ -375,3 +375,44 @@ Existing entries must never be rewritten or silently removed.
 - Complete valid collection rerun: **PROHIBITED**.
 - MSA-2/predictor/controller/KCL-7 remain **CLOSED**.
 - Replication result at this lineage entry: **UNOBSERVED**.
+
+---
+
+## 2026-09-25 — MSA-3 Canonical Replication Closed CONFIRMED
+
+- Workflow: `36051817225`.
+- Fresh seeds: **72/72 COMPLETE**.
+- Matched boundaries: **216/216 COMPLETE**.
+- A/B/C endpoint pairs: **648/648**.
+- Reliability repeats: **6/6 EXACT PASS**.
+- Integrity/support: **PASS**.
+- Collection SHA-256: `a4943f33cf36627d2ba27572e2e9ff15fc4b1acebd1509fa24587c677c9cd282`.
+- Collection evidence commit: `78b3b5d4fe6af7795e12c4b1b40de1d9acb1afea`.
+- Collection-before-adjudication artifact ID: `10830733270`.
+- Collection artifact ZIP SHA-256: `fdcf17b2861fdf4e253d8236dd6495dc4922ab863dfe3068f2d73209ce4f6748`.
+- Intermediate endpoint/replication classification inspection: **NO**.
+- Unchanged MSA-1 classifier calls: **1**.
+- Observed verdict: `ACCURACY_COARSE_LOSS_INFORMATIVE`.
+- Replication status: `REPLICATION_CONFIRMED`.
+- Formal-result SHA-256: `823f9c5f225f95eb69cfa940c96733257c9130ac1926533b847645bd46e8c5a6`.
+- Formal-result evidence commit: `a0ceff49b54ab389d5d98a934a31486ffce4f669`.
+- Complete evidence artifact ID: `10830678339`.
+- Complete evidence ZIP SHA-256: `ccb947cf15f621ae3b75c05ed2b9635200e9d771f634bad40067cec11af7802c`.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- MSA-3 cohort: **HISTORICAL / SPENT CONFIRMATORY EVIDENCE**.
+
+---
+
+## 2026-09-25 — MSA-4 Downstream Governance Review Closed
+
+- MSA-2 difficulty/structure search: **NOT SELECTED / CLOSED**.
+- Stop all endpoint-response modeling: **NOT SELECTED**.
+- Separately named new response-modeling program: **SELECTED**.
+- Replicated measurement inheritance: terminal CE loss informative; terminal accuracy coarse under current substrate.
+- Current substrate: **RETAIN**.
+- Difficulty mutation: **NOT JUSTIFIED**.
+- Downstream predictor training: **NOT AUTHORIZED**.
+- New-program specification foundation: **AUTHORIZED**.
+- MSA program: **FORMALLY CONVERGED / CLOSED**.
+- Controller/KCL-7: **CLOSED**.

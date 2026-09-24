@@ -153,3 +153,38 @@ The exact 72-seed independent replication is now eligible to be opened.
 
 No MSA-3 fresh execution workflow exists yet. MSA-2, predictor fitting,
 controller work and KCL-7 remain closed.
+
+
+## MSA final convergence
+
+MSA-3 independently replicated the MSA-1 discovery:
+
+```text
+ACCURACY_COARSE_LOSS_INFORMATIVE
+REPLICATION_CONFIRMED
+```
+
+Canonical replication closure: `MSA3_FORMAL_CLOSURE.md`.
+
+MSA-4 governance decision: `MSA4_DOWNSTREAM_RESEARCH_DECISION.md`.
+
+Final state:
+
+```text
+MSA PROGRAM                   FORMALLY CONVERGED / CLOSED
+MSA-2                         CLOSED / NOT SELECTED
+current substrate             RETAIN
+difficulty mutation           NOT JUSTIFIED
+
+replicated finding:
+terminal accuracy             COARSE / SATURATED
+terminal CE loss              INFORMATIVE
+
+next direction:
+separately named new response-modeling program
+specification foundation only
+
+fresh downstream science      NOT AUTHORIZED
+predictor training            NOT AUTHORIZED
+controller                    CLOSED
+```
