@@ -113,3 +113,26 @@ exact MSA-1 substrate, endpoint definitions, gates and classification matrix.
 
 MSA-3 fresh execution, MSA-2, predictor fitting, controller work and KCL-7
 remain closed.
+
+
+## MSA-3 replication status
+
+MSA-3 Independent Fresh Replication is preregistered and zero-science
+preflight qualified.
+
+```text
+discovery claim:
+ACCURACY_COARSE_LOSS_INFORMATIVE
+
+72-seed replication cohort    FROZEN
+MSA-1 substrate/metrics/gates FROZEN / UNCHANGED
+replication success criterion FROZEN
+execution lock                FROZEN
+zero-science preflight        PASS
+
+fresh MSA-3 science           NOT AUTHORIZED YET
+```
+
+Canonical preflight closure: `MSA3_PREFLIGHT_QA.md`.
+
+Next admissible step: independent exact-lock verification only.

@@ -298,3 +298,24 @@ Existing entries must never be rewritten or silently removed.
 - Replication success criterion: exact `ACCURACY_COARSE_LOSS_INFORMATIVE`.
 - Gate/metric/difficulty changes from MSA-1: **NONE**.
 - Fresh MSA-3 execution: **BLOCKED** pending zero-science preflight and independent exact-lock verification.
+
+---
+
+## 2026-09-25 — MSA-3 Zero-Science Preflight Closed PASS
+
+- Canonical workflow: `36049791418`.
+- Focused tests: **6/6 PASS**.
+- Verdict: `MSA3_ZERO_SCIENCE_PREFLIGHT_PASS`.
+- Execution-lock SHA-256: `bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7`.
+- Protocol SHA-256: `260de277655bb120f48e5aff5f2bf44469419076d65cdbbfd3dbce02d29248f1`.
+- Preflight JSON SHA-256: `f08f263c19a554dd0adb60dbb0fddd95d91bb9414e0d1a7f57735f179f0fe994`.
+- Artifact ID: `10829654395`.
+- Artifact ZIP SHA-256: `027fdd21ddce0596b25408ce5b1c1702dcce2b583a58c091946cd524799e0188`.
+- Fresh cohort collision audit: **PASS / ZERO COLLISIONS**.
+- Exact unchanged MSA-1 scientific contract: **PASS**.
+- Historical probe/repeat: **PASS**.
+- Fresh MSA-3 seed execution: **NO**.
+- Scientific outcome: **NO**.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- Independent execution-lock verification: **PENDING**.
