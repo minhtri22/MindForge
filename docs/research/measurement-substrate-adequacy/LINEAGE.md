@@ -354,3 +354,24 @@ Existing entries must never be rewritten or silently removed.
 - Predictor fitting: **NO**.
 - Exact MSA-3 replication is now **ELIGIBLE TO OPEN**, but has not started.
 - MSA-2/predictor/controller/KCL-7 remain **CLOSED**.
+
+---
+
+## 2026-09-25 — MSA-3 Canonical Replication Execution Opened
+
+- Exact verified MSA-3 lock SHA-256: `bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7`.
+- Independent verification: `MSA3_EXECUTION_LOCK_VERIFICATION_PASS`, workflow `36050240612`.
+- Authorized action: exactly one frozen 72-seed MSA-3 replication collection.
+- Expected population: `72 seeds × 3 boundaries = 216 boundaries`.
+- Expected A/B/C endpoint pairs: `648`.
+- Reliability repeats: exactly first `6` frozen MSA-3 seeds.
+- Pre-adjudication validation: **integrity/support/reliability only**.
+- Accuracy/loss/joint classification inspection before adjudication: **PROHIBITED**.
+- Replication-status inspection before adjudication: **PROHIBITED**.
+- Complete collection must be preserved before adjudication.
+- Adjudication: exactly one call through the unchanged MSA-1 classifier.
+- Replication success remains exact `ACCURACY_COARSE_LOSS_INFORMATIVE`.
+- Technical retry: only before complete valid collection, same seed + same lock, no seed/source/gate/difficulty substitution.
+- Complete valid collection rerun: **PROHIBITED**.
+- MSA-2/predictor/controller/KCL-7 remain **CLOSED**.
+- Replication result at this lineage entry: **UNOBSERVED**.

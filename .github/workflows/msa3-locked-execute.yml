@@ -1,0 +1,321 @@
+name: MSA — MSA-3 locked fresh replication
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/measurement-substrate-adequacy
+    paths:
+      - .github/workflows/msa3-locked-execute.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: msa3-locked-fresh-replication
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/measurement-substrate-adequacy
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked dependencies
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce exact verified MSA-3 lock before science
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/research/measurement-substrate-adequacy/MSA3_EXECUTION_LOCK.json | awk '{print $1}')" = "bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7"
+
+          test "$(git hash-object docs/research/measurement-substrate-adequacy/msa3-independent-replication-protocol.md)" = "edd84edfe189af94578cc89dfcdc5e40f54e759a"
+          test "$(git hash-object experiments/msa/msa3_independent_replication.py)" = "530521780d61f5dc2848476ed0c966c1a8fbcd1d"
+          test "$(git hash-object experiments/msa/msa1_endpoint_adequacy.py)" = "55d6686c6c1182b7706f4831cb8f49eec2ec032d"
+
+          test "$(git hash-object experiments/kernel_cl/kcl1_substrate.py)" = "4303dd544e0bdb935c499abedc62aa095bc56674"
+          test "$(git hash-object experiments/kernel_cl/kcl6_long_horizon.py)" = "33a743d62b5a83286c8945ffc0f473ae66fe50c0"
+          test "$(git hash-object experiments/kernel_cl/kcl61_weighted_replay_ab.py)" = "9a2ea8435bc92d65af7044b5351d06adc6cc2d44"
+          test "$(git hash-object experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py)" = "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7"
+          test "$(git hash-object experiments/kernel_cl/kcl65_specificity_ab.py)" = "88aa11fea6e8474c323c02491c0b85a91722c686"
+          test "$(git hash-object experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py)" = "7119b9520f50de53a42313f7c7173c8d5daec2f1"
+          test "$(git hash-object mindforge/config.py)" = "54ab270a25edd962e62360e14736b28f52a4fbcd"
+          test "$(git hash-object mindforge/model.py)" = "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+
+          grep -q "MSA3_EXECUTION_LOCK_VERIFICATION_PASS" docs/research/measurement-substrate-adequacy/MSA3_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7" docs/research/measurement-substrate-adequacy/MSA3_EXECUTION_LOCK_VERIFICATION.md
+
+          test ! -e experiments/msa/results/msa3_fresh_endpoints.json
+          test ! -e experiments/msa/results/MSA3_FORMAL_RESULT.json
+
+          python - <<'PY'
+          import json, platform
+          from importlib.metadata import version
+          import torch
+
+          lock=json.load(open("docs/research/measurement-substrate-adequacy/MSA3_EXECUTION_LOCK.json",encoding="utf-8"))
+
+          assert lock["schema"]=="MSA3-EXECUTION-LOCK-v1"
+          assert lock["program"]=="MSA-3"
+          assert lock["discovery"]["verdict"]=="ACCURACY_COARSE_LOSS_INFORMATIVE"
+          assert lock["discovery"]["formal_result_sha256"]=="359cdc7c505244e71a5122d0a1038f045d20af27782008afab9b1bbddbf51637"
+
+          assert lock["seed_manifest"]["count"]==72
+          assert len(lock["seed_manifest"]["seeds"])==72
+          assert len(set(lock["seed_manifest"]["seeds"]))==72
+          assert lock["seed_manifest"]["sha256"]=="5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8"
+
+          assert lock["population"]["expected_boundaries"]==216
+          assert lock["population"]["expected_endpoint_pairs"]==648
+          assert len(lock["reliability_repeat_seeds"])==6
+
+          assert lock["substrate"]["difficulty_mutation_allowed"] is False
+          assert lock["substrate"]["endpoint_step"]==250
+          assert lock["scientific_contract"]["relation_to_msa1"]=="EXACT_REPLICATION_NO_GATE_CHANGE"
+          assert lock["replication"]["success_criterion"]=="underlying verdict == ACCURACY_COARSE_LOSS_INFORMATIVE"
+          assert lock["replication"]["partial_match_allowed"] is False
+          assert lock["replication"]["post_outcome_gate_change_allowed"] is False
+
+          assert platform.machine()=="x86_64"
+          assert platform.python_version()=="3.12.14"
+          assert version("pip")=="26.2.1"
+          assert version("numpy")=="2.3.3"
+          assert version("pytest")=="8.4.2"
+          assert torch.__version__=="2.10.0+cpu"
+
+          assert lock["adjudication"]["one_shot"] is True
+          assert lock["adjudication"]["no_intermediate_endpoint_classification_inspection"] is True
+          assert lock["downstream"]["msa2_closed"] is True
+          assert lock["downstream"]["predictor_closed"] is True
+
+          print("MSA3_LOCKED_EXECUTION_GATE=PASS")
+          PY
+
+      - name: Collect frozen MSA-3 cohort exactly once
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiments/msa/results artifacts
+          PYTHONPATH=. python experiments/msa/msa3_independent_replication.py             --phase collect             --output experiments/msa/results/msa3_fresh_endpoints.json
+          test -s experiments/msa/results/msa3_fresh_endpoints.json
+
+      - name: Integrity support and reliability validation only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import collections, hashlib, json, math
+
+          p="experiments/msa/results/msa3_fresh_endpoints.json"
+          d=json.load(open(p,encoding="utf-8"))
+
+          assert d["schema"]=="MSA3-FRESH-COLLECTION-v1"
+          assert d["program"]=="MSA-3"
+          assert d["protocol_sha256"]=="260de277655bb120f48e5aff5f2bf44469419076d65cdbbfd3dbce02d29248f1"
+          assert d["seed_manifest_sha256"]=="5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8"
+
+          expected=[
+            4632344,3715332,4702401,8249890,7222878,8766965,
+            8186980,3421287,7823696,7361523,5782374,3461192,
+            8672287,7946731,8039551,5898726,5530516,7304549,
+            4574050,2777688,6487687,2073202,2493669,6069173,
+            5380311,6749456,7186523,2822907,8679347,4723573,
+            5594742,4730662,5957069,5391391,6804821,4925724,
+            4489402,2373972,3373481,8495716,7878724,7620252,
+            4567757,6965735,8480204,3484189,2610959,8358070,
+            4332215,7468926,2250351,5806588,2693511,3617592,
+            4267044,2041109,3209463,3238873,7635919,5232304,
+            3408254,5059373,4701506,6837399,4842603,6283077,
+            6348697,6445575,8003159,5921802,6552527,7406131
+          ]
+          policies={"A_CARRY_ALL","B_RESET_ALL","C_CARRY_STEP_RESET_MOMENTS"}
+
+          rows=d["records"]
+          assert len(rows)==216
+
+          per_seed=collections.Counter(int(r["seed"]) for r in rows)
+          per_stage=collections.Counter(int(r["boundary_index"]) for r in rows)
+
+          assert set(per_seed)==set(expected)
+          assert all(per_seed[s]==3 for s in expected)
+          assert per_stage=={1:72,2:72,3:72}
+
+          endpoint_pairs=0
+          for r in rows:
+              assert int(r["boundary_index"]) in {1,2,3}
+              integ=r["integrity"]
+              assert bool(integ["valid"])
+              assert bool(integ["fork_models_equal"])
+              assert bool(integ["boundary_model_unchanged"])
+              assert bool(integ["exact_replay_match"])
+              assert bool(integ["endpoint_same_curve_state"])
+              assert set(r["endpoints"])==policies
+              for policy in policies:
+                  e=r["endpoints"][policy]
+                  assert int(e["step"])==250
+                  a=float(e["terminal_accuracy"])
+                  l=float(e["terminal_cross_entropy_loss"])
+                  assert math.isfinite(a) and 0.0<=a<=1.0
+                  assert math.isfinite(l) and l>=0.0
+                  endpoint_pairs += 1
+
+          assert endpoint_pairs==648
+
+          rel=d["reliability_checks"]
+          assert len(rel)==6
+          assert [int(x["seed"]) for x in rel]==expected[:6]
+          assert all(bool(x["exact"]) for x in rel)
+          assert all(float(x["max_abs_diff"])==0.0 for x in rel)
+          assert all(bool(x["same_structure"]) for x in rel)
+
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          evidence={
+              "schema":"MSA3-COLLECTION-INTEGRITY-v1",
+              "program":"MSA-3",
+              "status":"PASS",
+              "seed_count":72,
+              "boundary_count":216,
+              "endpoint_pair_count":648,
+              "per_stage":{"1":72,"2":72,"3":72},
+              "reliability_repeat_count":6,
+              "reliability_exact":True,
+              "collection_sha256":sha,
+              "accuracy_classification_inspected":False,
+              "loss_classification_inspected":False,
+              "joint_classification_inspected":False,
+              "replication_status_inspected":False,
+          }
+          open("artifacts/msa3_collection_integrity.json","w",encoding="utf-8").write(
+              json.dumps(evidence,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("MSA3_COLLECTION_INTEGRITY=PASS")
+          print("MSA3_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Preserve complete collection artifact before adjudication
+        uses: actions/upload-artifact@v4
+        with:
+          name: msa3-complete-collection-before-adjudication
+          path: |
+            experiments/msa/results/msa3_fresh_endpoints.json
+            artifacts/msa3_collection_integrity.json
+          if-no-files-found: error
+
+      - name: Preserve complete collection in branch before adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/msa/results/msa3_fresh_endpoints.json
+          git commit -m "evidence(msa): preserve MSA-3 complete replication collection"
+          git push origin HEAD:research/measurement-substrate-adequacy
+
+      - name: Run exactly one unchanged MSA-1 classifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e experiments/msa/results/MSA3_FORMAL_RESULT.json
+          test ! -e artifacts/MSA3_ADJUDICATOR_CALLED
+          touch artifacts/MSA3_ADJUDICATOR_CALLED
+
+          PYTHONPATH=. python experiments/msa/msa3_independent_replication.py             --phase adjudicate             --input experiments/msa/results/msa3_fresh_endpoints.json             --output experiments/msa/results/MSA3_FORMAL_RESULT.json
+
+          test -s experiments/msa/results/MSA3_FORMAL_RESULT.json
+
+      - name: Validate and reveal replication result only after adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+
+          cp="experiments/msa/results/msa3_fresh_endpoints.json"
+          rp="experiments/msa/results/MSA3_FORMAL_RESULT.json"
+          ip="artifacts/msa3_collection_integrity.json"
+
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          rsha=hashlib.sha256(open(rp,"rb").read()).hexdigest()
+
+          d=json.load(open(rp,encoding="utf-8"))
+          integ=json.load(open(ip,encoding="utf-8"))
+
+          assert d["schema"]=="MSA3-FORMAL-RESULT-v1"
+          assert d["program"]=="MSA-3"
+          assert d["protocol_sha256"]=="260de277655bb120f48e5aff5f2bf44469419076d65cdbbfd3dbce02d29248f1"
+          assert d["source_records_sha256"]==csha
+          assert integ["collection_sha256"]==csha
+
+          a=d["adjudication"]
+          assert a["replication_status"] in {"REPLICATION_CONFIRMED","REPLICATION_NOT_CONFIRMED"}
+          assert a["observed_verdict"] in {
+              "ENDPOINT_MEASUREMENT_ADEQUATE",
+              "ACCURACY_COARSE_LOSS_INFORMATIVE",
+              "CURRENT_SUBSTRATE_ENDPOINT_SATURATED",
+              "STOP_INTEGRITY_OR_SUPPORT",
+          }
+          assert a["discovery_verdict"]=="ACCURACY_COARSE_LOSS_INFORMATIVE"
+          assert bool(a["replication_confirmed"]) == (a["replication_status"]=="REPLICATION_CONFIRMED")
+
+          ev={
+              "schema":"MSA3-EXECUTION-EVIDENCE-v1",
+              "program":"MSA-3",
+              "lock_sha256":"bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7",
+              "protocol_sha256":"260de277655bb120f48e5aff5f2bf44469419076d65cdbbfd3dbce02d29248f1",
+              "seed_manifest_sha256":"5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8",
+              "discovery_verdict":"ACCURACY_COARSE_LOSS_INFORMATIVE",
+              "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+              "workflow_head_sha":os.environ["GITHUB_SHA"],
+              "collection_sha256":csha,
+              "formal_result_sha256":rsha,
+              "collection_integrity":"PASS",
+              "one_shot_adjudication":True,
+              "difficulty_mutation":False,
+              "predictor_fitting":False,
+              "observed_verdict":a["observed_verdict"],
+              "replication_status":a["replication_status"],
+              "replication_confirmed":a["replication_confirmed"],
+          }
+          open("artifacts/MSA3_EXECUTION_EVIDENCE.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("MSA3_OBSERVED_VERDICT="+a["observed_verdict"])
+          print("MSA3_REPLICATION_STATUS="+a["replication_status"])
+          print("MSA3_COLLECTION_SHA256="+csha)
+          print("MSA3_FORMAL_RESULT_SHA256="+rsha)
+          PY
+
+      - name: Upload complete replication evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: msa3-locked-replication-evidence
+          path: |
+            experiments/msa/results/msa3_fresh_endpoints.json
+            experiments/msa/results/MSA3_FORMAL_RESULT.json
+            artifacts/msa3_collection_integrity.json
+            artifacts/MSA3_EXECUTION_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve formal replication result in branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add experiments/msa/results/MSA3_FORMAL_RESULT.json
+          git commit -m "evidence(msa): preserve MSA-3 formal replication result"
+          git push origin HEAD:research/measurement-substrate-adequacy
