@@ -25,3 +25,21 @@ Append-only.
 - Fresh scientific execution: **NOT AUTHORIZED**.
 - Controller/KCL-7: **CLOSED**.
 - Current milestone: **CLRM-0 Specification Foundation**.
+
+---
+
+## 2026-09-25 — CLRM-0 QA Attempt 1 Technical Infrastructure Failure
+
+- Workflow: `36056186547`.
+- Failure point: static specification tests before validator execution.
+- Root cause: GitHub runner Python environment did not have `pytest` installed.
+- Classification: **TECHNICAL_QA_INFRASTRUCTURE_FAILURE / ZERO-SCIENCE**.
+- Scientific target changed: **NO**.
+- Baseline/gate/partition contracts changed: **NO**.
+- Fresh seed execution: **NO**.
+- Scientific outcome generated: **NO**.
+- Predictor fitting: **NO**.
+- Controller execution: **NO**.
+- QA recovery also narrows the CPRM anti-reuse assertion to the actual primary
+  target-definition block, because the document intentionally names historical
+  CPRM variables in a prohibition section.

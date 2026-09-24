@@ -70,7 +70,8 @@ def validate() -> dict:
         and "six channels" in target
     )
 
-    checks["no_cprm_target_reuse"] = all(x not in target for x in [
+    primary_block = target.split("## 5. Explicit discontinuity from CPRM", 1)[0]
+    checks["no_cprm_target_reuse"] = all(x not in primary_block for x in [
         "plasticity_auc",
         "final_current_accuracy",
         "prior_task_retention",
