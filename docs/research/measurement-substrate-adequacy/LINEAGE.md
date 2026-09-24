@@ -145,3 +145,15 @@ Existing entries must never be rewritten or silently removed.
 - Formal result: **NONE**.
 - Independent execution-lock verification: **PENDING**.
 - MSA-2/predictor/controller/KCL-7: **CLOSED**.
+
+---
+
+## 2026-09-24 — MSA-1 Independent Execution-Lock Verification Opened
+
+- Exact lock SHA-256: `c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657`.
+- Verification implementation is static and independent; it does **not** import or call the MSA-1 scientific runner.
+- Required checks: protocol/runner/test/preflight blobs, eight substrate blobs, exact 72-seed manifest + deterministic regeneration, exact runtime, KCL/protected/ACO/CPRM disjointness, accuracy gates, loss gates, classification matrix, retry policy, absence of collection/result/execution workflow.
+- Fresh MSA-1 seed execution during verification: **PROHIBITED**.
+- Difficulty mutation during verification: **PROHIBITED**.
+- Predictor fitting during verification: **PROHIBITED**.
+- Verification result at this entry: **PENDING**.
