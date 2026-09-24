@@ -1,0 +1,59 @@
+name: CLRM — CLRM-0 zero-science specification QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - docs/research/continual-loss-response/**
+      - tools/clrm/**
+      - tests/test_clrm0_spec.py
+      - .github/workflows/clrm0-zero-science-spec-qa.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Run static specification tests
+        run: PYTHONPATH=. python -m pytest tests/test_clrm0_spec.py -q
+
+      - name: Run zero-science specification validator
+        run: |
+          mkdir -p artifacts
+          PYTHONPATH=. python tools/clrm/validate_clrm0_spec.py
+
+      - name: Enforce zero-science invariants
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/clrm0_spec_qa.json",encoding="utf-8"))
+          assert d["status"]=="PASS", d
+          assert d["verdict"]=="CLRM0_ZERO_SCIENCE_SPEC_QA_PASS", d
+          assert d["fresh_seed_execution_attempted"] is False, d
+          assert d["scientific_outcome_generated"] is False, d
+          assert d["predictor_fitting_performed"] is False, d
+          assert d["controller_execution_performed"] is False, d
+          print("CLRM0_ZERO_SCIENCE_SPEC_QA=PASS")
+          PY
+          sha256sum artifacts/clrm0_spec_qa.json
+
+      - name: Upload QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm0-zero-science-spec-qa
+          path: artifacts/clrm0_spec_qa.json
+          if-no-files-found: error
