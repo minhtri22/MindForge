@@ -203,3 +203,23 @@ Existing entries must never be rewritten or silently removed.
 - Predictor fitting: **NO**.
 - MSA-1 fresh collection is now **ELIGIBLE TO OPEN under exact verified lock**, but has not started.
 - MSA-2/predictor/controller/KCL-7 remain **CLOSED**.
+
+---
+
+## 2026-09-25 — MSA-1 Locked Fresh Scientific Execution Opened
+
+- Verified execution lock SHA-256: `c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657`.
+- Independent verification: `MSA1_EXECUTION_LOCK_VERIFICATION_PASS`, workflow `36026801647`.
+- Authorized action: exactly one frozen 72-seed current-substrate collection.
+- Expected population: `72 seeds × 3 boundaries = 216 boundaries`.
+- Expected A/B/C endpoint pairs: `648`.
+- Reliability repeats: exactly first `6` preregistered fresh seeds.
+- Pre-adjudication validation: **integrity/support/reliability only**.
+- Accuracy/loss/joint classification inspection before adjudication: **PROHIBITED**.
+- Complete collection must be preserved as artifact and branch evidence before adjudication.
+- Adjudication: exactly one valid one-shot call on the preserved complete input.
+- Technical collection retry: only before a complete valid collection exists, same seed + same lock, no seed substitution or difficulty change.
+- Complete valid collection rerun: **PROHIBITED**.
+- MSA-2 remains **CLOSED** regardless of MSA-1 verdict until a formal transition review.
+- Predictor/controller/KCL-7 remain **CLOSED**.
+- Scientific result at this lineage entry: **UNOBSERVED**.

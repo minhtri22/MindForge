@@ -1,0 +1,323 @@
+name: MSA — MSA-1 locked fresh execution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/measurement-substrate-adequacy
+    paths:
+      - .github/workflows/msa1-locked-execute.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: msa1-locked-fresh-execution
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/measurement-substrate-adequacy
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked dependencies
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce verified immutable lock before fresh science
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/research/measurement-substrate-adequacy/MSA1_EXECUTION_LOCK.json | awk '{print $1}')" = "c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657"
+
+          test "$(git hash-object docs/research/measurement-substrate-adequacy/msa1-endpoint-adequacy-protocol.md)" = "b4a68aee9db6a0698f70dbb1e1e4b33fbf7ffc4a"
+          test "$(git hash-object experiments/msa/msa1_endpoint_adequacy.py)" = "55d6686c6c1182b7706f4831cb8f49eec2ec032d"
+          test "$(git hash-object tests/test_msa1_endpoint_adequacy.py)" = "0cd1702ae2ecc64af270aa0e8843df3ea1f75fae"
+          test "$(git hash-object .github/workflows/msa1-zero-science-preflight.yml)" = "a72ea5105e6dc306d7f214084b4160463f49f00d"
+
+          test "$(git hash-object experiments/kernel_cl/kcl1_substrate.py)" = "4303dd544e0bdb935c499abedc62aa095bc56674"
+          test "$(git hash-object experiments/kernel_cl/kcl6_long_horizon.py)" = "33a743d62b5a83286c8945ffc0f473ae66fe50c0"
+          test "$(git hash-object experiments/kernel_cl/kcl61_weighted_replay_ab.py)" = "9a2ea8435bc92d65af7044b5351d06adc6cc2d44"
+          test "$(git hash-object experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py)" = "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7"
+          test "$(git hash-object experiments/kernel_cl/kcl65_specificity_ab.py)" = "88aa11fea6e8474c323c02491c0b85a91722c686"
+          test "$(git hash-object experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py)" = "7119b9520f50de53a42313f7c7173c8d5daec2f1"
+          test "$(git hash-object mindforge/config.py)" = "54ab270a25edd962e62360e14736b28f52a4fbcd"
+          test "$(git hash-object mindforge/model.py)" = "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+
+          grep -q "MSA1_EXECUTION_LOCK_VERIFICATION_PASS" docs/research/measurement-substrate-adequacy/MSA1_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657" docs/research/measurement-substrate-adequacy/MSA1_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "cb8896c048576103f3ab0cddc2d41195d7c1e8525d06ce250d893a71c4322753" docs/research/measurement-substrate-adequacy/MSA1_EXECUTION_LOCK_VERIFICATION.md
+
+          test ! -e experiments/msa/results/msa1_fresh_endpoints.json
+          test ! -e experiments/msa/results/FORMAL_RESULT.json
+
+          python - <<'PY'
+          import json, platform
+          from importlib.metadata import version
+          import torch
+
+          p="docs/research/measurement-substrate-adequacy/MSA1_EXECUTION_LOCK.json"
+          d=json.load(open(p,encoding="utf-8"))
+
+          assert d["schema"]=="MSA1-EXECUTION-LOCK-v1"
+          assert d["program"]=="MSA-1"
+          assert d["seed_manifest"]["count"]==72
+          assert len(d["seed_manifest"]["seeds"])==72
+          assert len(set(d["seed_manifest"]["seeds"]))==72
+          assert d["seed_manifest"]["sha256"]=="e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347"
+
+          assert d["substrate"]["identity"]=="UNCHANGED_CANONICAL_KCL_COMPATIBLE_SUBSTRATE"
+          assert d["substrate"]["difficulty_mutation_allowed"] is False
+          assert d["substrate"]["endpoint_step"]==250
+
+          assert d["population"]["expected_boundaries"]==216
+          assert d["population"]["expected_endpoint_pairs"]==648
+
+          assert platform.machine()=="x86_64"
+          assert platform.python_version()=="3.12.14"
+          assert version("pip")=="26.2.1"
+          assert version("numpy")=="2.3.3"
+          assert version("pytest")=="8.4.2"
+          assert torch.__version__=="2.10.0+cpu"
+
+          assert d["adjudication"]["one_shot"] is True
+          assert d["adjudication"]["no_intermediate_endpoint_classification_inspection"] is True
+          assert d["downstream"]["msa2_not_automatic"] is True
+          assert d["downstream"]["predictor_training_remains_outside_msa"] is True
+
+          print("MSA1_LOCKED_EXECUTION_GATE=PASS")
+          PY
+
+      - name: Collect frozen 72-seed cohort exactly once
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiments/msa/results artifacts
+          PYTHONPATH=. python experiments/msa/msa1_endpoint_adequacy.py             --phase collect             --output experiments/msa/results/msa1_fresh_endpoints.json
+          test -s experiments/msa/results/msa1_fresh_endpoints.json
+
+      - name: Integrity support and reliability validation only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import collections, hashlib, json, math
+
+          p="experiments/msa/results/msa1_fresh_endpoints.json"
+          d=json.load(open(p,encoding="utf-8"))
+
+          assert d["schema"]=="MSA1-FRESH-COLLECTION-v1"
+          assert d["program"]=="MSA-1"
+          assert d["protocol_sha256"]=="4d9ce52b66192c3847d78883cb99fe21a767a6d719c4495149f1d43996b5ec48"
+          assert d["seed_manifest_sha256"]=="e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347"
+
+          expected=[
+            7852877,2761307,7980060,8886053,8372679,3779647,
+            4340369,4656404,2606362,8420602,5624433,6963476,
+            7109847,4349361,4173979,3032355,8811213,4469405,
+            2348174,7601591,7945831,7994374,4658109,2192576,
+            4761197,2128138,3590175,2017834,8060511,5925203,
+            8484385,2496490,2757847,3322545,8487705,3599975,
+            3093036,2132012,4581015,6358053,8139369,8085240,
+            5318924,7730623,5530158,8191416,7476487,5469329,
+            3337298,7726785,7539302,6456627,7169558,2637791,
+            4500255,3710728,8425464,8494433,5135219,6119817,
+            4907431,8799077,8489437,5715340,2301093,2230544,
+            7672062,2312271,6591423,5628578,5723797,6209697
+          ]
+          policies={"A_CARRY_ALL","B_RESET_ALL","C_CARRY_STEP_RESET_MOMENTS"}
+
+          rows=d["records"]
+          assert len(rows)==216
+
+          per_seed=collections.Counter(int(r["seed"]) for r in rows)
+          per_stage=collections.Counter(int(r["boundary_index"]) for r in rows)
+
+          assert set(per_seed)==set(expected)
+          assert all(per_seed[s]==3 for s in expected)
+          assert per_stage=={1:72,2:72,3:72}
+
+          endpoint_pairs=0
+          for r in rows:
+              assert int(r["boundary_index"]) in {1,2,3}
+              integ=r["integrity"]
+              assert bool(integ["valid"])
+              assert bool(integ["fork_models_equal"])
+              assert bool(integ["boundary_model_unchanged"])
+              assert bool(integ["exact_replay_match"])
+              assert bool(integ["endpoint_same_curve_state"])
+              assert set(r["endpoints"])==policies
+              for policy in policies:
+                  e=r["endpoints"][policy]
+                  assert int(e["step"])==250
+                  a=float(e["terminal_accuracy"])
+                  l=float(e["terminal_cross_entropy_loss"])
+                  assert math.isfinite(a) and 0.0 <= a <= 1.0
+                  assert math.isfinite(l) and l >= 0.0
+                  endpoint_pairs += 1
+
+          assert endpoint_pairs==648
+
+          rel=d["reliability_checks"]
+          assert len(rel)==6
+          assert [int(x["seed"]) for x in rel]==expected[:6]
+          assert all(bool(x["exact"]) for x in rel)
+          assert all(float(x["max_abs_diff"])==0.0 for x in rel)
+          assert all(bool(x["same_structure"]) for x in rel)
+
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          evidence={
+              "schema":"MSA1-COLLECTION-INTEGRITY-v1",
+              "program":"MSA-1",
+              "status":"PASS",
+              "seed_count":72,
+              "boundary_count":216,
+              "endpoint_pair_count":648,
+              "per_stage":{"1":72,"2":72,"3":72},
+              "reliability_repeat_count":6,
+              "reliability_exact":True,
+              "collection_sha256":sha,
+              "accuracy_classification_inspected":False,
+              "loss_classification_inspected":False,
+              "joint_classification_inspected":False,
+          }
+          open("artifacts/msa1_collection_integrity.json","w",encoding="utf-8").write(
+              json.dumps(evidence,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("MSA1_COLLECTION_INTEGRITY=PASS")
+          print("MSA1_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Preserve complete collection artifact before adjudication
+        uses: actions/upload-artifact@v4
+        with:
+          name: msa1-complete-collection-before-adjudication
+          path: |
+            experiments/msa/results/msa1_fresh_endpoints.json
+            artifacts/msa1_collection_integrity.json
+          if-no-files-found: error
+
+      - name: Preserve complete collection in branch before adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/msa/results/msa1_fresh_endpoints.json
+          git commit -m "evidence(msa): preserve MSA-1 complete collection"
+          git push origin HEAD:research/measurement-substrate-adequacy
+
+      - name: Run exactly one one-shot adjudicator
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e experiments/msa/results/FORMAL_RESULT.json
+          test ! -e artifacts/MSA1_ADJUDICATOR_CALLED
+          touch artifacts/MSA1_ADJUDICATOR_CALLED
+
+          PYTHONPATH=. python experiments/msa/msa1_endpoint_adequacy.py             --phase adjudicate             --input experiments/msa/results/msa1_fresh_endpoints.json             --output experiments/msa/results/FORMAL_RESULT.json
+
+          test -s experiments/msa/results/FORMAL_RESULT.json
+
+      - name: Validate and reveal formal result only after adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+
+          cp="experiments/msa/results/msa1_fresh_endpoints.json"
+          rp="experiments/msa/results/FORMAL_RESULT.json"
+          ip="artifacts/msa1_collection_integrity.json"
+
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          rsha=hashlib.sha256(open(rp,"rb").read()).hexdigest()
+
+          d=json.load(open(rp,encoding="utf-8"))
+          integ=json.load(open(ip,encoding="utf-8"))
+
+          assert d["schema"]=="MSA1-FORMAL-RESULT-v1"
+          assert d["program"]=="MSA-1"
+          assert d["protocol_sha256"]=="4d9ce52b66192c3847d78883cb99fe21a767a6d719c4495149f1d43996b5ec48"
+          assert d["source_records_sha256"]==csha
+          assert integ["collection_sha256"]==csha
+
+          a=d["adjudication"]
+          assert a["status"] in {"PASS","STOP"}
+          assert a["verdict"] in {
+              "ENDPOINT_MEASUREMENT_ADEQUATE",
+              "ACCURACY_COARSE_LOSS_INFORMATIVE",
+              "CURRENT_SUBSTRATE_ENDPOINT_SATURATED",
+              "STOP_INTEGRITY_OR_SUPPORT",
+          }
+
+          ev={
+              "schema":"MSA1-EXECUTION-EVIDENCE-v1",
+              "program":"MSA-1",
+              "lock_sha256":"c42062b965a08f5e503f8307eaa27ffbede13511ed245dfdb80e0163d747f657",
+              "protocol_sha256":"4d9ce52b66192c3847d78883cb99fe21a767a6d719c4495149f1d43996b5ec48",
+              "seed_manifest_sha256":"e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347",
+              "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+              "workflow_head_sha":os.environ["GITHUB_SHA"],
+              "collection_sha256":csha,
+              "formal_result_sha256":rsha,
+              "collection_integrity":"PASS",
+              "one_shot_adjudication":True,
+              "difficulty_mutation":False,
+              "predictor_fitting":False,
+              "scientific_status":a["status"],
+              "scientific_verdict":a["verdict"],
+              "reason":a["reason"],
+          }
+          open("artifacts/MSA1_EXECUTION_EVIDENCE.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("MSA1_FORMAL_STATUS="+a["status"])
+          print("MSA1_FORMAL_VERDICT="+a["verdict"])
+          print("MSA1_FORMAL_REASON="+a["reason"])
+          print("MSA1_COLLECTION_SHA256="+csha)
+          print("MSA1_FORMAL_RESULT_SHA256="+rsha)
+
+          if "endpoint_geometry" in a:
+              g=a["endpoint_geometry"]
+              print("MSA1_GLOBAL_ENDPOINT_STATES="+json.dumps({
+                  "accuracy_informative":g["accuracy_informative"]["qualified"],
+                  "accuracy_saturated":g["accuracy_saturated"]["qualified"],
+                  "loss_informative":g["loss_informative"]["qualified"],
+                  "loss_saturated":g["loss_saturated"]["qualified"],
+              },sort_keys=True))
+          PY
+
+      - name: Upload complete execution evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: msa1-locked-execution-evidence
+          path: |
+            experiments/msa/results/msa1_fresh_endpoints.json
+            experiments/msa/results/FORMAL_RESULT.json
+            artifacts/msa1_collection_integrity.json
+            artifacts/MSA1_EXECUTION_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve formal result in branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add experiments/msa/results/FORMAL_RESULT.json
+          git commit -m "evidence(msa): preserve MSA-1 formal result"
+          git push origin HEAD:research/measurement-substrate-adequacy
