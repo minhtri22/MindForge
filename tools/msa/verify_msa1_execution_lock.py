@@ -82,6 +82,43 @@ def git_blob(path: Path) -> str:
     return git("hash-object", str(path.relative_to(ROOT)))
 
 
+def _safe_numeric_expr(node: ast.AST) -> float | int:
+    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+        return node.value
+    if isinstance(node, ast.UnaryOp):
+        value = _safe_numeric_expr(node.operand)
+        if isinstance(node.op, ast.USub):
+            return -value
+        if isinstance(node.op, ast.UAdd):
+            return +value
+    if isinstance(node, ast.BinOp):
+        lhs = _safe_numeric_expr(node.left)
+        rhs = _safe_numeric_expr(node.right)
+        if isinstance(node.op, ast.Add):
+            return lhs + rhs
+        if isinstance(node.op, ast.Sub):
+            return lhs - rhs
+        if isinstance(node.op, ast.Mult):
+            return lhs * rhs
+        if isinstance(node.op, ast.Div):
+            return lhs / rhs
+        if isinstance(node.op, ast.Mod):
+            return lhs % rhs
+        if isinstance(node.op, ast.Pow):
+            return lhs ** rhs
+    if (
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and isinstance(node.func.value, ast.Name)
+        and node.func.value.id == "math"
+        and node.func.attr == "log"
+        and len(node.args) == 1
+        and not node.keywords
+    ):
+        return math.log(float(_safe_numeric_expr(node.args[0])))
+    raise ValueError("not a permitted static numeric expression")
+
+
 def literal_assignments(path: Path) -> dict[str, Any]:
     tree = ast.parse(path.read_text(encoding="utf-8"))
     out: dict[str, Any] = {}
@@ -93,6 +130,11 @@ def literal_assignments(path: Path) -> dict[str, Any]:
             continue
         try:
             out[target.id] = ast.literal_eval(node.value)
+            continue
+        except Exception:
+            pass
+        try:
+            out[target.id] = _safe_numeric_expr(node.value)
         except Exception:
             pass
     return out

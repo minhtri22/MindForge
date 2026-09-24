@@ -157,3 +157,19 @@ Existing entries must never be rewritten or silently removed.
 - Difficulty mutation during verification: **PROHIBITED**.
 - Predictor fitting during verification: **PROHIBITED**.
 - Verification result at this entry: **PENDING**.
+
+---
+
+## 2026-09-24 — MSA-1 Verifier Attempt 1 Technical Parser Failure
+
+- Workflow run: `36026522210`.
+- Failure point: independent verifier tests, before canonical static verification.
+- Root cause: verifier used `ast.literal_eval` for frozen numeric constants expressed as `2.0/24.0` and `-math.log(0.95)`; those expressions were not evaluated and produced missing values.
+- Classification: **TECHNICAL_VERIFIER_PARSER_FAILURE / NON-SCIENTIFIC**.
+- MSA-1 execution lock changed: **NO**.
+- Protocol/runner/substrate/gates/seeds changed: **NO**.
+- Fresh MSA-1 scientific seed execution: **NO**.
+- Scientific outcome generated: **NO**.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- Recovery scope: verifier-only safe static numeric-expression evaluator; no scientific runner import or execution.
