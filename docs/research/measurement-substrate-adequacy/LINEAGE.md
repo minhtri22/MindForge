@@ -283,3 +283,18 @@ Existing entries must never be rewritten or silently removed.
 - Predictor fitting: **FORBIDDEN / NONE**.
 - Fresh MSA-3 execution: **LOCKED / NOT AUTHORIZED**.
 - Next: freeze exact MSA-3 execution lock, run zero-science preflight, then independent lock verification.
+
+---
+
+## 2026-09-25 — MSA-3 Execution Lock v1 Frozen
+
+- Scientific wrapper commit: `191639c572b5db72a7ea323aeb82bd683de09bdb`.
+- Protocol Git blob: `edd84edfe189af94578cc89dfcdc5e40f54e759a`.
+- MSA-3 wrapper Git blob: `530521780d61f5dc2848476ed0c966c1a8fbcd1d`.
+- Reused exact MSA-1 classifier Git blob: `55d6686c6c1182b7706f4831cb8f49eec2ec032d`.
+- Eight substrate blobs: frozen identical to MSA-1.
+- Fresh MSA-3 manifest SHA-256: `5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8`.
+- Discovery result SHA-256: `359cdc7c505244e71a5122d0a1038f045d20af27782008afab9b1bbddbf51637`.
+- Replication success criterion: exact `ACCURACY_COARSE_LOSS_INFORMATIVE`.
+- Gate/metric/difficulty changes from MSA-1: **NONE**.
+- Fresh MSA-3 execution: **BLOCKED** pending zero-science preflight and independent exact-lock verification.
