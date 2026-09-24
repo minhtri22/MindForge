@@ -136,3 +136,20 @@ fresh MSA-3 science           NOT AUTHORIZED YET
 Canonical preflight closure: `MSA3_PREFLIGHT_QA.md`.
 
 Next admissible step: independent exact-lock verification only.
+
+
+## MSA-3 lock verification
+
+Independent exact-lock verification is **PASS / CLOSED**.
+
+Canonical closure: `MSA3_EXECUTION_LOCK_VERIFICATION.md`.
+
+```text
+MSA3_EXECUTION_LOCK_VERIFICATION_PASS
+lock = bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7
+```
+
+The exact 72-seed independent replication is now eligible to be opened.
+
+No MSA-3 fresh execution workflow exists yet. MSA-2, predictor fitting,
+controller work and KCL-7 remain closed.

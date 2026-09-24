@@ -331,3 +331,26 @@ Existing entries must never be rewritten or silently removed.
 - Difficulty mutation: **PROHIBITED**.
 - Predictor fitting: **PROHIBITED**.
 - Verification result at this entry: **PENDING**.
+
+---
+
+## 2026-09-25 — MSA-3 Independent Execution-Lock Verification Closed PASS
+
+- Canonical workflow: `36050240612`.
+- Independent tests: **5/5 PASS**.
+- Exact verified lock SHA-256: `bd8deb49030d98d2c11254d792065ceaef2e4e53d8db35489efb2c15570d66a7`.
+- Verdict: `MSA3_EXECUTION_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256: `a69406b03d074049597df34776a169322e05c3cbb05e64e2e0c102ba7af6a8fa`.
+- Artifact ID: `10829807853`.
+- Artifact ZIP SHA-256: `70e0655bde174af59dc24321eea3695bc76e071f215f07f840280a8865a3330a`.
+- Scientific contract exact-copy vs MSA-1: **PASS**.
+- 72-seed deterministic regeneration: **PASS**.
+- Historical/protected/ACO/CPRM/MSA-1 collisions: **ZERO**.
+- Fresh execution workflow: **ABSENT**.
+- Fresh collection/result: **ABSENT**.
+- Fresh scientific seed execution: **NO**.
+- Scientific outcome: **NO**.
+- Difficulty mutation: **NO**.
+- Predictor fitting: **NO**.
+- Exact MSA-3 replication is now **ELIGIBLE TO OPEN**, but has not started.
+- MSA-2/predictor/controller/KCL-7 remain **CLOSED**.
