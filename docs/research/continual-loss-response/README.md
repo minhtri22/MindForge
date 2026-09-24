@@ -59,3 +59,12 @@ predictor fitting              NOT AUTHORIZED
 controller                     CLOSED
 KCL-7                          CLOSED
 ```
+
+
+Canonical zero-science Actions confirmation:
+
+```text
+workflow = 36057035870
+4/4 tests PASS
+CLRM0_ZERO_SCIENCE_SPEC_QA_PASS
+```

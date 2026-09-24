@@ -38,11 +38,27 @@ No scientific outcome is generated.
 GitHub Actions attempt `36056186547` failed before tests because `pytest`
 was absent.
 
-Recovery attempts `36056366585` and `36057035870` remained in GitHub
-repository checkout and are **not** used as evidence of PASS.
+Recovery attempt `36056366585` experienced a checkout stall and is
+non-canonical.
 
-Their runner state is infrastructure-only and does not change this static
-branch-tree audit.
+The bounded-depth recovery run `36057035870` completed successfully and is
+the canonical Actions confirmation of this static audit:
+
+```text
+4/4 tests PASS
+CLRM0_ZERO_SCIENCE_SPEC_QA_PASS
+
+QA JSON SHA-256:
+74710fb9c8fe5422f33749664996ecc47f5e32c0a4f11d01c087f2e0e6d4d257
+
+artifact ID:
+10832548397
+
+artifact ZIP SHA-256:
+59776fe2373ead0fb9d3d1f790ec86643879fb7252cd38dd0f65b8f0e9af4659
+```
+
+Every zero-science flag in the canonical run is false.
 
 ## Frozen research object
 

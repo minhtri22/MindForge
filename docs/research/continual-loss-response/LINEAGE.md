@@ -80,3 +80,23 @@ Append-only.
 - CLRM-0: **PASS / CLOSED**.
 - CLRM-1 protocol design: **AUTHORIZED**.
 - CLRM-1 fresh science/predictor: **NOT AUTHORIZED**.
+
+---
+
+## 2026-09-25 — CLRM-0 Canonical Actions QA Confirmed PASS
+
+- Workflow: `36057035870`.
+- Workflow HEAD: `6c2c679bb90e9be8838503d346fed7ffd843310e`.
+- Static tests: **4/4 PASS**.
+- Verdict: `CLRM0_ZERO_SCIENCE_SPEC_QA_PASS`.
+- QA JSON SHA-256:
+  `74710fb9c8fe5422f33749664996ecc47f5e32c0a4f11d01c087f2e0e6d4d257`.
+- Artifact ID: `10832548397`.
+- Artifact ZIP SHA-256:
+  `59776fe2373ead0fb9d3d1f790ec86643879fb7252cd38dd0f65b8f0e9af4659`.
+- Fresh seed execution: **NO**.
+- Scientific outcome: **NO**.
+- Predictor fitting: **NO**.
+- Controller execution: **NO**.
+- This Actions PASS confirms the independent branch-tree audit already used to
+  close CLRM-0.
