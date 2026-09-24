@@ -1,0 +1,225 @@
+{
+  "adjudication": {
+    "discovery_verdict": "ACCURACY_COARSE_LOSS_INFORMATIVE",
+    "observed_verdict": "ACCURACY_COARSE_LOSS_INFORMATIVE",
+    "replication_confirmed": true,
+    "replication_status": "REPLICATION_CONFIRMED",
+    "underlying_msa1_classifier": {
+      "endpoint_geometry": {
+        "accuracy_cells": {
+          "A_CARRY_ALL|stage1": {
+            "ceiling_fraction": 0.9722222222222222,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 2
+          },
+          "A_CARRY_ALL|stage2": {
+            "ceiling_fraction": 1.0,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 1
+          },
+          "A_CARRY_ALL|stage3": {
+            "ceiling_fraction": 0.875,
+            "informative": false,
+            "p10": 0.9583333134651184,
+            "p90": 1.0,
+            "robust_span": 0.04166668653488159,
+            "saturated": false,
+            "unique_count": 7
+          },
+          "B_RESET_ALL|stage1": {
+            "ceiling_fraction": 0.9722222222222222,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 2
+          },
+          "B_RESET_ALL|stage2": {
+            "ceiling_fraction": 0.9861111111111112,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 2
+          },
+          "B_RESET_ALL|stage3": {
+            "ceiling_fraction": 0.8888888888888888,
+            "informative": false,
+            "p10": 0.9624999821186065,
+            "p90": 1.0,
+            "robust_span": 0.037500017881393455,
+            "saturated": true,
+            "unique_count": 6
+          },
+          "C_CARRY_STEP_RESET_MOMENTS|stage1": {
+            "ceiling_fraction": 0.9722222222222222,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 2
+          },
+          "C_CARRY_STEP_RESET_MOMENTS|stage2": {
+            "ceiling_fraction": 1.0,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 1
+          },
+          "C_CARRY_STEP_RESET_MOMENTS|stage3": {
+            "ceiling_fraction": 0.9166666666666666,
+            "informative": false,
+            "p10": 1.0,
+            "p90": 1.0,
+            "robust_span": 0.0,
+            "saturated": true,
+            "unique_count": 6
+          }
+        },
+        "accuracy_informative": {
+          "qualified": false,
+          "qualifying_policies_per_stage": {
+            "1": 0,
+            "2": 0,
+            "3": 0
+          }
+        },
+        "accuracy_saturated": {
+          "qualified": true,
+          "qualifying_policies_per_stage": {
+            "1": 3,
+            "2": 3,
+            "3": 2
+          }
+        },
+        "loss_cells": {
+          "A_CARRY_ALL|stage1": {
+            "informative": true,
+            "p10": 0.024827083759009837,
+            "p90": 0.06621188595890999,
+            "robust_span": 0.04138480219990015,
+            "saturated": false,
+            "unique_count": 72
+          },
+          "A_CARRY_ALL|stage2": {
+            "informative": true,
+            "p10": 0.03327767029404641,
+            "p90": 0.06213058568537235,
+            "robust_span": 0.028852915391325944,
+            "saturated": false,
+            "unique_count": 72
+          },
+          "A_CARRY_ALL|stage3": {
+            "informative": true,
+            "p10": 0.01722661089152098,
+            "p90": 0.15407765507698054,
+            "robust_span": 0.13685104418545957,
+            "saturated": false,
+            "unique_count": 72
+          },
+          "B_RESET_ALL|stage1": {
+            "informative": true,
+            "p10": 0.027448810078203677,
+            "p90": 0.06328400410711765,
+            "robust_span": 0.035835194028913976,
+            "saturated": false,
+            "unique_count": 72
+          },
+          "B_RESET_ALL|stage2": {
+            "informative": true,
+            "p10": 0.03241598457098007,
+            "p90": 0.06880586668848991,
+            "robust_span": 0.03638988211750984,
+            "saturated": false,
+            "unique_count": 72
+          },
+          "B_RESET_ALL|stage3": {
+            "informative": true,
+            "p10": 0.01647724136710167,
+            "p90": 0.07594504468142983,
+            "robust_span": 0.05946780331432816,
+            "saturated": false,
+            "unique_count": 72
+          },
+          "C_CARRY_STEP_RESET_MOMENTS|stage1": {
+            "informative": false,
+            "p10": 0.01603991985321045,
+            "p90": 0.04983586929738521,
+            "robust_span": 0.03379594944417476,
+            "saturated": true,
+            "unique_count": 72
+          },
+          "C_CARRY_STEP_RESET_MOMENTS|stage2": {
+            "informative": false,
+            "p10": 0.0191228449344635,
+            "p90": 0.05007902458310127,
+            "robust_span": 0.03095617964863777,
+            "saturated": true,
+            "unique_count": 72
+          },
+          "C_CARRY_STEP_RESET_MOMENTS|stage3": {
+            "informative": false,
+            "p10": 0.010535681806504726,
+            "p90": 0.02896089348942041,
+            "robust_span": 0.018425211682915683,
+            "saturated": true,
+            "unique_count": 72
+          }
+        },
+        "loss_informative": {
+          "qualified": true,
+          "qualifying_policies_per_stage": {
+            "1": 2,
+            "2": 2,
+            "3": 2
+          }
+        },
+        "loss_saturated": {
+          "qualified": false,
+          "qualifying_policies_per_stage": {
+            "1": 1,
+            "2": 1,
+            "3": 1
+          }
+        }
+      },
+      "reason": "ACCURACY_SATURATED_LOSS_INFORMATIVE",
+      "reliability_ok": true,
+      "status": "PASS",
+      "support_integrity": {
+        "checks": {
+          "all_rows_valid": true,
+          "records_exact": true,
+          "seed_count_exact": true,
+          "seed_set_exact": true,
+          "stage_counts_exact": true,
+          "three_boundaries_per_seed": true
+        },
+        "per_stage": {
+          "1": 72,
+          "2": 72,
+          "3": 72
+        },
+        "valid": true
+      },
+      "verdict": "ACCURACY_COARSE_LOSS_INFORMATIVE"
+    }
+  },
+  "program": "MSA-3",
+  "protocol_sha256": "260de277655bb120f48e5aff5f2bf44469419076d65cdbbfd3dbce02d29248f1",
+  "schema": "MSA3-FORMAL-RESULT-v1",
+  "source_records_sha256": "a4943f33cf36627d2ba27572e2e9ff15fc4b1acebd1509fa24587c677c9cd282"
+}
