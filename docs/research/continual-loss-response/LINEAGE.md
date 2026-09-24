@@ -43,3 +43,15 @@ Append-only.
 - QA recovery also narrows the CPRM anti-reuse assertion to the actual primary
   target-definition block, because the document intentionally names historical
   CPRM variables in a prohibition section.
+
+---
+
+## 2026-09-25 — CLRM-0 QA Checkout Optimization
+
+- QA recovery run `36056366585` remained in repository checkout because
+  `fetch-depth: 0` fetched full branch history.
+- Classification: **QA_INFRASTRUCTURE_ONLY**.
+- Checkout scope reduced to `fetch-depth: 4`, sufficient to retain the exact
+  MSA closure ancestor and CLRM-0 commit chain required by static validation.
+- Scientific target/baselines/gates/partitions/exclusions changed: **NO**.
+- Fresh science/predictor/controller execution: **NO**.
