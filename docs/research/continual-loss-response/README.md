@@ -1,6 +1,6 @@
 # Continual Loss Response Modeling (CLRM)
 
-Status: **CLRM-0 — SPECIFICATION FOUNDATION / ZERO SCIENCE**
+Status: **CLRM-0 PASS / CLOSED — CLRM-1 DESIGN ONLY AUTHORIZED**
 
 Branch: `research/continual-loss-response`
 
@@ -42,3 +42,20 @@ Canonical CLRM-0 documents:
 The next admissible transition after CLRM-0 PASS is design/preregistration of
 CLRM-1 measurement-support qualification. CLRM-1 is still a no-predictor
 milestone.
+
+
+## CLRM-0 formal closure
+
+Independent static zero-science specification QA is **PASS / CLOSED**.
+
+Canonical closure: `CLRM0_SPEC_QA.md`.
+
+```text
+CLRM0_ZERO_SCIENCE_SPEC_QA_PASS
+
+CLRM-1 protocol design          AUTHORIZED
+CLRM-1 fresh execution         NOT AUTHORIZED
+predictor fitting              NOT AUTHORIZED
+controller                     CLOSED
+KCL-7                          CLOSED
+```

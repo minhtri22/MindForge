@@ -1,15 +1,9 @@
 name: CLRM — CLRM-0 zero-science specification QA
 
+# CLRM-0 is formally closed by independent static GitHub tree audit.
+# Retained manual-only for provenance/debugging; it is not canonical PASS evidence.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/continual-loss-response
-    paths:
-      - docs/research/continual-loss-response/**
-      - tools/clrm/**
-      - tests/test_clrm0_spec.py
-      - .github/workflows/clrm0-zero-science-spec-qa.yml
 
 permissions:
   contents: read

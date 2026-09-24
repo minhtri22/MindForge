@@ -1,0 +1,58 @@
+{
+  "schema": "CLRM0-INDEPENDENT-STATIC-SPEC-QA-v1",
+  "program": "CLRM-0",
+  "status": "PASS",
+  "verdict": "CLRM0_ZERO_SCIENCE_SPEC_QA_PASS",
+  "method": "Independent GitHub branch-tree/diff and frozen-contract audit; no scientific execution.",
+  "audited_head": "6c2c679bb90e9be8838503d346fed7ffd843310e",
+  "exact_parent_closure": "64138ab9cb09dcb56a387d3b1f500063eff8302d",
+  "branch": "research/continual-loss-response",
+  "compare": {
+    "status": "ahead",
+    "ahead_by": 3,
+    "behind_by": 0,
+    "merge_base": "64138ab9cb09dcb56a387d3b1f500063eff8302d",
+    "changed_files": 17,
+    "inherited_files_modified": false
+  },
+  "checks": {
+    "branch_exact": true,
+    "parent_merge_base_exact": true,
+    "required_contract_documents_present": true,
+    "new_program_not_cprm2": true,
+    "exact_response_vector_frozen": true,
+    "response_vector": [
+      "L_current_end",
+      "L_prior_mean_end"
+    ],
+    "direct_channels": 6,
+    "a_relative_contrasts_frozen": true,
+    "accuracy_sentinel_only": true,
+    "all_boundary_population_frozen": true,
+    "simple_baselines_frozen": [
+      "B0_policy_global_mean",
+      "B1_policy_by_stage_mean",
+      "B2_ridge_state_response"
+    ],
+    "development_validation_replication_roles_separated": true,
+    "baseline_superiority_gate_frozen": true,
+    "calibration_gate_frozen": true,
+    "historical_spent_exclusions_frozen": true,
+    "finite_stop_roadmap_frozen": true,
+    "controller_prohibited": true,
+    "kcl7_closed": true,
+    "no_experiments_clrm_path_added": true,
+    "no_clrm_fresh_seed_manifest_added": true,
+    "no_predictor_implementation_added": true,
+    "no_scientific_result_added": true
+  },
+  "actions_attempts": {
+    "36056186547": "TECHNICAL_QA_INFRASTRUCTURE_FAILURE_MISSING_PYTEST",
+    "36056366585": "RUNNER_CHECKOUT_STALL_NOT_USED_FOR_PASS",
+    "36057035870": "RUNNER_CHECKOUT_STALL_NOT_USED_FOR_PASS"
+  },
+  "fresh_seed_execution_attempted": false,
+  "scientific_outcome_generated": false,
+  "predictor_fitting_performed": false,
+  "controller_execution_performed": false
+}

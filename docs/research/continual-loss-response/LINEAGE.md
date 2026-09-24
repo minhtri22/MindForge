@@ -55,3 +55,28 @@ Append-only.
   MSA closure ancestor and CLRM-0 commit chain required by static validation.
 - Scientific target/baselines/gates/partitions/exclusions changed: **NO**.
 - Fresh science/predictor/controller execution: **NO**.
+
+---
+
+## 2026-09-25 — CLRM-0 Independent Static Specification QA Closed PASS
+
+- Audited branch head: `6c2c679bb90e9be8838503d346fed7ffd843310e`.
+- Exact merge base / parent closure:
+  `64138ab9cb09dcb56a387d3b1f500063eff8302d`.
+- Git compare: **ahead 3 / behind 0 / 17 added CLRM files**.
+- Inherited scientific implementation modified: **NO**.
+- Exact two-axis CE-loss response vector: **FROZEN**.
+- Accuracy role: **SENTINEL ONLY**.
+- All-boundary population: **FROZEN**.
+- B0/B1/B2 baselines: **FROZEN**.
+- Role S / D-train / D-val / R separation: **FROZEN**.
+- Baseline-superiority + point-calibration gates: **FROZEN**.
+- KCL/ACO/CPRM/MSA freshness exclusions: **FROZEN**.
+- Scientific runner/result: **ABSENT**.
+- Fresh seed manifest: **ABSENT**.
+- Predictor fitting: **NO**.
+- Controller execution: **NO**.
+- Verdict: `CLRM0_ZERO_SCIENCE_SPEC_QA_PASS`.
+- CLRM-0: **PASS / CLOSED**.
+- CLRM-1 protocol design: **AUTHORIZED**.
+- CLRM-1 fresh science/predictor: **NOT AUTHORIZED**.
