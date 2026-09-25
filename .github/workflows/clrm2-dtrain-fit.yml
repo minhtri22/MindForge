@@ -91,10 +91,13 @@ jobs:
           import torch
 
           wf=pathlib.Path(".github/workflows/clrm2-dtrain-fit.yml").read_text(encoding="utf-8")
-          assert wf.count("--phase', 'collect-train'")==1
-          assert wf.count("--phase', 'fit-freeze'")==1
-          assert "--phase', 'collect-val'" not in wf
-          assert "--phase', 'adjudicate'" not in wf
+          collect_needle='"--phase", "' + "collect-train" + '"'
+          fit_needle='"--phase", "' + "fit-freeze" + '"'
+          assert wf.count(collect_needle)==1
+          assert wf.count(fit_needle)==1
+          for forbidden_phase in ("collect"+"-val", "adju"+"dicate"):
+              forbidden_needle='"--phase", "' + forbidden_phase + '"'
+              assert forbidden_needle not in wf
 
           assert platform.machine()=="x86_64"
           assert platform.python_version()=="3.12.14"
