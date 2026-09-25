@@ -1,0 +1,297 @@
+{
+  "schema": "CLRM1-EXECUTION-LOCK-v1",
+  "program": "CLRM-1",
+  "role": "S_SUPPORT_ONLY",
+  "status": "LOCKED_PENDING_ZERO_SCIENCE_PREFLIGHT_AND_INDEPENDENT_VERIFICATION",
+  "parent": {
+    "clrm0_closure_commit": "cd989bef0c314479b5be16380d024124c05d9351",
+    "clrm0_verdict": "CLRM0_ZERO_SCIENCE_SPEC_QA_PASS"
+  },
+  "implementation": {
+    "commit": "2b8f29547b29a63bf3f4131a0cdd48cfb48c3e63",
+    "runner_path": "experiments/clrm/clrm1_loss_response_support.py",
+    "runner_git_blob_sha": "deb0c30af6a981705587637706e98ddc1cbc1ceb",
+    "test_path": "tests/test_clrm1_loss_response_support.py",
+    "test_git_blob_sha": "00333df9b8293409f6a40cada3dfa763e61035e8",
+    "post_lock_scientific_source_change_allowed": false
+  },
+  "protocol": {
+    "path": "docs/research/continual-loss-response/clrm1-loss-response-support-protocol.md",
+    "git_blob_sha": "6560f7ff12b98bfcdead97661c934b58abe3a437"
+  },
+  "seed_manifest": {
+    "path": "docs/research/continual-loss-response/CLRM1_ROLE_S_SEED_MANIFEST.json",
+    "git_blob_sha": "3060fe5f6d348390f3dbcdc1ceb7471084635318",
+    "generation_phrase": "MindForge|CLRM-1|role-s-loss-response-support|v1",
+    "generation_rule": "2,000,000 + uint64_be(SHA256(phrase + '|' + decimal(i))[0:8]) mod 7,000,000; accept unique candidates in counter order",
+    "count": 72,
+    "sha256": "3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6",
+    "seeds": [
+      3010487,
+      6390804,
+      7554778,
+      6421546,
+      8255747,
+      3221303,
+      4920374,
+      6284346,
+      4716387,
+      5672294,
+      6811595,
+      5893018,
+      8611908,
+      3537915,
+      3904505,
+      6328288,
+      3828589,
+      5858064,
+      7762622,
+      7393682,
+      7860013,
+      6639705,
+      2326389,
+      2733788,
+      6182716,
+      7681758,
+      4502424,
+      4542422,
+      4883553,
+      7560158,
+      6740910,
+      6765774,
+      5812757,
+      6374908,
+      6785962,
+      5738725,
+      5242548,
+      3626182,
+      8429721,
+      5169376,
+      7906970,
+      7389765,
+      2621346,
+      5051772,
+      3290569,
+      4656879,
+      4458089,
+      6890844,
+      7215063,
+      6226921,
+      7653913,
+      7095910,
+      8732714,
+      7547285,
+      7882034,
+      4917790,
+      4193824,
+      3048847,
+      5211537,
+      5003679,
+      5923954,
+      3107127,
+      8263759,
+      5352954,
+      4767982,
+      5964534,
+      7997783,
+      5425848,
+      2302199,
+      4020310,
+      5879011,
+      7559240
+    ]
+  },
+  "exclusions": {
+    "historical_kcl_scan_required": true,
+    "protected_kcl": [
+      13635,
+      13837,
+      14039,
+      14241,
+      14443,
+      14645,
+      14847,
+      15049,
+      15251,
+      15453,
+      15655,
+      15857,
+      16059,
+      16261,
+      16463,
+      16665,
+      16867,
+      17069,
+      17271,
+      17473
+    ],
+    "spent_manifest_sha256": {
+      "ACO-1": "9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91",
+      "CPRM-1": "d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3",
+      "MSA-1": "e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347",
+      "MSA-3": "5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8"
+    },
+    "exclusion_source_blobs": {
+      "experiments/msa/msa1_endpoint_adequacy.py": "55d6686c6c1182b7706f4831cb8f49eec2ec032d",
+      "experiments/msa/msa3_independent_replication.py": "530521780d61f5dc2848476ed0c966c1a8fbcd1d"
+    }
+  },
+  "substrate": {
+    "identity": "EXACT_CURRENT_KCL_MSA_SUBSTRATE",
+    "git_blobs": {
+      "experiments/kernel_cl/kcl1_substrate.py": "4303dd544e0bdb935c499abedc62aa095bc56674",
+      "experiments/kernel_cl/kcl6_long_horizon.py": "33a743d62b5a83286c8945ffc0f473ae66fe50c0",
+      "experiments/kernel_cl/kcl61_weighted_replay_ab.py": "9a2ea8435bc92d65af7044b5351d06adc6cc2d44",
+      "experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py": "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7",
+      "experiments/kernel_cl/kcl65_specificity_ab.py": "88aa11fea6e8474c323c02491c0b85a91722c686",
+      "experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py": "7119b9520f50de53a42313f7c7173c8d5daec2f1",
+      "mindforge/config.py": "54ab270a25edd962e62360e14736b28f52a4fbcd",
+      "mindforge/model.py": "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+    },
+    "task_order": [
+      "T1_U1_A",
+      "T2_U1_B",
+      "T3_U3_A",
+      "T4_U3_B"
+    ],
+    "policies": [
+      "A_CARRY_ALL",
+      "B_RESET_ALL",
+      "C_CARRY_STEP_RESET_MOMENTS"
+    ],
+    "endpoint_step": 250,
+    "difficulty_mutation_allowed": false
+  },
+  "response_contract": {
+    "direct_channels": [
+      "A.current_loss",
+      "A.prior_mean_loss",
+      "B.current_loss",
+      "B.prior_mean_loss",
+      "C.current_loss",
+      "C.prior_mean_loss"
+    ],
+    "exact_response_vector": [
+      "L_current_end",
+      "L_prior_mean_end"
+    ],
+    "same_terminal_state_required": true,
+    "current_curve_point_exact_required": true,
+    "prior_task_weighting": "EQUAL_ARITHMETIC_MEAN_OVER_ALL_PRIOR_TASKS",
+    "accuracy_sentinel": {
+      "fields": [
+        "current_terminal_accuracy",
+        "min_prior_terminal_accuracy"
+      ],
+      "gating": false,
+      "threshold_imported": false
+    },
+    "contrasts": {
+      "families": [
+        "B_minus_A",
+        "C_minus_A"
+      ],
+      "components": [
+        "current_loss",
+        "prior_mean_loss"
+      ],
+      "gating": false,
+      "diagnostic_only": true
+    }
+  },
+  "population": {
+    "seeds": 72,
+    "boundaries_per_seed": 3,
+    "expected_boundaries": 216,
+    "expected_per_stage": {
+      "1": 72,
+      "2": 72,
+      "3": 72
+    },
+    "policies_per_boundary": 3,
+    "expected_policy_response_vectors": 648,
+    "expected_primary_loss_scalars": 1296,
+    "all_boundary_population": true
+  },
+  "geometry_gate": {
+    "cell": {
+      "unique_count_min": 10,
+      "robust_span_definition": "p90-p10",
+      "robust_span_min": 0.02
+    },
+    "channel": {
+      "qualified_stage_count_min": 2,
+      "total_stages": 3
+    },
+    "pass_rule": "ALL_6_DIRECT_CHANNELS_QUALIFIED",
+    "pooled_across_stage_qualification_allowed": false
+  },
+  "reliability": {
+    "repeat_seed_count": 6,
+    "repeat_seeds": [
+      3010487,
+      6390804,
+      7554778,
+      6421546,
+      8255747,
+      3221303
+    ],
+    "exact_required": true,
+    "max_abs_diff_required": 0
+  },
+  "adjudication": {
+    "one_shot": true,
+    "pre_adjudication_geometry_inspection_allowed": false,
+    "allowed_verdicts": [
+      "PASS_LOSS_RESPONSE_SUPPORT",
+      "NEGATIVE_LOSS_RESPONSE_GEOMETRY",
+      "STOP_INTEGRITY_OR_SUPPORT"
+    ],
+    "pass_verdict": "PASS_LOSS_RESPONSE_SUPPORT"
+  },
+  "technical_retry_policy": {
+    "collection_retry_only_before_complete_valid_collection": true,
+    "same_seed_same_lock": true,
+    "seed_substitution": false,
+    "extra_seeds": false,
+    "difficulty_change": false,
+    "source_or_gate_change": false,
+    "outcome_inspection_before_retry": false,
+    "complete_valid_collection_must_not_be_rerun": true,
+    "adjudication_exactly_one_valid_run": true,
+    "adjudication_retry_only_if_no_valid_formal_result": true,
+    "source_protocol_seed_runtime_or_gate_change_invalidates_lock": true
+  },
+  "runtime": {
+    "platform": "GitHub-hosted ubuntu-24.04",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "pip": "26.2.1",
+    "numpy": "2.3.3",
+    "pytest": "8.4.2",
+    "torch": "2.10.0+cpu",
+    "torch_index_url": "https://download.pytorch.org/whl/cpu",
+    "device": "CPU",
+    "deterministic_algorithms": true,
+    "torch_num_threads": 1
+  },
+  "historical_probe": {
+    "seed": 9595,
+    "purpose": "ZERO_SCIENCE_EXTRACTION_AND_REPEAT_PROBE_ONLY",
+    "fresh": false,
+    "adjudication_allowed": false,
+    "geometry_inspection_allowed": false
+  },
+  "outputs": {
+    "preflight": "artifacts/clrm1_zero_science_preflight.json",
+    "collection": "experiments/clrm/results/clrm1_role_s_responses.json",
+    "formal_result": "experiments/clrm/results/CLRM1_FORMAL_RESULT.json"
+  },
+  "downstream": {
+    "on_pass": "CLRM-2 DESIGN ONLY",
+    "on_negative_or_stop": "FORMAL CONVERGENCE REVIEW",
+    "predictor_training_authorized": false,
+    "controller_closed": true,
+    "kcl7_closed": true
+  }
+}

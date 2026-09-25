@@ -125,3 +125,27 @@ Append-only.
   and independent lock verification.
 - Only `PASS_LOSS_RESPONSE_SUPPORT` may open **CLRM-2 design**.
 - CLRM-2 predictor training: **NOT AUTHORIZED** by CLRM-1 design.
+
+---
+
+## 2026-09-25 — CLRM-1 Execution Lock v1 Frozen
+
+- Preregistration/implementation commit:
+  `2b8f29547b29a63bf3f4131a0cdd48cfb48c3e63`.
+- Protocol Git blob:
+  `6560f7ff12b98bfcdead97661c934b58abe3a437`.
+- Role-S seed-manifest Git blob:
+  `3060fe5f6d348390f3dbcdc1ceb7471084635318`.
+- Scientific runner Git blob:
+  `deb0c30af6a981705587637706e98ddc1cbc1ceb`.
+- Synthetic/static test Git blob:
+  `00333df9b8293409f6a40cada3dfa763e61035e8`.
+- Role-S manifest SHA-256:
+  `3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6`.
+- Eight substrate blobs: frozen exact.
+- ACO-1 / CPRM-1 / MSA-1 / MSA-3 spent manifest hashes: frozen exact.
+- Six-channel geometry gate: frozen exact.
+- Reliability / one-shot adjudication / retry policy: frozen exact.
+- Predictor training: **NOT AUTHORIZED**.
+- Fresh CLRM-1 execution: **BLOCKED** pending zero-science preflight and
+  independent exact-lock verification.
