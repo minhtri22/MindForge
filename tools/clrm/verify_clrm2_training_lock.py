@@ -130,8 +130,10 @@ def verifier_safety():
         elif isinstance(n,ast.Call):
             f=n.func.id if isinstance(n.func,ast.Name) else n.func.attr if isinstance(n.func,ast.Attribute) else ""
             call |= f in forbidden
-            lits=[x.value for x in ast.walk(n) if isinstance(x,ast.Constant) and isinstance(x.value,str)]
-            if any("clrm2_predictive_discovery.py" in x for x in lits): launch=True
+            if f in {"run","call","check_call","check_output","Popen"}:
+                lits=[x.value for x in ast.walk(n) if isinstance(x,ast.Constant) and isinstance(x.value,str)]
+                if any("clrm2_predictive_discovery.py" in x for x in lits):
+                    launch=True
     return {"no_import_clrm2":not imp,"no_scientific_call":not call,"no_runner_launch":not launch}
 
 def verify()->dict[str,Any]:

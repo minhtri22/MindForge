@@ -384,3 +384,18 @@ Append-only.
 - Predictor fitting: **PROHIBITED during verification**.
 - D-val execution: **PROHIBITED**.
 - Verification result at this entry: **PENDING**.
+
+---
+
+## 2026-09-25 — CLRM2-A Verification Attempt 1 Technical Verifier False Positive
+
+- Workflow: `36100100251`.
+- Scientific execution: **NONE**.
+- D-train/candidate/D-val/formal outputs: **ABSENT**.
+- Failure source: verifier self-safety detector treated its own string literal
+  `clrm2_predictive_discovery.py` as if it had launched the scientific runner.
+- Classification: **TECHNICAL_VERIFIER_FALSE_POSITIVE / ZERO-SCIENCE**.
+- Training Lock changed: **NO**.
+- Protocol/representation/target/model/baseline/CV/Gate-2 contracts changed:
+  **NO**.
+- Recovery: restrict runner-launch detection to actual subprocess call-sites.
