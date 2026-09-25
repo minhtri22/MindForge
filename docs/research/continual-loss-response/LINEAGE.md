@@ -149,3 +149,29 @@ Append-only.
 - Predictor training: **NOT AUTHORIZED**.
 - Fresh CLRM-1 execution: **BLOCKED** pending zero-science preflight and
   independent exact-lock verification.
+
+---
+
+## 2026-09-25 — CLRM-1 Zero-Science Preflight Closed PASS
+
+- Canonical workflow: `36088425840`.
+- Static/synthetic tests: **5/5 PASS**.
+- Verdict: `CLRM1_ZERO_SCIENCE_PREFLIGHT_PASS`.
+- Execution-lock SHA-256:
+  `39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e`.
+- Protocol SHA-256:
+  `1841fb6ce65eb9d1f4ce93771797819fa68bc9216f5714322de645a874f59411`.
+- Preflight JSON SHA-256:
+  `d32e2efd209a8dcfd7ba6a1b2db9790536e65233817a3c476046c9758702976b`.
+- Artifact ID: `10844344688`.
+- Artifact ZIP SHA-256:
+  `e9942ed848382117ae7df148c71b733d0e397c54dd2c968a8f4b0f954d6ccb57`.
+- Historical extraction/repeat seed 9595: **PASS / EXACT**.
+- KCL/ACO/CPRM/MSA collision audit: **ZERO**.
+- Fresh Role-S seed execution: **NO**.
+- Response geometry inspection: **NO**.
+- Scientific outcome: **NO**.
+- Predictor fitting: **NO**.
+- Difficulty mutation: **NO**.
+- Controller execution: **NO**.
+- Independent execution-lock verification: **PENDING**.

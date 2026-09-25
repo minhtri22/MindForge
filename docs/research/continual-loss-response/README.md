@@ -68,3 +68,24 @@ workflow = 36057035870
 4/4 tests PASS
 CLRM0_ZERO_SCIENCE_SPEC_QA_PASS
 ```
+
+
+## CLRM-1 preregistration status
+
+CLRM-1 Loss Response Support Qualification is preregistered and its
+zero-science preflight is **PASS / CLOSED**.
+
+```text
+Role-S seeds                   72 FROZEN
+boundaries                     216 expected
+policy response vectors        648 expected
+direct loss channels           6 FROZEN
+reliability repeats            6 FROZEN
+Execution Lock SHA-256
+39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e
+
+CLRM1_ZERO_SCIENCE_PREFLIGHT_PASS
+```
+
+Fresh CLRM-1 science remains blocked pending independent exact-lock
+verification. CLRM-2 design and predictor fitting remain closed.
