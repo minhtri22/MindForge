@@ -62,3 +62,20 @@ No replacement seed may be chosen after scientific outcomes are inspected to
 repair support or model performance.
 
 CLRM-0 itself creates no fresh seed manifest.
+
+
+## CLRM-1 spent support cohort
+
+After canonical Gate-1 execution, the full Role-S cohort is spent.
+
+Manifest SHA-256:
+
+```text
+3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6
+```
+
+This cohort is excluded from every CLRM-2 D-train/D-val manifest and every
+future CLRM independent replication manifest.
+
+It may be used only for provenance and exact reproduction of the CLRM-1
+support verdict.

@@ -110,3 +110,34 @@ CLRM-2 design                  CLOSED UNTIL CLRM-1 PASS
 predictor training             CLOSED
 controller                     CLOSED
 ```
+
+
+## CLRM-1 formal result
+
+CLRM-1 is **PASS / CLOSED**.
+
+```text
+PASS_LOSS_RESPONSE_SUPPORT
+ALL_SIX_DIRECT_LOSS_CHANNELS_NONDEGENERATE
+```
+
+Canonical closure: `CLRM1_FORMAL_CLOSURE.md`.
+
+```text
+72/72 Role-S seeds
+216/216 boundaries
+648/648 A/B/C response vectors
+6/6 deterministic repeats exact
+
+A.current_loss       3/3 stages
+A.prior_mean_loss    3/3 stages
+B.current_loss       2/3 stages
+B.prior_mean_loss    3/3 stages
+C.current_loss       2/3 stages
+C.prior_mean_loss    3/3 stages
+```
+
+Role-S is now spent support evidence.
+
+CLRM-2 **design only** is authorized. No CLRM-2 fresh execution or predictor
+training is authorized yet.

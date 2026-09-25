@@ -1,12 +1,9 @@
-name: CLRM — CLRM-1 locked Role-S support execution
+name: CLRM — CLRM-1 locked Role-S support execution (RETIRED)
 
+# Canonical CLRM-1 execution completed in run 36092039012.
+# Retained for provenance only; execution is hard-disabled.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - research/continual-loss-response
-    paths:
-      - .github/workflows/clrm1-locked-execute.yml
 
 permissions:
   contents: write
@@ -17,6 +14,7 @@ concurrency:
 
 jobs:
   execute:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 300
 

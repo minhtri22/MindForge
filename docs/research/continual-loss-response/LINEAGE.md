@@ -244,3 +244,43 @@ Append-only.
 - Complete valid collection rerun: **PROHIBITED**.
 - Predictor fitting / difficulty mutation / controller: **PROHIBITED**.
 - Result at this lineage entry: **UNOBSERVED**.
+
+---
+
+## 2026-09-25 — CLRM-1 Canonical Role-S Execution Closed PASS
+
+- Canonical workflow: `36092039012`.
+- Exact lock SHA-256:
+  `39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e`.
+- Role-S seeds: **72/72 COMPLETE**.
+- Matched boundaries: **216/216 COMPLETE**.
+- A/B/C response vectors: **648/648**.
+- Primary loss scalars: **1296/1296**.
+- Reliability repeats: **6/6 EXACT PASS**.
+- Integrity/support/reliability: **PASS**.
+- Collection SHA-256:
+  `adc69007e98f036785427617b7109f0a93cc236e4ef605bfbdfcdf727748c7b4`.
+- Collection evidence commit:
+  `ff3d4d6b5c386c036e5e0de3286ff53f19cb18c4`.
+- Pre-adjudication artifact ID: `10845952892`.
+- Pre-adjudication artifact ZIP SHA-256:
+  `b7530afd0e3ad748777518fad46d45311116da6fd881c46ac1dacbc7d4537155`.
+- Intermediate six-channel/contrast/accuracy-distribution inspection: **NO**.
+- Valid support-adjudicator calls: **1**.
+- Observed status: **PASS**.
+- Observed verdict: `PASS_LOSS_RESPONSE_SUPPORT`.
+- Reason: `ALL_SIX_DIRECT_LOSS_CHANNELS_NONDEGENERATE`.
+- Formal-result SHA-256:
+  `1ed1ce672454c845445c0f87efb27df75cdc4842dea01c8a22b825a5ed76ff20`.
+- Formal-result evidence commit:
+  `aa35ad61f032b35303958edafd7b2c8e3ce7010d`.
+- Complete evidence artifact ID: `10845703212`.
+- Complete evidence ZIP SHA-256:
+  `6cf2ff1afde9f2b41d540362720c8d9c4c481cfbf8212bd27e19dc8e1f3b70c8`.
+- Predictor fitted: **NO**.
+- Difficulty mutation: **NO**.
+- Controller execution: **NO**.
+- Role-S cohort: **HISTORICAL / SPENT SUPPORT EVIDENCE**.
+- CLRM-1: **PASS / CLOSED**.
+- CLRM-2 design: **AUTHORIZED**.
+- CLRM-2 fresh science / predictor training: **NOT AUTHORIZED**.
