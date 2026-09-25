@@ -1,0 +1,237 @@
+{
+  "schema": "CLRM2-TRAINING-LOCK-v1",
+  "program": "CLRM-2",
+  "phase": "A_DTRAIN_ONLY",
+  "status": "LOCKED_PENDING_ZERO_SCIENCE_PREFLIGHT_AND_INDEPENDENT_VERIFICATION",
+  "parent": {
+    "clrm1_closure_commit": "2dd27566961e6e31d9938b6d27084ef6a6e6e6ed",
+    "clrm1_verdict": "PASS_LOSS_RESPONSE_SUPPORT",
+    "clrm2_preregistration_commit": "3d359e3cc8a101c4f8b0c2be5a8f278931645129"
+  },
+  "protocol": {
+    "path": "docs/research/continual-loss-response/clrm2-predictive-discovery-protocol.md",
+    "git_blob_sha": "9c35a9b8648ae2581a9f111680364dc75ffcf8a8"
+  },
+  "implementation": {
+    "runner_path": "experiments/clrm/clrm2_predictive_discovery.py",
+    "runner_git_blob_sha": "2b802f0ff10508d573e0c8ae61b6337ef80a1807",
+    "test_path": "tests/test_clrm2_predictive_discovery.py",
+    "test_git_blob_sha": "e9dcd706aa72d09de69523323675601d7ae1d28a",
+    "preflight_workflow_path": ".github/workflows/clrm2-zero-science-preflight.yml",
+    "preflight_workflow_git_blob_sha": "9e439da9ffc6e865961fd67e3dc738a8100137c6",
+    "post_lock_scientific_source_change_allowed": false
+  },
+  "feature_contract": {
+    "name": "OBS11-v1",
+    "exact_order": [
+      "STAGE_2",
+      "STAGE_3",
+      "H1_M1_RMS",
+      "H2_SQRT_M2_RMS",
+      "H3_BIAS_CORRECTED_ADAM_PRESSURE_RMS",
+      "H4_TASK_DRIFT_RELATIVE_L2",
+      "H5_PRESSURE_TO_DRIFT_RATIO",
+      "H6_DRIFT_PRESSURE_COSINE",
+      "H7_PRIOR_MEAN_ACCURACY",
+      "H8_PRIOR_WORST_ACCURACY",
+      "H9_CURRENT_TASK_LOSS"
+    ],
+    "feature_extractor_path": "experiments/kernel_cl/kcl656_boundary_health_signal.py",
+    "feature_extractor_git_blob_sha": "cd1ce639435df7f94499d2a22c3087334bbcadc5",
+    "historical_primary_features_path": "experiments/kernel_cl/kcl6592_regime_predictability.py",
+    "historical_primary_features_git_blob_sha": "16e48196d09a661c145ee5efdd264d2abd4d6f96",
+    "future_task_input_allowed": false,
+    "post_policy_outcome_input_allowed": false,
+    "localized_future_probe_features_allowed": false
+  },
+  "target_contract": {
+    "exact_six_channels": [
+      "A.current_loss",
+      "A.prior_mean_loss",
+      "B.current_loss",
+      "B.prior_mean_loss",
+      "C.current_loss",
+      "C.prior_mean_loss"
+    ],
+    "clrm1_extractor_path": "experiments/clrm/clrm1_loss_response_support.py",
+    "clrm1_extractor_git_blob_sha": "deb0c30af6a981705587637706e98ddc1cbc1ceb",
+    "target_drop_or_reweight_allowed": false,
+    "accuracy_sentinel_gating": false
+  },
+  "discovery_manifest": {
+    "path": "docs/research/continual-loss-response/CLRM2_DISCOVERY_SEED_MANIFEST.json",
+    "git_blob_sha": "c7600a8963a15b03a1d3c27a4134e0a724088519",
+    "generation_phrase": "MindForge|CLRM-2|predictive-discovery|v1",
+    "total_count": 240,
+    "all_sha256": "05b7d1a077b3b4a152882fc42e67f6189d3f66d55ff0dc50b859ffd022480374",
+    "dtrain": {
+      "count": 160,
+      "expected_boundaries": 480,
+      "sha256": "bc7f7dd941a5ec280156e9cbfc3f1501565213db7efa3b940dd4d189891b93e8"
+    },
+    "dval": {
+      "count": 80,
+      "expected_boundaries": 240,
+      "sha256": "a2287c490acf6c8a94cff56be1a5eb4aaa0115fce26675312ac590d5bfe6ee96",
+      "sealed": true,
+      "execution_authorized": false
+    },
+    "seed_grouping": "ALL_3_BOUNDARIES_STAY_WITH_SEED"
+  },
+  "exclusions": {
+    "historical_kcl_scan_required": true,
+    "protected_kcl": [
+      13635,
+      13837,
+      14039,
+      14241,
+      14443,
+      14645,
+      14847,
+      15049,
+      15251,
+      15453,
+      15655,
+      15857,
+      16059,
+      16261,
+      16463,
+      16665,
+      16867,
+      17069,
+      17271,
+      17473
+    ],
+    "spent_manifest_sha256": {
+      "ACO-1": "9673966a25f8992efbe5c6462b5b1d9e6a2d8af14436d2fb1180044198e56e91",
+      "CPRM-1": "d213e307a25fd49813d060cc6c88b91f6e2e7939a45d48ce29ab1048691bcfc3",
+      "MSA-1": "e5dbdfeb46889c422336bbc4b77a45ce8c87bbef48326ce6f48bfef75709e347",
+      "MSA-3": "5fbcddd66c9094051721f0dd549031e621e66a2d4c62f5866b29eb7fc1efcbb8",
+      "CLRM-1": "3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6"
+    }
+  },
+  "substrate": {
+    "identity": "EXACT_CURRENT_KCL_MSA_CLRM1_SUBSTRATE",
+    "git_blobs": {
+      "experiments/kernel_cl/kcl1_substrate.py": "4303dd544e0bdb935c499abedc62aa095bc56674",
+      "experiments/kernel_cl/kcl6_long_horizon.py": "33a743d62b5a83286c8945ffc0f473ae66fe50c0",
+      "experiments/kernel_cl/kcl61_weighted_replay_ab.py": "9a2ea8435bc92d65af7044b5351d06adc6cc2d44",
+      "experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py": "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7",
+      "experiments/kernel_cl/kcl65_specificity_ab.py": "88aa11fea6e8474c323c02491c0b85a91722c686",
+      "experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py": "7119b9520f50de53a42313f7c7173c8d5daec2f1",
+      "mindforge/config.py": "54ab270a25edd962e62360e14736b28f52a4fbcd",
+      "mindforge/model.py": "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+    },
+    "difficulty_mutation_allowed": false
+  },
+  "candidate": {
+    "family": "RBF-KRR-v1",
+    "multi_output": true,
+    "shared_hyperparameters": true,
+    "gamma_grid": [
+      0.02,
+      0.1,
+      0.5
+    ],
+    "lambda_grid": [
+      0.0001,
+      0.01,
+      1
+    ],
+    "selection": "5_FOLD_SEED_GROUPED_DTRAIN_ONLY",
+    "selection_objective": "MEAN_6_CHANNEL_OOF_MAE_NORMALIZED_BY_DTRAIN_P90_P10",
+    "tie_break": "SMALLER_GAMMA_THEN_SMALLER_LAMBDA",
+    "stochastic_initialization": false
+  },
+  "baselines": {
+    "required": [
+      "B0_POLICY_GLOBAL_MEAN",
+      "B1_POLICY_BY_STAGE_MEAN",
+      "B2_LINEAR_RIDGE_STATE_RESPONSE"
+    ],
+    "b2_lambda_grid": [
+      0.000001,
+      0.0001,
+      0.01,
+      1,
+      100
+    ],
+    "b2_selection": "PER_CHANNEL_5_FOLD_SEED_GROUPED_DTRAIN_OOF_MAE",
+    "strongest_selection": "LOWEST_DTRAIN_OOF_MACRO_SCALED_MAE",
+    "strongest_tie_break": [
+      "B2",
+      "B1",
+      "B0"
+    ]
+  },
+  "cross_validation": {
+    "folds": 5,
+    "grouping": "SEED",
+    "fold_rule": "uint64_be(SHA256('CLRM2-CV-v1|' + decimal(seed))[0:8]) mod 5",
+    "all_folds_nonempty_required": true
+  },
+  "sealed_validation_gate": {
+    "relative_gain_min": 0.1,
+    "whole_seed_bootstrap_resamples": 20000,
+    "bootstrap_seed": 72002,
+    "macro_ratio_ci_upper_must_be_below": 1,
+    "every_channel_ratio_max": 1.05,
+    "calibration_beta_min": 0.8,
+    "calibration_beta_max": 1.2,
+    "calibration_abs_alpha_over_baseline_mae_max": 0.1,
+    "no_recalibration": true,
+    "baseline_zero_mae_verdict": "STOP_INTEGRITY_OR_BASELINE",
+    "diagnostic_contrasts_non_gating": true,
+    "accuracy_sentinel_non_gating": true
+  },
+  "phase_A_authorization": {
+    "after_lock_verification_allowed": [
+      "COLLECT_DTRAIN_160_SEEDS",
+      "FIT_TUNE_RBF_KRR_ON_DTRAIN_ONLY",
+      "FIT_TUNE_BASELINES_ON_DTRAIN_ONLY",
+      "SELECT_STRONGEST_BASELINE_ON_DTRAIN_OOF_ONLY",
+      "FREEZE_CANDIDATE_PACKAGE"
+    ],
+    "prohibited": [
+      "COLLECT_DVAL",
+      "INSPECT_DVAL",
+      "FIT_ON_DVAL",
+      "TUNE_AFTER_DVAL",
+      "ADJUDICATE_GATE2",
+      "CONTROLLER"
+    ],
+    "dtrain_rerun_after_complete_valid_collection": false
+  },
+  "validation_transition": {
+    "requires_candidate_package": true,
+    "requires_separate_validation_lock": true,
+    "requires_independent_validation_lock_verification": true,
+    "dval_execution_before_both": false
+  },
+  "runtime": {
+    "platform": "GitHub-hosted ubuntu-24.04",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "pip": "26.2.1",
+    "numpy": "2.3.3",
+    "pytest": "8.4.2",
+    "torch": "2.10.0+cpu",
+    "torch_index_url": "https://download.pytorch.org/whl/cpu",
+    "device": "CPU",
+    "deterministic_algorithms": true,
+    "torch_num_threads": 1
+  },
+  "outputs": {
+    "preflight": "artifacts/clrm2_zero_science_preflight.json",
+    "dtrain": "experiments/clrm/results/clrm2_dtrain.json",
+    "candidate": "experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json",
+    "dval": "experiments/clrm/results/clrm2_dval.json",
+    "formal": "experiments/clrm/results/CLRM2_FORMAL_RESULT.json"
+  },
+  "downstream": {
+    "predictor_fitting_before_training_lock_verification": false,
+    "dval_before_validation_lock_verification": false,
+    "controller_closed": true,
+    "kcl7_closed": true
+  }
+}

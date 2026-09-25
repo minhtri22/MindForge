@@ -311,3 +311,37 @@ Append-only.
 - Contrast/accuracy diagnostics: non-gating.
 - No model-family rescue ladder.
 - Controller/KCL-7: **CLOSED**.
+
+---
+
+## 2026-09-25 — CLRM2-A Training Lock v1 Frozen
+
+- Parent CLRM-1 closure:
+  `2dd27566961e6e31d9938b6d27084ef6a6e6e6ed`.
+- CLRM-2 preregistration:
+  `3d359e3cc8a101c4f8b0c2be5a8f278931645129`.
+- Protocol blob:
+  `9c35a9b8648ae2581a9f111680364dc75ffcf8a8`.
+- Scientific runner blob:
+  `2b802f0ff10508d573e0c8ae61b6337ef80a1807`.
+- OBS11 feature-extractor blob:
+  `cd1ce639435df7f94499d2a22c3087334bbcadc5`.
+- Historical OBS11 source blob:
+  `16e48196d09a661c145ee5efdd264d2abd4d6f96`.
+- Discovery seed manifest blob:
+  `c7600a8963a15b03a1d3c27a4134e0a724088519`.
+- D-train: **160 seeds / 480 boundaries**.
+- Sealed D-val: **80 seeds / 240 boundaries**.
+- Both manifests frozen before any fresh CLRM-2 outcome.
+- Candidate: **RBF-KRR-v1 only**.
+- Baselines: **B0/B1/B2 mandatory**.
+- 5-fold seed-grouped D-train CV: frozen.
+- Gate-2 baseline-superiority/calibration: frozen.
+- Phase A permits only D-train collection/fitting/candidate freeze after
+  independent lock verification.
+- D-val execution: **PROHIBITED** until separate CLRM2-B Validation Lock and
+  independent verification.
+- Fresh D-train execution at this entry: **NO**.
+- Fresh predictor fitting at this entry: **NO**.
+- D-val outcomes: **NONE**.
+- Controller/KCL-7: **CLOSED**.

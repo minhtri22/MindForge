@@ -1,0 +1,92 @@
+name: CLRM — CLRM-2 zero-science training preflight
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - docs/research/continual-loss-response/CLRM2_TRAINING_LOCK.json
+      - .github/workflows/clrm2-zero-science-preflight.yml
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 12
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce pre-science repository state
+        run: |
+          test ! -e experiments/clrm/results/clrm2_dtrain.json
+          test ! -e experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json
+          test ! -e experiments/clrm/results/clrm2_dval.json
+          test ! -e experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+          test ! -e docs/research/continual-loss-response/CLRM2_TRAINING_LOCK_VERIFICATION.md
+          test ! -e docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK.json
+          test ! -e docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK_VERIFICATION.md
+          test ! -e .github/workflows/clrm2-dtrain-fit.yml
+          test ! -e .github/workflows/clrm2-dval-evaluate.yml
+
+      - name: Run frozen CLRM-2 tests
+        run: PYTHONPATH=. python -m pytest tests/test_clrm2_predictive_discovery.py -q
+
+      - name: Run zero-science historical preflight
+        run: |
+          mkdir -p artifacts
+          PYTHONPATH=. python experiments/clrm/clrm2_predictive_discovery.py             --phase preflight             --output artifacts/clrm2_zero_science_preflight.json
+
+      - name: Enforce zero-science invariants
+        run: |
+          python - <<'PY'
+          import json
+          p="artifacts/clrm2_zero_science_preflight.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d["status"]=="PASS", d
+          assert d["verdict"]=="CLRM2_ZERO_SCIENCE_PREFLIGHT_PASS", d
+          assert d["manifest"]["valid"], d
+          assert not any(d["manifest"]["collisions"].values()), d
+          assert d["historical_probe"]["seed"]==9595, d
+          assert d["historical_probe"]["record_count"]==3, d
+          assert d["historical_probe"]["obs11_exact"], d
+          assert d["historical_probe"]["integrity"], d
+          assert d["historical_probe"]["fresh_seed_used"] is False, d
+          assert d["historical_probe"]["predictor_fitted"] is False, d
+          assert d["checks"]["dtrain_absent"], d
+          assert d["checks"]["candidate_absent"], d
+          assert d["checks"]["dval_absent"], d
+          assert d["checks"]["formal_absent"], d
+          assert d["checks"]["training_blocked"], d
+          assert d["checks"]["validation_blocked"], d
+          assert d["fresh_seed_execution_attempted"] is False, d
+          assert d["fresh_predictor_fitting_performed"] is False, d
+          assert d["dval_outcomes_generated"] is False, d
+          assert d["scientific_outcome_generated"] is False, d
+          print("CLRM2_ZERO_SCIENCE_PREFLIGHT=PASS")
+          PY
+          sha256sum artifacts/clrm2_zero_science_preflight.json
+          sha256sum docs/research/continual-loss-response/CLRM2_TRAINING_LOCK.json
+          sha256sum docs/research/continual-loss-response/clrm2-predictive-discovery-protocol.md
+
+      - name: Upload preflight evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-zero-science-preflight
+          path: artifacts/clrm2_zero_science_preflight.json
+          if-no-files-found: error
