@@ -284,3 +284,30 @@ Append-only.
 - CLRM-1: **PASS / CLOSED**.
 - CLRM-2 design: **AUTHORIZED**.
 - CLRM-2 fresh science / predictor training: **NOT AUTHORIZED**.
+
+---
+
+## 2026-09-25 — CLRM-2 Predictive Discovery Preregistered
+
+- Trigger: CLRM-1 canonical `PASS_LOSS_RESPONSE_SUPPORT`.
+- Predictor fitting at this entry: **NO**.
+- Representation: **OBS11-v1**, exact historical KCL-6.5.9.2 primary observable tuple.
+- Candidate family: **RBF-KRR-v1 only**.
+- Candidate hyperparameter grid:
+  `gamma={0.02,0.10,0.50}`,
+  `lambda={1e-4,1e-2,1}`.
+- Mandatory baselines: **B0/B1/B2**.
+- D-train: **160 seeds / 480 boundaries**.
+- Sealed D-val: **80 seeds / 240 boundaries**.
+- Total discovery-manifest SHA-256:
+  `05b7d1a077b3b4a152882fc42e67f6189d3f66d55ff0dc50b859ffd022480374`.
+- D-train SHA-256:
+  `bc7f7dd941a5ec280156e9cbfc3f1501565213db7efa3b940dd4d189891b93e8`.
+- D-val SHA-256:
+  `a2287c490acf6c8a94cff56be1a5eb4aaa0115fce26675312ac590d5bfe6ee96`.
+- Two-lock architecture: **TRAINING LOCK → candidate freeze → VALIDATION LOCK**.
+- D-val collection before candidate freeze + validation-lock verification: **PROHIBITED**.
+- Gate-2 baseline superiority + calibration: frozen exact.
+- Contrast/accuracy diagnostics: non-gating.
+- No model-family rescue ladder.
+- Controller/KCL-7: **CLOSED**.
