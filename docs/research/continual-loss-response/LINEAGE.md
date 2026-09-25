@@ -175,3 +175,19 @@ Append-only.
 - Difficulty mutation: **NO**.
 - Controller execution: **NO**.
 - Independent execution-lock verification: **PENDING**.
+
+---
+
+## 2026-09-25 — CLRM-1 Independent Execution-Lock Verification Opened
+
+- Exact lock SHA-256:
+  `39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e`.
+- Verifier is static and does **not** import/call the CLRM-1 scientific runner.
+- Independent checks: source/protocol/manifest blobs, 8 substrate blobs,
+  deterministic seed regeneration, KCL/ACO/CPRM/MSA collisions, six-channel
+  geometry gate, reliability, one-shot adjudication, retry policy, exact
+  runtime, preflight closure, and absence of execution workflow/collection/result.
+- Fresh Role-S execution during verification: **PROHIBITED**.
+- Response-geometry inspection: **PROHIBITED**.
+- Predictor fitting / difficulty mutation / controller: **PROHIBITED**.
+- Verification result at this entry: **PENDING**.
