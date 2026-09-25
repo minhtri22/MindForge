@@ -221,3 +221,26 @@ Append-only.
 - Exact CLRM-1 Role-S support collection is now **ELIGIBLE TO OPEN**, but has
   not started.
 - CLRM-2 design remains **CLOSED UNTIL CLRM-1 PASS**.
+
+---
+
+## 2026-09-25 — CLRM-1 Canonical Role-S Scientific Execution Opened
+
+- Exact verified CLRM-1 lock SHA-256:
+  `39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e`.
+- Independent verification:
+  `CLRM1_EXECUTION_LOCK_VERIFICATION_PASS`, workflow `36088745852`.
+- Authorized action: exactly one frozen 72-seed Role-S collection.
+- Expected population: **216 boundaries / 648 A-B-C response vectors /
+  1296 primary loss scalars**.
+- Reliability repeats: exactly first **6** frozen Role-S seeds.
+- Pre-adjudication validation: **integrity/support/reliability only**.
+- Six-channel response geometry before preserve/adjudication: **PROHIBITED**.
+- Contrast geometry before preserve/adjudication: **PROHIBITED**.
+- Accuracy-distribution inspection before preserve/adjudication: **PROHIBITED**.
+- Complete valid collection must be preserved before one-shot adjudication.
+- Technical retry only before a complete valid collection and only under the
+  same seed + same immutable lock.
+- Complete valid collection rerun: **PROHIBITED**.
+- Predictor fitting / difficulty mutation / controller: **PROHIBITED**.
+- Result at this lineage entry: **UNOBSERVED**.

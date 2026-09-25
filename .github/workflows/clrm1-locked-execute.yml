@@ -1,0 +1,348 @@
+name: CLRM — CLRM-1 locked Role-S support execution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - .github/workflows/clrm1-locked-execute.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clrm1-locked-role-s-support
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/continual-loss-response
+          fetch-depth: 10
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce exact verified CLRM-1 lock before science
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/research/continual-loss-response/CLRM1_EXECUTION_LOCK.json | awk '{print $1}')" = "39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e"
+
+          test "$(git hash-object docs/research/continual-loss-response/clrm1-loss-response-support-protocol.md)" = "6560f7ff12b98bfcdead97661c934b58abe3a437"
+          test "$(git hash-object docs/research/continual-loss-response/CLRM1_ROLE_S_SEED_MANIFEST.json)" = "3060fe5f6d348390f3dbcdc1ceb7471084635318"
+          test "$(git hash-object experiments/clrm/clrm1_loss_response_support.py)" = "deb0c30af6a981705587637706e98ddc1cbc1ceb"
+          test "$(git hash-object tests/test_clrm1_loss_response_support.py)" = "00333df9b8293409f6a40cada3dfa763e61035e8"
+
+          test "$(git hash-object experiments/kernel_cl/kcl1_substrate.py)" = "4303dd544e0bdb935c499abedc62aa095bc56674"
+          test "$(git hash-object experiments/kernel_cl/kcl6_long_horizon.py)" = "33a743d62b5a83286c8945ffc0f473ae66fe50c0"
+          test "$(git hash-object experiments/kernel_cl/kcl61_weighted_replay_ab.py)" = "9a2ea8435bc92d65af7044b5351d06adc6cc2d44"
+          test "$(git hash-object experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py)" = "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7"
+          test "$(git hash-object experiments/kernel_cl/kcl65_specificity_ab.py)" = "88aa11fea6e8474c323c02491c0b85a91722c686"
+          test "$(git hash-object experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py)" = "7119b9520f50de53a42313f7c7173c8d5daec2f1"
+          test "$(git hash-object mindforge/config.py)" = "54ab270a25edd962e62360e14736b28f52a4fbcd"
+          test "$(git hash-object mindforge/model.py)" = "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+
+          grep -q "CLRM1_EXECUTION_LOCK_VERIFICATION_PASS" docs/research/continual-loss-response/CLRM1_EXECUTION_LOCK_VERIFICATION.md
+          grep -q "39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e" docs/research/continual-loss-response/CLRM1_EXECUTION_LOCK_VERIFICATION.md
+
+          test ! -e experiments/clrm/results/clrm1_role_s_responses.json
+          test ! -e experiments/clrm/results/CLRM1_FORMAL_RESULT.json
+
+          python - <<'PY'
+          import json, platform
+          from importlib.metadata import version
+          import torch
+
+          lock=json.load(open("docs/research/continual-loss-response/CLRM1_EXECUTION_LOCK.json",encoding="utf-8"))
+
+          assert lock["schema"]=="CLRM1-EXECUTION-LOCK-v1"
+          assert lock["program"]=="CLRM-1"
+          assert lock["role"]=="S_SUPPORT_ONLY"
+
+          assert lock["seed_manifest"]["count"]==72
+          assert len(lock["seed_manifest"]["seeds"])==72
+          assert len(set(lock["seed_manifest"]["seeds"]))==72
+          assert lock["seed_manifest"]["sha256"]=="3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6"
+
+          assert lock["population"]["expected_boundaries"]==216
+          assert lock["population"]["expected_policy_response_vectors"]==648
+          assert lock["population"]["expected_primary_loss_scalars"]==1296
+
+          assert lock["geometry_gate"]["cell"]["unique_count_min"]==10
+          assert lock["geometry_gate"]["cell"]["robust_span_min"]==0.02
+          assert lock["geometry_gate"]["channel"]["qualified_stage_count_min"]==2
+          assert lock["geometry_gate"]["pass_rule"]=="ALL_6_DIRECT_CHANNELS_QUALIFIED"
+          assert lock["geometry_gate"]["pooled_across_stage_qualification_allowed"] is False
+
+          assert lock["reliability"]["repeat_seed_count"]==6
+          assert lock["reliability"]["repeat_seeds"]==lock["seed_manifest"]["seeds"][:6]
+          assert lock["reliability"]["exact_required"] is True
+          assert float(lock["reliability"]["max_abs_diff_required"])==0.0
+
+          assert lock["adjudication"]["one_shot"] is True
+          assert lock["adjudication"]["pre_adjudication_geometry_inspection_allowed"] is False
+          assert lock["adjudication"]["pass_verdict"]=="PASS_LOSS_RESPONSE_SUPPORT"
+
+          assert lock["substrate"]["difficulty_mutation_allowed"] is False
+          assert lock["downstream"]["predictor_training_authorized"] is False
+          assert lock["downstream"]["controller_closed"] is True
+
+          assert platform.machine()=="x86_64"
+          assert platform.python_version()=="3.12.14"
+          assert version("pip")=="26.2.1"
+          assert version("numpy")=="2.3.3"
+          assert version("pytest")=="8.4.2"
+          assert torch.__version__=="2.10.0+cpu"
+
+          print("CLRM1_LOCKED_EXECUTION_GATE=PASS")
+          PY
+
+      - name: Collect frozen CLRM-1 Role-S cohort exactly once
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiments/clrm/results artifacts
+          PYTHONPATH=. python experiments/clrm/clrm1_loss_response_support.py             --phase collect             --output experiments/clrm/results/clrm1_role_s_responses.json
+          test -s experiments/clrm/results/clrm1_role_s_responses.json
+
+      - name: Integrity support and reliability validation only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import collections, hashlib, json, math
+
+          p="experiments/clrm/results/clrm1_role_s_responses.json"
+          d=json.load(open(p,encoding="utf-8"))
+
+          assert d["schema"]=="CLRM1-ROLE-S-COLLECTION-v1"
+          assert d["program"]=="CLRM-1"
+          assert d["role"]=="S_SUPPORT_ONLY"
+          assert d["protocol_sha256"]=="1841fb6ce65eb9d1f4ce93771797819fa68bc9216f5714322de645a874f59411"
+          assert d["seed_manifest_sha256"]=="3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6"
+
+          expected=[
+            3010487,6390804,7554778,6421546,8255747,3221303,
+            4920374,6284346,4716387,5672294,6811595,5893018,
+            8611908,3537915,3904505,6328288,3828589,5858064,
+            7762622,7393682,7860013,6639705,2326389,2733788,
+            6182716,7681758,4502424,4542422,4883553,7560158,
+            6740910,6765774,5812757,6374908,6785962,5738725,
+            5242548,3626182,8429721,5169376,7906970,7389765,
+            2621346,5051772,3290569,4656879,4458089,6890844,
+            7215063,6226921,7653913,7095910,8732714,7547285,
+            7882034,4917790,4193824,3048847,5211537,5003679,
+            5923954,3107127,8263759,5352954,4767982,5964534,
+            7997783,5425848,2302199,4020310,5879011,7559240
+          ]
+          policies={"A_CARRY_ALL","B_RESET_ALL","C_CARRY_STEP_RESET_MOMENTS"}
+
+          rows=d["records"]
+          assert len(rows)==216
+
+          per_seed=collections.Counter(int(r["seed"]) for r in rows)
+          per_stage=collections.Counter(int(r["boundary_index"]) for r in rows)
+
+          assert set(per_seed)==set(expected)
+          assert all(per_seed[s]==3 for s in expected)
+          assert per_stage=={1:72,2:72,3:72}
+
+          response_count=0
+          primary_scalars=0
+          for r in rows:
+              stage=int(r["boundary_index"])
+              assert stage in {1,2,3}
+              assert int(r["prior_task_count"])==stage
+
+              integ=r["integrity"]
+              assert bool(integ["valid"])
+              assert bool(integ["fork_models_equal"])
+              assert bool(integ["boundary_model_unchanged"])
+              assert bool(integ["exact_replay_match"])
+              assert bool(integ["same_terminal_state_for_both_loss_axes"])
+              assert bool(integ["current_curve_point_exact"])
+
+              assert set(r["responses"])==policies
+              for policy in policies:
+                  e=r["responses"][policy]
+                  assert int(e["step"])==250
+                  assert bool(e["same_terminal_state_verified"])
+                  assert bool(e["current_curve_point_exact"])
+                  assert len(e["prior_task_losses"])==stage
+
+                  # Integrity only: finite/range checks, no distributions or geometry.
+                  cur=float(e["current_loss"])
+                  prior=float(e["prior_mean_loss"])
+                  ca=float(e["accuracy_sentinel"]["current_terminal_accuracy"])
+                  pa=float(e["accuracy_sentinel"]["min_prior_terminal_accuracy"])
+                  assert math.isfinite(cur) and cur>=0.0
+                  assert math.isfinite(prior) and prior>=0.0
+                  assert math.isfinite(ca) and 0.0<=ca<=1.0
+                  assert math.isfinite(pa) and 0.0<=pa<=1.0
+
+                  response_count += 1
+                  primary_scalars += 2
+
+          assert response_count==648
+          assert primary_scalars==1296
+
+          rel=d["reliability_checks"]
+          assert len(rel)==6
+          assert [int(x["seed"]) for x in rel]==expected[:6]
+          assert all(bool(x["exact"]) for x in rel)
+          assert all(float(x["max_abs_diff"])==0.0 for x in rel)
+          assert all(bool(x["same_structure"]) for x in rel)
+
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          evidence={
+              "schema":"CLRM1-COLLECTION-INTEGRITY-v1",
+              "program":"CLRM-1",
+              "role":"S_SUPPORT_ONLY",
+              "status":"PASS",
+              "seed_count":72,
+              "boundary_count":216,
+              "policy_response_count":648,
+              "primary_loss_scalar_count":1296,
+              "per_stage":{"1":72,"2":72,"3":72},
+              "reliability_repeat_count":6,
+              "reliability_exact":True,
+              "collection_sha256":sha,
+              "six_channel_geometry_inspected":False,
+              "contrast_geometry_inspected":False,
+              "accuracy_distribution_inspected":False,
+              "adjudicator_called":False,
+          }
+          open("artifacts/clrm1_collection_integrity.json","w",encoding="utf-8").write(
+              json.dumps(evidence,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("CLRM1_COLLECTION_INTEGRITY=PASS")
+          print("CLRM1_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Preserve complete collection artifact before adjudication
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm1-complete-role-s-collection-before-adjudication
+          path: |
+            experiments/clrm/results/clrm1_role_s_responses.json
+            artifacts/clrm1_collection_integrity.json
+          if-no-files-found: error
+
+      - name: Preserve complete collection in branch before adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/clrm/results/clrm1_role_s_responses.json
+          git commit -m "evidence(clrm): preserve CLRM-1 complete Role-S collection"
+          git push origin HEAD:research/continual-loss-response
+
+      - name: Run exactly one CLRM-1 support adjudicator
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e experiments/clrm/results/CLRM1_FORMAL_RESULT.json
+          test ! -e artifacts/CLRM1_ADJUDICATOR_CALLED
+          touch artifacts/CLRM1_ADJUDICATOR_CALLED
+
+          PYTHONPATH=. python experiments/clrm/clrm1_loss_response_support.py             --phase adjudicate             --input experiments/clrm/results/clrm1_role_s_responses.json             --output experiments/clrm/results/CLRM1_FORMAL_RESULT.json
+
+          test -s experiments/clrm/results/CLRM1_FORMAL_RESULT.json
+
+      - name: Validate and reveal support result only after adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+
+          cp="experiments/clrm/results/clrm1_role_s_responses.json"
+          rp="experiments/clrm/results/CLRM1_FORMAL_RESULT.json"
+          ip="artifacts/clrm1_collection_integrity.json"
+
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          rsha=hashlib.sha256(open(rp,"rb").read()).hexdigest()
+
+          d=json.load(open(rp,encoding="utf-8"))
+          integ=json.load(open(ip,encoding="utf-8"))
+
+          assert d["schema"]=="CLRM1-FORMAL-RESULT-v1"
+          assert d["program"]=="CLRM-1"
+          assert d["role"]=="S_SUPPORT_ONLY"
+          assert d["protocol_sha256"]=="1841fb6ce65eb9d1f4ce93771797819fa68bc9216f5714322de645a874f59411"
+          assert d["source_records_sha256"]==csha
+          assert integ["collection_sha256"]==csha
+
+          a=d["adjudication"]
+          assert a["verdict"] in {
+              "PASS_LOSS_RESPONSE_SUPPORT",
+              "NEGATIVE_LOSS_RESPONSE_GEOMETRY",
+              "STOP_INTEGRITY_OR_SUPPORT",
+          }
+          assert a["status"] in {"PASS","NEGATIVE","STOP"}
+          assert a.get("predictor_fitted",False) is False
+
+          ev={
+              "schema":"CLRM1-EXECUTION-EVIDENCE-v1",
+              "program":"CLRM-1",
+              "role":"S_SUPPORT_ONLY",
+              "lock_sha256":"39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e",
+              "protocol_sha256":"1841fb6ce65eb9d1f4ce93771797819fa68bc9216f5714322de645a874f59411",
+              "seed_manifest_sha256":"3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6",
+              "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+              "workflow_head_sha":os.environ["GITHUB_SHA"],
+              "collection_sha256":csha,
+              "formal_result_sha256":rsha,
+              "collection_integrity":"PASS",
+              "one_shot_adjudication":True,
+              "difficulty_mutation":False,
+              "predictor_fitting":False,
+              "controller_execution":False,
+              "observed_status":a["status"],
+              "observed_verdict":a["verdict"],
+          }
+          open("artifacts/CLRM1_EXECUTION_EVIDENCE.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("CLRM1_OBSERVED_STATUS="+a["status"])
+          print("CLRM1_OBSERVED_VERDICT="+a["verdict"])
+          print("CLRM1_COLLECTION_SHA256="+csha)
+          print("CLRM1_FORMAL_RESULT_SHA256="+rsha)
+          PY
+
+      - name: Upload complete CLRM-1 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm1-locked-role-s-support-evidence
+          path: |
+            experiments/clrm/results/clrm1_role_s_responses.json
+            experiments/clrm/results/CLRM1_FORMAL_RESULT.json
+            artifacts/clrm1_collection_integrity.json
+            artifacts/CLRM1_EXECUTION_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve formal CLRM-1 result in branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add experiments/clrm/results/CLRM1_FORMAL_RESULT.json
+          git commit -m "evidence(clrm): preserve CLRM-1 formal support result"
+          git push origin HEAD:research/continual-loss-response
