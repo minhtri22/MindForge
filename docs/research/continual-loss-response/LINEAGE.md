@@ -399,3 +399,31 @@ Append-only.
 - Protocol/representation/target/model/baseline/CV/Gate-2 contracts changed:
   **NO**.
 - Recovery: restrict runner-launch detection to actual subprocess call-sites.
+
+---
+
+## 2026-09-25 — CLRM2-A Independent Training Lock Verification Closed PASS
+
+- Attempt 1 workflow `36100100251`: technical verifier false positive /
+  zero-science.
+- Recovery changed verifier self-audit only; Training Lock/scientific contract:
+  **UNCHANGED**.
+- Canonical workflow: `36100335778`.
+- Independent tests: **6/6 PASS**.
+- Exact Training Lock SHA-256:
+  `e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5`.
+- Verdict: `CLRM2_TRAINING_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256:
+  `5a4646b04ac24a6d1377d5ddb86c6b927df137b3060076b5a04158b448ef0f71`.
+- Artifact ID: `10849321095`.
+- Artifact ZIP SHA-256:
+  `f73ee175e00a29e39e02ceab7609ed3dd0fa0b9cb00034c31f1a4c2d0950b4d2`.
+- OBS11-v1 exact/pre-boundary: **PASS**.
+- 240-seed regeneration: **PASS**.
+- Historical/protected/ACO/CPRM/MSA/CLRM-1 collisions: **ZERO**.
+- RBF-KRR/B0-B2/CV/Gate-2 contracts: **EXACT**.
+- D-train/candidate/D-val/formal outputs: **ABSENT**.
+- Fresh science/predictor fitting: **NO**.
+- Phase A is now **ELIGIBLE TO OPEN**.
+- D-val remains **SEALED / PROHIBITED** until separate CLRM2-B Validation Lock
+  and independent verification.

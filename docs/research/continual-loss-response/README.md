@@ -158,3 +158,24 @@ D-val        SEALED / PROHIBITED
 ```
 
 Next: independent static verification of the exact Training Lock.
+
+
+## CLRM2-A Training Lock verification
+
+Independent Training Lock verification is **PASS / CLOSED**.
+
+```text
+CLRM2_TRAINING_LOCK_VERIFICATION_PASS
+
+Training Lock =
+e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5
+
+Phase A D-train collection/fitting  ELIGIBLE TO OPEN
+D-val                               SEALED / PROHIBITED
+Gate-2 adjudication                 PROHIBITED
+```
+
+Canonical closure:
+`CLRM2_TRAINING_LOCK_VERIFICATION.md`.
+
+No fresh CLRM-2 seed has been executed and no predictor has been fitted yet.
