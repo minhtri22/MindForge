@@ -345,3 +345,25 @@ Append-only.
 - Fresh predictor fitting at this entry: **NO**.
 - D-val outcomes: **NONE**.
 - Controller/KCL-7: **CLOSED**.
+
+---
+
+## 2026-09-25 — CLRM-2 Zero-Science Training Preflight Closed PASS
+
+- Canonical workflow: `36099718392`.
+- Frozen tests: **5/5 PASS**.
+- Verdict: `CLRM2_ZERO_SCIENCE_PREFLIGHT_PASS`.
+- Training Lock SHA-256:
+  `e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5`.
+- Protocol SHA-256:
+  `7d97a956fb4d5df8d4ed1ba452fe0a4f81009dd103fa361d127ad8a786b01611`.
+- Preflight JSON SHA-256:
+  `d790f55f0e599bcdb4f774d154dff2cf05ee7a045320b331e4dcf0ddf73c7140`.
+- Artifact ID: `10849305182`.
+- Artifact ZIP SHA-256:
+  `3ae6000cdadaeadafc8660920a54744971f1f24c5d1caa188b4994fc10f01dcd`.
+- D-train fresh execution: **NO**.
+- Predictor fitting: **NO**.
+- D-val execution: **NO**.
+- Scientific outcome: **NO**.
+- Independent Training Lock verification: **PENDING**.

@@ -141,3 +141,20 @@ Role-S is now spent support evidence.
 
 CLRM-2 **design only** is authorized. No CLRM-2 fresh execution or predictor
 training is authorized yet.
+
+
+## CLRM-2 zero-science training preflight
+
+CLRM2-A Training Lock preflight is **PASS / CLOSED**.
+
+```text
+CLRM2_ZERO_SCIENCE_PREFLIGHT_PASS
+Training Lock =
+e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5
+
+D-train      NOT AUTHORIZED
+predictor    NOT AUTHORIZED
+D-val        SEALED / PROHIBITED
+```
+
+Next: independent static verification of the exact Training Lock.
