@@ -1,0 +1,74 @@
+name: CLRM — CLRM2-A training-lock verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - tools/clrm/verify_clrm2_training_lock.py
+      - tests/test_clrm2_training_lock.py
+      - .github/workflows/clrm2-training-lock-verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 14
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Independent static verifier tests
+        run: PYTHONPATH=. python -m pytest tests/test_clrm2_training_lock.py -q
+
+      - name: Run independent Training Lock verifier
+        run: |
+          mkdir -p artifacts
+          PYTHONPATH=. python tools/clrm/verify_clrm2_training_lock.py
+
+      - name: Enforce exact verified lock
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/clrm2_training_lock_verification.json",encoding="utf-8"))
+          assert d["status"]=="PASS",d
+          assert d["verdict"]=="CLRM2_TRAINING_LOCK_VERIFICATION_PASS",d
+          assert d["lock_sha256"]=="e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5",d
+          assert not any(d["collisions"].values()),d
+          assert d["checks"]["obs11_exact"],d
+          assert d["checks"]["feature_preboundary_signature"],d
+          assert d["checks"]["phase_A_only"],d
+          assert d["checks"]["dtrain_absent"],d
+          assert d["checks"]["candidate_absent"],d
+          assert d["checks"]["dval_absent"],d
+          assert d["checks"]["formal_absent"],d
+          assert d["fresh_seed_execution_attempted"] is False,d
+          assert d["fresh_predictor_fitting_performed"] is False,d
+          assert d["dval_outcomes_generated"] is False,d
+          assert d["scientific_outcome_generated"] is False,d
+          print("CLRM2_TRAINING_LOCK_VERIFICATION=PASS")
+          PY
+          sha256sum artifacts/clrm2_training_lock_verification.json
+          sha256sum docs/research/continual-loss-response/CLRM2_TRAINING_LOCK.json
+
+      - name: Upload verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-training-lock-verification
+          path: artifacts/clrm2_training_lock_verification.json
+          if-no-files-found: error

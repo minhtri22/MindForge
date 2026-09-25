@@ -367,3 +367,20 @@ Append-only.
 - D-val execution: **NO**.
 - Scientific outcome: **NO**.
 - Independent Training Lock verification: **PENDING**.
+
+---
+
+## 2026-09-25 — CLRM2-A Independent Training Lock Verification Opened
+
+- Exact Training Lock SHA-256:
+  `e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5`.
+- Verifier is static and does **not** import/call CLRM-2 scientific code.
+- Checks include: OBS11-v1 exact historical tuple and pre-boundary signature,
+  240-seed deterministic regeneration, D-train/D-val split, all
+  KCL/ACO/CPRM/MSA/CLRM-1 exclusions, target/candidate/baseline/CV/Gate-2
+  contracts, exact runtime, preflight closure, and absence of all fresh
+  D-train/candidate/D-val/formal outputs.
+- Fresh D-train execution: **PROHIBITED during verification**.
+- Predictor fitting: **PROHIBITED during verification**.
+- D-val execution: **PROHIBITED**.
+- Verification result at this entry: **PENDING**.
