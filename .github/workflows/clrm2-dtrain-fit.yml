@@ -1,0 +1,296 @@
+name: CLRM — CLRM2-A D-train collection and candidate freeze
+
+on:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - .github/workflows/clrm2-dtrain-fit.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clrm2-a-dtrain-fit
+  cancel-in-progress: false
+
+jobs:
+  phase-a:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+
+    env:
+      PYTHONHASHSEED: "0"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/continual-loss-response
+          fetch-depth: 20
+
+      - name: Reject stale rerun or branch drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote_head="$(git ls-remote origin refs/heads/research/continual-loss-response | awk '{print $1}')"
+          test -n "$remote_head"
+          test "$remote_head" = "$GITHUB_SHA"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce exact verified CLRM2-A lock before science
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/research/continual-loss-response/CLRM2_TRAINING_LOCK.json | awk '{print $1}')" = "e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5"
+
+          test "$(git hash-object docs/research/continual-loss-response/clrm2-predictive-discovery-protocol.md)" = "9c35a9b8648ae2581a9f111680364dc75ffcf8a8"
+          test "$(git hash-object experiments/clrm/clrm2_predictive_discovery.py)" = "2b802f0ff10508d573e0c8ae61b6337ef80a1807"
+          test "$(git hash-object tests/test_clrm2_predictive_discovery.py)" = "e9dcd706aa72d09de69523323675601d7ae1d28a"
+          test "$(git hash-object docs/research/continual-loss-response/CLRM2_DISCOVERY_SEED_MANIFEST.json)" = "c7600a8963a15b03a1d3c27a4134e0a724088519"
+          test "$(git hash-object experiments/kernel_cl/kcl656_boundary_health_signal.py)" = "cd1ce639435df7f94499d2a22c3087334bbcadc5"
+          test "$(git hash-object experiments/kernel_cl/kcl6592_regime_predictability.py)" = "16e48196d09a661c145ee5efdd264d2abd4d6f96"
+          test "$(git hash-object experiments/clrm/clrm1_loss_response_support.py)" = "deb0c30af6a981705587637706e98ddc1cbc1ceb"
+
+          test "$(git hash-object experiments/kernel_cl/kcl1_substrate.py)" = "4303dd544e0bdb935c499abedc62aa095bc56674"
+          test "$(git hash-object experiments/kernel_cl/kcl6_long_horizon.py)" = "33a743d62b5a83286c8945ffc0f473ae66fe50c0"
+          test "$(git hash-object experiments/kernel_cl/kcl61_weighted_replay_ab.py)" = "9a2ea8435bc92d65af7044b5351d06adc6cc2d44"
+          test "$(git hash-object experiments/kernel_cl/kcl63_fuzzy_decay_abcd.py)" = "cb6cf442d9d6a01c6cec173ecd73771fc6ba30c7"
+          test "$(git hash-object experiments/kernel_cl/kcl65_specificity_ab.py)" = "88aa11fea6e8474c323c02491c0b85a91722c686"
+          test "$(git hash-object experiments/kernel_cl/kcl655_adamw_boundary_policy_abc.py)" = "7119b9520f50de53a42313f7c7173c8d5daec2f1"
+          test "$(git hash-object mindforge/config.py)" = "54ab270a25edd962e62360e14736b28f52a4fbcd"
+          test "$(git hash-object mindforge/model.py)" = "3f6b8f1f411d7a3ba061d4bca10cd0002ae91594"
+
+          grep -q "CLRM2_TRAINING_LOCK_VERIFICATION_PASS" docs/research/continual-loss-response/CLRM2_TRAINING_LOCK_VERIFICATION.md
+          grep -q "e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5" docs/research/continual-loss-response/CLRM2_TRAINING_LOCK_VERIFICATION.md
+
+          test ! -e experiments/clrm/results/clrm2_dtrain.json
+          test ! -e experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json
+          test ! -e experiments/clrm/results/clrm2_dval.json
+          test ! -e experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+          test ! -e docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK.json
+          test ! -e docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK_VERIFICATION.md
+          test ! -e .github/workflows/clrm2-dval-evaluate.yml
+
+          python - <<'PY'
+          import pathlib, platform
+          from importlib.metadata import version
+          import torch
+
+          wf=pathlib.Path(".github/workflows/clrm2-dtrain-fit.yml").read_text(encoding="utf-8")
+          assert wf.count("--phase', 'collect-train'")==1
+          assert wf.count("--phase', 'fit-freeze'")==1
+          assert "--phase', 'collect-val'" not in wf
+          assert "--phase', 'adjudicate'" not in wf
+
+          assert platform.machine()=="x86_64"
+          assert platform.python_version()=="3.12.14"
+          assert version("pip")=="26.2.1"
+          assert version("numpy")=="2.3.3"
+          assert version("pytest")=="8.4.2"
+          assert torch.__version__=="2.10.0+cpu"
+
+          print("CLRM2_PHASE_A_PRE_SCIENCE_GATE=PASS")
+          PY
+
+      - name: Collect exactly frozen D-train cohort
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiments/clrm/results artifacts
+          PYTHONPATH=. python - <<'PY'
+          import sys, torch
+          torch.set_num_threads(1)
+          torch.use_deterministic_algorithms(True)
+          assert torch.get_num_threads()==1
+          assert torch.are_deterministic_algorithms_enabled()
+          from experiments.clrm import clrm2_predictive_discovery as c2
+          sys.argv=[
+              "clrm2_predictive_discovery.py",
+              "--phase", "collect-train",
+              "--output", "experiments/clrm/results/clrm2_dtrain.json",
+          ]
+          raise SystemExit(c2.main())
+          PY
+          test -s experiments/clrm/results/clrm2_dtrain.json
+
+      - name: Validate D-train integrity only
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import collections, hashlib, json, math
+          from experiments.clrm import clrm2_predictive_discovery as c2
+
+          p="experiments/clrm/results/clrm2_dtrain.json"
+          d=json.load(open(p,encoding="utf-8"))
+          rows=d["records"]
+
+          assert d["schema"]=="CLRM2-DTRAIN-v1"
+          assert d["seed_sha256"]==c2.DTRAIN_SHA256=="bc7f7dd941a5ec280156e9cbfc3f1501565213db7efa3b940dd4d189891b93e8"
+          assert len(rows)==480
+
+          per_seed=collections.Counter(int(r["seed"]) for r in rows)
+          per_stage=collections.Counter(int(r["boundary_index"]) for r in rows)
+          assert set(per_seed)==set(c2.DTRAIN_SEEDS)
+          assert len(per_seed)==160
+          assert all(per_seed[s]==3 for s in c2.DTRAIN_SEEDS)
+          assert per_stage=={1:160,2:160,3:160}
+          assert set(per_seed).isdisjoint(set(c2.DVAL_SEEDS))
+
+          for r in rows:
+              assert tuple(r["features"].keys())==c2.OBS11
+              assert set(r["targets"])==set(c2.TARGETS)
+              assert bool(r["integrity"]["valid"])
+              for name in c2.TARGETS:
+                  assert math.isfinite(float(r["targets"][name]))
+
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          ev={
+              "schema":"CLRM2-PHASE-A-DTRAIN-INTEGRITY-v1",
+              "status":"PASS",
+              "lock_sha256":"e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5",
+              "seed_count":160,
+              "boundary_count":480,
+              "dtrain_seed_sha256":c2.DTRAIN_SHA256,
+              "dtrain_collection_sha256":sha,
+              "dval_seed_count_executed":0,
+              "gate2_called":False,
+          }
+          open("artifacts/clrm2_phase_a_dtrain_integrity.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+          print("CLRM2_DTRAIN_INTEGRITY=PASS")
+          print("CLRM2_DTRAIN_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Fit and freeze candidate from D-train only
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import sys, torch
+          torch.set_num_threads(1)
+          torch.use_deterministic_algorithms(True)
+          assert torch.get_num_threads()==1
+          assert torch.are_deterministic_algorithms_enabled()
+          from experiments.clrm import clrm2_predictive_discovery as c2
+          sys.argv=[
+              "clrm2_predictive_discovery.py",
+              "--phase", "fit-freeze",
+              "--input", "experiments/clrm/results/clrm2_dtrain.json",
+              "--output", "experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json",
+          ]
+          raise SystemExit(c2.main())
+          PY
+          test -s experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json
+          test ! -e experiments/clrm/results/clrm2_dval.json
+          test ! -e experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+
+      - name: Validate frozen candidate package without D-val
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import hashlib, json, math, os
+          from experiments.clrm import clrm2_predictive_discovery as c2
+
+          cp="experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json"
+          dp="experiments/clrm/results/clrm2_dtrain.json"
+          pkg=json.load(open(cp,encoding="utf-8"))
+
+          assert pkg["schema"]=="CLRM2-DISCOVERY-CANDIDATE-v1"
+          assert pkg["program"]=="CLRM-2"
+          assert pkg["dtrain_seed_sha256"]==c2.DTRAIN_SHA256
+          assert pkg["representation"]=="OBS11-v1"
+          assert tuple(pkg["feature_names"])==c2.OBS11
+          assert tuple(pkg["target_names"])==c2.TARGETS
+          assert pkg["candidate_family"]=="RBF-KRR-v1"
+          assert pkg["candidate"]["gamma"] in c2.KRR_GAMMAS
+          assert pkg["candidate"]["lambda"] in c2.KRR_LAMBDAS
+          assert math.isfinite(float(pkg["candidate"]["cv_score"]))
+          assert len(pkg["candidate"]["cv_channel_mae"])==6
+
+          model=pkg["candidate"]["model"]
+          assert len(model["x_mean"])==len(c2.OBS11)
+          assert len(model["x_std"])==len(c2.OBS11)
+          assert len(model["x_train"])==480
+          assert len(model["alpha"])==480
+          assert all(len(row)==6 for row in model["alpha"])
+
+          bs=pkg["baseline_selection"]
+          assert set(bs["family_scores"])=={"B0","B1","B2"}
+          assert bs["strongest_baseline"] in {"B0","B1","B2"}
+          assert len(bs["b2_lambdas"])==6
+          assert all(float(x) in c2.B2_LAMBDAS for x in bs["b2_lambdas"])
+          assert pkg["dval_used"] is False
+
+          assert not os.path.exists("experiments/clrm/results/clrm2_dval.json")
+          assert not os.path.exists("experiments/clrm/results/CLRM2_FORMAL_RESULT.json")
+
+          dsha=hashlib.sha256(open(dp,"rb").read()).hexdigest()
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          ev={
+              "schema":"CLRM2-PHASE-A-EVIDENCE-v1",
+              "status":"PASS",
+              "verdict":"CLRM2_PHASE_A_CANDIDATE_FROZEN",
+              "training_lock_sha256":"e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5",
+              "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+              "workflow_head_sha":os.environ["GITHUB_SHA"],
+              "dtrain_collection_sha256":dsha,
+              "candidate_package_sha256":csha,
+              "dtrain_seed_sha256":c2.DTRAIN_SHA256,
+              "seed_count":160,
+              "boundary_count":480,
+              "selected_gamma":pkg["candidate"]["gamma"],
+              "selected_lambda":pkg["candidate"]["lambda"],
+              "strongest_baseline":bs["strongest_baseline"],
+              "b2_lambdas":bs["b2_lambdas"],
+              "dval_used":False,
+              "dval_executed":False,
+              "gate2_called":False,
+              "controller_execution":False,
+          }
+          open("artifacts/CLRM2_PHASE_A_EVIDENCE.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("CLRM2_PHASE_A_CANDIDATE_FREEZE=PASS")
+          print("CLRM2_DTRAIN_COLLECTION_SHA256="+dsha)
+          print("CLRM2_CANDIDATE_PACKAGE_SHA256="+csha)
+          PY
+
+      - name: Preserve complete Phase-A evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-phase-a-dtrain-candidate
+          path: |
+            experiments/clrm/results/clrm2_dtrain.json
+            experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json
+            artifacts/clrm2_phase_a_dtrain_integrity.json
+            artifacts/CLRM2_PHASE_A_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve D-train and frozen candidate in branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/clrm/results/clrm2_dtrain.json
+          git add experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json
+          git commit -m "evidence(clrm): preserve CLRM2-A D-train candidate"
+          git push origin HEAD:research/continual-loss-response
