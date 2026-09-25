@@ -191,3 +191,33 @@ Append-only.
 - Response-geometry inspection: **PROHIBITED**.
 - Predictor fitting / difficulty mutation / controller: **PROHIBITED**.
 - Verification result at this entry: **PENDING**.
+
+---
+
+## 2026-09-25 — CLRM-1 Independent Execution-Lock Verification Closed PASS
+
+- Canonical workflow: `36088745852`.
+- Independent tests: **5/5 PASS**.
+- Exact verified lock SHA-256:
+  `39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e`.
+- Verdict: `CLRM1_EXECUTION_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256:
+  `6153044c2cbde37ddbb631adc3bf386d4361da9bf593ca9ef25bd3bd87cabb01`.
+- Artifact ID: `10844148728`.
+- Artifact ZIP SHA-256:
+  `cae8cdbed4bc485197da44a1d4d00aed72d1ea3c2d15c9a9ed49384c0250d3b3`.
+- Deterministic 72-seed regeneration: **PASS**.
+- Historical/protected/ACO/CPRM/MSA collisions: **ZERO**.
+- Six-channel response contract: **PASS / EXACT**.
+- Population / geometry / reliability / adjudication / retry contracts:
+  **PASS / EXACT**.
+- Fresh execution workflow: **ABSENT**.
+- Fresh collection/result: **ABSENT**.
+- Fresh scientific seed execution: **NO**.
+- Response geometry inspection: **NO**.
+- Predictor fitting: **NO**.
+- Difficulty mutation: **NO**.
+- Controller execution: **NO**.
+- Exact CLRM-1 Role-S support collection is now **ELIGIBLE TO OPEN**, but has
+  not started.
+- CLRM-2 design remains **CLOSED UNTIL CLRM-1 PASS**.

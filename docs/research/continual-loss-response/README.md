@@ -89,3 +89,24 @@ CLRM1_ZERO_SCIENCE_PREFLIGHT_PASS
 
 Fresh CLRM-1 science remains blocked pending independent exact-lock
 verification. CLRM-2 design and predictor fitting remain closed.
+
+
+## CLRM-1 independent lock verification
+
+Independent exact-lock verification is **PASS / CLOSED**.
+
+Canonical closure: `CLRM1_EXECUTION_LOCK_VERIFICATION.md`.
+
+```text
+CLRM1_EXECUTION_LOCK_VERIFICATION_PASS
+
+lock =
+39d4e22081c6cb6ac551c6ac5a77816747dd5dc9c477bd11b09c12de8f880d2e
+
+72-seed Role-S collection      ELIGIBLE TO OPEN
+fresh Role-S science           NOT STARTED
+
+CLRM-2 design                  CLOSED UNTIL CLRM-1 PASS
+predictor training             CLOSED
+controller                     CLOSED
+```
