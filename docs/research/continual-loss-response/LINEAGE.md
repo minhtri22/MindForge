@@ -100,3 +100,28 @@ Append-only.
 - Controller execution: **NO**.
 - This Actions PASS confirms the independent branch-tree audit already used to
   close CLRM-0.
+
+---
+
+## 2026-09-25 — CLRM-1 Preregistration Frozen
+
+- Milestone: **CLRM-1 — Loss Response Support Qualification**.
+- Predictor fitting: **PROHIBITED**.
+- Exact Role-S cohort size: **72 seeds**.
+- Population: **216 matched boundaries / 648 A-B-C response vectors**.
+- Seed generation phrase: `MindForge|CLRM-1|role-s-loss-response-support|v1`.
+- Role-S manifest SHA-256:
+  `3b8566fed61c625d2dee30406f5c40671a1f88a4b73d2e5a9c8aab0e00ab8ee6`.
+- Deterministic reliability repeats: first **6** frozen Role-S seeds.
+- Primary direct channels: **6**, exactly
+  A/B/C × {current CE loss, mean-prior CE loss}.
+- Cell non-degeneracy:
+  `unique_count >= 10 AND p90-p10 >= 0.02`.
+- Channel qualification: cell PASS in **>=2/3 stages**.
+- CLRM-1 PASS requires **all six direct channels**.
+- Accuracy: **sentinel only / non-gating**.
+- A-relative contrast geometry: **diagnostic only / non-gating**.
+- Fresh execution: **BLOCKED** pending execution lock, zero-science preflight,
+  and independent lock verification.
+- Only `PASS_LOSS_RESPONSE_SUPPORT` may open **CLRM-2 design**.
+- CLRM-2 predictor training: **NOT AUTHORIZED** by CLRM-1 design.
