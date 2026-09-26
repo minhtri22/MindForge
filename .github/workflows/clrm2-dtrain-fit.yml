@@ -1,11 +1,9 @@
-name: CLRM — CLRM2-A D-train collection and candidate freeze
+name: CLRM — CLRM2-A D-train collection and candidate freeze (RETIRED)
 
+# Canonical Phase-A execution completed in run 36254847891.
+# Retained for provenance only; D-train is spent and execution is hard-disabled.
 on:
-  push:
-    branches:
-      - research/continual-loss-response
-    paths:
-      - .github/workflows/clrm2-dtrain-fit.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,6 +14,7 @@ concurrency:
 
 jobs:
   phase-a:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 300
 
