@@ -427,3 +427,47 @@ Append-only.
 - Phase A is now **ELIGIBLE TO OPEN**.
 - D-val remains **SEALED / PROHIBITED** until separate CLRM2-B Validation Lock
   and independent verification.
+
+
+---
+
+## 2026-09-26 — CLRM2-A Phase A Closed PASS
+
+- Canonical same-lock technical recovery workflow: `36254847891`.
+- Workflow head: `b67a374eb1a5f04672d1bf3afdce3c7af8e1f21e`.
+- D-train: **160/160 seeds, 480/480 boundaries**.
+- D-train seed-manifest SHA-256:
+  `bc7f7dd941a5ec280156e9cbfc3f1501565213db7efa3b940dd4d189891b93e8`.
+- D-train collection SHA-256:
+  `8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28`.
+- D-train integrity: **PASS**.
+- Raw pre-integrity artifact ID: `10910576776`.
+- Raw pre-integrity artifact ZIP SHA-256:
+  `0efa68a8ceea97b0810f4509f51724fb46d2bfbb207b0149ee539418ba5e3dd7`.
+- Candidate family: `RBF-KRR-v1`.
+- Frozen candidate hyperparameters: `gamma=0.02`, `lambda=1.0`.
+- Candidate D-train OOF score: `0.418296023976582`.
+- Baseline OOF scores:
+  `B0=0.46650102517933295`,
+  `B1=0.4376053822804449`,
+  `B2=0.4155581142489717`.
+- Frozen strongest baseline: **B2**.
+- Frozen B2 per-channel lambdas:
+  `[100.0, 0.01, 100.0, 1.0, 100.0, 1.0]`.
+- Candidate package SHA-256:
+  `310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83`.
+- Evidence commit:
+  `29ff470e4c392b76795b6546d0d331553368de88`.
+- Complete Phase-A artifact ID: `10911205821`.
+- Complete Phase-A artifact ZIP SHA-256:
+  `9a1d1fc6b3d1f64817a685f8d6e9c1737d87aa1a57a6318d4b15bc43c0123325`.
+- D-val used: **NO**.
+- D-val executed: **NO**.
+- Gate-2 called: **NO**.
+- Phase-A workflow retired/hard-disabled at commit:
+  `786201738217345169484d1301b424a0d1161419`.
+- Formal Phase-A closure:
+  `CLRM2_PHASE_A_FORMAL_CLOSURE.md`.
+- D-train is now **SPENT**.
+- Candidate package and strongest baseline are now **FROZEN**.
+- Next authorized transition: **CLRM2-B Validation Lock only**.
