@@ -1,0 +1,83 @@
+name: CLRM — CLRM2-B validation-lock verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - .github/workflows/clrm2-validation-lock-verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/continual-loss-response
+          fetch-depth: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce exact verifier package
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(sha256sum docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK.json | awk '{print $1}')" = "bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde"
+          test "$(git hash-object tools/clrm/verify_clrm2_validation_lock.py)" = "c87b98a56b571c9d9efd0d24e200d8cae469f596"
+          test "$(git hash-object tests/test_clrm2_validation_lock.py)" = "9934b0560dd779fa5bafe91855fac53679507c28"
+          test "$(git hash-object experiments/clrm/clrm2_predictive_discovery.py)" = "2b802f0ff10508d573e0c8ae61b6337ef80a1807"
+          test "$(git hash-object experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json)" = "7bf84b2c4c4ddbc84131aaab807d9620a317d40c"
+          test "$(git hash-object experiments/clrm/results/clrm2_dtrain.json)" = "46731fbbf621829d55234c0ad670482c7a09bd51"
+          test ! -e experiments/clrm/results/clrm2_dval.json
+          test ! -e experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+
+      - name: Independent static verifier tests
+        run: PYTHONPATH=. python -m pytest tests/test_clrm2_validation_lock.py -q
+
+      - name: Run independent Validation Lock verifier
+        run: |
+          mkdir -p artifacts
+          PYTHONPATH=. python tools/clrm/verify_clrm2_validation_lock.py
+
+      - name: Enforce zero-validation-science verification result
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/clrm2_validation_lock_verification.json",encoding="utf-8"))
+          assert d["status"]=="PASS",d
+          assert d["verdict"]=="CLRM2_VALIDATION_LOCK_VERIFICATION_PASS",d
+          assert d["validation_lock_sha256"]=="bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde",d
+          assert d["candidate_package_sha256"]=="310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83",d
+          assert d["dtrain_sha256"]=="8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28",d
+          assert d["checks"]["dval_absent"],d
+          assert d["checks"]["formal_absent"],d
+          assert d["dval_outcomes_generated"] is False,d
+          assert d["gate2_called"] is False,d
+          assert d["scientific_outcome_generated"] is False,d
+          print("CLRM2_VALIDATION_LOCK_VERIFICATION=PASS")
+          PY
+          sha256sum artifacts/clrm2_validation_lock_verification.json
+          sha256sum docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK.json
+
+      - name: Upload verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-validation-lock-verification
+          path: artifacts/clrm2_validation_lock_verification.json
+          if-no-files-found: error
