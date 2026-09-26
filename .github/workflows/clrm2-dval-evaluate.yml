@@ -72,7 +72,7 @@ jobs:
           test ! -e artifacts/CLRM2_GATE2_ADJUDICATOR_CALLED
 
           grep -q "(RETIRED)" .github/workflows/clrm2-dtrain-fit.yml
-          grep -Fq 'if: ${{ false }}' .github/workflows/clrm2-dtrain-fit.yml
+          python -c 'from pathlib import Path; t=Path(".github/workflows/clrm2-dtrain-fit.yml").read_text(encoding="utf-8"); assert ("if: "+chr(36)+"{{ false }}") in t'
 
           python - <<'PY'
           import pathlib, platform
