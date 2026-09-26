@@ -179,3 +179,41 @@ Canonical closure:
 `CLRM2_TRAINING_LOCK_VERIFICATION.md`.
 
 No fresh CLRM-2 seed has been executed and no predictor has been fitted yet.
+
+
+## CLRM2-A Phase A formal closure
+
+CLRM2-A D-train discovery is **PASS / CLOSED**.
+
+```text
+canonical workflow = 36254847891
+D-train            = 160 seeds / 480 boundaries / integrity PASS
+candidate           = RBF-KRR-v1
+gamma               = 0.02
+lambda              = 1.0
+strongest baseline  = B2
+
+D-train SHA-256 =
+8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28
+
+candidate SHA-256 =
+310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83
+```
+
+Canonical closure: `CLRM2_PHASE_A_FORMAL_CLOSURE.md`.
+
+```text
+D-train workflow       RETIRED / HARD-DISABLED
+D-train                SPENT
+candidate package      FROZEN
+strongest baseline     FROZEN = B2
+D-val                  SEALED / NOT EXECUTED
+Gate-2                 NOT CALLED
+```
+
+The candidate's D-train selection is not a Gate-2 result and does not establish
+predictive qualification.
+
+Next authorized transition: create and independently verify the exact
+`CLRM2-B Validation Lock`. Only after that verification may the sealed
+80-seed D-val cohort execute once.
