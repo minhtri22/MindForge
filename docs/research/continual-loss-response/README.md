@@ -217,3 +217,29 @@ predictive qualification.
 Next authorized transition: create and independently verify the exact
 `CLRM2-B Validation Lock`. Only after that verification may the sealed
 80-seed D-val cohort execute once.
+
+
+## CLRM2-B Validation Lock verification
+
+Independent Validation Lock verification is **PASS / CLOSED**.
+
+```text
+CLRM2_VALIDATION_LOCK_VERIFICATION_PASS
+
+Validation Lock SHA-256 =
+bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde
+
+candidate SHA-256 =
+310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83
+
+D-train SHA-256 =
+8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28
+
+sealed D-val collection   ELIGIBLE TO OPEN ONCE
+refit / retune            PROHIBITED
+Gate-2                    ONE-SHOT AFTER D-VAL PRESERVATION
+```
+
+Canonical closure: `CLRM2_VALIDATION_LOCK_VERIFICATION.md`.
+
+No D-val outcome exists at this point.
