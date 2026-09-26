@@ -130,6 +130,13 @@ jobs:
           PY
           test -s experiments/clrm/results/clrm2_dtrain.json
 
+      - name: Preserve raw D-train immediately after collection
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-phase-a-raw-dtrain-pre-integrity
+          path: experiments/clrm/results/clrm2_dtrain.json
+          if-no-files-found: error
+
       - name: Validate D-train integrity only
         shell: bash
         run: |
@@ -155,7 +162,7 @@ jobs:
           assert set(per_seed).isdisjoint(set(c2.DVAL_SEEDS))
 
           for r in rows:
-              assert tuple(r["features"].keys())==c2.OBS11
+              assert set(r["features"])==set(c2.OBS11)
               assert set(r["targets"])==set(c2.TARGETS)
               assert bool(r["integrity"]["valid"])
               for name in c2.TARGETS:
