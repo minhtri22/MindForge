@@ -1,0 +1,87 @@
+{
+  "adjudication": {
+    "baseline_mae": {
+      "A.current_loss": 0.052240526605896204,
+      "A.prior_mean_loss": 0.3464585406353542,
+      "B.current_loss": 0.016379677342014645,
+      "B.prior_mean_loss": 0.3148028503606572,
+      "C.current_loss": 0.018626723949315842,
+      "C.prior_mean_loss": 0.3184578941948872
+    },
+    "baseline_superiority_pass": false,
+    "bootstrap": {
+      "lower_2p5": 0.9887160134229875,
+      "upper_97p5": 1.0157851023851696
+    },
+    "calibration": {
+      "all_pass": false,
+      "channels": {
+        "A.current_loss": {
+          "alpha": -0.010040134547930263,
+          "beta": 1.1383988752122176,
+          "normalized_abs_alpha": 0.1921905309966203,
+          "pass": false,
+          "valid": true
+        },
+        "A.prior_mean_loss": {
+          "alpha": -0.03713102357293363,
+          "beta": 1.058007180019129,
+          "normalized_abs_alpha": 0.10717306464675622,
+          "pass": false,
+          "valid": true
+        },
+        "B.current_loss": {
+          "alpha": 0.01993977333054908,
+          "beta": 0.4687479617378252,
+          "normalized_abs_alpha": 1.2173483588350438,
+          "pass": false,
+          "valid": true
+        },
+        "B.prior_mean_loss": {
+          "alpha": -0.016327980451810387,
+          "beta": 1.0448390317373917,
+          "normalized_abs_alpha": 0.05186732087433155,
+          "pass": true,
+          "valid": true
+        },
+        "C.current_loss": {
+          "alpha": -0.04872976671449271,
+          "beta": 2.7042719398211656,
+          "normalized_abs_alpha": 2.616121162641837,
+          "pass": false,
+          "valid": true
+        },
+        "C.prior_mean_loss": {
+          "alpha": -0.09548460815039461,
+          "beta": 1.0873659151068702,
+          "normalized_abs_alpha": 0.29983432626719797,
+          "pass": false,
+          "valid": true
+        }
+      }
+    },
+    "candidate_mae": {
+      "A.current_loss": 0.05310843339810618,
+      "A.prior_mean_loss": 0.34311412474164044,
+      "B.current_loss": 0.016156886083236618,
+      "B.prior_mean_loss": 0.31695140866845406,
+      "C.current_loss": 0.018647588790486017,
+      "C.prior_mean_loss": 0.3219460934209292
+    },
+    "macro_ratio": 1.0020429145900482,
+    "predictor_family": "RBF-KRR-v1",
+    "ratios": {
+      "A.current_loss": 1.0166136685174996,
+      "A.prior_mean_loss": 0.9903468510616578,
+      "B.current_loss": 0.9863983121201932,
+      "B.prior_mean_loss": 1.006825091657637,
+      "C.current_loss": 1.001120156245776,
+      "C.prior_mean_loss": 1.0109534079375257
+    },
+    "relative_gain": -0.0020429145900482393,
+    "status": "NEGATIVE",
+    "strongest_baseline": "B2",
+    "verdict": "LOSS_RESPONSE_PREDICTABILITY_NOT_QUALIFIED"
+  },
+  "schema": "CLRM2-FORMAL-RESULT-v1"
+}
