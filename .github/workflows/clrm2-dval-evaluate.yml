@@ -1,0 +1,299 @@
+name: CLRM — CLRM2-B sealed D-val and one-shot Gate-2
+
+on:
+  push:
+    branches:
+      - research/continual-loss-response
+    paths:
+      - .github/workflows/clrm2-dval-evaluate.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clrm2-b-sealed-dval
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+
+    env:
+      PYTHONHASHSEED: "0"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/continual-loss-response
+          fetch-depth: 24
+
+      - name: Reject stale rerun or branch drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote_head="$(git ls-remote origin refs/heads/research/continual-loss-response | awk '{print $1}')"
+          test -n "$remote_head"
+          test "$remote_head" = "$GITHUB_SHA"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: Install exact locked runtime
+        run: |
+          python -m pip install pip==26.2.1
+          python -m pip install numpy==2.3.3 pytest==8.4.2
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Enforce exact verified CLRM2-B lock before D-val
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK.json | awk '{print $1}')" = "bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde"
+          test "$(git hash-object docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK_VERIFICATION.md)" = "dcaa46189c9e87138c75a102dea1a014502cdab9"
+
+          grep -q "CLRM2_VALIDATION_LOCK_VERIFICATION_PASS" docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK_VERIFICATION.md
+          grep -q "bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde" docs/research/continual-loss-response/CLRM2_VALIDATION_LOCK_VERIFICATION.md
+
+          test "$(sha256sum experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json | awk '{print $1}')" = "310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83"
+          test "$(sha256sum experiments/clrm/results/clrm2_dtrain.json | awk '{print $1}')" = "8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28"
+          test "$(git hash-object experiments/clrm/clrm2_predictive_discovery.py)" = "2b802f0ff10508d573e0c8ae61b6337ef80a1807"
+          test "$(git hash-object experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json)" = "7bf84b2c4c4ddbc84131aaab807d9620a317d40c"
+          test "$(git hash-object experiments/clrm/results/clrm2_dtrain.json)" = "46731fbbf621829d55234c0ad670482c7a09bd51"
+
+          test ! -e experiments/clrm/results/clrm2_dval.json
+          test ! -e experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+          test ! -e artifacts/CLRM2_GATE2_ADJUDICATOR_CALLED
+
+          grep -q "(RETIRED)" .github/workflows/clrm2-dtrain-fit.yml
+          grep -Fq 'if: ${{ false }}' .github/workflows/clrm2-dtrain-fit.yml
+
+          python - <<'PY'
+          import pathlib, platform
+          from importlib.metadata import version
+          import torch
+
+          wf=pathlib.Path(".github/workflows/clrm2-dval-evaluate.yml").read_text(encoding="utf-8")
+          collect_needle='"--phase", "' + "collect-val" + '"'
+          adjudicate_needle='"--phase", "' + "adjudicate" + '"'
+          assert wf.count(collect_needle)==1
+          assert wf.count(adjudicate_needle)==1
+          for forbidden_phase in ("collect"+"-train", "fit"+"-freeze"):
+              needle='"--phase", "' + forbidden_phase + '"'
+              assert needle not in wf
+
+          assert platform.machine()=="x86_64"
+          assert platform.python_version()=="3.12.14"
+          assert version("pip")=="26.2.1"
+          assert version("numpy")=="2.3.3"
+          assert version("pytest")=="8.4.2"
+          assert torch.__version__=="2.10.0+cpu"
+
+          print("CLRM2_DVAL_PRE_SCIENCE_GATE=PASS")
+          PY
+
+      - name: Collect exactly frozen sealed D-val cohort
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiments/clrm/results artifacts
+          PYTHONPATH=. python - <<'PY'
+          import sys, torch
+          torch.set_num_threads(1)
+          torch.use_deterministic_algorithms(True)
+          assert torch.get_num_threads()==1
+          assert torch.are_deterministic_algorithms_enabled()
+          from experiments.clrm import clrm2_predictive_discovery as c2
+          sys.argv=[
+              "clrm2_predictive_discovery.py",
+              "--phase", "collect-val",
+              "--output", "experiments/clrm/results/clrm2_dval.json",
+          ]
+          raise SystemExit(c2.main())
+          PY
+          test -s experiments/clrm/results/clrm2_dval.json
+
+      - name: Preserve raw D-val immediately after collection
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-sealed-dval-pre-integrity
+          path: experiments/clrm/results/clrm2_dval.json
+          if-no-files-found: error
+
+      - name: Validate D-val integrity only
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import collections, hashlib, json, math
+          from experiments.clrm import clrm2_predictive_discovery as c2
+
+          p="experiments/clrm/results/clrm2_dval.json"
+          d=json.load(open(p,encoding="utf-8"))
+          rows=d["records"]
+
+          assert d["schema"]=="CLRM2-DVAL-v1"
+          assert d["seed_sha256"]==c2.DVAL_SHA256=="a2287c490acf6c8a94cff56be1a5eb4aaa0115fce26675312ac590d5bfe6ee96"
+          assert len(rows)==240
+
+          per_seed=collections.Counter(int(r["seed"]) for r in rows)
+          per_stage=collections.Counter(int(r["boundary_index"]) for r in rows)
+          assert set(per_seed)==set(c2.DVAL_SEEDS)
+          assert len(per_seed)==80
+          assert all(per_seed[s]==3 for s in c2.DVAL_SEEDS)
+          assert per_stage=={1:80,2:80,3:80}
+          assert set(per_seed).isdisjoint(set(c2.DTRAIN_SEEDS))
+
+          for r in rows:
+              assert set(r["features"])==set(c2.OBS11)
+              assert set(r["targets"])==set(c2.TARGETS)
+              assert bool(r["integrity"]["valid"])
+              for name in c2.TARGETS:
+                  assert math.isfinite(float(r["targets"][name]))
+
+          sha=hashlib.sha256(open(p,"rb").read()).hexdigest()
+          ev={
+              "schema":"CLRM2-DVAL-INTEGRITY-v1",
+              "status":"PASS",
+              "validation_lock_sha256":"bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde",
+              "candidate_package_sha256":"310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83",
+              "seed_count":80,
+              "boundary_count":240,
+              "dval_seed_sha256":c2.DVAL_SHA256,
+              "dval_collection_sha256":sha,
+              "gate2_called":False,
+              "scientific_result_inspected":False,
+          }
+          open("artifacts/clrm2_dval_integrity.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+          print("CLRM2_DVAL_INTEGRITY=PASS")
+          print("CLRM2_DVAL_COLLECTION_SHA256="+sha)
+          PY
+
+      - name: Preserve complete D-val before adjudication
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-complete-dval-before-adjudication
+          path: |
+            experiments/clrm/results/clrm2_dval.json
+            artifacts/clrm2_dval_integrity.json
+          if-no-files-found: error
+
+      - name: Preserve sealed D-val in branch before adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/clrm/results/clrm2_dval.json
+          git commit -m "evidence(clrm): preserve CLRM2 sealed D-val"
+          git push origin HEAD:research/continual-loss-response
+
+      - name: Run exactly one frozen Gate-2 adjudicator
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+          test ! -e artifacts/CLRM2_GATE2_ADJUDICATOR_CALLED
+          touch artifacts/CLRM2_GATE2_ADJUDICATOR_CALLED
+
+          PYTHONPATH=. python - <<'PY'
+          import sys, torch
+          torch.set_num_threads(1)
+          torch.use_deterministic_algorithms(True)
+          assert torch.get_num_threads()==1
+          assert torch.are_deterministic_algorithms_enabled()
+          from experiments.clrm import clrm2_predictive_discovery as c2
+          sys.argv=[
+              "clrm2_predictive_discovery.py",
+              "--phase", "adjudicate",
+              "--input", "experiments/clrm/results/clrm2_dval.json",
+              "--candidate", "experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json",
+              "--output", "experiments/clrm/results/CLRM2_FORMAL_RESULT.json",
+          ]
+          raise SystemExit(c2.main())
+          PY
+
+          test -s experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+
+      - name: Validate and reveal frozen Gate-2 result
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import hashlib, json, os
+
+          dp="experiments/clrm/results/clrm2_dval.json"
+          cp="experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json"
+          rp="experiments/clrm/results/CLRM2_FORMAL_RESULT.json"
+
+          dsha=hashlib.sha256(open(dp,"rb").read()).hexdigest()
+          csha=hashlib.sha256(open(cp,"rb").read()).hexdigest()
+          rsha=hashlib.sha256(open(rp,"rb").read()).hexdigest()
+          d=json.load(open(rp,encoding="utf-8"))
+
+          assert d["schema"]=="CLRM2-FORMAL-RESULT-v1"
+          a=d["adjudication"]
+          assert a["verdict"] in {
+              "LOSS_RESPONSE_PREDICTABILITY_QUALIFIED",
+              "LOSS_RESPONSE_PREDICTABILITY_NOT_QUALIFIED",
+              "STOP_INTEGRITY_OR_BASELINE",
+          }
+          assert a["status"] in {"PASS","NEGATIVE","STOP"}
+          assert a.get("predictor_family","RBF-KRR-v1")=="RBF-KRR-v1"
+          if a["verdict"]!="STOP_INTEGRITY_OR_BASELINE":
+              assert a["strongest_baseline"]=="B2"
+
+          ev={
+              "schema":"CLRM2-SEALED-VALIDATION-EVIDENCE-v1",
+              "program":"CLRM-2",
+              "validation_lock_sha256":"bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde",
+              "candidate_package_sha256":csha,
+              "dval_collection_sha256":dsha,
+              "formal_result_sha256":rsha,
+              "workflow_run_id":os.environ["GITHUB_RUN_ID"],
+              "workflow_head_sha":os.environ["GITHUB_SHA"],
+              "dval_seed_count":80,
+              "dval_boundary_count":240,
+              "one_shot_gate2":True,
+              "refit_performed":False,
+              "recalibration_performed":False,
+              "controller_execution":False,
+              "observed_status":a["status"],
+              "observed_verdict":a["verdict"],
+          }
+          open("artifacts/CLRM2_SEALED_VALIDATION_EVIDENCE.json","w",encoding="utf-8").write(
+              json.dumps(ev,indent=2,sort_keys=True)+"\n"
+          )
+
+          print("CLRM2_OBSERVED_STATUS="+a["status"])
+          print("CLRM2_OBSERVED_VERDICT="+a["verdict"])
+          print("CLRM2_DVAL_COLLECTION_SHA256="+dsha)
+          print("CLRM2_FORMAL_RESULT_SHA256="+rsha)
+          PY
+
+      - name: Upload complete sealed validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: clrm2-sealed-validation-evidence
+          path: |
+            experiments/clrm/results/clrm2_dval.json
+            experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+            artifacts/clrm2_dval_integrity.json
+            artifacts/CLRM2_SEALED_VALIDATION_EVIDENCE.json
+          if-no-files-found: error
+
+      - name: Preserve formal Gate-2 result in branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add experiments/clrm/results/CLRM2_FORMAL_RESULT.json
+          git commit -m "evidence(clrm): preserve CLRM2 formal Gate-2 result"
+          git push origin HEAD:research/continual-loss-response
