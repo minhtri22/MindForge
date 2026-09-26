@@ -1,0 +1,157 @@
+{
+  "schema": "CLRM2-VALIDATION-LOCK-v1",
+  "program": "CLRM-2",
+  "phase": "B_SEALED_DVAL_ONLY",
+  "status": "LOCKED_PENDING_INDEPENDENT_VERIFICATION",
+  "parent": {
+    "training_lock_sha256": "e29873b3fd384f95c1d65490e259055b8c03545ea6a99a8b839f0d51f13619b5",
+    "phase_a_canonical_workflow": 36254847891,
+    "phase_a_workflow_head": "b67a374eb1a5f04672d1bf3afdce3c7af8e1f21e",
+    "phase_a_evidence_commit": "29ff470e4c392b76795b6546d0d331553368de88",
+    "phase_a_closure_path": "docs/research/continual-loss-response/CLRM2_PHASE_A_FORMAL_CLOSURE.md",
+    "phase_a_closure_git_blob": "09e2905fc288988ab6baf44c3f43544607ab99c8",
+    "phase_a_workflow_retired_git_blob": "c53de603d6c1a41f5f8f289864f8f89d52546d6f"
+  },
+  "protocol": {
+    "path": "docs/research/continual-loss-response/clrm2-predictive-discovery-protocol.md",
+    "git_blob_sha": "9c35a9b8648ae2581a9f111680364dc75ffcf8a8"
+  },
+  "scientific_source": {
+    "path": "experiments/clrm/clrm2_predictive_discovery.py",
+    "git_blob_sha": "2b802f0ff10508d573e0c8ae61b6337ef80a1807",
+    "post_lock_change_allowed": false
+  },
+  "candidate_package": {
+    "path": "experiments/clrm/results/CLRM2_DISCOVERY_CANDIDATE.json",
+    "sha256": "310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83",
+    "git_blob_sha": "7bf84b2c4c4ddbc84131aaab807d9620a317d40c",
+    "family": "RBF-KRR-v1",
+    "representation": "OBS11-v1",
+    "selected_gamma": 0.02,
+    "selected_lambda": 1,
+    "strongest_baseline": "B2",
+    "b2_lambdas": [
+      100,
+      0.01,
+      100,
+      1,
+      100,
+      1
+    ],
+    "dval_used": false,
+    "refit_on_dval_allowed": false,
+    "recalibration_allowed": false
+  },
+  "dtrain_evidence": {
+    "path": "experiments/clrm/results/clrm2_dtrain.json",
+    "sha256": "8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28",
+    "git_blob_sha": "46731fbbf621829d55234c0ad670482c7a09bd51",
+    "seed_manifest_sha256": "bc7f7dd941a5ec280156e9cbfc3f1501565213db7efa3b940dd4d189891b93e8",
+    "seed_count": 160,
+    "boundary_count": 480,
+    "spent": true,
+    "rerun_allowed": false
+  },
+  "dval_manifest": {
+    "manifest_path": "docs/research/continual-loss-response/CLRM2_DISCOVERY_SEED_MANIFEST.json",
+    "manifest_git_blob_sha": "c7600a8963a15b03a1d3c27a4134e0a724088519",
+    "seed_sha256": "a2287c490acf6c8a94cff56be1a5eb4aaa0115fce26675312ac590d5bfe6ee96",
+    "seed_count": 80,
+    "expected_boundaries": 240,
+    "seed_grouping": "ALL_3_BOUNDARIES_STAY_WITH_SEED",
+    "sealed": true,
+    "execution_authorized_only_after_independent_validation_lock_verification": true
+  },
+  "representation": {
+    "name": "OBS11-v1",
+    "exact_order": [
+      "STAGE_2",
+      "STAGE_3",
+      "H1_M1_RMS",
+      "H2_SQRT_M2_RMS",
+      "H3_BIAS_CORRECTED_ADAM_PRESSURE_RMS",
+      "H4_TASK_DRIFT_RELATIVE_L2",
+      "H5_PRESSURE_TO_DRIFT_RATIO",
+      "H6_DRIFT_PRESSURE_COSINE",
+      "H7_PRIOR_MEAN_ACCURACY",
+      "H8_PRIOR_WORST_ACCURACY",
+      "H9_CURRENT_TASK_LOSS"
+    ]
+  },
+  "target_contract": {
+    "exact_six_channels": [
+      "A.current_loss",
+      "A.prior_mean_loss",
+      "B.current_loss",
+      "B.prior_mean_loss",
+      "C.current_loss",
+      "C.prior_mean_loss"
+    ],
+    "target_drop_or_reweight_allowed": false,
+    "accuracy_sentinel_gating": false,
+    "contrast_rescue_allowed": false
+  },
+  "gate2": {
+    "strongest_baseline": "B2",
+    "relative_gain_min": 0.1,
+    "whole_seed_bootstrap_resamples": 20000,
+    "bootstrap_seed": 72002,
+    "macro_ratio_ci_upper_must_be_below": 1,
+    "every_channel_ratio_max": 1.05,
+    "calibration_beta_min": 0.8,
+    "calibration_beta_max": 1.2,
+    "calibration_abs_alpha_over_baseline_mae_max": 0.1,
+    "no_recalibration": true,
+    "baseline_zero_mae_verdict": "STOP_INTEGRITY_OR_BASELINE",
+    "pass_verdict": "LOSS_RESPONSE_PREDICTABILITY_QUALIFIED",
+    "negative_verdict": "LOSS_RESPONSE_PREDICTABILITY_NOT_QUALIFIED",
+    "one_shot_adjudication": true
+  },
+  "execution_order": [
+    "COLLECT_EXACT_DVAL_80_SEEDS",
+    "VALIDATE_DVAL_INTEGRITY_ONLY",
+    "PRESERVE_COMPLETE_DVAL_BEFORE_ADJUDICATION",
+    "RUN_EXACTLY_ONE_GATE2_ADJUDICATION",
+    "PRESERVE_FORMAL_RESULT"
+  ],
+  "prohibited": [
+    "RERUN_DTRAIN",
+    "REFIT_CANDIDATE",
+    "REFIT_BASELINE",
+    "CHANGE_FEATURES",
+    "CHANGE_TARGETS",
+    "CHANGE_HYPERPARAMETERS",
+    "CHANGE_BASELINE_IDENTITY",
+    "RECALIBRATE",
+    "ADD_OR_SUBSTITUTE_DVAL_SEEDS",
+    "INSPECT_DVAL_BEFORE_VALID_COLLECTION_PRESERVATION",
+    "TUNE_AFTER_DVAL",
+    "MODEL_RESCUE",
+    "CONTRAST_RESCUE",
+    "ACCURACY_SENTINEL_RESCUE",
+    "CONTROLLER"
+  ],
+  "runtime": {
+    "platform": "GitHub-hosted ubuntu-24.04",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "pip": "26.2.1",
+    "numpy": "2.3.3",
+    "pytest": "8.4.2",
+    "torch": "2.10.0+cpu",
+    "torch_index_url": "https://download.pytorch.org/whl/cpu",
+    "device": "CPU",
+    "deterministic_algorithms": true,
+    "torch_num_threads": 1
+  },
+  "outputs": {
+    "dval": "experiments/clrm/results/clrm2_dval.json",
+    "formal": "experiments/clrm/results/CLRM2_FORMAL_RESULT.json"
+  },
+  "downstream": {
+    "dval_before_independent_validation_lock_verification": false,
+    "clrm3_design_only_if_qualified": true,
+    "controller_closed": true,
+    "kcl7_closed": true
+  }
+}
