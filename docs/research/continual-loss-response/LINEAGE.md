@@ -471,3 +471,31 @@ Append-only.
 - D-train is now **SPENT**.
 - Candidate package and strongest baseline are now **FROZEN**.
 - Next authorized transition: **CLRM2-B Validation Lock only**.
+
+
+---
+
+## 2026-09-26 — CLRM2-B Validation Lock Verification Closed PASS
+
+- Validation Lock commit:
+  `7175664c7c4648361aabba5c62e082d5fd5eb9fe`.
+- Exact Validation Lock SHA-256:
+  `bd5845eb350bc5bbe889d0d1e2570d9a97b51c8bc683585c6d344f53ee15abde`.
+- Frozen candidate SHA-256:
+  `310bd9805cb028691826722c8cf5ee365e85d549872f2f3e898d8e348cef2a83`.
+- Frozen D-train SHA-256:
+  `8e7e38357f2117e76337b454f40debeb7741f1a8f3993a61add9f50c490d1b28`.
+- Canonical independent verification workflow: `36256072896`.
+- Workflow head: `3c7aa2132af06a9010d98f5c87eab98bc3809604`.
+- Independent tests: **5/5 PASS**.
+- Verdict: `CLRM2_VALIDATION_LOCK_VERIFICATION_PASS`.
+- Verification JSON SHA-256:
+  `389e3c9b031659da51dc42a6eefc440741b347a0b351ed72b759c93c5bebb7f6`.
+- Artifact ID: `10910592362`.
+- Artifact ZIP SHA-256:
+  `f679e7ec7fbc155c240eb50cb4754d7cac6157c49758639817406e5259f2f461`.
+- D-val outcomes generated during verification: **NO**.
+- Gate-2 called during verification: **NO**.
+- Sealed 80-seed D-val is now **ELIGIBLE TO OPEN ONCE**.
+- No refit, retuning, feature change, baseline change, recalibration, seed
+  substitution or controller is authorized.
