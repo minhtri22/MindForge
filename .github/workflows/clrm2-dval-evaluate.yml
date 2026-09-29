@@ -1,4 +1,8 @@
-name: CLRM — CLRM2-B sealed D-val and one-shot Gate-2
+name: CLRM — CLRM2-B sealed D-val and one-shot Gate-2 (RETIRED)
+
+# Canonical sealed validation completed in run 36256426311.
+# D-val is spent and Gate-2 has been adjudicated exactly once.
+# Retained for provenance only; execution is hard-disabled.
 
 on:
   push:
@@ -16,6 +20,7 @@ concurrency:
 
 jobs:
   validate:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 300
 
