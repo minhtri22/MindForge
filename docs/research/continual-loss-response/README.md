@@ -243,3 +243,56 @@ Gate-2                    ONE-SHOT AFTER D-VAL PRESERVATION
 Canonical closure: `CLRM2_VALIDATION_LOCK_VERIFICATION.md`.
 
 No D-val outcome exists at this point.
+
+
+## CLRM-2 final result
+
+CLRM-2 is **NEGATIVE / CLOSED**.
+
+```text
+LOSS_RESPONSE_PREDICTABILITY_NOT_QUALIFIED
+
+sealed D-val       = 80 seeds / 240 boundaries / integrity PASS
+strongest baseline = B2
+macro_ratio        = 1.0020429145900482
+relative_gain      = -0.0020429145900482393
+baseline superiority = FAIL
+all-channel calibration = FAIL
+```
+
+Canonical formal closure:
+`CLRM2_FORMAL_CLOSURE.md`.
+
+The result is specific to the frozen OBS11-v1 × RBF-KRR-v1 predictive contract.
+It does not establish that CE-loss response is uninformative or that OBS11-v1
+contains no signal.
+
+The sealed-validation workflow is retired/hard-disabled and D-val/Gate-2 are
+spent. No rerun, rescue model, threshold relaxation, recalibration or extra
+validation cohort is authorized.
+
+## CLRM convergence
+
+The mandatory convergence review is complete:
+
+`CLRM_FORMAL_CONVERGENCE_REVIEW.md`.
+
+```text
+retain:
+  continuous CE-response measurement
+  same-state response extraction
+  support qualification methodology
+  two-lock discovery/validation governance
+  B2 as comparator only
+
+do not promote:
+  CLRM-2 RBF-KRR predictor
+  policy controller
+  KCL-7
+
+CLRM-3              NOT AUTHORIZED
+CLRM program         CLOSED / CONVERGED
+```
+
+Any future successor must be a separately justified scientific question rather
+than a rescue continuation of CLRM-2.
