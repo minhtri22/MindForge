@@ -499,3 +499,90 @@ Append-only.
 - Sealed 80-seed D-val is now **ELIGIBLE TO OPEN ONCE**.
 - No refit, retuning, feature change, baseline change, recalibration, seed
   substitution or controller is authorized.
+
+
+---
+
+## 2026-09-29 — CLRM-2 Sealed Validation Formal Closure
+
+- Canonical sealed validation workflow: `36256426311`.
+- Workflow head: `659b834b95723b8ca11b9bfac55e078710c6c8a2`.
+- D-val: **80/80 seeds, 240/240 boundaries**.
+- D-val integrity: **PASS**.
+- D-val collection SHA-256:
+  `a5fbf4bc170112929536a056fcb0001245dbae42daaf89160d63c66a816d767a`.
+- D-val seed-manifest SHA-256:
+  `a2287c490acf6c8a94cff56be1a5eb4aaa0115fce26675312ac590d5bfe6ee96`.
+- Gate-2 called: **exactly one valid time**.
+- Formal result SHA-256:
+  `03f66e5851f2d7ef61d2db1a59a6a4ce6c3249f8920e3830b2ce7cfe7721fc79`.
+- Formal result preservation commit:
+  `44ebebc65a76a8233c5323a2a56a0222d3813bf8`.
+- Observed status: **NEGATIVE**.
+- Observed verdict:
+  `LOSS_RESPONSE_PREDICTABILITY_NOT_QUALIFIED`.
+- Frozen strongest baseline: **B2**.
+- `macro_ratio = 1.0020429145900482`.
+- `relative_gain = -0.0020429145900482393`.
+- Whole-seed bootstrap 95% macro-ratio interval:
+  `[0.9887160134229875, 1.0157851023851696]`.
+- Baseline-superiority gate: **FAIL**.
+- Calibration all-channel gate: **FAIL**; only `B.prior_mean_loss` passed
+  the complete frozen alpha/beta criterion.
+- No refit, retuning, recalibration, seed substitution, extra D-val seed or
+  controller execution occurred.
+- Formal closure:
+  `CLRM2_FORMAL_CLOSURE.md`.
+- Formal closure commit:
+  `8bd6a46becb63ea6309d4b51dc18a813e7b671a6`.
+
+Technical attempt before the canonical D-val run:
+
+- workflow `36256306507`;
+- classification:
+  **TECHNICAL_PRE_SCIENCE_LITERAL_GUARD_FAILURE**;
+- D-val seeds executed: **0**;
+- Gate-2 calls: **0**.
+
+The sealed-validation workflow is now **RETIRED / HARD-DISABLED** at commit
+`535078620359d2fac2369b521373222c28cc0771`.
+Retirement verification run `36586640387` completed **skipped**, so no new
+validation science was executed.
+
+---
+
+## 2026-09-29 — CLRM Mandatory Formal Convergence Review Closed
+
+Canonical review:
+
+`CLRM_FORMAL_CONVERGENCE_REVIEW.md`
+
+Review commit:
+
+`458d87258cf8148ca8c698ef4c7588ab55c3e321`
+
+Convergence decision:
+
+```text
+CLRM scientific question                    CLOSED
+CLRM-2 RBF-KRR predictor                    ARCHIVE AS NEGATIVE EVIDENCE
+continuous CE response measurement          RETAIN
+response-support methodology                RETAIN
+two-lock discovery/validation governance    RETAIN
+B2                                          RETAIN AS COMPARATOR ONLY
+predictor promotion                         NO
+controller promotion                        NO
+CLRM-3                                      NOT AUTHORIZED
+same-question rescue ladder                 CLOSED
+```
+
+Interpretation:
+
+- CLRM-1 support qualification remains valid.
+- CLRM-2 does not show that CE-loss response or OBS11-v1 is useless.
+- It shows that the preregistered nonlinear RBF-KRR-v1 candidate did not
+  materially outperform the frozen strongest B2 comparator and did not achieve
+  all-channel calibration on sealed validation.
+- No immediate successor experiment is authorized by CLRM itself.
+- Any future work must start as an independently justified new research
+  question, not as a rescue of the spent CLRM-2 D-val result.
