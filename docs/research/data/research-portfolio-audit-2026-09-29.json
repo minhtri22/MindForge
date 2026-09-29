@@ -1,0 +1,160 @@
+{
+  "schema": "mindforge-research-portfolio-audit-v1",
+  "audit_date": "2026-09-29",
+  "canonical_main": {
+    "branch": "main",
+    "sha": "924654c81c08832c23ff192fdcbf63d3f2680d3a"
+  },
+  "decision": "ONE_ACTIVE_SCIENCE_AXIS",
+  "primary_research_axis": {
+    "name": "PERSONAL_INTELLIGENCE_PPF_FIRST",
+    "active_branch": "research/ppf-l1-l2",
+    "branch_sha": "18b57e70a62c2468e6940d6741c705f0ff850a31",
+    "core_admission": "PPF remains plugin/extension; future model capability requires separate post-G5 evidence"
+  },
+  "promote_to_core": [
+    {
+      "branch": "refactor/mks-1-model-kernel-separation",
+      "sha": "5280243a54ba8977b0d02a5b4ed85c657e03193f",
+      "capability": "minimal PyTorch-bound Model/Kernel contract"
+    }
+  ],
+  "merge_evidence_then_archive": [
+    {
+      "branch": "governance/model-pipeline-infra-science-separation",
+      "sha": "750d6358a88e738cfaf971b3a5db3192f7622889",
+      "lesson": "separate SCIENCE_GATE, INFRA_QUALIFICATION and INFRA_BINDING_CHECK"
+    },
+    {
+      "branch": "research/measurement-substrate-adequacy",
+      "sha": "64138ab9cb09dcb56a387d3b1f500063eff8302d",
+      "lesson": "replicated ACCURACY_COARSE_LOSS_INFORMATIVE"
+    },
+    {
+      "branch": "research/model-pipeline-m6r-runtime-failure-decomposition",
+      "sha": "fdfec8a926ff11f5e10ce0e360251b0ce86e5221",
+      "lesson": "runtime cache/flash conflict root cause"
+    },
+    {
+      "branch": "codex/oir-lineage-cleanup",
+      "sha": "d642371582d301db66e8a996c91536904636f79a",
+      "lesson": "historical provenance corrections only"
+    }
+  ],
+  "supporting_platform_freeze": [
+    {
+      "branch": "docs/evidence-model-training-pipeline",
+      "sha": "9ff987ebd95cd23fef4cd2a0511774d772b14400"
+    },
+    {
+      "branch": "research/model-pipeline-m5-quantization-qualification",
+      "sha": "7bcacfa8fb291a9a55e2acf19077c8e61f33c329"
+    },
+    {
+      "branch": "infra/ollama-windows-runtime-qualification",
+      "sha": "46709f0266970a7a16ce4ca2b07b9365c55329b4"
+    }
+  ],
+  "finish_and_archive": [
+    {
+      "branch": "research/model-pipeline-m6r2-parity",
+      "sha": "c3c3537d53e76729fa76d42e263d1969f3f54bc2",
+      "remaining": "one already-authorized S3 execution only"
+    },
+    {
+      "branch": "research/continual-loss-response",
+      "sha": "44ebebc65a76a8233c5323a2a56a0222d3813bf8",
+      "remaining": "formal-close existing CLRM2 negative result; no rescue"
+    }
+  ],
+  "archive": [
+    [
+      "quarantine/m5-quantization-agent-drift-20260921",
+      "ddb0a080ae06c99b6f72ffa633d34f255989b485",
+      "QUARANTINE_ARCHIVE"
+    ],
+    [
+      "oir-ppv-research",
+      "e8cf4a958108e048d8d93f8b61bc0c3d63c6bb51",
+      "closed/falsified evidence"
+    ],
+    [
+      "research/oir-ppv",
+      "9d0879b038b9792809e6589a92ddff5ba2636f4e",
+      "superseded OIR audit/reconstruction"
+    ],
+    [
+      "research/h3r2-r-closure",
+      "2e9ad80af6479409e71dc4d3aff90398740112ff",
+      "PROTOCOL_DEVIATION / no rerun"
+    ],
+    [
+      "research/kernel-cl",
+      "a9159ae8f17693453e7b6378c92deb5effc4a56f",
+      "diagnostic convergence / controller not qualified"
+    ],
+    [
+      "research/cl-potential-outcomes",
+      "4fca2b5639e581614e33d9dbfbae576c2bddf9c7",
+      "design-only / superseded direction"
+    ],
+    [
+      "research/adaptive-continual-outcomes",
+      "0700601f9196d3c5989fa8eb5169f28b1bb01799",
+      "STOP insufficient hard-target support"
+    ],
+    [
+      "research/continual-policy-response",
+      "c1837438d944c0e11dcb961fa669cfef92bc3c2d",
+      "negative response-geometry contract"
+    ],
+    [
+      "research/model_kernel",
+      "d6e3c50abdb8606afa9615db221f45e49de3db81",
+      "superseded by model_core"
+    ],
+    [
+      "research/model_core",
+      "256849fe29c870bc7d1cfbda5930a847ede63e6a",
+      "MK-1 H1A_FAIL terminal"
+    ],
+    [
+      "research/model-pipeline-m6-ollama",
+      "c9952ac66be2a15776dcfb92d7bd7e2e1355242e",
+      "FAIL_PACKAGE closed"
+    ],
+    [
+      "research/model-pipeline-m6r-installed-ollama",
+      "63cfcd12fae036dd94cf8ce64854796142751b49",
+      "FAIL_RUNTIME closed"
+    ],
+    [
+      "research/pit",
+      "8a1628d0fba93029f9b9bd6825865145278ff0c9",
+      "deterministic representation ceiling; input evidence only"
+    ],
+    [
+      "research/sol-recon-teacher-learning",
+      "3a11517dc7011d4620b5328224dca669f79b0abc",
+      "sandbox replay insufficient"
+    ],
+    [
+      "research/track-a-benchmark-v1",
+      "e17c4f886381e24bc9f3b14d719b0a6e60f41485",
+      "Track-A closed"
+    ],
+    [
+      "research/track-a-foundation-protocol",
+      "627044cc06d3e411b1388b57cd94906fefa74343",
+      "benchmark protocol retained; Track-A closed"
+    ]
+  ],
+  "portfolio_rules": {
+    "max_active_science_axes": 1,
+    "max_active_science_branches": 1,
+    "pass_does_not_auto_authorize_successor": true,
+    "fail_does_not_auto_authorize_rescue": true,
+    "platform_is_not_science": true,
+    "no_new_branch_until_ppf_finite_closure_or_portfolio_review": true
+  }
+}

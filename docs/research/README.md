@@ -1,5 +1,7 @@
 # MindForge Research Index
 
+> Portfolio governance proposal: see [MindForge Research Portfolio Audit — 2026-09-29](MINDFORGE_RESEARCH_PORTFOLIO_AUDIT_2026-09-29.md). The audit is staged on a governance branch for review and is not yet canonical main policy.
+
 MindForge separates the active compact-kernel roadmap from optional research tracks. Research does not become kernel architecture merely because it may be interesting later.
 
 ## Strategic research directions
