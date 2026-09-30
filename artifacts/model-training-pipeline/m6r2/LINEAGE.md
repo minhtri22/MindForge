@@ -282,3 +282,41 @@ Authorization now binds both the exact qualified runtime scope and the exact
 materialized qualified adapter blob on the execution branch.
 
 M7 and bulk training remain closed.
+
+
+## 2026-10-01 — S3 one-shot scientific execution PASS / M6R2 formally closed
+
+Canonical local execution:
+- job: job_0da0cbc9be34b48e94baf0e132ec1136
+- repo head: c3c3537d53e76729fa76d42e263d1969f3f54bc2
+- report SHA256: 86a970f61064682e3f5ebb4edb9107e61f762d16735486e0a547a4a34b32aed8
+- evidence manifest SHA256: ede3bddc01f33e2749bec0f156b317d09e49dc857e18550095aca61cfd2135e7
+
+Attempt state:
+- authorized = 1
+- consumed = 1
+- remaining = 0
+- first exposure task = arith-1
+- rerun = forbidden
+
+Observed:
+- Ollama task vector = [false,false]
+- Ollama accuracy = 0
+- parent task vector = [false,false]
+- parent accuracy = 0
+- format valid = all rows
+- native thinking = empty
+- verdict = PASS_PARITY
+
+Cleanup:
+- owned cleanup PASS
+- initial/final model sets match
+
+Interpretation:
+PASS_PARITY means the frozen Ollama packaged target reproduced the frozen llama.cpp
+parent behavior under the study contract. It does not establish model quality.
+
+M6R2 = PASS_PARITY / FORMALLY_CLOSED.
+M7 remains unauthorized.
+Bulk training remains unauthorized.
+No automatic successor is authorized.

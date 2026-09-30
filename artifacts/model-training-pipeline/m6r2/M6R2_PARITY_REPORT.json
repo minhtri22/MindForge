@@ -1,0 +1,168 @@
+{
+    "schema":  "mindforge-model-pipeline-m6r2-parity-report-v1",
+    "program":  "M6R2_PARITY_REPLICATION",
+    "completed_at":  "2026-09-30T20:06:50.8004980Z",
+    "classification":  "PASS_PARITY",
+    "scientific_attempt_consumed":  true,
+    "scientific_fail":  false,
+    "repo_head":  "c3c3537d53e76729fa76d42e263d1969f3f54bc2",
+    "q4":  {
+               "path":  "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\.local\\M6-LOCAL-Q4-RECONSTRUCTION\\output\\model-q4_k_m.gguf",
+               "size":  397807456,
+               "sha256":  "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+               "aggregate_manifest_hash":  "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+               "exact_identity":  true
+           },
+    "infra_binding":  {
+                          "binding":  {
+                                          "flash_attention_forced":  false,
+                                          "flash_attention_mode":  "off",
+                                          "flash_attention_observed_value":  "false",
+                                          "host":  "127.0.0.1:11468",
+                                          "kv_cache_type":  "f16",
+                                          "local_machine_fingerprint_sha256":  "a208a4c542eeaf70363b77344cac81eec531cc0c9be85aada22d61c112c08993",
+                                          "ollama_executable_sha256":  "ad41dcf55c5de96d4a0bff7c559a17285c3aa064a6f12d23db3ebf59ad8e4125",
+                                          "ollama_version":  "0.34.2",
+                                          "runtime_adapter_contract_version":  "mindforge-owrq-runtime-adapter-v1",
+                                          "runtime_adapter_entrypoint":  "tools/ollama_windows_adapter.py",
+                                          "runtime_adapter_git_blob_sha1":  "075b3b354bbd0c7674d629070d99769d201ad619"
+                                      },
+                          "adapter_path":  "D:\\WORK\\RESEARCH\\MindForge\\MindForge-M5-F16\\tools\\ollama_windows_adapter.py",
+                          "artifact_sha256":  "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370"
+                      },
+    "rows":  [
+                 {
+                     "expected":  "42",
+                     "format_valid":  true,
+                     "id":  "arith-1",
+                     "native_thinking":  "",
+                     "outcome_exposed":  true,
+                     "output":  "17 + 25 equals 42.",
+                     "task_success":  false,
+                     "type":  "exact_answer"
+                 },
+                 {
+                     "expected":  "9.9",
+                     "format_valid":  true,
+                     "id":  "compare-1",
+                     "native_thinking":  "",
+                     "outcome_exposed":  true,
+                     "output":  "To determine which number is larger between 9.9 and 9.11, we can follow these steps:\n\n1. **Understand the numbers**: Both numbers are very close to each other.\n2. **Compare the digits from left to right**:\n   - The first digit of both numbers is 9.\n   - The second digit of both numbers is also 9.\n\n3. **Determine the next digit**:\n   - In the number 9.9, the digit in the hundredths place is 1.\n   - In the number 9.11, the digit in the thousandths place is",
+                     "task_success":  false,
+                     "type":  "exact_answer"
+                 }
+             ],
+    "cleanup":  {
+                    "owned_cleanup_pass":  true,
+                    "initial_final_model_sets_match":  true
+                },
+    "evidence_manifest":  {
+                              "files":  [
+                                            {
+                                                "relative_path":  "evidence\\adapter-cleanup.json",
+                                                "size":  574,
+                                                "sha256":  "2453344e2a106ddc9a6e528c81b9450b3797d3725471cc86cda62108b59933ec"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\adapter-session.json",
+                                                "size":  2482,
+                                                "sha256":  "317548f5dd19484c3fcb7a47f4c9242d38b6a5a98d354786302d09a6eaf7d55b"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\ollama-create.stderr.log",
+                                                "size":  2990,
+                                                "sha256":  "e08a4579ff3dd848a40860c9c9b58e09de3e0b15d4ccdb4fadd2ed5983744424"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\ollama-create.stdout.log",
+                                                "size":  0,
+                                                "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\ollama-rm.stderr.log",
+                                                "size":  94,
+                                                "sha256":  "2af5c4c461f8ad5fe32f472d8b170b58655fea900665f96d0338bc969b30e093"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\ollama-rm.stdout.log",
+                                                "size":  55,
+                                                "sha256":  "0ecf61225f9c89c283eeacf850ba0613a03c197afa5bfe6a21cd71cc2d505cd3"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\ollama-serve.stderr.log",
+                                                "size":  0,
+                                                "sha256":  "6cfdec8bd4a87053edfd7b1df463ff59f4f6e000eca453ca787d2a3e17c3601d"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\ollama-serve.stdout.log",
+                                                "size":  1776,
+                                                "sha256":  "5d37e0eabb36ef6b3f3896062dde0a256c7b28b72752164a75fd89a70f695759"
+                                            },
+                                            {
+                                                "relative_path":  "evidence\\remote-env-reconstruction.json",
+                                                "size":  703,
+                                                "sha256":  "d9bd1e96833d232883d0ef6f032e7acac5d83cd03c53af8c73e99ef8fd0188b8"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\completed-rows.json",
+                                                "size":  1305,
+                                                "sha256":  "432bb58a9f4c6659c57f7b62d7e7124b8fd914b9b90b5e7f6ccacf0b864e3d4d"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-01-arith-1-request.json",
+                                                "size":  501,
+                                                "sha256":  "50718b5337636f8b2eb0ca1080a5331211f8b44f72a9631f3540f229c29832b6"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-01-arith-1-response.json",
+                                                "size":  459,
+                                                "sha256":  "97170afeded6bec51291e9c724659b29330866bc0b452e1516f0c224e4b11def"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-01-arith-1-start.json",
+                                                "size":  198,
+                                                "sha256":  "cb1964a910d982a86075d91d1660792647e5c424bb7aa97a61eed2b210b276e7"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-01-arith-1-task.json",
+                                                "size":  118,
+                                                "sha256":  "a95b6f1aff33d71737466c93225e596cbda7ecf2278da948d8f7b62480bf2db3"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-01-arith-1-transport.json",
+                                                "size":  135,
+                                                "sha256":  "7fcb3649b4fe5e6de8c3a726b366e0c6dc909b670176b8e77119329fd8cdb0c8"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-02-compare-1-request.json",
+                                                "size":  514,
+                                                "sha256":  "f2b8fa8a88e1e6c45385718cb584df16f641dd4b3337c399435a8b981da213bf"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-02-compare-1-response.json",
+                                                "size":  912,
+                                                "sha256":  "da5fb6fd3c0d989ff712d8a93a45209654e3bcace1799fca5874ef7704bfbde5"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-02-compare-1-start.json",
+                                                "size":  199,
+                                                "sha256":  "57239d9b345ed18b5b79e7a42231c2e6ba11abc3ceec7d727b3bc8722ca85910"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-02-compare-1-task.json",
+                                                "size":  134,
+                                                "sha256":  "1b6002cc3e8ff3d6d6c0d2c0d12bb1fd7a27167def927a96585943069d511ee6"
+                                            },
+                                            {
+                                                "relative_path":  "outcome-ledger\\request-02-compare-1-transport.json",
+                                                "size":  135,
+                                                "sha256":  "7fcb3649b4fe5e6de8c3a726b366e0c6dc909b670176b8e77119329fd8cdb0c8"
+                                            }
+                                        ],
+                              "manifest_sha256":  "ede3bddc01f33e2749bec0f156b317d09e49dc857e18550095aca61cfd2135e7"
+                          },
+    "m6_status":  "FAIL_PACKAGE_CLOSED",
+    "m6r_status":  "FAIL_RUNTIME_CLOSED",
+    "m7_authorized":  false,
+    "bulk_training_authorized":  false
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "mindforge-model-pipeline-m6r2-s3-formal-adjudication-v1",
+  "status": "FORMALLY_CLOSED",
+  "terminal_class": "PASS_PARITY",
+  "program": "M6R2_PARITY_REPLICATION",
+  "execution": {
+    "repo_head": "c3c3537d53e76729fa76d42e263d1969f3f54bc2",
+    "local_job_id": "job_0da0cbc9be34b48e94baf0e132ec1136",
+    "source_report_sha256": "86a970f61064682e3f5ebb4edb9107e61f762d16735486e0a547a4a34b32aed8",
+    "source_report_size_bytes": 12050,
+    "completed_at": "2026-09-30T20:06:50.8004980Z",
+    "scientific_attempts_authorized": 1,
+    "scientific_attempts_consumed": 1,
+    "scientific_attempts_remaining": 0,
+    "rerun_authorized": false
+  },
+  "frozen_parent": {
+    "q4_sha256": "ca9ac3104fa025619f34eaf941f4bac95787cc4aba2818d3e972766bc02cb977",
+    "q4_size": 397807456,
+    "q4_manifest": "e47700cab51bcf82174aa437ed767032f7ff29e3e1594690f5b9ff91e4762e0b",
+    "llama_parent_task_vector": [
+      false,
+      false
+    ],
+    "llama_parent_accuracy": 0
+  },
+  "observed": {
+    "task_vector": [
+      false,
+      false
+    ],
+    "accuracy": 0,
+    "format_valid_all": true,
+    "native_thinking_all_empty": true,
+    "rows": [
+      {
+        "expected": "42",
+        "format_valid": true,
+        "id": "arith-1",
+        "native_thinking": "",
+        "outcome_exposed": true,
+        "output": "17 + 25 equals 42.",
+        "task_success": false,
+        "type": "exact_answer"
+      },
+      {
+        "expected": "9.9",
+        "format_valid": true,
+        "id": "compare-1",
+        "native_thinking": "",
+        "outcome_exposed": true,
+        "output": "To determine which number is larger between 9.9 and 9.11, we can follow these steps:\n\n1. **Understand the numbers**: Both numbers are very close to each other.\n2. **Compare the digits from left to right**:\n   - The first digit of both numbers is 9.\n   - The second digit of both numbers is also 9.\n\n3. **Determine the next digit**:\n   - In the number 9.9, the digit in the hundredths place is 1.\n   - In the number 9.11, the digit in the thousandths place is",
+        "task_success": false,
+        "type": "exact_answer"
+      }
+    ],
+    "scientific_verdict": "PASS_PARITY"
+  },
+  "infrastructure": {
+    "qualified_runtime_sha256": "4c15da27c2087b14d9c48689e5e811520c422b4b45eaddc3838bd4432ceb0370",
+    "adapter_blob": "075b3b354bbd0c7674d629070d99769d201ad619",
+    "ollama_version": "0.34.2",
+    "kv_cache_type": "f16",
+    "flash_attention_mode": "off",
+    "cleanup_pass": true,
+    "initial_final_model_sets_match": true,
+    "remote_transport_env_reconstruction": {
+      "scientific": false,
+      "global_environment_mutated": false,
+      "source": "HKCU\\Environment\\OLLAMA_FLASH_ATTENTION",
+      "registry_value": "false",
+      "remote_agent_inherited_value": null,
+      "child_process_value": "false",
+      "receipt_sha256": "d9bd1e96833d232883d0ef6f032e7acac5d83cd03c53af8c73e99ef8fd0188b8"
+    }
+  },
+  "interpretation": {
+    "supported": "The exact admitted Q4 under the frozen Ollama study contract reproduced the frozen llama.cpp parent task vector/accuracy and satisfied the frozen parity contract.",
+    "not_supported": [
+      "model quality is good",
+      "reasoning quality improved",
+      "training succeeded as a quality claim",
+      "Q4 is accurate on these tasks",
+      "Ollama is better than llama.cpp"
+    ],
+    "narrow_fact": "Both runtimes produce the frozen task vector [false,false] with accuracy 0; PASS_PARITY is behavioral parity, not quality."
+  },
+  "governance": {
+    "m6r2_closed": true,
+    "rerun_authorized": false,
+    "rescue_authorized": false,
+    "m7_authorized": false,
+    "bulk_training_authorized": false,
+    "automatic_successor_authorized": false
+  }
+}
