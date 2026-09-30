@@ -19,6 +19,7 @@ MindForge separates the active compact-kernel roadmap from optional research tra
 
 ## Completed research
 
+- **Continual-learning portfolio — CLOSED / ARCHIVED** — Later post-Phase-0 research established positive bounded-replay evidence on tested synthetic substrates, replicated that terminal CE loss is informative where terminal accuracy is coarse, and then obtained a negative sealed-validation result for the preregistered CLRM-2 RBF-KRR predictor. No continual-learning controller/mechanism enters core; no same-question rescue is authorized. See [archive/continual-learning-portfolio-closure-2026-10-01.md](archive/continual-learning-portfolio-closure-2026-10-01.md).
 - **R1 — Open-Source Learning/Memory Architecture Survey — PASS / CLOSED** — source-level survey of ten projects and six shortlisted candidates. It recommends minimal reservoir replay only for a future independently authorized prototype, keeps application memory outside the kernel, and concludes that Phase 1 needs no architectural change or preserved extension point. See the [survey](r1-open-source-learning-memory.md), [matrices](r1-candidate-matrix.md), and [machine-readable inventory](data/r1-candidates.json). R1 did not implement a candidate and is not a P0.9 retry.
 
 ## Deferred research
