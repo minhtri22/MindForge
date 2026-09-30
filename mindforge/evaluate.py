@@ -15,7 +15,7 @@ from torch.nn import functional as F
 from .checkpoint import load_checkpoint, read_checkpoint
 from .data import load_token_array
 from .device import resolve_device
-from .model import TransformerLM
+from .model_contract import TokenModel
 from .tokenizer import decode, load_tokenizer, metadata
 
 
@@ -29,7 +29,7 @@ def bits_per_byte(total_nll: float, utf8_bytes: int) -> float:
 
 @torch.no_grad()
 def evaluate_tokens(
-    model: TransformerLM,
+    model: TokenModel,
     tokens: np.ndarray,
     tokenizer: Any,
     *,
@@ -38,7 +38,7 @@ def evaluate_tokens(
 ) -> dict[str, Any]:
     if max_windows <= 0:
         raise ValueError("max_windows must be positive")
-    context = model.config.max_context
+    context = model.context_limit
     if len(tokens) < 2:
         raise ValueError("evaluation token array is too short")
     stride = context + 1
