@@ -98,6 +98,14 @@ dataset
 
 Continual learning, explicit memory and adaptive/pattern mechanisms are **not current core commitments**. Phase 0 stopped the custom research hypotheses because the bounded experiments did not establish a scientifically usable forgetting/memory-value substrate. Future capabilities may be adopted, ported, adapted or minimally cloned from proven open-source mechanisms after a dedicated research/selection phase.
 
+## Current research portfolio
+
+MindForge now operates with **one active science axis at a time**. The current axis is **Personal Intelligence / PPF-first** on `research/ppf-l1-l2`. PPF has passed L1→L5, blind confirmation C1 and capability-placement F1; the remaining finite closure path is G1→G5. PPF remains an optional Plugin/Extension rather than a Kernel capability.
+
+MKS-1 model/kernel separation has been promoted into core. Continual-learning, OIR, MK-1, Track-A/PIT and completed runtime-parity studies are historical evidence, not concurrent active research programs. Model-training/export/runtime tooling remains supporting platform infrastructure and is governed separately from science.
+
+See [docs/research/PORTFOLIO_STATUS_2026-10-01.md](docs/research/PORTFOLIO_STATUS_2026-10-01.md).
+
 ## Roadmap
 
 MindForge uses an evidence-driven capability roadmap:

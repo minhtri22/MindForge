@@ -2,15 +2,25 @@
 
 MindForge separates the active compact-kernel roadmap from optional research tracks. Research does not become kernel architecture merely because it may be interesting later.
 
-## Strategic research directions
+## Active research portfolio
 
-- **Personal Intelligence — Two-Track Direction — FOUNDATION RESEARCH ONLY** — Track A investigates whether a <=20M-class MindForge-Mobile model can focus on personal understanding/routing rather than world knowledge. Track B is now **Personal Pattern Foundation (PPF)**, a greenfield research track asking how little machinery is required to reliably recognize one person over time. PPF must progress through five proof layers: define "Recognize Me"; define the personal event foundation; freeze a ground-truth benchmark; test minimal baselines; add only the minimum mechanism justified by measured failure. Legacy PIS is outside the PPF execution path and is historical only. Track A/PPF integration is not authorized. See [personal-intelligence-two-track.md](personal-intelligence-two-track.md).
+- **SOLE ACTIVE SCIENCE AXIS — Personal Intelligence / PPF-first** — branch `research/ppf-l1-l2` at audited state `18b57e70a62c2468e6940d6741c705f0ff850a31`. Frozen evidence: L1 PASS/FROZEN, L2 PASS/FROZEN, L3 PASS/DATASET FROZEN, L4 PASS, L5 PASS, C1 BLINDLY CONFIRMED, F1 PASS. Confirmed primitive: **Observability Eligibility**. PPF remains an optional Plugin/Extension; it is not Kernel and does not currently require Model modification. The only authorized finite research path is **G1 → G2 → G3 → G4 → G5**. No parallel science branch is authorized. See [PORTFOLIO_STATUS_2026-10-01.md](PORTFOLIO_STATUS_2026-10-01.md).
 
-## PPF foundation research
+## PPF closure roadmap
 
-- **Device/platform research — COMPLETE / INPUT TO L1-L2** — surveys Android, iOS, Wear OS, Apple Watch/watchOS, connected accessories, Health Connect/HealthKit and the medical-software boundary. Main conclusion: personal-device evidence is feasible but inherently partial, delayed, permission-dependent and multi-device; `unknown/not observable`, source provenance and opportunity semantics must therefore be first-class. See [ppf-device-platform-research.md](ppf-device-platform-research.md).
-- **L1/L2 related-work research — COMPLETE / PRE-EXECUTION INPUT** — surveys Reality Mining, Eigenbehaviors, StudentLife, ExtraSensory, personal sensing/informatics, context-aware computing, missingness/data-quality research, SOSA/SSN, SensorThings, OpenTelemetry, CloudEvents, W3C PROV, and OSS systems including AWARE, Beiwe, mindLAMP, RAPIDS, ActivityWatch, and Open mHealth. Main conclusion: PPF should reuse minimal event/provenance semantics instead of inventing them, while directly proving its unique `opportunity + observability + correction/deletion + abstention` contract. See [ppf-l1-l2-related-work-research.md](ppf-l1-l2-related-work-research.md).
-- **PPF-L1/L2 Foundation Protocol — DEFINED / EXECUTION NOT YET RUN** — freezes the proof requirements for defining "Recognize Me" and a platform-neutral personal-event foundation before any pattern algorithm may be implemented. The related-work pass recommends a small pre-execution revision covering observation quality/coverage, three conceptual times (phenomenon/result/ingest), capture-policy provenance, multi-label context, and provenance-bearing user correction. L3/L4/L5 and PPF implementation remain blocked until L1 and L2 pass. See [ppf-l1-l2-foundation-protocol.md](ppf-l1-l2-foundation-protocol.md).
+~~~text
+PPF-G1  Plugin Contract Feasibility
+   ↓
+PPF-G2  Boundary & Runtime Isolation Proof
+   ↓
+PPF-G3  Minimal Plugin Prototype Feasibility
+   ↓
+PPF-G4  Real-World Interface Feasibility
+   ↓
+PPF-G5  Research Closure Decision
+~~~
+
+Definition of done: **Prototype Authorized**, **Research Foundation Complete**, or **Stop**. There is no infinite research state.
 
 ## Canonical research governance and methodology
 
