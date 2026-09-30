@@ -4,6 +4,28 @@
 
 Every phase is a **thin vertical slice** and must produce something runnable and measurable. A phase may be committed as complete only when its QA and evidence gates pass. Failed or ambiguous evidence changes the roadmap instead of being hidden by additional architecture.
 
+## Portfolio governance — 2026-10-01
+
+MindForge has one active scientific axis:
+
+~~~text
+Personal Intelligence / PPF-first
+branch: research/ppf-l1-l2
+remaining finite path: PPF-G1 → G2 → G3 → G4 → G5
+~~~
+
+Portfolio rules:
+
+- maximum active science axes = 1;
+- maximum active science branches = 1;
+- supporting platform work does not count as science;
+- PASS does not auto-authorize a successor;
+- FAIL does not auto-authorize a rescue;
+- historical branches remain evidence-only;
+- no new science branch opens before PPF-G5 unless a portfolio-level review explicitly supersedes this state.
+
+Canonical portfolio state: [docs/research/PORTFOLIO_STATUS_2026-10-01.md](docs/research/PORTFOLIO_STATUS_2026-10-01.md).
+
 ## Phase lifecycle
 
 For every phase:
