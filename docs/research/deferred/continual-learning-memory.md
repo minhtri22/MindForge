@@ -64,3 +64,34 @@ Large framework dependencies, new kernel hooks, memory APIs or continual-learnin
 - [P0.9 experiment implementation](../../../experiments/phase0_continual_real.py)
 - [P0.9 qualification JSON](../../../experiments/results/phase0_continual_qualification.json)
 - [P0.9 final STOP record](../../../experiments/results/phase0_continual_real.json)
+
+
+## 2026-10-01 portfolio update
+
+After the original Phase-0 STOP, MindForge later opened a separately governed
+continual-learning research portfolio. That work did not rewrite the Phase-0
+result.
+
+The later chain produced both positive and negative evidence:
+
+~~~text
+KCL
+  replay causal effect on tested synthetic substrate = SUPPORTED
+  controller qualification                           = NOT ESTABLISHED
+
+MSA
+  ACCURACY_COARSE_LOSS_INFORMATIVE
+  independent replication                            = CONFIRMED
+
+CLRM
+  direct CE-loss response support                    = QUALIFIED
+  RBF-KRR-v1 sealed predictive qualification         = NEGATIVE
+  controller                                         = NOT AUTHORIZED
+~~~
+
+The full later continual-learning portfolio is now formally archived as
+historical evidence. See
+[../archive/continual-learning-portfolio-closure-2026-10-01.md](../archive/continual-learning-portfolio-closure-2026-10-01.md).
+
+Reopening still requires a new portfolio-level question. None of KCL-7,
+CLRM-3, a CLRM-2 rescue ladder, or post-hoc predictor tuning is authorized.
